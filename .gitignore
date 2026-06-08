@@ -1,0 +1,15 @@
+# Session / planning artifacts (not for public repo)
+.remember/
+.planning/
+Awesome DS要件.md
+
+# OS / editor
+.DS_Store
+*.log
+
+# Node (in case reference snippets get scaffolded locally)
+node_modules/
+dist/
+.next/
+.turbo/
+.cache/
