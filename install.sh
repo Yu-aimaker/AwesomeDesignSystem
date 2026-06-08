@@ -40,13 +40,31 @@ info()  { printf '%s\n' "$*"; }
 ok()    { printf '%s✓%s %s\n' "$c_green" "$c_reset" "$*"; }
 warn()  { printf '%s!%s %s\n' "$c_yellow" "$c_reset" "$*"; }
 
-mkdir -p "$SKILLS_DIR"
+# Backups live OUTSIDE the skills dir, so the loader never mistakes a backup for a skill.
+BACKUP_DIR="$(dirname "$SKILLS_DIR")/skills-backups"
+mkdir -p "$SKILLS_DIR" "$BACKUP_DIR"
 
-backup_path() {
-  # Prints a non-colliding backup path for an existing entry.
-  local base="$1" ts
+# stash <path> : move an existing entry out to BACKUP_DIR (timestamped). Symlinks are
+# recreated with an ABSOLUTE target so they don't break when moved to another directory.
+# Prints the backup path it created.
+stash() {
+  local src="$1" ts name bk
   ts="$(date +%Y%m%d-%H%M%S)"
-  printf '%s.backup.%s' "$base" "$ts"
+  name="$(basename "$src")"
+  bk="$BACKUP_DIR/$name.backup.$ts"
+  if [ -L "$src" ]; then
+    local tgt abstgt
+    tgt="$(readlink "$src")"
+    case "$tgt" in
+      /*) abstgt="$tgt" ;;
+      *)  abstgt="$(cd "$(dirname "$src")" && cd "$(dirname "$tgt")" 2>/dev/null && pwd)/$(basename "$tgt")" ;;
+    esac
+    ln -s "$abstgt" "$bk"
+    rm "$src"
+  else
+    mv "$src" "$bk"
+  fi
+  printf '%s' "$bk"
 }
 
 uninstall() {
@@ -68,9 +86,7 @@ uninstall() {
 # destroy it: move it aside so it can be restored if desired.
 LEGACY="$SKILLS_DIR/awesome-design-skills"
 if [ -e "$LEGACY" ] || [ -L "$LEGACY" ]; then
-  BK="$(backup_path "$LEGACY")"
-  # Preserve symlink-ness: mv handles both real dirs and symlinks.
-  mv "$LEGACY" "$BK"
+  BK="$(stash "$LEGACY")"
   ok "backed up legacy awesome-design-skills -> $c_dim$BK$c_reset"
   # Leave a redirect so old references still resolve to the new hub skill.
   ln -s "$SKILLS_SRC/awesome-ds" "$LEGACY"
@@ -86,8 +102,7 @@ for s in "${SKILLS[@]}"; do
     continue
   fi
   if [ -e "$dst" ] || [ -L "$dst" ]; then
-    BK="$(backup_path "$dst")"
-    mv "$dst" "$BK"
+    BK="$(stash "$dst")"
     warn "existing $s backed up -> $c_dim$BK$c_reset"
   fi
   if [ "$MODE" = "copy" ]; then
