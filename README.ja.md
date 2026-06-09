@@ -1,102 +1,122 @@
 <div align="center">
 
-# AwesomeDesignSystem
+<img src="./assets/banner.svg" alt="AwesomeDesignSystem — AIエージェントのためのテイスト層" width="100%">
 
-**AIエージェントのためのテイスト層。**
-完結型でソース引用付きのデザインシステム知識ベース + スキル群。あらゆるAIエージェントが
-モダン（2026年版）で人間味のあるフロントエンドデザインを生み出し、ありきたりな「AIの量産品」から脱却できるようにします。
+&nbsp;
 
-<sub>
+[![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
+[![Cited sources: 270+](https://img.shields.io/badge/cited_sources-270%2B-E5484D?style=flat-square)](./research)
+[![Skills: 5](https://img.shields.io/badge/skills-5-7C5CFC?style=flat-square)](./skills)
+[![Color: OKLCH](https://img.shields.io/badge/color-OKLCH-D6409F?style=flat-square)](./design-system/foundations/color.md)
+[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](./design-system/INDEX.md)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-46C26B?style=flat-square)](./CONTRIBUTING.md)
 
-[English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
-
-</sub>
+[English](./README.md) · **日本語** · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
 
 </div>
 
 ---
 
-## なぜ存在するのか
+> **凡庸（median）を避けよ。視点を持って言い切れ。** ソース付き・自己完結のデザインシステム知識ベース **＋** スキル群。あらゆるAIエージェントが、モダン（2026年）で人間味のあるフロントエンドを生み出し、ありがちな「AIスロップ」の量産をやめるために。
 
-LLMに「ランディングページを作って」と頼んでも、得られるのは*デザイン*ではありません。スクレイピングされた
-あらゆるTailwindチュートリアルの**統計的中央値**です。Inter、白地に紫から青へのグラデーション、中央寄せのヒーロー、
-絵文字つきの機能カード3枚。モデルに知識が足りないからではなく、**何も舵を取らなければ中央へ寄ってしまう**からです。
+## 🧭 なぜ存在するのか
 
-AwesomeDesignSystemはその舵取りを供給します。**コードを埋め込んだ**キュレーション済みの主張あるデザイン知識の集合体と、
-タスクに必要な分だけを読み込むスキル群です。**AIエージェントが直接読むこと**を前提に作られているので、
-エージェントはタスクの途中でライブラリのドキュメントを取りに行かずとも生産的に動けますし、
-かといってシステム全体をコンテキストに丸呑みする必要もありません。
+LLMに「ランディングページを作って」と頼んでも、返ってくるのは*デザイン*ではない — スクレイピングされた無数のTailwindチュートリアルの**統計的中央値**だ。Inter、白地に紫→青のグラデ、中央寄せのヒーロー、絵文字付き機能カード3枚。モデルに知識がないからではなく、**操舵（steering）しない限り中央に落ちる**からだ。
 
-ここにあるものはすべて、**一次ソース**（Apple HIG & Liquid Glass、Google Material 3 Expressive、Nothing、
-Goodpatch、Linear / Stripe / Vercel / Raycast、各ライブラリの公式ドキュメント）から抽出され、
-**敵対的にファクトチェック**されています。引用元270件以上が [`research/`](./research) に収められています。
+AwesomeDesignSystem はその操舵を供給する。**コードを埋め込んだ**、キュレーション済みで明確な視点を持つデザイン知識体 **＋** タスクに必要な分だけを読み込むスキル群。
 
-## 中身
-
-```
-design-system/            ← 正典となる知識ベース（コード埋め込み・唯一の信頼できる情報源）
-  INDEX.md                  ルーター：質問 → どのモジュールを読むべきか
-  best-practice-design-for-ai.md   旗艦となる統合ドキュメント、ソースリンク付き
-  00-philosophy/            テイスト層 ・「モダン2026」・ 核となる原則
-  foundations/              色（OKLCH）・ タイポグラフィ（日本語含む）・ スペーシング/レイアウト ・ トークン
-  motion/                   原則 ・ コピペで使える Motion + CSS レシピ
-  components/               button/card/input/dialog/… 状態とa11y付き
-  patterns/                 hero/bento/sections/nav/backgrounds（脱・量産品）
-  accessibility/            WCAG 2.2 ・ フォーカス ・ キーボード ・ コントラスト
-  tech-stack-2026/          推奨するAIネイティブなスタック
-research/                 ← 生の一次ソース調査（その根拠）
-skills/                   ← 持ち運べる5つのスキル（その動詞）
-```
-
-## 5つのスキル
-
-| スキル | 用途 |
+| | |
 |---|---|
-| **/AwesomeDS** | システムのテイスト層を使って任意のUIを構築・改善。必要なモジュールだけにルーティングします。 |
-| **/MakeAwesomeDS** | ブランドやプロダクト*自身*のデザインシステムを生成（OKLCHトークン + `DESIGN.md` + プレビュー）。 |
-| **/AwesomeHTML** | Markdown / 調査資料 / メモを、洗練された完結型の単一ファイルHTMLドキュメントに変換。 |
-| **/AwesomeReview** | 既存のUIやコードを監査。AIの量産品やa11yの不備を検出し、優先度をつけた修正案を報告。 |
-| **/AwesomeMotion** | 目的に根ざした上質なモーションを設計（Motion for React + CSSのみのレシピ）。 |
+| 🤖 **AIエージェントが直接読むために設計** | タスク途中でライブラリのドキュメントを取りに行かずに即戦力… |
+| 🪶 **…しかしコンテキストを膨張させない** | …かといってシステム全体をコンテキストに丸呑みもしない。 |
+| 📐 **一次情報の厳密さ** | Apple HIG & Liquid Glass、Material 3 Expressive、Nothing、Goodpatch、Linear/Stripe/Vercel/Raycast ＋ 公式ライブラリドキュメントから抽出。 |
+| 🔬 **敵対的にファクトチェック済み** | 270以上の出典が [`research/`](./research) に。 |
 
-## クイックスタート
+## 📂 中身
 
-### AIエージェント向け（インストール不要）
-エージェントをこのリポジトリに向けて、**まず [`design-system/INDEX.md`](./design-system/INDEX.md) を読む**よう指示し、
-そのタスクに必要なモジュールだけを開かせます。INDEXは地図であり、各モジュールはそれぞれ完結しています。
+3つのレイヤー：**知識**（読む）・**証拠**（検証する）・**動詞**（実行する）。
 
-### Claude Codeのスキルとして
+<details open>
+<summary><b>リポジトリ・マップ</b></summary>
+
+```
+design-system/            ← 正典の知識ベース（コード埋め込み・単一の真実の源）
+  INDEX.md                  ルーター：問い → 読むべきモジュール
+  best-practice-design-for-ai.md   旗艦の統合ドキュメント（出典リンク付き）
+  00-philosophy/            テイスト層 ・「モダン2026」・ 核心原則
+  foundations/              color (OKLCH) ・ typography（日本語含む）・ spacing/layout ・ tokens
+  motion/                   原則 ・ コピペ可能な Motion + CSS レシピ
+  components/               button/card/input/dialog/… 状態 + a11y 付き
+  patterns/                 hero/bento/sections/nav/backgrounds（アンチスロップ）
+  accessibility/            WCAG 2.2 ・ focus ・ keyboard ・ contrast
+  tech-stack-2026/          推奨 AIネイティブ スタック
+research/                 ← 生の一次情報リサーチ（証拠）
+skills/                   ← 5つのポータブルなスキル（動詞）
+```
+
+</details>
+
+## 🛠️ 5つのスキル
+
+| | スキル | 用途… |
+|:--:|---|---|
+| 🎨 | **/AwesomeDS** | システムのテイスト層で任意のUIを構築・洗練。必要なモジュールだけにルーティング。 |
+| 🏗️ | **/MakeAwesomeDS** | ブランド/プロダクト*独自*のデザインシステムを生成（OKLCHトークン + `DESIGN.md` + プレビュー）。 |
+| 📄 | **/AwesomeHTML** | Markdown / リサーチ / メモを、洗練された自己完結の単一HTMLドキュメントに変換。 |
+| 🔍 | **/AwesomeReview** | 既存のUIやコードを監査 — AIスロップとa11yの失敗を検出し、優先度付きの修正を報告。 |
+| ✨ | **/AwesomeMotion** | 目的駆動の上品なモーションを設計（Motion for React + CSSのみのレシピ）。 |
+
+## 🚀 クイックスタート
+
+#### AIエージェント向け — インストール不要
+
+> [!TIP]
+> エージェントをこのリポジトリに向け、**まず [`design-system/INDEX.md`](./design-system/INDEX.md) を読む**よう指示する。あとはタスクに必要なモジュールだけを開く。INDEX が地図、各モジュールは自己完結。
+
+#### Claude Code スキルとして
+
 ```bash
 git clone https://github.com/Yu-aimaker/AwesomeDesignSystem.git
 cd AwesomeDesignSystem
-./install.sh        # 5つのスキルを ~/.claude/skills にシンボリックリンクし、既存スキルがあればバックアップ
+./install.sh        # 5つのスキルを ~/.claude/skills にsymlink（既存スキルはバックアップ）
 ```
-あとは Claude Code 内で：`/AwesomeDS`、`/MakeAwesomeDS`、`/AwesomeHTML`、`/AwesomeReview`、`/AwesomeMotion`。
-> `install.sh` はシンボリックリンクを使うため、リポジトリはその場に残しておいてください。更新をpullすればスキルも更新されます。サンドボックス環境では `--copy` を使ってください。
 
-## ひと息で語る、その基準
+その後 Claude Code で：`/AwesomeDS` · `/MakeAwesomeDS` · `/AwesomeHTML` · `/AwesomeReview` · `/AwesomeMotion`
 
-> 中央値を避けよ。視点を持て。支配的な色を1つと、鋭いアクセント色を。臆病で均一なパレットは禁物。
-> 意図的で個性のある書体を。Interを唯一の選択肢にするな。コントラストで本物の階層を生み、画面ごとに焦点は1つ。
-> 抑制は自信の表れ。モーションは状態を伝えるもので、装飾ではない。整然と振り付けられたページ読み込みのほうが、
-> 散らばったマイクロインタラクションに勝る。プリミティブはテーマ化し、素のデフォルトのまま出荷するな。
-> エラー/空/読み込み中の状態を必ず設計し、WCAG 2.2 AAを満たせ。
-> パーツの寄せ集めではなく、一貫した**全体**を。
+> [!NOTE]
+> `install.sh` はsymlinkを使うため、リポジトリはそのままの場所に保つこと — pullで更新すればスキルも更新される。サンドボックス環境では `--copy` を使う。
 
-## デザイントークン（共通の語彙）
+## 📐 一息で言う、標準
 
-すべてのモジュールが1つのトークン言語を話します（全セットは [`foundations/tokens.md`](./design-system/foundations/tokens.md) に）。
-セマンティックなOKLCHカラー（`--color-bg/-surface/-fg/-border/-accent/-ring`）、8ptのスペーススケール
-（`--space-*`）、`--radius-*`、流動的なタイプスケール（`--text-*` + `--leading-*`/`--tracking-*`）、
-`--font-display/-body/-mono`、ヘアラインボーダー + `--shadow-*`、そしてモーショントークン（`--ease-*`、`--dur-*`）。
-これらは Tailwind v4 の `@theme {}` ブロックにそのまま反映されます。
+> 凡庸を避けよ。視点を持って言い切れ。支配的な1色 **＋** 鋭いアクセント、臆病で均等なパレットにはしない。意図的で個性ある書体 — Interを唯一の選択肢にしない。コントラストによる本物の階層；1画面に焦点は1つ。抑制 **＝** 自信。モーションは状態を伝えるためのもので装飾ではない — 散発的なマイクロインタラクションより、統率された1回のページロードが勝る。プリミティブにテーマを当て、素のデフォルトを出荷しない。エラー / 空 / ローディング状態を常に設計し、WCAG 2.2 AA を満たす。部品の寄せ集めではなく、一貫した**全体**を。
 
-## コントリビュート
+## 🎨 デザイントークン — 共有の語彙
 
-[CONTRIBUTING.md](./CONTRIBUTING.md) を参照してください。基準はこうです。すべての主張に**ソースがあり**、コードは**埋め込まれ**、
-スキルは**トークンを節約し**、脱・AI量産品のための事前チェック（Pre-Flight）に通らないものは何も出荷しない。
+すべてのモジュールが**1つのトークン言語**を話し、Tailwind v4 の `@theme {}` ブロックに反映される。
 
-## ライセンス
+<details>
+<summary><b>トークン契約の全体</b></summary>
 
-[MIT](./LICENSE) — 自由に使い、改変し、その上に築いてください。
+| グループ | トークン |
+|---|---|
+| **Color**（セマンティック・OKLCH） | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
+| **Space**（8ptスケール） | `--space-1` … `--space-32` |
+| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
+| **Type**（流体） | `--text-xs` … `--text-7xl` · `--leading-*` · `--tracking-*` |
+| **Font** | `--font-display` · `--font-body` · `--font-mono` |
+| **Elevation** | ヘアライン境界 **+** `--shadow-sm/md/lg` |
+| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
 
-<div align="center"><sub>テイストを持っているかのようにAIがデザインできるように。</sub></div>
+値付きの全セット → [`foundations/tokens.md`](./design-system/foundations/tokens.md)
+
+</details>
+
+## 🤝 コントリビュート
+
+[CONTRIBUTING.md](./CONTRIBUTING.md) を参照。基準：すべての主張に**出典**があり、コードは**埋め込み**、スキルは**トークン倹約的**であり、アンチAIスロップの Pre-Flight に落ちるものは出荷しない。
+
+## ⚖️ ライセンス
+
+[MIT](./LICENSE) — 自由に使い、改変し、その上に作ってよい。
+
+<div align="center"><sub>AIが、まるでテイストを持つかのようにデザインするために。🎨</sub></div>

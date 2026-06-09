@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" role="img"
+     aria-label="AwesomeDesignSystem — the taste layer for AI agents">
+  <title>AwesomeDesignSystem</title>
+  <desc>A self-contained, source-cited design-system knowledge base and skill suite for AI agents.</desc>
+
+  <defs>
+    <!-- Curated OKLCH spectrum: same L/C, hue stepped. "Designed", not a random rainbow. -->
+    <linearGradient id="spectrum" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#E5484D"/>
+      <stop offset="0.14" stop-color="#F2711C"/>
+      <stop offset="0.28" stop-color="#F5C518"/>
+      <stop offset="0.43" stop-color="#46C26B"/>
+      <stop offset="0.57" stop-color="#1FB8B8"/>
+      <stop offset="0.72" stop-color="#3E7BFA"/>
+      <stop offset="0.86" stop-color="#7C5CFC"/>
+      <stop offset="1"    stop-color="#D6409F"/>
+    </linearGradient>
+    <style>
+      :root { color-scheme: light; }
+      .wm   { font-family: "Bricolage Grotesque","Satoshi",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+      .body { font-family: "Satoshi",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; }
+      .mono { font-family: "Geist Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+      /* Calm, continuous "subtractive mixing" breathe — surface stays white. */
+      .c { transform-box: fill-box; transform-origin: center; animation: breathe 7s ease-in-out infinite; }
+      .c2 { animation-delay: -2.3s; }
+      .c3 { animation-delay: -4.6s; }
+      @keyframes breathe { 0%,100% { transform: translate(0,0); } 50% { transform: translate(2.5px,-2px); } }
+      @media (prefers-reduced-motion: reduce) { .c { animation: none; } }
+    </style>
+  </defs>
+
+  <!-- Paper. White-based, dark ink — never a dark hero. -->
+  <rect width="1280" height="400" fill="#FAFAF9"/>
+  <rect x="24" y="24" width="1232" height="352" rx="22" fill="#FFFFFF" stroke="#ECECE7" stroke-width="1.5"/>
+
+  <!-- Window chrome as CMY dots (a quiet nod to the palette). -->
+  <g>
+    <circle cx="72" cy="68" r="6" fill="#19C0D6"/>
+    <circle cx="92" cy="68" r="6" fill="#E84393"/>
+    <circle cx="112" cy="68" r="6" fill="#F6C915"/>
+  </g>
+  <text class="mono" x="1216" y="73" text-anchor="end" font-size="14" fill="#A2A29A">design-system · for AI agents</text>
+
+  <!-- CMY logomark: subtractive color mixing. The 🎨 metaphor, drawn. -->
+  <g transform="translate(72,108)" style="mix-blend-mode:multiply">
+    <circle class="c"     cx="34" cy="20" r="30" fill="#15C7DE"/>
+    <circle class="c c2"  cx="14" cy="56" r="30" fill="#FF2EA6"/>
+    <circle class="c c3"  cx="54" cy="56" r="30" fill="#FFD400"/>
+  </g>
+
+  <!-- Wordmark in ink + a spectrum signature underline. -->
+  <text class="wm" x="196" y="150" font-size="60" font-weight="800" letter-spacing="-1.6" fill="#18181D">AwesomeDesignSystem</text>
+  <rect x="198" y="168" width="232" height="6" rx="3" fill="url(#spectrum)"/>
+  <text class="body" x="198" y="208" font-size="22" font-weight="500" fill="#57574F">The taste layer for AI agents — stop shipping generic AI slop.</text>
+
+  <!-- Real token chips: it eats its own dog food. -->
+  <g class="mono" font-size="15" fill="#6E6E66">
+    <g><rect x="198" y="240" width="156" height="32" rx="9" fill="#FFFFFF" stroke="#E6E6E0"/><text x="214" y="261">--color-accent</text></g>
+    <g><rect x="366" y="240" width="116" height="32" rx="9" fill="#FFFFFF" stroke="#E6E6E0"/><text x="382" y="261">--space-4</text></g>
+    <g><rect x="494" y="240" width="124" height="32" rx="9" fill="#FFFFFF" stroke="#E6E6E0"/><text x="510" y="261">--radius-lg</text></g>
+    <g><rect x="630" y="240" width="136" height="32" rx="9" fill="#FFFFFF" stroke="#E6E6E0"/><text x="646" y="261">--ease-spring</text></g>
+  </g>
+
+  <!-- OKLCH palette: 8 chips, one designed lightness/chroma, hue stepped. -->
+  <text class="mono" x="198" y="316" font-size="13" fill="#A2A29A">oklch() · semantic color tokens</text>
+  <g>
+    <rect x="198" y="328" width="44" height="28" rx="8" fill="#E5484D"/>
+    <rect x="252" y="328" width="44" height="28" rx="8" fill="#F2711C"/>
+    <rect x="306" y="328" width="44" height="28" rx="8" fill="#F5C518"/>
+    <rect x="360" y="328" width="44" height="28" rx="8" fill="#46C26B"/>
+    <rect x="414" y="328" width="44" height="28" rx="8" fill="#1FB8B8"/>
+    <rect x="468" y="328" width="44" height="28" rx="8" fill="#3E7BFA"/>
+    <rect x="522" y="328" width="44" height="28" rx="8" fill="#7C5CFC"/>
+    <rect x="576" y="328" width="44" height="28" rx="8" fill="#D6409F"/>
+  </g>
+
+  <!-- Right-aligned proof. -->
+  <text class="body" x="1216" y="300" text-anchor="end" font-size="16" font-weight="700" fill="#3A3A33">270+ cited sources · 5 skills · MIT</text>
+  <text class="mono" x="1216" y="324" text-anchor="end" font-size="13" fill="#A2A29A">read design-system/INDEX.md first</text>
+
+  <!-- Signature spectrum stripe. -->
+  <rect x="0" y="394" width="1280" height="6" fill="url(#spectrum)"/>
+</svg>
