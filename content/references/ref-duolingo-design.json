@@ -1,30 +1,41 @@
 {
   "id": "ref.duolingo.design",
-  "title": "Duolingo Design",
+  "title": "Duolingo Design (Brand Guidelines hub)",
   "url": "https://design.duolingo.com/",
   "owner": "duolingo",
   "sourceClass": "brand",
   "region": "global",
   "language": "en",
   "topics": [
-    "brand"
+    "brand",
+    "content-design",
+    "illustration"
   ],
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
-  "freshnessState": "healthy",
+  "freshnessState": "due",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Duolingo Design — primary reference for AwesomeDS synthesis on brand.",
+  "summary": "Public brand bible SPA covering identity, writing, illustration, marketing assets. Excellent for personality\u2192production systems; not a product component library. Content contains historical product fossils \u2014 revalidate product facts.",
   "lessons": [
-    "Extract transferable brand principles from Duolingo Design.",
-    "Prefer primary guidance over secondary summaries."
+    "Personality must propagate across words, shapes, imagery, and production constraints.",
+    "Document with principle \u2192 rule \u2192 good/bad \u2192 production limit \u2192 related links.",
+    "Character systems need anatomy, emotion limits, and verbal contracts."
   ],
-  "caveats": [],
-  "licenseNote": "Public web documentation or standard; cite and synthesize.",
-  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "caveats": [
+    "Stale product terminology and stats may appear; treat as case study not current product truth.",
+    "No public a11y/motion/component engineering system on this site."
+  ],
+  "licenseNote": "Public brand guidelines; cite and synthesize only.",
+  "antiImitationNote": "Never copy Duo, green owl geometry, feather type, or proprietary assets. Transfer process only.",
   "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence",
+    "rule.brand.content-design",
+    "rule.brand.illustration-grammar",
     "rule.brand.personality-system"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "seed-duolingo-design"
+  "linkedArtifactIds": [
+    "artifact.doc.brand-coherence"
+  ],
+  "contentHash": "duolingo-hub-2026-07-13"
 }

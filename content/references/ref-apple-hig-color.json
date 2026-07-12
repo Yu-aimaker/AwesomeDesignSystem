@@ -1,31 +1,30 @@
 {
-  "id": "ref.apple.hig",
-  "title": "Apple Human Interface Guidelines",
-  "url": "https://developer.apple.com/design/human-interface-guidelines/",
+  "id": "ref.apple.hig-color",
+  "title": "Apple HIG Color",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/color",
   "owner": "apple",
   "sourceClass": "official-system",
   "region": "global",
   "language": "en",
   "topics": [
-    "product"
+    "color"
   ],
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple Human Interface Guidelines \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Apple HIG Color \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
-    "Extract transferable product doctrine from Apple Human Interface Guidelines.",
+    "Extract transferable color doctrine from Apple HIG Color.",
     "Prefer first-party production constraints over secondary summaries."
   ],
   "caveats": [],
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
   "linkedRuleIds": [
-    "rule.foundations.platform-literacy",
-    "rule.a11y.wcag-aa"
+    "rule.foundations.semantic-tokens"
   ],
   "linkedArtifactIds": [],
-  "contentHash": "elite-apple-hig"
+  "contentHash": "elite-apple-hig-color"
 }

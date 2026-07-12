@@ -1,0 +1,25 @@
+{
+  "id": "rule.brand.cross-medium-coherence",
+  "title": "Brand personality must propagate across media",
+  "domain": "brand",
+  "summary": "One personality contract drives words, shapes, color, imagery, motion, and constraints.",
+  "guidance": "Ship a cross-medium brand contract before generating marketing or product UI. Do not invent personality mid-component.",
+  "do": [
+    "Define voice+tone+illustration+identity together",
+    "Include misuse examples"
+  ],
+  "dont": [
+    "Palette-only brand kits",
+    "Mascot decoration without speaking rules"
+  ],
+  "referenceIds": [
+    "ref.duolingo.design",
+    "ref.duolingo.writing-voice",
+    "ref.duolingo.illustration-shape"
+  ],
+  "artifactIds": [
+    "artifact.doc.brand-coherence"
+  ],
+  "verification": "Brand modules present; agent skill routes to contract first",
+  "status": "canon"
+}

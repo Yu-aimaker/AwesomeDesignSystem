@@ -1,0 +1,121 @@
+[
+  {
+    "slug": "home",
+    "url": "https://design.duolingo.com/",
+    "title": "Duolingo Brand Guidelines",
+    "chars": 916,
+    "ok": true
+  },
+  {
+    "slug": "identity-logos",
+    "url": "https://design.duolingo.com/identity/logos",
+    "title": "Logos - Duolingo Brand Guidelines",
+    "chars": 4473,
+    "ok": true
+  },
+  {
+    "slug": "identity-color",
+    "url": "https://design.duolingo.com/identity/color",
+    "title": "Color - Duolingo Brand Guidelines",
+    "chars": 3141,
+    "ok": true
+  },
+  {
+    "slug": "identity-typography",
+    "url": "https://design.duolingo.com/identity/typography",
+    "title": "Typography - Duolingo Brand Guidelines",
+    "chars": 6008,
+    "ok": true
+  },
+  {
+    "slug": "identity-imagery",
+    "url": "https://design.duolingo.com/identity/imagery",
+    "title": "Imagery - Duolingo Brand Guidelines",
+    "chars": 3039,
+    "ok": true
+  },
+  {
+    "slug": "identity-brand-family",
+    "url": "https://design.duolingo.com/identity/brand-family",
+    "title": "Brand Family - Duolingo Brand Guidelines",
+    "chars": 2114,
+    "ok": true
+  },
+  {
+    "slug": "writing-brand-narrative",
+    "url": "https://design.duolingo.com/writing/brand-narrative",
+    "title": "Brand Narrative - Duolingo Brand Guidelines",
+    "chars": 9813,
+    "ok": true
+  },
+  {
+    "slug": "writing-voice",
+    "url": "https://design.duolingo.com/writing/voice",
+    "title": "Voice - Duolingo Brand Guidelines",
+    "chars": 4076,
+    "ok": true
+  },
+  {
+    "slug": "writing-tone",
+    "url": "https://design.duolingo.com/writing/tone",
+    "title": "Tone - Duolingo Brand Guidelines",
+    "chars": 2662,
+    "ok": true
+  },
+  {
+    "slug": "writing-duo",
+    "url": "https://design.duolingo.com/writing/duo",
+    "title": "Duo - Duolingo Brand Guidelines",
+    "chars": 2855,
+    "ok": true
+  },
+  {
+    "slug": "writing-style",
+    "url": "https://design.duolingo.com/writing/style",
+    "title": "Style - Duolingo Brand Guidelines",
+    "chars": 13111,
+    "ok": true
+  },
+  {
+    "slug": "writing-glossary",
+    "url": "https://design.duolingo.com/writing/glossary",
+    "title": "Glossary - Duolingo Brand Guidelines",
+    "chars": 4097,
+    "ok": true
+  },
+  {
+    "slug": "illustration-shape-language",
+    "url": "https://design.duolingo.com/illustration/shape-language",
+    "title": "Shape Language - Duolingo Brand Guidelines",
+    "chars": 4314,
+    "ok": true
+  },
+  {
+    "slug": "illustration-duo",
+    "url": "https://design.duolingo.com/illustration/duo",
+    "title": "Duo - Duolingo Brand Guidelines",
+    "chars": 1339,
+    "ok": true
+  },
+  {
+    "slug": "illustration-characters",
+    "url": "https://design.duolingo.com/illustration/characters",
+    "title": "Characters - Duolingo Brand Guidelines",
+    "chars": 4763,
+    "ok": true
+  },
+  {
+    "slug": "marketing-assets",
+    "url": "https://design.duolingo.com/marketing/assets",
+    "title": "Assets - Duolingo Brand Guidelines",
+    "chars": 1476,
+    "ok": true
+  },
+  {
+    "slug": "resources",
+    "url": "https://design.duolingo.com/resources",
+    "title": "Resources - Duolingo Brand Guidelines",
+    "chars": 1195,
+    "ok": true
+  }
+]

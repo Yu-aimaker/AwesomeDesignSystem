@@ -85,3 +85,18 @@ All modules speak one token vocabulary. Full definitions live in `foundations/to
 | Governance | `governance/evidence-and-freshness.md` |
 
 Structured rule metadata lives in `content/canon/`. Reference Atlas records live in `content/references/`.
+
+
+## Platform expansion (2026-07 quality upgrade)
+
+| Domain | Modules |
+|---|---|
+| Brand coherence | `brand/cross-medium-coherence.md`, `brand/voice-tone-matrix.md`, `brand/character-system.md`, `brand/sound-haptics.md`, plus prior brand/* |
+| Review | `review/interface-quality-checklist.md` (IQ-* rubric from Vercel-class craft) |
+| Interaction | `interaction/browser-native-correctness.md`, product-quality, states-recovery |
+| Platform | `foundations/platform-literacy.md` (Apple HIG-class literacy) |
+| Case studies | `case-studies/duolingo-lessons.md`, `apple-hig-lessons.md`, `elite-org-map.md` |
+
+**Duolingo Design inventory:** hub + 15 subpages are registered as `ref.duolingo.*` in Reference Atlas. Synthesis lives in case-studies + brand modules (not asset copies).
+
+**Always-read for brand work:** `brand/cross-medium-coherence.md` then voice/illustration modules.

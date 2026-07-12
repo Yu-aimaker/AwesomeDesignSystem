@@ -63,6 +63,7 @@ export const nav = [
   { href: "/principles", label: "Principles" },
   { href: "/foundations", label: "Foundations" },
   { href: "/brand", label: "Brand" },
+  { href: "/review", label: "Review" },
   { href: "/interaction", label: "Interaction" },
   { href: "/patterns", label: "Patterns" },
   { href: "/ai-design", label: "AI Design" },

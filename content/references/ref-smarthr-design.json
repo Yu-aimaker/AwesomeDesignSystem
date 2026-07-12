@@ -1,0 +1,31 @@
+{
+  "id": "ref.smarthr.design",
+  "title": "SmartHR Design System",
+  "url": "https://smarthr.design/",
+  "owner": "smarthr",
+  "sourceClass": "official-system",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "jp-saas"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "SmartHR Design System \u2014 Japanese design excellence source for AwesomeDS regional coverage.",
+  "lessons": [
+    "Study JP product content design and process rigor.",
+    "Pair with international typography module."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; synthesize.",
+  "antiImitationNote": "Transfer process and clarity patterns; original brand expression only.",
+  "linkedRuleIds": [
+    "rule.brand.content-design",
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "jp-smarthr-design"
+}

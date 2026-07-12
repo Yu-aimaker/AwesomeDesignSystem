@@ -1,31 +1,30 @@
 {
-  "id": "ref.apple.hig",
-  "title": "Apple Human Interface Guidelines",
-  "url": "https://developer.apple.com/design/human-interface-guidelines/",
-  "owner": "apple",
+  "id": "ref.atlassian.content",
+  "title": "Atlassian Content Design",
+  "url": "https://atlassian.design/content",
+  "owner": "atlassian",
   "sourceClass": "official-system",
   "region": "global",
   "language": "en",
   "topics": [
-    "product"
+    "content-design"
   ],
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple Human Interface Guidelines \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Atlassian Content Design \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
-    "Extract transferable product doctrine from Apple Human Interface Guidelines.",
+    "Extract transferable content-design doctrine from Atlassian Content Design.",
     "Prefer first-party production constraints over secondary summaries."
   ],
   "caveats": [],
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
   "linkedRuleIds": [
-    "rule.foundations.platform-literacy",
-    "rule.a11y.wcag-aa"
+    "rule.brand.content-design"
   ],
   "linkedArtifactIds": [],
-  "contentHash": "elite-apple-hig"
+  "contentHash": "elite-atlassian-content"
 }

@@ -28,7 +28,7 @@ const sample: ReferenceRecord = {
 describe("docs shell contracts", () => {
   test("exposes all required primary routes", () => {
     const hrefs = nav.map((n) => n.href);
-    for (const required of ["/", "/foundations", "/principles", "/brand", "/interaction", "/patterns", "/ai-design", "/components", "/motion", "/references", "/playground", "/status"]) {
+    for (const required of ["/", "/foundations", "/review", "/principles", "/brand", "/interaction", "/patterns", "/ai-design", "/components", "/motion", "/references", "/playground", "/status"]) {
       expect(hrefs).toContain(required);
     }
   });

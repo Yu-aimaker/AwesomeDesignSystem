@@ -1,22 +1,22 @@
 {
-  "id": "ref.apple.hig",
-  "title": "Apple Human Interface Guidelines",
-  "url": "https://developer.apple.com/design/human-interface-guidelines/",
+  "id": "ref.apple.hig-foundations",
+  "title": "Apple HIG Foundations",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/foundations",
   "owner": "apple",
   "sourceClass": "official-system",
   "region": "global",
   "language": "en",
   "topics": [
-    "product"
+    "foundations"
   ],
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple Human Interface Guidelines \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Apple HIG Foundations \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
-    "Extract transferable product doctrine from Apple Human Interface Guidelines.",
+    "Extract transferable foundations doctrine from Apple HIG Foundations.",
     "Prefer first-party production constraints over secondary summaries."
   ],
   "caveats": [],
@@ -24,8 +24,8 @@
   "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
   "linkedRuleIds": [
     "rule.foundations.platform-literacy",
-    "rule.a11y.wcag-aa"
+    "rule.foundations.semantic-tokens"
   ],
   "linkedArtifactIds": [],
-  "contentHash": "elite-apple-hig"
+  "contentHash": "elite-apple-hig-foundations"
 }

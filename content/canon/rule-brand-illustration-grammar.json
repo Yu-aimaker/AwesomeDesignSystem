@@ -1,0 +1,24 @@
+{
+  "id": "rule.brand.illustration-grammar",
+  "title": "Illustration is a production grammar",
+  "domain": "brand",
+  "summary": "Geometry, complexity budgets, silhouettes, and misuse galleries make illustration scalable.",
+  "guidance": "Document shape language and character anatomy; forbid freeform stylization that breaks system.",
+  "do": [
+    "Shape primitives",
+    "Misuse gallery",
+    "Size readability checks"
+  ],
+  "dont": [
+    "One-off illustrations without system"
+  ],
+  "referenceIds": [
+    "ref.duolingo.illustration-shape",
+    "ref.duolingo.illustration-duo"
+  ],
+  "artifactIds": [
+    "artifact.doc.illustration"
+  ],
+  "verification": "illustration modules + character system present",
+  "status": "canon"
+}

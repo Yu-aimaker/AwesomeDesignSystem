@@ -157,5 +157,66 @@
     "referenceIds": [
       "ref.w3c.dtcg"
     ]
+  },
+  {
+    "id": "artifact.doc.brand-coherence",
+    "kind": "doc",
+    "title": "Cross-medium brand coherence",
+    "path": "design-system/brand/cross-medium-coherence.md",
+    "ruleIds": [
+      "rule.brand.cross-medium-coherence",
+      "rule.brand.personality-system"
+    ],
+    "referenceIds": [
+      "ref.duolingo.design"
+    ]
+  },
+  {
+    "id": "artifact.doc.content-design",
+    "kind": "doc",
+    "title": "Voice tone matrix",
+    "path": "design-system/brand/voice-tone-matrix.md",
+    "ruleIds": [
+      "rule.brand.content-design"
+    ],
+    "referenceIds": [
+      "ref.duolingo.writing-tone"
+    ]
+  },
+  {
+    "id": "artifact.doc.illustration",
+    "kind": "doc",
+    "title": "Character & illustration grammar",
+    "path": "design-system/brand/character-system.md",
+    "ruleIds": [
+      "rule.brand.illustration-grammar"
+    ],
+    "referenceIds": [
+      "ref.duolingo.illustration-shape"
+    ]
+  },
+  {
+    "id": "artifact.doc.interface-quality",
+    "kind": "doc",
+    "title": "Interface quality checklist",
+    "path": "design-system/review/interface-quality-checklist.md",
+    "ruleIds": [
+      "rule.interaction.interface-quality"
+    ],
+    "referenceIds": [
+      "ref.vercel.web-interface-guidelines"
+    ]
+  },
+  {
+    "id": "artifact.doc.platform-literacy",
+    "kind": "doc",
+    "title": "Platform literacy",
+    "path": "design-system/foundations/platform-literacy.md",
+    "ruleIds": [
+      "rule.foundations.platform-literacy"
+    ],
+    "referenceIds": [
+      "ref.apple.hig"
+    ]
   }
 ]

@@ -1,0 +1,30 @@
+{
+  "id": "ref.spotify.design",
+  "title": "Spotify Design",
+  "url": "https://design.spotify.com/",
+  "owner": "spotify",
+  "sourceClass": "brand",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "observed-behavior",
+  "summary": "Spotify Design \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "lessons": [
+    "Extract transferable brand doctrine from Spotify Design.",
+    "Prefer first-party production constraints over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.brand.personality-system"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-spotify-design"
+}

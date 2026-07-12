@@ -1,0 +1,34 @@
+{
+  "id": "ref.duolingo.resources",
+  "title": "Duolingo Design \u2014 Designer resources hub",
+  "url": "https://design.duolingo.com/resources",
+  "owner": "duolingo",
+  "sourceClass": "brand",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "resources",
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "due",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Duolingo Design page: Designer resources hub. Part of 16-page public brand bible inventory.",
+  "lessons": [
+    "Extract transferable production constraints from Designer resources hub.",
+    "Prefer system documentation sequences with misuse examples."
+  ],
+  "caveats": [
+    "Historical product claims may be stale.",
+    "Do not reproduce proprietary assets."
+  ],
+  "licenseNote": "Public brand guidelines; synthesize only.",
+  "antiImitationNote": "Transfer rules and process; invent original brand expression.",
+  "linkedRuleIds": [
+    "rule.governance.evidence-first"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "duolingo-resources-2026-07-13"
+}

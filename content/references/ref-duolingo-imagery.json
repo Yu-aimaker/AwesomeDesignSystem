@@ -1,0 +1,35 @@
+{
+  "id": "ref.duolingo.imagery",
+  "title": "Duolingo Design \u2014 Imagery direction",
+  "url": "https://design.duolingo.com/identity/imagery",
+  "owner": "duolingo",
+  "sourceClass": "brand",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "identity",
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "due",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Duolingo Design page: Imagery direction. Part of 16-page public brand bible inventory.",
+  "lessons": [
+    "Extract transferable production constraints from Imagery direction.",
+    "Prefer system documentation sequences with misuse examples."
+  ],
+  "caveats": [
+    "Historical product claims may be stale.",
+    "Do not reproduce proprietary assets."
+  ],
+  "licenseNote": "Public brand guidelines; synthesize only.",
+  "antiImitationNote": "Transfer rules and process; invent original brand expression.",
+  "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence",
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "duolingo-imagery-2026-07-13"
+}

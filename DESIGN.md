@@ -38,3 +38,11 @@ Avoid the median. Compose approved tokens and components. Cite `rule.*` IDs. Tra
 pnpm install
 pnpm --filter @awesome-ds/docs dev
 ```
+
+
+## Brand bible requirements
+- Load `design-system/brand/cross-medium-coherence.md` for brand work.
+- Voice/tone matrix is mandatory for product copy.
+- Illustration/character work requires grammar + misuse rules (original IP only).
+- Duolingo Design is a case study source (`ref.duolingo.*`); never copy Duo assets.
+- Interface reviews must cite `IQ-*` items from `design-system/review/interface-quality-checklist.md`.

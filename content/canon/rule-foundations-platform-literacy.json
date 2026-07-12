@@ -1,0 +1,24 @@
+{
+  "id": "rule.foundations.platform-literacy",
+  "title": "Respect platform grammar before brand divergence",
+  "domain": "foundations",
+  "summary": "Apple/Material/Web conventions are baseline literacy; brand divergence must be intentional and complete.",
+  "guidance": "Load platform foundations (safe area, focus, type scaling, materials) before inventing custom chrome.",
+  "do": [
+    "Safe areas",
+    "System accessibility settings"
+  ],
+  "dont": [
+    "Fight platform focus/zoom without replacement"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-foundations",
+    "ref.google.material-3"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy"
+  ],
+  "verification": "platform-literacy module present",
+  "status": "canon"
+}

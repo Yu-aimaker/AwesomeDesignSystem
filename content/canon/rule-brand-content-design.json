@@ -1,0 +1,25 @@
+{
+  "id": "rule.brand.content-design",
+  "title": "Content design is a product surface",
+  "domain": "brand",
+  "summary": "Voice, tone matrix, glossary, and error copy are required design deliverables.",
+  "guidance": "Errors name problem+recovery; glossary forbids overloaded terms; tone matrix covers onboarding/empty/error/success/destructive.",
+  "do": [
+    "Tone matrix for \u22656 contexts",
+    "Canonical glossary"
+  ],
+  "dont": [
+    "Joke in failure states",
+    "Shame language"
+  ],
+  "referenceIds": [
+    "ref.duolingo.writing-tone",
+    "ref.shopify.polaris",
+    "ref.ibm.carbon"
+  ],
+  "artifactIds": [
+    "artifact.doc.content-design"
+  ],
+  "verification": "content-design + voice-tone modules linked",
+  "status": "canon"
+}

@@ -1,31 +1,30 @@
 {
-  "id": "ref.apple.hig",
-  "title": "Apple Human Interface Guidelines",
-  "url": "https://developer.apple.com/design/human-interface-guidelines/",
+  "id": "ref.apple.hig-accessibility",
+  "title": "Apple HIG Accessibility",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
   "owner": "apple",
   "sourceClass": "official-system",
   "region": "global",
   "language": "en",
   "topics": [
-    "product"
+    "accessibility"
   ],
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple Human Interface Guidelines \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Apple HIG Accessibility \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
-    "Extract transferable product doctrine from Apple Human Interface Guidelines.",
+    "Extract transferable accessibility doctrine from Apple HIG Accessibility.",
     "Prefer first-party production constraints over secondary summaries."
   ],
   "caveats": [],
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
   "linkedRuleIds": [
-    "rule.foundations.platform-literacy",
     "rule.a11y.wcag-aa"
   ],
   "linkedArtifactIds": [],
-  "contentHash": "elite-apple-hig"
+  "contentHash": "elite-apple-hig-accessibility"
 }
