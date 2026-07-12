@@ -5,10 +5,11 @@ const port = Number(process.env.PLAYWRIGHT_PORT ?? 3000);
 const baseURL = `http://127.0.0.1:${port}`;
 
 export default defineConfig({
+  snapshotPathTemplate: "{testDir}/{testFilePath}-snapshots/{arg}{ext}",
   forbidOnly: Boolean(process.env.CI),
   fullyParallel: true,
   reporter: process.env.CI ? "github" : "list",
-  retries: process.env.CI ? 2 : 1,
+  retries: 0,
   timeout: 60_000,
   expect: {
     timeout: 15_000,

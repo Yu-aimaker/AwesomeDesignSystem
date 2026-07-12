@@ -1,10 +1,10 @@
 "use client";
 
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 import { Button } from "./Button";
 import { Link } from "./Link";
 
-export const navigationMetadata = defineMetadata({ name: "Navigation", ruleIds: ["rule.a11y.wcag-aa", "rule.interaction.url-state"], states: ["idle", "current"] });
+export const navigationMetadata = getComponentMetadata("breadcrumb");
 
 export function Breadcrumb({ items }: { items: { href?: string; label: string }[] }) {
   return (

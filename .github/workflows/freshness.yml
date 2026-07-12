@@ -6,6 +6,10 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -16,8 +20,16 @@ jobs:
           node-version: 22.12
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - uses: actions/cache@v4
+        with:
+          path: |
+            reports/source-observations.json
+            reports/link-check.json
+          key: source-observations-${{ github.run_id }}
+          restore-keys: source-observations-
       - run: pnpm validate
-      - run: pnpm check:freshness
+      - run: pnpm check:freshness -- --strict
+      - run: pnpm check:links -- --strict
       - uses: actions/upload-artifact@v4
         with:
           name: freshness-report

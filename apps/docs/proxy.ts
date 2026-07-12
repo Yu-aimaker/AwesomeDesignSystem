@@ -29,5 +29,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|icon.svg|robots.txt|sitemap.xml|.*\\.[a-zA-Z0-9]+$).*)"],
+  // Route IDs may legitimately end in `.css`, `.design`, `.hig`, etc.; only
+  // exclude known framework/static roots rather than treating every suffix as a file.
+  matcher: ["/((?!_next/|favicon.ico$|icon.svg$|robots.txt$|sitemap.xml$).*)"],
 };

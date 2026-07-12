@@ -7,9 +7,9 @@ import { getRequestLocale } from "../../lib/i18n-server";
 export const metadata = { title: domainRoutes["brand"].title };
 
 export default async function DomainPage() {
-  const docs = await docsForDomain("brand");
-  const featured = docs[0];
   const locale = await getRequestLocale();
+  const docs = await docsForDomain("brand", locale);
+  const featured = docs[0];
   const dictionary = getDictionary(locale);
   const d = dictionary.brand;
   return (

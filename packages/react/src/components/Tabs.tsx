@@ -7,13 +7,9 @@ import {
   TabPanel,
   Tabs as AriaTabs,
 } from "react-aria-components";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const tabsMetadata = defineMetadata({
-  name: "Tabs",
-  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
-  states: ["selected"],
-});
+export const tabsMetadata = getComponentMetadata("tabs");
 
 export function Tabs({ items, defaultValue }: { items: { value: string; label: string; content: ReactNode }[]; defaultValue?: string }) {
   const fallback = defaultValue ?? items[0]?.value;

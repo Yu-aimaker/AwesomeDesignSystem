@@ -106,10 +106,12 @@ test.describe("docs smoke", () => {
     const copyField = page.getByLabel("Interface copy");
     const cleanCopy = "A clear workspace for everyone.";
     await expect(copyField).toBeEditable();
-    await copyField.fill(cleanCopy);
-    await expect(copyField).toHaveValue(cleanCopy);
     const results = page.locator(".lint-results");
-    await expect(results).toHaveAttribute("data-copy", cleanCopy);
+    await expect.poll(async () => {
+      await copyField.fill(cleanCopy);
+      return results.getAttribute("data-copy");
+    }, { message: "hydrated workbench processes edited copy" }).toBe(cleanCopy);
+    await expect(copyField).toHaveValue(cleanCopy);
     await expect(results).toContainText("No lexicon violations.");
   });
 
@@ -126,5 +128,38 @@ test.describe("docs smoke", () => {
       document.documentElement.setAttribute("data-theme", "light");
     });
     await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+  });
+
+  test("Japanese dynamic detail routes localize their instructional chrome", async ({ page }) => {
+    await page.goto("/ja/components/button", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "状態マトリクス" })).toBeVisible();
+    await expect(page.locator("main").getByRole("link", { name: "コンポーネント" })).toHaveAttribute("href", "/ja/components");
+    await expect(page.getByText(/未翻訳/)).toBeVisible();
+
+    await page.goto("/ja/motion/enter", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText("使用できる場面")).toBeVisible();
+    await expect(page.getByText("パフォーマンス")).toBeVisible();
+
+    await page.goto("/ja/references/ref.apple.hig", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "この情報源から得られる知見" })).toBeVisible();
+  });
+
+  test("Canon frontmatter is hidden and internal Markdown links resolve", async ({ page, request }) => {
+    const response = await page.goto("/ja/canon/brand/voice-tone-matrix", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(400);
+    await expect(page.locator("main#main")).not.toContainText("updated: 2026");
+    await page.goto("/ja/canon/components/components", { waitUntil: "domcontentloaded" });
+    const internal = page.locator('main a[href*="foundations/tokens"]').first();
+    await expect(internal).toHaveAttribute("href", /foundations\/tokens(?!\.md)/);
+    const href = await internal.getAttribute("href");
+    expect(href).toBeTruthy();
+    const target = await request.get(new URL(href!, page.url()).toString());
+    expect(target.status()).toBeLessThan(400);
+  });
+
+  test("docs responses include defense-in-depth security headers", async ({ request }) => {
+    const response = await request.get("/en/canon");
+    expect(response.headers()["content-security-policy"]).toContain("object-src 'none'");
+    expect(response.headers()["x-content-type-options"]).toBe("nosniff");
   });
 });

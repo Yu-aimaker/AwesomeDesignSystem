@@ -1,7 +1,7 @@
 "use client";
 
 import { cx } from "@awesome-ds/core";
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   Button as AriaButton,
   Dialog as AriaDialog,
@@ -9,13 +9,9 @@ import {
   Modal,
   ModalOverlay,
 } from "react-aria-components";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const dialogMetadata = defineMetadata({
-  name: "Dialog",
-  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
-  states: ["open", "closed"],
-});
+export const dialogMetadata = getComponentMetadata("dialog");
 
 export type DialogProps = {
   open: boolean;
@@ -23,12 +19,41 @@ export type DialogProps = {
   title: string;
   children: ReactNode;
   danger?: boolean;
+  onConfirm?: () => void | Promise<void>;
+  confirming?: boolean;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  confirmationErrorLabel?: string;
 };
 
-export function Dialog({ open, onClose, title, children, danger = false }: DialogProps) {
+export function Dialog({ open, onClose, title, children, danger = false, onConfirm, confirming = false, confirmLabel = "Confirm", cancelLabel = "Cancel", confirmationErrorLabel = "Confirmation failed. Try again." }: DialogProps) {
   const returnFocusRef = useRef<HTMLElement | null>(null);
-  if (open && !returnFocusRef.current && typeof document !== "undefined") {
-    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const [internalConfirming, setInternalConfirming] = useState(false);
+  const [confirmationFailed, setConfirmationFailed] = useState(false);
+  const isConfirming = confirming || internalConfirming;
+  useLayoutEffect(() => {
+    if (open && !returnFocusRef.current) {
+      returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    }
+  }, [open]);
+  function requestClose() {
+    setInternalConfirming(false);
+    setConfirmationFailed(false);
+    onClose();
+  }
+
+  async function confirm() {
+    if (!onConfirm || isConfirming) return;
+    setConfirmationFailed(false);
+    setInternalConfirming(true);
+    try {
+      await onConfirm();
+      requestClose();
+    } catch {
+      setConfirmationFailed(true);
+    } finally {
+      setInternalConfirming(false);
+    }
   }
   useEffect(() => {
     if (open || !returnFocusRef.current) return;
@@ -41,9 +66,9 @@ export function Dialog({ open, onClose, title, children, danger = false }: Dialo
     <ModalOverlay
       isOpen={open}
       onOpenChange={(nextOpen) => {
-        if (!nextOpen) onClose();
+        if (!nextOpen) requestClose();
       }}
-      isDismissable={!danger}
+      isDismissable={!danger && !isConfirming}
       className="ads-dialog-backdrop"
     >
       <Modal className="ads-dialog-modal">
@@ -52,16 +77,28 @@ export function Dialog({ open, onClose, title, children, danger = false }: Dialo
           className={cx("ads-dialog", "ads-motion-enter")}
         >
           {({ close }) => (
-            <>
+            <div
+              onKeyDown={(event) => {
+                if (danger && event.key === "Escape") {
+                  event.preventDefault();
+                  if (!isConfirming) requestClose();
+                }
+              }}
+            >
               <Heading slot="title" className="ads-dialog-title">{title}</Heading>
               <div>{children}</div>
+              {confirmationFailed ? <p role="alert">{confirmationErrorLabel}</p> : null}
               <div className="ads-cluster ads-dialog-actions">
-                <AriaButton className={cx("ads-btn", danger ? "ads-btn--danger" : "ads-btn--primary", "ads-btn--md")} onPress={close}>
-                  {danger ? "Confirm" : "Close"}
+                <AriaButton
+                  className={cx("ads-btn", danger ? "ads-btn--danger" : "ads-btn--primary", "ads-btn--md")}
+                  isDisabled={isConfirming}
+                  onPress={danger ? () => { void confirm(); } : close}
+                >
+                  {danger ? (isConfirming ? "Confirming…" : confirmLabel) : "Close"}
                 </AriaButton>
-                {danger ? <AriaButton className="ads-btn ads-btn--ghost ads-btn--md" onPress={close}>Cancel</AriaButton> : null}
+                {danger ? <AriaButton className="ads-btn ads-btn--ghost ads-btn--md" isDisabled={isConfirming} onPress={requestClose}>{cancelLabel}</AriaButton> : null}
               </div>
-            </>
+            </div>
           )}
         </AriaDialog>
       </Modal>
@@ -69,7 +106,7 @@ export function Dialog({ open, onClose, title, children, danger = false }: Dialo
   );
 }
 
-export function AlertDialog(props: Omit<DialogProps, "danger">) {
+export function AlertDialog(props: Omit<DialogProps, "danger"> & { onConfirm: NonNullable<DialogProps["onConfirm"]> }) {
   return <Dialog {...props} danger />;
 }
 

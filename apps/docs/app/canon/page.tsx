@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { loadAllCanonDocs } from "../../lib/markdown";
+import { getRequestLocale } from "../../lib/i18n-server";
+import { localizePathname } from "../../lib/i18n";
 
 export const metadata = { title: "Canon" };
 
 export default async function CanonIndexPage() {
-  const docs = await loadAllCanonDocs();
+  const locale = await getRequestLocale();
+  const docs = await loadAllCanonDocs(locale);
   const byDomain = new Map<string, typeof docs>();
   for (const doc of docs) {
     const list = byDomain.get(doc.domain) ?? [];
@@ -21,7 +24,7 @@ export default async function CanonIndexPage() {
           <ul>
             {items.map((doc) => (
               <li key={doc.slug}>
-                <Link href={"/canon/" + doc.slug}>{doc.title}</Link>
+                <Link href={localizePathname("/canon/" + doc.slug, locale)}>{doc.title}</Link>
                 <span className="meta"> — {doc.slug}</span>
               </li>
             ))}

@@ -1,10 +1,10 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 import { Button } from "./Button";
 
-export const statusMetadata = defineMetadata({ name: "Status", ruleIds: ["rule.interaction.product-quality", "rule.a11y.wcag-aa"], states: ["loading", "empty", "error", "success"] });
+export const statusMetadata = getComponentMetadata("empty-state");
 
 export function Card({ title, children }: { title?: string; children: ReactNode }) {
   return <section className="ads-card">{title ? <h3>{title}</h3> : null}{children}</section>;
@@ -36,5 +36,5 @@ export function EmptyState({ title, description, actionLabel, onAction }: { titl
 export function ErrorState({ title, description, actionLabel, onAction }: { title: string; description: string; actionLabel?: string; onAction?: () => void }) {
   return <div className="ads-error-state" role="alert"><h3>{title}</h3><p>{description}</p>{actionLabel ? <Button variant="danger" onClick={onAction}>{actionLabel}</Button> : null}</div>;
 }
-EmptyState.metadata = { ...statusMetadata, name: "EmptyState", ruleIds: ["rule.interaction.product-quality"] };
-ErrorState.metadata = { ...statusMetadata, name: "ErrorState", ruleIds: ["rule.interaction.product-quality"] };
+EmptyState.metadata = getComponentMetadata("empty-state");
+ErrorState.metadata = getComponentMetadata("error-state");

@@ -18,7 +18,7 @@ const navLabels = {
 export async function CanonDomainPage({ domainKey }: { domainKey: DomainKey }) {
   const locale = await getRequestLocale();
   const dictionary = getDictionary(locale);
-  const docs = await docsForDomain(domainKey);
+  const docs = await docsForDomain(domainKey, locale);
   const featured = docs[0];
   const localizedDomain = domainKey as keyof typeof navLabels;
   const labelKey = localizedDomain in navLabels ? navLabels[localizedDomain] : undefined;

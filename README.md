@@ -21,16 +21,16 @@
 
 ## 🧭 Why this exists
 
-Ask an LLM to "build a landing page" and you don't get *design* — you get the **statistical median** of every Tailwind tutorial ever scraped: Inter, a purple-to-blue gradient on white, a centered hero, three emoji feature cards. Not because the model lacks knowledge, but because it **defaults to the center unless steered off it.**
+Ask an LLM to "build a landing page" and you don't get _design_ — you get the **statistical median** of every Tailwind tutorial ever scraped: Inter, a purple-to-blue gradient on white, a centered hero, three emoji feature cards. Not because the model lacks knowledge, but because it **defaults to the center unless steered off it.**
 
 AwesomeDesignSystem supplies the steering: a curated, opinionated body of design knowledge — **with the code embedded** — plus skills that load only what a task needs.
 
-| | |
-|---|---|
-| 🤖 **Built for AI agents to read directly** | No fetching a library's docs mid-task to be productive… |
-| 🪶 **…yet never context-bloating** | …and never swallowing the whole system into context either. |
-| 📐 **Primary-source rigor** | Distilled from Apple HIG & Liquid Glass, Material 3 Expressive, Nothing, Goodpatch, Linear/Stripe/Vercel/Raycast + official library docs. |
-| 🔬 **Adversarially fact-checked** | 270+ cited sources live under [`research/`](./research). |
+|                                             |                                                                                                                                           |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| 🤖 **Built for AI agents to read directly** | No fetching a library's docs mid-task to be productive…                                                                                   |
+| 🪶 **…yet never context-bloating**          | …and never swallowing the whole system into context either.                                                                               |
+| 📐 **Primary-source rigor**                 | Distilled from Apple HIG & Liquid Glass, Material 3 Expressive, Nothing, Goodpatch, Linear/Stripe/Vercel/Raycast + official library docs. |
+| 🔬 **Adversarially fact-checked**           | 270+ cited sources live under [`research/`](./research).                                                                                  |
 
 ## 📂 What's inside
 
@@ -58,13 +58,13 @@ skills/                   ← five portable skills (the verbs)
 
 ## 🛠️ The five skills
 
-| | Skill | Use it to… |
-|:--:|---|---|
-| 🎨 | **/AwesomeDS** | Build or refine any UI with the system's taste layer; routes to only the modules you need. |
-| 🏗️ | **/MakeAwesomeDS** | Generate a brand/product's *own* design system (OKLCH tokens + `DESIGN.md` + previews). |
-| 📄 | **/AwesomeHTML** | Turn Markdown / research / notes into a polished, self-contained single-file HTML document. |
-| 🔍 | **/AwesomeReview** | Audit existing UI or code — detect AI slop & a11y failures, report prioritized fixes. |
-| ✨ | **/AwesomeMotion** | Design tasteful, purpose-driven motion (Motion for React + CSS-only recipes). |
+|     | Skill              | Use it to…                                                                                  |
+| :-: | ------------------ | ------------------------------------------------------------------------------------------- |
+| 🎨  | **/AwesomeDS**     | Build or refine any UI with the system's taste layer; routes to only the modules you need.  |
+| 🏗️  | **/MakeAwesomeDS** | Generate a brand/product's _own_ design system (OKLCH tokens + `DESIGN.md` + previews).     |
+| 📄  | **/AwesomeHTML**   | Turn Markdown / research / notes into a polished, self-contained single-file HTML document. |
+| 🔍  | **/AwesomeReview** | Audit existing UI or code — detect AI slop & a11y failures, report prioritized fixes.       |
+| ✨  | **/AwesomeMotion** | Design tasteful, purpose-driven motion (Motion for React + CSS-only recipes).               |
 
 ## 🚀 Quick start
 
@@ -97,15 +97,15 @@ Every module speaks **one token language**, mirrored into a Tailwind v4 `@theme 
 <details>
 <summary><b>The full token contract</b></summary>
 
-| Group | Tokens |
-|---|---|
+| Group                       | Tokens                                                                                                 |
+| --------------------------- | ------------------------------------------------------------------------------------------------------ |
 | **Color** (semantic, OKLCH) | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
-| **Space** (8pt scale) | `--space-1` … `--space-32` |
-| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
-| **Type** (fluid) | `--text-xs` … `--text-7xl` · `--leading-*` · `--tracking-*` |
-| **Font** | `--font-display` · `--font-body` · `--font-mono` |
-| **Elevation** | hairline borders **+** `--shadow-sm/md/lg` |
-| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
+| **Space** (8pt scale)       | `--space-1` … `--space-32`                                                                             |
+| **Radius**                  | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full`                                        |
+| **Type** (fluid)            | `--text-xs` … `--text-7xl` · `--leading-*` · `--tracking-*`                                            |
+| **Font**                    | `--font-display` · `--font-body` · `--font-mono`                                                       |
+| **Elevation**               | hairline borders **+** `--shadow-sm/md/lg`                                                             |
+| **Motion**                  | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow`                                                |
 
 Full set with values → [`foundations/tokens.md`](./design-system/foundations/tokens.md)
 
@@ -127,15 +127,15 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). The bar: every claim is **sourced**, c
 
 This repository now also ships an executable design platform alongside the Markdown knowledge base:
 
-| Path | Role |
-|---|---|
-| `content/` | Reference Atlas + canon rules + signals + artifact claims |
-| `packages/tokens` | Semantic multi-theme tokens |
-| `packages/react` | Accessible React component baseline |
-| `packages/motion` | Intent-based motion recipes |
-| `packages/content` | Evidence graph schemas & validators |
-| `packages/brand` | Brand manifest, Product Lexicon schemas, and copy linting |
-| `apps/docs` | Local documentation website |
+| Path               | Role                                                      |
+| ------------------ | --------------------------------------------------------- |
+| `content/`         | Reference Atlas + canon rules + signals + artifact claims |
+| `packages/tokens`  | Semantic multi-theme tokens                               |
+| `packages/react`   | Accessible React component baseline                       |
+| `packages/motion`  | Intent-based motion recipes                               |
+| `packages/content` | Evidence graph schemas & validators                       |
+| `packages/brand`   | Brand manifest, Product Lexicon schemas, and copy linting |
+| `apps/docs`        | Local documentation website                               |
 
 ```bash
 pnpm install

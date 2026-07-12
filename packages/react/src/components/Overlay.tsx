@@ -12,13 +12,9 @@ import {
   Tooltip as AriaTooltip,
   TooltipTrigger,
 } from "react-aria-components";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const overlayMetadata = defineMetadata({
-  name: "Overlay",
-  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
-  states: ["open", "closed"],
-});
+export const overlayMetadata = getComponentMetadata("popover");
 
 export function Popover({ label, children }: { label: string; children: ReactNode }) {
   return (

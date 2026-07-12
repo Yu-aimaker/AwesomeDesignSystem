@@ -1,8 +1,8 @@
 import { cx } from "@awesome-ds/core";
 import type { HTMLAttributes, ReactNode } from "react";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const layoutMetadata = defineMetadata({ name: "Layout", ruleIds: ["rule.foundations.semantic-tokens"], states: ["idle"] });
+export const layoutMetadata = getComponentMetadata("stack");
 type BoxProps = HTMLAttributes<HTMLDivElement> & { children?: ReactNode; gap?: 1 | 2 | 3 | 4 | 6 | 8 };
 export function Stack({ className, gap = 4, children, ...rest }: BoxProps) {
   return <div className={cx("ads-stack", className)} data-gap={gap} {...rest}>{children}</div>;

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   Accordion, Badge, Button, Callout, Card, Checkbox, EmptyState, ErrorState, IconButton, Input, Link,
-  Pagination, Progress, RadioGroup, Select, Skeleton, Spinner, Switch, Tabs, Textarea, Toast, Breadcrumb, Popover, Tooltip, DropdownMenu, Dialog, Stack, Cluster, Grid, Container, VisuallyHidden,
+  Pagination, Progress, RadioGroup, Select, Skeleton, Spinner, Switch, Tabs, Textarea, Toast, Breadcrumb, Popover, Tooltip, DropdownMenu, Dialog, AlertDialog, Stack, Cluster, Grid, Container, VisuallyHidden,
 } from "@awesome-ds/react";
 
 export function ComponentLive({ slug }: { slug: string }) {
@@ -34,13 +34,21 @@ export function ComponentLive({ slug }: { slug: string }) {
     case "select":
       return <Select id="live-sel" label="Role"><option>Admin</option><option>Editor</option></Select>;
     case "dialog":
-    case "alert-dialog":
       return (
         <>
           <Button onClick={() => setOpen(true)}>Open dialog</Button>
-          <Dialog open={open} title={slug === "alert-dialog" ? "Delete item" : "Dialog"} onClose={() => setOpen(false)} danger={slug === "alert-dialog"}>
+          <Dialog open={open} title="Dialog" onClose={() => setOpen(false)}>
             Confirm this action.
           </Dialog>
+        </>
+      );
+    case "alert-dialog":
+      return (
+        <>
+          <Button variant="danger" onClick={() => setOpen(true)}>Delete item</Button>
+          <AlertDialog open={open} title="Delete item" onClose={() => setOpen(false)} onConfirm={() => setOpen(false)}>
+            This action cannot be undone.
+          </AlertDialog>
         </>
       );
     case "popover":

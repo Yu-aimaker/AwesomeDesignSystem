@@ -1,9 +1,5 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { register } from "node:module";
-import { pathToFileURL } from "node:url";
-
-// Use dynamic import of TS sources through tsx loader
 import {
   buildEvidenceGraph,
   loadArtifactClaims,

@@ -8,7 +8,11 @@ import AxeBuilder from "@axe-core/playwright";
  */
 const skip = process.env.PLAYWRIGHT_SKIP === "1";
 
-const routes = ["/en", "/ja", "/en/references", "/ja/references", "/en/components", "/ja/brand/workbench"] as const;
+const routes = [
+  "/en", "/ja", "/en/references", "/ja/references", "/en/components",
+  "/ja/brand/workbench", "/ja/components/alert-dialog", "/ja/motion/enter",
+  "/ja/references/ref-apple-hig-accessibility",
+] as const;
 
 test.describe("docs a11y (axe)", () => {
   test.skip(skip, "PLAYWRIGHT_SKIP=1");

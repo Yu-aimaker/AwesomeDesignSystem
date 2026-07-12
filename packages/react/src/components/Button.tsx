@@ -2,13 +2,9 @@
 
 import { cx, stateAttributes } from "@awesome-ds/core";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const buttonMetadata = defineMetadata({
-  name: "Button",
-  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix", "rule.foundations.semantic-tokens"],
-  states: ["idle", "hover", "focus", "active", "disabled", "loading"],
-});
+export const buttonMetadata = getComponentMetadata("button");
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "ghost" | "danger";

@@ -25,11 +25,13 @@
 ### Task 0: Requirement matrix and compatibility baseline
 
 **Files:**
+
 - Create: `docs/requirements-matrix.md`
 - Create: `tests/baseline/repository.test.ts`, `tests/baseline/install.test.ts`
 - Create: `tests/fixtures/legacy-links.json`
 
 **Interfaces:**
+
 - Produces stable requirement IDs `REQ-001` onward, each mapped to an artifact and automated/manual evidence.
 - Produces the compatibility contract consumed by the final audit.
 - Records, but does not modify, pre-existing untracked `.claude/` and `.tokensave/` paths.
@@ -43,11 +45,13 @@
 ### Task 1: Monorepo foundation and verification shell
 
 **Files:**
+
 - Create: `package.json`, `pnpm-workspace.yaml`, `turbo.json`, `tsconfig.base.json`, `.npmrc`
 - Create: `vitest.workspace.ts`, `playwright.config.ts`
 - Modify: `.gitignore`
 
 **Interfaces:**
+
 - Produces root scripts: `dev`, `build`, `typecheck`, `lint`, `test`, `test:a11y`, `test:e2e`, `validate`, `qa`.
 - Produces shared TypeScript compiler rules consumed by every package.
 
@@ -61,12 +65,14 @@
 ### Task 2: Versioned content contracts and evidence graph
 
 **Files:**
+
 - Create: `packages/content/package.json`, `packages/content/tsconfig.json`
 - Create: `packages/content/src/schema.ts`, `ids.ts`, `graph.ts`, `loaders.ts`, `index.ts`
 - Create: `packages/content/src/schema.test.ts`, `graph.test.ts`
 - Create: `content/schema-version.json`
 
 **Interfaces:**
+
 - Produces `ReferenceRecord`, `CanonRule`, `ArtifactClaim`, `FreshnessState`, `EvidenceLevel`.
 - Produces `loadReferenceRecords()`, `loadCanonRules()`, `buildEvidenceGraph()`, and `validateEvidenceGraph()`.
 - IDs follow `ref.<owner>.<slug>`, `rule.<domain>.<slug>`, and `artifact.<kind>.<slug>`.
@@ -81,12 +87,14 @@
 ### Task 3: Semantic token system and generated outputs
 
 **Files:**
+
 - Create: `packages/tokens/package.json`, `packages/tokens/tsconfig.json`
 - Create: `packages/tokens/src/tokens.ts`, `types.ts`, `build.ts`, `index.ts`
 - Create: `packages/tokens/src/tokens.test.ts`
 - Generate: `packages/tokens/dist/tokens.css`, `tailwind-theme.css`, `tokens.json`
 
 **Interfaces:**
+
 - Produces typed `tokens`, `lightTheme`, `darkTheme`, `highContrastTheme`, `motionTokens`.
 - Produces CSS semantic variables and Tailwind v4 `@theme` mappings.
 - Token names preserve the existing contract (`--color-bg`, `--color-fg`, `--space-*`, `--dur-*`) and add component-independent state roles.
@@ -101,6 +109,7 @@
 ### Task 4: Reference Atlas seed and freshness tooling
 
 **Files:**
+
 - Create: `content/references/*.json`
 - Create: `content/signals/*.json`
 - Create: `packages/content/src/freshness.ts`, `freshness.test.ts`
@@ -109,6 +118,7 @@
 - Modify: `research/reference-landscape-2026-07.md`, `research/reference-repos.md`
 
 **Interfaces:**
+
 - Consumes content schemas and graph validators from Task 2.
 - Produces at least 40 curated first-party records spanning standards, systems, design engineering, AI UI, brand, motion, typography, and the requested repositories.
 - Produces JSON reports distinguishing `changed`, `stale`, `fetch_failed`, and `healthy`.
@@ -123,6 +133,7 @@
 ### Task 5: Canon expansion and rule metadata
 
 **Files:**
+
 - Modify: `design-system/INDEX.md`, `design-system/best-practice-design-for-ai.md`
 - Create: `design-system/brand/brand-system.md`, `content-design.md`, `illustration-iconography.md`
 - Create: `design-system/interaction/product-quality.md`, `states-recovery.md`
@@ -132,6 +143,7 @@
 - Create: `content/canon/*.json`
 
 **Interfaces:**
+
 - Produces canon records with stable rule IDs and source references.
 - Connects existing modules to the graph without rewriting their substantive guidance unnecessarily.
 
@@ -145,11 +157,13 @@
 ### Task 6: Framework-independent core and motion package
 
 **Files:**
+
 - Create: `packages/core/**`
 - Create: `packages/motion/**`
 - Test: `packages/core/src/*.test.ts`, `packages/motion/src/*.test.ts`
 
 **Interfaces:**
+
 - Core produces `cx`, polymorphic type helpers, state/data-attribute contracts, and layout utility CSS.
 - Motion produces `motionTokens`, `getMotionPreference()`, recipe metadata, CSS recipes, and React helpers exported from a separate entry point.
 
@@ -163,11 +177,13 @@
 ### Task 7: React component baseline
 
 **Files:**
+
 - Create: `packages/react/package.json`, `tsconfig.json`, `src/index.ts`, `src/styles.css`
 - Create: focused component directories under `packages/react/src/components/`
 - Test: colocated `*.test.tsx` for each component family
 
 **Interfaces:**
+
 - Consumes tokens, core state contracts, and motion preferences.
 - Produces all components named in the approved spec with AwesomeDS-owned public APIs.
 - Every component exports `metadata` containing implemented rule IDs and supported behavior states.
@@ -183,10 +199,12 @@
 ### Task 8: Documentation application shell and visual system
 
 **Files:**
+
 - Create: `apps/docs/**` including route layout, global styles, navigation, search, error boundaries, and shared page components.
 - Create: `apps/docs/tests/**`
 
 **Interfaces:**
+
 - Consumes packages/content, tokens, React, and motion through public entry points only.
 - Produces responsive shell, command/search navigation, theme controls, language-ready layouts, and development integrity errors.
 
@@ -200,11 +218,13 @@
 ### Task 9: Canon, component, motion, and Reference Atlas routes
 
 **Files:**
+
 - Create: `apps/docs/app/(canon)/**`, `components/**`, `motion/**`, `references/**`, `status/**`
 - Create: `apps/docs/components/reference-filter.tsx`, `code-example.tsx`, `component-preview.tsx`, `evidence-links.tsx`
 - Test: route and filter tests under `apps/docs/tests/`
 
 **Interfaces:**
+
 - Produces every route required by the specification.
 - Reference filters are URL-addressable and preserve Back/Forward behavior.
 - Canon and artifact pages expose bidirectional evidence links.
@@ -220,11 +240,13 @@
 ### Task 10: Playground and AI-agent integration
 
 **Files:**
+
 - Create: `apps/docs/app/playground/**`, `apps/docs/components/playground/**`
 - Modify: `skills/awesome-ds/SKILL.md`, `skills/make-awesome-ds/SKILL.md`, `skills/awesome-review/SKILL.md`, `skills/awesome-motion/SKILL.md`, `skills/awesome-html/SKILL.md`
 - Create: `skills/shared/reference-atlas.md`, `skills/shared/rule-contract.md`
 
 **Interfaces:**
+
 - Playground edits theme roles and composes approved components without arbitrary code execution.
 - Skills route agents through canon rule IDs, artifact metadata, and evidence validation.
 
@@ -238,11 +260,13 @@
 ### Task 11: Automated accessibility, visual, and browser QA
 
 **Files:**
+
 - Create: `tests/e2e/*.spec.ts`, `tests/visual/*.spec.ts`, `tests/a11y/*.spec.ts`
 - Create: `tests/fixtures/i18n.ts`
 - Modify: `playwright.config.ts`, root QA scripts
 
 **Interfaces:**
+
 - Produces browser evidence for required routes, components, themes, Japanese, RTL, zoom/reflow, high contrast, reduced motion, and keyboard-only operation.
 
 - [ ] **Step 1: Add Playwright coverage** for navigation, search/filter URL state, component interactions, playground, and status integrity.
@@ -255,11 +279,13 @@
 ### Task 12: Repository experience, compatibility, and final audit loop
 
 **Files:**
+
 - Modify: `README.md`, translated READMEs, `CONTRIBUTING.md`, `install.sh`
 - Create: `CHANGELOG.md`, `docs/architecture.md`, `docs/maintenance.md`, `docs/qa-report.md`, `docs/completion-audit.md`
 - Create: `.github/workflows/ci.yml`, `.github/workflows/freshness.yml`
 
 **Interfaces:**
+
 - Produces onboarding commands, architecture/maintenance guidance, local QA evidence, and requirement mapping.
 - CI definitions mirror local commands but are not represented as deployed or run remotely in this phase.
 

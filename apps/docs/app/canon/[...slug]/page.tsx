@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function CanonDocPage({ params }: { params: Promise<{ slug: string[] }> }) {
   const { slug } = await params;
   const rel = "design-system/" + slug.join("/") + ".md";
-  const doc = await loadCanonDoc(rel);
-  if (!doc) notFound();
   const locale = await getRequestLocale();
+  const doc = await loadCanonDoc(rel, locale);
+  if (!doc) notFound();
   const d = getDictionary(locale).canon;
   return (
     <article className="ads-motion-enter">

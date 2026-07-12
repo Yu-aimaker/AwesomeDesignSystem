@@ -1,3 +1,5 @@
+"use client";
+
 export * from "./components/Button";
 export * from "./components/IconButton";
 export * from "./components/Link";

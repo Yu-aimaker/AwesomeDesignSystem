@@ -23,20 +23,15 @@ async function readJsonFiles<T>(
     return [];
   }
 
-  const out: T[] = [];
-  for (const entry of entries) {
-    if (!entry.endsWith(".json")) continue;
+  const parsed = await Promise.all(entries.filter((entry) => entry.endsWith(".json")).map(async (entry) => {
     const file = path.join(dir, entry);
     const raw = JSON.parse(await readFile(file, "utf8")) as unknown;
     if (Array.isArray(raw)) {
-      for (const item of raw) {
-        out.push(parse(item, file));
-      }
-    } else {
-      out.push(parse(raw, file));
+      return raw.map((item) => parse(item, file));
     }
-  }
-  return out;
+    return [parse(raw, file)];
+  }));
+  return parsed.flat();
 }
 
 export async function loadReferenceRecords(

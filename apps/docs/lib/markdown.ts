@@ -1,12 +1,84 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { marked } from "marked";
+import { Marked } from "marked";
+import sanitizeHtml from "sanitize-html";
+import { cache } from "react";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../../..",
 );
+
+const markdownSanitizer: sanitizeHtml.IOptions = {
+  allowedTags: [
+    "a", "blockquote", "br", "code", "del", "details", "div", "em",
+    "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "kbd", "li",
+    "ol", "p", "pre", "s", "span", "strong", "summary", "table", "tbody",
+    "td", "th", "thead", "tr", "ul",
+  ],
+  allowedAttributes: {
+    a: ["href", "title"],
+    code: ["class"],
+    div: ["class"],
+    img: ["src", "alt", "title", "width", "height", "loading"],
+    span: ["class"],
+    td: ["align"],
+    th: ["align"],
+  },
+  allowedSchemes: ["http", "https", "mailto"],
+  allowedSchemesByTag: { img: ["http", "https"] },
+  allowProtocolRelative: false,
+  disallowedTagsMode: "discard",
+};
+
+function splitFrontmatter(markdown: string): { body: string; metadata: Record<string, string> } {
+  const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) return { metadata: {}, body: markdown };
+  const metadata: Record<string, string> = {};
+  for (const [index, line] of (match[1] ?? "").split(/\r?\n/).entries()) {
+    if (!line.trim() || line.trimStart().startsWith("#")) continue;
+    const field = line.match(/^([A-Za-z][A-Za-z0-9_-]*):\s*(.*?)\s*$/);
+    if (!field?.[1]) throw new Error(`Invalid Canon frontmatter at line ${index + 2}`);
+    if (["__proto__", "constructor", "prototype"].includes(field[1])) throw new Error(`Unsafe Canon frontmatter key: ${field[1]}`);
+    metadata[field[1]] = (field[2] ?? "").replace(/^(?:"([\s\S]*)"|'([\s\S]*)')$/, "$1$2");
+  }
+  return { metadata, body: markdown.slice(match[0].length) };
+}
+
+type RenderCanonOptions = { relPath?: string; locale?: "en" | "ja" };
+
+function resolveCanonHref(href: string, relPath: string, locale: "en" | "ja"): string {
+  if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|#|\/)/i.test(href)) return href;
+  const match = href.match(/^([^?#]*)([?#].*)?$/);
+  const pathname = match?.[1] ?? href;
+  const suffix = match?.[2] ?? "";
+  if (!pathname.toLowerCase().endsWith(".md")) return href;
+  const resolved = path.posix.normalize(path.posix.join(path.posix.dirname(relPath), pathname));
+  if (!resolved.startsWith("design-system/") || resolved.includes("../")) {
+    throw new Error(`Canon link escapes design-system: ${href} from ${relPath}`);
+  }
+  const slug = resolved.slice("design-system/".length).replace(/\.md$/i, "");
+  return `/${locale}/canon/${slug}${suffix}`;
+}
+
+export function renderCanonMarkdown(markdown: string, options: RenderCanonOptions = {}): string {
+  const { body } = splitFrontmatter(markdown);
+  const relPath = options.relPath ?? "design-system/index.md";
+  const locale = options.locale ?? "en";
+  const parser = new Marked({
+    gfm: true,
+    breaks: false,
+    walkTokens(token) {
+      if (token.type === "link") token.href = resolveCanonHref(token.href, relPath, locale);
+    },
+  });
+  const rendered = parser.parse(body);
+  if (typeof rendered !== "string") {
+    throw new TypeError("Canon Markdown must render synchronously");
+  }
+  return sanitizeHtml(rendered, markdownSanitizer);
+}
 
 export function getRepoRoot() {
   return repoRoot;
@@ -19,6 +91,7 @@ export type CanonDoc = {
   domain: string;
   html: string;
   excerpt: string;
+  metadata: Record<string, string>;
 };
 
 function titleFromMarkdown(md: string, fallback: string): string {
@@ -51,7 +124,7 @@ export async function listMarkdownFiles(
   return out.sort();
 }
 
-export async function loadCanonDoc(relPath: string): Promise<CanonDoc | null> {
+export async function loadCanonDoc(relPath: string, locale: "en" | "ja" = "en"): Promise<CanonDoc | null> {
   const full = path.join(repoRoot, relPath);
   try {
     const md = await readFile(full, "utf8");
@@ -60,30 +133,30 @@ export async function loadCanonDoc(relPath: string): Promise<CanonDoc | null> {
       .replace(/\.md$/, "")
       .replace(/\\/g, "/");
     const domain = slug.split("/")[0] ?? "general";
-    const title = titleFromMarkdown(md, slug);
-    const html = await marked.parse(md, { gfm: true, breaks: false });
-    const excerpt = md
-      .replace(/^---[\s\S]*?---/, "")
+    const { body, metadata } = splitFrontmatter(md);
+    const title = metadata.title || titleFromMarkdown(body, slug);
+    const html = renderCanonMarkdown(body, { relPath, locale });
+    const excerpt = body
       .replace(/^#.+$/m, "")
       .replace(/[*_`>#\[\]]/g, "")
       .trim()
       .slice(0, 220);
-    return { slug, title, path: relPath, domain, html, excerpt };
+    return { slug, title, path: relPath, domain, html, excerpt, metadata };
   } catch {
     return null;
   }
 }
 
-export async function loadAllCanonDocs(): Promise<CanonDoc[]> {
+export const loadAllCanonDocs = cache(async function loadAllCanonDocs(locale: "en" | "ja" = "en"): Promise<CanonDoc[]> {
   const files = await listMarkdownFiles("design-system");
   const docs: CanonDoc[] = [];
   for (const file of files) {
     const rel = path.relative(repoRoot, file).replace(/\\/g, "/");
-    const doc = await loadCanonDoc(rel);
+    const doc = await loadCanonDoc(rel, locale);
     if (doc) docs.push(doc);
   }
   return docs;
-}
+});
 
 type DomainRoute = {
   title: string;
@@ -136,9 +209,10 @@ export const domainRoutes = {
 
 export async function docsForDomain(
   domain: keyof typeof domainRoutes,
+  locale: "en" | "ja" = "en",
 ): Promise<CanonDoc[]> {
   const cfg = domainRoutes[domain];
   if (!cfg) return [];
-  const all = await loadAllCanonDocs();
+  const all = await loadAllCanonDocs(locale);
   return all.filter((d) => cfg.match(d.slug, d.path));
 }

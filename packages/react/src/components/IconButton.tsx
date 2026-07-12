@@ -2,13 +2,9 @@
 
 import { cx, stateAttributes } from "@awesome-ds/core";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const iconButtonMetadata = defineMetadata({
-  name: "IconButton",
-  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
-  states: ["idle", "disabled", "loading"],
-});
+export const iconButtonMetadata = getComponentMetadata("icon-button");
 
 export type IconButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   label: string;

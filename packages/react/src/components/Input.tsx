@@ -2,9 +2,9 @@
 
 import { cx, stateAttributes } from "@awesome-ds/core";
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
-import { defineMetadata } from "../utils/metadata";
+import { getComponentMetadata } from "../contracts";
 
-export const inputMetadata = defineMetadata({ name: "Input", ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"], states: ["idle", "focus", "disabled", "error"] });
+export const inputMetadata = getComponentMetadata("input");
 export type FieldProps = { label: string; hint?: string; error?: string; id: string };
 
 export function Input({ label, hint, error, id, className, disabled, ...rest }: FieldProps & InputHTMLAttributes<HTMLInputElement>) {

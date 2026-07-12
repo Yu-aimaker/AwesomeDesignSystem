@@ -10,8 +10,8 @@ export function ThemeControls({ labels }: { labels: { label: string; light: stri
   useEffect(() => {
     const stored = window.localStorage.getItem("ads-theme") as (typeof themes)[number] | null;
     if (stored && themes.includes(stored)) {
-      setTheme(stored);
       document.documentElement.setAttribute("data-theme", stored);
+      queueMicrotask(() => setTheme(stored));
     }
   }, []);
 

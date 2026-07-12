@@ -1,5 +1,5 @@
 {
-  "id": "ref.pinterest.gestalt-accessibility", "title": "Gestalt web accessibility", "url": "https://gestalt.pinterest.systems/web/accessibility",
+  "id": "ref.pinterest.gestalt-accessibility", "title": "Gestalt web accessibility", "url": "https://github.com/pinterest/gestalt/blob/master/docs/pages/foundations/accessibility.tsx",
   "owner": "pinterest", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["accessibility", "components", "quality"],
   "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
   "summary": "Page-level source for accessibility guidance and component-quality communication.", "lessons": ["Keep accessibility status visible beside component usage."],

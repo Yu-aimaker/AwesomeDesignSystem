@@ -19,6 +19,7 @@ playwright-report/
 test-results/
 *.tsbuildinfo
 reports/*.json
+reports/*.md
 !reports/.gitkeep
 .firecrawl/
 .playwright-cli/

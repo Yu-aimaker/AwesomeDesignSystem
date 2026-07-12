@@ -10,7 +10,7 @@ import { Link } from "./Link";
 import { VisuallyHidden } from "./Layout";
 import { Breadcrumb, Pagination } from "./Navigation";
 import { Callout, Progress, Spinner, Toast } from "./Status";
-import { Dialog } from "./Dialog";
+import { AlertDialog, Dialog } from "./Dialog";
 import { DropdownMenu, Popover, Tooltip } from "./Overlay";
 import { Tabs } from "./Tabs";
 
@@ -234,6 +234,56 @@ describe("Dialog keyboard contract", () => {
     expect(dialog).toContainElement(document.activeElement as HTMLElement);
     await user.keyboard("{Escape}");
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+});
+
+describe("AlertDialog action contract", () => {
+  test("keeps destructive confirmation distinct from cancellation", async () => {
+    const user = userEvent.setup();
+    const onConfirm = vi.fn();
+    const onClose = vi.fn();
+    const { rerender } = render(<AlertDialog open title="Delete project" onClose={onClose} onConfirm={onConfirm}>This cannot be undone.</AlertDialog>);
+    await user.click(screen.getByRole("button", { name: "Confirm" }));
+    expect(onConfirm).toHaveBeenCalledOnce();
+    expect(onClose).toHaveBeenCalledOnce();
+
+    rerender(<AlertDialog open title="Delete project" onClose={onClose} onConfirm={onConfirm}>This cannot be undone.</AlertDialog>);
+    await user.click(screen.getByRole("button", { name: "Cancel" }));
+    expect(onConfirm).toHaveBeenCalledOnce();
+    expect(onClose).toHaveBeenCalledTimes(2);
+  });
+
+  test("locks actions while pending and reports a rejected confirmation", async () => {
+    const user = userEvent.setup();
+    let reject!: (reason?: unknown) => void;
+    const pending = new Promise<void>((_, rejectPromise) => { reject = rejectPromise; });
+    const onClose = vi.fn();
+    render(<AlertDialog open title="Delete project" onClose={onClose} onConfirm={() => pending}>This cannot be undone.</AlertDialog>);
+
+    await user.click(screen.getByRole("button", { name: "Confirm" }));
+    expect(screen.getByRole("button", { name: "Confirming…" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Cancel" })).toBeDisabled();
+    await user.keyboard("{Escape}");
+    expect(onClose).not.toHaveBeenCalled();
+
+    reject(new Error("network"));
+    expect(await screen.findByRole("alert")).toHaveTextContent("Confirmation failed");
+    expect(screen.getByRole("button", { name: "Confirm" })).toBeEnabled();
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
+  test("Escape cancels and restores focus to the trigger", async () => {
+    const user = userEvent.setup();
+    function Example() {
+      const [open, setOpen] = React.useState(false);
+      return <><button onClick={() => setOpen(true)}>Delete</button><AlertDialog open={open} title="Delete project" onClose={() => setOpen(false)} onConfirm={() => undefined}>Sure?</AlertDialog></>;
+    }
+    render(<Example />);
+    const trigger = screen.getByRole("button", { name: "Delete" });
+    await user.click(trigger);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument();
     expect(trigger).toHaveFocus();
   });
 });

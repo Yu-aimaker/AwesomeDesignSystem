@@ -11,11 +11,12 @@ import {
   type CanonRule,
   type ReferenceRecord,
 } from "@awesome-ds/content";
+import { cache } from "react";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const contentRoot = path.join(repoRoot, "content");
 
-export async function getAtlas() {
+export const getAtlas = cache(async function getAtlas() {
   const [references, rules, artifacts, signals] = await Promise.all([
     loadReferenceRecords(contentRoot),
     loadCanonRules(contentRoot),
@@ -26,7 +27,7 @@ export async function getAtlas() {
   const validation = validateEvidenceGraph(graph);
   const freshness = summarizeFreshness(references);
   return { references, rules, artifacts, signals, graph, validation, freshness };
-}
+});
 
 export function filterReferences(
   references: ReferenceRecord[],

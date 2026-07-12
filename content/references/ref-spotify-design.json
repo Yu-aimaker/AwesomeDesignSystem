@@ -1,30 +1,32 @@
 {
   "id": "ref.spotify.design",
-  "title": "Spotify Design",
-  "url": "https://design.spotify.com/",
+  "title": "Engineering at Spotify",
+  "url": "https://engineering.atspotify.com/",
   "owner": "spotify",
-  "sourceClass": "brand",
+  "sourceClass": "design-engineering",
   "region": "global",
   "language": "en",
   "topics": [
-    "brand"
+    "design-engineering",
+    "editorial"
   ],
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "observed-behavior",
-  "summary": "Spotify Design \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Spotify's first-party engineering publication exposes production constraints, system evolution, and the editorial structure used to explain technical design decisions.",
   "lessons": [
-    "Extract transferable brand doctrine from Spotify Design.",
-    "Prefer first-party production constraints over secondary summaries."
+    "Treat engineering narratives as evidence of production constraints rather than copying the consumer brand surface.",
+    "Pair system decisions with the problem, trade-offs, implementation context, and measurable outcome."
   ],
   "caveats": [],
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
   "linkedRuleIds": [
-    "rule.brand.personality-system"
+    "rule.brand.editorial-style",
+    "rule.design-eng.docs-as-product"
   ],
   "linkedArtifactIds": [],
-  "contentHash": "elite-spotify-design"
+  "contentHash": "spotify-engineering-editorial-2026-07"
 }
