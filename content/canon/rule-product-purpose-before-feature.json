@@ -1,0 +1,13 @@
+{
+  "id": "rule.product.purpose-before-feature",
+  "title": "Purpose precedes feature and polish",
+  "domain": "product",
+  "summary": "Name the human outcome and non-goals before selecting technology or interface form.",
+  "guidance": "Treat time and attention as costs; remove work whose value cannot justify them.",
+  "do": ["Write a one-sentence human outcome", "Record explicit non-goals and success evidence"],
+  "dont": ["Use engagement, parity, or new technology as the only rationale"],
+  "referenceIds": ["ref.apple.hig", "ref.apple.hig-foundations"],
+  "artifactIds": ["artifact.doc.platform-literacy"],
+  "verification": "manual review of purpose, non-goals, and outcome evidence",
+  "status": "canon"
+}

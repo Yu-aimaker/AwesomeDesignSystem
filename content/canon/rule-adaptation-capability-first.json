@@ -1,0 +1,13 @@
+{
+  "id": "rule.adaptation.capability-first",
+  "title": "Adapt by capability, not device label",
+  "domain": "foundations",
+  "summary": "Components declare supported inputs, presentations, attention contexts, accessibility preferences, environments, and fallbacks.",
+  "guidance": "Preserve intent while adapting hierarchy and interaction; never assume hover, precision, motion, transparency, or a fixed viewport.",
+  "do": ["Publish a capability declaration and fallback", "Test compact, regular, assistive, localized, and degraded states"],
+  "dont": ["Treat mobile, desktop, and spatial as scaled skins"],
+  "referenceIds": ["ref.apple.hig", "ref.apple.hig-accessibility", "ref.apple.hig-spatial"],
+  "artifactIds": ["artifact.doc.platform-literacy"],
+  "verification": "capability declaration plus cross-input and adaptive-state tests",
+  "status": "canon"
+}
