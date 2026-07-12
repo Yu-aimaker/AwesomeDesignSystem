@@ -84,9 +84,24 @@ Before shipping, run the **Anti-AI-Slop Pre-Flight checklist** in `human-not-ai.
 · `/AwesomeReview` (audit existing UI) · `/AwesomeMotion` (animation design).
 
 
-## AwesomeDS Platform contracts (2026-07)
+## AwesomeDS Platform (required routing)
 
-- Read `skills/shared/rule-contract.md` and `skills/shared/reference-atlas.md`.
-- Prefer packages `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion` for executable work.
-- Cite `rule.*` IDs; keep generative UI inside approved components.
-- Validate with `pnpm validate` and review `/status` locally.
+Before major UI work, also load:
+- `../../DESIGN.md` (agent contract)
+- `../../skills/shared/rule-contract.md`
+- `../../skills/shared/reference-atlas.md`
+- Relevant canon under `../../design-system/` via INDEX
+- Executable packages: `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion`
+
+### Review / QA
+- Interface quality: `../../design-system/review/interface-quality-checklist.md` (cite IQ-* IDs)
+- Local site: `pnpm --filter @awesome-ds/docs dev`
+- Graph: `pnpm validate`
+- Tests: `pnpm test` and `pnpm test:e2e` when UI changes
+
+### Non-negotiables
+- Semantic tokens only (no raw product colors in components)
+- Full states: empty/loading/error as first-class
+- WCAG 2.2 AA + keyboard paths
+- Evidence for doctrine (`ref.*` / `rule.*`)
+- No auto-promotion of social signals into canon

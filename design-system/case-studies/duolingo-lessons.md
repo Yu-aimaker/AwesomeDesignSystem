@@ -9,11 +9,9 @@ source: https://design.duolingo.com/
 
 ## Coverage status (2026-07-13)
 
-**Playwright full-text scrape: 17/17 pages OK** (hub + 16 routes). Raw extracts in `research/case-studies/raw/duolingo-*.md` + `inventory.json`.
+**Playwright full-text scrape: 17/17 pages OK** (hub + 16 content routes). Raw extracts live in `research/case-studies/raw/duolingo-*.md` + `inventory.json`.
 
-## Coverage status (2026-07-13)
-
-Public site is a **brand bible SPA** (not a product component system). Canonical page inventory (hub + 15):
+Public site is a **brand bible SPA** (not a product component system). Canonical content inventory:
 
 ### Identity
 - `/identity/logos` — clear space, min size, lockups, misuse
@@ -66,3 +64,9 @@ Treat product stats, plan names (e.g. legacy Plus), OS version examples, and lea
 - `rule.brand.cross-medium-coherence`
 - `rule.brand.content-design`
 - `rule.brand.illustration-grammar`
+
+## Operational depth
+
+Registration is not absorption. The route-by-route completion audit is
+`research/duolingo-complete-audit-2026-07.md`; the resulting executable,
+brand-neutral production doctrine lives in `brand/duolingo-derived/`.

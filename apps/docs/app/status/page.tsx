@@ -1,6 +1,8 @@
 import { getAtlas } from "../../lib/content";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import { getDictionary } from "../../lib/i18n";
+import { getRequestLocale } from "../../lib/i18n-server";
 
 export const metadata = { title: "Status" };
 
@@ -12,24 +14,25 @@ export default async function StatusPage() {
   } catch {
     report = null;
   }
+  const d = getDictionary(await getRequestLocale()).status;
   return (
     <div>
-      <h1>System status</h1>
-      <p className="muted">Integrity signals for content graph, freshness, and coverage.</p>
+      <h1>{d.title}</h1>
+      <p className="muted">{d.intro}</p>
       <div className="grid-cards">
-        <div className="card-link"><strong>Evidence graph</strong><p className="meta">{validation.ok ? "OK" : validation.issues.length + " issues"}</p></div>
-        <div className="card-link"><strong>References</strong><p className="meta">{references.length}</p></div>
-        <div className="card-link"><strong>Canon rules</strong><p className="meta">{rules.length}</p></div>
-        <div className="card-link"><strong>Artifacts</strong><p className="meta">{artifacts.length}</p></div>
-        <div className="card-link"><strong>Signals (quarantined)</strong><p className="meta">{signals.length}</p></div>
+        <div className="card-link"><strong>{d.graph}</strong><p className="meta">{validation.ok ? "OK" : validation.issues.length + " issues"}</p></div>
+        <div className="card-link"><strong>{d.references}</strong><p className="meta">{references.length}</p></div>
+        <div className="card-link"><strong>{d.rules}</strong><p className="meta">{rules.length}</p></div>
+        <div className="card-link"><strong>{d.artifacts}</strong><p className="meta">{artifacts.length}</p></div>
+        <div className="card-link"><strong>{d.signals}</strong><p className="meta">{signals.length}</p></div>
       </div>
-      <h2>Freshness buckets</h2>
+      <h2>{d.buckets}</h2>
       <pre className="code">{JSON.stringify(freshness, null, 2)}</pre>
-      <h2>Latest freshness report</h2>
-      <pre className="code">{report ?? "No report yet. Run pnpm check:freshness."}</pre>
+      <h2>{d.latest}</h2>
+      <pre className="code">{report ?? d.noReport}</pre>
       {!validation.ok ? (
         <>
-          <h2>Graph issues</h2>
+          <h2>{d.issues}</h2>
           <ul>{validation.issues.map((i, idx) => <li key={idx}>{i.message}</li>)}</ul>
         </>
       ) : null}

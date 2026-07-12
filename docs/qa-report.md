@@ -2,34 +2,36 @@
 
 **Date:** 2026-07-13  
 **Branch:** `feat/awesome-ds-platform`  
-**Round:** post-delegation (x-search + agy research + subagent e2e/react)
+**Round:** final integration and localization hardening
 
 ## Environment
 
 - Node: `>=22.12.0`
 - pnpm: `10.5.2`
-- Next.js: `15.5.2`
+- Next.js: `16.2.10`
+- React: `19.2.7`
 - Playwright + `@axe-core/playwright`
 
 ## Commands & results
 
 | Command | Result |
 |---|---|
-| `pnpm test` | **54 passed** (12 files) |
-| `pnpm validate` | **52 refs / 12 rules / 6 signals / 0 issues** |
-| `pnpm --filter @awesome-ds/docs build` | Pass (80+ routes incl. new refs) |
-| `PLAYWRIGHT_PORT=3333 CI=1 pnpm exec playwright test` | **10 passed** (e2e + a11y axe) |
+| `pnpm test` | **79 passed** (17 files) |
+| `pnpm validate` | **97 refs / 42 rules / 20 artifacts / 6 signals / 0 issues** |
+| `pnpm --filter @awesome-ds/docs build` | Pass (**217 generated pages**) |
+| Focused flaky-test stress run | **39 passed**, three consecutive passes, retries disabled |
+| Full Playwright matrix, retries disabled | **27 passed** (E2E + RTL/reflow + axe + visual) |
+| Visual suite | **4 passed**, including English/Japanese home, components, and full Atlas |
 | `pnpm tokens:build` | Pass |
 
-## Delegation notes
+## Research and implementation evidence
 
-| Worker | Outcome |
+| Area | Outcome |
 |---|---|
-| x-search | `research/x-signals-2026-07.md` → 4 new `content/signals/*` |
-| agy research | `research/gap-audit-2026-07.md` → 8 new references + `DESIGN.md` |
-| hermes composer 2.5 | **Failed**: xAI OAuth rejects model ids via hermes (`Invalid model name`) |
-| general-purpose subagent | Playwright e2e/a11y suite |
-| general-purpose subagent | React 16 extra unit tests + playground controls |
+| Duolingo | 17/17 public Design pages audited; transferable doctrine implemented under `design-system/brand/duolingo-derived/` |
+| Apple | Current HIG/platform guidance audited; product doctrine implemented under `design-system/platforms/apple-derived/` |
+| Elite systems | Cross-system synthesis implemented under `design-system/case-studies/elite-systems/` |
+| Localization | English/Japanese routes, negotiation, locale-preserving navigation, `html lang`, sitemap, and explicit canon fallback |
 
 ## A11y fixes this round
 
@@ -38,8 +40,7 @@
 - Accent badge border treatment (no low-contrast tinted text)
 - Axe critical/serious allowlist removed after fixes
 
-## Intentional follow-ups
+## Intentional constraints
 
-- Restore hermes `composer` alias once xAI model routing is fixed
-- MCP server package for design-system query
-- Generative UI runtime schema validator package
+- The site remains local-only; deployment and package publication are outside this phase.
+- Canon Markdown is English-first. Japanese UI clearly labels English fallback content until reviewed translations are added.

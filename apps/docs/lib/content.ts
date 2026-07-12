@@ -34,6 +34,9 @@ export function filterReferences(
     q?: string | undefined;
     topic?: string | undefined;
     sourceClass?: string | undefined;
+    owner?: string | undefined;
+    language?: string | undefined;
+    evidenceLevel?: string | undefined;
     region?: string | undefined;
     freshness?: string | undefined;
   },
@@ -48,6 +51,9 @@ export function filterReferences(
     }
     if (query.topic && !ref.topics.includes(query.topic)) return false;
     if (query.sourceClass && ref.sourceClass !== query.sourceClass) return false;
+    if (query.owner && ref.owner !== query.owner) return false;
+    if (query.language && ref.language !== query.language) return false;
+    if (query.evidenceLevel && ref.evidenceLevel !== query.evidenceLevel) return false;
     if (query.region && ref.region !== query.region) return false;
     if (query.freshness && ref.freshnessState !== query.freshness) return false;
     return true;
@@ -58,18 +64,4 @@ export function findRule(rules: CanonRule[], id: string) {
   return rules.find((r) => r.id === id);
 }
 
-export const nav = [
-  { href: "/", label: "Home" },
-  { href: "/principles", label: "Principles" },
-  { href: "/foundations", label: "Foundations" },
-  { href: "/brand", label: "Brand" },
-  { href: "/review", label: "Review" },
-  { href: "/interaction", label: "Interaction" },
-  { href: "/patterns", label: "Patterns" },
-  { href: "/ai-design", label: "AI Design" },
-  { href: "/components", label: "Components" },
-  { href: "/motion", label: "Motion" },
-  { href: "/references", label: "Reference Atlas" },
-  { href: "/playground", label: "Playground" },
-  { href: "/status", label: "Status" },
-] as const;
+export { nav } from "./navigation";

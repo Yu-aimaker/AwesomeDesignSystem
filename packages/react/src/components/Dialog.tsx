@@ -1,38 +1,76 @@
 "use client";
 
 import { cx } from "@awesome-ds/core";
-import type { ReactNode } from "react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
+import {
+  Button as AriaButton,
+  Dialog as AriaDialog,
+  Heading,
+  Modal,
+  ModalOverlay,
+} from "react-aria-components";
 import { defineMetadata } from "../utils/metadata";
-import { Button } from "./Button";
 
-export const dialogMetadata = defineMetadata({ name: "Dialog", ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"], states: ["open", "closed"] });
+export const dialogMetadata = defineMetadata({
+  name: "Dialog",
+  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
+  states: ["open", "closed"],
+});
 
-export function Dialog({ open, onClose, title, children, danger = false }: { open: boolean; onClose: () => void; title: string; children: ReactNode; danger?: boolean }) {
-  const titleId = useId();
-  const ref = useRef<HTMLDivElement>(null);
+export type DialogProps = {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: ReactNode;
+  danger?: boolean;
+};
+
+export function Dialog({ open, onClose, title, children, danger = false }: DialogProps) {
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  if (open && !returnFocusRef.current && typeof document !== "undefined") {
+    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  }
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", onKey);
-    ref.current?.focus();
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
-  if (!open) return null;
+    if (open || !returnFocusRef.current) return;
+    const target = returnFocusRef.current;
+    returnFocusRef.current = null;
+    queueMicrotask(() => target.focus());
+  }, [open]);
+
   return (
-    <div className="ads-dialog-backdrop" role="presentation" onClick={onClose}>
-      <div ref={ref} role="dialog" aria-modal="true" aria-labelledby={titleId} className={cx("ads-dialog", "ads-motion-enter")} tabIndex={-1} onClick={(e) => e.stopPropagation()}>
-        <h2 id={titleId}>{title}</h2>
-        <div>{children}</div>
-        <div className="ads-cluster" style={{ marginTop: "var(--space-4)" }}>
-          <Button variant={danger ? "danger" : "primary"} onClick={onClose}>{danger ? "Confirm" : "Close"}</Button>
-          {danger ? <Button variant="ghost" onClick={onClose}>Cancel</Button> : null}
-        </div>
-      </div>
-    </div>
+    <ModalOverlay
+      isOpen={open}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) onClose();
+      }}
+      isDismissable={!danger}
+      className="ads-dialog-backdrop"
+    >
+      <Modal className="ads-dialog-modal">
+        <AriaDialog
+          role={danger ? "alertdialog" : "dialog"}
+          className={cx("ads-dialog", "ads-motion-enter")}
+        >
+          {({ close }) => (
+            <>
+              <Heading slot="title" className="ads-dialog-title">{title}</Heading>
+              <div>{children}</div>
+              <div className="ads-cluster ads-dialog-actions">
+                <AriaButton className={cx("ads-btn", danger ? "ads-btn--danger" : "ads-btn--primary", "ads-btn--md")} onPress={close}>
+                  {danger ? "Confirm" : "Close"}
+                </AriaButton>
+                {danger ? <AriaButton className="ads-btn ads-btn--ghost ads-btn--md" onPress={close}>Cancel</AriaButton> : null}
+              </div>
+            </>
+          )}
+        </AriaDialog>
+      </Modal>
+    </ModalOverlay>
   );
 }
-export function AlertDialog(props: { open: boolean; onClose: () => void; title: string; children: ReactNode }) {
+
+export function AlertDialog(props: Omit<DialogProps, "danger">) {
   return <Dialog {...props} danger />;
 }
+
 Dialog.metadata = dialogMetadata;

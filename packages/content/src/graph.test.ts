@@ -101,4 +101,14 @@ describe("evidence graph", () => {
     });
     expect(graph.issues.some((i) => i.code === "duplicate-id")).toBe(true);
   });
+
+  test("flags one-way rule and artifact links", () => {
+    const graph = buildEvidenceGraph({
+      references: [ref],
+      rules: [rule],
+      artifacts: [{ ...artifact, ruleIds: ["rule.other.missing-backlink"] }],
+    });
+    expect(graph.issues.some((i) => i.code === "missing-rule-backlink")).toBe(true);
+    expect(graph.issues.some((i) => i.code === "unknown-rule-on-artifact")).toBe(true);
+  });
 });

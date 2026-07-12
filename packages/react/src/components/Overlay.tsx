@@ -1,47 +1,70 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import {
+  Button as AriaButton,
+  Dialog as AriaDialog,
+  DialogTrigger,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  Popover as AriaPopover,
+  Tooltip as AriaTooltip,
+  TooltipTrigger,
+} from "react-aria-components";
 import { defineMetadata } from "../utils/metadata";
-import { Button } from "./Button";
 
-export const overlayMetadata = defineMetadata({ name: "Overlay", ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"], states: ["open", "closed"] });
+export const overlayMetadata = defineMetadata({
+  name: "Overlay",
+  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
+  states: ["open", "closed"],
+});
 
 export function Popover({ label, children }: { label: string; children: ReactNode }) {
-  const [open, setOpen] = useState(false);
-  const id = useId();
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      <Button variant="secondary" aria-expanded={open} aria-controls={id} onClick={() => setOpen((v) => !v)}>{label}</Button>
-      {open ? <div id={id} role="dialog" className="ads-popover" style={{ position: "absolute", top: "calc(100% + 0.5rem)", zIndex: 10 }}>{children}</div> : null}
-    </div>
+    <DialogTrigger>
+      <AriaButton className="ads-btn ads-btn--secondary ads-btn--md">{label}</AriaButton>
+      <AriaPopover className="ads-popover" placement="bottom start">
+        <AriaDialog aria-label={label}>{children}</AriaDialog>
+      </AriaPopover>
+    </DialogTrigger>
   );
 }
 
 export function Tooltip({ label, children }: { label: string; children: ReactNode }) {
-  const id = useId();
   return (
-    <span style={{ position: "relative", display: "inline-flex" }}>
-      <span tabIndex={0} aria-describedby={id}>{children}</span>
-      <span role="tooltip" id={id} className="ads-tooltip" style={{ position: "absolute", bottom: "calc(100% + 0.35rem)", whiteSpace: "nowrap" }}>{label}</span>
-    </span>
+    <TooltipTrigger delay={0} closeDelay={0}>
+      <AriaButton className="ads-tooltip-trigger" aria-label={label}>{children}</AriaButton>
+      <AriaTooltip className="ads-tooltip" placement="top">{label}</AriaTooltip>
+    </TooltipTrigger>
   );
 }
 
-export function DropdownMenu({ label, items }: { label: string; items: { id: string; label: string; onSelect?: () => void }[] }) {
-  const [open, setOpen] = useState(false);
+export type DropdownMenuItem = {
+  id: string;
+  label: string;
+  onSelect?: () => void;
+  disabled?: boolean;
+};
+
+export function DropdownMenu({ label, items }: { label: string; items: DropdownMenuItem[] }) {
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
-      <Button variant="secondary" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((v) => !v)}>{label}</Button>
-      {open ? (
-        <div role="menu" className="ads-menu" style={{ position: "absolute", top: "calc(100% + 0.5rem)", zIndex: 10 }}>
+    <MenuTrigger>
+      <AriaButton className="ads-btn ads-btn--secondary ads-btn--md">{label}</AriaButton>
+      <AriaPopover className="ads-menu-popover" placement="bottom start">
+        <Menu
+          className="ads-menu"
+          aria-label={label}
+          disabledKeys={items.filter((item) => item.disabled).map((item) => item.id)}
+          onAction={(key) => items.find((item) => item.id === String(key))?.onSelect?.()}
+        >
           {items.map((item) => (
-            <button key={item.id} role="menuitem" type="button" className="ads-btn ads-btn--ghost ads-btn--sm" style={{ width: "100%", justifyContent: "flex-start" }} onClick={() => { item.onSelect?.(); setOpen(false); }}>
-              {item.label}
-            </button>
+            <MenuItem id={item.id} key={item.id} className="ads-menu-item">{item.label}</MenuItem>
           ))}
-        </div>
-      ) : null}
-    </div>
+        </Menu>
+      </AriaPopover>
+    </MenuTrigger>
   );
 }
+
 Popover.metadata = overlayMetadata;

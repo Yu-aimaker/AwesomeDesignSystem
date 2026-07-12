@@ -6,6 +6,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 
 const nextConfig: NextConfig = {
   transpilePackages: [
+    "@awesome-ds/brand",
     "@awesome-ds/content",
     "@awesome-ds/core",
     "@awesome-ds/motion",
@@ -13,6 +14,9 @@ const nextConfig: NextConfig = {
     "@awesome-ds/tokens",
   ],
   outputFileTracingRoot: root,
+  turbopack: {
+    root,
+  },
 };
 
 export default nextConfig;

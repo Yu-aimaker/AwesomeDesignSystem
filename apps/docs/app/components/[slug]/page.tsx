@@ -1,30 +1,50 @@
 import { notFound } from "next/navigation";
-import { Button, Card, Input, Dialog } from "@awesome-ds/react";
-
-const catalog: Record<string, { title: string; ruleIds: string[]; body: string }> = {
-  button: { title: "Button", ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"], body: "Primary action control with loading/disabled states." },
-  input: { title: "Input", ruleIds: ["rule.a11y.wcag-aa"], body: "Labeled text field with hint and error association." },
-  dialog: { title: "Dialog", ruleIds: ["rule.a11y.wcag-aa"], body: "Modal dialog with Escape dismiss and labelled title." },
-};
+import Link from "next/link";
+import {
+  Accordion, Badge, Button, Callout, Card, Checkbox, EmptyState, ErrorState, IconButton, Input, Link as AdsLink,
+  Pagination, Progress, RadioGroup, Select, Spinner, Switch, Tabs, Textarea, Toast, Breadcrumb, Popover, Tooltip, DropdownMenu, Dialog, Stack, Cluster, Grid, Container, VisuallyHidden,
+} from "@awesome-ds/react";
+import { componentCatalog, getComponent } from "../../../lib/components-catalog";
+import { ComponentLive } from "../../../components/component-live";
 
 export function generateStaticParams() {
-  return Object.keys(catalog).map((slug) => ({ slug }));
+  return componentCatalog.map((c) => ({ slug: c.slug }));
 }
 
-export default async function ComponentDetail({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const item = catalog[slug];
+  const item = getComponent(slug);
+  return { title: item?.name ?? "Component" };
+}
+
+export default async function ComponentDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const item = getComponent(slug);
   if (!item) notFound();
   return (
-    <article>
-      <h1>{item.title}</h1>
-      <p className="muted">{item.body}</p>
+    <article className="ads-motion-enter">
+      <p className="meta"><Link href="/components">Components</Link> / {item.family}</p>
+      <h1>{item.name}</h1>
+      <p className="muted">{item.description}</p>
       <p className="meta">Rules: {item.ruleIds.join(", ")}</p>
-      <Card title="Live">
-        {slug === "button" ? <Button>Continue</Button> : null}
-        {slug === "input" ? <Input id="demo" label="Email" /> : null}
-        {slug === "dialog" ? <p className="meta">Open from playground for interactive modal.</p> : null}
+      <h2>State matrix</h2>
+      <div className="state-matrix">
+        {item.states.map((state) => (
+          <div className="state-chip" key={state}>
+            <strong>{state}</strong>
+            <span className="meta">required</span>
+          </div>
+        ))}
+      </div>
+      <h2>Live</h2>
+      <Card title="Preview">
+        <ComponentLive slug={slug} />
       </Card>
+      <h2>Copyable example</h2>
+      <pre className="code">{item.example}</pre>
+      <Callout title="Implementation">
+        Import <code>{item.importName}</code> from <code>@awesome-ds/react</code>. Consume semantic tokens only.
+      </Callout>
     </article>
   );
 }

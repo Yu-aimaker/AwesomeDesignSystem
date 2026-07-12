@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
-import { filterReferences, nav } from "../lib/content";
+import { filterReferences } from "../lib/content";
+import { nav } from "../lib/navigation";
 import type { ReferenceRecord } from "@awesome-ds/content";
 
 const sample: ReferenceRecord = {
@@ -28,7 +29,7 @@ const sample: ReferenceRecord = {
 describe("docs shell contracts", () => {
   test("exposes all required primary routes", () => {
     const hrefs = nav.map((n) => n.href);
-    for (const required of ["/", "/foundations", "/review", "/principles", "/brand", "/interaction", "/patterns", "/ai-design", "/components", "/motion", "/references", "/playground", "/status"]) {
+    for (const required of ["/", "/foundations", "/review", "/canon", "/principles", "/brand", "/interaction", "/patterns", "/ai-design", "/components", "/motion", "/references", "/playground", "/status"]) {
       expect(hrefs).toContain(required);
     }
   });
@@ -38,5 +39,7 @@ describe("docs shell contracts", () => {
     expect(filterReferences([sample], { q: "missing" })).toHaveLength(0);
     expect(filterReferences([sample], { topic: "interaction", freshness: "healthy" })).toHaveLength(1);
     expect(filterReferences([sample], { region: "jp" })).toHaveLength(0);
+    expect(filterReferences([sample], { owner: "vercel", language: "en", evidenceLevel: "first-party-guidance" })).toHaveLength(1);
+    expect(filterReferences([sample], { language: "ja" })).toHaveLength(0);
   });
 });

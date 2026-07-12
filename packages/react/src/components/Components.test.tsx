@@ -1,5 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import * as React from "react";
 import { describe, expect, test, vi } from "vitest";
 import { Accordion } from "./Accordion";
 import { Badge } from "./Badge";
@@ -9,6 +10,9 @@ import { Link } from "./Link";
 import { VisuallyHidden } from "./Layout";
 import { Breadcrumb, Pagination } from "./Navigation";
 import { Callout, Progress, Spinner, Toast } from "./Status";
+import { Dialog } from "./Dialog";
+import { DropdownMenu, Popover, Tooltip } from "./Overlay";
+import { Tabs } from "./Tabs";
 
 describe("IconButton", () => {
   test("exposes aria-label as accessible name", async () => {
@@ -205,5 +209,74 @@ describe("Link", () => {
     const link = screen.getByRole("link", { name: "Documentation" });
     expect(link).toHaveAttribute("href", "/docs");
     expect(link).toHaveClass("ads-link");
+  });
+});
+
+describe("Dialog keyboard contract", () => {
+  test("moves focus inside, closes with Escape, and restores trigger focus", async () => {
+    const user = userEvent.setup();
+    function Example() {
+      const [open, setOpen] = React.useState(false);
+      return (
+        <>
+          <button type="button" onClick={() => setOpen(true)}>Open settings</button>
+          <Dialog open={open} onClose={() => setOpen(false)} title="Settings">
+            <button type="button">Save settings</button>
+          </Dialog>
+        </>
+      );
+    }
+    render(<Example />);
+    const trigger = screen.getByRole("button", { name: "Open settings" });
+    await user.click(trigger);
+    const dialog = screen.getByRole("dialog", { name: "Settings" });
+    expect(dialog).toBeInTheDocument();
+    expect(dialog).toContainElement(document.activeElement as HTMLElement);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+    expect(trigger).toHaveFocus();
+  });
+});
+
+describe("Tabs keyboard contract", () => {
+  test("moves selection with arrow keys", async () => {
+    const user = userEvent.setup();
+    render(<Tabs items={[{ value: "one", label: "One", content: "First" }, { value: "two", label: "Two", content: "Second" }]} />);
+    const first = screen.getByRole("tab", { name: "One" });
+    await user.click(first);
+    await user.keyboard("{ArrowRight}");
+    expect(screen.getByRole("tab", { name: "Two" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByRole("tabpanel")).toHaveTextContent("Second");
+  });
+});
+
+describe("Overlay keyboard contracts", () => {
+  test("opens a menu, moves focus, selects, and closes", async () => {
+    const user = userEvent.setup();
+    const selected = vi.fn();
+    render(<DropdownMenu label="Actions" items={[{ id: "edit", label: "Edit", onSelect: selected }, { id: "delete", label: "Delete" }]} />);
+    const trigger = screen.getByRole("button", { name: "Actions" });
+    trigger.focus();
+    await user.keyboard("{ArrowDown}{Enter}");
+    expect(selected).toHaveBeenCalledOnce();
+    expect(screen.queryByRole("menu")).not.toBeInTheDocument();
+  });
+
+  test("popover dismisses with Escape", async () => {
+    const user = userEvent.setup();
+    render(<Popover label="More">Details</Popover>);
+    await user.click(screen.getByRole("button", { name: "More" }));
+    expect(screen.getByRole("dialog")).toHaveTextContent("Details");
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+  });
+
+  test("tooltip opens from keyboard focus and dismisses with Escape", async () => {
+    const user = userEvent.setup();
+    render(<Tooltip label="Helpful hint">?</Tooltip>);
+    await user.tab();
+    expect(await screen.findByRole("tooltip")).toHaveTextContent("Helpful hint");
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("tooltip")).not.toBeInTheDocument();
   });
 });

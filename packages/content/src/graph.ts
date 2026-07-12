@@ -8,6 +8,7 @@ export type GraphIssue = {
     | "artifact-without-rule"
     | "unknown-rule-on-artifact"
     | "unknown-artifact-on-rule"
+    | "missing-rule-backlink"
     | "unknown-rule-on-reference";
   message: string;
   id?: string;
@@ -81,6 +82,12 @@ export function buildEvidenceGraph(input: {
           code: "unknown-artifact-on-rule",
           id: rule.id,
           message: `Rule ${rule.id} points to unknown artifact ${artifactId}`,
+        });
+      } else if (!artifacts.get(artifactId)?.ruleIds.includes(rule.id)) {
+        issues.push({
+          code: "missing-rule-backlink",
+          id: rule.id,
+          message: `Rule ${rule.id} points to ${artifactId}, but the artifact does not link back`,
         });
       }
     }

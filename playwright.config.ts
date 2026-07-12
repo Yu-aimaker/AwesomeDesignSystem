@@ -25,7 +25,7 @@ export default defineConfig({
     // Locally, reuse an already-running docs server when present (same port).
     // If port 3000 is taken by another app, run with PLAYWRIGHT_PORT=3333.
     command: `pnpm --filter @awesome-ds/docs exec next start --hostname 127.0.0.1 --port ${port}`,
-    url: baseURL,
+    url: `${baseURL}/icon.svg`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
@@ -38,6 +38,11 @@ export default defineConfig({
     {
       name: "a11y",
       testDir: "./tests/a11y",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "visual",
+      testDir: "./tests/visual",
       use: { ...devices["Desktop Chrome"] },
     },
   ],

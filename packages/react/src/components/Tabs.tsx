@@ -1,24 +1,30 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import {
+  Tab,
+  TabList,
+  TabPanel,
+  Tabs as AriaTabs,
+} from "react-aria-components";
 import { defineMetadata } from "../utils/metadata";
 
-export const tabsMetadata = defineMetadata({ name: "Tabs", ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"], states: ["selected"] });
+export const tabsMetadata = defineMetadata({
+  name: "Tabs",
+  ruleIds: ["rule.a11y.wcag-aa", "rule.components.state-matrix"],
+  states: ["selected"],
+});
 
 export function Tabs({ items, defaultValue }: { items: { value: string; label: string; content: ReactNode }[]; defaultValue?: string }) {
-  const [value, setValue] = useState(defaultValue ?? items[0]?.value ?? "");
-  const active = items.find((i) => i.value === value) ?? items[0];
+  const fallback = defaultValue ?? items[0]?.value;
   return (
-    <div className="ads-tabs">
-      <div role="tablist" aria-label="Sections" className="ads-tablist">
-        {items.map((item) => (
-          <button key={item.value} role="tab" type="button" className="ads-tab" aria-selected={item.value === value} id={"tab-" + item.value} aria-controls={"panel-" + item.value} onClick={() => setValue(item.value)}>
-            {item.label}
-          </button>
-        ))}
-      </div>
-      {active ? <div role="tabpanel" id={"panel-" + active.value} aria-labelledby={"tab-" + active.value} className="ads-motion-enter">{active.content}</div> : null}
-    </div>
+    <AriaTabs className="ads-tabs" {...(fallback ? { defaultSelectedKey: fallback } : {})} keyboardActivation="automatic">
+      <TabList aria-label="Sections" className="ads-tablist">
+        {items.map((item) => <Tab key={item.value} id={item.value} className="ads-tab">{item.label}</Tab>)}
+      </TabList>
+      {items.map((item) => <TabPanel key={item.value} id={item.value} className="ads-tabpanel ads-motion-enter">{item.content}</TabPanel>)}
+    </AriaTabs>
   );
 }
+
 Tabs.metadata = tabsMetadata;

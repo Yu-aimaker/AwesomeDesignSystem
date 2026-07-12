@@ -1,29 +1,27 @@
 import Link from "next/link";
-import { nav } from "../lib/content";
+import { getDictionary } from "../lib/i18n";
+import { getRequestLocale } from "../lib/i18n-server";
+import { LocaleSwitcher } from "./locale-switcher";
+import { SiteNav } from "./site-nav";
 
-export function SiteShell({
+export async function SiteShell({
   children,
-  currentPath,
 }: {
   children: React.ReactNode;
-  currentPath?: string;
 }) {
+  const locale = await getRequestLocale();
+  const dictionary = getDictionary(locale);
   return (
     <>
-      <a className="skip-link" href="#main">Skip to content</a>
+      <a className="skip-link" href="#main">{dictionary.shell.skipToContent}</a>
       <div className="shell">
-        <aside className="sidebar" aria-label="Primary">
+        <aside className="sidebar" aria-label={dictionary.shell.primary}>
           <div className="brand">
-            <strong>AwesomeDS</strong>
-            <span className="meta">Evidence-backed design bible</span>
+            <Link href={`/${locale}`} className="brand-lockup" aria-label={dictionary.shell.home}><span className="brand-mark" aria-hidden="true">A</span><strong>AwesomeDS</strong></Link>
+            <span className="meta">{dictionary.shell.tagline}</span>
           </div>
-          <nav className="nav" aria-label="Site">
-            {nav.map((item) => (
-              <Link key={item.href} href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <SiteNav locale={locale} labels={dictionary.nav} ariaLabel={dictionary.shell.site} />
+          <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
         </aside>
         <main id="main" className="main">
           {children}

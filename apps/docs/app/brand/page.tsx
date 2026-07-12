@@ -1,39 +1,39 @@
-export const metadata = { title: "Brand" };
+import Link from "next/link";
+import { docsForDomain, domainRoutes } from "../../lib/markdown";
+import { Prose } from "../../components/prose";
+import { formatMessage, getDictionary, localizePathname } from "../../lib/i18n";
+import { getRequestLocale } from "../../lib/i18n-server";
 
-const modules = [
-  { href: "/references?q=duolingo", title: "Duolingo-class brand bible lessons", body: "Cross-medium personality, voice/tone, illustration grammar." },
-  { title: "Cross-medium coherence", body: "Personality → words, shapes, color, imagery, motion, constraints." },
-  { title: "Voice & tone matrix", body: "Stable voice + situational tone for error/success/onboarding/marketing." },
-  { title: "Character systems", body: "Anatomy sheets, emotion limits, misuse galleries — process only, no IP copy." },
-  { title: "Content design", body: "Glossary, forbidden terms, recovery copy patterns." },
-  { title: "Sound & haptics", body: "Optional sonic brand layer with mute and non-sensory alternatives." },
-];
+export const metadata = { title: domainRoutes["brand"].title };
 
-export default function BrandPage() {
+export default async function DomainPage() {
+  const docs = await docsForDomain("brand");
+  const featured = docs[0];
+  const locale = await getRequestLocale();
+  const dictionary = getDictionary(locale);
+  const d = dictionary.brand;
   return (
-    <article className="ads-motion-enter">
-      <h1>Brand</h1>
-      <p className="muted">
-        Personality is a production system. AwesomeDS extracts transferable brand-bible structure
-        from elite orgs (Duolingo Design inventory, Dropbox Brand, Apple foundations) without
-        copying proprietary assets.
-      </p>
-      <div className="grid-cards">
-        {modules.map((m) => (
-          <div className="card-link" key={m.title}>
-            <strong>{m.title}</strong>
-            <p className="meta">{m.body}</p>
-          </div>
+    <div className="ads-motion-enter">
+      <h1>{d.title}</h1>
+      <p className="muted">{formatMessage(d.intro, { count: docs.length })}</p>
+      <p className="translation-notice" role="note" lang="ja">{locale === "ja" ? dictionary.canon.fallbackNotice : null}</p>
+      <Link className="hero-cta" href={localizePathname("/brand/workbench", locale)}>{d.workbench} <span aria-hidden="true">↗</span></Link>
+      <div className="grid-cards" style={{ marginBottom: "var(--space-8)" }}>
+        {docs.map((doc) => (
+          <Link key={doc.slug} className="card-link" href={localizePathname("/canon/" + doc.slug, locale)}>
+            <strong>{doc.title}</strong>
+            <p className="meta">{doc.excerpt || doc.slug}</p>
+          </Link>
         ))}
       </div>
-      <h2>Source modules</h2>
-      <ul>
-        <li><code>design-system/brand/cross-medium-coherence.md</code></li>
-        <li><code>design-system/brand/voice-tone-matrix.md</code></li>
-        <li><code>design-system/brand/character-system.md</code></li>
-        <li><code>design-system/case-studies/duolingo-lessons.md</code></li>
-        <li><code>design-system/case-studies/elite-org-map.md</code></li>
-      </ul>
-    </article>
+      {featured ? (
+        <section>
+          <h2>{d.featured}: {featured.title}</h2>
+          <div lang="en"><Prose html={featured.html} /></div>
+        </section>
+      ) : (
+        <p>{d.empty}</p>
+      )}
+    </div>
   );
 }

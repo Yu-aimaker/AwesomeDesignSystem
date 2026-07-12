@@ -12,18 +12,20 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@awesome-ds/brand": "workspace:*",
     "@awesome-ds/content": "workspace:*",
     "@awesome-ds/core": "workspace:*",
     "@awesome-ds/motion": "workspace:*",
     "@awesome-ds/react": "workspace:*",
     "@awesome-ds/tokens": "workspace:*",
-    "next": "15.5.2",
-    "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "marked": "18.0.6",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@types/react": "19.1.10",
-    "@types/react-dom": "19.1.7",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
     "typescript": "5.9.2",
     "vitest": "3.2.4"
   }

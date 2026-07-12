@@ -1,0 +1,15 @@
+{
+  "name": "@awesome-ds/brand",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": { "zod": "3.25.76" },
+  "devDependencies": { "typescript": "5.9.2", "vitest": "3.2.4" }
+}

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { filterReferences, getAtlas } from "../../lib/content";
+import { formatMessage, getDictionary, localizePathname } from "../../lib/i18n";
+import { getRequestLocale } from "../../lib/i18n-server";
 
 export const metadata = { title: "Reference Atlas" };
 
@@ -12,58 +14,87 @@ export default async function ReferencesPage({
   const q = typeof sp.q === "string" ? sp.q : undefined;
   const topic = typeof sp.topic === "string" ? sp.topic : undefined;
   const sourceClass = typeof sp.sourceClass === "string" ? sp.sourceClass : undefined;
+  const owner = typeof sp.owner === "string" ? sp.owner : undefined;
+  const language = typeof sp.language === "string" ? sp.language : undefined;
+  const evidenceLevel = typeof sp.evidenceLevel === "string" ? sp.evidenceLevel : undefined;
   const region = typeof sp.region === "string" ? sp.region : undefined;
   const freshness = typeof sp.freshness === "string" ? sp.freshness : undefined;
   const { references } = await getAtlas();
-  const filtered = filterReferences(references, { q, topic, sourceClass, region, freshness });
+  const filtered = filterReferences(references, { q, topic, sourceClass, owner, language, evidenceLevel, region, freshness });
   const topics = Array.from(new Set(references.flatMap((r) => r.topics))).sort();
+  const owners = Array.from(new Set(references.map((r) => r.owner))).sort();
+  const languages = Array.from(new Set(references.map((r) => r.language))).sort();
+  const evidenceLevels = Array.from(new Set(references.map((r) => r.evidenceLevel))).sort();
+  const locale = await getRequestLocale();
+  const d = getDictionary(locale).references;
 
   return (
     <div>
-      <h1>Reference Atlas</h1>
-      <p className="muted">Structured evidence — not a raw link dump. Each source links to AwesomeDS conclusions.</p>
-      <form className="filters" method="get" aria-label="Filter references">
+      <h1>{d.title}</h1>
+      <p className="muted">{d.intro}</p>
+      <form className="filters" method="get" aria-label={d.filterLabel}>
         <label className="ads-field">
-          <span className="ads-label">Search</span>
-          <input name="q" placeholder="Search title, lesson, owner…" defaultValue={q ?? ""} aria-label="Search references" />
+          <span className="ads-label">{d.search}</span>
+          <input name="q" placeholder={d.searchPlaceholder} defaultValue={q ?? ""} aria-label={d.search} />
         </label>
         <label className="ads-field">
-          <span className="ads-label">Topic</span>
+          <span className="ads-label">{d.owner}</span>
+          <select name="owner" defaultValue={owner ?? ""} aria-label={d.owner}>
+            <option value="">{d.allOwners}</option>
+            {owners.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">{d.language}</span>
+          <select name="language" defaultValue={language ?? ""} aria-label={d.language}>
+            <option value="">{d.allLanguages}</option>
+            {languages.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">{d.evidenceLevel}</span>
+          <select name="evidenceLevel" defaultValue={evidenceLevel ?? ""} aria-label={d.evidenceLevel}>
+            <option value="">{d.allEvidence}</option>
+            {evidenceLevels.map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">{d.topic}</span>
           <select name="topic" defaultValue={topic ?? ""} aria-label="Filter by topic">
-            <option value="">All topics</option>
+            <option value="">{d.allTopics}</option>
             {topics.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
         </label>
         <label className="ads-field">
-          <span className="ads-label">Source class</span>
+          <span className="ads-label">{d.sourceClass}</span>
           <select name="sourceClass" defaultValue={sourceClass ?? ""} aria-label="Filter by source class">
-            <option value="">All source classes</option>
+            <option value="">{d.allClasses}</option>
             {["standard","official-system","design-engineering","implementation","brand","research","book","repository","signal"].map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
         </label>
         <label className="ads-field">
-          <span className="ads-label">Region</span>
+          <span className="ads-label">{d.region}</span>
           <select name="region" defaultValue={region ?? ""} aria-label="Filter by region">
-            <option value="">All regions</option>
+            <option value="">{d.allRegions}</option>
             {["global","us","eu","jp","kr","cn","other"].map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
         </label>
         <label className="ads-field">
-          <span className="ads-label">Freshness</span>
+          <span className="ads-label">{d.freshness}</span>
           <select name="freshness" defaultValue={freshness ?? ""} aria-label="Filter by freshness">
-            <option value="">All freshness</option>
+            <option value="">{d.allFreshness}</option>
             {["healthy","due","stale","expired","unknown"].map((f) => <option key={f} value={f}>{f}</option>)}
           </select>
         </label>
-        <button className="ads-btn ads-btn--primary ads-btn--md" type="submit">Apply filters</button>
+        <button className="ads-btn ads-btn--primary ads-btn--md" type="submit">{d.apply}</button>
       </form>
-      <p className="meta">{filtered.length} of {references.length} sources</p>
-      <table className="table">
-        <thead><tr><th>Source</th><th>Class</th><th>Topics</th><th>Freshness</th><th>Linked rules</th></tr></thead>
+      <p className="meta">{formatMessage(d.count, { shown: filtered.length, total: references.length })}</p>
+      <div className="table-wrap"><table className="table">
+        <thead><tr><th>{d.source}</th><th>{d.sourceClass}</th><th>{d.topics}</th><th>{d.freshness}</th><th>{d.linkedRules}</th></tr></thead>
         <tbody>
           {filtered.map((ref) => (
             <tr key={ref.id}>
-              <td><Link href={"/references/" + encodeURIComponent(ref.id)}>{ref.title}</Link><div className="meta">{ref.owner}</div></td>
+              <td><Link href={localizePathname("/references/" + encodeURIComponent(ref.id), locale)}>{ref.title}</Link><div className="meta">{ref.owner}</div></td>
               <td>{ref.sourceClass}</td>
               <td>{ref.topics.join(", ")}</td>
               <td><span className={"pill " + ref.freshnessState}>{ref.freshnessState}</span></td>
@@ -71,8 +102,8 @@ export default async function ReferencesPage({
             </tr>
           ))}
         </tbody>
-      </table>
-      {filtered.length === 0 ? <p role="status">No references match these filters.</p> : null}
+      </table></div>
+      {filtered.length === 0 ? <p role="status">{d.noResults}</p> : null}
     </div>
   );
 }

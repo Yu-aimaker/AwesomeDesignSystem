@@ -15,7 +15,7 @@ Generated for implementation tracking (Task 0). Status updates as tasks complete
 | REQ-008 | Intent-based motion + reduced-motion | motion | recipes + tokens | package tests | done |
 | REQ-009 | AI operates inside contracts | skills | skill updates + rule contract | skill smoke tests | done |
 | REQ-010 | Freshness visibility | content/scripts | freshness scripts + `/status` | `pnpm validate` | done |
-| REQ-011 | Anti-imitation boundary | content | reference caveats + research notes | manual audit | planned |
+| REQ-011 | Anti-imitation boundary | content | every reference `antiImitationNote` + brand-neutral derived doctrine | schema + manual audit | done |
 | REQ-012 | Reference Atlas structured records | content | `content/references/*.json` | schema + graph | done |
 | REQ-013 | Emerging signals not auto-canon | content | `content/signals/*` | graph tests | done |
 | REQ-014 | Component baseline set | react | `packages/react` | unit + a11y tests | done |
@@ -25,6 +25,7 @@ Generated for implementation tracking (Task 0). Status updates as tasks complete
 | REQ-018 | Local-only; no deploy/publish | platform | scripts/docs | audit | intentional |
 | REQ-019 | Preserve README/skills/install | platform | baseline tests | `tests/baseline/*` | done |
 | REQ-020 | Unresolved Critical/High = 0 at completion | qa | `docs/completion-audit.md` | full QA loop | done |
+| REQ-021 | English/Japanese website localization | docs | `/en/*`, `/ja/*`, proxy negotiation, dictionaries, fallback notice | i18n unit + E2E + visual + axe | done |
 
 ## Compatibility contract (pre-migration snapshot)
 

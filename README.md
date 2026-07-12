@@ -134,6 +134,7 @@ This repository now also ships an executable design platform alongside the Markd
 | `packages/react` | Accessible React component baseline |
 | `packages/motion` | Intent-based motion recipes |
 | `packages/content` | Evidence graph schemas & validators |
+| `packages/brand` | Brand manifest, Product Lexicon schemas, and copy linting |
 | `apps/docs` | Local documentation website |
 
 ```bash
@@ -145,3 +146,5 @@ pnpm qa
 ```
 
 See `docs/architecture.md`, `docs/maintenance.md`, and `docs/completion-audit.md`.
+
+The website is URL-addressable in English and Japanese (`/en/*`, `/ja/*`), negotiates the initial locale, preserves locale during navigation, and marks untranslated canon documents explicitly instead of silently mixing languages.

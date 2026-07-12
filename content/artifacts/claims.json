@@ -5,7 +5,8 @@
     "title": "Semantic tokens",
     "path": "packages/tokens",
     "ruleIds": [
-      "rule.foundations.semantic-tokens"
+      "rule.foundations.semantic-tokens",
+      "rule.design-eng.platform-first"
     ],
     "referenceIds": [
       "ref.w3c.dtcg"
@@ -41,7 +42,7 @@
     "id": "artifact.component.empty-state",
     "kind": "component",
     "title": "EmptyState",
-    "path": "packages/react/src/components/EmptyState.tsx",
+    "path": "packages/react/src/components/Status.tsx",
     "ruleIds": [
       "rule.interaction.product-quality"
     ],
@@ -53,7 +54,7 @@
     "id": "artifact.component.error-state",
     "kind": "component",
     "title": "ErrorState",
-    "path": "packages/react/src/components/ErrorState.tsx",
+    "path": "packages/react/src/components/Status.tsx",
     "ruleIds": [
       "rule.interaction.product-quality"
     ],
@@ -67,7 +68,8 @@
     "title": "Motion recipes",
     "path": "packages/motion",
     "ruleIds": [
-      "rule.motion.purpose-first"
+      "rule.motion.purpose-first",
+      "rule.design-eng.platform-first"
     ],
     "referenceIds": [
       "ref.motion.motion-react"
@@ -116,7 +118,11 @@
     "title": "Brand system module",
     "path": "design-system/brand/brand-system.md",
     "ruleIds": [
-      "rule.brand.personality-system"
+      "rule.brand.personality-system",
+      "rule.brand.marks-lockups",
+      "rule.brand.typography-contract",
+      "rule.brand.family-architecture",
+      "rule.brand.asset-governance"
     ],
     "referenceIds": [
       "ref.duolingo.design"
@@ -140,7 +146,9 @@
     "title": "awesome-ds skill",
     "path": "skills/awesome-ds/SKILL.md",
     "ruleIds": [
-      "rule.ai.generative-boundaries"
+      "rule.ai.generative-boundaries",
+      "rule.agent.go-wide-remix-repeat",
+      "rule.agent.real-content-risk-gates"
     ],
     "referenceIds": [
       "ref.voltagent.awesome-design-md"
@@ -165,7 +173,9 @@
     "path": "design-system/brand/cross-medium-coherence.md",
     "ruleIds": [
       "rule.brand.cross-medium-coherence",
-      "rule.brand.personality-system"
+      "rule.brand.personality-system",
+      "rule.brand.imagery-direction",
+      "rule.brand.narrative-evidence"
     ],
     "referenceIds": [
       "ref.duolingo.design"
@@ -177,7 +187,9 @@
     "title": "Voice tone matrix",
     "path": "design-system/brand/voice-tone-matrix.md",
     "ruleIds": [
-      "rule.brand.content-design"
+      "rule.brand.content-design",
+      "rule.brand.editorial-style",
+      "rule.brand.product-lexicon"
     ],
     "referenceIds": [
       "ref.duolingo.writing-tone"
@@ -189,7 +201,8 @@
     "title": "Character & illustration grammar",
     "path": "design-system/brand/character-system.md",
     "ruleIds": [
-      "rule.brand.illustration-grammar"
+      "rule.brand.illustration-grammar",
+      "rule.brand.character-motion"
     ],
     "referenceIds": [
       "ref.duolingo.illustration-shape"
@@ -213,10 +226,48 @@
     "title": "Platform literacy",
     "path": "design-system/foundations/platform-literacy.md",
     "ruleIds": [
-      "rule.foundations.platform-literacy"
+      "rule.foundations.platform-literacy",
+      "rule.adaptation.capability-first",
+      "rule.adaptation.constrained-surfaces",
+      "rule.product.agency-responsibility",
+      "rule.product.craft-systemic-delight",
+      "rule.product.familiar-flexible-simple",
+      "rule.product.purpose-before-feature",
+      "rule.trust.contextual-permission",
+      "rule.trust.icon-system"
     ],
     "referenceIds": [
       "ref.apple.hig"
+    ]
+  },
+  {
+    "id": "artifact.script.brand-contract",
+    "kind": "script",
+    "title": "Brand manifest and Product Lexicon validator",
+    "path": "packages/brand/src/index.ts",
+    "ruleIds": [
+      "rule.brand.marks-lockups",
+      "rule.brand.typography-contract",
+      "rule.brand.imagery-direction",
+      "rule.brand.product-lexicon",
+      "rule.brand.asset-governance"
+    ],
+    "referenceIds": [
+      "ref.duolingo.design",
+      "ref.duolingo.writing-glossary"
+    ]
+  },
+  {
+    "id": "artifact.doc.brand-workbench",
+    "kind": "doc",
+    "title": "Interactive Brand Workbench",
+    "path": "apps/docs/app/brand/workbench/page.tsx",
+    "ruleIds": [
+      "rule.brand.cross-medium-coherence",
+      "rule.brand.product-lexicon"
+    ],
+    "referenceIds": [
+      "ref.duolingo.design"
     ]
   }
 ]

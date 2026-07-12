@@ -1,5 +1,11 @@
 # Apple Design Language (2026)
 
+> [!WARNING]
+> **Historical snapshot:** this file primarily captures the WWDC25 / iOS 26 / SF Symbols 7 era.
+> Apple Design Resources had advanced to iOS/iPadOS 27, macOS 27, and SF Symbols 8 beta when
+> rechecked on 2026-07-13. Use `apple-hig-complete-audit-2026-07.md` and
+> `design-system/platforms/apple-derived/` for the current operational synthesis.
+
 > Snapshot of Apple's current design language as of **June 2026**. Covers the Human Interface Guidelines (HIG), the **Liquid Glass** material (introduced at WWDC25, June 9 2025), SF Pro / SF Symbols 7, the type system, spatial/visionOS design, materials & vibrancy, motion, layout, and what makes Apple feel premium. Built for AI agents to consume without re-fetching. Concrete values and copy-paste code are embedded throughout.
 
 ---
