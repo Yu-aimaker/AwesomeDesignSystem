@@ -21,6 +21,7 @@
     "tokens:build": "pnpm --filter @awesome-ds/tokens build"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
     "@playwright/test": "1.55.0",
     "@types/node": "24.3.0",
     "turbo": "2.5.6",

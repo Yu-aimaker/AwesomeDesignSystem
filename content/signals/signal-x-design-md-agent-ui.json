@@ -1,0 +1,17 @@
+{
+  "id": "signal.x.design-md-agent-ui",
+  "title": "DESIGN.md as agent-readable design contract",
+  "url": "https://x.com/itsolelehmann/status/2040189738859307303",
+  "observedDate": "2026-07-13",
+  "summary": "Serious teams treat DESIGN.md (or DESIGN_SYSTEM.md) plus AGENTS.md as the agent-readable visual/logic contract, with CI enforcement and collections like awesome-design-md. Recurring in Vercel-adjacent and agentic coding discussions.",
+  "relatedTopics": [
+    "ai-ui",
+    "governance",
+    "design-engineering"
+  ],
+  "promotionBlockedReason": "Emerging social signal; corroborate with primary product docs and multi-repo adoption before promoting new canon beyond rule.ai.generative-boundaries.",
+  "candidateRuleIds": [
+    "rule.ai.generative-boundaries",
+    "rule.governance.evidence-first"
+  ]
+}

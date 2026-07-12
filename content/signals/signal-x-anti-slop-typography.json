@@ -1,0 +1,16 @@
+{
+  "id": "signal.x.anti-slop-typography",
+  "title": "Distinctive typography as anti-AI-slop differentiator",
+  "url": "https://x.com/madebydaybreak/status/1970847957625811207",
+  "observedDate": "2026-07-13",
+  "summary": "Practitioners emphasize context-aware type systems over generic AI font defaults; typography remains a primary brand differentiator against homogenized generative UI.",
+  "relatedTopics": [
+    "foundations",
+    "brand"
+  ],
+  "promotionBlockedReason": "Align with existing foundations/typography.md; promote only after operational checklist is linked as a rule artifact.",
+  "candidateRuleIds": [
+    "rule.foundations.core-literacy",
+    "rule.brand.personality-system"
+  ]
+}

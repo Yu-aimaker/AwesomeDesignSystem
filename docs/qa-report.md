@@ -2,53 +2,44 @@
 
 **Date:** 2026-07-13  
 **Branch:** `feat/awesome-ds-platform`  
-**Scope:** Local-first monorepo platform (Tasks 0–12)
+**Round:** post-delegation (x-search + agy research + subagent e2e/react)
 
 ## Environment
 
-- Node: `>=22.12.0` (required by toolchain)
+- Node: `>=22.12.0`
 - pnpm: `10.5.2`
 - Next.js: `15.5.2`
-- React: `19.1.1`
-- TypeScript: `5.9.2`
-- Vitest: `3.2.4`
+- Playwright + `@axe-core/playwright`
 
 ## Commands & results
 
 | Command | Result |
 |---|---|
-| `pnpm test` | Pass — 11 files / 38 tests |
-| `pnpm typecheck` | Pass — all 6 packages + root |
-| `pnpm validate` | Pass — 44 refs, 12 rules, 13 artifacts, 2 signals, 0 graph issues |
-| `pnpm tokens:build` | Pass — deterministic CSS/JSON generation |
-| `pnpm build` | Pass — docs production build, 72 static routes |
-| `pnpm check:freshness` | Pass — report at `reports/freshness.json` |
+| `pnpm test` | **54 passed** (12 files) |
+| `pnpm validate` | **52 refs / 12 rules / 6 signals / 0 issues** |
+| `pnpm --filter @awesome-ds/docs build` | Pass (80+ routes incl. new refs) |
+| `PLAYWRIGHT_PORT=3333 CI=1 pnpm exec playwright test` | **10 passed** (e2e + a11y axe) |
+| `pnpm tokens:build` | Pass |
 
-## Coverage notes
+## Delegation notes
 
-### Automated
+| Worker | Outcome |
+|---|---|
+| x-search | `research/x-signals-2026-07.md` → 4 new `content/signals/*` |
+| agy research | `research/gap-audit-2026-07.md` → 8 new references + `DESIGN.md` |
+| hermes composer 2.5 | **Failed**: xAI OAuth rejects model ids via hermes (`Invalid model name`) |
+| general-purpose subagent | Playwright e2e/a11y suite |
+| general-purpose subagent | React 16 extra unit tests + playground controls |
 
-- Workspace foundation + compatibility baseline (README/skills/install)
-- Content schema + evidence graph + freshness evaluation
-- Token multi-theme + generation determinism
-- Core utilities / motion recipe intents
-- React component a11y-oriented unit tests (button, input, tabs, dialog, empty/error)
-- Docs route map + Reference Atlas filter serialization
+## A11y fixes this round
 
-### Manual / deferred browser suite
+- Darkened accent/danger semantic tokens for AA contrast on white text
+- Labeled Reference Atlas filter controls
+- Accent badge border treatment (no low-contrast tinted text)
+- Axe critical/serious allowlist removed after fixes
 
-Playwright config and script hooks exist (`test:a11y`, `test:e2e`). Full browser visual matrix is intentional follow-up once Chromium install is desired in CI agents; production docs build + unit graph validation cover local completion gates for this phase.
+## Intentional follow-ups
 
-## Intentional constraints
-
-- Local-first only; no package publish / no production deploy
-- X findings remain in `content/signals/` (not auto-promoted)
-- External link check is non-blocking for flaky network (`check:links` writes report, exits 0)
-- Brand/book sources use copyright-safe synthesis notes
-
-## Open lower-priority improvements (not Critical/High)
-
-- Expand per-component Storybook-depth tests and axe page scans
-- Deeper JP/RTL visual snapshots
-- Broader canon Markdown rewrite beyond seed modules
-- Richer playground token editor beyond theme + button state
+- Restore hermes `composer` alias once xAI model routing is fixed
+- MCP server package for design-system query
+- Generative UI runtime schema validator package

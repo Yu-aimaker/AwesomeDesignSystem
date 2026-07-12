@@ -1,0 +1,15 @@
+{
+  "id": "signal.x.agent-behavioral-contracts",
+  "title": "Runtime agent behavioral contracts for generative UI",
+  "url": "https://x.com/ZabihullahAtal/status/2047692175019008019",
+  "observedDate": "2026-07-13",
+  "summary": "Research and practitioner discussion on runtime-enforced preconditions, invariants, recovery, and governance for agent actions\u2014relevant to safe generative UI and fail-closed design.",
+  "relatedTopics": [
+    "ai-ui",
+    "a11y"
+  ],
+  "promotionBlockedReason": "Needs peer-reviewed or first-party production guidance plus a11y implications review before canon elevation.",
+  "candidateRuleIds": [
+    "rule.ai.generative-boundaries"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "ref.apple.hig-spatial",
+  "title": "Apple HIG Spatial Design",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/spatial-design",
+  "owner": "apple",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "product"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Apple HIG Spatial Design \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "lessons": [
+    "Incorporate transferable product guidance from Apple HIG Spatial Design.",
+    "Prefer schema/contract-bound generative UI over freeform HTML."
+  ],
+  "caveats": [
+    "Verify URL path still resolves; some vendor docs reorganize frequently."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
+  "linkedRuleIds": [
+    "rule.interaction.product-quality"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "gap-apple-hig-spatial"
+}

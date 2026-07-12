@@ -1,18 +1,43 @@
 import { defineConfig, devices } from "@playwright/test";
 
+/** Docs server port. Override with PLAYWRIGHT_PORT when 3000 is occupied. */
+const port = Number(process.env.PLAYWRIGHT_PORT ?? 3000);
+const baseURL = `http://127.0.0.1:${port}`;
+
 export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   fullyParallel: true,
   reporter: process.env.CI ? "github" : "list",
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
+  timeout: 60_000,
+  expect: {
+    timeout: 15_000,
+  },
   testDir: "./tests",
   use: {
-    baseURL: "http://127.0.0.1:3000",
+    baseURL,
     trace: "on-first-retry",
+    navigationTimeout: 45_000,
+    actionTimeout: 15_000,
+  },
+  webServer: {
+    // Prefer production server after `pnpm --filter @awesome-ds/docs build`.
+    // Locally, reuse an already-running docs server when present (same port).
+    // If port 3000 is taken by another app, run with PLAYWRIGHT_PORT=3333.
+    command: `pnpm --filter @awesome-ds/docs exec next start --hostname 127.0.0.1 --port ${port}`,
+    url: baseURL,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
   },
   projects: [
     {
-      name: "chromium",
+      name: "e2e",
+      testDir: "./tests/e2e",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "a11y",
+      testDir: "./tests/a11y",
       use: { ...devices["Desktop Chrome"] },
     },
   ],

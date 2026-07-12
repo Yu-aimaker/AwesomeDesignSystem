@@ -1,0 +1,32 @@
+{
+  "id": "ref.w3c.wcag-3",
+  "title": "WCAG 3.0 Working Draft",
+  "url": "https://www.w3.org/TR/wcag3/",
+  "owner": "w3c",
+  "sourceClass": "standard",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "standard",
+  "summary": "WCAG 3.0 Working Draft \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "lessons": [
+    "Incorporate transferable accessibility guidance from WCAG 3.0 Working Draft.",
+    "Prefer schema/contract-bound generative UI over freeform HTML."
+  ],
+  "caveats": [
+    "Verify URL path still resolves; some vendor docs reorganize frequently."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "gap-w3c-wcag-3"
+}

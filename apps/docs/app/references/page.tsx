@@ -22,24 +22,39 @@ export default async function ReferencesPage({
     <div>
       <h1>Reference Atlas</h1>
       <p className="muted">Structured evidence — not a raw link dump. Each source links to AwesomeDS conclusions.</p>
-      <form className="filters" method="get">
-        <input name="q" placeholder="Search title, lesson, owner…" defaultValue={q ?? ""} />
-        <select name="topic" defaultValue={topic ?? ""}>
-          <option value="">All topics</option>
-          {topics.map((t) => <option key={t} value={t}>{t}</option>)}
-        </select>
-        <select name="sourceClass" defaultValue={sourceClass ?? ""}>
-          <option value="">All source classes</option>
-          {["standard","official-system","design-engineering","implementation","brand","research","book","repository","signal"].map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-        <select name="region" defaultValue={region ?? ""}>
-          <option value="">All regions</option>
-          {["global","us","eu","jp","kr","cn","other"].map((r) => <option key={r} value={r}>{r}</option>)}
-        </select>
-        <select name="freshness" defaultValue={freshness ?? ""}>
-          <option value="">All freshness</option>
-          {["healthy","due","stale","expired","unknown"].map((f) => <option key={f} value={f}>{f}</option>)}
-        </select>
+      <form className="filters" method="get" aria-label="Filter references">
+        <label className="ads-field">
+          <span className="ads-label">Search</span>
+          <input name="q" placeholder="Search title, lesson, owner…" defaultValue={q ?? ""} aria-label="Search references" />
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">Topic</span>
+          <select name="topic" defaultValue={topic ?? ""} aria-label="Filter by topic">
+            <option value="">All topics</option>
+            {topics.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">Source class</span>
+          <select name="sourceClass" defaultValue={sourceClass ?? ""} aria-label="Filter by source class">
+            <option value="">All source classes</option>
+            {["standard","official-system","design-engineering","implementation","brand","research","book","repository","signal"].map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">Region</span>
+          <select name="region" defaultValue={region ?? ""} aria-label="Filter by region">
+            <option value="">All regions</option>
+            {["global","us","eu","jp","kr","cn","other"].map((r) => <option key={r} value={r}>{r}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">Freshness</span>
+          <select name="freshness" defaultValue={freshness ?? ""} aria-label="Filter by freshness">
+            <option value="">All freshness</option>
+            {["healthy","due","stale","expired","unknown"].map((f) => <option key={f} value={f}>{f}</option>)}
+          </select>
+        </label>
         <button className="ads-btn ads-btn--primary ads-btn--md" type="submit">Apply filters</button>
       </form>
       <p className="meta">{filtered.length} of {references.length} sources</p>

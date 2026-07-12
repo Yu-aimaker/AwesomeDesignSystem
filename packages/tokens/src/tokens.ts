@@ -110,16 +110,16 @@ export const lightTheme: ColorRoles = {
   "color-fg-subtle": primitives.neutral[500],
   "color-border": primitives.neutral[200],
   "color-border-subtle": primitives.neutral[100],
-  "color-accent": primitives.brand[500],
+  "color-accent": primitives.brand[700],
   "color-accent-fg": primitives.neutral[0],
   "color-accent-hover": primitives.brand[600],
-  "color-success": primitives.success,
+  "color-success": "oklch(0.48 0.14 150)",
   "color-success-fg": primitives.neutral[0],
-  "color-warning": primitives.warning,
-  "color-warning-fg": primitives.neutral[900],
-  "color-danger": primitives.danger,
+  "color-warning": "oklch(0.72 0.14 80)",
+  "color-warning-fg": primitives.neutral[950],
+  "color-danger": "oklch(0.48 0.20 25)",
   "color-danger-fg": primitives.neutral[0],
-  "color-ring": primitives.brand[500],
+  "color-ring": primitives.brand[600],
 };
 
 export const darkTheme: ColorRoles = {
