@@ -1,0 +1,8 @@
+{
+  "id": "ref.uber.base-web", "title": "Base Web", "url": "https://baseweb.design/",
+  "owner": "uber", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["components", "react", "extensibility"],
+  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
+  "summary": "Open component implementation distinct from Uber's company brand system.", "lessons": ["Govern overrides with typed contracts, tests, owners and expiry."],
+  "caveats": ["Override-heavy APIs can fragment system coherence."], "licenseNote": "Base Web repository was MIT-licensed at observation; verify current package metadata.",
+  "antiImitationNote": "Adopt extensibility governance, not Uber visuals.", "linkedRuleIds": ["rule.governance.promotion-maturity"], "linkedArtifactIds": [], "contentHash": "elite-uber-baseweb-20260713"
+}

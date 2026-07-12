@@ -1,0 +1,11 @@
+{
+  "id": "rule.ai.ux-failure-contract",
+  "title": "Model AI failure by cause, consequence and recovery",
+  "domain": "ai-driven",
+  "summary": "Refusal, safety block, timeout, rate limit, unavailable tool, malformed output, partial success and unsafe result remain distinct states.",
+  "guidance": "Preserve valid work, say what did and did not happen, provide a specific recovery and protect side effects from duplicates. Log enough context for accountability without exposing secrets or private reasoning.",
+  "do": ["Retain valid partial results", "Offer cause-specific recovery", "Make side-effect retries explicit and idempotent"],
+  "dont": ["Collapse every failure into Try again", "Discard user input", "Reveal chain-of-thought as an explanation"],
+  "referenceIds": ["ref.microsoft.human-ai-guidelines", "ref.nist.ai-rmf", "ref.vercel.ai-elements", "ref.zendesk.garden", "ref.zendesk.garden-components"],
+  "artifactIds": [], "verification": "Refusal, timeout, 429, unavailable-tool, malformed, partial-success and duplicate-side-effect tests", "status": "canon"
+}

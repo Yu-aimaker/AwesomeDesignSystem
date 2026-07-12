@@ -1,0 +1,8 @@
+{
+  "id": "ref.zendesk.garden-components", "title": "Zendesk Garden components", "url": "https://garden.zendesk.com/components/",
+  "owner": "zendesk", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["components", "forms", "enterprise"],
+  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
+  "summary": "Page-level component catalog evidence for compact, form-heavy enterprise interfaces.", "lessons": ["Publish component states and maturity near implementation guidance."],
+  "caveats": ["A catalog entry does not prove accessibility in an integrating product."], "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer state and validation contracts, not visual identity.", "linkedRuleIds": ["rule.ai.ux-failure-contract"], "linkedArtifactIds": [], "contentHash": "elite-zendesk-components-20260713"
+}

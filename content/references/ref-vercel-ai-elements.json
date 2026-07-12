@@ -1,0 +1,8 @@
+{
+  "id": "ref.vercel.ai-elements", "title": "Vercel AI Elements", "url": "https://ai-sdk.dev/elements/overview",
+  "owner": "vercel", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["ai", "streaming", "components"],
+  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 60, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
+  "summary": "Implementation-oriented AI UI component reference for streaming, messages and tool activity.", "lessons": ["Model partial output and tool activity as explicit states."],
+  "caveats": ["Library capability does not establish product semantics or safety."], "licenseNote": "Verify current package license and version before implementation.",
+  "antiImitationNote": "Do not treat chat UI or provider conventions as universal AI UX.", "linkedRuleIds": ["rule.ai.ux-streaming-contract", "rule.ai.ux-failure-contract"], "linkedArtifactIds": [], "contentHash": "elite-vercel-ai-elements-20260713"
+}

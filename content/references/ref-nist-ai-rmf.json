@@ -1,0 +1,8 @@
+{
+  "id": "ref.nist.ai-rmf", "title": "NIST AI Risk Management Framework", "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+  "owner": "nist", "sourceClass": "standard", "region": "us", "language": "en", "topics": ["ai", "risk", "governance"],
+  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 180, "freshnessState": "healthy", "evidenceLevel": "standard",
+  "summary": "Risk-governance baseline for mapping, measuring, managing and governing AI risk.", "lessons": ["Evaluate harmful-error severity and accountability, not only usability."],
+  "caveats": ["Framework use does not establish compliance or product safety."], "licenseNote": "U.S. government framework; cite the current version.",
+  "antiImitationNote": "Use the risk process; do not claim certification.", "linkedRuleIds": ["rule.ai.ux-uncertainty-contract", "rule.ai.ux-failure-contract", "rule.governance.promotion-maturity"], "linkedArtifactIds": [], "contentHash": "elite-nist-airmf-20260713"
+}

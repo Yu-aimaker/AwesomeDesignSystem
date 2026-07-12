@@ -1,0 +1,8 @@
+{
+  "id": "ref.mailchimp.brand-assets", "title": "Mailchimp brand assets", "url": "https://mailchimp.com/about/brand-assets/",
+  "owner": "mailchimp", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["brand", "assets", "governance"],
+  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 120, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
+  "summary": "Controlled asset distribution and usage guidance as part of brand operations.", "lessons": ["Assets require owner, rights, version, allowed channels and expiry."],
+  "caveats": ["Public availability is not permission for unrestricted reuse."], "licenseNote": "Trademarked/proprietary assets; follow the portal's current usage terms.",
+  "antiImitationNote": "Do not reuse Freddie, palette, typography or illustrations.", "linkedRuleIds": ["rule.governance.promotion-maturity"], "linkedArtifactIds": [], "contentHash": "elite-mailchimp-assets-20260713"
+}
