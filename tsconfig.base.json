@@ -20,6 +20,6 @@
     "target": "ES2023",
     "types": ["node"]
   },
-  "include": ["tests/**/*.ts", "*.config.ts", "vitest.workspace.ts"],
+  "include": ["tests/**/*.ts", "*.config.ts"],
   "exclude": ["node_modules", "dist", ".next", ".turbo"]
 }

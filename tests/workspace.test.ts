@@ -35,4 +35,22 @@ describe("workspace foundation", () => {
       expect.arrayContaining(requiredScripts),
     );
   });
+
+  test("requires the minimum Node release supported by the toolchain", async () => {
+    const manifest = JSON.parse(await readFile("package.json", "utf8")) as {
+      engines?: { node?: string };
+    };
+
+    expect(manifest.engines?.node).toBe(">=22.12.0");
+  });
+
+  test("uses Vitest projects instead of the deprecated workspace flag", async () => {
+    const manifest = JSON.parse(await readFile("package.json", "utf8")) as {
+      scripts?: Record<string, string>;
+    };
+    const config = await readFile("vitest.config.ts", "utf8");
+
+    expect(manifest.scripts?.test).not.toContain("--workspace");
+    expect(config).toContain("projects:");
+  });
 });
