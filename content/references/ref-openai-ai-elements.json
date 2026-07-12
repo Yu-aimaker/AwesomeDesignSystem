@@ -1,0 +1,30 @@
+{
+  "id": "ref.openai.ai-elements",
+  "title": "AI Elements patterns (research)",
+  "url": "https://platform.openai.com/docs/guides/text",
+  "owner": "openai",
+  "sourceClass": "research",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "ai-ui"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "inferred-pattern",
+  "summary": "AI Elements patterns (research) — primary reference for AwesomeDS synthesis on ai-ui.",
+  "lessons": [
+    "Extract transferable ai-ui principles from AI Elements patterns (research).",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.ai.generative-boundaries"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "seed-openai-ai-elements"
+}

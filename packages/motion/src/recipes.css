@@ -1,0 +1,72 @@
+/* CSS-first motion recipes — progressive enhancement. */
+
+@keyframes ads-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ads-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ads-motion-enter {
+  animation: ads-fade-up var(--dur-base) var(--ease-out) both;
+}
+
+.ads-motion-exit {
+  animation: ads-fade var(--dur-fast) var(--ease-in-out) reverse both;
+}
+
+.ads-motion-reveal {
+  animation: ads-fade-up var(--dur-slow) var(--ease-out) both;
+}
+
+.ads-motion-expand {
+  transition:
+    grid-template-rows var(--dur-base) var(--ease-in-out),
+    opacity var(--dur-base) var(--ease-out);
+}
+
+.ads-motion-feedback {
+  transition:
+    transform var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.ads-motion-feedback:active {
+  transform: scale(0.98);
+}
+
+.ads-motion-page,
+.ads-motion-list,
+.ads-motion-drag,
+.ads-motion-scroll,
+.ads-motion-shared {
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ads-motion-enter,
+  .ads-motion-exit,
+  .ads-motion-reveal,
+  .ads-motion-expand,
+  .ads-motion-feedback,
+  .ads-motion-page,
+  .ads-motion-list,
+  .ads-motion-drag,
+  .ads-motion-scroll,
+  .ads-motion-shared {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

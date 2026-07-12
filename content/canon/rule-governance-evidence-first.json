@@ -1,0 +1,24 @@
+{
+  "id": "rule.governance.evidence-first",
+  "title": "Doctrine requires traceable evidence",
+  "domain": "governance",
+  "summary": "Every canon rule links to sources; signals stay quarantined until corroborated.",
+  "guidance": "Reference Atlas records carry freshness, confidence, and anti-imitation notes.",
+  "do": [
+    "Validate graph on CI",
+    "Mark X posts as signals"
+  ],
+  "dont": [
+    "Promote social trends directly to canon"
+  ],
+  "referenceIds": [
+    "ref.voltagent.awesome-design-md",
+    "ref.kzhrknt.awesome-design-md-jp"
+  ],
+  "artifactIds": [
+    "artifact.script.validate-content",
+    "artifact.doc.reference-atlas"
+  ],
+  "verification": "pnpm validate",
+  "status": "canon"
+}

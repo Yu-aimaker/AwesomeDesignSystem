@@ -70,3 +70,11 @@ long-form feel premium.
 Run the Pre-Flight checklist (`human-not-ai.md`). Confirm: single file opens standalone, dark mode
 works, reduced-motion disables animation, prints cleanly, AA contrast, and it reads as *designed*.
 If converting 日本語 content, apply the 和文 typography rules from `foundations/typography.md`.
+
+
+## AwesomeDS Platform contracts (2026-07)
+
+- Read `skills/shared/rule-contract.md` and `skills/shared/reference-atlas.md`.
+- Prefer packages `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion` for executable work.
+- Cite `rule.*` IDs; keep generative UI inside approved components.
+- Validate with `pnpm validate` and review `/status` locally.

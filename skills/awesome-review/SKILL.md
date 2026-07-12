@@ -56,3 +56,11 @@ For each finding give: **what** (the tell), **where** (selector/file/line or reg
 (principle), **fix** (concrete change using the `--color-*`/`--space-*`/`--text-*` tokens). End
 with the top 3 highest-leverage changes and an overall verdict (ship / fix-then-ship / rework).
 If asked, apply the fixes — but keep the audit and the fixing as distinct steps.
+
+
+## AwesomeDS Platform contracts (2026-07)
+
+- Read `skills/shared/rule-contract.md` and `skills/shared/reference-atlas.md`.
+- Prefer packages `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion` for executable work.
+- Cite `rule.*` IDs; keep generative UI inside approved components.
+- Validate with `pnpm validate` and review `/status` locally.

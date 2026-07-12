@@ -51,3 +51,11 @@ moment (usually a staggered page-load reveal, or a hero/section entrance).
 Provide the actual snippet (CSS or React/Motion) wired to the project's tokens, with the
 reduced-motion fallback included. State what the motion communicates and which dial value it reflects.
 Then sanity-check against the Pre-Flight motion lines in `00-philosophy/human-not-ai.md`.
+
+
+## AwesomeDS Platform contracts (2026-07)
+
+- Read `skills/shared/rule-contract.md` and `skills/shared/reference-atlas.md`.
+- Prefer packages `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion` for executable work.
+- Cite `rule.*` IDs; keep generative UI inside approved components.
+- Validate with `pnpm validate` and review `/status` locally.

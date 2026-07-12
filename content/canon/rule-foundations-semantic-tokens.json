@@ -1,0 +1,23 @@
+{
+  "id": "rule.foundations.semantic-tokens",
+  "title": "Components consume semantic tokens only",
+  "domain": "foundations",
+  "summary": "Theme by rebinding roles, never hard-coding product colors in components.",
+  "guidance": "Use --color-* / --space-* / --dur-* contracts. Primitives stay in tokens package.",
+  "do": [
+    "Reference CSS variables",
+    "Support light/dark/high-contrast"
+  ],
+  "dont": [
+    "Hard-code hex/oklch in component source"
+  ],
+  "referenceIds": [
+    "ref.w3c.dtcg",
+    "ref.github.primer"
+  ],
+  "artifactIds": [
+    "artifact.token.semantic-system"
+  ],
+  "verification": "token tests + no raw color in packages/react",
+  "status": "canon"
+}

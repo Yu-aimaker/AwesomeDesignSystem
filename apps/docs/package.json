@@ -1,0 +1,30 @@
+{
+  "name": "@awesome-ds/docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --port 3000",
+    "build": "next build",
+    "start": "next start --port 3000",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@awesome-ds/content": "workspace:*",
+    "@awesome-ds/core": "workspace:*",
+    "@awesome-ds/motion": "workspace:*",
+    "@awesome-ds/react": "workspace:*",
+    "@awesome-ds/tokens": "workspace:*",
+    "next": "15.5.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  }
+}

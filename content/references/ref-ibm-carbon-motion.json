@@ -1,0 +1,30 @@
+{
+  "id": "ref.ibm.carbon-motion",
+  "title": "Carbon motion guidance",
+  "url": "https://carbondesignsystem.com/guidelines/motion/overview/",
+  "owner": "ibm",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "motion"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Carbon motion guidance — primary reference for AwesomeDS synthesis on motion.",
+  "lessons": [
+    "Extract transferable motion principles from Carbon motion guidance.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.motion.purpose-first"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "seed-ibm-carbon-motion"
+}

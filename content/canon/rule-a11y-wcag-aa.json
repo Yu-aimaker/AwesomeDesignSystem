@@ -1,0 +1,25 @@
+{
+  "id": "rule.a11y.wcag-aa",
+  "title": "Meet WCAG 2.2 AA by default",
+  "domain": "accessibility",
+  "summary": "Accessibility is a release gate, not a polish pass.",
+  "guidance": "Every interactive surface must meet WCAG 2.2 AA for contrast, keyboard, name, and operable paths.",
+  "do": [
+    "Run axe on representative pages",
+    "Keyboard-only smoke every complex widget"
+  ],
+  "dont": [
+    "Mouse-only flows",
+    "Icon buttons without accessible names"
+  ],
+  "referenceIds": [
+    "ref.w3c.wcag-22",
+    "ref.w3c.apg"
+  ],
+  "artifactIds": [
+    "artifact.component.button",
+    "artifact.test.a11y-suite"
+  ],
+  "verification": "axe serious/critical = 0; keyboard suite green",
+  "status": "canon"
+}

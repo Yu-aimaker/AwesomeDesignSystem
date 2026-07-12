@@ -72,3 +72,16 @@ All modules speak one token vocabulary. Full definitions live in `foundations/to
 6. Motion communicates; one orchestrated page-load beats scattered micro-interactions.
 7. Always design error/empty/loading states and meet WCAG 2.2 AA.
 8. Framework-agnostic first; React/Tailwind v4/Motion as the reference implementation.
+
+
+## Platform expansion modules (2026-07)
+
+| Domain | Module |
+|---|---|
+| Brand | `brand/brand-system.md`, `brand/content-design.md`, `brand/illustration-iconography.md` |
+| Interaction | `interaction/product-quality.md`, `interaction/states-recovery.md` |
+| AI-driven | `ai-driven/generative-ui.md`, `ai-driven/agent-workflow.md`, `ai-driven/evaluation.md` |
+| Foundations | `foundations/core-design-literacy.md`, `foundations/international-typography.md` |
+| Governance | `governance/evidence-and-freshness.md` |
+
+Structured rule metadata lives in `content/canon/`. Reference Atlas records live in `content/references/`.

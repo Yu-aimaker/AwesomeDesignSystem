@@ -120,3 +120,28 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md). The bar: every claim is **sourced**, c
 [MIT](./LICENSE) — free to use, adapt, and build on.
 
 <div align="center"><sub>Built to make AI design like it has taste. 🎨</sub></div>
+
+---
+
+## AwesomeDS Platform (local monorepo)
+
+This repository now also ships an executable design platform alongside the Markdown knowledge base:
+
+| Path | Role |
+|---|---|
+| `content/` | Reference Atlas + canon rules + signals + artifact claims |
+| `packages/tokens` | Semantic multi-theme tokens |
+| `packages/react` | Accessible React component baseline |
+| `packages/motion` | Intent-based motion recipes |
+| `packages/content` | Evidence graph schemas & validators |
+| `apps/docs` | Local documentation website |
+
+```bash
+pnpm install
+pnpm --filter @awesome-ds/docs dev   # http://127.0.0.1:3000
+pnpm test
+pnpm validate
+pnpm qa
+```
+
+See `docs/architecture.md`, `docs/maintenance.md`, and `docs/completion-audit.md`.

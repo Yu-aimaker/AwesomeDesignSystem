@@ -1,0 +1,23 @@
+{
+  "id": "rule.brand.personality-system",
+  "title": "Brand personality spans UI, voice, and illustration",
+  "domain": "brand",
+  "summary": "Coherent systems define personality beyond color and logo.",
+  "guidance": "Document voice/tone, illustration grammar, and anti-patterns as first-class brand contracts.",
+  "do": [
+    "Write content design rules",
+    "Define illustration do/don't"
+  ],
+  "dont": [
+    "UI kit without verbal/visual personality"
+  ],
+  "referenceIds": [
+    "ref.duolingo.design",
+    "ref.nothing.design"
+  ],
+  "artifactIds": [
+    "artifact.doc.brand-system"
+  ],
+  "verification": "brand modules present + linked rules",
+  "status": "canon"
+}

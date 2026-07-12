@@ -1,0 +1,34 @@
+{
+  "name": "@awesome-ds/motion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./react": "./src/react.ts",
+    "./recipes.css": "./src/recipes.css"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@awesome-ds/tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/react": "19.1.10",
+    "react": "19.1.1",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  }
+}

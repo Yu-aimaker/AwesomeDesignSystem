@@ -1,0 +1,161 @@
+[
+  {
+    "id": "artifact.token.semantic-system",
+    "kind": "token",
+    "title": "Semantic tokens",
+    "path": "packages/tokens",
+    "ruleIds": [
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.w3c.dtcg"
+    ]
+  },
+  {
+    "id": "artifact.component.button",
+    "kind": "component",
+    "title": "Button",
+    "path": "packages/react/src/components/Button.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa",
+      "rule.components.state-matrix"
+    ],
+    "referenceIds": [
+      "ref.w3c.apg"
+    ]
+  },
+  {
+    "id": "artifact.component.dialog",
+    "kind": "component",
+    "title": "Dialog",
+    "path": "packages/react/src/components/Dialog.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa",
+      "rule.components.state-matrix"
+    ],
+    "referenceIds": [
+      "ref.w3c.apg"
+    ]
+  },
+  {
+    "id": "artifact.component.empty-state",
+    "kind": "component",
+    "title": "EmptyState",
+    "path": "packages/react/src/components/EmptyState.tsx",
+    "ruleIds": [
+      "rule.interaction.product-quality"
+    ],
+    "referenceIds": [
+      "ref.shopify.polaris"
+    ]
+  },
+  {
+    "id": "artifact.component.error-state",
+    "kind": "component",
+    "title": "ErrorState",
+    "path": "packages/react/src/components/ErrorState.tsx",
+    "ruleIds": [
+      "rule.interaction.product-quality"
+    ],
+    "referenceIds": [
+      "ref.vercel.web-interface-guidelines"
+    ]
+  },
+  {
+    "id": "artifact.motion.recipe-set",
+    "kind": "motion-recipe",
+    "title": "Motion recipes",
+    "path": "packages/motion",
+    "ruleIds": [
+      "rule.motion.purpose-first"
+    ],
+    "referenceIds": [
+      "ref.motion.motion-react"
+    ]
+  },
+  {
+    "id": "artifact.test.a11y-suite",
+    "kind": "test",
+    "title": "A11y suite",
+    "path": "tests/a11y",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core"
+    ]
+  },
+  {
+    "id": "artifact.doc.reference-atlas",
+    "kind": "doc",
+    "title": "Reference Atlas",
+    "path": "apps/docs/app/references",
+    "ruleIds": [
+      "rule.governance.evidence-first",
+      "rule.interaction.url-state"
+    ],
+    "referenceIds": [
+      "ref.voltagent.awesome-design-md"
+    ]
+  },
+  {
+    "id": "artifact.doc.docs-shell",
+    "kind": "doc",
+    "title": "Docs shell",
+    "path": "apps/docs",
+    "ruleIds": [
+      "rule.design-eng.docs-as-product"
+    ],
+    "referenceIds": [
+      "ref.storybook.docs"
+    ]
+  },
+  {
+    "id": "artifact.doc.brand-system",
+    "kind": "doc",
+    "title": "Brand system module",
+    "path": "design-system/brand/brand-system.md",
+    "ruleIds": [
+      "rule.brand.personality-system"
+    ],
+    "referenceIds": [
+      "ref.duolingo.design"
+    ]
+  },
+  {
+    "id": "artifact.doc.core-literacy",
+    "kind": "doc",
+    "title": "Core literacy",
+    "path": "design-system/foundations/core-design-literacy.md",
+    "ruleIds": [
+      "rule.foundations.core-literacy"
+    ],
+    "referenceIds": [
+      "ref.williams.non-designers"
+    ]
+  },
+  {
+    "id": "artifact.skill.awesome-ds",
+    "kind": "skill",
+    "title": "awesome-ds skill",
+    "path": "skills/awesome-ds/SKILL.md",
+    "ruleIds": [
+      "rule.ai.generative-boundaries"
+    ],
+    "referenceIds": [
+      "ref.voltagent.awesome-design-md"
+    ]
+  },
+  {
+    "id": "artifact.script.validate-content",
+    "kind": "script",
+    "title": "validate-content",
+    "path": "scripts/validate-content.mjs",
+    "ruleIds": [
+      "rule.governance.evidence-first"
+    ],
+    "referenceIds": [
+      "ref.w3c.dtcg"
+    ]
+  }
+]

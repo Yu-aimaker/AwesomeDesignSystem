@@ -1,0 +1,23 @@
+{
+  "id": "rule.foundations.core-literacy",
+  "title": "Core visual literacy is non-negotiable",
+  "domain": "foundations",
+  "summary": "Contrast, hierarchy, alignment, proximity, and restraint beat decoration.",
+  "guidance": "Encode CRAP/gestalt as operational rules agents can check.",
+  "do": [
+    "One focal point",
+    "Real hierarchy via type/space/contrast"
+  ],
+  "dont": [
+    "Equal visual weight everywhere"
+  ],
+  "referenceIds": [
+    "ref.williams.non-designers",
+    "ref.nielsen.usability"
+  ],
+  "artifactIds": [
+    "artifact.doc.core-literacy"
+  ],
+  "verification": "foundations modules + review checklist",
+  "status": "canon"
+}

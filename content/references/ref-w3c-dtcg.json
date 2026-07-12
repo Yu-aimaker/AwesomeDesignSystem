@@ -1,0 +1,30 @@
+{
+  "id": "ref.w3c.dtcg",
+  "title": "Design Tokens Community Group",
+  "url": "https://www.designtokens.org/",
+  "owner": "w3c",
+  "sourceClass": "standard",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "tokens"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "standard",
+  "summary": "Design Tokens Community Group — primary reference for AwesomeDS synthesis on tokens.",
+  "lessons": [
+    "Extract transferable tokens principles from Design Tokens Community Group.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "seed-w3c-dtcg"
+}

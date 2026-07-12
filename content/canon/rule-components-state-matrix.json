@@ -1,0 +1,24 @@
+{
+  "id": "rule.components.state-matrix",
+  "title": "Ship full component state matrices",
+  "domain": "components",
+  "summary": "Idle, hover, focus, active, disabled, loading, error are first-class.",
+  "guidance": "Document and test each interactive state including empty/error recovery for composites.",
+  "do": [
+    "Export metadata.ruleIds",
+    "Cover keyboard and disabled"
+  ],
+  "dont": [
+    "Happy-path-only demos"
+  ],
+  "referenceIds": [
+    "ref.openui.open-ui",
+    "ref.radix.primitives"
+  ],
+  "artifactIds": [
+    "artifact.component.button",
+    "artifact.component.dialog"
+  ],
+  "verification": "component unit tests cover states",
+  "status": "canon"
+}

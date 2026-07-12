@@ -1,0 +1,23 @@
+{
+  "name": "@awesome-ds/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./dist/tokens.css",
+    "./tailwind-theme.css": "./dist/tailwind-theme.css",
+    "./tokens.json": "./dist/tokens.json"
+  },
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "tsx": "4.20.4",
+    "typescript": "5.9.2",
+    "vitest": "3.2.4"
+  }
+}

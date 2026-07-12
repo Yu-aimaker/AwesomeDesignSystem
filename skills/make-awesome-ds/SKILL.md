@@ -64,3 +64,11 @@ Write these files (ask where; default to `./design-system/` in the user's projec
 Run the Pre-Flight checklist from `human-not-ai.md`. HARD fails (contrast, focus, coherence)
 must pass. Apply the swap-test: *could this system belong to a different brand unchanged?*
 If yes, push `DESIGN_VARIANCE` up and add distinctiveness. Keep the system **coherent as a whole**.
+
+
+## AwesomeDS Platform contracts (2026-07)
+
+- Read `skills/shared/rule-contract.md` and `skills/shared/reference-atlas.md`.
+- Prefer packages `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion` for executable work.
+- Cite `rule.*` IDs; keep generative UI inside approved components.
+- Validate with `pnpm validate` and review `/status` locally.

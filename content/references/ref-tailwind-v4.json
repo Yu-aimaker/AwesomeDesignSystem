@@ -1,0 +1,30 @@
+{
+  "id": "ref.tailwind.v4",
+  "title": "Tailwind CSS v4",
+  "url": "https://tailwindcss.com/docs",
+  "owner": "tailwind",
+  "sourceClass": "implementation",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "css"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Tailwind CSS v4 — primary reference for AwesomeDS synthesis on css.",
+  "lessons": [
+    "Extract transferable css principles from Tailwind CSS v4.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "seed-tailwind-v4"
+}

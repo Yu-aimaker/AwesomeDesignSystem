@@ -1,0 +1,24 @@
+{
+  "id": "rule.interaction.product-quality",
+  "title": "Product quality includes recovery states",
+  "domain": "interaction",
+  "summary": "Empty, loading, error, and partial success are designed, not improvised.",
+  "guidance": "Every flow defines recovery and next best action.",
+  "do": [
+    "EmptyState/ErrorState components",
+    "Optimistic update rollback notes"
+  ],
+  "dont": [
+    "Blank screens on failure"
+  ],
+  "referenceIds": [
+    "ref.vercel.web-interface-guidelines",
+    "ref.shopify.polaris"
+  ],
+  "artifactIds": [
+    "artifact.component.empty-state",
+    "artifact.component.error-state"
+  ],
+  "verification": "component tests for empty/error",
+  "status": "canon"
+}

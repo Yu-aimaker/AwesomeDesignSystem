@@ -1,0 +1,52 @@
+{
+  "readmeFiles": [
+    "README.md",
+    "README.ja.md",
+    "README.ko.md",
+    "README.es.md",
+    "README.zh-Hans.md"
+  ],
+  "designSystemModules": [
+    "design-system/INDEX.md",
+    "design-system/00-philosophy/human-not-ai.md",
+    "design-system/00-philosophy/principles.md",
+    "design-system/00-philosophy/modern-2026.md",
+    "design-system/foundations/color.md",
+    "design-system/foundations/typography.md",
+    "design-system/foundations/spacing-layout.md",
+    "design-system/foundations/tokens.md",
+    "design-system/motion/principles.md",
+    "design-system/motion/recipes.md",
+    "design-system/components/components.md",
+    "design-system/patterns/patterns.md",
+    "design-system/accessibility/a11y.md",
+    "design-system/tech-stack-2026/stack.md",
+    "design-system/best-practice-design-for-ai.md"
+  ],
+  "skills": [
+    {
+      "name": "awesome-ds",
+      "path": "skills/awesome-ds/SKILL.md"
+    },
+    {
+      "name": "make-awesome-ds",
+      "path": "skills/make-awesome-ds/SKILL.md"
+    },
+    {
+      "name": "awesome-review",
+      "path": "skills/awesome-review/SKILL.md"
+    },
+    {
+      "name": "awesome-motion",
+      "path": "skills/awesome-motion/SKILL.md"
+    },
+    {
+      "name": "awesome-html",
+      "path": "skills/awesome-html/SKILL.md"
+    }
+  ],
+  "installer": {
+    "path": "install.sh",
+    "modes": ["symlink", "--copy"]
+  }
+}

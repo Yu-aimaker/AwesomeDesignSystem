@@ -1,0 +1,32 @@
+{
+  "id": "ref.williams.non-designers",
+  "title": "Non-Designer's Design Book (principles synthesis)",
+  "url": "https://www.nngroup.com/articles/principles-visual-design/",
+  "owner": "williams",
+  "sourceClass": "book",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "foundations"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "inferred-pattern",
+  "summary": "Non-Designer's Design Book (principles synthesis) — primary reference for AwesomeDS synthesis on foundations.",
+  "lessons": [
+    "Extract transferable foundations principles from Non-Designer's Design Book (principles synthesis).",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [
+    "Copyright-safe synthesis only; do not reproduce book text."
+  ],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.foundations.core-literacy"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "seed-williams-non-designers"
+}

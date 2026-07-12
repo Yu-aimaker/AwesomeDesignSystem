@@ -1,0 +1,30 @@
+{
+  "id": "ref.baseui.base-ui",
+  "title": "Base UI",
+  "url": "https://base-ui.com/",
+  "owner": "baseui",
+  "sourceClass": "implementation",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "a11y"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-implementation",
+  "summary": "Base UI — primary reference for AwesomeDS synthesis on a11y.",
+  "lessons": [
+    "Extract transferable a11y principles from Base UI.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "seed-baseui-base-ui"
+}

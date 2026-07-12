@@ -1,0 +1,23 @@
+{
+  "id": "rule.design-eng.docs-as-product",
+  "title": "Documentation is a product surface",
+  "domain": "design-engineering",
+  "summary": "Docs, examples, and status dashboards are part of the system quality bar.",
+  "guidance": "Ship searchable guidance, live examples, and integrity errors for missing content.",
+  "do": [
+    "Status dashboard",
+    "Copyable examples"
+  ],
+  "dont": [
+    "Stale README-only docs"
+  ],
+  "referenceIds": [
+    "ref.storybook.docs",
+    "ref.github.primer"
+  ],
+  "artifactIds": [
+    "artifact.doc.docs-shell"
+  ],
+  "verification": "docs build + route tests",
+  "status": "canon"
+}

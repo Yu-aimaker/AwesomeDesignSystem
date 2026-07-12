@@ -14,8 +14,11 @@
     "test": "vitest run",
     "test:a11y": "playwright test tests/a11y",
     "test:e2e": "playwright test tests/e2e tests/visual",
-    "validate": "turbo run validate",
-    "qa": "pnpm typecheck && pnpm lint && pnpm test && pnpm validate && pnpm build"
+    "validate": "pnpm --filter @awesome-ds/content validate",
+    "qa": "pnpm typecheck && pnpm test && pnpm validate && pnpm tokens:build && pnpm build",
+    "check:links": "tsx scripts/check-links.mjs",
+    "check:freshness": "tsx scripts/check-freshness.mjs",
+    "tokens:build": "pnpm --filter @awesome-ds/tokens build"
   },
   "devDependencies": {
     "@playwright/test": "1.55.0",
@@ -23,6 +26,8 @@
     "turbo": "2.5.6",
     "typescript": "5.9.2",
     "vitest": "3.2.4",
-    "yaml": "2.8.1"
+    "yaml": "2.8.1",
+    "tsx": "4.20.4",
+    "zod": "3.25.76"
   }
 }

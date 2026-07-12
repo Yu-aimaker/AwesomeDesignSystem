@@ -82,3 +82,11 @@ Before shipping, run the **Anti-AI-Slop Pre-Flight checklist** in `human-not-ai.
 
 `/MakeAwesomeDS` (generate a brand's own design system) · `/AwesomeHTML` (polished single-file HTML)
 · `/AwesomeReview` (audit existing UI) · `/AwesomeMotion` (animation design).
+
+
+## AwesomeDS Platform contracts (2026-07)
+
+- Read `skills/shared/rule-contract.md` and `skills/shared/reference-atlas.md`.
+- Prefer packages `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion` for executable work.
+- Cite `rule.*` IDs; keep generative UI inside approved components.
+- Validate with `pnpm validate` and review `/status` locally.
