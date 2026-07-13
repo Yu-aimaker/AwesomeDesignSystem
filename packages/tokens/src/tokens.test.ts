@@ -61,4 +61,13 @@ describe("semantic tokens", () => {
     }
     expect(tokens.themes.light["color-bg"]).toBeTruthy();
   });
+
+  test("Tailwind aliases never create circular custom properties", async () => {
+    const dir = await mkdtemp(path.join(tmpdir(), "ads-tailwind-"));
+    await generate(dir);
+    const css = await readFile(path.join(dir, "tailwind-theme.css"), "utf8");
+    expect(css).not.toMatch(/--([a-z0-9-]+):\s*var\(--\1\)/i);
+    expect(css).toContain("--color-ads-bg: var(--color-bg)");
+    expect(css).toContain("--font-ads-display:");
+  });
 });

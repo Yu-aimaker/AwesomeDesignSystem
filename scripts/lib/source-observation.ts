@@ -17,7 +17,16 @@ export type SourceObservation = {
   adapter?: "http" | "github";
   revision?: string;
   adapterWarning?: string;
+  adapterHealth?: "healthy" | "degraded";
+  adapterError?: string;
+  adapterFirstFailedAt?: string;
+  adapterRecoveredAt?: string;
   firstFailedAt?: string;
+  lastSuccessfulHash?: string;
+  lastSuccessfulEtag?: string;
+  lastSuccessfulLastModified?: string;
+  /** Adapter-scoped baselines prevent incomparable GitHub revision and HTML hashes from being diffed. */
+  lastSuccessfulHashes?: Partial<Record<"http" | "github", string>>;
 };
 
 type Source = { id: string; url: string };
@@ -33,6 +42,10 @@ type Options = {
   githubToken?: string;
   hashMode?: "full" | "headings-links" | "status-only";
   previousFirstFailedAt?: string;
+  previousHashes?: Partial<Record<"http" | "github", string>>;
+  assumeUnchangedWithoutBaseline?: boolean;
+  previousAdapterHealth?: SourceObservation["adapterHealth"];
+  previousAdapterFirstFailedAt?: string;
 };
 
 const DEFAULT_MAX_BYTES = 5 * 1024 * 1024;
@@ -118,23 +131,25 @@ export async function observeSource(source: Source, options: Options = {}): Prom
       const contentHash = hashContent(normalized);
       const etag = response.headers.get("etag") ?? undefined;
       const lastModified = response.headers.get("last-modified") ?? undefined;
-      const metadataUnchanged = Boolean(
-        (options.previousEtag && etag && options.previousEtag === etag) ||
-        (options.previousLastModified && lastModified && options.previousLastModified === lastModified),
-      );
       clearTimeout(timer);
       const observation: SourceObservation = {
         sourceId: source.id,
         url: source.url,
         observedAt: new Date().toISOString(),
-        result: metadataUnchanged || options.previousHash === contentHash ? "unchanged" : "changed",
+        result: options.previousHash === contentHash || (!options.previousHash && options.assumeUnchangedWithoutBaseline)
+          ? "unchanged"
+          : "changed",
         attempts: attempt,
         status: response.status,
         contentHash,
         adapter: "http",
+        lastSuccessfulHash: contentHash,
+        lastSuccessfulHashes: { ...options.previousHashes, http: contentHash },
       };
       if (etag) observation.etag = etag;
       if (lastModified) observation.lastModified = lastModified;
+      if (etag) observation.lastSuccessfulEtag = etag;
+      if (lastModified) observation.lastSuccessfulLastModified = lastModified;
       return observation;
     } catch (error) {
       clearTimeout(timer);
@@ -155,6 +170,10 @@ export async function observeSource(source: Source, options: Options = {}): Prom
     error: lastError,
     firstFailedAt: options.previousFirstFailedAt ?? new Date().toISOString(),
   };
+  if (options.previousHash) failure.lastSuccessfulHash = options.previousHash;
+  if (options.previousEtag) failure.lastSuccessfulEtag = options.previousEtag;
+  if (options.previousLastModified) failure.lastSuccessfulLastModified = options.previousLastModified;
+  if (options.previousHashes) failure.lastSuccessfulHashes = { ...options.previousHashes };
   if (lastStatus !== undefined) failure.status = lastStatus;
   return failure;
 }
@@ -177,6 +196,83 @@ export function isActionablePersistentFailure(
   return !allowlistedSourceIds.has(observation.sourceId) && isPersistentFailure(observation, thresholdDays, now);
 }
 
+export function adapterFailureAgeDays(
+  observation: Pick<SourceObservation, "adapterHealth" | "adapterFirstFailedAt">,
+  now = new Date(),
+): number {
+  if (observation.adapterHealth !== "degraded" || !observation.adapterFirstFailedAt) return 0;
+  return Math.max(0, (now.getTime() - new Date(observation.adapterFirstFailedAt).getTime()) / 86_400_000);
+}
+
+export function isActionablePersistentAdapterFailure(
+  observation: Pick<SourceObservation, "sourceId" | "adapterHealth" | "adapterFirstFailedAt">,
+  allowlistedSourceIds: ReadonlySet<string>,
+  thresholdDays = 7,
+  now = new Date(),
+): boolean {
+  return !allowlistedSourceIds.has(observation.sourceId)
+    && observation.adapterHealth === "degraded"
+    && adapterFailureAgeDays(observation, now) >= thresholdDays;
+}
+
+export type ObservationReviewItem = {
+  sourceId: string;
+  title: string;
+  url: string;
+  reason: "upstream-content-changed" | "source-fetch-failed" | "github-adapter-failed" | "github-adapter-recovered";
+  observedAt: string;
+  firstFailedAt?: string;
+  failureAgeDays: number;
+  persistent: boolean;
+  allowlisted: boolean;
+  error?: string;
+  errorCategory?: SourceObservation["errorCategory"];
+};
+
+export function buildObservationReviewItems(
+  source: Source & { title?: string },
+  observation: SourceObservation,
+  allowlistedSourceIds: ReadonlySet<string>,
+  thresholdDays = 7,
+  now = new Date(),
+): ObservationReviewItem[] {
+  const items: ObservationReviewItem[] = [];
+  const common = {
+    sourceId: source.id,
+    title: source.title ?? source.id,
+    url: source.url,
+    observedAt: observation.observedAt,
+    allowlisted: allowlistedSourceIds.has(source.id),
+  };
+  if (observation.result === "changed") {
+    items.push({ ...common, reason: "upstream-content-changed", failureAgeDays: 0, persistent: false });
+  } else if (observation.result === "fetch_failed") {
+    items.push({
+      ...common,
+      reason: "source-fetch-failed",
+      ...(observation.firstFailedAt ? { firstFailedAt: observation.firstFailedAt } : {}),
+      failureAgeDays: failureAgeDays(observation, now),
+      persistent: isPersistentFailure(observation, thresholdDays, now),
+      ...(observation.error ? { error: observation.error } : {}),
+      ...(observation.errorCategory ? { errorCategory: observation.errorCategory } : {}),
+    });
+  }
+  if (observation.adapterHealth === "degraded") {
+    items.push({
+      ...common,
+      reason: "github-adapter-failed",
+      ...(observation.adapterFirstFailedAt ? { firstFailedAt: observation.adapterFirstFailedAt } : {}),
+      failureAgeDays: adapterFailureAgeDays(observation, now),
+      persistent: observation.adapterHealth === "degraded"
+        && adapterFailureAgeDays(observation, now) >= thresholdDays,
+      ...(observation.adapterError ? { error: observation.adapterError } : {}),
+    });
+  } else if (observation.adapterRecoveredAt) {
+    items.push({ ...common, reason: "github-adapter-recovered", failureAgeDays: 0, persistent: false });
+  }
+  return items;
+}
+
 export function parseGitHubRepository(url: string): { owner: string; repo: string } | null {
   try {
     const parsed = new URL(url);
@@ -192,6 +288,10 @@ export function parseGitHubRepository(url: string): { owner: string; repo: strin
 export async function observeTrackedSource(source: Source, options: Options = {}): Promise<SourceObservation> {
   const repository = parseGitHubRepository(source.url);
   if (!repository) return observeSource(source, options);
+  const previousHashes = {
+    ...options.previousHashes,
+    ...(!options.previousHashes?.github && options.previousHash ? { github: options.previousHash } : {}),
+  };
   const fetchImpl = options.fetchImpl ?? fetch;
   const headers: Record<string, string> = {
     accept: "application/vnd.github+json",
@@ -209,20 +309,44 @@ export async function observeTrackedSource(source: Source, options: Options = {}
     const revision = [repo.default_branch, repo.pushed_at, release.tag_name, release.published_at].filter(Boolean).join("|");
     if (!revision) throw new Error("GitHub response omitted revision metadata");
     const contentHash = hashContent(revision);
+    const previousGitHubHash = previousHashes.github;
+    const observedAt = new Date().toISOString();
     return {
       sourceId: source.id,
       url: source.url,
-      observedAt: new Date().toISOString(),
-      result: options.previousHash === contentHash ? "unchanged" : "changed",
+      observedAt,
+      result: previousGitHubHash === contentHash ? "unchanged" : "changed",
       attempts: 1,
       status: repoResponse.status,
       contentHash,
+      lastSuccessfulHash: contentHash,
+      lastSuccessfulHashes: { ...previousHashes, github: contentHash },
       adapter: "github",
+      adapterHealth: "healthy",
+      ...(options.previousAdapterHealth === "degraded" ? { adapterRecoveredAt: observedAt } : {}),
       revision,
     };
   } catch (error) {
-    const fallback = await observeSource(source, options);
+    // HTML and GitHub revision hashes describe different representations. On the
+    // first adapter transition, reachability is known but content equivalence is
+    // not, so do not manufacture a content-change event. Subsequent HTTP
+    // observations use their own baseline while the GitHub baseline is retained.
+    // Drop the generic baseline before switching representations. Otherwise a
+    // GitHub revision hash can leak into the HTTP content comparison.
+    const fallbackOptions = { ...options };
+    delete fallbackOptions.previousHash;
+    const fallback = await observeSource(source, {
+      ...fallbackOptions,
+      ...(previousHashes.http ? { previousHash: previousHashes.http } : {}),
+      previousHashes,
+      assumeUnchangedWithoutBaseline: !previousHashes.http,
+    });
     fallback.adapterWarning = error instanceof Error ? error.message : String(error);
+    fallback.adapterHealth = "degraded";
+    fallback.adapterError = fallback.adapterWarning;
+    fallback.adapterFirstFailedAt = options.previousAdapterHealth === "degraded"
+      ? (options.previousAdapterFirstFailedAt ?? fallback.observedAt)
+      : fallback.observedAt;
     return fallback;
   }
 }

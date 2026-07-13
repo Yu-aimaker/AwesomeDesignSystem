@@ -25,6 +25,8 @@
   "linkedRuleIds": [
     "rule.interaction.url-state"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.pagination"
+  ],
   "contentHash": "seed-vercel-design"
 }

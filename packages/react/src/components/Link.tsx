@@ -4,7 +4,9 @@ import { getComponentMetadata } from "../contracts";
 
 export const linkMetadata = getComponentMetadata("link");
 
-export function Link({ className, children, ...rest }: AnchorHTMLAttributes<HTMLAnchorElement> & { children: ReactNode }) {
+export type LinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & { href: string; children: ReactNode };
+
+export function Link({ className, children, ...rest }: LinkProps) {
   return <a className={cx("ads-link", className)} {...rest}>{children}</a>;
 }
 Link.metadata = linkMetadata;

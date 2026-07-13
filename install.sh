@@ -42,6 +42,8 @@ warn()  { printf '%s!%s %s\n' "$c_yellow" "$c_reset" "$*"; }
 
 # Backups live OUTSIDE the skills dir, so the loader never mistakes a backup for a skill.
 BACKUP_DIR="$(dirname "$SKILLS_DIR")/skills-backups"
+BUNDLE_ROOT="$(dirname "$SKILLS_DIR")"
+BUNDLE_MARKER="$SKILLS_DIR/.awesome-ds-copy-bundle"
 mkdir -p "$SKILLS_DIR" "$BACKUP_DIR"
 
 # stash <path> : move an existing entry out to BACKUP_DIR (timestamped). Symlinks are
@@ -67,6 +69,47 @@ stash() {
   printf '%s' "$bk"
 }
 
+# Copy-mode skills cannot follow symlinks back into this repository. Their
+# documented ../../ paths resolve from <bundle-root>/skills/<skill>, so install
+# the shared knowledge at that public layout as a self-contained bundle.
+install_copy_bundle() {
+  local design_contract="$BUNDLE_ROOT/DESIGN.md"
+  local design_system="$BUNDLE_ROOT/design-system"
+  local shared_dir="$SKILLS_DIR/shared"
+  local shared_file
+
+  for target in "$design_contract" "$design_system"; do
+    if [ -e "$target" ] || [ -L "$target" ]; then
+      BK="$(stash "$target")"
+      warn "existing $(basename "$target") backed up -> $c_dim$BK$c_reset"
+    fi
+  done
+
+  mkdir -p "$shared_dir"
+  for shared_file in rule-contract.md reference-atlas.md; do
+    target="$shared_dir/$shared_file"
+    if [ -e "$target" ] || [ -L "$target" ]; then
+      BK="$(stash "$target")"
+      warn "existing shared/$shared_file backed up -> $c_dim$BK$c_reset"
+    fi
+    cp "$SKILLS_SRC/shared/$shared_file" "$target"
+  done
+
+  cp "$REPO_ROOT/DESIGN.md" "$design_contract"
+  cp -R "$REPO_ROOT/design-system" "$design_system"
+  printf '%s\n' "AwesomeDesignSystem copy bundle" > "$BUNDLE_MARKER"
+  ok "copied  shared DESIGN.md, design-system, and skill contracts"
+}
+
+remove_copy_bundle() {
+  [ -f "$BUNDLE_MARKER" ] || return 0
+  rm -f "$BUNDLE_ROOT/DESIGN.md"
+  rm -rf "$BUNDLE_ROOT/design-system"
+  rm -f "$SKILLS_DIR/shared/rule-contract.md" "$SKILLS_DIR/shared/reference-atlas.md"
+  rmdir "$SKILLS_DIR/shared" 2>/dev/null || true
+  rm -f "$BUNDLE_MARKER"
+}
+
 uninstall() {
   for s in "${SKILLS[@]}"; do
     local target="$SKILLS_DIR/$s"
@@ -75,11 +118,16 @@ uninstall() {
       ok "removed $target"
     fi
   done
+  remove_copy_bundle
   warn "Note: backups of awesome-design-skills (if any) were left in place."
   exit 0
 }
 
 [ "$ACTION" = "uninstall" ] && uninstall
+
+# Switching an existing copy install to symlink mode should not leave stale
+# knowledge that shadows the repository reached through the skill symlinks.
+[ "$MODE" = "symlink" ] && remove_copy_bundle
 
 # --- Back up legacy awesome-design-skills --------------------------------
 # The new /AwesomeDS supersedes the old `awesome-design-skills`. We never
@@ -94,6 +142,8 @@ if [ -e "$LEGACY" ] || [ -L "$LEGACY" ]; then
 fi
 
 # --- Install the five skills ---------------------------------------------
+[ "$MODE" = "copy" ] && install_copy_bundle
+
 for s in "${SKILLS[@]}"; do
   src="$SKILLS_SRC/$s"
   dst="$SKILLS_DIR/$s"

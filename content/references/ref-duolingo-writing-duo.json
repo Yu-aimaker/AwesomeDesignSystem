@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.writing-duo",
-  "title": "Duolingo Design \u2014 Character verbal contract",
+  "title": "Duolingo Design — Character verbal contract",
   "url": "https://design.duolingo.com/writing/duo",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,8 +27,11 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
+    "rule.brand.character-motion",
     "rule.brand.content-design"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
   "contentHash": "duolingo-writing-duo-2026-07-13"
 }

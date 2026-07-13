@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple HIG Spatial Design \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "Apple HIG Spatial Design — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable product guidance from Apple HIG Spatial Design.",
     "Prefer schema/contract-bound generative UI over freeform HTML."
@@ -25,8 +25,14 @@
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
   "linkedRuleIds": [
+    "rule.adaptation.capability-first",
     "rule.interaction.product-quality"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.skeleton",
+    "artifact.component.toast"
+  ],
   "contentHash": "gap-apple-hig-spatial"
 }

@@ -12,8 +12,10 @@
     "Equal visual weight everywhere"
   ],
   "referenceIds": [
-    "ref.williams.non-designers",
-    "ref.nielsen.usability"
+    "ref.adobe.spectrum-principles",
+    "ref.apple.hig-typography",
+    "ref.nielsen.usability",
+    "ref.williams.non-designers"
   ],
   "artifactIds": [
     "artifact.doc.core-literacy"

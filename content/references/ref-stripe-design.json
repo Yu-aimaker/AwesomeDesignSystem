@@ -25,6 +25,11 @@
   "linkedRuleIds": [
     "rule.interaction.product-quality"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.skeleton",
+    "artifact.component.toast"
+  ],
   "contentHash": "seed-stripe-design"
 }

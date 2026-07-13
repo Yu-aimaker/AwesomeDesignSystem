@@ -1,10 +1,10 @@
 import { describe, expect, test } from "vitest";
-import { docsForDomain, loadAllCanonDocs, loadCanonDoc, renderCanonMarkdown } from "../lib/markdown";
+import { docsForDomain, getRepoRoot, loadAllCanonDocs, loadCanonDoc, renderCanonMarkdown } from "../lib/markdown";
 import { componentCatalog } from "../lib/components-catalog";
 import * as ReactComponents from "@awesome-ds/react";
 import ts from "typescript";
 import { validateComponentContracts } from "@awesome-ds/core/contracts";
-import { readFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 describe("canon markdown loading", () => {
@@ -80,16 +80,57 @@ describe("canon markdown loading", () => {
       expect(item.reducedMotion, item.slug).toBeTruthy();
       expect(item.testIds.length, item.slug).toBeGreaterThan(0);
       for (const evidence of item.testEvidence) {
-        const source = await readFile(path.resolve(process.cwd(), evidence.file), "utf8");
+        const source = await readFile(path.resolve(getRepoRoot(), evidence.file), "utf8");
         expect(source, `${item.slug} test evidence must resolve`).toContain(evidence.caseName);
       }
       expect(ReactComponents, `${item.importName} must be a public export`).toHaveProperty(item.importName);
-      const compiled = ts.transpileModule(item.example, {
-        compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.ESNext },
-        reportDiagnostics: true,
-        fileName: `${item.slug}.tsx`,
+      const component = ReactComponents[item.importName as keyof typeof ReactComponents] as { metadata?: { name: string; ruleIds: string[]; states: string[] } };
+      expect(component.metadata, `${item.importName} must expose its own contract metadata`).toEqual({
+        name: item.name,
+        ruleIds: item.ruleIds,
+        states: item.states,
       });
-      expect(compiled.diagnostics ?? [], `${item.slug} copyable example must be syntactically valid`).toHaveLength(0);
+    }
+
+    const cacheDirectory = path.resolve(getRepoRoot(), "apps/docs/.cache/component-examples");
+    await mkdir(cacheDirectory, { recursive: true });
+    const entries = await Promise.all(componentCatalog.map(async (item) => {
+      const entry = path.join(cacheDirectory, `${item.slug}.tsx`);
+      const source = item.example.replace(/^(import[^\n]+\n+)/, "$1declare const cancel: () => void; declare const remove: () => Promise<void>;\n");
+      await writeFile(entry, `${source}\n`);
+      return entry;
+    }));
+    const contractEntry = path.join(cacheDirectory, "public-api-contracts.ts");
+    const componentImports = [...new Set(componentCatalog.map((item) => item.importName))].sort().join(", ");
+    const contractAssertions = componentCatalog.map((item) => {
+      const identifier = item.slug.replaceAll("-", "_");
+      const documented = item.publicApi.filter((api) => api.name !== "…native").map((api) => JSON.stringify(api.name)).join(" | ") || "never";
+      const required = item.publicApi.filter((api) => api.name !== "…native" && api.required).map((api) => JSON.stringify(api.name)).join(" | ") || "never";
+      const acceptsNative = item.publicApi.some((api) => api.name === "…native");
+      return [
+        `type Props_${identifier} = ComponentProps<typeof ${item.importName}>;`,
+        `type Missing_${identifier} = AssertNever<Exclude<${documented}, keyof Props_${identifier}>>;`,
+        `type RequiredMismatch_${identifier} = AssertNever<Exclude<${required}, RequiredKeys<Props_${identifier}>> | Exclude<RequiredKeys<Props_${identifier}>, ${required}>>;`,
+        ...(!acceptsNative ? [`type Undocumented_${identifier} = AssertNever<Exclude<keyof Props_${identifier}, ${documented}>>;`] : []),
+      ].join("\n");
+    }).join("\n");
+    await writeFile(contractEntry, `import type { ComponentProps } from "react";\nimport { ${componentImports} } from "@awesome-ds/react";\ntype AssertNever<T extends never> = T;\ntype RequiredKeys<T> = { [K in keyof T]-?: object extends Pick<T, K> ? never : K }[keyof T];\n${contractAssertions}\n`);
+    entries.push(contractEntry);
+    try {
+      const program = ts.createProgram(entries, {
+        strict: true,
+        noEmit: true,
+        skipLibCheck: true,
+        target: ts.ScriptTarget.ES2023,
+        module: ts.ModuleKind.ESNext,
+        moduleResolution: ts.ModuleResolutionKind.Bundler,
+        jsx: ts.JsxEmit.ReactJSX,
+      });
+      const diagnostics = ts.getPreEmitDiagnostics(program);
+      const messages = diagnostics.map((diagnostic) => `${path.basename(diagnostic.file?.fileName ?? "unknown")}:${diagnostic.start ?? 0} ${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`);
+      expect(messages, "each original copyable example must independently pass semantic TypeScript checking against public exports").toEqual([]);
+    } finally {
+      await rm(cacheDirectory, { recursive: true, force: true });
     }
   });
 });

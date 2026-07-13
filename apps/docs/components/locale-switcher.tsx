@@ -2,9 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import { type Locale, localizePathname, locales } from "../lib/i18n";
-
-const names: Record<Locale, string> = { en: "English", ja: "日本語" };
+import { type Locale, localeConfig, localizePathname, locales } from "../lib/i18n";
 
 export function LocaleSwitcher({ locale, label }: { locale: Locale; label: string }) {
   const pathname = usePathname();
@@ -26,7 +24,7 @@ export function LocaleSwitcher({ locale, label }: { locale: Locale; label: strin
           data-locale={target}
           aria-current={target === locale ? "page" : undefined}
         >
-          {names[target]}
+          {localeConfig[target].name}
         </a>
       ))}
     </nav>

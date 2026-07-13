@@ -1,8 +1,33 @@
 {
-  "id": "ref.salesforce.lightning-guidelines", "title": "Lightning Design System guidelines", "url": "https://www.lightningdesignsystem.com/guidelines/overview/",
-  "owner": "salesforce", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["enterprise", "workflow", "guidelines"],
-  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
-  "summary": "Page-level source for object-centric enterprise guidance and system conventions.", "lessons": ["Define shared domain states across record, table and history views."],
-  "caveats": ["Current platform guidance must be checked before using older public React APIs."], "licenseNote": "Public documentation; cite and synthesize.",
-  "antiImitationNote": "Do not copy Salesforce domain language or visual identity.", "linkedRuleIds": ["rule.ai.ux-agency-contract"], "linkedArtifactIds": [], "contentHash": "elite-lightning-guidelines-20260713"
+  "id": "ref.salesforce.lightning-guidelines",
+  "title": "Lightning Design System guidelines",
+  "url": "https://www.lightningdesignsystem.com/guidelines/overview/",
+  "owner": "salesforce",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "enterprise",
+    "workflow",
+    "guidelines"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Page-level source for object-centric enterprise guidance and system conventions.",
+  "lessons": [
+    "Define shared domain states across record, table and history views."
+  ],
+  "caveats": [
+    "Current platform guidance must be checked before using older public React APIs."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Do not copy Salesforce domain language or visual identity.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-lightning-guidelines-20260713"
 }

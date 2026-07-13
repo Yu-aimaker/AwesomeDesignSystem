@@ -134,11 +134,14 @@ test.describe("docs smoke", () => {
     await page.goto("/ja/components/button", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "状態マトリクス" })).toBeVisible();
     await expect(page.locator("main").getByRole("link", { name: "コンポーネント" })).toHaveAttribute("href", "/ja/components");
-    await expect(page.getByText(/未翻訳/)).toBeVisible();
+    await expect(page.getByText(/未翻訳/)).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "主要操作" })).toBeVisible();
 
     await page.goto("/ja/motion/enter", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { level: 1, name: "表示" })).toBeVisible();
     await expect(page.getByText("使用できる場面")).toBeVisible();
     await expect(page.getByText("パフォーマンス")).toBeVisible();
+    await expect(page.locator("main")).not.toContainText("Introduce new content");
 
     await page.goto("/ja/references/ref.apple.hig", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "この情報源から得られる知見" })).toBeVisible();
@@ -161,5 +164,81 @@ test.describe("docs smoke", () => {
     const response = await request.get("/en/canon");
     expect(response.headers()["content-security-policy"]).toContain("object-src 'none'");
     expect(response.headers()["x-content-type-options"]).toBe("nosniff");
+  });
+
+  test("localized metadata exposes canonical and language alternates", async ({ page }) => {
+    await page.goto("/ja/components/alert-dialog", { waitUntil: "domcontentloaded" });
+    await expect(page).toHaveTitle(/AlertDialog · AwesomeDS/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/ja\/components\/alert-dialog$/);
+    await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute("href", /\/en\/components\/alert-dialog$/);
+    await expect(page.locator('link[rel="alternate"][hreflang="ja"]')).toHaveAttribute("href", /\/ja\/components\/alert-dialog$/);
+
+    await page.goto("/ja/components", { waitUntil: "domcontentloaded" });
+    await expect(page).toHaveTitle(/コンポーネント · AwesomeDS/);
+  });
+
+  test("Japanese not-found UI preserves locale", async ({ page }) => {
+    await page.goto("/ja/not-a-real-route", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "ページが見つかりません" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "ホームへ戻る" })).toHaveAttribute("href", "/ja");
+    await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+    await expect(page.locator('link[rel="alternate"]')).toHaveCount(0);
+  });
+
+  test("evidence is navigable from source and component to a structured rule", async ({ page }) => {
+    const response = await page.goto("/ja/references/ref.apple.hig-accessibility", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBeLessThan(400);
+    const ruleLink = page.locator('main a[href*="/ja/rules/"]').first();
+    await expect(ruleLink).toBeVisible();
+    await ruleLink.click();
+    await expect(page.getByRole("heading", { name: "検証契約" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "根拠リファレンス" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "実装・検証成果物" })).toBeVisible();
+    await expect(page.getByRole("note")).toContainText("英語の原文");
+    const artifactLink = page.locator('main a[href*="/ja/artifacts/"]').first();
+    await expect(artifactLink).toBeVisible();
+    await artifactLink.click();
+    await expect(page.getByRole("heading", { name: "リポジトリ実装" })).toBeVisible();
+
+    await page.goto("/ja/components/button", { waitUntil: "domcontentloaded" });
+    await expect(page.locator('main a[href*="/ja/rules/"]').first()).toBeVisible();
+  });
+
+  test("component gallery recovery actions produce localized feedback", async ({ page }) => {
+    await page.goto("/ja/components", { waitUntil: "networkidle" });
+    await page.getByRole("button", { name: "一覧を見る" }).click();
+    await expect(page.getByRole("status").filter({ hasText: "一覧を表示しました。" })).toBeVisible();
+    await page.getByRole("tab", { name: "エラー" }).click();
+    await page.getByRole("button", { name: "再試行" }).click();
+    await expect(page.getByRole("status").filter({ hasText: "再試行を開始しました。" })).toBeVisible();
+  });
+
+  test("mobile API table stays legible and persistent controls meet touch target size", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.goto("/ja/components/alert-dialog", { waitUntil: "domcontentloaded" });
+    const tableRegion = page.locator(".table-scroll");
+    await expect(tableRegion).toBeVisible();
+    const dimensions = await tableRegion.evaluate((element) => ({ client: element.clientWidth, scroll: element.scrollWidth }));
+    expect(dimensions.scroll).toBeGreaterThan(dimensions.client);
+    expect(await page.locator("html").evaluate((element) => element.scrollWidth)).toBeLessThanOrEqual(320);
+    for (const control of await page.locator(".theme-bar button, .locale-switcher a").all()) {
+      const box = await control.boundingBox();
+      expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
+      expect(box?.width ?? 0).toBeGreaterThanOrEqual(44);
+    }
+  });
+
+  test("Japanese component and not-found metadata stay localized", async ({ page }) => {
+    await page.goto("/ja/components/alert-dialog", { waitUntil: "domcontentloaded" });
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      "取り消せない操作を安全に確認する警告ダイアログ。",
+    );
+
+    await page.goto("/ja/not-a-real-route", { waitUntil: "domcontentloaded" });
+    await expect(page).toHaveTitle(/ページが見つかりません/);
+    const robots = page.locator('meta[name="robots"]');
+    expect(await robots.count()).toBeGreaterThan(0);
+    expect(await robots.evaluateAll((elements) => elements.every((element) => element.getAttribute("content")?.includes("noindex")))).toBe(true);
   });
 });

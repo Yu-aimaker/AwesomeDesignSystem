@@ -25,6 +25,16 @@
   "linkedRuleIds": [
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack",
+    "artifact.script.validate-content",
+    "artifact.token.semantic-system"
+  ],
   "contentHash": "seed-w3c-dtcg"
 }

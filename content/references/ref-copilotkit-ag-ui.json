@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "CopilotKit AG-UI \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "CopilotKit AG-UI — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable ai-ui guidance from CopilotKit AG-UI.",
     "Prefer schema/contract-bound generative UI over freeform HTML."

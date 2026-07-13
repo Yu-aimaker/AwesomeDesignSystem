@@ -44,4 +44,15 @@ describe("lintProductCopy", () => {
   test("respects locale ownership", () => {
     expect(lintProductCopy("guaranteed", lexicon, "ja")).toEqual([]);
   });
+
+  test("finds Japanese and CJK terms without whitespace boundaries", () => {
+    const japaneseLexicon: ProductLexicon = [
+      { term: "作業場", definition: "旧プロダクト名", status: "deprecated", replacement: "ワークスペース", locales: ["ja"], owner: "コンテンツ" },
+      { term: "必ず", definition: "根拠のない絶対表現", status: "forbidden", locales: ["ja"], owner: "法務" },
+    ];
+    expect(lintProductCopy("すべての作業場で必ず成果が出ます。", japaneseLexicon, "ja")).toEqual([
+      expect.objectContaining({ term: "作業場", severity: "warning", replacement: "ワークスペース" }),
+      expect.objectContaining({ term: "必ず", severity: "error" }),
+    ]);
+  });
 });

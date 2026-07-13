@@ -12,12 +12,16 @@
     "Infinite decorative motion"
   ],
   "referenceIds": [
+    "ref.ibm.carbon-motion",
+    "ref.microsoft.fluent-motion",
     "ref.motion.motion-react",
-    "ref.web.view-transitions",
-    "ref.ibm.carbon-motion"
+    "ref.web.scroll-driven",
+    "ref.web.view-transitions"
   ],
   "artifactIds": [
-    "artifact.motion.recipe-set"
+    "artifact.component.accordion",
+    "artifact.motion.recipe-set",
+    "artifact.test.motion-recipes"
   ],
   "verification": "motion package tests + reduced-motion CSS",
   "status": "canon"

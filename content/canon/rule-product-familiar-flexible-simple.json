@@ -4,10 +4,20 @@
   "domain": "product",
   "summary": "Reuse learned behavior, adapt to context and ability, and remove friction without hiding necessary context.",
   "guidance": "Stable semantics and hierarchy travel across presentations; layouts and inputs adapt to capabilities.",
-  "do": ["Keep recurring actions predictable", "Explain consequences in plain language"],
-  "dont": ["Stretch one layout everywhere or equate empty appearance with simplicity"],
-  "referenceIds": ["ref.apple.hig", "ref.apple.hig-foundations"],
-  "artifactIds": ["artifact.doc.platform-literacy"],
+  "do": [
+    "Keep recurring actions predictable",
+    "Explain consequences in plain language"
+  ],
+  "dont": [
+    "Stretch one layout everywhere or equate empty appearance with simplicity"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-foundations"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy"
+  ],
   "verification": "capability matrix plus semantics and comprehension review",
   "status": "canon"
 }

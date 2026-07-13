@@ -4,8 +4,23 @@
   "domain": "ai-driven",
   "summary": "Users can preview, edit, confirm, cancel, stop, undo, retry, take over manually and escalate in proportion to impact.",
   "guidance": "Place explicit approval before external or irreversible side effects. Summarize the actual action, target and consequence, then retain an audit record and reversible checkpoint where possible.",
-  "do": ["Offer manual takeover", "Make cancellation immediate and visible", "Require scoped approval for external side effects"],
-  "dont": ["Bundle materially different actions into one consent", "Silently retry a side effect", "Remove manual paths after automation begins"],
-  "referenceIds": ["ref.google.pair-guidebook", "ref.microsoft.human-ai-guidelines", "ref.intuit.design-system", "ref.salesforce.lightning-guidelines"],
-  "artifactIds": [], "verification": "Cancel, undo, manual-takeover, duplicate-prevention and high-risk approval tests", "status": "canon"
+  "do": [
+    "Offer manual takeover",
+    "Make cancellation immediate and visible",
+    "Require scoped approval for external side effects"
+  ],
+  "dont": [
+    "Bundle materially different actions into one consent",
+    "Silently retry a side effect",
+    "Remove manual paths after automation begins"
+  ],
+  "referenceIds": [
+    "ref.google.pair-guidebook",
+    "ref.intuit.design-system",
+    "ref.microsoft.human-ai-guidelines",
+    "ref.salesforce.lightning-guidelines"
+  ],
+  "artifactIds": [],
+  "verification": "Cancel, undo, manual-takeover, duplicate-prevention and high-risk approval tests",
+  "status": "canon"
 }

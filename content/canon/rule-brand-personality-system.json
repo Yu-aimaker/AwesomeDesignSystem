@@ -12,10 +12,13 @@
     "UI kit without verbal/visual personality"
   ],
   "referenceIds": [
+    "ref.airbnb.design",
     "ref.duolingo.design",
+    "ref.mercari.design",
     "ref.nothing.design"
   ],
   "artifactIds": [
+    "artifact.doc.brand-coherence",
     "artifact.doc.brand-system"
   ],
   "verification": "brand modules present + linked rules",

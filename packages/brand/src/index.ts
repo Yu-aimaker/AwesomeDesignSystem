@@ -72,10 +72,19 @@ function escapeRegExp(value: string) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
+function termPattern(term: string) {
+  const escaped = escapeRegExp(term);
+  const usesWordSpacing = !/[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u.test(term);
+  return new RegExp(
+    usesWordSpacing ? `(^|[^\\p{L}\\p{N}])${escaped}(?=$|[^\\p{L}\\p{N}])` : escaped,
+    "iu",
+  );
+}
+
 export function lintProductCopy(text: string, lexicon: ProductLexicon, locale: string): CopyLintIssue[] {
   return lexicon.flatMap((entry) => {
     if (!entry.locales.includes(locale) || !["deprecated", "forbidden"].includes(entry.status)) return [];
-    const pattern = new RegExp(`(^|[^\\p{L}\\p{N}])${escapeRegExp(entry.term)}(?=$|[^\\p{L}\\p{N}])`, "iu");
+    const pattern = termPattern(entry.term);
     if (!pattern.test(text)) return [];
     const severity = entry.status === "forbidden" ? "error" : "warning";
     return [{

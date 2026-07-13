@@ -2,7 +2,9 @@ import { motionRecipes } from "@awesome-ds/motion";
 import { getDictionary, localizePathname } from "../../lib/i18n";
 import { getRequestLocale } from "../../lib/i18n-server";
 
-export const metadata = { title: "Motion" };
+import { createLocalizedMetadata } from "../../lib/metadata";
+import { localizeMotionRecipe } from "../../lib/motion-localization";
+export const generateMetadata = () => createLocalizedMetadata("/motion", (dictionary) => dictionary.motion.title, (dictionary) => dictionary.motion.intro);
 
 export default async function MotionPage() {
   const locale = await getRequestLocale();
@@ -14,14 +16,17 @@ export default async function MotionPage() {
       <table className="table">
         <thead><tr><th>{d.intent}</th><th>{d.purpose}</th><th>{d.reduced}</th><th>{d.rules}</th></tr></thead>
         <tbody>
-          {motionRecipes.map((recipe) => (
+          {motionRecipes.map((sourceRecipe) => {
+            const recipe = localizeMotionRecipe(sourceRecipe, locale);
+            return (
             <tr key={recipe.id}>
-              <td><a href={localizePathname("/motion/" + recipe.intent, locale)}>{recipe.intent}</a></td>
+              <td><a href={localizePathname("/motion/" + recipe.intent, locale)}>{recipe.intentLabel}</a></td>
               <td>{recipe.purpose}</td>
               <td>{recipe.reducedMotionAlternative}</td>
               <td className="meta">{recipe.ruleIds.join(", ")}</td>
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
       <div className={"ads-motion-enter ads-card"} style={{ marginTop: "var(--space-6)" }}>

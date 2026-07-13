@@ -1,8 +1,35 @@
 {
-  "id": "ref.pinterest.gestalt", "title": "Pinterest Gestalt", "url": "https://gestalt.pinterest.systems/",
-  "owner": "pinterest", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["components", "media", "accessibility"],
-  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
-  "summary": "Product system for image-led discovery, responsive media and explicit component quality.", "lessons": ["Media declares geometry and loading/error states.", "Expose component maturity."],
-  "caveats": ["Masonry is inappropriate when linear scan order carries meaning."], "licenseNote": "Docs are public; implementation repository is Apache-2.0 at observation.",
-  "antiImitationNote": "Do not copy Pinterest feed mechanics or identity.", "linkedRuleIds": ["rule.ai.ux-streaming-contract", "rule.governance.promotion-maturity"], "linkedArtifactIds": [], "contentHash": "elite-gestalt-20260713"
+  "id": "ref.pinterest.gestalt",
+  "title": "Pinterest Gestalt",
+  "url": "https://gestalt.pinterest.systems/",
+  "owner": "pinterest",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "components",
+    "media",
+    "accessibility"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Product system for image-led discovery, responsive media and explicit component quality.",
+  "lessons": [
+    "Media declares geometry and loading/error states.",
+    "Expose component maturity."
+  ],
+  "caveats": [
+    "Masonry is inappropriate when linear scan order carries meaning."
+  ],
+  "licenseNote": "Docs are public; implementation repository is Apache-2.0 at observation.",
+  "antiImitationNote": "Do not copy Pinterest feed mechanics or identity.",
+  "linkedRuleIds": [
+    "rule.ai.ux-streaming-contract",
+    "rule.governance.promotion-maturity"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-gestalt-20260713"
 }

@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Atlassian Content Design \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Atlassian Content Design — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
     "Extract transferable content-design doctrine from Atlassian Content Design.",
     "Prefer first-party production constraints over secondary summaries."
@@ -25,6 +25,8 @@
   "linkedRuleIds": [
     "rule.brand.content-design"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
   "contentHash": "elite-atlassian-content"
 }

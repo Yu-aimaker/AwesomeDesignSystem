@@ -3,7 +3,8 @@ import { filterReferences, getAtlas } from "../../lib/content";
 import { formatMessage, getDictionary, localizePathname } from "../../lib/i18n";
 import { getRequestLocale } from "../../lib/i18n-server";
 
-export const metadata = { title: "Reference Atlas" };
+import { createLocalizedMetadata } from "../../lib/metadata";
+export const generateMetadata = () => createLocalizedMetadata("/references", (dictionary) => dictionary.references.title, (dictionary) => dictionary.references.intro);
 
 export default async function ReferencesPage({
   searchParams,

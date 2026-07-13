@@ -16,8 +16,8 @@
     "ref.react.docs"
   ],
   "artifactIds": [
-    "artifact.token.semantic-system",
-    "artifact.motion.recipe-set"
+    "artifact.motion.recipe-set",
+    "artifact.token.semantic-system"
   ],
   "verification": "core package has no React dependency",
   "status": "canon"

@@ -142,8 +142,9 @@ export async function loadCanonDoc(relPath: string, locale: "en" | "ja" = "en"):
       .trim()
       .slice(0, 220);
     return { slug, title, path: relPath, domain, html, excerpt, metadata };
-  } catch {
-    return null;
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") return null;
+    throw error;
   }
 }
 
@@ -154,6 +155,9 @@ export const loadAllCanonDocs = cache(async function loadAllCanonDocs(locale: "e
     const rel = path.relative(repoRoot, file).replace(/\\/g, "/");
     const doc = await loadCanonDoc(rel, locale);
     if (doc) docs.push(doc);
+  }
+  if (docs.length !== files.length) {
+    throw new Error(`Canon loader returned ${docs.length} documents for ${files.length} Markdown files`);
   }
   return docs;
 });

@@ -23,8 +23,14 @@
   "licenseNote": "Public web documentation or standard; cite and synthesize.",
   "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
   "linkedRuleIds": [
+    "rule.agent.go-wide-remix-repeat",
+    "rule.agent.real-content-risk-gates",
+    "rule.ai.generative-boundaries",
     "rule.governance.evidence-first"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.doc.reference-atlas",
+    "artifact.skill.awesome-ds"
+  ],
   "contentHash": "seed-voltagent-awesome-design-md"
 }

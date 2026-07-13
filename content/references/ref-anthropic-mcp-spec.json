@@ -14,7 +14,7 @@
   "reviewCadenceDays": 180,
   "freshnessState": "healthy",
   "evidenceLevel": "standard",
-  "summary": "Model Context Protocol \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "Model Context Protocol — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable ai-ui guidance from Model Context Protocol.",
     "Prefer schema/contract-bound generative UI over freeform HTML."

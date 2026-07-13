@@ -12,10 +12,11 @@
     "Trap users in non-shareable modal-only workflows for primary content"
   ],
   "referenceIds": [
-    "ref.vercel.web-interface-guidelines",
-    "ref.vercel.design"
+    "ref.vercel.design",
+    "ref.vercel.web-interface-guidelines"
   ],
   "artifactIds": [
+    "artifact.component.pagination",
     "artifact.doc.reference-atlas"
   ],
   "verification": "docs filter tests for Back/Forward",

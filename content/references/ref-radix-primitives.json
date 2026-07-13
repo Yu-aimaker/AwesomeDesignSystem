@@ -23,8 +23,30 @@
   "licenseNote": "Public web documentation or standard; cite and synthesize.",
   "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
   "linkedRuleIds": [
-    "rule.a11y.wcag-aa"
+    "rule.a11y.wcag-aa",
+    "rule.components.state-matrix"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden"
+  ],
   "contentHash": "seed-radix-primitives"
 }

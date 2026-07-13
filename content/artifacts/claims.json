@@ -1,15 +1,107 @@
 [
   {
-    "id": "artifact.token.semantic-system",
-    "kind": "token",
-    "title": "Semantic tokens",
-    "path": "packages/tokens",
+    "id": "artifact.component.accordion",
+    "kind": "component",
+    "title": "Accordion",
+    "path": "packages/react/src/components/Accordion.tsx",
     "ruleIds": [
-      "rule.foundations.semantic-tokens",
-      "rule.design-eng.platform-first"
+      "rule.a11y.wcag-aa",
+      "rule.motion.purpose-first"
     ],
     "referenceIds": [
-      "ref.w3c.dtcg"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.ibm.carbon-motion",
+      "ref.microsoft.fluent-motion",
+      "ref.motion.motion-react",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3",
+      "ref.web.scroll-driven",
+      "ref.web.view-transitions"
+    ]
+  },
+  {
+    "id": "artifact.component.alert-dialog",
+    "kind": "component",
+    "title": "AlertDialog",
+    "path": "packages/react/src/components/Dialog.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.badge",
+    "kind": "component",
+    "title": "Badge",
+    "path": "packages/react/src/components/Badge.tsx",
+    "ruleIds": [
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.adobe.spectrum",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.shopify.polaris",
+      "ref.tailwind.v4",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format"
+    ]
+  },
+  {
+    "id": "artifact.component.breadcrumb",
+    "kind": "component",
+    "title": "Breadcrumb",
+    "path": "packages/react/src/components/Navigation.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
@@ -19,10 +111,181 @@
     "path": "packages/react/src/components/Button.tsx",
     "ruleIds": [
       "rule.a11y.wcag-aa",
-      "rule.components.state-matrix"
+      "rule.components.state-matrix",
+      "rule.foundations.semantic-tokens"
     ],
     "referenceIds": [
-      "ref.w3c.apg"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.adobe.spectrum",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.baseui.base-ui",
+      "ref.chakra.v3",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.govuk.design-system",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.openui.open-ui",
+      "ref.radix.primitives",
+      "ref.salesforce.lightning",
+      "ref.shadcn.ui",
+      "ref.shopify.polaris",
+      "ref.smarthr.design",
+      "ref.tailwind.v4",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.callout",
+    "kind": "component",
+    "title": "Callout",
+    "path": "packages/react/src/components/Status.tsx",
+    "ruleIds": [
+      "rule.brand.content-design"
+    ],
+    "referenceIds": [
+      "ref.atlassian.content",
+      "ref.duolingo.brand-narrative",
+      "ref.duolingo.design",
+      "ref.duolingo.writing-duo",
+      "ref.duolingo.writing-glossary",
+      "ref.duolingo.writing-style",
+      "ref.duolingo.writing-tone",
+      "ref.duolingo.writing-voice",
+      "ref.ibm.carbon",
+      "ref.ibm.carbon-content",
+      "ref.shopify.polaris",
+      "ref.smarthr.design"
+    ]
+  },
+  {
+    "id": "artifact.component.card",
+    "kind": "component",
+    "title": "Card",
+    "path": "packages/react/src/components/Status.tsx",
+    "ruleIds": [
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.adobe.spectrum",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.shopify.polaris",
+      "ref.tailwind.v4",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format"
+    ]
+  },
+  {
+    "id": "artifact.component.checkbox",
+    "kind": "component",
+    "title": "Checkbox",
+    "path": "packages/react/src/components/Input.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.cluster",
+    "kind": "component",
+    "title": "Cluster",
+    "path": "packages/react/src/components/Layout.tsx",
+    "ruleIds": [
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.adobe.spectrum",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.shopify.polaris",
+      "ref.tailwind.v4",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format"
+    ]
+  },
+  {
+    "id": "artifact.component.container",
+    "kind": "component",
+    "title": "Container",
+    "path": "packages/react/src/components/Layout.tsx",
+    "ruleIds": [
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.adobe.spectrum",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.shopify.polaris",
+      "ref.tailwind.v4",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format"
     ]
   },
   {
@@ -35,7 +298,52 @@
       "rule.components.state-matrix"
     ],
     "referenceIds": [
-      "ref.w3c.apg"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.adobe.spectrum",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.atlassian.design-system",
+      "ref.baseui.base-ui",
+      "ref.chakra.v3",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.govuk.design-system",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.openui.open-ui",
+      "ref.radix.primitives",
+      "ref.salesforce.lightning",
+      "ref.shadcn.ui",
+      "ref.shopify.polaris",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.dropdown-menu",
+    "kind": "component",
+    "title": "DropdownMenu",
+    "path": "packages/react/src/components/Overlay.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
@@ -47,7 +355,15 @@
       "rule.interaction.product-quality"
     ],
     "referenceIds": [
-      "ref.shopify.polaris"
+      "ref.apple.hig-spatial",
+      "ref.govuk.design-system",
+      "ref.linear.brand",
+      "ref.nielsen.usability",
+      "ref.notion.design",
+      "ref.shopify.polaris",
+      "ref.stripe.design",
+      "ref.uswds.uswds",
+      "ref.vercel.web-interface-guidelines"
     ]
   },
   {
@@ -59,111 +375,453 @@
       "rule.interaction.product-quality"
     ],
     "referenceIds": [
+      "ref.apple.hig-spatial",
+      "ref.govuk.design-system",
+      "ref.linear.brand",
+      "ref.nielsen.usability",
+      "ref.notion.design",
+      "ref.shopify.polaris",
+      "ref.stripe.design",
+      "ref.uswds.uswds",
       "ref.vercel.web-interface-guidelines"
     ]
   },
   {
-    "id": "artifact.motion.recipe-set",
-    "kind": "motion-recipe",
-    "title": "Motion recipes",
-    "path": "packages/motion",
+    "id": "artifact.component.grid",
+    "kind": "component",
+    "title": "Grid",
+    "path": "packages/react/src/components/Layout.tsx",
     "ruleIds": [
-      "rule.motion.purpose-first",
-      "rule.design-eng.platform-first"
+      "rule.foundations.semantic-tokens"
     ],
     "referenceIds": [
-      "ref.motion.motion-react"
+      "ref.adobe.spectrum",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.shopify.polaris",
+      "ref.tailwind.v4",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format"
     ]
   },
   {
-    "id": "artifact.test.a11y-suite",
-    "kind": "test",
-    "title": "A11y suite",
-    "path": "tests/a11y",
+    "id": "artifact.component.icon-button",
+    "kind": "component",
+    "title": "IconButton",
+    "path": "packages/react/src/components/IconButton.tsx",
     "ruleIds": [
       "rule.a11y.wcag-aa"
     ],
     "referenceIds": [
-      "ref.a11y.axe-core"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
-    "id": "artifact.doc.reference-atlas",
-    "kind": "doc",
-    "title": "Reference Atlas",
-    "path": "apps/docs/app/references",
+    "id": "artifact.component.input",
+    "kind": "component",
+    "title": "Input",
+    "path": "packages/react/src/components/Input.tsx",
     "ruleIds": [
-      "rule.governance.evidence-first",
+      "rule.a11y.wcag-aa",
+      "rule.components.state-matrix"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.adobe.spectrum",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.atlassian.design-system",
+      "ref.baseui.base-ui",
+      "ref.chakra.v3",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.govuk.design-system",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.openui.open-ui",
+      "ref.radix.primitives",
+      "ref.salesforce.lightning",
+      "ref.shadcn.ui",
+      "ref.shopify.polaris",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.link",
+    "kind": "component",
+    "title": "Link",
+    "path": "packages/react/src/components/Link.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa",
+      "rule.interaction.interface-quality"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.vercel.web-interface-guidelines",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.pagination",
+    "kind": "component",
+    "title": "Pagination",
+    "path": "packages/react/src/components/Navigation.tsx",
+    "ruleIds": [
       "rule.interaction.url-state"
     ],
     "referenceIds": [
-      "ref.voltagent.awesome-design-md"
+      "ref.vercel.design",
+      "ref.vercel.web-interface-guidelines"
     ]
   },
   {
-    "id": "artifact.doc.docs-shell",
-    "kind": "doc",
-    "title": "Docs shell",
-    "path": "apps/docs",
+    "id": "artifact.component.popover",
+    "kind": "component",
+    "title": "Popover",
+    "path": "packages/react/src/components/Overlay.tsx",
     "ruleIds": [
-      "rule.design-eng.docs-as-product"
+      "rule.a11y.wcag-aa"
     ],
     "referenceIds": [
-      "ref.storybook.docs"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
-    "id": "artifact.doc.brand-system",
-    "kind": "doc",
-    "title": "Brand system module",
-    "path": "design-system/brand/brand-system.md",
+    "id": "artifact.component.progress",
+    "kind": "component",
+    "title": "Progress",
+    "path": "packages/react/src/components/Status.tsx",
     "ruleIds": [
-      "rule.brand.personality-system",
-      "rule.brand.marks-lockups",
-      "rule.brand.typography-contract",
-      "rule.brand.family-architecture",
-      "rule.brand.asset-governance"
+      "rule.a11y.wcag-aa"
     ],
     "referenceIds": [
-      "ref.duolingo.design"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
-    "id": "artifact.doc.core-literacy",
-    "kind": "doc",
-    "title": "Core literacy",
-    "path": "design-system/foundations/core-design-literacy.md",
+    "id": "artifact.component.radio-group",
+    "kind": "component",
+    "title": "RadioGroup",
+    "path": "packages/react/src/components/Input.tsx",
     "ruleIds": [
-      "rule.foundations.core-literacy"
+      "rule.a11y.wcag-aa"
     ],
     "referenceIds": [
-      "ref.williams.non-designers"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
-    "id": "artifact.skill.awesome-ds",
-    "kind": "skill",
-    "title": "awesome-ds skill",
-    "path": "skills/awesome-ds/SKILL.md",
+    "id": "artifact.component.select",
+    "kind": "component",
+    "title": "Select",
+    "path": "packages/react/src/components/Input.tsx",
     "ruleIds": [
-      "rule.ai.generative-boundaries",
-      "rule.agent.go-wide-remix-repeat",
-      "rule.agent.real-content-risk-gates"
+      "rule.a11y.wcag-aa"
     ],
     "referenceIds": [
-      "ref.voltagent.awesome-design-md"
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
-    "id": "artifact.script.validate-content",
-    "kind": "script",
-    "title": "validate-content",
-    "path": "scripts/validate-content.mjs",
+    "id": "artifact.component.skeleton",
+    "kind": "component",
+    "title": "Skeleton",
+    "path": "packages/react/src/components/Status.tsx",
     "ruleIds": [
-      "rule.governance.evidence-first"
+      "rule.interaction.product-quality"
     ],
     "referenceIds": [
-      "ref.w3c.dtcg"
+      "ref.apple.hig-spatial",
+      "ref.govuk.design-system",
+      "ref.linear.brand",
+      "ref.nielsen.usability",
+      "ref.notion.design",
+      "ref.shopify.polaris",
+      "ref.stripe.design",
+      "ref.uswds.uswds",
+      "ref.vercel.web-interface-guidelines"
+    ]
+  },
+  {
+    "id": "artifact.component.spinner",
+    "kind": "component",
+    "title": "Spinner",
+    "path": "packages/react/src/components/Status.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.stack",
+    "kind": "component",
+    "title": "Stack",
+    "path": "packages/react/src/components/Layout.tsx",
+    "ruleIds": [
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.adobe.spectrum",
+      "ref.apple.hig-color",
+      "ref.apple.hig-foundations",
+      "ref.apple.liquid-glass",
+      "ref.atlassian.design-system",
+      "ref.duolingo.brand-family",
+      "ref.duolingo.color",
+      "ref.duolingo.imagery",
+      "ref.duolingo.logos",
+      "ref.duolingo.typography",
+      "ref.figma.variables",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.shopify.polaris",
+      "ref.tailwind.v4",
+      "ref.w3c.dtcg",
+      "ref.w3c.dtcg-format"
+    ]
+  },
+  {
+    "id": "artifact.component.switch",
+    "kind": "component",
+    "title": "Switch",
+    "path": "packages/react/src/components/Input.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.tabs",
+    "kind": "component",
+    "title": "Tabs",
+    "path": "packages/react/src/components/Tabs.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa",
+      "rule.components.state-matrix"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.adobe.spectrum",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.atlassian.design-system",
+      "ref.baseui.base-ui",
+      "ref.chakra.v3",
+      "ref.github.primer",
+      "ref.google.material-3",
+      "ref.govuk.design-system",
+      "ref.ibm.carbon",
+      "ref.microsoft.fluent-2",
+      "ref.openui.open-ui",
+      "ref.radix.primitives",
+      "ref.salesforce.lightning",
+      "ref.shadcn.ui",
+      "ref.shopify.polaris",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.textarea",
+    "kind": "component",
+    "title": "Textarea",
+    "path": "packages/react/src/components/Input.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.toast",
+    "kind": "component",
+    "title": "Toast",
+    "path": "packages/react/src/components/Status.tsx",
+    "ruleIds": [
+      "rule.interaction.product-quality"
+    ],
+    "referenceIds": [
+      "ref.apple.hig-spatial",
+      "ref.govuk.design-system",
+      "ref.linear.brand",
+      "ref.nielsen.usability",
+      "ref.notion.design",
+      "ref.shopify.polaris",
+      "ref.stripe.design",
+      "ref.uswds.uswds",
+      "ref.vercel.web-interface-guidelines"
+    ]
+  },
+  {
+    "id": "artifact.component.tooltip",
+    "kind": "component",
+    "title": "Tooltip",
+    "path": "packages/react/src/components/Overlay.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
+    ]
+  },
+  {
+    "id": "artifact.component.visually-hidden",
+    "kind": "component",
+    "title": "VisuallyHidden",
+    "path": "packages/react/src/components/Layout.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core",
+      "ref.adobe.react-aria",
+      "ref.apple.hig",
+      "ref.apple.hig-accessibility",
+      "ref.baseui.base-ui",
+      "ref.govuk.design-system",
+      "ref.radix.primitives",
+      "ref.smarthr.design",
+      "ref.uswds.uswds",
+      "ref.w3c.apg",
+      "ref.w3c.wcag-22",
+      "ref.w3c.wcag-3"
     ]
   },
   {
@@ -173,9 +831,38 @@
     "path": "design-system/brand/cross-medium-coherence.md",
     "ruleIds": [
       "rule.brand.cross-medium-coherence",
-      "rule.brand.personality-system",
       "rule.brand.imagery-direction",
-      "rule.brand.narrative-evidence"
+      "rule.brand.narrative-evidence",
+      "rule.brand.personality-system"
+    ],
+    "referenceIds": [
+      "ref.duolingo.design"
+    ]
+  },
+  {
+    "id": "artifact.doc.brand-system",
+    "kind": "doc",
+    "title": "Brand system module",
+    "path": "design-system/brand/brand-system.md",
+    "ruleIds": [
+      "rule.brand.asset-governance",
+      "rule.brand.family-architecture",
+      "rule.brand.marks-lockups",
+      "rule.brand.personality-system",
+      "rule.brand.typography-contract"
+    ],
+    "referenceIds": [
+      "ref.duolingo.design"
+    ]
+  },
+  {
+    "id": "artifact.doc.brand-workbench",
+    "kind": "doc",
+    "title": "Interactive Brand Workbench",
+    "path": "apps/docs/app/brand/workbench/page.tsx",
+    "ruleIds": [
+      "rule.brand.cross-medium-coherence",
+      "rule.brand.product-lexicon"
     ],
     "referenceIds": [
       "ref.duolingo.design"
@@ -196,13 +883,37 @@
     ]
   },
   {
+    "id": "artifact.doc.core-literacy",
+    "kind": "doc",
+    "title": "Core literacy",
+    "path": "design-system/foundations/core-design-literacy.md",
+    "ruleIds": [
+      "rule.foundations.core-literacy"
+    ],
+    "referenceIds": [
+      "ref.williams.non-designers"
+    ]
+  },
+  {
+    "id": "artifact.doc.docs-shell",
+    "kind": "doc",
+    "title": "Docs shell",
+    "path": "apps/docs",
+    "ruleIds": [
+      "rule.design-eng.docs-as-product"
+    ],
+    "referenceIds": [
+      "ref.storybook.docs"
+    ]
+  },
+  {
     "id": "artifact.doc.illustration",
     "kind": "doc",
     "title": "Character & illustration grammar",
     "path": "design-system/brand/character-system.md",
     "ruleIds": [
-      "rule.brand.illustration-grammar",
-      "rule.brand.character-motion"
+      "rule.brand.character-motion",
+      "rule.brand.illustration-grammar"
     ],
     "referenceIds": [
       "ref.duolingo.illustration-shape"
@@ -226,9 +937,9 @@
     "title": "Platform literacy",
     "path": "design-system/foundations/platform-literacy.md",
     "ruleIds": [
-      "rule.foundations.platform-literacy",
       "rule.adaptation.capability-first",
       "rule.adaptation.constrained-surfaces",
+      "rule.foundations.platform-literacy",
       "rule.product.agency-responsibility",
       "rule.product.craft-systemic-delight",
       "rule.product.familiar-flexible-simple",
@@ -241,16 +952,42 @@
     ]
   },
   {
+    "id": "artifact.doc.reference-atlas",
+    "kind": "doc",
+    "title": "Reference Atlas",
+    "path": "apps/docs/app/references",
+    "ruleIds": [
+      "rule.governance.evidence-first",
+      "rule.interaction.url-state"
+    ],
+    "referenceIds": [
+      "ref.voltagent.awesome-design-md"
+    ]
+  },
+  {
+    "id": "artifact.motion.recipe-set",
+    "kind": "motion-recipe",
+    "title": "Motion recipes",
+    "path": "packages/motion",
+    "ruleIds": [
+      "rule.design-eng.platform-first",
+      "rule.motion.purpose-first"
+    ],
+    "referenceIds": [
+      "ref.motion.motion-react"
+    ]
+  },
+  {
     "id": "artifact.script.brand-contract",
     "kind": "script",
     "title": "Brand manifest and Product Lexicon validator",
     "path": "packages/brand/src/index.ts",
     "ruleIds": [
-      "rule.brand.marks-lockups",
-      "rule.brand.typography-contract",
+      "rule.brand.asset-governance",
       "rule.brand.imagery-direction",
+      "rule.brand.marks-lockups",
       "rule.brand.product-lexicon",
-      "rule.brand.asset-governance"
+      "rule.brand.typography-contract"
     ],
     "referenceIds": [
       "ref.duolingo.design",
@@ -258,16 +995,146 @@
     ]
   },
   {
-    "id": "artifact.doc.brand-workbench",
-    "kind": "doc",
-    "title": "Interactive Brand Workbench",
-    "path": "apps/docs/app/brand/workbench/page.tsx",
+    "id": "artifact.script.validate-content",
+    "kind": "script",
+    "title": "validate-content",
+    "path": "scripts/validate-content.mjs",
     "ruleIds": [
-      "rule.brand.cross-medium-coherence",
-      "rule.brand.product-lexicon"
+      "rule.governance.evidence-first"
     ],
     "referenceIds": [
-      "ref.duolingo.design"
+      "ref.w3c.dtcg"
+    ]
+  },
+  {
+    "id": "artifact.skill.awesome-ds",
+    "kind": "skill",
+    "title": "awesome-ds skill",
+    "path": "skills/awesome-ds/SKILL.md",
+    "ruleIds": [
+      "rule.agent.go-wide-remix-repeat",
+      "rule.agent.real-content-risk-gates",
+      "rule.ai.generative-boundaries"
+    ],
+    "referenceIds": [
+      "ref.voltagent.awesome-design-md"
+    ]
+  },
+  {
+    "id": "artifact.test.a11y-suite",
+    "kind": "test",
+    "title": "A11y suite",
+    "path": "tests/a11y",
+    "ruleIds": [
+      "rule.a11y.wcag-aa"
+    ],
+    "referenceIds": [
+      "ref.a11y.axe-core"
+    ],
+    "verifiesArtifactIds": [
+      "artifact.component.accordion",
+      "artifact.component.alert-dialog",
+      "artifact.component.badge",
+      "artifact.component.breadcrumb",
+      "artifact.component.button",
+      "artifact.component.callout",
+      "artifact.component.card",
+      "artifact.component.checkbox",
+      "artifact.component.cluster",
+      "artifact.component.container",
+      "artifact.component.dialog",
+      "artifact.component.dropdown-menu",
+      "artifact.component.empty-state",
+      "artifact.component.error-state",
+      "artifact.component.grid",
+      "artifact.component.icon-button",
+      "artifact.component.input",
+      "artifact.component.link",
+      "artifact.component.pagination",
+      "artifact.component.popover",
+      "artifact.component.progress",
+      "artifact.component.radio-group",
+      "artifact.component.select",
+      "artifact.component.skeleton",
+      "artifact.component.spinner",
+      "artifact.component.stack",
+      "artifact.component.switch",
+      "artifact.component.tabs",
+      "artifact.component.textarea",
+      "artifact.component.toast",
+      "artifact.component.tooltip",
+      "artifact.component.visually-hidden"
+    ]
+  },
+  {
+    "id": "artifact.test.component-contracts",
+    "kind": "test",
+    "title": "Component contract unit and keyboard suites",
+    "path": "packages/react/src/components/Components.test.tsx",
+    "ruleIds": [
+      "rule.a11y.wcag-aa",
+      "rule.components.state-matrix"
+    ],
+    "referenceIds": [],
+    "verifiesArtifactIds": [
+      "artifact.component.accordion",
+      "artifact.component.alert-dialog",
+      "artifact.component.badge",
+      "artifact.component.breadcrumb",
+      "artifact.component.button",
+      "artifact.component.callout",
+      "artifact.component.card",
+      "artifact.component.checkbox",
+      "artifact.component.cluster",
+      "artifact.component.container",
+      "artifact.component.dialog",
+      "artifact.component.dropdown-menu",
+      "artifact.component.empty-state",
+      "artifact.component.error-state",
+      "artifact.component.grid",
+      "artifact.component.icon-button",
+      "artifact.component.input",
+      "artifact.component.link",
+      "artifact.component.pagination",
+      "artifact.component.popover",
+      "artifact.component.progress",
+      "artifact.component.radio-group",
+      "artifact.component.select",
+      "artifact.component.skeleton",
+      "artifact.component.spinner",
+      "artifact.component.stack",
+      "artifact.component.switch",
+      "artifact.component.tabs",
+      "artifact.component.textarea",
+      "artifact.component.toast",
+      "artifact.component.tooltip",
+      "artifact.component.visually-hidden"
+    ]
+  },
+  {
+    "id": "artifact.test.motion-recipes",
+    "kind": "test",
+    "title": "Motion recipe and reduced-motion suite",
+    "path": "packages/motion/src/recipes.test.ts",
+    "ruleIds": [
+      "rule.motion.purpose-first"
+    ],
+    "referenceIds": [],
+    "verifiesArtifactIds": [
+      "artifact.motion.recipe-set"
+    ]
+  },
+  {
+    "id": "artifact.token.semantic-system",
+    "kind": "token",
+    "title": "Semantic tokens",
+    "path": "packages/tokens",
+    "ruleIds": [
+      "rule.design-eng.platform-first",
+      "rule.foundations.semantic-tokens"
+    ],
+    "referenceIds": [
+      "ref.w3c.dtcg"
     ]
   }
 ]

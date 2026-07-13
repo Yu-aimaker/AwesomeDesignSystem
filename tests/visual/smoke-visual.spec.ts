@@ -32,7 +32,7 @@ const routes: VisualRoute[] = [
   { path: "/references", name: "references" },
   { path: "/ja/components/alert-dialog", name: "component-detail-ja-mobile", viewport: { width: 320, height: 640 } },
   { path: "/ja/motion/enter", name: "motion-detail-ja" },
-  { path: "/ja/references/ref-apple-hig-accessibility", name: "reference-detail-ja-mobile", viewport: { width: 320, height: 640 } },
+  { path: "/ja/references/ref.apple.hig-accessibility", name: "reference-detail-ja-mobile", viewport: { width: 320, height: 640 } },
 ];
 
 test.describe("docs visual smoke", () => {
@@ -45,13 +45,12 @@ test.describe("docs visual smoke", () => {
       if (route.viewport) await page.setViewportSize(route.viewport);
       if (route.reducedMotion) await page.emulateMedia({ reducedMotion: "reduce" });
       if (route.theme) {
-        await page.addInitScript((theme) => {
-          localStorage.setItem("ads-theme", theme);
-          document.documentElement.setAttribute("data-theme", theme);
-        }, route.theme);
+        await page.context().addCookies([{ name: "awesome-theme", value: route.theme, domain: "127.0.0.1", path: "/" }]);
       }
       await page.goto(route.path, { waitUntil: "domcontentloaded" });
       await expect(page.locator("main#main")).toBeVisible();
+      if (route.name === "reference-detail-ja-mobile") await expect(page.getByRole("heading", { name: "Apple HIG Accessibility" })).toBeVisible();
+      if (route.name === "component-detail-ja-mobile") await expect(page.getByRole("heading", { name: "スクリーンリーダー契約" })).toBeVisible();
       if (route.direction) await page.locator("html").evaluate((element, direction) => element.setAttribute("dir", direction), route.direction);
       await page.evaluate(() => document.fonts.ready);
 

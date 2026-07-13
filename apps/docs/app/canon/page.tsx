@@ -2,11 +2,14 @@ import Link from "next/link";
 import { loadAllCanonDocs } from "../../lib/markdown";
 import { getRequestLocale } from "../../lib/i18n-server";
 import { localizePathname } from "../../lib/i18n";
+import { formatMessage, getDictionary } from "../../lib/i18n";
 
-export const metadata = { title: "Canon" };
+import { createLocalizedMetadata } from "../../lib/metadata";
+export const generateMetadata = () => createLocalizedMetadata("/canon", (dictionary) => dictionary.nav.Canon);
 
 export default async function CanonIndexPage() {
   const locale = await getRequestLocale();
+  const dictionary = getDictionary(locale);
   const docs = await loadAllCanonDocs(locale);
   const byDomain = new Map<string, typeof docs>();
   for (const doc of docs) {
@@ -16,8 +19,8 @@ export default async function CanonIndexPage() {
   }
   return (
     <div className="ads-motion-enter">
-      <h1>Canon library</h1>
-      <p className="muted">{docs.length} Markdown modules from design-system/, fully readable on the site.</p>
+      <h1>{dictionary.canon.libraryTitle}</h1>
+      <p className="muted">{formatMessage(dictionary.canon.libraryIntro, { count: docs.length })}</p>
       {[...byDomain.entries()].map(([domain, items]) => (
         <section key={domain}>
           <h2>{domain}</h2>

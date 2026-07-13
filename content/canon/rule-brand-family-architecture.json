@@ -1,1 +1,23 @@
-{"id":"rule.brand.family-architecture","title":"Sub-brands declare relationship, inheritance, and lifecycle","domain":"brand","summary":"Every offering explicitly chooses master-branded, endorsed, or independent architecture with governed overrides.","guidance":"Base family decisions on audience, trust, ownership, risk, lifecycle, and recognition before composing lockups.","do":["Validate an acyclic ownership graph","Version naming, migration, aliases, and deprecation"],"dont":["Turn each campaign into a permanent sub-brand","Treat missing inheritance rules as designer discretion"],"referenceIds":["ref.duolingo.brand-family"],"artifactIds":["artifact.doc.brand-system"],"verification":"Family graph, allowed-override, naming, ownership, and lifecycle validation","status":"canon"}
+{
+  "id": "rule.brand.family-architecture",
+  "title": "Sub-brands declare relationship, inheritance, and lifecycle",
+  "domain": "brand",
+  "summary": "Every offering explicitly chooses master-branded, endorsed, or independent architecture with governed overrides.",
+  "guidance": "Base family decisions on audience, trust, ownership, risk, lifecycle, and recognition before composing lockups.",
+  "do": [
+    "Validate an acyclic ownership graph",
+    "Version naming, migration, aliases, and deprecation"
+  ],
+  "dont": [
+    "Turn each campaign into a permanent sub-brand",
+    "Treat missing inheritance rules as designer discretion"
+  ],
+  "referenceIds": [
+    "ref.duolingo.brand-family"
+  ],
+  "artifactIds": [
+    "artifact.doc.brand-system"
+  ],
+  "verification": "Family graph, allowed-override, naming, ownership, and lifecycle validation",
+  "status": "canon"
+}

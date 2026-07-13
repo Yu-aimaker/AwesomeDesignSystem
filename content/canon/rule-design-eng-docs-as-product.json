@@ -12,8 +12,11 @@
     "Stale README-only docs"
   ],
   "referenceIds": [
-    "ref.storybook.docs",
-    "ref.github.primer"
+    "ref.github.primer",
+    "ref.goodpatch.blog",
+    "ref.goodpatch.design",
+    "ref.spotify.design",
+    "ref.storybook.docs"
   ],
   "artifactIds": [
     "artifact.doc.docs-shell"

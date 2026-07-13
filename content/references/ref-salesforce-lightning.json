@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Lightning Design System \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "Lightning Design System — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable system guidance from Lightning Design System.",
     "Prefer schema/contract-bound generative UI over freeform HTML."
@@ -27,6 +27,11 @@
   "linkedRuleIds": [
     "rule.components.state-matrix"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.button",
+    "artifact.component.dialog",
+    "artifact.component.input",
+    "artifact.component.tabs"
+  ],
   "contentHash": "gap-salesforce-lightning"
 }

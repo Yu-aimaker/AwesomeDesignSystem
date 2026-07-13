@@ -55,7 +55,7 @@ unchanged, normalized-noise-only, real change, HEAD rejected/GET accepted,
 timeout then retry, persistent failure, allowlisted failure, and GitHub fixture.
 
 - `pnpm test` → all existing plus observation tests pass.
-- `pnpm validate` → 97 references, 42 rules, 20 artifacts, 6 signals, 0 issues.
+- `pnpm validate` → 97 references, 42 rules, 48 artifacts, 6 signals, 0 issues.
 - Fixture strict run exits nonzero only for the aged persistent failure case.
 - `pnpm check:freshness` produces separate freshness and observation summaries.
 

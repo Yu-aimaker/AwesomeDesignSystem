@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.writing-voice",
-  "title": "Duolingo Design \u2014 Stable voice qualities",
+  "title": "Duolingo Design — Stable voice qualities",
   "url": "https://design.duolingo.com/writing/voice",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,8 +27,11 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
-    "rule.brand.content-design"
+    "rule.brand.content-design",
+    "rule.brand.cross-medium-coherence"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
   "contentHash": "duolingo-writing-voice-2026-07-13"
 }

@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.color",
-  "title": "Duolingo Design \u2014 Named brand color roles",
+  "title": "Duolingo Design — Named brand color roles",
   "url": "https://design.duolingo.com/identity/color",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -30,6 +30,14 @@
     "rule.brand.cross-medium-coherence",
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "duolingo-color-2026-07-13"
 }

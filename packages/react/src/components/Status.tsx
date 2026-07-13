@@ -38,3 +38,9 @@ export function ErrorState({ title, description, actionLabel, onAction }: { titl
 }
 EmptyState.metadata = getComponentMetadata("empty-state");
 ErrorState.metadata = getComponentMetadata("error-state");
+Card.metadata = getComponentMetadata("card");
+Callout.metadata = getComponentMetadata("callout");
+Skeleton.metadata = getComponentMetadata("skeleton");
+Spinner.metadata = getComponentMetadata("spinner");
+Progress.metadata = getComponentMetadata("progress");
+Toast.metadata = getComponentMetadata("toast");

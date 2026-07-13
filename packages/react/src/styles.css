@@ -58,3 +58,21 @@
 .ads-menu-item[data-disabled]{color:var(--color-fg-subtle)}
 .ads-tooltip-trigger{display:inline-flex;align-items:center;justify-content:center;min-inline-size:2.75rem;min-block-size:2.75rem;border:1px solid var(--color-border);border-radius:var(--radius-full);background:var(--color-surface);color:var(--color-fg);font:inherit}
 .ads-tooltip{background:var(--color-fg);color:var(--color-bg);font-size:var(--text-xs);padding:.25rem .5rem;border-radius:var(--radius-sm)}
+
+@media (forced-colors:active){
+  .ads-btn,.ads-icon-btn,.ads-input,.ads-textarea,.ads-select,.ads-card,.ads-toast,.ads-empty,.ads-error-state,.ads-popover,.ads-menu-popover,.ads-dialog,.ads-tooltip-trigger{forced-color-adjust:auto;background:Canvas;color:CanvasText;border-color:ButtonText;box-shadow:none}
+  .ads-btn--primary{background:Highlight;color:HighlightText;border-color:Highlight}
+  .ads-btn--danger{background:Canvas;color:CanvasText;border:3px double ButtonText}
+  .ads-btn[data-disabled],.ads-btn:disabled,.ads-icon-btn:disabled,.ads-input:disabled,.ads-textarea:disabled,.ads-select:disabled{opacity:1;color:GrayText;border-color:GrayText}
+  .ads-btn:focus-visible,.ads-icon-btn:focus-visible,.ads-link:focus-visible,.ads-input:focus-visible,.ads-textarea:focus-visible,.ads-select:focus-visible,.ads-tab:focus-visible,.ads-tooltip-trigger:focus-visible{outline:3px solid Highlight;outline-offset:3px}
+  .ads-input[data-invalid],.ads-textarea[data-invalid],.ads-select[data-invalid],.ads-error-state{border:2px solid MarkText}
+  .ads-error{color:MarkText}
+  .ads-tab[aria-selected="true"]{color:CanvasText;border-bottom:3px solid Highlight}
+  .ads-menu-item[data-focused]{outline:2px solid Highlight;background:Canvas;color:CanvasText}
+  .ads-menu-item[data-disabled]{color:GrayText}
+  .ads-dialog-backdrop{background:Canvas}
+  .ads-dialog{border-width:2px}
+  .ads-spinner{border-color:GrayText;border-top-color:Highlight}
+  .ads-progress{border:1px solid ButtonText;background:Canvas}
+  .ads-progress>span{background:Highlight}
+}

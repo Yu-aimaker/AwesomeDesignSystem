@@ -12,11 +12,12 @@
     "Happy-path-only demos"
   ],
   "referenceIds": [
+    "ref.apple.hig",
     "ref.vercel.web-interface-guidelines",
-    "ref.w3c.apg",
-    "ref.apple.hig"
+    "ref.w3c.apg"
   ],
   "artifactIds": [
+    "artifact.component.link",
     "artifact.doc.interface-quality"
   ],
   "verification": "review/interface-quality-checklist.md + tests",

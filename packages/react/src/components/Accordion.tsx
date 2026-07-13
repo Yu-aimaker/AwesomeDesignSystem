@@ -4,8 +4,10 @@ import type { ReactNode } from "react";
 import { getComponentMetadata } from "../contracts";
 
 export const accordionMetadata = getComponentMetadata("accordion");
+export type AccordionItem = { id: string; title: string; content: ReactNode };
+export type AccordionProps = { items: AccordionItem[] };
 
-export function Accordion({ items }: { items: { id: string; title: string; content: ReactNode }[] }) {
+export function Accordion({ items }: AccordionProps) {
   return (
     <div className="ads-accordion">
       {items.map((item) => (

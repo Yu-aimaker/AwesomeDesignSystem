@@ -13,12 +13,20 @@
     "Mascot decoration without speaking rules"
   ],
   "referenceIds": [
+    "ref.dropbox.brand",
+    "ref.duolingo.brand-family",
+    "ref.duolingo.color",
     "ref.duolingo.design",
-    "ref.duolingo.writing-voice",
-    "ref.duolingo.illustration-shape"
+    "ref.duolingo.illustration-shape",
+    "ref.duolingo.imagery",
+    "ref.duolingo.logos",
+    "ref.duolingo.marketing-assets",
+    "ref.duolingo.typography",
+    "ref.duolingo.writing-voice"
   ],
   "artifactIds": [
-    "artifact.doc.brand-coherence"
+    "artifact.doc.brand-coherence",
+    "artifact.doc.brand-workbench"
   ],
   "verification": "Brand modules present; agent skill routes to contract first",
   "status": "canon"

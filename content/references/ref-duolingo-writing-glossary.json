@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.writing-glossary",
-  "title": "Duolingo Design \u2014 Canonical and prohibited terms",
+  "title": "Duolingo Design — Canonical and prohibited terms",
   "url": "https://design.duolingo.com/writing/glossary",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,8 +27,12 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
-    "rule.brand.content-design"
+    "rule.brand.content-design",
+    "rule.brand.product-lexicon"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout",
+    "artifact.script.brand-contract"
+  ],
   "contentHash": "duolingo-writing-glossary-2026-07-13"
 }

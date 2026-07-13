@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.logos",
-  "title": "Duolingo Design \u2014 Logos production constraints",
+  "title": "Duolingo Design — Logos production constraints",
   "url": "https://design.duolingo.com/identity/logos",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -28,8 +28,17 @@
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
     "rule.brand.cross-medium-coherence",
+    "rule.brand.marks-lockups",
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "duolingo-logos-2026-07-13"
 }

@@ -12,12 +12,13 @@
     "Promote social trends directly to canon"
   ],
   "referenceIds": [
-    "ref.voltagent.awesome-design-md",
-    "ref.kzhrknt.awesome-design-md-jp"
+    "ref.duolingo.resources",
+    "ref.kzhrknt.awesome-design-md-jp",
+    "ref.voltagent.awesome-design-md"
   ],
   "artifactIds": [
-    "artifact.script.validate-content",
-    "artifact.doc.reference-atlas"
+    "artifact.doc.reference-atlas",
+    "artifact.script.validate-content"
   ],
   "verification": "pnpm validate",
   "status": "canon"

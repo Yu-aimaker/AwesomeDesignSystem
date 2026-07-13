@@ -1,8 +1,33 @@
 {
-  "id": "ref.intuit.content-design", "title": "Intuit Content Design", "url": "https://contentdesign.intuit.com/",
-  "owner": "intuit", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["content", "fintech", "trust"],
-  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
-  "summary": "Content-system evidence for making complex financial tasks understandable and recoverable.", "lessons": ["Put actionable meaning before reassurance or personality."],
-  "caveats": ["Tone never replaces legal, financial or domain review."], "licenseNote": "Public documentation; cite and synthesize.",
-  "antiImitationNote": "Do not reuse proprietary terminology or copy examples verbatim.", "linkedRuleIds": ["rule.ai.ux-uncertainty-contract"], "linkedArtifactIds": [], "contentHash": "elite-intuit-content-20260713"
+  "id": "ref.intuit.content-design",
+  "title": "Intuit Content Design",
+  "url": "https://contentdesign.intuit.com/",
+  "owner": "intuit",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "content",
+    "fintech",
+    "trust"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Content-system evidence for making complex financial tasks understandable and recoverable.",
+  "lessons": [
+    "Put actionable meaning before reassurance or personality."
+  ],
+  "caveats": [
+    "Tone never replaces legal, financial or domain review."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Do not reuse proprietary terminology or copy examples verbatim.",
+  "linkedRuleIds": [
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-intuit-content-20260713"
 }

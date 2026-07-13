@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.brand-family",
-  "title": "Duolingo Design \u2014 Sub-brand family rules",
+  "title": "Duolingo Design — Sub-brand family rules",
   "url": "https://design.duolingo.com/identity/brand-family",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -28,8 +28,17 @@
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
     "rule.brand.cross-medium-coherence",
+    "rule.brand.family-architecture",
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "duolingo-brand-family-2026-07-13"
 }

@@ -1,8 +1,34 @@
 {
-  "id": "ref.ibm.carbon-for-ai", "title": "Carbon for AI", "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
-  "owner": "ibm", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["ai", "transparency", "components"],
-  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
-  "summary": "Design-system-level AI presence and transparency guidance.", "lessons": ["Integrate AI provenance and behavior into component contracts."],
-  "caveats": ["IBM visual AI signifiers are not universal disclosure."], "licenseNote": "Public documentation; cite and synthesize.",
-  "antiImitationNote": "Do not copy IBM AI visual signifiers or identity.", "linkedRuleIds": ["rule.ai.ux-capability-contract", "rule.ai.ux-uncertainty-contract"], "linkedArtifactIds": [], "contentHash": "elite-carbon-ai-20260713"
+  "id": "ref.ibm.carbon-for-ai",
+  "title": "Carbon for AI",
+  "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+  "owner": "ibm",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "ai",
+    "transparency",
+    "components"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Design-system-level AI presence and transparency guidance.",
+  "lessons": [
+    "Integrate AI provenance and behavior into component contracts."
+  ],
+  "caveats": [
+    "IBM visual AI signifiers are not universal disclosure."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Do not copy IBM AI visual signifiers or identity.",
+  "linkedRuleIds": [
+    "rule.ai.ux-capability-contract",
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-carbon-ai-20260713"
 }

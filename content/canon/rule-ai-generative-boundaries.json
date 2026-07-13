@@ -12,8 +12,12 @@
     "Unbounded one-off styling from prompts"
   ],
   "referenceIds": [
-    "ref.voltagent.awesome-design-md",
-    "ref.openai.ai-elements"
+    "ref.anthropic.mcp-spec",
+    "ref.copilotkit.ag-ui",
+    "ref.google.stitch",
+    "ref.openai.ai-elements",
+    "ref.vercel.generative-ui",
+    "ref.voltagent.awesome-design-md"
   ],
   "artifactIds": [
     "artifact.skill.awesome-ds"

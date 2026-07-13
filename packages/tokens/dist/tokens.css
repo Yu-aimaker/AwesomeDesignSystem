@@ -39,8 +39,8 @@
   --radius-xl: 1rem;
   --radius-2xl: 1.25rem;
   --radius-full: 9999px;
-  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-body: "IBM Plex Sans", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  --font-display: "Newsreader Variable", "Iowan Old Style", "Palatino Linotype", serif;
+  --font-body: "IBM Plex Sans Variable", "Noto Sans JP Variable", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;

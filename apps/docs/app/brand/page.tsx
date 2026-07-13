@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { docsForDomain, domainRoutes } from "../../lib/markdown";
+import { docsForDomain } from "../../lib/markdown";
 import { Prose } from "../../components/prose";
 import { formatMessage, getDictionary, localizePathname } from "../../lib/i18n";
 import { getRequestLocale } from "../../lib/i18n-server";
 
-export const metadata = { title: domainRoutes["brand"].title };
+import { createLocalizedMetadata } from "../../lib/metadata";
+export const generateMetadata = () => createLocalizedMetadata("/brand", (dictionary) => dictionary.brand.title, (dictionary) => dictionary.brand.intro);
 
 export default async function DomainPage() {
   const locale = await getRequestLocale();

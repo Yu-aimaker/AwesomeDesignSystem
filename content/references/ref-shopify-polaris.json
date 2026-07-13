@@ -23,9 +23,27 @@
   "licenseNote": "Public web documentation or standard; cite and synthesize.",
   "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
   "linkedRuleIds": [
+    "rule.brand.content-design",
+    "rule.components.state-matrix",
     "rule.foundations.semantic-tokens",
-    "rule.components.state-matrix"
+    "rule.interaction.product-quality"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.callout",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.dialog",
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.grid",
+    "artifact.component.input",
+    "artifact.component.skeleton",
+    "artifact.component.stack",
+    "artifact.component.tabs",
+    "artifact.component.toast"
+  ],
   "contentHash": "seed-shopify-polaris"
 }

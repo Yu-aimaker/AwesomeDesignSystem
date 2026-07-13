@@ -25,6 +25,11 @@
   "linkedRuleIds": [
     "rule.components.state-matrix"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.button",
+    "artifact.component.dialog",
+    "artifact.component.input",
+    "artifact.component.tabs"
+  ],
   "contentHash": "seed-openui-open-ui"
 }

@@ -1,3 +1,4 @@
 import { CanonDomainPage } from "../../components/canon-domain-page";
-export const metadata = { title: "Patterns" };
+import { createLocalizedMetadata } from "../../lib/metadata";
+export const generateMetadata = () => createLocalizedMetadata("/patterns", (dictionary) => dictionary.nav.Patterns);
 export default function Page() { return <CanonDomainPage domainKey="patterns" />; }

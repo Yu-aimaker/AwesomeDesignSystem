@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.resources",
-  "title": "Duolingo Design \u2014 Designer resources hub",
+  "title": "Duolingo Design — Designer resources hub",
   "url": "https://design.duolingo.com/resources",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,6 +27,7 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
+    "rule.brand.asset-governance",
     "rule.governance.evidence-first"
   ],
   "linkedArtifactIds": [],

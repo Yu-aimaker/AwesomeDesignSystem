@@ -4,8 +4,26 @@
   "domain": "ai-driven",
   "summary": "AI output distinguishes source uncertainty, model uncertainty, stale data and conflict without disguising them as fluent certainty.",
   "guidance": "Prefer provenance, observation dates and conflicting evidence over unexplained confidence scores. Calibrate language and required review to consequence.",
-  "do": ["Attach sources and freshness where decisions depend on them", "Expose conflicts and missing evidence", "Escalate review for high-stakes uncertainty"],
-  "dont": ["Invent confidence percentages", "Present partial output as verified", "Use reassuring tone to mask unknowns"],
-  "referenceIds": ["ref.google.pair-guidebook", "ref.ibm.carbon-for-ai", "ref.nist.ai-rmf", "ref.intuit.content-design"],
-  "artifactIds": [], "verification": "Stale, conflicting, absent-source and high-consequence scenario review", "status": "canon"
+  "do": [
+    "Attach sources and freshness where decisions depend on them",
+    "Expose conflicts and missing evidence",
+    "Escalate review for high-stakes uncertainty"
+  ],
+  "dont": [
+    "Invent confidence percentages",
+    "Present partial output as verified",
+    "Use reassuring tone to mask unknowns"
+  ],
+  "referenceIds": [
+    "ref.google.pair-guidebook",
+    "ref.ibm.carbon-for-ai",
+    "ref.intuit.content-design",
+    "ref.intuit.design-system",
+    "ref.mailchimp.style-guide",
+    "ref.nist.ai-rmf",
+    "ref.uber.base"
+  ],
+  "artifactIds": [],
+  "verification": "Stale, conflicting, absent-source and high-consequence scenario review",
+  "status": "canon"
 }

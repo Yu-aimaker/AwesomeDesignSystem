@@ -25,6 +25,8 @@
   "linkedRuleIds": [
     "rule.motion.purpose-first"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.accordion"
+  ],
   "contentHash": "seed-web-view-transitions"
 }

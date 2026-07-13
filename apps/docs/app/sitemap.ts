@@ -2,25 +2,33 @@ import type { MetadataRoute } from "next";
 import { loadAllCanonDocs } from "../lib/markdown";
 import { componentCatalog } from "../lib/components-catalog";
 import { motionRecipes } from "@awesome-ds/motion";
-import { loadReferenceRecords } from "@awesome-ds/content";
+import { loadArtifactClaims, loadCanonRules, loadReferenceRecords } from "@awesome-ds/content";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { locales, localizePathname } from "../lib/i18n";
+import { getSiteUrl } from "../lib/metadata";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = "http://127.0.0.1:3000";
-  const paths = ["/", "/principles", "/foundations", "/brand", "/brand/workbench", "/interaction", "/patterns", "/ai-design", "/review", "/components", "/motion", "/references", "/playground", "/status", "/canon"];
-  const staticRoutes = locales.flatMap((locale) => paths.map((route) => ({
+  const base = getSiteUrl().origin;
+  const localizedEntries = (route: string) => locales.map((locale) => ({
     url: base + localizePathname(route, locale),
-    alternates: { languages: Object.fromEntries(locales.map((lang) => [lang, base + localizePathname(route, lang)])) },
-  })));
+    alternates: { languages: {
+      ...Object.fromEntries(locales.map((language) => [language, base + localizePathname(route, language)])),
+      "x-default": base + localizePathname(route, "en"),
+    } },
+  }));
+  const paths = ["/", "/principles", "/foundations", "/brand", "/brand/workbench", "/interaction", "/patterns", "/ai-design", "/review", "/components", "/motion", "/references", "/playground", "/status", "/canon"];
+  const staticRoutes = paths.flatMap(localizedEntries);
   const canon = await loadAllCanonDocs();
-  const refs = await loadReferenceRecords(path.join(path.dirname(fileURLToPath(import.meta.url)), "../../../content"));
+  const contentRoot = path.join(path.dirname(fileURLToPath(import.meta.url)), "../../../content");
+  const [refs, rules, artifacts] = await Promise.all([loadReferenceRecords(contentRoot), loadCanonRules(contentRoot), loadArtifactClaims(contentRoot)]);
   return [
     ...staticRoutes,
-    ...locales.flatMap((locale) => canon.map((d) => ({ url: base + localizePathname("/canon/" + d.slug, locale) }))),
-    ...locales.flatMap((locale) => componentCatalog.map((c) => ({ url: base + localizePathname("/components/" + c.slug, locale) }))),
-    ...locales.flatMap((locale) => motionRecipes.map((m) => ({ url: base + localizePathname("/motion/" + m.intent, locale) }))),
-    ...locales.flatMap((locale) => refs.map((r) => ({ url: base + localizePathname("/references/" + encodeURIComponent(r.id), locale) }))),
+    ...canon.flatMap((document) => localizedEntries("/canon/" + document.slug)),
+    ...componentCatalog.flatMap((component) => localizedEntries("/components/" + component.slug)),
+    ...motionRecipes.flatMap((recipe) => localizedEntries("/motion/" + recipe.intent)),
+    ...refs.flatMap((reference) => localizedEntries("/references/" + encodeURIComponent(reference.id))),
+    ...rules.flatMap((rule) => localizedEntries("/rules/" + encodeURIComponent(rule.id))),
+    ...artifacts.flatMap((artifact) => localizedEntries("/artifacts/" + encodeURIComponent(artifact.id))),
   ];
 }

@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple HIG Accessibility \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Apple HIG Accessibility — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
     "Extract transferable accessibility doctrine from Apple HIG Accessibility.",
     "Prefer first-party production constraints over secondary summaries."
@@ -23,8 +23,36 @@
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
   "linkedRuleIds": [
-    "rule.a11y.wcag-aa"
+    "rule.a11y.wcag-aa",
+    "rule.adaptation.capability-first",
+    "rule.adaptation.constrained-surfaces",
+    "rule.agent.real-content-risk-gates",
+    "rule.product.agency-responsibility",
+    "rule.product.craft-systemic-delight",
+    "rule.trust.contextual-permission",
+    "rule.trust.icon-system"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden"
+  ],
   "contentHash": "elite-apple-hig-accessibility"
 }

@@ -9,7 +9,13 @@ export type GraphIssue = {
     | "unknown-rule-on-artifact"
     | "unknown-artifact-on-rule"
     | "missing-rule-backlink"
-    | "unknown-rule-on-reference";
+    | "unknown-rule-on-reference"
+    | "missing-reference-backlink"
+    | "missing-rule-forward-link"
+    | "missing-artifact-reference-backlink"
+    | "missing-artifact-forward-link"
+    | "unknown-verification-target"
+    | "unverified-artifact";
   message: string;
   id?: string;
 };
@@ -75,6 +81,13 @@ export function buildEvidenceGraph(input: {
           message: `Rule ${rule.id} references missing source ${refId}`,
         });
       }
+      else if (!references.get(refId)?.linkedRuleIds.includes(rule.id)) {
+        issues.push({
+          code: "missing-reference-backlink",
+          id: rule.id,
+          message: `Rule ${rule.id} cites ${refId}, but the reference does not link back`,
+        });
+      }
     }
     for (const artifactId of rule.artifactIds) {
       if (!artifacts.has(artifactId)) {
@@ -118,6 +131,36 @@ export function buildEvidenceGraph(input: {
           message: `Artifact ${artifact.id} references missing source ${refId}`,
         });
       }
+      else if (!references.get(refId)?.linkedArtifactIds.includes(artifact.id)) {
+        issues.push({
+          code: "missing-artifact-reference-backlink",
+          id: artifact.id,
+          message: `Artifact ${artifact.id} cites ${refId}, but the reference does not link back`,
+        });
+      }
+    }
+    for (const verifiedId of artifact.verifiesArtifactIds ?? []) {
+      if (!artifacts.has(verifiedId)) {
+        issues.push({
+          code: "unknown-verification-target",
+          id: artifact.id,
+          message: `Verification artifact ${artifact.id} points to unknown artifact ${verifiedId}`,
+        });
+      }
+    }
+  }
+
+  for (const artifact of input.artifacts) {
+    if (artifact.kind !== "component" && artifact.kind !== "motion-recipe") continue;
+    const verified = input.artifacts.some((candidate) =>
+      candidate.kind === "test" && candidate.verifiesArtifactIds?.includes(artifact.id),
+    );
+    if (!verified) {
+      issues.push({
+        code: "unverified-artifact",
+        id: artifact.id,
+        message: `Artifact ${artifact.id} has no declared test or review verification edge`,
+      });
     }
   }
 
@@ -128,6 +171,28 @@ export function buildEvidenceGraph(input: {
           code: "unknown-rule-on-reference",
           id: ref.id,
           message: `Reference ${ref.id} links unknown rule ${ruleId}`,
+        });
+      }
+      else if (!rules.get(ruleId)?.referenceIds.includes(ref.id)) {
+        issues.push({
+          code: "missing-rule-forward-link",
+          id: ref.id,
+          message: `Reference ${ref.id} links ${ruleId}, but the rule does not cite it`,
+        });
+      }
+    }
+    for (const artifactId of ref.linkedArtifactIds) {
+      if (!artifacts.has(artifactId)) {
+        issues.push({
+          code: "missing-artifact-forward-link",
+          id: ref.id,
+          message: `Reference ${ref.id} links unknown artifact ${artifactId}`,
+        });
+      } else if (!artifacts.get(artifactId)?.referenceIds.includes(ref.id)) {
+        issues.push({
+          code: "missing-artifact-forward-link",
+          id: ref.id,
+          message: `Reference ${ref.id} links ${artifactId}, but the artifact does not cite it`,
         });
       }
     }

@@ -46,5 +46,10 @@ export default defineConfig({
       testDir: "./tests/visual",
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "no-js",
+      testDir: "./tests/no-js",
+      use: { ...devices["Desktop Chrome"], javaScriptEnabled: false },
+    },
   ],
 });

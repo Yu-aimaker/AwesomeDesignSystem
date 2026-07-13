@@ -13,30 +13,60 @@ import { getComponentMetadata } from "../contracts";
 
 export const dialogMetadata = getComponentMetadata("dialog");
 
-export type DialogProps = {
+export type DialogBaseProps = {
   open: boolean;
   onClose: () => void;
   title: string;
   children: ReactNode;
-  danger?: boolean;
-  onConfirm?: () => void | Promise<void>;
+};
+
+export type DialogProps = DialogBaseProps & {
+  closeLabel?: string;
+};
+
+export type AlertDialogProps = DialogBaseProps & {
+  onConfirm: () => void | Promise<void>;
   confirming?: boolean;
   confirmLabel?: string;
+  confirmingLabel?: string;
   cancelLabel?: string;
   confirmationErrorLabel?: string;
 };
 
-export function Dialog({ open, onClose, title, children, danger = false, onConfirm, confirming = false, confirmLabel = "Confirm", cancelLabel = "Cancel", confirmationErrorLabel = "Confirmation failed. Try again." }: DialogProps) {
+type DialogFrameProps = DialogBaseProps & {
+  danger: boolean;
+  onConfirm?: () => void | Promise<void>;
+  confirming?: boolean;
+  confirmLabel?: string;
+  confirmingLabel?: string;
+  cancelLabel?: string;
+  closeLabel?: string;
+  confirmationErrorLabel?: string;
+};
+
+function DialogFrame({ open, onClose, title, children, danger, onConfirm, confirming = false, confirmLabel = "Confirm", confirmingLabel = "Confirming…", cancelLabel = "Cancel", closeLabel = "Close", confirmationErrorLabel = "Confirmation failed. Try again." }: DialogFrameProps) {
   const returnFocusRef = useRef<HTMLElement | null>(null);
+  const confirmationRequestRef = useRef<{ token: symbol; generation: number } | null>(null);
+  const openGenerationRef = useRef(0);
+  const previousOpenRef = useRef(open);
   const [internalConfirming, setInternalConfirming] = useState(false);
   const [confirmationFailed, setConfirmationFailed] = useState(false);
   const isConfirming = confirming || internalConfirming;
+  useLayoutEffect(() => {
+    if (previousOpenRef.current === open) return;
+    previousOpenRef.current = open;
+    openGenerationRef.current += 1;
+    confirmationRequestRef.current = null;
+    setInternalConfirming(false);
+    setConfirmationFailed(false);
+  }, [open]);
   useLayoutEffect(() => {
     if (open && !returnFocusRef.current) {
       returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     }
   }, [open]);
   function requestClose() {
+    confirmationRequestRef.current = null;
     setInternalConfirming(false);
     setConfirmationFailed(false);
     onClose();
@@ -44,15 +74,19 @@ export function Dialog({ open, onClose, title, children, danger = false, onConfi
 
   async function confirm() {
     if (!onConfirm || isConfirming) return;
+    const generation = openGenerationRef.current;
+    const request = { token: Symbol("confirmation-request"), generation };
+    confirmationRequestRef.current = request;
     setConfirmationFailed(false);
     setInternalConfirming(true);
     try {
       await onConfirm();
-      requestClose();
+      if (confirmationRequestRef.current === request && openGenerationRef.current === generation) requestClose();
     } catch {
-      setConfirmationFailed(true);
-    } finally {
-      setInternalConfirming(false);
+      if (confirmationRequestRef.current === request && openGenerationRef.current === generation) {
+        setConfirmationFailed(true);
+        setInternalConfirming(false);
+      }
     }
   }
   useEffect(() => {
@@ -94,7 +128,7 @@ export function Dialog({ open, onClose, title, children, danger = false, onConfi
                   isDisabled={isConfirming}
                   onPress={danger ? () => { void confirm(); } : close}
                 >
-                  {danger ? (isConfirming ? "Confirming…" : confirmLabel) : "Close"}
+                  {danger ? (isConfirming ? confirmingLabel : confirmLabel) : closeLabel}
                 </AriaButton>
                 {danger ? <AriaButton className="ads-btn ads-btn--ghost ads-btn--md" isDisabled={isConfirming} onPress={requestClose}>{cancelLabel}</AriaButton> : null}
               </div>
@@ -106,8 +140,13 @@ export function Dialog({ open, onClose, title, children, danger = false, onConfi
   );
 }
 
-export function AlertDialog(props: Omit<DialogProps, "danger"> & { onConfirm: NonNullable<DialogProps["onConfirm"]> }) {
-  return <Dialog {...props} danger />;
+export function Dialog(props: DialogProps) {
+  return <DialogFrame {...props} danger={false} />;
+}
+
+export function AlertDialog(props: AlertDialogProps) {
+  return <DialogFrame {...props} danger />;
 }
 
 Dialog.metadata = dialogMetadata;
+AlertDialog.metadata = getComponentMetadata("alert-dialog");

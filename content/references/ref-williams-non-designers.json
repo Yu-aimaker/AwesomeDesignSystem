@@ -27,6 +27,8 @@
   "linkedRuleIds": [
     "rule.foundations.core-literacy"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.doc.core-literacy"
+  ],
   "contentHash": "seed-williams-non-designers"
 }

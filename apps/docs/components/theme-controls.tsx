@@ -1,24 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { persistTheme } from "../lib/client-theme";
 
 const themes = ["light", "dark", "high-contrast"] as const;
 
-export function ThemeControls({ labels }: { labels: { label: string; light: string; dark: string; highContrast: string } }) {
-  const [theme, setTheme] = useState<(typeof themes)[number]>("light");
+export type DocsTheme = (typeof themes)[number];
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem("ads-theme") as (typeof themes)[number] | null;
-    if (stored && themes.includes(stored)) {
-      document.documentElement.setAttribute("data-theme", stored);
-      queueMicrotask(() => setTheme(stored));
-    }
-  }, []);
+export function ThemeControls({ labels, initialTheme }: { labels: { label: string; light: string; dark: string; highContrast: string }; initialTheme: DocsTheme }) {
+  const [theme, setTheme] = useState<DocsTheme>(initialTheme);
 
   function apply(next: (typeof themes)[number]) {
     setTheme(next);
-    document.documentElement.setAttribute("data-theme", next);
-    window.localStorage.setItem("ads-theme", next);
+    persistTheme(next);
   }
 
   return (

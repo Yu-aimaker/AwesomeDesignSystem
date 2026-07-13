@@ -25,6 +25,14 @@
   "linkedRuleIds": [
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "seed-figma-variables"
 }

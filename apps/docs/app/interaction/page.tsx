@@ -1,3 +1,4 @@
 import { CanonDomainPage } from "../../components/canon-domain-page";
-export const metadata = { title: "Interaction" };
+import { createLocalizedMetadata } from "../../lib/metadata";
+export const generateMetadata = () => createLocalizedMetadata("/interaction", (dictionary) => dictionary.nav.Interaction);
 export default function Page() { return <CanonDomainPage domainKey="interaction" />; }

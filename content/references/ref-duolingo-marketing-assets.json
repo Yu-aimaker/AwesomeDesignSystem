@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.marketing-assets",
-  "title": "Duolingo Design \u2014 Marketing asset packaging",
+  "title": "Duolingo Design — Marketing asset packaging",
   "url": "https://design.duolingo.com/marketing/assets",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,6 +27,7 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
+    "rule.brand.asset-governance",
     "rule.brand.cross-medium-coherence"
   ],
   "linkedArtifactIds": [],

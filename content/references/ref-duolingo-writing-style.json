@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.writing-style",
-  "title": "Duolingo Design \u2014 Editorial style rules",
+  "title": "Duolingo Design — Editorial style rules",
   "url": "https://design.duolingo.com/writing/style",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,8 +27,11 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
-    "rule.brand.content-design"
+    "rule.brand.content-design",
+    "rule.brand.editorial-style"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
   "contentHash": "duolingo-writing-style-2026-07-13"
 }

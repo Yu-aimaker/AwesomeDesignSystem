@@ -26,10 +26,12 @@
     "test:e2e": "playwright test tests/e2e tests/visual",
     "validate": "pnpm --filter @awesome-ds/content validate",
     "qa": "pnpm qa:core",
-    "qa:core": "pnpm lint && pnpm format:check && pnpm build && pnpm packages:smoke && pnpm typecheck && pnpm test && pnpm validate",
+    "qa:core": "pnpm lint && pnpm format:check && pnpm evidence:check && pnpm build && pnpm packages:smoke && pnpm typecheck && pnpm test && pnpm validate",
     "qa:full": "pnpm qa:core && playwright test --retries=0",
     "check:links": "tsx scripts/check-links.mjs",
     "check:freshness": "tsx scripts/check-freshness.mjs",
+    "evidence:sync": "tsx scripts/sync-component-artifacts.mts && node scripts/sync-evidence-backlinks.mjs",
+    "evidence:check": "tsx scripts/sync-component-artifacts.mts --check && node scripts/sync-evidence-backlinks.mjs --check",
     "tokens:build": "pnpm --filter @awesome-ds/tokens build",
     "packages:smoke": "tsx scripts/check-package-artifacts.mts"
   },

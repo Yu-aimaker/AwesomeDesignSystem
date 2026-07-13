@@ -4,8 +4,22 @@
   "domain": "ai-driven",
   "summary": "Every AI surface states the supported task, important limits, data/tool boundary, freshness and expected latency before users depend on it.",
   "guidance": "Describe observable capability in user language. Disclose provider/model/version only where it changes assessment or accountability. Re-evaluate the contract when tools, data, model or autonomy change.",
-  "do": ["Show unsupported scope before or at the decision point", "Name required data and tools", "Test missing-tool and out-of-scope requests"],
-  "dont": ["Promise general intelligence from a narrow workflow", "Use an AI badge as capability disclosure", "Hide material data or latency constraints"],
-  "referenceIds": ["ref.google.pair-guidebook", "ref.microsoft.human-ai-guidelines", "ref.ibm.carbon-for-ai"],
-  "artifactIds": [], "verification": "Contract review plus unsupported-task, missing-tool, stale-data and changed-model test cases", "status": "canon"
+  "do": [
+    "Show unsupported scope before or at the decision point",
+    "Name required data and tools",
+    "Test missing-tool and out-of-scope requests"
+  ],
+  "dont": [
+    "Promise general intelligence from a narrow workflow",
+    "Use an AI badge as capability disclosure",
+    "Hide material data or latency constraints"
+  ],
+  "referenceIds": [
+    "ref.google.pair-guidebook",
+    "ref.ibm.carbon-for-ai",
+    "ref.microsoft.human-ai-guidelines"
+  ],
+  "artifactIds": [],
+  "verification": "Contract review plus unsupported-task, missing-tool, stale-data and changed-model test cases",
+  "status": "canon"
 }

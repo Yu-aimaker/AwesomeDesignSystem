@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.brand-narrative",
-  "title": "Duolingo Design \u2014 Brand narrative system",
+  "title": "Duolingo Design — Brand narrative system",
   "url": "https://design.duolingo.com/writing/brand-narrative",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,8 +27,11 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
-    "rule.brand.content-design"
+    "rule.brand.content-design",
+    "rule.brand.narrative-evidence"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
   "contentHash": "duolingo-brand-narrative-2026-07-13"
 }

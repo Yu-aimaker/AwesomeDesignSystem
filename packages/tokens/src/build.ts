@@ -67,7 +67,7 @@ ${entriesToCss(hc)}
 
 function buildTailwindTheme(): string {
   const colorMap = Object.keys(lightTheme)
-    .map((k) => `  --color-${k.replace(/^color-/, "")}: var(--${k});`)
+    .map((k) => `  --color-ads-${k.replace(/^color-/, "")}: var(--${k});`)
     .join("\n");
   const spaceMap = Object.keys(space)
     .map((k) => `  --${k.replace("space-", "spacing-")}: var(--${k});`)
@@ -76,16 +76,16 @@ function buildTailwindTheme(): string {
   return `${HEADER}@theme {
 ${colorMap}
 ${spaceMap}
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-2xl);
-  --ease-out: var(--ease-out);
-  --ease-in-out: var(--ease-in-out);
+  --font-ads-display: var(--font-display);
+  --font-ads-body: var(--font-body);
+  --font-ads-mono: var(--font-mono);
+  --radius-ads-sm: var(--radius-sm);
+  --radius-ads-md: var(--radius-md);
+  --radius-ads-lg: var(--radius-lg);
+  --radius-ads-xl: var(--radius-xl);
+  --radius-ads-2xl: var(--radius-2xl);
+  --ease-ads-out: var(--ease-out);
+  --ease-ads-in-out: var(--ease-in-out);
   --animate-duration-fast: var(--dur-fast);
   --animate-duration-base: var(--dur-base);
   --animate-duration-slow: var(--dur-slow);

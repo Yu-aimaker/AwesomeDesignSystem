@@ -1,1 +1,25 @@
-{"id":"rule.brand.product-lexicon","title":"Product terminology is governed domain data","domain":"brand","summary":"Public and internal nouns have definitions, owners, lifecycle, locale mappings, aliases, and replacements.","guidance":"Map terms to stable concepts across copy, code, API, analytics, support, and localization; lint lifecycle violations.","do":["Return a reason and replacement with every lint finding","Coordinate deprecation across every affected surface"],"dont":["Treat an alias as automatically approved copy","Autofix when grammar makes replacement ambiguous"],"referenceIds":["ref.duolingo.writing-glossary"],"artifactIds":["artifact.doc.content-design"],"verification":"Schema, duplicate-concept, alias-collision, lifecycle, locale, and golden-fixture tests","status":"canon"}
+{
+  "id": "rule.brand.product-lexicon",
+  "title": "Product terminology is governed domain data",
+  "domain": "brand",
+  "summary": "Public and internal nouns have definitions, owners, lifecycle, locale mappings, aliases, and replacements.",
+  "guidance": "Map terms to stable concepts across copy, code, API, analytics, support, and localization; lint lifecycle violations.",
+  "do": [
+    "Return a reason and replacement with every lint finding",
+    "Coordinate deprecation across every affected surface"
+  ],
+  "dont": [
+    "Treat an alias as automatically approved copy",
+    "Autofix when grammar makes replacement ambiguous"
+  ],
+  "referenceIds": [
+    "ref.duolingo.writing-glossary"
+  ],
+  "artifactIds": [
+    "artifact.doc.brand-workbench",
+    "artifact.doc.content-design",
+    "artifact.script.brand-contract"
+  ],
+  "verification": "Schema, duplicate-concept, alias-collision, lifecycle, locale, and golden-fixture tests",
+  "status": "canon"
+}

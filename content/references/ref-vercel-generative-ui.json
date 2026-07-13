@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Vercel AI SDK Generative UI \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "Vercel AI SDK Generative UI — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable ai-ui guidance from Vercel AI SDK Generative UI.",
     "Prefer schema/contract-bound generative UI over freeform HTML."

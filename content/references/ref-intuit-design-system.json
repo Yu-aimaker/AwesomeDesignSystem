@@ -1,8 +1,34 @@
 {
-  "id": "ref.intuit.design-system", "title": "Intuit Design System", "url": "https://designsystem.intuit.com/",
-  "owner": "intuit", "sourceClass": "official-system", "region": "global", "language": "en", "topics": ["fintech", "trust", "components"],
-  "observedDate": "2026-07-13", "lastVerifiedDate": "2026-07-13", "reviewCadenceDays": 90, "freshnessState": "healthy", "evidenceLevel": "first-party-guidance",
-  "summary": "First-party product-system source for high-stakes financial decisions and error prevention.", "lessons": ["Expose consequence, assumptions and recovery before commitment."],
-  "caveats": ["Documentation is more inspectable than implementation; do not infer code behavior."], "licenseNote": "Public documentation; no asset reuse implied.",
-  "antiImitationNote": "Do not copy product/legal language or jurisdiction-specific claims.", "linkedRuleIds": ["rule.ai.ux-agency-contract", "rule.ai.ux-uncertainty-contract"], "linkedArtifactIds": [], "contentHash": "elite-intuit-system-20260713"
+  "id": "ref.intuit.design-system",
+  "title": "Intuit Design System",
+  "url": "https://designsystem.intuit.com/",
+  "owner": "intuit",
+  "sourceClass": "official-system",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "fintech",
+    "trust",
+    "components"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "First-party product-system source for high-stakes financial decisions and error prevention.",
+  "lessons": [
+    "Expose consequence, assumptions and recovery before commitment."
+  ],
+  "caveats": [
+    "Documentation is more inspectable than implementation; do not infer code behavior."
+  ],
+  "licenseNote": "Public documentation; no asset reuse implied.",
+  "antiImitationNote": "Do not copy product/legal language or jurisdiction-specific claims.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract",
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-intuit-system-20260713"
 }

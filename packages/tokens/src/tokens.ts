@@ -58,9 +58,9 @@ export const radius = {
 
 export const typography = {
   "font-display":
-    '"Iowan Old Style", "Palatino Linotype", Palatino, "Hiragino Mincho ProN", "Yu Mincho", serif',
+    '"Newsreader Variable", "Iowan Old Style", "Palatino Linotype", serif',
   "font-body":
-    '"IBM Plex Sans", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif',
+    '"IBM Plex Sans Variable", "Noto Sans JP Variable", system-ui, sans-serif',
   "font-mono":
     '"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace',
   "text-xs": "0.75rem",

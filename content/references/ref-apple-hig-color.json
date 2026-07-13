@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple HIG Color \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Apple HIG Color — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
     "Extract transferable color doctrine from Apple HIG Color.",
     "Prefer first-party production constraints over secondary summaries."
@@ -25,6 +25,14 @@
   "linkedRuleIds": [
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "elite-apple-hig-color"
 }

@@ -12,12 +12,25 @@
     "Happy-path-only demos"
   ],
   "referenceIds": [
+    "ref.adobe.spectrum",
+    "ref.atlassian.design-system",
+    "ref.chakra.v3",
+    "ref.github.primer",
+    "ref.google.material-3",
+    "ref.ibm.carbon",
+    "ref.microsoft.fluent-2",
     "ref.openui.open-ui",
-    "ref.radix.primitives"
+    "ref.radix.primitives",
+    "ref.salesforce.lightning",
+    "ref.shadcn.ui",
+    "ref.shopify.polaris"
   ],
   "artifactIds": [
     "artifact.component.button",
-    "artifact.component.dialog"
+    "artifact.component.dialog",
+    "artifact.component.input",
+    "artifact.component.tabs",
+    "artifact.test.component-contracts"
   ],
   "verification": "component unit tests cover states",
   "status": "canon"

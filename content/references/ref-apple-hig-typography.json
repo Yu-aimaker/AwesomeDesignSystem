@@ -14,7 +14,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Apple HIG Typography \u2014 elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "summary": "Apple HIG Typography — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
   "lessons": [
     "Extract transferable typography doctrine from Apple HIG Typography.",
     "Prefer first-party production constraints over secondary summaries."

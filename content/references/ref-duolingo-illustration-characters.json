@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.illustration-characters",
-  "title": "Duolingo Design \u2014 Multi-character system",
+  "title": "Duolingo Design — Multi-character system",
   "url": "https://design.duolingo.com/illustration/characters",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,6 +27,7 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
+    "rule.brand.character-motion",
     "rule.brand.illustration-grammar"
   ],
   "linkedArtifactIds": [],

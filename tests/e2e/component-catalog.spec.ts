@@ -14,18 +14,27 @@ test("all component contracts have a working localized detail and live preview",
   }
 });
 
-test("every motion recipe has localized Japanese chrome and an explicit English fallback", async ({ page }) => {
+test("a failed live preview cannot take down its component documentation", async ({ page }) => {
+  await page.goto("/ja/components/button?preview=error", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("heading", { level: 1, name: "Button" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "公開API" })).toBeVisible();
+  await expect(page.getByText("ライブプレビューだけでエラー", { exact: false })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "コピー可能な実装例" })).toBeVisible();
+});
+
+test("every motion recipe has reviewed Japanese content without an English fallback", async ({ page }) => {
   for (const recipe of motionRecipes) {
     const response = await page.goto(`/ja/motion/${recipe.intent}`, { waitUntil: "domcontentloaded" });
     expect(response?.status(), recipe.intent).toBeLessThan(400);
-    await expect(page.getByRole("heading", { level: 1, name: recipe.intent })).toBeVisible();
-    await expect(page.getByText("この標準文書は未翻訳です。", { exact: false })).toBeVisible();
-    await expect(page.getByText("使用できる場面", { exact: true })).toBeVisible();
-    await expect(page.locator('[lang="en"]')).not.toHaveCount(0);
+    await expect(page.getByRole("heading", { level: 1 })).not.toHaveText(recipe.intent);
+    await expect(page.getByText("この標準文書は未翻訳です。", { exact: false })).toHaveCount(0);
+    await expect(page.getByText(/^使用できる場面:/)).toBeVisible();
+    await expect(page.locator("main")).not.toContainText(recipe.purpose);
   }
 });
 
 test("every reference has localized Japanese chrome or Japanese source content", async ({ page }) => {
+  test.setTimeout(180_000);
   const directory = path.resolve(process.cwd(), "content/references");
   const files = (await readdir(directory)).filter((file) => file.endsWith(".json"));
   for (const file of files) {

@@ -23,9 +23,21 @@
   "licenseNote": "Public web documentation or standard; cite and synthesize.",
   "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
   "linkedRuleIds": [
-    "rule.foundations.semantic-tokens",
-    "rule.components.state-matrix"
+    "rule.components.state-matrix",
+    "rule.foundations.platform-literacy",
+    "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.dialog",
+    "artifact.component.grid",
+    "artifact.component.input",
+    "artifact.component.stack",
+    "artifact.component.tabs"
+  ],
   "contentHash": "seed-google-material-3"
 }

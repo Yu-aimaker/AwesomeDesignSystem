@@ -49,12 +49,22 @@ const artifact: ArtifactClaim = {
   referenceIds: ["ref.w3c.wcag-22"],
 };
 
+const verifier: ArtifactClaim = {
+  id: "artifact.test.component-contracts",
+  kind: "test",
+  title: "Component contracts",
+  path: "packages/react/src/components/Components.test.tsx",
+  ruleIds: ["rule.a11y.wcag-aa"],
+  referenceIds: [],
+  verifiesArtifactIds: [artifact.id],
+};
+
 describe("evidence graph", () => {
   test("accepts a valid bidirectional graph", () => {
     const graph = buildEvidenceGraph({
       references: [ref],
       rules: [rule],
-      artifacts: [artifact],
+      artifacts: [artifact, verifier],
     });
     const result = validateEvidenceGraph(graph);
     expect(result.ok).toBe(true);
@@ -102,6 +112,18 @@ describe("evidence graph", () => {
     expect(graph.issues.some((i) => i.code === "duplicate-id")).toBe(true);
   });
 
+  test("flags unverified implementations and unknown verification targets", () => {
+    const unverified = buildEvidenceGraph({ references: [ref], rules: [rule], artifacts: [artifact] });
+    expect(unverified.issues.some((issue) => issue.code === "unverified-artifact")).toBe(true);
+
+    const unknownTarget = buildEvidenceGraph({
+      references: [ref],
+      rules: [rule],
+      artifacts: [artifact, { ...verifier, verifiesArtifactIds: ["artifact.component.missing"] }],
+    });
+    expect(unknownTarget.issues.some((issue) => issue.code === "unknown-verification-target")).toBe(true);
+  });
+
   test("flags one-way rule and artifact links", () => {
     const graph = buildEvidenceGraph({
       references: [ref],
@@ -110,5 +132,37 @@ describe("evidence graph", () => {
     });
     expect(graph.issues.some((i) => i.code === "missing-rule-backlink")).toBe(true);
     expect(graph.issues.some((i) => i.code === "unknown-rule-on-artifact")).toBe(true);
+  });
+
+  test("flags one-way rule and reference links in either direction", () => {
+    const missingReferenceBacklink = buildEvidenceGraph({
+      references: [{ ...ref, linkedRuleIds: [] }],
+      rules: [rule],
+      artifacts: [artifact],
+    });
+    expect(missingReferenceBacklink.issues.some((issue) => issue.code === "missing-reference-backlink")).toBe(true);
+
+    const missingRuleForwardLink = buildEvidenceGraph({
+      references: [ref],
+      rules: [{ ...rule, referenceIds: [] }],
+      artifacts: [artifact],
+    });
+    expect(missingRuleForwardLink.issues.some((issue) => issue.code === "missing-rule-forward-link")).toBe(true);
+  });
+
+  test("flags one-way artifact and reference links in either direction", () => {
+    const missingReferenceBacklink = buildEvidenceGraph({
+      references: [{ ...ref, linkedArtifactIds: [] }],
+      rules: [rule],
+      artifacts: [artifact],
+    });
+    expect(missingReferenceBacklink.issues.some((issue) => issue.code === "missing-artifact-reference-backlink")).toBe(true);
+
+    const missingArtifactForwardLink = buildEvidenceGraph({
+      references: [ref],
+      rules: [rule],
+      artifacts: [{ ...artifact, referenceIds: [] }],
+    });
+    expect(missingArtifactForwardLink.issues.some((issue) => issue.code === "missing-artifact-forward-link")).toBe(true);
   });
 });

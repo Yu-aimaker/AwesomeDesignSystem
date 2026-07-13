@@ -14,7 +14,7 @@
   "reviewCadenceDays": 180,
   "freshnessState": "healthy",
   "evidenceLevel": "standard",
-  "summary": "WCAG 3.0 Working Draft \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "WCAG 3.0 Working Draft — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable accessibility guidance from WCAG 3.0 Working Draft.",
     "Prefer schema/contract-bound generative UI over freeform HTML."
@@ -27,6 +27,27 @@
   "linkedRuleIds": [
     "rule.a11y.wcag-aa"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden"
+  ],
   "contentHash": "gap-w3c-wcag-3"
 }

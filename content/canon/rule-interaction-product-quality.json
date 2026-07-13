@@ -12,12 +12,21 @@
     "Blank screens on failure"
   ],
   "referenceIds": [
-    "ref.vercel.web-interface-guidelines",
-    "ref.shopify.polaris"
+    "ref.apple.hig-spatial",
+    "ref.govuk.design-system",
+    "ref.linear.brand",
+    "ref.nielsen.usability",
+    "ref.notion.design",
+    "ref.shopify.polaris",
+    "ref.stripe.design",
+    "ref.uswds.uswds",
+    "ref.vercel.web-interface-guidelines"
   ],
   "artifactIds": [
     "artifact.component.empty-state",
-    "artifact.component.error-state"
+    "artifact.component.error-state",
+    "artifact.component.skeleton",
+    "artifact.component.toast"
   ],
   "verification": "component tests for empty/error",
   "status": "canon"

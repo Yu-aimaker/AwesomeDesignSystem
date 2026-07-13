@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { persistTheme } from "../../lib/client-theme";
 import { Button, Card, Input, Stack, Switch, Badge } from "@awesome-ds/react";
 import type { Dictionary } from "../../lib/i18n";
 
@@ -44,7 +45,7 @@ export function PlaygroundControls({ labels }: { labels: Dictionary["playground"
 
   function applyTheme(t: (typeof themes)[number]) {
     setTheme(t);
-    document.documentElement.setAttribute("data-theme", t);
+    persistTheme(t);
     window.localStorage.setItem("ads-theme", t);
   }
 

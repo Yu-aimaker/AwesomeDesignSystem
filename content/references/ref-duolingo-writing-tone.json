@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.writing-tone",
-  "title": "Duolingo Design \u2014 Contextual tone matrix",
+  "title": "Duolingo Design — Contextual tone matrix",
   "url": "https://design.duolingo.com/writing/tone",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -29,6 +29,9 @@
   "linkedRuleIds": [
     "rule.brand.content-design"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.callout",
+    "artifact.doc.content-design"
+  ],
   "contentHash": "duolingo-writing-tone-2026-07-13"
 }

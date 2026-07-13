@@ -14,7 +14,7 @@
   "reviewCadenceDays": 180,
   "freshnessState": "healthy",
   "evidenceLevel": "standard",
-  "summary": "DTCG Design Tokens Format \u2014 primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "DTCG Design Tokens Format — primary source for agent-era design platform gaps (gap-audit-2026-07).",
   "lessons": [
     "Incorporate transferable tokens guidance from DTCG Design Tokens Format.",
     "Prefer schema/contract-bound generative UI over freeform HTML."
@@ -27,6 +27,14 @@
   "linkedRuleIds": [
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "gap-w3c-dtcg-format"
 }

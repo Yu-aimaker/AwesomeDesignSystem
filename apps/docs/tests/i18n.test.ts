@@ -3,6 +3,7 @@ import {
   DEFAULT_LOCALE,
   getDictionary,
   getLocaleFromPathname,
+  localeConfig,
   localizePathname,
   negotiateLocale,
   stripLocaleFromPathname,
@@ -30,6 +31,8 @@ describe("locale routing", () => {
 
   test("has an explicit stable default locale", () => {
     expect(DEFAULT_LOCALE).toBe("en");
+    expect(localeConfig.en).toEqual({ name: "English", dir: "ltr" });
+    expect(localeConfig.ja).toEqual({ name: "日本語", dir: "ltr" });
   });
 
   test("prefers a saved locale, then Japanese browser preference", () => {
@@ -50,5 +53,13 @@ describe("translation fallback", () => {
     expect(getDictionary("ja").shell.skipToContent).toBe("本文へ移動");
     expect(getDictionary("ja").theme.dark).toBe("ダーク");
     expect(getDictionary("en").theme.dark).toBe("Dark");
+  });
+
+  test("localizes interactive workbench and reference-detail copy", () => {
+    const ja = getDictionary("ja");
+    expect(ja.workbench.interfaceCopy).toBe("インターフェース文言");
+    expect(ja.workbench.forbidden).toContain("{term}");
+    expect(ja.referenceDetail.implementations).toBe("実装・成果物");
+    expect(ja.canon.traceability).toBe("構造化された追跡情報");
   });
 });

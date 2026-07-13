@@ -111,6 +111,8 @@ export const ArtifactClaimSchema = z.object({
   path: z.string().min(1),
   ruleIds: z.array(ruleId).min(1),
   referenceIds: z.array(refId).default([]),
+  /** Test/review artifacts declare the implementation artifacts they verify. */
+  verifiesArtifactIds: z.array(artifactId).optional(),
 });
 
 export const SignalRecordSchema = z.object({

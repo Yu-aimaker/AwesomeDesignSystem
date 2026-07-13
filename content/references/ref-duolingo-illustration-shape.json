@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.illustration-shape",
-  "title": "Duolingo Design \u2014 Illustration shape language",
+  "title": "Duolingo Design — Illustration shape language",
   "url": "https://design.duolingo.com/illustration/shape-language",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -27,8 +27,11 @@
   "licenseNote": "Public brand guidelines; synthesize only.",
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence",
     "rule.brand.illustration-grammar"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.doc.illustration"
+  ],
   "contentHash": "duolingo-illustration-shape-2026-07-13"
 }

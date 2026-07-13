@@ -25,6 +25,8 @@
   "linkedRuleIds": [
     "rule.design-eng.docs-as-product"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.doc.docs-shell"
+  ],
   "contentHash": "seed-storybook-docs"
 }

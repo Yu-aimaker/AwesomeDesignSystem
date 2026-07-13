@@ -1,6 +1,6 @@
 {
   "id": "ref.duolingo.typography",
-  "title": "Duolingo Design \u2014 Brand type hierarchy + fallbacks",
+  "title": "Duolingo Design — Brand type hierarchy + fallbacks",
   "url": "https://design.duolingo.com/identity/typography",
   "owner": "duolingo",
   "sourceClass": "brand",
@@ -28,8 +28,17 @@
   "antiImitationNote": "Transfer rules and process; invent original brand expression.",
   "linkedRuleIds": [
     "rule.brand.cross-medium-coherence",
+    "rule.brand.typography-contract",
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
   "contentHash": "duolingo-typography-2026-07-13"
 }
