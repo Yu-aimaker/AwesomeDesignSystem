@@ -10,5 +10,12 @@
   "promotionBlockedReason": "Corroborate with first-party system docs and performance budgets.",
   "candidateRuleIds": [
     "rule.motion.purpose-first"
-  ]
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
 }

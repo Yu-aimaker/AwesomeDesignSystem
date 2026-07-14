@@ -39,6 +39,17 @@ export const REGIONS = [
   "other",
 ] as const;
 
+export const REFERENCE_MEDIA = [
+  "standard",
+  "documentation",
+  "website",
+  "repository",
+  "article",
+  "book",
+] as const;
+
+export const DRIFT_RISKS = ["low", "medium", "high"] as const;
+
 const isoDate = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, "expected YYYY-MM-DD date");
@@ -64,6 +75,8 @@ export const ReferenceRecordSchema = z.object({
   url: z.string().url(),
   owner: z.string().min(1),
   sourceClass: z.enum(SOURCE_CLASSES),
+  medium: z.enum(REFERENCE_MEDIA),
+  driftRisk: z.enum(DRIFT_RISKS),
   region: z.enum(REGIONS),
   language: z.string().min(2),
   topics: z.array(z.string().min(1)).min(1),
@@ -106,6 +119,7 @@ export const ArtifactClaimSchema = z.object({
     "skill",
     "doc",
     "script",
+    "app",
   ]),
   title: z.string().min(1),
   path: z.string().min(1),
@@ -126,6 +140,26 @@ export const SignalRecordSchema = z.object({
   relatedTopics: z.array(z.string()).default([]),
   promotionBlockedReason: z.string().min(1),
   candidateRuleIds: z.array(ruleId).default([]),
+  promotionAssessment: z.object({
+    primaryEvidenceCount: z.number().int().nonnegative(),
+    workingImplementation: z.boolean(),
+    accessibilityReviewed: z.boolean(),
+    performanceReviewed: z.boolean(),
+    decision: z.enum(["pending", "promote", "reject"]),
+  }),
+}).superRefine((signal, context) => {
+  if (signal.promotionAssessment.decision !== "promote") return;
+  const assessment = signal.promotionAssessment;
+  if (assessment.primaryEvidenceCount < 2
+    || !assessment.workingImplementation
+    || !assessment.accessibilityReviewed
+    || !assessment.performanceReviewed) {
+    context.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["promotionAssessment"],
+      message: "promotion requires two primary sources, a working implementation, and accessibility/performance review",
+    });
+  }
 });
 
 export type ReferenceRecord = z.infer<typeof ReferenceRecordSchema>;
@@ -134,3 +168,5 @@ export type ArtifactClaim = z.infer<typeof ArtifactClaimSchema>;
 export type SignalRecord = z.infer<typeof SignalRecordSchema>;
 export type EvidenceLevel = (typeof EVIDENCE_LEVELS)[number];
 export type FreshnessState = (typeof FRESHNESS_STATES)[number];
+export type ReferenceMedium = (typeof REFERENCE_MEDIA)[number];
+export type DriftRisk = (typeof DRIFT_RISKS)[number];

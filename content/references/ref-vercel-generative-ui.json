@@ -1,9 +1,11 @@
 {
   "id": "ref.vercel.generative-ui",
   "title": "Vercel AI SDK Generative UI",
-  "url": "https://sdk.vercel.ai/docs/ai-sdk-ui/generative-user-interfaces",
+  "url": "https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces",
   "owner": "vercel",
   "sourceClass": "design-engineering",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [
@@ -27,6 +29,8 @@
   "linkedRuleIds": [
     "rule.ai.generative-boundaries"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.script.ai-interaction-contract"
+  ],
   "contentHash": "gap-vercel-generative-ui"
 }

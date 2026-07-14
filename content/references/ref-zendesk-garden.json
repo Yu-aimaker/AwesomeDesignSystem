@@ -4,6 +4,8 @@
   "url": "https://garden.zendesk.com/",
   "owner": "zendesk",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

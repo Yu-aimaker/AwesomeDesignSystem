@@ -4,6 +4,8 @@
   "url": "https://storybook.js.org/",
   "owner": "storybook",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

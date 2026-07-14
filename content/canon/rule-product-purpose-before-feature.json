@@ -16,7 +16,8 @@
     "ref.apple.hig-foundations"
   ],
   "artifactIds": [
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "manual review of purpose, non-goals, and outcome evidence",
   "status": "canon"

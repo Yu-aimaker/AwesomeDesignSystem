@@ -4,6 +4,8 @@
   "url": "https://www.lightningdesignsystem.com/",
   "owner": "salesforce",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

@@ -7,15 +7,13 @@ import {
 } from "@awesome-ds/react";
 import type { Locale } from "../lib/i18n";
 
-export function ComponentLive({ slug, locale, forceError = false }: { slug: string; locale: Locale; forceError?: boolean }) {
+export function ComponentLive({ slug, locale }: { slug: string; locale: Locale }) {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(2);
   const [on, setOn] = useState(false);
   const [radio, setRadio] = useState("a");
   const [feedback, setFeedback] = useState("");
   const t = (english: string, japanese: string) => locale === "ja" ? japanese : english;
-  if (forceError && typeof window !== "undefined") throw new Error("Intentional preview isolation fixture");
-
   switch (slug) {
     case "button":
       return <div className="ads-cluster"><Button>{t("Primary", "主要操作")}</Button><Button loading>{t("Loading", "読み込み中")}</Button><Button disabled>{t("Disabled", "無効")}</Button><Button variant="danger">{t("Danger", "危険な操作")}</Button></div>;

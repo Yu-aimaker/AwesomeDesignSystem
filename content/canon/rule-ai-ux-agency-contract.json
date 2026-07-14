@@ -20,7 +20,10 @@
     "ref.microsoft.human-ai-guidelines",
     "ref.salesforce.lightning-guidelines"
   ],
-  "artifactIds": [],
+  "artifactIds": [
+    "artifact.doc.ai-interaction-contracts",
+    "artifact.script.ai-interaction-contract"
+  ],
   "verification": "Cancel, undo, manual-takeover, duplicate-prevention and high-risk approval tests",
   "status": "canon"
 }

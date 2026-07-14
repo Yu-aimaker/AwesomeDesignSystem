@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { ReferenceRecordSchema, CanonRuleSchema } from "./schema";
+import { ReferenceRecordSchema, CanonRuleSchema, SignalRecordSchema } from "./schema";
 
 const validRef = {
   id: "ref.vercel.web-interface-guidelines",
@@ -8,6 +8,8 @@ const validRef = {
   url: "https://vercel.com/design/guidelines",
   owner: "vercel",
   sourceClass: "design-engineering" as const,
+  medium: "documentation" as const,
+  driftRisk: "high" as const,
   region: "global" as const,
   language: "en",
   topics: ["interaction", "a11y"],
@@ -54,6 +56,12 @@ describe("content schemas", () => {
     expect(() =>
       ReferenceRecordSchema.parse({ ...validRef, id: "vercel-guidelines" }),
     ).toThrow();
+    expect(() =>
+      ReferenceRecordSchema.parse({ ...validRef, medium: "podcast" }),
+    ).toThrow();
+    expect(() =>
+      ReferenceRecordSchema.parse({ ...validRef, driftRisk: "unknown" }),
+    ).toThrow();
   });
 
   test("requires canon rules to cite at least one reference", () => {
@@ -68,5 +76,24 @@ describe("content schemas", () => {
         verification: "Back/Forward restores state.",
       }),
     ).toThrow();
+  });
+
+  test("blocks signal promotion until evidence and review gates pass", () => {
+    const signal = {
+      id: "signal.x.example",
+      title: "Example signal",
+      url: "https://x.com/example",
+      observedDate: "2026-07-13",
+      summary: "An emerging interaction pattern.",
+      relatedTopics: ["interaction"],
+      promotionBlockedReason: "Awaiting corroboration.",
+      candidateRuleIds: [],
+      promotionAssessment: { primaryEvidenceCount: 1, workingImplementation: false, accessibilityReviewed: false, performanceReviewed: false, decision: "promote" },
+    } as const;
+    expect(() => SignalRecordSchema.parse(signal)).toThrow(/promotion requires/);
+    expect(SignalRecordSchema.parse({
+      ...signal,
+      promotionAssessment: { primaryEvidenceCount: 2, workingImplementation: true, accessibilityReviewed: true, performanceReviewed: true, decision: "promote" },
+    }).promotionAssessment.decision).toBe("promote");
   });
 });

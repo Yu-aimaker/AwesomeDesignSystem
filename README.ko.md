@@ -5,11 +5,12 @@
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Cited sources: 270+](https://img.shields.io/badge/cited_sources-270%2B-E5484D?style=flat-square)](./research)
-[![Skills: 5](https://img.shields.io/badge/skills-5-7C5CFC?style=flat-square)](./skills)
-[![Color: OKLCH](https://img.shields.io/badge/color-OKLCH-D6409F?style=flat-square)](./design-system/foundations/color.md)
-[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](./design-system/INDEX.md)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-46C26B?style=flat-square)](./CONTRIBUTING.md)
+[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
+[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#️-다섯-스킬)
+[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-빠른-시작)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-Hans.md) · **한국어** · [Español](./README.es.md)
 
@@ -17,106 +18,99 @@
 
 ---
 
-> **중앙값을 피하라. 관점을 분명히 하라.** 출처가 명시된 자기 완결적 디자인 시스템 지식 베이스 **＋** 스킬 모음. 어떤 AI 에이전트든 모던한(2026) 인간미 있는 프런트엔드를 만들고, 흔한 "AI slop" 양산을 멈추게 한다.
+> **중앙값을 피하라. 관점을 가져라.**  
+> AwesomeDesignSystem은 더 이상 “Markdown + 스킬”만이 아닙니다. **AI 에이전트 우선 디자인 플랫폼**입니다. 큐레이션된 교의, 버전 관리되는 증거 그래프, 실행 가능한 토큰/컴포넌트/모션, 영·일 로컬 문서 사이트 — 에이전트가 “AI 슬롭”이 아닌 현대적(2026)이고 인간적인 UI를 출하하도록 합니다.
 
-## 🧭 왜 존재하는가
+## 🧭 존재 이유
 
-LLM에게 "랜딩 페이지를 만들어 줘"라고 하면 돌아오는 건 *디자인*이 아니다 — 스크랩된 수많은 Tailwind 튜토리얼의 **통계적 중앙값**이다. Inter, 흰 배경의 보라→파랑 그라데이션, 가운데 정렬 히어로, 이모지 기능 카드 3장. 모델이 지식이 없어서가 아니라, **조향하지 않으면 중앙으로 떨어지기** 때문이다.
+LLM에게 “랜딩 페이지 만들어 줘”라고 하면 *디자인* 대신 Tailwind 튜토리얼의 **통계적 중앙값**이 자주 나옵니다. Inter, 보라→파랑 그라데이션, 중앙 히어로, 이모지 카드 3장. 조타하지 않으면 중심으로 떨어집니다.
 
-AwesomeDesignSystem은 바로 그 조향을 제공한다. **코드를 내장한**, 큐레이션되고 관점이 분명한 디자인 지식체 **＋** 작업에 필요한 만큼만 불러오는 스킬 모음.
+AwesomeDesignSystem은 **서로 연결된 4개 레이어**로 조타합니다.
 
-| | |
-|---|---|
-| 🤖 **AI 에이전트가 직접 읽도록 설계** | 작업 도중 라이브러리 문서를 가지러 가지 않아도 바로 활용 가능… |
-| 🪶 **…그러나 컨텍스트를 부풀리지 않음** | …그렇다고 시스템 전체를 컨텍스트에 통째로 삼키지도 않는다. |
-| 📐 **1차 출처의 엄밀함** | Apple HIG & Liquid Glass, Material 3 Expressive, Nothing, Goodpatch, Linear/Stripe/Vercel/Raycast ＋ 공식 라이브러리 문서에서 정제. |
-| 🔬 **적대적으로 팩트체크 완료** | 270개 이상의 인용 출처가 [`research/`](./research)에. |
+| 레이어 | 내용 | 위치 |
+| --- | --- | --- |
+| **Doctrine** | 코드가 박힌 의견 있는 디자인 지식 | `design-system/` |
+| **Evidence** | 구조화·검증된 1차 출처와 canon 규칙 | `content/` |
+| **Executable** | 토큰, React 베이스라인, 모션, 브랜드 계약 | `packages/` |
+| **Verbs** | 점진적 공개 에이전트 스킬 | `skills/` + `install.sh` |
 
-## 📂 무엇이 들어 있나
+## 🎁 얻을 수 있는 것
 
-세 개의 레이어: **지식**(읽기) · **증거**(검증) · **동사**(실행).
+| 결과 | 방법 |
+| --- | --- |
+| **AI 슬롭 중단** | 취향 원칙, 반-중앙값 패턴, 리뷰 스킬 |
+| **주장 추적** | Reference Atlas → canon → artifact → 테스트 |
+| **접근성 UI 가속** | 공유 계약 + React Aria 32 컴포넌트 |
+| **의도 있는 모션** | `prefers-reduced-motion` 준수 레시피 |
+| **브랜드 as code** | Product Lexicon, 보이스 규칙, 카피 lint |
+| **신선도 유지** | freshness / 링크 거버넌스 + CI |
+| **로컬 탐색** | Next.js 문서 (**EN/JA**, `/en/*` `/ja/*`) |
 
-<details open>
-<summary><b>리포지토리 지도</b></summary>
+현재 증거 그래프(검증됨): **105 Reference Atlas · 42 canon · 54 artifact · 6 quarantine signal**.
+
+## 📂 구성
 
 ```
-design-system/            ← 정전(canonical) 지식 베이스 (코드 내장 · 단일 진실 공급원)
-  INDEX.md                  라우터: 질문 → 어떤 모듈을 읽을지
-  best-practice-design-for-ai.md   대표 종합 문서 (출처 링크 포함)
-  00-philosophy/            취향 레이어 ·「모던 2026」· 핵심 원칙
-  foundations/              color (OKLCH) · typography (日本語 포함) · spacing/layout · tokens
-  motion/                   원칙 · 복붙 가능한 Motion + CSS 레시피
-  components/               button/card/input/dialog/… 상태 + a11y 포함
-  patterns/                 hero/bento/sections/nav/backgrounds (안티 slop)
-  accessibility/            WCAG 2.2 · focus · keyboard · contrast
-  tech-stack-2026/          권장 AI 네이티브 스택
-research/                 ← 가공 전 1차 출처 리서치 (증거)
-skills/                   ← 다섯 개의 이식 가능한 스킬 (동사)
+design-system/     사람이 읽는 정전
+content/           기계용 그래프
+packages/          tokens · core · react · motion · brand · content
+apps/docs/         로컬 Next.js 16 문서 + Reference Atlas + 라이브 프리뷰
+skills/            다섯 개의 이식 가능 스킬
+research/ · docs/ · scripts/
 ```
 
-</details>
+## 🛠️ 다섯 스킬
 
-## 🛠️ 다섯 개의 스킬
-
-| | 스킬 | 이렇게 쓴다… |
-|:--:|---|---|
-| 🎨 | **/AwesomeDS** | 시스템의 취향 레이어로 모든 UI를 구축·다듬기. 필요한 모듈로만 라우팅. |
-| 🏗️ | **/MakeAwesomeDS** | 브랜드/제품 *고유의* 디자인 시스템 생성 (OKLCH 토큰 + `DESIGN.md` + 미리보기). |
-| 📄 | **/AwesomeHTML** | Markdown / 리서치 / 메모를 세련된 자기 완결형 단일 HTML 문서로 변환. |
-| 🔍 | **/AwesomeReview** | 기존 UI·코드 감사 — AI slop과 a11y 결함을 찾아 우선순위별 수정안을 보고. |
-| ✨ | **/AwesomeMotion** | 목적이 분명한 품격 있는 모션 설계 (Motion for React + CSS 전용 레시피). |
+|  | 스킬 | 용도 |
+| :-: | --- | --- |
+| 🎨 | **/AwesomeDS** | 취향 레이어로 UI 구축·다듬기 |
+| 🏗️ | **/MakeAwesomeDS** | 제품 고유 DS 생성 (OKLCH + `DESIGN.md`) |
+| 📄 | **/AwesomeHTML** | Markdown → 단일 HTML |
+| 🔍 | **/AwesomeReview** | AI 슬롭·a11y 감사 |
+| ✨ | **/AwesomeMotion** | 목적 지향 모션 |
 
 ## 🚀 빠른 시작
 
-#### AI 에이전트용 — 설치 불필요
+### 1) AI 에이전트 — 설치 불필요
 
-> [!TIP]
-> 에이전트를 이 리포지토리로 향하게 하고 **먼저 [`design-system/INDEX.md`](./design-system/INDEX.md)를 읽으라**고 지시하라. 이후엔 작업에 필요한 모듈만 연다. INDEX가 지도이고, 각 모듈은 자기 완결적이다.
+[`DESIGN.md`](./DESIGN.md)와 [`design-system/INDEX.md`](./design-system/INDEX.md)를 먼저 읽고, 작업에 필요한 모듈만 엽니다. `rule.*`를 인용하고 `ref.*`까지 추적합니다.
 
-#### Claude Code 스킬로
+### 2) Claude Code 스킬
 
 ```bash
 git clone https://github.com/Yu-aimaker/AwesomeDesignSystem.git
 cd AwesomeDesignSystem
-./install.sh        # 5개 스킬을 ~/.claude/skills에 심볼릭 링크 (기존 스킬은 백업)
+./install.sh
 ```
 
-그다음 Claude Code에서: `/AwesomeDS` · `/MakeAwesomeDS` · `/AwesomeHTML` · `/AwesomeReview` · `/AwesomeMotion`
+### 3) 로컬 monorepo + 문서 사이트
 
-> [!NOTE]
-> `install.sh`는 심볼릭 링크를 사용하므로 리포지토리를 제자리에 두라 — pull로 업데이트하면 스킬도 갱신된다. 샌드박스 환경에서는 `--copy`를 사용하라.
+**Node ≥ 22.12**, **pnpm 10.5.2** 필요.
 
-## 📐 한 호흡으로 말하는 표준
+```bash
+pnpm install
+pnpm --filter @awesome-ds/docs dev   # http://127.0.0.1:3000
+pnpm validate && pnpm test && pnpm qa:core
+```
 
-> 중앙값을 피하라, 관점을 분명히 하라. 지배적인 한 가지 색 **＋** 날카로운 강조색, 소심하고 균등한 팔레트는 금물. 의도적이고 개성 있는 서체 — Inter를 유일한 선택지로 삼지 말 것. 대비로 진짜 위계를 만들고, 화면당 초점은 하나. 절제 **＝** 자신감. 모션은 장식이 아니라 상태를 전달한다 — 흩어진 마이크로 인터랙션보다 잘 조율된 한 번의 페이지 로드가 낫다. 프리미티브에 테마를 입히고, 날것의 기본값을 출고하지 말 것. error / empty / loading 상태를 항상 설계하고 WCAG 2.2 AA를 충족하라. 부품의 모음이 아니라 일관된 **전체**를.
+자세한 내용: [`docs/architecture.md`](./docs/architecture.md), [`docs/completion-audit.md`](./docs/completion-audit.md).
 
-## 🎨 디자인 토큰 — 공유 어휘
+## 📐 한 호흡 표준
 
-모든 모듈이 **하나의 토큰 언어**를 말하며, Tailwind v4의 `@theme {}` 블록에 반영된다.
+> 중앙값을 피하라. 관점을 가져라. 주조색 + 날카로운 액센트. 의도적 서체. 진짜 계층; 화면당 초점 하나. 절제 = 자신감. 모션은 상태를 전한다. 원시 기본값을 내지 마라. 에러/빈/로딩 상태를 설계하라. WCAG 2.2 AA. 일관된 전체.
 
-<details>
-<summary><b>토큰 계약 전체</b></summary>
+## 🔬 증거와 신선도
 
-| 그룹 | 토큰 |
-|---|---|
-| **Color** (시맨틱 · OKLCH) | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
-| **Space** (8pt 스케일) | `--space-1` … `--space-32` |
-| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
-| **Type** (플루이드) | `--text-xs` … `--text-7xl` · `--leading-*` · `--tracking-*` |
-| **Font** | `--font-display` · `--font-body` · `--font-mono` |
-| **Elevation** | 헤어라인 보더 **+** `--shadow-sm/md/lg` |
-| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
+- Reference Atlas, canon 규칙, quarantine signals  
+- `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`  
+- **링크 모음이 아님** — 1차 출처를 교의와 실행 계약으로 흡수하고 그래프 검증으로 정직함을 유지합니다.
 
-값이 포함된 전체 세트 → [`foundations/tokens.md`](./design-system/foundations/tokens.md)
+## 🌐 로컬라이제이션
 
-</details>
+문서 UI는 영어·일본어. Canon Markdown은 영어 우선, 미번역은 명시적 폴백.
 
-## 🤝 기여하기
+## 🤝 기여 · ⚖️ 라이선스
 
-[CONTRIBUTING.md](./CONTRIBUTING.md)를 참고하라. 기준: 모든 주장에 **출처**가 있고, 코드는 **내장**되며, 스킬은 **토큰 절약적**이고, 안티 AI slop 프리플라이트(Pre-Flight)를 통과하지 못하는 것은 출고하지 않는다.
+[CONTRIBUTING.md](./CONTRIBUTING.md) · [MIT](./LICENSE)
 
-## ⚖️ 라이선스
-
-[MIT](./LICENSE) — 자유롭게 사용·개작하고 그 위에 빌드할 수 있다.
-
-<div align="center"><sub>AI가 마치 취향을 가진 듯 디자인하도록. 🎨</sub></div>
+<div align="center"><sub>AI가 취향 있게 디자인하도록. 🎨</sub></div>

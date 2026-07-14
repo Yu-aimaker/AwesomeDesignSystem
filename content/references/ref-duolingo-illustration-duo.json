@@ -4,6 +4,8 @@
   "url": "https://design.duolingo.com/illustration/duo",
   "owner": "duolingo",
   "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

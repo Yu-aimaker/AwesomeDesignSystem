@@ -16,7 +16,8 @@
     "ref.apple.hig-foundations"
   ],
   "artifactIds": [
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "capability matrix plus semantics and comprehension review",
   "status": "canon"

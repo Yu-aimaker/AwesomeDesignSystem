@@ -4,6 +4,8 @@
   "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
   "owner": "web",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [

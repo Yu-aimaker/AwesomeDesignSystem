@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomUUID } from "node:crypto";
 import { getLocaleFromPathname, negotiateLocale, stripLocaleFromPathname } from "./lib/i18n";
 
 const LOCALE_COOKIE = "awesome-locale";
+const INTERNAL_LOCALE_TOKEN = randomUUID();
 
 export function proxy(request: NextRequest) {
-  if (request.headers.get("x-awesome-locale")) {
+  if (
+    request.headers.get("x-awesome-locale-token") === INTERNAL_LOCALE_TOKEN
+    && getLocaleFromPathname(request.nextUrl.pathname) === null
+  ) {
     return NextResponse.next();
   }
   const { pathname } = request.nextUrl;
@@ -21,6 +26,7 @@ export function proxy(request: NextRequest) {
   rewriteUrl.pathname = stripLocaleFromPathname(pathname);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-awesome-locale", locale);
+  requestHeaders.set("x-awesome-locale-token", INTERNAL_LOCALE_TOKEN);
   const response = NextResponse.rewrite(rewriteUrl, { request: { headers: requestHeaders } });
   response.cookies.set(LOCALE_COOKIE, locale, {
     path: "/", sameSite: "lax", maxAge: 60 * 60 * 24 * 365,

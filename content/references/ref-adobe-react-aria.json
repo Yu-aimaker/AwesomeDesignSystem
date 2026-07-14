@@ -4,6 +4,8 @@
   "url": "https://react-spectrum.adobe.com/react-aria/",
   "owner": "adobe",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

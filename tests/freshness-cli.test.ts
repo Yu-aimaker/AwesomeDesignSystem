@@ -53,6 +53,8 @@ test("freshness CLI preserves failure age, applies allowlists, and resets after 
       url: `http://127.0.0.1:${address.port}/guide`,
       owner: "test",
       sourceClass: "implementation",
+      medium: "documentation",
+      driftRisk: "high",
       region: "global",
       language: "en",
       topics: ["governance"],

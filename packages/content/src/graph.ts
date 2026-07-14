@@ -15,7 +15,8 @@ export type GraphIssue = {
     | "missing-artifact-reference-backlink"
     | "missing-artifact-forward-link"
     | "unknown-verification-target"
-    | "unverified-artifact";
+    | "unverified-artifact"
+    | "unimplemented-rule";
   message: string;
   id?: string;
 };
@@ -26,6 +27,20 @@ export type EvidenceGraph = {
   artifacts: Map<string, ArtifactClaim>;
   issues: GraphIssue[];
 };
+
+const EXECUTABLE_ARTIFACT_KINDS = new Set<ArtifactClaim["kind"]>([
+  "token",
+  "component",
+  "motion-recipe",
+  "test",
+  "skill",
+  "script",
+  "app",
+]);
+
+function isExecutableArtifact(artifact: ArtifactClaim): boolean {
+  return EXECUTABLE_ARTIFACT_KINDS.has(artifact.kind);
+}
 
 function collectDuplicates(
   ids: string[],
@@ -103,6 +118,19 @@ export function buildEvidenceGraph(input: {
           message: `Rule ${rule.id} points to ${artifactId}, but the artifact does not link back`,
         });
       }
+    }
+    const hasExecutableImplementation = rule.artifactIds.some((artifactId) => {
+      const artifact = artifacts.get(artifactId);
+      return artifact !== undefined
+        && isExecutableArtifact(artifact)
+        && artifact.ruleIds.includes(rule.id);
+    });
+    if (!hasExecutableImplementation) {
+      issues.push({
+        code: "unimplemented-rule",
+        id: rule.id,
+        message: `Rule ${rule.id} has no bidirectionally linked executable implementation artifact`,
+      });
     }
   }
 
@@ -203,8 +231,10 @@ export function buildEvidenceGraph(input: {
     const linkedFromRef = input.references.some((r) =>
       r.linkedRuleIds.includes(rule.id),
     );
-    const implemented = input.artifacts.some((a) =>
-      a.ruleIds.includes(rule.id),
+    const implemented = input.artifacts.some((artifact) =>
+      isExecutableArtifact(artifact)
+      && artifact.ruleIds.includes(rule.id)
+      && rule.artifactIds.includes(artifact.id),
     );
     if (!linkedFromRef && !implemented && rule.artifactIds.length === 0) {
       issues.push({

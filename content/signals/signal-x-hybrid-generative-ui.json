@@ -11,5 +11,12 @@
   "promotionBlockedReason": "Emerging social signal; requires primary product evidence and a11y review before canon.",
   "candidateRuleIds": [
     "rule.ai.generative-boundaries"
-  ]
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
 }

@@ -4,6 +4,8 @@
   "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations",
   "owner": "web",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [

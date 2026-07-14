@@ -19,7 +19,8 @@
   ],
   "artifactIds": [
     "artifact.doc.brand-coherence",
-    "artifact.doc.brand-system"
+    "artifact.doc.brand-system",
+    "artifact.script.brand-contract"
   ],
   "verification": "brand modules present + linked rules",
   "status": "canon"

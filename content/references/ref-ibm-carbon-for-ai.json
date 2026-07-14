@@ -4,6 +4,8 @@
   "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
   "owner": "ibm",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [
@@ -29,6 +31,8 @@
     "rule.ai.ux-capability-contract",
     "rule.ai.ux-uncertainty-contract"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.script.ai-interaction-contract"
+  ],
   "contentHash": "elite-carbon-ai-20260713"
 }

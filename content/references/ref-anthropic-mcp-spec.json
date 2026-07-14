@@ -4,6 +4,8 @@
   "url": "https://modelcontextprotocol.io/",
   "owner": "anthropic",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [

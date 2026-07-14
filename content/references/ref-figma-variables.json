@@ -4,6 +4,8 @@
   "url": "https://help.figma.com/hc/en-us/articles/15339657135383",
   "owner": "figma",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

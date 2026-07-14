@@ -4,6 +4,8 @@
   "url": "https://vercel.com/design",
   "owner": "vercel",
   "sourceClass": "design-engineering",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

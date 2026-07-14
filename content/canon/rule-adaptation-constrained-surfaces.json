@@ -16,7 +16,8 @@
     "ref.apple.hig-accessibility"
   ],
   "artifactIds": [
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "surface lifecycle, privacy, localization, and deep-link matrix",
   "status": "canon"

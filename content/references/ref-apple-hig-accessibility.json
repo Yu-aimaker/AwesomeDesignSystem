@@ -4,6 +4,8 @@
   "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
   "owner": "apple",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

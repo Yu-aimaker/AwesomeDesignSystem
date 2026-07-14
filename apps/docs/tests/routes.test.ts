@@ -9,6 +9,8 @@ const sample: ReferenceRecord = {
   url: "https://vercel.com/design",
   owner: "vercel",
   sourceClass: "design-engineering",
+  medium: "documentation",
+  driftRisk: "high",
   region: "global",
   language: "en",
   topics: ["interaction"],
@@ -40,6 +42,8 @@ describe("docs shell contracts", () => {
     expect(filterReferences([sample], { topic: "interaction", freshness: "healthy" })).toHaveLength(1);
     expect(filterReferences([sample], { region: "jp" })).toHaveLength(0);
     expect(filterReferences([sample], { owner: "vercel", language: "en", evidenceLevel: "first-party-guidance" })).toHaveLength(1);
+    expect(filterReferences([sample], { medium: "documentation", driftRisk: "high" })).toHaveLength(1);
+    expect(filterReferences([sample], { medium: "repository" })).toHaveLength(0);
     expect(filterReferences([sample], { language: "ja" })).toHaveLength(0);
   });
 });

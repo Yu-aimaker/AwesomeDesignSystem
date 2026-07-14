@@ -4,6 +4,8 @@
   "url": "https://developer.apple.com/design/human-interface-guidelines/",
   "owner": "apple",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [
@@ -58,7 +60,8 @@
     "artifact.component.textarea",
     "artifact.component.tooltip",
     "artifact.component.visually-hidden",
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "contentHash": "elite-apple-hig"
 }

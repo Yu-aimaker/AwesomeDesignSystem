@@ -4,6 +4,8 @@
   "url": "https://mailchimp.com/about/brand-assets/",
   "owner": "mailchimp",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

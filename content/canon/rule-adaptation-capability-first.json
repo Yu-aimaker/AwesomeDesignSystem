@@ -17,7 +17,8 @@
     "ref.apple.hig-spatial"
   ],
   "artifactIds": [
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "capability declaration plus cross-input and adaptive-state tests",
   "status": "canon"

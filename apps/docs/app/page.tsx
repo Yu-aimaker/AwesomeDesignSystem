@@ -22,11 +22,11 @@ export default async function HomePage() {
               <Link className="hero-secondary" href={localizePathname("/references", locale)}>{formatMessage(d.sourcesCta, { count: references.length })}</Link>
             </div>
           </div>
-          <aside className="hero-proof" aria-label="Repository proof">
+          <aside className="hero-proof" aria-label={d.repositoryProof}>
             <div><strong>{rules.length}</strong><span>{d.rules}</span></div>
             <div><strong>{references.length}</strong><span>{d.sources}</span></div>
             <div><strong>{freshness.healthy}</strong><span>{d.fresh}</span></div>
-            <div><strong>{validation.ok ? "PASS" : "CHECK"}</strong><span>{d.graph}</span></div>
+            <div><strong>{validation.ok ? d.pass : d.check}</strong><span>{d.graph}</span></div>
           </aside>
         </div>
       </section>

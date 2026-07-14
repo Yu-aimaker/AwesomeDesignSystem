@@ -4,6 +4,8 @@
   "url": "https://goodpatch.com/",
   "owner": "goodpatch",
   "sourceClass": "research",
+  "medium": "article",
+  "driftRisk": "high",
   "region": "jp",
   "language": "en",
   "topics": [

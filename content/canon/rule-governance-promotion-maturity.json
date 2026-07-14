@@ -21,7 +21,10 @@
     "ref.pinterest.gestalt-accessibility",
     "ref.uber.base-web"
   ],
-  "artifactIds": [],
+  "artifactIds": [
+    "artifact.doc.evidence-governance",
+    "artifact.script.validate-content"
+  ],
   "verification": "Content-graph validation plus human promotion checklist and quarterly maturity audit",
   "status": "canon"
 }

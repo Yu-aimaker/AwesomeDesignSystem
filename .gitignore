@@ -21,5 +21,10 @@ test-results/
 reports/*.json
 reports/*.md
 !reports/.gitkeep
+!reports/freshness.json
+!reports/source-observations.json
+!reports/review-queue.json
+!reports/link-check.json
+!reports/freshness-summary.md
 .firecrawl/
 .playwright-cli/

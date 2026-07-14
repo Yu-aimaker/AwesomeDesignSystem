@@ -13,5 +13,12 @@
   "candidateRuleIds": [
     "rule.ai.generative-boundaries",
     "rule.governance.evidence-first"
-  ]
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
 }

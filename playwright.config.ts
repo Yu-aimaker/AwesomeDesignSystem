@@ -17,7 +17,7 @@ export default defineConfig({
   testDir: "./tests",
   use: {
     baseURL,
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
     navigationTimeout: 45_000,
     actionTimeout: 15_000,
   },

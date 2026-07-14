@@ -16,7 +16,8 @@
     "ref.duolingo.brand-narrative"
   ],
   "artifactIds": [
-    "artifact.doc.brand-coherence"
+    "artifact.doc.brand-coherence",
+    "artifact.script.brand-contract"
   ],
   "verification": "Claim-to-source traceability, freshness checks, contradiction scan, and locale review",
   "status": "canon"

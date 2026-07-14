@@ -25,6 +25,20 @@ export const BrandManifestSchema = z.object({
     traits: z.array(z.string().min(1)).min(3).max(5),
     antiTraits: z.array(z.string().min(1)).min(2),
   }),
+  narrative: z.object({
+    promise: z.string().min(1),
+    evidence: z.array(z.string().min(1)).min(1),
+    prohibitedClaims: z.array(z.string().min(1)).min(1),
+  }),
+  voice: z.object({
+    qualities: z.array(z.string().min(1)).min(3).max(5),
+    contextualTones: z.array(z.object({ context: z.string().min(1), tone: z.string().min(1) })).min(1),
+    editorialRules: z.array(z.string().min(1)).min(1),
+  }),
+  family: z.object({
+    parentBrand: z.string().min(1),
+    variants: z.array(z.object({ name: z.string().min(1), invariantTraits: z.array(z.string().min(1)).min(1) })).min(1),
+  }),
   marks: z.array(z.object({
     id: z.string().min(1),
     role: z.enum(["primary", "compact", "icon", "partner", "monochrome"]),
@@ -47,6 +61,11 @@ export const BrandManifestSchema = z.object({
     syntheticMediaDisclosure: z.enum(["required", "contextual", "prohibited"]),
     requireRights: z.boolean(),
     requireAltText: z.boolean(),
+  }),
+  illustration: z.object({
+    shapeGrammar: z.array(z.string().min(1)).min(1),
+    characterRules: z.array(z.string().min(1)).min(1),
+    motionRules: z.array(z.string().min(1)).min(1),
   }),
   lexicon: z.array(LexiconEntrySchema),
   assets: z.array(z.object({

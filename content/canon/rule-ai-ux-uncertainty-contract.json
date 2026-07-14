@@ -23,7 +23,10 @@
     "ref.nist.ai-rmf",
     "ref.uber.base"
   ],
-  "artifactIds": [],
+  "artifactIds": [
+    "artifact.doc.ai-interaction-contracts",
+    "artifact.script.ai-interaction-contract"
+  ],
   "verification": "Stale, conflicting, absent-source and high-consequence scenario review",
   "status": "canon"
 }

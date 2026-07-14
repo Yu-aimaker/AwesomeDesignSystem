@@ -4,6 +4,8 @@
   "url": "https://www.nist.gov/itl/ai-risk-management-framework",
   "owner": "nist",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "us",
   "language": "en",
   "topics": [

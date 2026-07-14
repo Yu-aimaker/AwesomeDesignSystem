@@ -6,6 +6,7 @@ import { ComponentLive } from "../../../components/component-live";
 import { formatMessage, getDictionary, localizePathname } from "../../../lib/i18n";
 import { getRequestLocale } from "../../../lib/i18n-server";
 import { PreviewBoundary } from "../../../components/preview-boundary";
+import { PreviewErrorFixture } from "../../../components/preview-error-fixture";
 import { createLocalizedMetadata } from "../../../lib/metadata";
 import { localizeComponentContract } from "../../../lib/component-localization";
 
@@ -68,7 +69,7 @@ export default async function ComponentDetailPage({ params, searchParams }: { pa
       <h2>{d.live}</h2>
       <Card title={d.live}>
         <PreviewBoundary resetKey={`${slug}:${previewErrorFixture}`} fallback={<p role="alert">{d.previewFailed}</p>}>
-          <ComponentLive slug={slug} locale={locale} forceError={previewErrorFixture} />
+          {previewErrorFixture ? <PreviewErrorFixture /> : <ComponentLive slug={slug} locale={locale} />}
         </PreviewBoundary>
       </Card>
       <h2>{d.copyable}</h2>

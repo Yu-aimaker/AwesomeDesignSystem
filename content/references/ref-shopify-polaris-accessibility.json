@@ -1,0 +1,57 @@
+{
+  "id": "ref.shopify.polaris-accessibility",
+  "title": "Shopify Polaris React Accessibility",
+  "url": "https://polaris-react.shopify.com/foundations/accessibility",
+  "owner": "shopify",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility",
+    "commerce",
+    "components"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 60,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Shopify's Polaris React accessibility foundation for inclusive commerce interfaces and component use.",
+  "lessons": [
+    "Make accessible structure, interaction, and content part of every component decision."
+  ],
+  "caveats": [
+    "The Polaris documentation surface is migrating; verify the canonical Shopify platform before implementation."
+  ],
+  "licenseNote": "Public first-party documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer accessibility discipline, not Shopify branding or commerce-specific language.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden",
+    "artifact.test.a11y-suite"
+  ],
+  "contentHash": "polaris-accessibility-20260713"
+}

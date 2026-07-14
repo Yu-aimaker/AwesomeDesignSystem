@@ -4,6 +4,8 @@
   "url": "https://stripe.com/",
   "owner": "stripe",
   "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

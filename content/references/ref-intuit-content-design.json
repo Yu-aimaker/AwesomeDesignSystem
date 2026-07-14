@@ -4,6 +4,8 @@
   "url": "https://contentdesign.intuit.com/",
   "owner": "intuit",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

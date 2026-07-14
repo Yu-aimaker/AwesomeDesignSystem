@@ -16,7 +16,8 @@
     "ref.duolingo.brand-family"
   ],
   "artifactIds": [
-    "artifact.doc.brand-system"
+    "artifact.doc.brand-system",
+    "artifact.script.brand-contract"
   ],
   "verification": "Family graph, allowed-override, naming, ownership, and lifecycle validation",
   "status": "canon"

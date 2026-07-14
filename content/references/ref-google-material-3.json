@@ -4,6 +4,8 @@
   "url": "https://m3.material.io/",
   "owner": "google",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

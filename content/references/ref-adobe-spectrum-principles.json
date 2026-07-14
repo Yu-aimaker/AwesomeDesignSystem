@@ -4,6 +4,8 @@
   "url": "https://spectrum.adobe.com/page/design-principles/",
   "owner": "adobe",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

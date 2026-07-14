@@ -1,6 +1,15 @@
 import type { ComponentCatalogItem } from "@awesome-ds/core/contracts";
 
-const descriptions: Record<string, string> = {
+export const componentSlugs = [
+  "button", "icon-button", "link", "badge", "input", "textarea", "checkbox", "switch",
+  "radio-group", "select", "dialog", "alert-dialog", "popover", "tooltip", "dropdown-menu",
+  "tabs", "accordion", "breadcrumb", "pagination", "card", "callout", "skeleton", "spinner",
+  "progress", "toast", "empty-state", "error-state", "stack", "cluster", "grid", "container",
+  "visually-hidden",
+] as const;
+type ComponentSlug = (typeof componentSlugs)[number];
+
+const descriptions: Record<ComponentSlug, string> = {
   button: "読み込み中・無効状態を備えた主要アクション。", "icon-button": "必ずアクセシブルな名前を持つアイコン専用ボタン。", link: "移動先を明確に伝えるセマンティックなリンク。", badge: "状態や分類を短く示すラベル。",
   input: "ラベル、補足、エラーを関連付けた一行入力。", textarea: "長文入力のためのラベル付き複数行フィールド。", checkbox: "複数選択に使う二値の選択肢。", switch: "設定を即時に切り替えるオン・オフ操作。", "radio-group": "名前付き候補から一つだけ選ぶグループ。", select: "ラベルとエラーを備えたネイティブ選択欄。",
   dialog: "フォーカスを管理し、Escapeで閉じられるモーダル。", "alert-dialog": "取り消せない操作を安全に確認する警告ダイアログ。", popover: "現在の文脈を保ったまま補足を開く非モーダル面。", tooltip: "操作対象へ短い補足説明を加える表示。", "dropdown-menu": "キーボード操作に対応したアクションメニュー。",
@@ -9,7 +18,7 @@ const descriptions: Record<string, string> = {
   stack: "トークン化した間隔で縦に並べるレイアウト。", cluster: "折り返し可能な横並びレイアウト。", grid: "画面幅に適応する自動グリッド。", container: "読みやすい最大幅に内容を収めるコンテナ。", "visually-hidden": "視覚表示を増やさず支援技術へ文脈を渡すテキスト。",
 };
 
-const anatomy: Record<string, string[]> = {
+const anatomy: Record<ComponentSlug, string[]> = {
   button: ["button要素", "操作ラベル", "読み込み表示"], "icon-button": ["button要素", "装飾アイコン", "アクセシブルな名前"], link: ["a要素", "移動先を示す文言", "任意の外部リンク表示"], badge: ["インライン領域", "短い状態ラベル"],
   input: ["ラベル", "テキスト入力", "補足", "エラーメッセージ"], textarea: ["ラベル", "複数行入力", "補足またはエラー"], checkbox: ["チェックボックス", "表示ラベル", "任意の説明"], switch: ["スイッチ", "トラックとつまみ", "常時表示ラベル"], "radio-group": ["fieldset", "legend", "ラジオ選択肢"], select: ["ラベル", "select要素", "選択肢", "エラーメッセージ"],
   dialog: ["背景オーバーレイ", "名前付きダイアログ", "タイトル", "本文", "閉じる操作"], "alert-dialog": ["背景オーバーレイ", "alertdialog", "結果の説明", "確定", "キャンセル", "エラー通知"], popover: ["開閉トリガー", "非モーダル面", "本文"], tooltip: ["対象要素", "ツールチップ面", "補足説明"], "dropdown-menu": ["メニュートリガー", "メニュー面", "メニュー項目"],
@@ -18,12 +27,26 @@ const anatomy: Record<string, string[]> = {
   stack: ["縦方向flexコンテナ", "順序付きの子要素", "トークン間隔"], cluster: ["折り返すflexコンテナ", "横並びの子要素", "トークン間隔"], grid: ["レスポンシブグリッド", "繰り返しセル"], container: ["中央寄せの幅制約", "内容スロット", "レスポンシブ余白"], "visually-hidden": ["画面外テキスト領域", "支援技術向け文言"],
 };
 
-const keyboard: Record<string, string> = {
+const keyboard: Record<ComponentSlug, string> = {
   button: "EnterまたはSpaceで一度だけ実行します。無効・読み込み中は実行しません。", "icon-button": "EnterまたはSpaceで実行し、フォーカスリングを常に表示します。", link: "Tabでフォーカスし、Enterで移動します。", input: "標準の文字入力・選択・Tab移動を維持します。", textarea: "標準の複数行編集を維持し、Enterは改行として扱います。", checkbox: "Spaceで選択を切り替え、Tabで次へ移動します。", switch: "Spaceで設定を即時に切り替えます。", "radio-group": "矢印キーで候補を移動し、Tabでグループへ出入りします。", select: "OS標準のキー操作と先頭文字検索を維持します。",
   dialog: "内部へフォーカスを移し、Tabを閉じ込め、Escapeで閉じた後トリガーへ戻します。", "alert-dialog": "確認中以外はEscapeでキャンセルできます。確認中は操作を固定します。", popover: "EnterまたはSpaceで開き、Escapeで閉じてトリガーへ戻します。", tooltip: "キーボードフォーカスで表示し、blurまたはEscapeで閉じます。", "dropdown-menu": "矢印、Home、Endで移動し、Enterで実行、Escapeで閉じます。", tabs: "左右矢印でタブを移動し、Home・Endで端へ移動します。", accordion: "見出しへフォーカスし、EnterまたはSpaceで開閉します。", breadcrumb: "リンクは標準のTab・Enter操作を維持し、現在ページは不要にリンク化しません。", pagination: "前後ボタンは標準操作を使い、範囲の端では無効になります。",
+  badge: "通常はフォーカスを受けません。操作要素の中で使う場合は、その要素の標準キー操作に従います。",
+  card: "追加のキー操作は持たず、内部の操作要素をDOM順にTab移動します。",
+  callout: "追加のキー操作は持たず、内部にリンクがある場合だけ標準のTab・Enter操作を使います。",
+  skeleton: "操作対象にせず、読み込み後に現れる操作要素へフォーカスを自動移動しません。",
+  spinner: "操作対象にせず、処理中も現在のフォーカス位置を保ちます。",
+  progress: "操作対象にせず、進捗更新によってフォーカスを移動しません。",
+  toast: "通知自体へフォーカスを強制せず、操作を含む場合だけ標準のTab・Enter操作を使います。",
+  "empty-state": "次の行動がある場合は標準のTab・EnterまたはSpace操作を使います。",
+  "error-state": "回復操作へTabで移動し、EnterまたはSpaceで再試行します。",
+  stack: "追加のキー操作は持たず、子要素のDOM順を保ちます。",
+  cluster: "追加のキー操作は持たず、折り返しても子要素のDOM順を保ちます。",
+  grid: "追加のキー操作は持たず、視覚配置とDOM順を一致させます。",
+  container: "追加のキー操作は持たず、内部要素のセマンティックな操作を維持します。",
+  "visually-hidden": "文言自体はフォーカスを受けず、関連する操作要素のキー操作を変えません。",
 };
 
-const screenReader: Record<string, string> = {
+const screenReader: Record<ComponentSlug, string> = {
   button: "buttonとして名前、無効状態、処理中状態を通知します。処理中も操作名は変えません。",
   "icon-button": "labelを操作名として公開し、アイコン自体は装飾として扱います。",
   link: "リンクであることと、移動先が分かる文言を読み上げます。",
@@ -58,7 +81,7 @@ const screenReader: Record<string, string> = {
   "visually-hidden": "画面には表示せず、支援技術のアクセシビリティツリーには補足文言を残します。",
 };
 
-const contentRules: Record<string, string[]> = {
+const contentRules: Record<ComponentSlug, string[]> = {
   button: ["具体的な動詞から始めます。", "処理中の文言は実行した操作と一致させます。"],
   "icon-button": ["一つの目的に対応する見慣れたアイコンを使います。", "形ではなく実行される操作をlabelにします。"],
   link: ["移動先を名前で示します。", "URLだけ、または「詳しく見る」のような曖昧な文言を避けます。"],
@@ -97,7 +120,7 @@ const propDescriptions: Record<string, string> = {
   children: "表示または読み上げ対象となる内容。", id: "ラベルや説明と関連付ける一意なID。", label: "利用者と支援技術へ示す名前。", title: "領域の目的を示す見出し。", hint: "入力へ関連付ける補足説明。", error: "入力へ関連付ける回復可能なエラー。", open: "表示状態を外部から制御します。", onClose: "閉じる操作を受け取るコールバック。", onConfirm: "確定操作を実行するコールバック。", confirming: "外部から制御する処理中状態。", confirmLabel: "確定操作のローカライズ済みラベル。", confirmingLabel: "確定処理中のローカライズ済みラベル。", cancelLabel: "キャンセル操作のローカライズ済みラベル。", closeLabel: "閉じる操作のローカライズ済みラベル。", confirmationErrorLabel: "確定失敗時に読み上げるローカライズ済み文言。", items: "表示する項目とその内容。", options: "選択可能な候補。", value: "外部から制御する現在値。", checked: "外部から制御する選択状態。", onChange: "値の変更を受け取るコールバック。", disabled: "操作を無効にします。", loading: "重複操作を防ぐ処理中状態。", variant: "意味に応じた操作の強調度。", size: "トークンで定義したコントロール寸法。", tone: "意味に応じた視覚tone。", href: "リンクの移動先。", legend: "選択肢グループを説明する見出し。", name: "ネイティブフォームのグループ名。", defaultValue: "初期選択する項目。", ariaLabel: "支援技術向けにローカライズした領域名。", page: "1から始まる現在ページ。", pageCount: "総ページ数。", formatPageStatus: "現在位置をロケールに合わせて整形します。", previousLabel: "前ページ操作のローカライズ済みラベル。", nextLabel: "次ページ操作のローカライズ済みラベル。", actionLabel: "次の行動を示すラベル。", onAction: "次の行動を実行するコールバック。", description: "状態と次の手順を説明する本文。", width: "想定する表示幅。", height: "想定する表示高さ。", gap: "トークン化した要素間隔。", "…native": "対応するネイティブ要素の標準属性。",
 };
 
-const stateLabels: Record<string, string> = { idle: "通常", hover: "ホバー", focus: "フォーカス", active: "押下中", disabled: "無効", loading: "読み込み中", unchecked: "未選択", checked: "選択済み", off: "オフ", on: "オン", error: "エラー", selected: "選択済み", unselected: "未選択", open: "開いている", closed: "閉じている", expanded: "展開", collapsed: "折りたたみ", current: "現在", first: "先頭", middle: "途中", last: "末尾", partial: "進行中", visible: "表示中", empty: "空" };
+const stateLabels: Record<string, string> = { idle: "通常", hover: "ホバー", focus: "フォーカス", active: "押下中", disabled: "無効", loading: "読み込み中", visited: "訪問済み", unchecked: "未選択", checked: "選択済み", off: "オフ", on: "オン", error: "エラー", selected: "選択済み", unselected: "未選択", open: "開いている", closed: "閉じている", expanded: "展開", collapsed: "折りたたみ", current: "現在", first: "先頭", middle: "途中", last: "末尾", "0": "未開始", partial: "進行中", "100": "完了", visible: "表示中", empty: "空" };
 
 const adaptation = {
   rtl: "論理方向の余白と配置を使い、DOMとフォーカスの順序を保ちます。方向を持つアイコンだけを反転します。",
@@ -107,14 +130,18 @@ const adaptation = {
 
 export function localizeComponentContract(item: ComponentCatalogItem, locale: "en" | "ja"): ComponentCatalogItem {
   if (locale === "en") return item;
+  if (!componentSlugs.includes(item.slug as ComponentSlug)) {
+    throw new Error(`Missing Japanese component localization: ${item.slug}`);
+  }
+  const slug = item.slug as ComponentSlug;
   return {
     ...item,
-    description: descriptions[item.slug] ?? item.description,
+    description: descriptions[slug],
     states: item.states.map((state) => stateLabels[state] ?? state),
-    anatomy: anatomy[item.slug] ?? item.anatomy,
-    keyboard: keyboard[item.slug] ?? "追加のキー操作は持たず、子要素のセマンティックな操作とDOM順を保ちます。",
-    screenReader: screenReader[item.slug] ?? item.screenReader,
-    contentRules: contentRules[item.slug] ?? item.contentRules,
+    anatomy: anatomy[slug],
+    keyboard: keyboard[slug],
+    screenReader: screenReader[slug],
+    contentRules: contentRules[slug],
     rtl: adaptation.rtl,
     highContrast: adaptation.highContrast,
     reducedMotion: adaptation.reducedMotion,

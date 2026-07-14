@@ -4,6 +4,8 @@
   "url": "https://open-ui.org/",
   "owner": "openui",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [

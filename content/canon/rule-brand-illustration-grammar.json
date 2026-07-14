@@ -19,7 +19,8 @@
     "ref.duolingo.illustration-shape"
   ],
   "artifactIds": [
-    "artifact.doc.illustration"
+    "artifact.doc.illustration",
+    "artifact.script.brand-contract"
   ],
   "verification": "illustration modules + character system present",
   "status": "canon"

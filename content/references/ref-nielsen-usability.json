@@ -4,6 +4,8 @@
   "url": "https://www.nngroup.com/",
   "owner": "nielsen",
   "sourceClass": "research",
+  "medium": "article",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [
@@ -30,7 +32,8 @@
     "artifact.component.empty-state",
     "artifact.component.error-state",
     "artifact.component.skeleton",
-    "artifact.component.toast"
+    "artifact.component.toast",
+    "artifact.script.design-decision-contract"
   ],
   "contentHash": "seed-nielsen-usability"
 }

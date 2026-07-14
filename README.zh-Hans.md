@@ -1,15 +1,16 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="AwesomeDesignSystem — 面向 AI 智能体的品味层" width="100%">
+<img src="./assets/banner.svg" alt="AwesomeDesignSystem — 面向 AI 代理的品味层" width="100%">
 
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Cited sources: 270+](https://img.shields.io/badge/cited_sources-270%2B-E5484D?style=flat-square)](./research)
-[![Skills: 5](https://img.shields.io/badge/skills-5-7C5CFC?style=flat-square)](./skills)
-[![Color: OKLCH](https://img.shields.io/badge/color-OKLCH-D6409F?style=flat-square)](./design-system/foundations/color.md)
-[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](./design-system/INDEX.md)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-46C26B?style=flat-square)](./CONTRIBUTING.md)
+[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
+[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-五个技能)
+[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-快速开始)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
 
 [English](./README.md) · [日本語](./README.ja.md) · **简体中文** · [한국어](./README.ko.md) · [Español](./README.es.md)
 
@@ -17,106 +18,101 @@
 
 ---
 
-> **避开中位数，亮明你的观点。** 一个自包含、附带出处的设计系统知识库 **＋** 技能套件，让任何 AI 智能体都能产出现代（2026）、有人情味的前端设计——并停止批量生产千篇一律的「AI slop」。
+> **避开中位数。坚持观点。**  
+> AwesomeDesignSystem 已不只是「Markdown + 技能」。它是 **面向 AI 代理的设计平台**：策展教义、可版本化的证据图、可执行的 tokens / 组件 / 动效，以及英日双语本地文档站——让代理交付有人情味的现代（2026）UI，而不是千篇一律的 “AI slop”。
 
-## 🧭 为什么需要它
+## 🧭 为什么存在
 
-让 LLM「做一个落地页」，你得到的不是*设计*——而是被抓取的无数 Tailwind 教程的**统计中位数**：Inter 字体、白底紫到蓝的渐变、居中的 hero、三张带表情符号的功能卡片。不是因为模型缺乏知识，而是因为**只要不主动操舵，它就会落回中心**。
+让 LLM「做一个落地页」，你得到的往往不是 *设计*，而是全网 Tailwind 教程的**统计中位数**：Inter、紫到蓝渐变、居中 hero、三张 emoji 卡片。模型默认落在中心，除非被舵控。
 
-AwesomeDesignSystem 提供的正是这种操舵：一套**内嵌代码**、经过精选且立场鲜明的设计知识体 **＋** 只按任务所需加载内容的技能套件。
+AwesomeDesignSystem 用 **四层互相链接** 来舵控：
 
-| | |
-|---|---|
-| 🤖 **为 AI 智能体直接阅读而设计** | 无需在任务中途去抓取某个库的文档即可上手…… |
-| 🪶 **……却又不让上下文膨胀** | ……也绝不把整个系统一股脑塞进上下文。 |
-| 📐 **一手来源的严谨** | 提炼自 Apple HIG & Liquid Glass、Material 3 Expressive、Nothing、Goodpatch、Linear/Stripe/Vercel/Raycast ＋ 官方库文档。 |
-| 🔬 **经过对抗式事实核查** | 270+ 条引用来源收录于 [`research/`](./research)。 |
+| 层 | 是什么 | 位置 |
+| --- | --- | --- |
+| **Doctrine** | 带代码的有观点设计知识 | `design-system/` |
+| **Evidence** | 结构化、可校验的一手来源与 canon 规则 | `content/` |
+| **Executable** | Tokens、React 基线、动效、品牌契约 | `packages/` |
+| **Verbs** | 渐进披露的代理技能 | `skills/` + `install.sh` |
 
-## 📂 内容一览
+## 🎁 你能得到什么
 
-三层结构：**知识**（读）·**证据**（验证）·**动词**（执行）。
+| 结果 | 方式 |
+| --- | --- |
+| **停止产出 AI slop** | 品味原则、反中位数模式、审查技能 |
+| **主张可追溯** | Reference Atlas → canon → artifact → 测试 |
+| **更快交付无访问 UI** | 32 个带共享契约 + React Aria 的组件 |
+| **有意图的动效** | 尊重 `prefers-reduced-motion` 的配方库 |
+| **品牌即代码** | Product Lexicon、语气规则、文案 lint |
+| **保持新鲜** | Freshness / 链接治理脚本与 CI |
+| **本地浏览** | Next.js 文档站（**英 / 日**，`/en/*` `/ja/*`） |
 
-<details open>
-<summary><b>仓库地图</b></summary>
+当前证据图（已校验）：**105 Reference Atlas · 42 canon 规则 · 54 artifact · 6 隔离 signal**。
+
+## 📂 仓库内容
 
 ```
-design-system/            ← 规范知识库（内嵌代码 · 唯一真实来源）
-  INDEX.md                  路由：问题 → 该读哪个模块
-  best-practice-design-for-ai.md   旗舰综述（附来源链接）
-  00-philosophy/            品味层 ·「现代 2026」· 核心原则
-  foundations/              color (OKLCH) · typography（含日本語）· spacing/layout · tokens
-  motion/                   原则 · 可复制粘贴的 Motion + CSS 配方
-  components/               button/card/input/dialog/… 含状态 + a11y
-  patterns/                 hero/bento/sections/nav/backgrounds（反 slop）
-  accessibility/            WCAG 2.2 · focus · keyboard · contrast
-  tech-stack-2026/          推荐的 AI 原生技术栈
-research/                 ← 原始一手研究（证据）
-skills/                   ← 五个可移植技能（动词）
+design-system/     人类可读教义
+content/           机器图：references / canon / artifacts / signals
+packages/          tokens · core · react · motion · brand · content
+apps/docs/         本地 Next.js 16 文档 + Reference Atlas + 预览
+skills/            五个可移植技能
+research/          一手调研笔记
+docs/              架构 / 运维 / QA / 完成审计
+scripts/           校验、鲜度、证据、链接检查
 ```
-
-</details>
 
 ## 🛠️ 五个技能
 
-| | 技能 | 用来…… |
-|:--:|---|---|
-| 🎨 | **/AwesomeDS** | 以系统的品味层构建或打磨任意 UI；只路由到你需要的模块。 |
-| 🏗️ | **/MakeAwesomeDS** | 为品牌/产品生成*专属*设计系统（OKLCH 令牌 + `DESIGN.md` + 预览）。 |
-| 📄 | **/AwesomeHTML** | 把 Markdown / 研究 / 笔记转成精致、自包含的单文件 HTML 文档。 |
-| 🔍 | **/AwesomeReview** | 审计现有 UI 或代码——检出 AI slop 与 a11y 问题，给出按优先级排序的修复。 |
-| ✨ | **/AwesomeMotion** | 设计有品味、有目的的动效（Motion for React + 纯 CSS 配方）。 |
+|  | 技能 | 用途 |
+| :-: | --- | --- |
+| 🎨 | **/AwesomeDS** | 用品味层构建或打磨 UI |
+| 🏗️ | **/MakeAwesomeDS** | 生成产品自有 DS（OKLCH + `DESIGN.md` + 预览） |
+| 📄 | **/AwesomeHTML** | 将 Markdown / 笔记变成精美单文件 HTML |
+| 🔍 | **/AwesomeReview** | 审查 AI slop 与 a11y 问题 |
+| ✨ | **/AwesomeMotion** | 设计有目的的动效 |
 
 ## 🚀 快速开始
 
-#### 面向 AI 智能体——无需安装
+### 1) AI 代理 — 无需安装
 
-> [!TIP]
-> 把智能体指向本仓库，并要求它**先读 [`design-system/INDEX.md`](./design-system/INDEX.md)**，之后只打开任务所需的模块。INDEX 是地图，每个模块都自包含。
+先读 [`DESIGN.md`](./DESIGN.md) 与 [`design-system/INDEX.md`](./design-system/INDEX.md)，再按任务打开模块；引用 `rule.*`，追溯到 `ref.*`。
 
-#### 作为 Claude Code 技能
+### 2) Claude Code 技能
 
 ```bash
 git clone https://github.com/Yu-aimaker/AwesomeDesignSystem.git
 cd AwesomeDesignSystem
-./install.sh        # 将 5 个技能软链接到 ~/.claude/skills（并备份任何已有技能）
+./install.sh
 ```
 
-然后在 Claude Code 中：`/AwesomeDS` · `/MakeAwesomeDS` · `/AwesomeHTML` · `/AwesomeReview` · `/AwesomeMotion`
+### 3) 本地 monorepo + 文档站
 
-> [!NOTE]
-> `install.sh` 使用软链接，因此请保持仓库原地不动——拉取更新即可更新技能。沙箱环境请使用 `--copy`。
+需要 **Node ≥ 22.12** 与 **pnpm 10.5.2**。
 
-## 📐 一口气说完的标准
+```bash
+pnpm install
+pnpm --filter @awesome-ds/docs dev   # http://127.0.0.1:3000
+pnpm validate && pnpm test && pnpm qa:core
+```
 
-> 避开中位数，亮明观点。一个主色 **＋** 锐利点缀，绝不用怯懦而均匀的调色板。一款刻意而独特的字体——绝不把 Inter 当唯一选择。靠对比建立真实层级；每屏只有一个焦点。克制 **＝** 自信。动效传达状态而非装饰——一次精心编排的页面加载，胜过零散的微交互。为基础元件设定主题，绝不直接交付原始默认值。务必设计 error / empty / loading 状态，并满足 WCAG 2.2 AA。要的是连贯的**整体**，而非零件的拼凑。
+详见 [`docs/architecture.md`](./docs/architecture.md) 与 [`docs/completion-audit.md`](./docs/completion-audit.md)。
 
-## 🎨 设计令牌——共享词汇
+## 📐 一句话标准
 
-每个模块都讲**同一种令牌语言**，并映射进 Tailwind v4 的 `@theme {}` 块。
+> 避开中位数。坚持观点。主色 + 锐利强调色。有意识的字体选择。真实层级；一屏一个焦点。克制即自信。动效传达状态而非装饰。主题化原语。设计错误 / 空 / 加载态。满足 WCAG 2.2 AA。交付连贯整体。
 
-<details>
-<summary><b>完整令牌契约</b></summary>
+## 🔬 证据与鲜度
 
-| 分组 | 令牌 |
-|---|---|
-| **Color**（语义 · OKLCH） | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
-| **Space**（8pt 刻度） | `--space-1` … `--space-32` |
-| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
-| **Type**（流体） | `--text-xs` … `--text-7xl` · `--leading-*` · `--tracking-*` |
-| **Font** | `--font-display` · `--font-body` · `--font-mono` |
-| **Elevation** | 发丝边框 **+** `--shadow-sm/md/lg` |
-| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
+- Reference Atlas、canon 规则、隔离 signals  
+- 命令：`pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`  
+- **不是链接合集**——一手来源被吸收为教义与可执行契约，再经图校验保持诚实。
 
-带数值的完整集合 → [`foundations/tokens.md`](./design-system/foundations/tokens.md)
+## 🌐 本地化
 
-</details>
+文档 UI 为英 / 日；canon Markdown 以英文为准，未翻译处有明确回退提示。
 
-## 🤝 参与贡献
+## 🤝 贡献 · ⚖️ 许可
 
-请见 [CONTRIBUTING.md](./CONTRIBUTING.md)。底线：每条主张都有**出处**、代码必须**内嵌**、技能保持**令牌节俭**，凡是过不了反 AI slop 预检（Pre-Flight）的都不发布。
+见 [CONTRIBUTING.md](./CONTRIBUTING.md)。[MIT](./LICENSE)。
 
-## ⚖️ 许可证
-
-[MIT](./LICENSE)——可自由使用、改编与在其之上构建。
-
-<div align="center"><sub>让 AI 设计得像是真有品味。🎨</sub></div>
+<div align="center"><sub>让 AI 像拥有品味一样做设计。🎨</sub></div>

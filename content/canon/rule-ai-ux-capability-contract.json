@@ -19,7 +19,10 @@
     "ref.ibm.carbon-for-ai",
     "ref.microsoft.human-ai-guidelines"
   ],
-  "artifactIds": [],
+  "artifactIds": [
+    "artifact.doc.ai-interaction-contracts",
+    "artifact.script.ai-interaction-contract"
+  ],
   "verification": "Contract review plus unsupported-task, missing-tool, stale-data and changed-model test cases",
   "status": "canon"
 }

@@ -11,5 +11,12 @@
   "promotionBlockedReason": "Needs peer-reviewed or first-party production guidance plus a11y implications review before canon elevation.",
   "candidateRuleIds": [
     "rule.ai.generative-boundaries"
-  ]
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
 }

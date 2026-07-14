@@ -4,6 +4,8 @@
   "url": "https://fluent2.microsoft.design/",
   "owner": "microsoft",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

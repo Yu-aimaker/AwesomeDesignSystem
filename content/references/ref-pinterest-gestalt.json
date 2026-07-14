@@ -4,6 +4,8 @@
   "url": "https://gestalt.pinterest.systems/",
   "owner": "pinterest",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

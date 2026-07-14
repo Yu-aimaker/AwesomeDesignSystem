@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "updated": "2026-07-13",
-  "description": "AwesomeDS content graph schema version for references, canon rules, and signals."
+  "description": "AwesomeDS content graph schema version. Reference Atlas 1.1 adds required medium and driftRisk enums."
 }

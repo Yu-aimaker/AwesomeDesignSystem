@@ -4,6 +4,8 @@
   "url": "https://motion.dev/",
   "owner": "motion",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

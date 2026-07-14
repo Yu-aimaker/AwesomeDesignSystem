@@ -4,6 +4,8 @@
   "url": "https://github.com/pinterest/gestalt/blob/master/docs/pages/foundations/accessibility.tsx",
   "owner": "pinterest",
   "sourceClass": "official-system",
+  "medium": "repository",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

@@ -1,9 +1,11 @@
 {
   "id": "ref.shopify.polaris",
   "title": "Shopify Polaris",
-  "url": "https://polaris.shopify.com/",
+  "url": "https://polaris-react.shopify.com/",
   "owner": "shopify",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

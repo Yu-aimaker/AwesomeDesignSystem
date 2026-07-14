@@ -53,6 +53,8 @@ describe("translation fallback", () => {
     expect(getDictionary("ja").shell.skipToContent).toBe("本文へ移動");
     expect(getDictionary("ja").theme.dark).toBe("ダーク");
     expect(getDictionary("en").theme.dark).toBe("Dark");
+    expect(getDictionary("ja").home.repositoryProof).toBe("リポジトリの検証結果");
+    expect(getDictionary("ja").home.pass).toBe("合格");
   });
 
   test("localizes interactive workbench and reference-detail copy", () => {
@@ -61,5 +63,9 @@ describe("translation fallback", () => {
     expect(ja.workbench.forbidden).toContain("{term}");
     expect(ja.referenceDetail.implementations).toBe("実装・成果物");
     expect(ja.canon.traceability).toBe("構造化された追跡情報");
+    expect(ja.references.medium).toBe("媒体");
+    expect(ja.references.driftRisk).toBe("変化リスク");
+    expect(ja.status.reportIntegrityError).toContain("整合性エラー");
+    expect(ja.status.latestLinks).toContain("外部リンク");
   });
 });

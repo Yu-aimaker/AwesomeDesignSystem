@@ -4,6 +4,8 @@
   "url": "https://vercel.com/design/guidelines",
   "owner": "vercel",
   "sourceClass": "design-engineering",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [
@@ -34,7 +36,8 @@
     "artifact.component.pagination",
     "artifact.component.skeleton",
     "artifact.component.toast",
-    "artifact.doc.interface-quality"
+    "artifact.doc.interface-quality",
+    "artifact.script.design-decision-contract"
   ],
   "contentHash": "seed-vercel-web-interface-guidelines"
 }

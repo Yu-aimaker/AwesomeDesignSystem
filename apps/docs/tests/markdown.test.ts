@@ -54,6 +54,12 @@ describe("canon markdown loading", () => {
     expect(() => renderCanonMarkdown("[Secrets](../../secrets.md)", { relPath: "design-system/components/index.md" })).toThrow(/escapes design-system/);
   });
 
+  test("rejects Canon document paths outside the canon root", async () => {
+    await expect(loadCanonDoc("../package.json")).rejects.toThrow(/escapes design-system/);
+    await expect(loadCanonDoc("design-system/../package.json")).rejects.toThrow(/escapes design-system/);
+    await expect(loadCanonDoc("/etc/passwd")).rejects.toThrow(/escapes design-system/);
+  });
+
   test("all rendered internal canon links resolve to a known document", async () => {
     const docs = await loadAllCanonDocs("ja");
     const known = new Set(docs.map((doc) => `/ja/canon/${doc.slug}`));
@@ -132,5 +138,5 @@ describe("canon markdown loading", () => {
     } finally {
       await rm(cacheDirectory, { recursive: true, force: true });
     }
-  });
+  }, 30_000);
 });

@@ -4,6 +4,8 @@
   "url": "https://www.nngroup.com/articles/principles-visual-design/",
   "owner": "williams",
   "sourceClass": "book",
+  "medium": "book",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [
@@ -28,7 +30,8 @@
     "rule.foundations.core-literacy"
   ],
   "linkedArtifactIds": [
-    "artifact.doc.core-literacy"
+    "artifact.doc.core-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "contentHash": "seed-williams-non-designers"
 }

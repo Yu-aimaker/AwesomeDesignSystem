@@ -38,6 +38,8 @@ export function filterReferences(
     owner?: string | undefined;
     language?: string | undefined;
     evidenceLevel?: string | undefined;
+    medium?: string | undefined;
+    driftRisk?: string | undefined;
     region?: string | undefined;
     freshness?: string | undefined;
   },
@@ -55,6 +57,8 @@ export function filterReferences(
     if (query.owner && ref.owner !== query.owner) return false;
     if (query.language && ref.language !== query.language) return false;
     if (query.evidenceLevel && ref.evidenceLevel !== query.evidenceLevel) return false;
+    if (query.medium && ref.medium !== query.medium) return false;
+    if (query.driftRisk && ref.driftRisk !== query.driftRisk) return false;
     if (query.region && ref.region !== query.region) return false;
     if (query.freshness && ref.freshnessState !== query.freshness) return false;
     return true;

@@ -4,6 +4,8 @@
   "url": "https://design.mercari.com/",
   "owner": "mercari",
   "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
   "region": "jp",
   "language": "ja",
   "topics": [

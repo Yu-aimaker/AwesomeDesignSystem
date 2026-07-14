@@ -7,9 +7,13 @@ const validManifest = {
   version: "1.0.0",
   owner: { name: "Brand team", contact: "brand@example.com" },
   personality: { traits: ["clear", "warm", "curious"], antiTraits: ["vague", "patronizing"] },
+  narrative: { promise: "Make complex work feel manageable", evidence: ["Task completion research"], prohibitedClaims: ["Guaranteed outcomes"] },
+  voice: { qualities: ["clear", "warm", "direct"], contextualTones: [{ context: "error", tone: "calm and actionable" }], editorialRules: ["Lead with the outcome"] },
+  family: { parentBrand: "Example", variants: [{ name: "Example Teams", invariantTraits: ["clear", "warm"] }] },
   marks: [{ id: "primary", role: "primary", assetPath: "assets/mark.svg", minPx: 24, safeArea: 0.25, allowedBackgrounds: ["light", "dark"] }],
   typography: [{ id: "body", role: "body", family: "Example Sans", fallback: "system-ui", scripts: ["Latn", "Jpan"], license: "OFL-1.1" }],
   imagery: { defaultMode: "illustration", syntheticMediaDisclosure: "required", requireRights: true, requireAltText: true },
+  illustration: { shapeGrammar: ["Rounded structural forms"], characterRules: ["Expressions reflect product state"], motionRules: ["Motion explains causality"] },
   lexicon: [{ term: "workspace", definition: "A shared project area", status: "preferred", locales: ["en", "ja"], owner: "Content design" }],
   assets: [{ id: "mark-primary", path: "assets/mark.svg", license: "Owned", checksum: "sha256:abc", owner: "Brand team", status: "active" }]
 };

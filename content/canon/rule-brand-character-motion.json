@@ -18,7 +18,8 @@
     "ref.duolingo.writing-duo"
   ],
   "artifactIds": [
-    "artifact.doc.illustration"
+    "artifact.doc.illustration",
+    "artifact.script.brand-contract"
   ],
   "verification": "Cross-modal fixture review covering copy, motion, sound, accessibility, rig bounds, and critical contexts",
   "status": "canon"

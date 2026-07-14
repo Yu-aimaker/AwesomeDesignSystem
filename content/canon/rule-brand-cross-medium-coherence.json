@@ -26,7 +26,8 @@
   ],
   "artifactIds": [
     "artifact.doc.brand-coherence",
-    "artifact.doc.brand-workbench"
+    "artifact.doc.brand-workbench",
+    "artifact.script.brand-contract"
   ],
   "verification": "Brand modules present; agent skill routes to contract first",
   "status": "canon"

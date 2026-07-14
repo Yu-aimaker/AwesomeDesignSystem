@@ -4,6 +4,8 @@
   "url": "https://github.com/dequelabs/axe-core",
   "owner": "a11y",
   "sourceClass": "implementation",
+  "medium": "repository",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

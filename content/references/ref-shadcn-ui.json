@@ -4,6 +4,8 @@
   "url": "https://ui.shadcn.com/",
   "owner": "shadcn",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

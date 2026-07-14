@@ -9,6 +9,16 @@ const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "../../..",
 );
+const canonRoot = path.join(repoRoot, "design-system");
+
+function resolveCanonFile(relPath: string): string {
+  const full = path.resolve(repoRoot, relPath);
+  const relative = path.relative(canonRoot, full);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error(`Canon path escapes design-system: ${relPath}`);
+  }
+  return full;
+}
 
 const markdownSanitizer: sanitizeHtml.IOptions = {
   allowedTags: [
@@ -125,7 +135,7 @@ export async function listMarkdownFiles(
 }
 
 export async function loadCanonDoc(relPath: string, locale: "en" | "ja" = "en"): Promise<CanonDoc | null> {
-  const full = path.join(repoRoot, relPath);
+  const full = resolveCanonFile(relPath);
   try {
     const md = await readFile(full, "utf8");
     const slug = relPath

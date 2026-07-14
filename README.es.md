@@ -1,15 +1,16 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="AwesomeDesignSystem — la capa de buen gusto para agentes de IA" width="100%">
+<img src="./assets/banner.svg" alt="AwesomeDesignSystem — la capa de gusto para agentes de IA" width="100%">
 
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Cited sources: 270+](https://img.shields.io/badge/cited_sources-270%2B-E5484D?style=flat-square)](./research)
-[![Skills: 5](https://img.shields.io/badge/skills-5-7C5CFC?style=flat-square)](./skills)
-[![Color: OKLCH](https://img.shields.io/badge/color-OKLCH-D6409F?style=flat-square)](./design-system/foundations/color.md)
-[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](./design-system/INDEX.md)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-46C26B?style=flat-square)](./CONTRIBUTING.md)
+[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
+[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-las-cinco-skills)
+[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-inicio-rápido)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · **Español**
 
@@ -17,106 +18,99 @@
 
 ---
 
-> **Evita la mediana. Comprométete con un punto de vista.** Una base de conocimiento de sistema de diseño autocontenida y con fuentes citadas **＋** un conjunto de skills que permiten a cualquier agente de IA producir un diseño frontend moderno (2026) y con sensación humana — y dejar de publicar el típico "AI slop".
+> **Evita la mediana. Comprométete con un punto de vista.**  
+> AwesomeDesignSystem ya no es solo “Markdown + skills”. Es una **plataforma de diseño para agentes de IA**: doctrina curada, grafo de evidencia versionado, tokens/componentes/motion ejecutables y un sitio de docs local bilingüe (EN/JA) — para que los agentes entreguen UI moderna (2026) con sensación humana, no “AI slop”.
 
 ## 🧭 Por qué existe
 
-Pídele a un LLM que "construya una landing page" y no obtienes *diseño* — obtienes la **mediana estadística** de cada tutorial de Tailwind jamás rastreado: Inter, un degradado de morado a azul sobre blanco, un hero centrado, tres tarjetas de features con emojis. No porque al modelo le falte conocimiento, sino porque **cae al centro a menos que lo desvíes de él.**
+Pide a un LLM “haz un landing” y casi nunca obtienes *diseño*: obtienes la **mediana estadística** de cada tutorial de Tailwind. Inter, degradado púrpura-azul, hero centrado, tres tarjetas con emoji. El modelo cae al centro salvo que lo dirijas.
 
-AwesomeDesignSystem aporta esa dirección: un cuerpo de conocimiento de diseño curado y con criterio — **con el código incrustado** — más skills que cargan solo lo que la tarea necesita.
+AwesomeDesignSystem dirige con **cuatro capas enlazadas**:
 
-| | |
-|---|---|
-| 🤖 **Diseñado para que los agentes de IA lo lean directamente** | Sin tener que buscar la documentación de una librería a mitad de tarea para ser productivo… |
-| 🪶 **…sin inflar el contexto** | …y sin tragarse todo el sistema dentro del contexto tampoco. |
-| 📐 **Rigor de fuentes primarias** | Destilado de Apple HIG & Liquid Glass, Material 3 Expressive, Nothing, Goodpatch, Linear/Stripe/Vercel/Raycast ＋ la documentación oficial de las librerías. |
-| 🔬 **Verificado de forma adversarial** | Más de 270 fuentes citadas viven en [`research/`](./research). |
+| Capa | Qué es | Dónde |
+| --- | --- | --- |
+| **Doctrine** | Conocimiento de diseño con código embebido | `design-system/` |
+| **Evidence** | Fuentes primarias estructuradas + reglas canon | `content/` |
+| **Executable** | Tokens, React base, motion, contratos de marca | `packages/` |
+| **Verbs** | Skills de agente con divulgación progresiva | `skills/` + `install.sh` |
+
+## 🎁 Qué obtienes
+
+| Resultado | Cómo |
+| --- | --- |
+| **Dejar de enviar AI slop** | Principios de gusto, patrones anti-mediana, skill de review |
+| **Trazar cada afirmación** | Reference Atlas → reglas canon → artifacts → tests |
+| **UI accesible más rápido** | 32 componentes React con contratos + React Aria |
+| **Motion con intención** | Recetas que respetan `prefers-reduced-motion` |
+| **Marca como código** | Product Lexicon, voz y lint de copy |
+| **Mantenerse actualizado** | Freshness, links y CI |
+| **Explorar en local** | Docs Next.js en **EN/JA** (`/en/*`, `/ja/*`) |
+
+Grafo actual (validado): **105 Reference Atlas · 42 reglas canon · 54 artifacts · 6 signals en cuarentena**.
 
 ## 📂 Qué hay dentro
 
-Tres capas: **conocimiento** (leer) · **evidencia** (verificar) · **verbos** (actuar).
-
-<details open>
-<summary><b>El mapa del repositorio</b></summary>
-
 ```
-design-system/            ← la base de conocimiento canónica (código incrustado · única fuente de verdad)
-  INDEX.md                  router: pregunta → qué módulo leer
-  best-practice-design-for-ai.md   la síntesis insignia, con enlaces a fuentes
-  00-philosophy/            capa de gusto ·「moderno 2026」· principios fundamentales
-  foundations/              color (OKLCH) · typography (incl. 日本語) · spacing/layout · tokens
-  motion/                   principios · recetas copy-paste de Motion + CSS
-  components/               button/card/input/dialog/… con estados + a11y
-  patterns/                 hero/bento/sections/nav/backgrounds (anti-slop)
-  accessibility/            WCAG 2.2 · focus · keyboard · contrast
-  tech-stack-2026/          el stack AI-native recomendado
-research/                 ← investigación cruda de fuentes primarias (la evidencia)
-skills/                   ← cinco skills portables (los verbos)
+design-system/     canon legible por humanos
+content/           grafo máquina: references / canon / artifacts / signals
+packages/          tokens · core · react · motion · brand · content
+apps/docs/         docs Next.js 16 + Reference Atlas + previews
+skills/            cinco skills portátiles
+research/ · docs/ · scripts/
 ```
-
-</details>
 
 ## 🛠️ Las cinco skills
 
-| | Skill | Úsala para… |
-|:--:|---|---|
-| 🎨 | **/AwesomeDS** | Construir o refinar cualquier UI con la capa de gusto del sistema; enruta solo a los módulos que necesitas. |
-| 🏗️ | **/MakeAwesomeDS** | Generar el sistema de diseño *propio* de una marca/producto (tokens OKLCH + `DESIGN.md` + previews). |
-| 📄 | **/AwesomeHTML** | Convertir Markdown / investigación / notas en un documento HTML de un solo archivo, pulido y autocontenido. |
-| 🔍 | **/AwesomeReview** | Auditar UI o código existente — detecta AI slop y fallos de a11y, reporta arreglos priorizados. |
-| ✨ | **/AwesomeMotion** | Diseñar movimiento con criterio y propósito (Motion para React + recetas solo CSS). |
+|  | Skill | Para… |
+| :-: | --- | --- |
+| 🎨 | **/AwesomeDS** | Construir o refinar UI con la capa de gusto |
+| 🏗️ | **/MakeAwesomeDS** | Generar el DS propio del producto |
+| 📄 | **/AwesomeHTML** | Markdown → HTML de un solo archivo |
+| 🔍 | **/AwesomeReview** | Auditar slop y fallos de a11y |
+| ✨ | **/AwesomeMotion** | Motion con propósito |
 
 ## 🚀 Inicio rápido
 
-#### Para un agente de IA — sin instalación
+### 1) Agente de IA — sin instalar
 
-> [!TIP]
-> Apunta al agente a este repositorio y dile que **lea primero [`design-system/INDEX.md`](./design-system/INDEX.md)**, y luego abra solo los módulos que su tarea necesite. El INDEX es el mapa; cada módulo es autocontenido.
+Lee primero [`DESIGN.md`](./DESIGN.md) y [`design-system/INDEX.md`](./design-system/INDEX.md); abre solo lo necesario; cita `rule.*` y traza a `ref.*`.
 
-#### Como skills de Claude Code
+### 2) Skills de Claude Code
 
 ```bash
 git clone https://github.com/Yu-aimaker/AwesomeDesignSystem.git
 cd AwesomeDesignSystem
-./install.sh        # enlaza las 5 skills en ~/.claude/skills (y respalda cualquier skill previa)
+./install.sh
 ```
 
-Luego en Claude Code: `/AwesomeDS` · `/MakeAwesomeDS` · `/AwesomeHTML` · `/AwesomeReview` · `/AwesomeMotion`
+### 3) Monorepo local + sitio de docs
 
-> [!NOTE]
-> `install.sh` usa enlaces simbólicos, así que mantén el repo en su sitio — al hacer pull se actualizan las skills. Usa `--copy` para entornos aislados (sandbox).
+Requiere **Node ≥ 22.12** y **pnpm 10.5.2**.
 
-## 📐 El estándar, en un solo aliento
+```bash
+pnpm install
+pnpm --filter @awesome-ds/docs dev   # http://127.0.0.1:3000
+pnpm validate && pnpm test && pnpm qa:core
+```
 
-> Evita la mediana. Comprométete con un punto de vista. Un color dominante **＋** acentos nítidos, nunca una paleta tímida y uniforme. Una tipografía deliberada y distintiva — nunca Inter como única opción. Jerarquía real mediante contraste; un foco por pantalla. Contención **＝** confianza. El movimiento comunica estado, no decoración — una carga de página orquestada vale más que microinteracciones dispersas. Tematiza tus primitivos, nunca entregues los defaults en crudo. Diseña siempre los estados de error / vacío / carga y cumple WCAG 2.2 AA. Un **todo** coherente, no una colección de partes.
+Ver [`docs/architecture.md`](./docs/architecture.md) y [`docs/completion-audit.md`](./docs/completion-audit.md).
 
-## 🎨 Tokens de diseño — el vocabulario compartido
+## 📐 El estándar en un aliento
 
-Cada módulo habla **un único lenguaje de tokens**, reflejado en un bloque `@theme {}` de Tailwind v4.
+> Evita la mediana. Un color dominante + acentos nítidos. Tipografía deliberada. Jerarquía real; un foco por pantalla. La contención es confianza. El motion comunica estado. Tematiza primitivos. Diseña error / vacío / carga. WCAG 2.2 AA. Un **todo** coherente.
 
-<details>
-<summary><b>El contrato de tokens completo</b></summary>
+## 🔬 Evidencia y frescura
 
-| Grupo | Tokens |
-|---|---|
-| **Color** (semántico, OKLCH) | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
-| **Space** (escala 8pt) | `--space-1` … `--space-32` |
-| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
-| **Type** (fluida) | `--text-xs` … `--text-7xl` · `--leading-*` · `--tracking-*` |
-| **Font** | `--font-display` · `--font-body` · `--font-mono` |
-| **Elevation** | bordes hairline **+** `--shadow-sm/md/lg` |
-| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
+- Reference Atlas, reglas canon, signals en cuarentena  
+- `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`  
+- **No es un listado de enlaces** — las fuentes se absorben en doctrina y contratos ejecutables, validados por el grafo.
 
-El conjunto completo con valores → [`foundations/tokens.md`](./design-system/foundations/tokens.md)
+## 🌐 Localización
 
-</details>
+UI de docs en inglés y japonés. El Markdown canon es inglés primero; el fallback se marca de forma explícita.
 
-## 🤝 Contribuir
+## 🤝 Contribuir · ⚖️ Licencia
 
-Mira [CONTRIBUTING.md](./CONTRIBUTING.md). El listón: toda afirmación tiene **fuente**, el código va **incrustado**, las skills se mantienen **frugales en tokens**, y no se publica nada que no pase el Pre-Flight anti-AI-slop.
+[CONTRIBUTING.md](./CONTRIBUTING.md) · [MIT](./LICENSE)
 
-## ⚖️ Licencia
-
-[MIT](./LICENSE) — libre para usar, adaptar y construir encima.
-
-<div align="center"><sub>Hecho para que la IA diseñe como si tuviera buen gusto. 🎨</sub></div>
+<div align="center"><sub>Hecho para que la IA diseñe como si tuviera gusto. 🎨</sub></div>

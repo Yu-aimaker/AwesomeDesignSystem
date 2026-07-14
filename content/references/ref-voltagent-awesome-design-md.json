@@ -4,6 +4,8 @@
   "url": "https://github.com/voltagent/awesome-design-md",
   "owner": "voltagent",
   "sourceClass": "repository",
+  "medium": "repository",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

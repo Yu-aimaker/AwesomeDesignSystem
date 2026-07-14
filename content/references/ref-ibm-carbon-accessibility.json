@@ -1,0 +1,57 @@
+{
+  "id": "ref.ibm.carbon-accessibility",
+  "title": "Carbon Accessibility Overview",
+  "url": "https://carbondesignsystem.com/guidelines/accessibility/overview/",
+  "owner": "ibm",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility",
+    "enterprise",
+    "quality"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "IBM Carbon's accessibility operating model for inclusive enterprise products, components, and delivery practices.",
+  "lessons": [
+    "Treat accessibility as a shared delivery responsibility backed by repeatable testing."
+  ],
+  "caveats": [
+    "Enterprise guidance must be validated against each product's users, platforms, and risks."
+  ],
+  "licenseNote": "Public first-party documentation; cite and synthesize.",
+  "antiImitationNote": "Adopt the operating model, not IBM brand expression.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden",
+    "artifact.test.a11y-suite"
+  ],
+  "contentHash": "carbon-accessibility-20260713"
+}

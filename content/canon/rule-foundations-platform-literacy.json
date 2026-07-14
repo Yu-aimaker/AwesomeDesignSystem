@@ -17,7 +17,8 @@
     "ref.google.material-3"
   ],
   "artifactIds": [
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "platform-literacy module present",
   "status": "canon"

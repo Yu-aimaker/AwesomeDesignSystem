@@ -4,6 +4,8 @@
   "url": "https://www.w3.org/TR/WCAG22/",
   "owner": "w3c",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [

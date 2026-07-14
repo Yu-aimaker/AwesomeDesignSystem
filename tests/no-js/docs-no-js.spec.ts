@@ -31,3 +31,11 @@ test("motion documentation remains visible when animation helpers cannot hydrate
   await expect(page.getByRole("heading", { level: 1, name: "enter" })).toBeVisible();
   await expect(page.getByText("Introduce new content without layout thrash")).toBeVisible();
 });
+
+test("locale switch preserves query parameters before hydration", async ({ page }) => {
+  await page.goto("/ja/references?q=apple&region=global", { waitUntil: "domcontentloaded" });
+  await expect(page.getByRole("link", { name: "English" })).toHaveAttribute(
+    "href",
+    "/en/references?q=apple&region=global",
+  );
+});

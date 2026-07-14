@@ -4,6 +4,8 @@
   "url": "https://baseweb.design/",
   "owner": "uber",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

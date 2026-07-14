@@ -17,7 +17,8 @@
     "ref.spotify.design"
   ],
   "artifactIds": [
-    "artifact.doc.content-design"
+    "artifact.doc.content-design",
+    "artifact.script.brand-contract"
   ],
   "verification": "Profile schema plus golden lint fixtures and locale-owner review",
   "status": "canon"

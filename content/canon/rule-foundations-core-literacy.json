@@ -18,7 +18,8 @@
     "ref.williams.non-designers"
   ],
   "artifactIds": [
-    "artifact.doc.core-literacy"
+    "artifact.doc.core-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "foundations modules + review checklist",
   "status": "canon"

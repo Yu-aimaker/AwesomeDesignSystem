@@ -4,6 +4,8 @@
   "url": "https://tailwindcss.com/docs",
   "owner": "tailwind",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

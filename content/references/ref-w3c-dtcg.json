@@ -4,6 +4,8 @@
   "url": "https://www.designtokens.org/",
   "owner": "w3c",
   "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
   "region": "global",
   "language": "en",
   "topics": [

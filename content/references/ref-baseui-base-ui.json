@@ -4,6 +4,8 @@
   "url": "https://base-ui.com/",
   "owner": "baseui",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

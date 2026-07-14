@@ -1,9 +1,11 @@
 {
   "id": "ref.salesforce.lightning-guidelines",
-  "title": "Lightning Design System guidelines",
+  "title": "Lightning Design System 2 patterns",
   "url": "https://www.lightningdesignsystem.com/guidelines/overview/",
   "owner": "salesforce",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [
@@ -16,7 +18,7 @@
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Page-level source for object-centric enterprise guidance and system conventions.",
+  "summary": "Current Lightning Design System 2 patterns guidance for consistent enterprise workflows and interaction models.",
   "lessons": [
     "Define shared domain states across record, table and history views."
   ],

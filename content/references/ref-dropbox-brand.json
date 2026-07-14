@@ -4,6 +4,8 @@
   "url": "https://brand.dropbox.com/",
   "owner": "dropbox",
   "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

@@ -4,6 +4,8 @@
   "url": "https://smarthr.design/",
   "owner": "smarthr",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "jp",
   "language": "ja",
   "topics": [

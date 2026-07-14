@@ -4,6 +4,8 @@
   "url": "https://atlassian.design/content",
   "owner": "atlassian",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

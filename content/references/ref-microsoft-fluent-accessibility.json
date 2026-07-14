@@ -1,0 +1,57 @@
+{
+  "id": "ref.microsoft.fluent-accessibility",
+  "title": "Fluent 2 Accessibility",
+  "url": "https://fluent2.microsoft.design/accessibility",
+  "owner": "microsoft",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility",
+    "inclusive-design",
+    "quality"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Fluent 2 guidance for inclusive product design, accessible interaction, content, and implementation.",
+  "lessons": [
+    "Include accessibility requirements in design and implementation decisions from the start."
+  ],
+  "caveats": [
+    "Platform guidance must be validated against the target operating system and assistive technologies."
+  ],
+  "licenseNote": "Public first-party documentation; cite and synthesize.",
+  "antiImitationNote": "Adopt inclusive practices, not Microsoft visual identity.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden",
+    "artifact.test.a11y-suite"
+  ],
+  "contentHash": "fluent-accessibility-20260713"
+}

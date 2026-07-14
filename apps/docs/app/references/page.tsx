@@ -18,10 +18,12 @@ export default async function ReferencesPage({
   const owner = typeof sp.owner === "string" ? sp.owner : undefined;
   const language = typeof sp.language === "string" ? sp.language : undefined;
   const evidenceLevel = typeof sp.evidenceLevel === "string" ? sp.evidenceLevel : undefined;
+  const medium = typeof sp.medium === "string" ? sp.medium : undefined;
+  const driftRisk = typeof sp.driftRisk === "string" ? sp.driftRisk : undefined;
   const region = typeof sp.region === "string" ? sp.region : undefined;
   const freshness = typeof sp.freshness === "string" ? sp.freshness : undefined;
   const { references } = await getAtlas();
-  const filtered = filterReferences(references, { q, topic, sourceClass, owner, language, evidenceLevel, region, freshness });
+  const filtered = filterReferences(references, { q, topic, sourceClass, owner, language, evidenceLevel, medium, driftRisk, region, freshness });
   const topics = Array.from(new Set(references.flatMap((r) => r.topics))).sort();
   const owners = Array.from(new Set(references.map((r) => r.owner))).sort();
   const languages = Array.from(new Set(references.map((r) => r.language))).sort();
@@ -61,28 +63,42 @@ export default async function ReferencesPage({
         </label>
         <label className="ads-field">
           <span className="ads-label">{d.topic}</span>
-          <select name="topic" defaultValue={topic ?? ""} aria-label="Filter by topic">
+          <select name="topic" defaultValue={topic ?? ""} aria-label={d.topic}>
             <option value="">{d.allTopics}</option>
             {topics.map((t) => <option key={t} value={t}>{t}</option>)}
           </select>
         </label>
         <label className="ads-field">
           <span className="ads-label">{d.sourceClass}</span>
-          <select name="sourceClass" defaultValue={sourceClass ?? ""} aria-label="Filter by source class">
+          <select name="sourceClass" defaultValue={sourceClass ?? ""} aria-label={d.sourceClass}>
             <option value="">{d.allClasses}</option>
             {["standard","official-system","design-engineering","implementation","brand","research","book","repository","signal"].map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
         </label>
         <label className="ads-field">
+          <span className="ads-label">{d.medium}</span>
+          <select name="medium" defaultValue={medium ?? ""} aria-label={d.medium}>
+            <option value="">{d.allMedia}</option>
+            {["standard","documentation","website","repository","article","book"].map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
+          <span className="ads-label">{d.driftRisk}</span>
+          <select name="driftRisk" defaultValue={driftRisk ?? ""} aria-label={d.driftRisk}>
+            <option value="">{d.allDriftRisks}</option>
+            {["low","medium","high"].map((value) => <option key={value} value={value}>{value}</option>)}
+          </select>
+        </label>
+        <label className="ads-field">
           <span className="ads-label">{d.region}</span>
-          <select name="region" defaultValue={region ?? ""} aria-label="Filter by region">
+          <select name="region" defaultValue={region ?? ""} aria-label={d.region}>
             <option value="">{d.allRegions}</option>
             {["global","us","eu","jp","kr","cn","other"].map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
         </label>
         <label className="ads-field">
           <span className="ads-label">{d.freshness}</span>
-          <select name="freshness" defaultValue={freshness ?? ""} aria-label="Filter by freshness">
+          <select name="freshness" defaultValue={freshness ?? ""} aria-label={d.freshness}>
             <option value="">{d.allFreshness}</option>
             {["healthy","due","stale","expired","unknown"].map((f) => <option key={f} value={f}>{f}</option>)}
           </select>
@@ -91,12 +107,13 @@ export default async function ReferencesPage({
       </form>
       <p className="meta">{formatMessage(d.count, { shown: filtered.length, total: references.length })}</p>
       <div className="table-wrap"><table className="table">
-        <thead><tr><th>{d.source}</th><th>{d.sourceClass}</th><th>{d.topics}</th><th>{d.freshness}</th><th>{d.linkedRules}</th></tr></thead>
+        <thead><tr><th>{d.source}</th><th>{d.sourceClass}</th><th>{d.medium}</th><th>{d.topics}</th><th>{d.freshness}</th><th>{d.linkedRules}</th></tr></thead>
         <tbody>
           {filtered.map((ref) => (
             <tr key={ref.id}>
               <td><Link href={localizePathname("/references/" + encodeURIComponent(ref.id), locale)}>{ref.title}</Link><div className="meta">{ref.owner}</div></td>
               <td>{ref.sourceClass}</td>
+              <td>{ref.medium}</td>
               <td>{ref.topics.join(", ")}</td>
               <td><span className={"pill " + ref.freshnessState}>{ref.freshnessState}</span></td>
               <td className="meta">{ref.linkedRuleIds.join(", ") || "—"}</td>

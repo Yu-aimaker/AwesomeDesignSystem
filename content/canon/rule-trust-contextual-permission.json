@@ -16,7 +16,8 @@
     "ref.apple.hig-accessibility"
   ],
   "artifactIds": [
-    "artifact.doc.platform-literacy"
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
   ],
   "verification": "permission lifecycle and coercion review across all scopes",
   "status": "canon"

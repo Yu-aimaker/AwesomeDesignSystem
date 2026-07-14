@@ -18,7 +18,10 @@
     "ref.pinterest.gestalt",
     "ref.vercel.ai-elements"
   ],
-  "artifactIds": [],
+  "artifactIds": [
+    "artifact.doc.ai-interaction-contracts",
+    "artifact.script.ai-interaction-contract"
+  ],
   "verification": "Keyboard stop, focus retention, screen-reader announcement, reduced-motion and layout-shift tests",
   "status": "canon"
 }

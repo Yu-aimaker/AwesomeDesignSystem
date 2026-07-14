@@ -4,6 +4,8 @@
   "url": "https://carbondesignsystem.com/",
   "owner": "ibm",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

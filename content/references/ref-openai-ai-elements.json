@@ -4,6 +4,8 @@
   "url": "https://platform.openai.com/docs/guides/text",
   "owner": "openai",
   "sourceClass": "research",
+  "medium": "article",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [
@@ -25,6 +27,8 @@
   "linkedRuleIds": [
     "rule.ai.generative-boundaries"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.script.ai-interaction-contract"
+  ],
   "contentHash": "seed-openai-ai-elements"
 }

@@ -4,6 +4,8 @@
   "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
   "owner": "microsoft",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [
@@ -30,6 +32,9 @@
     "rule.ai.ux-capability-contract",
     "rule.ai.ux-failure-contract"
   ],
-  "linkedArtifactIds": [],
+  "linkedArtifactIds": [
+    "artifact.script.ai-interaction-contract",
+    "artifact.script.design-decision-contract"
+  ],
   "contentHash": "elite-ms-human-ai-20260713"
 }

@@ -89,13 +89,13 @@ test.describe("docs smoke", () => {
   });
 
   test("Japanese locale is URL-addressable and language switch preserves the route", async ({ page }) => {
-    await page.goto("/ja/references?q=apple", { waitUntil: "domcontentloaded" });
+    await page.goto("/ja/references?q=apple#results", { waitUntil: "domcontentloaded" });
     await expect(page.locator("html")).toHaveAttribute("lang", "ja");
     await expect(page.getByRole("heading", { name: "リファレンス・アトラス" })).toBeVisible();
     const englishLink = page.getByRole("link", { name: "English" });
-    await expect(englishLink).toHaveAttribute("href", "/en/references?q=apple");
+    await expect(englishLink).toHaveAttribute("href", "/en/references?q=apple#results");
     await englishLink.click();
-    await expect(page).toHaveURL(/\/en\/references\?q=apple$/);
+    await expect(page).toHaveURL(/\/en\/references\?q=apple#results$/);
     await expect(page.locator("html")).toHaveAttribute("lang", "en");
   });
 

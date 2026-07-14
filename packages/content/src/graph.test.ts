@@ -9,6 +9,8 @@ const ref: ReferenceRecord = {
   url: "https://www.w3.org/TR/WCAG22/",
   owner: "w3c",
   sourceClass: "standard",
+  medium: "standard",
+  driftRisk: "low",
   region: "global",
   language: "en",
   topics: ["accessibility"],
@@ -101,6 +103,58 @@ describe("evidence graph", () => {
     expect(graph.issues.some((i) => i.code === "artifact-without-rule")).toBe(
       true,
     );
+    expect(graph.issues.some((i) => i.code === "unimplemented-rule")).toBe(true);
+  });
+
+  test("does not treat documentation as an executable rule implementation", () => {
+    const documentation: ArtifactClaim = {
+      ...artifact,
+      id: "artifact.doc.guidance",
+      kind: "doc",
+    };
+    const documentedRule: CanonRule = {
+      ...rule,
+      artifactIds: [documentation.id],
+    };
+    const documentedRef: ReferenceRecord = {
+      ...ref,
+      linkedArtifactIds: [documentation.id],
+    };
+
+    const graph = buildEvidenceGraph({
+      references: [documentedRef],
+      rules: [documentedRule],
+      artifacts: [documentation],
+    });
+
+    expect(graph.issues).toContainEqual(expect.objectContaining({
+      code: "unimplemented-rule",
+      id: documentedRule.id,
+    }));
+  });
+
+  test("accepts a bidirectionally linked executable contract", () => {
+    const contract: ArtifactClaim = {
+      ...artifact,
+      id: "artifact.script.decision-contract",
+      kind: "script",
+    };
+    const executableRule: CanonRule = {
+      ...rule,
+      artifactIds: [contract.id],
+    };
+    const executableRef: ReferenceRecord = {
+      ...ref,
+      linkedArtifactIds: [contract.id],
+    };
+
+    const graph = buildEvidenceGraph({
+      references: [executableRef],
+      rules: [executableRule],
+      artifacts: [contract],
+    });
+
+    expect(graph.issues.some((issue) => issue.code === "unimplemented-rule")).toBe(false);
   });
 
   test("flags duplicate IDs", () => {

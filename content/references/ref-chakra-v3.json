@@ -4,6 +4,8 @@
   "url": "https://chakra-ui.com/",
   "owner": "chakra",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

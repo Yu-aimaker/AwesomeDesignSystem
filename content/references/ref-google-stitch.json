@@ -4,6 +4,8 @@
   "url": "https://m3.material.io/blog",
   "owner": "google",
   "sourceClass": "research",
+  "medium": "article",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

@@ -4,6 +4,8 @@
   "url": "https://docs.copilotkit.ai/",
   "owner": "copilotkit",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

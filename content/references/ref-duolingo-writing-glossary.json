@@ -4,6 +4,8 @@
   "url": "https://design.duolingo.com/writing/glossary",
   "owner": "duolingo",
   "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

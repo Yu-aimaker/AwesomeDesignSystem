@@ -4,6 +4,8 @@
   "url": "https://www.radix-ui.com/primitives",
   "owner": "radix",
   "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

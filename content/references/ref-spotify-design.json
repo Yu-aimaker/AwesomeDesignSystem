@@ -4,6 +4,8 @@
   "url": "https://engineering.atspotify.com/",
   "owner": "spotify",
   "sourceClass": "design-engineering",
+  "medium": "documentation",
+  "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [

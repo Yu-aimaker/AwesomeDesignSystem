@@ -21,7 +21,10 @@
     "ref.zendesk.garden",
     "ref.zendesk.garden-components"
   ],
-  "artifactIds": [],
+  "artifactIds": [
+    "artifact.doc.ai-interaction-contracts",
+    "artifact.script.ai-interaction-contract"
+  ],
   "verification": "Refusal, timeout, 429, unavailable-tool, malformed, partial-success and duplicate-side-effect tests",
   "status": "canon"
 }

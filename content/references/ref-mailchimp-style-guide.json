@@ -4,6 +4,8 @@
   "url": "https://styleguide.mailchimp.com/",
   "owner": "mailchimp",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [

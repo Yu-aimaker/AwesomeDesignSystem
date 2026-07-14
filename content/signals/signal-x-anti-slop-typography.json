@@ -12,5 +12,12 @@
   "candidateRuleIds": [
     "rule.foundations.core-literacy",
     "rule.brand.personality-system"
-  ]
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
 }

@@ -12,5 +12,12 @@
   "candidateRuleIds": [
     "rule.motion.purpose-first",
     "rule.foundations.semantic-tokens"
-  ]
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
 }

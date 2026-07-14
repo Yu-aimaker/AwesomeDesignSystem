@@ -4,6 +4,8 @@
   "url": "https://developer.apple.com/design/",
   "owner": "apple",
   "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
   "region": "global",
   "language": "en",
   "topics": [
