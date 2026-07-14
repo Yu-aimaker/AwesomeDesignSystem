@@ -1,0 +1,24 @@
+{
+  "id": "rule.trust.contextual-permission",
+  "title": "Request minimum permission at the moment of intent",
+  "domain": "interaction",
+  "summary": "Permission requests explain an immediate benefit, ask for the narrowest scope, and support denial, limitation, revocation, and recovery.",
+  "guidance": "Preserve unrelated functionality and never use shame, obstruction, repeated nagging, or misleading pre-prompts to manufacture consent.",
+  "do": [
+    "Explain what, why, duration, and data destination",
+    "Design denied and revoked states as normal paths"
+  ],
+  "dont": [
+    "Request speculative access on launch or punish refusal"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-accessibility"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
+  ],
+  "verification": "permission lifecycle and coercion review across all scopes",
+  "status": "canon"
+}

@@ -51,3 +51,26 @@ moment (usually a staggered page-load reveal, or a hero/section entrance).
 Provide the actual snippet (CSS or React/Motion) wired to the project's tokens, with the
 reduced-motion fallback included. State what the motion communicates and which dial value it reflects.
 Then sanity-check against the Pre-Flight motion lines in `00-philosophy/human-not-ai.md`.
+
+
+## AwesomeDS Platform (required routing)
+
+Before major UI work, also load:
+- `../../DESIGN.md` (agent contract)
+- `../../skills/shared/rule-contract.md`
+- `../../skills/shared/reference-atlas.md`
+- Relevant canon under `../../design-system/` via INDEX
+- Executable packages: `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion`
+
+### Review / QA
+- Interface quality: `../../design-system/review/interface-quality-checklist.md` (cite IQ-* IDs)
+- Local site: `pnpm --filter @awesome-ds/docs dev`
+- Graph: `pnpm validate`
+- Tests: `pnpm test` and `pnpm test:e2e` when UI changes
+
+### Non-negotiables
+- Semantic tokens only (no raw product colors in components)
+- Full states: empty/loading/error as first-class
+- WCAG 2.2 AA + keyboard paths
+- Evidence for doctrine (`ref.*` / `rule.*`)
+- No auto-promotion of social signals into canon

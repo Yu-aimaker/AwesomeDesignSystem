@@ -1,0 +1,23 @@
+{
+  "id": "signal.x.motion-tokens-m3",
+  "title": "Motion tokens / spring systems as established practice",
+  "url": "https://x.com/GoogleDesign/status/2042677497142350240",
+  "observedDate": "2026-07-13",
+  "summary": "Material 3 spring-based motion tokens and LottieFiles motion tokens discussions reinforce motion as a tokenized system rather than one-off animations.",
+  "relatedTopics": [
+    "motion",
+    "tokens"
+  ],
+  "promotionBlockedReason": "Partially corroborated by Material docs already in Reference Atlas; keep as signal until motion token schema is expanded in packages/tokens.",
+  "candidateRuleIds": [
+    "rule.motion.purpose-first",
+    "rule.foundations.semantic-tokens"
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
+}

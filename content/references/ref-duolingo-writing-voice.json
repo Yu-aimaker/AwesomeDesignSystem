@@ -1,0 +1,39 @@
+{
+  "id": "ref.duolingo.writing-voice",
+  "title": "Duolingo Design — Stable voice qualities",
+  "url": "https://design.duolingo.com/writing/voice",
+  "owner": "duolingo",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "writing",
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "due",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Duolingo Design page: Stable voice qualities. Part of 16-page public brand bible inventory.",
+  "lessons": [
+    "Extract transferable production constraints from Stable voice qualities.",
+    "Prefer system documentation sequences with misuse examples."
+  ],
+  "caveats": [
+    "Historical product claims may be stale.",
+    "Do not reproduce proprietary assets."
+  ],
+  "licenseNote": "Public brand guidelines; synthesize only.",
+  "antiImitationNote": "Transfer rules and process; invent original brand expression.",
+  "linkedRuleIds": [
+    "rule.brand.content-design",
+    "rule.brand.cross-medium-coherence"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
+  "contentHash": "duolingo-writing-voice-2026-07-13"
+}

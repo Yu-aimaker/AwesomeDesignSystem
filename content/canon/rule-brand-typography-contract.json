@@ -1,0 +1,24 @@
+{
+  "id": "rule.brand.typography-contract",
+  "title": "Brand typography is a measurable multilingual contract",
+  "domain": "brand",
+  "summary": "Type roles include metrics, license, script coverage, fallbacks, word budgets, and production limits.",
+  "guidance": "Define role tokens and validate hierarchy, overflow, font loading, localization, accessibility, and rights before release.",
+  "do": [
+    "Record fallback metric overrides and supported scripts",
+    "Test real localized strings at viewport and zoom extremes"
+  ],
+  "dont": [
+    "Choose type because it resembles a reference brand",
+    "Compress copy to conceal overflow"
+  ],
+  "referenceIds": [
+    "ref.duolingo.typography"
+  ],
+  "artifactIds": [
+    "artifact.doc.brand-system",
+    "artifact.script.brand-contract"
+  ],
+  "verification": "Role specimens, license review, locale overflow tests, and font-loading evidence",
+  "status": "canon"
+}

@@ -72,3 +72,37 @@ All modules speak one token vocabulary. Full definitions live in `foundations/to
 6. Motion communicates; one orchestrated page-load beats scattered micro-interactions.
 7. Always design error/empty/loading states and meet WCAG 2.2 AA.
 8. Framework-agnostic first; React/Tailwind v4/Motion as the reference implementation.
+
+
+## Platform expansion modules (2026-07)
+
+| Domain | Module |
+|---|---|
+| Brand | `brand/brand-system.md`, `brand/content-design.md`, `brand/illustration-iconography.md` |
+| Interaction | `interaction/product-quality.md`, `interaction/states-recovery.md` |
+| AI-driven | `ai-driven/generative-ui.md`, `ai-driven/agent-workflow.md`, `ai-driven/evaluation.md` |
+| Foundations | `foundations/core-design-literacy.md`, `foundations/international-typography.md` |
+| Governance | `governance/evidence-and-freshness.md` |
+
+Structured rule metadata lives in `content/canon/`. Reference Atlas records live in `content/references/`.
+
+
+## Platform expansion (2026-07 quality upgrade)
+
+| Domain | Modules |
+|---|---|
+| Brand coherence | `brand/cross-medium-coherence.md`, `brand/voice-tone-matrix.md`, `brand/character-system.md`, `brand/sound-haptics.md`, plus prior brand/* |
+| Review | `review/interface-quality-checklist.md` (IQ-* rubric from Vercel-class craft) |
+| Interaction | `interaction/browser-native-correctness.md`, product-quality, states-recovery |
+| Platform | `foundations/platform-literacy.md` (Apple HIG-class literacy) |
+| Case studies | `case-studies/duolingo-lessons.md`, `apple-hig-lessons.md`, `elite-org-map.md` |
+| Complete brand production | `brand/duolingo-derived/README.md` → marks, type, imagery, family, narrative, editorial style, lexicon, assets, character motion |
+| Platform adaptation | `platforms/apple-derived/README.md` → product gates, capability matrix, live surfaces, spatial, permissions, agent workflow |
+| AI interaction contracts | `case-studies/elite-systems/ai-interaction-contracts.md` → capability, uncertainty, agency, streaming, failure |
+| Mature system operations | `case-studies/elite-systems/README.md` → enterprise workflows, discovery, brand voice, doctrine promotion |
+
+**Duolingo Design inventory:** hub + 16 canonical content routes are registered as 17 `ref.duolingo.*` records. Route-level audit lives at `research/duolingo-complete-audit-2026-07.md`; transferable production doctrine lives under `brand/duolingo-derived/` (never asset copies).
+
+**Apple current-source audit:** `research/apple-hig-complete-audit-2026-07.md` tracks current Design Resources, WWDC26 principles, and the agent-prototyping workflow. Treat older iOS 26 / SF Symbols 7 material as a dated snapshot.
+
+**Always-read for brand work:** `brand/cross-medium-coherence.md` then voice/illustration modules.

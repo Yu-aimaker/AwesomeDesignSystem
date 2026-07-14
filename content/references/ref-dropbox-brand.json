@@ -1,0 +1,32 @@
+{
+  "id": "ref.dropbox.brand",
+  "title": "Dropbox Brand",
+  "url": "https://brand.dropbox.com/",
+  "owner": "dropbox",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Dropbox Brand — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "lessons": [
+    "Extract transferable brand doctrine from Dropbox Brand.",
+    "Prefer first-party production constraints over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-dropbox-brand"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "rule.interaction.url-state",
+  "title": "Shareable UI state lives in the URL",
+  "domain": "interaction",
+  "summary": "Filters, tabs, and dialogs that users share should serialize to the address bar.",
+  "guidance": "Back/Forward restores state; avoid ephemeral-only critical UI state.",
+  "do": [
+    "URL-addressable reference filters",
+    "Preserve history"
+  ],
+  "dont": [
+    "Trap users in non-shareable modal-only workflows for primary content"
+  ],
+  "referenceIds": [
+    "ref.vercel.design",
+    "ref.vercel.web-interface-guidelines"
+  ],
+  "artifactIds": [
+    "artifact.component.pagination",
+    "artifact.doc.reference-atlas"
+  ],
+  "verification": "docs filter tests for Back/Forward",
+  "status": "canon"
+}

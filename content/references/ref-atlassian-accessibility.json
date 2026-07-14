@@ -1,0 +1,57 @@
+{
+  "id": "ref.atlassian.accessibility",
+  "title": "Atlassian Design System Accessibility",
+  "url": "https://atlassian.design/foundations/accessibility",
+  "owner": "atlassian",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility",
+    "foundations",
+    "components"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Atlassian's foundation-level accessibility guidance for inclusive design, content, and component implementation.",
+  "lessons": [
+    "Define accessibility responsibilities across design, engineering, and content workflows."
+  ],
+  "caveats": [
+    "Component guidance does not replace testing complete product journeys with assistive technologies."
+  ],
+  "licenseNote": "Public first-party documentation; cite and synthesize.",
+  "antiImitationNote": "Adopt cross-functional practices, not Atlassian product styling.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden",
+    "artifact.test.a11y-suite"
+  ],
+  "contentHash": "atlassian-accessibility-20260713"
+}

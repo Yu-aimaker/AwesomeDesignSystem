@@ -1,0 +1,37 @@
+{
+  "id": "ref.google.pair-guidebook",
+  "title": "Google PAIR Guidebook",
+  "url": "https://pair.withgoogle.com/guidebook/",
+  "owner": "google",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "ai",
+    "human-ai",
+    "trust"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 120,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Human-centered AI guidance covering mental models, explainability, feedback, errors and control.",
+  "lessons": [
+    "Set expectations before interaction and preserve correction paths."
+  ],
+  "caveats": [
+    "Validate guidance against current model capability, risk and user population."
+  ],
+  "licenseNote": "Public first-party guidance; cite and synthesize.",
+  "antiImitationNote": "Do not copy Google visual identity or assistant persona.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract",
+    "rule.ai.ux-capability-contract",
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-google-pair-20260713"
+}

@@ -1,0 +1,36 @@
+{
+  "id": "ref.zendesk.garden",
+  "title": "Zendesk Garden",
+  "url": "https://garden.zendesk.com/",
+  "owner": "zendesk",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "components",
+    "enterprise",
+    "localization"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Modular component system for long-lived customer-support workflows, theming and bidirectionality.",
+  "lessons": [
+    "Treat density as a tested mode.",
+    "Specify conversation and delivery states explicitly."
+  ],
+  "caveats": [
+    "Package maintenance and licensing must be verified per package."
+  ],
+  "licenseNote": "Public documentation; individual packages have their own license metadata.",
+  "antiImitationNote": "Do not copy Zendesk identity or ticketing information architecture.",
+  "linkedRuleIds": [
+    "rule.ai.ux-failure-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-zendesk-garden-20260713"
+}

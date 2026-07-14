@@ -1,0 +1,30 @@
+{
+  "id": "rule.governance.promotion-maturity",
+  "title": "Promote doctrine through explicit evidence and maturity gates",
+  "domain": "governance",
+  "summary": "A design finding advances through researched, synthesized, specified, implemented, tested, adopted and measured states without implying completion early.",
+  "guidance": "Promotion requires a precise first-party source, bounded user need, complementary comparison for high-impact rules, cross-cutting risk review, anti-imitation decision, owner, verification and recheck date. Overrides and exceptions carry owner, reason, tests and expiry.",
+  "do": [
+    "Publish maturity beside every component and pattern",
+    "Keep signals quarantined until corroborated",
+    "Measure adoption and outcome after release"
+  ],
+  "dont": [
+    "Equate a live URL with current doctrine",
+    "Call documentation implemented",
+    "Promote taste or social popularity directly to canon"
+  ],
+  "referenceIds": [
+    "ref.mailchimp.brand-assets",
+    "ref.nist.ai-rmf",
+    "ref.pinterest.gestalt",
+    "ref.pinterest.gestalt-accessibility",
+    "ref.uber.base-web"
+  ],
+  "artifactIds": [
+    "artifact.doc.evidence-governance",
+    "artifact.script.validate-content"
+  ],
+  "verification": "Content-graph validation plus human promotion checklist and quarterly maturity audit",
+  "status": "canon"
+}

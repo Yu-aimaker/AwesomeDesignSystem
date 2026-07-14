@@ -1,0 +1,40 @@
+{
+  "id": "ref.apple.hig-color",
+  "title": "Apple HIG Color",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/color",
+  "owner": "apple",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "color"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Apple HIG Color — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "lessons": [
+    "Extract transferable color doctrine from Apple HIG Color.",
+    "Prefer first-party production constraints over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
+  "contentHash": "elite-apple-hig-color"
+}

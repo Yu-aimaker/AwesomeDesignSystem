@@ -1,0 +1,4 @@
+{
+  "sourceIds": [],
+  "note": "Add only sources with a documented, temporary bot/network exception. Strict checks still report them."
+}

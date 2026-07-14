@@ -1,0 +1,32 @@
+{
+  "id": "ref.goodpatch.blog",
+  "title": "Goodpatch Design Blog",
+  "url": "https://goodpatch.com/blog/",
+  "owner": "goodpatch",
+  "sourceClass": "research",
+  "medium": "article",
+  "driftRisk": "high",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "process"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "observed-behavior",
+  "summary": "Goodpatch Design Blog — Japanese design excellence source for AwesomeDS regional coverage.",
+  "lessons": [
+    "Study JP product content design and process rigor.",
+    "Pair with international typography module."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; synthesize.",
+  "antiImitationNote": "Transfer process and clarity patterns; original brand expression only.",
+  "linkedRuleIds": [
+    "rule.design-eng.docs-as-product"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "jp-goodpatch-blog"
+}

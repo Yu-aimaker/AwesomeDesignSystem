@@ -1,0 +1,33 @@
+{
+  "id": "rule.interaction.product-quality",
+  "title": "Product quality includes recovery states",
+  "domain": "interaction",
+  "summary": "Empty, loading, error, and partial success are designed, not improvised.",
+  "guidance": "Every flow defines recovery and next best action.",
+  "do": [
+    "EmptyState/ErrorState components",
+    "Optimistic update rollback notes"
+  ],
+  "dont": [
+    "Blank screens on failure"
+  ],
+  "referenceIds": [
+    "ref.apple.hig-spatial",
+    "ref.govuk.design-system",
+    "ref.linear.brand",
+    "ref.nielsen.usability",
+    "ref.notion.design",
+    "ref.shopify.polaris",
+    "ref.stripe.design",
+    "ref.uswds.uswds",
+    "ref.vercel.web-interface-guidelines"
+  ],
+  "artifactIds": [
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.skeleton",
+    "artifact.component.toast"
+  ],
+  "verification": "component tests for empty/error",
+  "status": "canon"
+}

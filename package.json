@@ -1,0 +1,53 @@
+{
+  "name": "awesome-design-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.5.2",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "esbuild": "0.28.1",
+      "postcss": "8.5.10",
+      "yaml": "2.8.3"
+    }
+  },
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck && pnpm exec tsc --noEmit --project tsconfig.base.json",
+    "lint": "eslint .",
+    "format:check": "prettier --check README.md CHANGELOG.md CONTRIBUTING.md docs plans",
+    "format": "prettier --write README.md CHANGELOG.md CONTRIBUTING.md docs plans",
+    "test": "vitest run",
+    "test:a11y": "playwright test tests/a11y",
+    "test:e2e": "playwright test tests/e2e tests/visual",
+    "validate": "pnpm --filter @awesome-ds/content validate",
+    "qa": "pnpm qa:core",
+    "qa:core": "pnpm lint && pnpm format:check && pnpm evidence:check && pnpm build && pnpm packages:smoke && pnpm typecheck && pnpm test && pnpm validate",
+    "qa:full": "pnpm qa:core && playwright test --retries=0",
+    "check:links": "tsx scripts/check-links.mjs",
+    "check:freshness": "tsx scripts/check-freshness.mjs",
+    "evidence:sync": "tsx scripts/sync-component-artifacts.mts && node scripts/sync-evidence-backlinks.mjs",
+    "evidence:check": "tsx scripts/sync-component-artifacts.mts --check && node scripts/sync-evidence-backlinks.mjs --check",
+    "tokens:build": "pnpm --filter @awesome-ds/tokens build",
+    "packages:smoke": "tsx scripts/check-package-artifacts.mts"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.61.1",
+    "@types/node": "24.3.0",
+    "eslint": "9.39.2",
+    "eslint-config-next": "16.2.10",
+    "prettier": "3.9.5",
+    "tsup": "8.5.1",
+    "tsx": "4.20.4",
+    "turbo": "2.9.14",
+    "typescript": "5.9.2",
+    "vitest": "4.1.10",
+    "yaml": "2.8.3",
+    "zod": "3.25.76"
+  }
+}

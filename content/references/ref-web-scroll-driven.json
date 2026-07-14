@@ -1,0 +1,34 @@
+{
+  "id": "ref.web.scroll-driven",
+  "title": "CSS scroll-driven animations",
+  "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations",
+  "owner": "web",
+  "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "motion"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "standard",
+  "summary": "CSS scroll-driven animations — primary reference for AwesomeDS synthesis on motion.",
+  "lessons": [
+    "Extract transferable motion principles from CSS scroll-driven animations.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.motion.purpose-first"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion"
+  ],
+  "contentHash": "seed-web-scroll-driven"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "rule.product.agency-responsibility",
+  "title": "Protect agency and model responsibility",
+  "domain": "product",
+  "summary": "Every path supports exit and recovery; every risky feature has minimum-data, misuse, safeguard, and removal decisions.",
+  "guidance": "Scale preview and confirmation to consequence, preserve undo where possible, and do not ship when foreseeable harm cannot be bounded.",
+  "do": [
+    "Design decline, cancel, undo, and recovery",
+    "Document data need, misuse cases, safeguards, and do-not-build threshold"
+  ],
+  "dont": [
+    "Coerce consent or make consequential changes silently"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-accessibility"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
+  ],
+  "verification": "manual threat, consent, consequence, and recovery review",
+  "status": "canon"
+}

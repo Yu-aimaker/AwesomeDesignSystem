@@ -1,0 +1,39 @@
+{
+  "id": "ref.chakra.v3",
+  "title": "Chakra UI v3",
+  "url": "https://chakra-ui.com/",
+  "owner": "chakra",
+  "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "components"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-implementation",
+  "summary": "Chakra UI v3 — primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "lessons": [
+    "Incorporate transferable components guidance from Chakra UI v3.",
+    "Prefer schema/contract-bound generative UI over freeform HTML."
+  ],
+  "caveats": [
+    "Verify URL path still resolves; some vendor docs reorganize frequently."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
+  "linkedRuleIds": [
+    "rule.components.state-matrix"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.button",
+    "artifact.component.dialog",
+    "artifact.component.input",
+    "artifact.component.tabs"
+  ],
+  "contentHash": "gap-chakra-v3"
+}

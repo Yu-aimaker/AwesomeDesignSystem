@@ -1,0 +1,46 @@
+{
+  "id": "ref.duolingo.logos",
+  "title": "Duolingo Design — Logos production constraints",
+  "url": "https://design.duolingo.com/identity/logos",
+  "owner": "duolingo",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "identity",
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "due",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Duolingo Design page: Logos production constraints. Part of 16-page public brand bible inventory.",
+  "lessons": [
+    "Extract transferable production constraints from Logos production constraints.",
+    "Prefer system documentation sequences with misuse examples."
+  ],
+  "caveats": [
+    "Historical product claims may be stale.",
+    "Do not reproduce proprietary assets."
+  ],
+  "licenseNote": "Public brand guidelines; synthesize only.",
+  "antiImitationNote": "Transfer rules and process; invent original brand expression.",
+  "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence",
+    "rule.brand.marks-lockups",
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
+  "contentHash": "duolingo-logos-2026-07-13"
+}

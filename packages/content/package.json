@@ -1,0 +1,23 @@
+{
+  "name": "@awesome-ds/content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": { "types": "./src/index.ts", "development": "./src/index.ts", "import": "./dist/index.js" }
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "validate": "tsx ../../scripts/validate-content.mjs",
+    "build": "tsup src/index.ts --format esm --dts --clean"
+  },
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2",
+    "vitest": "4.1.10"
+  }
+}

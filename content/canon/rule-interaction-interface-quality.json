@@ -1,0 +1,25 @@
+{
+  "id": "rule.interaction.interface-quality",
+  "title": "Interface quality is a reviewable checklist",
+  "domain": "interaction",
+  "summary": "Hundreds of craft decisions accumulate into product quality; encode them as severity-tagged review rules.",
+  "guidance": "Use IQ-* checklist for agent and human review. Keyboard, focus, URL state, motion, locale, and states are release gates.",
+  "do": [
+    "Cite IQ IDs in reviews",
+    "Test Back/Forward URL state"
+  ],
+  "dont": [
+    "Happy-path-only demos"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.vercel.web-interface-guidelines",
+    "ref.w3c.apg"
+  ],
+  "artifactIds": [
+    "artifact.component.link",
+    "artifact.doc.interface-quality"
+  ],
+  "verification": "review/interface-quality-checklist.md + tests",
+  "status": "canon"
+}

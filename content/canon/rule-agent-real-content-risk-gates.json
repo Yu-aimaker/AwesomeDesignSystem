@@ -1,0 +1,24 @@
+{
+  "id": "rule.agent.real-content-risk-gates",
+  "title": "Agents prove design with real content, hostile states, and risk gates",
+  "domain": "ai-driven",
+  "summary": "Generated interfaces are not refined until realistic content, complete state coverage, accessibility evidence, and consequence-aware AI review exist.",
+  "guidance": "Require purpose, seed content, preview matrix, key-moment tuning, user review, accessibility review, and a do-not-build threshold.",
+  "do": [
+    "Test long, large, multilingual, RTL, denied, offline, destructive, and restored states",
+    "Preserve edit, undo, uncertainty, and proportional confirmation"
+  ],
+  "dont": [
+    "Treat placeholder content, happy paths, or generated code as production evidence"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-accessibility",
+    "ref.voltagent.awesome-design-md"
+  ],
+  "artifactIds": [
+    "artifact.skill.awesome-ds"
+  ],
+  "verification": "state matrix, accessibility evidence, user feedback, and AI risk assessment",
+  "status": "canon"
+}

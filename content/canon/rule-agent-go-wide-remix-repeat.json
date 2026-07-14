@@ -1,0 +1,23 @@
+{
+  "id": "rule.agent.go-wide-remix-repeat",
+  "title": "Agents go wide, remix, and repeat",
+  "domain": "ai-driven",
+  "summary": "Agent-assisted design begins with divergent, named directions and converges through documented human judgment.",
+  "guidance": "Generate 6–10 materially different directions, record selection and rejection reasons, then retest remixes with realistic content and edge cases.",
+  "do": [
+    "Keep a divergence board and decision log",
+    "Return to divergence when the concept is weak"
+  ],
+  "dont": [
+    "Accept one generated answer or cosmetic variants as exploration"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.voltagent.awesome-design-md"
+  ],
+  "artifactIds": [
+    "artifact.skill.awesome-ds"
+  ],
+  "verification": "artifact review for divergent previews, decision log, and repeated evaluation",
+  "status": "canon"
+}

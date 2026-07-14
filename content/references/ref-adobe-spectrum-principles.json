@@ -1,0 +1,32 @@
+{
+  "id": "ref.adobe.spectrum-principles",
+  "title": "Adobe Spectrum Design Principles",
+  "url": "https://spectrum.adobe.com/page/design-principles/",
+  "owner": "adobe",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "principles"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Adobe Spectrum Design Principles — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "lessons": [
+    "Extract transferable principles doctrine from Adobe Spectrum Design Principles.",
+    "Prefer first-party production constraints over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.foundations.core-literacy"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-adobe-spectrum-principles"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "signal.x.hybrid-generative-ui",
+  "title": "Hybrid generative UI beyond chat boxes",
+  "url": "https://x.com/search?q=generative%20UI",
+  "observedDate": "2026-07-01",
+  "summary": "Practitioners discuss forms/tables/maps as generative surfaces, not only chat.",
+  "relatedTopics": [
+    "ai-ui",
+    "components"
+  ],
+  "promotionBlockedReason": "Emerging social signal; requires primary product evidence and a11y review before canon.",
+  "candidateRuleIds": [
+    "rule.ai.generative-boundaries"
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
+}

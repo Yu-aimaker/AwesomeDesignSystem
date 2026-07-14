@@ -1,0 +1,24 @@
+{
+  "id": "rule.design-eng.platform-first",
+  "title": "Prefer platform capabilities over framework fashion",
+  "domain": "design-engineering",
+  "summary": "CSS, HTML semantics, and browser APIs outlive component library trends.",
+  "guidance": "Progressive enhancement for motion and forms; framework-independent tokens/contracts.",
+  "do": [
+    "CSS-first motion recipes",
+    "Semantic HTML"
+  ],
+  "dont": [
+    "JS-only for basic interactions when HTML suffices"
+  ],
+  "referenceIds": [
+    "ref.mdn.css",
+    "ref.react.docs"
+  ],
+  "artifactIds": [
+    "artifact.motion.recipe-set",
+    "artifact.token.semantic-system"
+  ],
+  "verification": "core package has no React dependency",
+  "status": "canon"
+}

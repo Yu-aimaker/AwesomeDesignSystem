@@ -1,0 +1,57 @@
+{
+  "id": "ref.google.material-accessibility",
+  "title": "Material 3 Accessible Design",
+  "url": "https://m3.material.io/foundations/accessible-design/overview",
+  "owner": "google",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility",
+    "components",
+    "quality"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Material 3 guidance for designing accessible interfaces across color, layout, interaction, and assistive-technology use.",
+  "lessons": [
+    "Treat accessibility as a cross-cutting design constraint across foundations and components."
+  ],
+  "caveats": [
+    "Material-specific patterns still require product-context and assistive-technology testing."
+  ],
+  "licenseNote": "Public first-party documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer accessibility practices, not Google product styling.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden",
+    "artifact.test.a11y-suite"
+  ],
+  "contentHash": "material-accessibility-20260713"
+}

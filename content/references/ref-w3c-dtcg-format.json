@@ -1,0 +1,42 @@
+{
+  "id": "ref.w3c.dtcg-format",
+  "title": "DTCG Design Tokens Format",
+  "url": "https://tr.designtokens.org/format/",
+  "owner": "w3c",
+  "sourceClass": "standard",
+  "medium": "standard",
+  "driftRisk": "low",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "tokens"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "standard",
+  "summary": "DTCG Design Tokens Format — primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "lessons": [
+    "Incorporate transferable tokens guidance from DTCG Design Tokens Format.",
+    "Prefer schema/contract-bound generative UI over freeform HTML."
+  ],
+  "caveats": [
+    "Verify URL path still resolves; some vendor docs reorganize frequently."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack"
+  ],
+  "contentHash": "gap-w3c-dtcg-format"
+}

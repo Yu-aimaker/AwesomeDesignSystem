@@ -1,0 +1,27 @@
+{
+  "id": "rule.ai.ux-streaming-contract",
+  "title": "Treat streaming as semantic asynchronous state",
+  "domain": "ai-driven",
+  "summary": "Queued, generating, tool activity, partial, completed, stopped and failed states are distinguishable and accessible.",
+  "guidance": "Reserve layout, preserve focus and user input, expose stop, batch live announcements and label partial output as partial. Completion is a state transition, not the last received token.",
+  "do": [
+    "Stabilize geometry before output arrives",
+    "Announce meaningful chunks rather than every token",
+    "Keep stop and retry keyboard reachable"
+  ],
+  "dont": [
+    "Move the active target as content streams",
+    "Present partial output as confirmed",
+    "Use typing theater without status meaning"
+  ],
+  "referenceIds": [
+    "ref.pinterest.gestalt",
+    "ref.vercel.ai-elements"
+  ],
+  "artifactIds": [
+    "artifact.doc.ai-interaction-contracts",
+    "artifact.script.ai-interaction-contract"
+  ],
+  "verification": "Keyboard stop, focus retention, screen-reader announcement, reduced-motion and layout-shift tests",
+  "status": "canon"
+}

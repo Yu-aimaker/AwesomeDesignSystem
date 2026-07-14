@@ -1,0 +1,24 @@
+{
+  "id": "rule.trust.icon-system",
+  "title": "Icons are governed semantic systems",
+  "domain": "foundations",
+  "summary": "Interface glyphs, product icons, status marks, and badges have distinct contracts for meaning, geometry, localization, state, and accessibility.",
+  "guidance": "Define meaning before form, pair unfamiliar or consequential symbols with text, and provide static and non-color state equivalents.",
+  "do": [
+    "Test baseline, optical weight, RTL, locale, smallest size, contrast, and accessible naming",
+    "Route vendor assets through official downloads and licenses"
+  ],
+  "dont": [
+    "Redistribute vendor assets or let color, animation, or tooltips carry meaning alone"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-accessibility"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
+  ],
+  "verification": "icon family, localization, reduced-motion, contrast, and accessible-name review",
+  "status": "canon"
+}

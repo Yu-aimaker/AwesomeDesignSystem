@@ -1,0 +1,24 @@
+{
+  "id": "rule.product.craft-systemic-delight",
+  "title": "Craft and delight are system properties",
+  "domain": "product",
+  "summary": "Performance, reliability, security, accessibility, feedback, and visual expression jointly create trust and emotion.",
+  "guidance": "Name the intended feeling, then verify every state supports it; novelty cannot compensate for poor system behavior.",
+  "do": [
+    "Review quality across happy, failure, and recovery states",
+    "Tune a few meaningful moments with representative content"
+  ],
+  "dont": [
+    "Add confetti, motion, or decorative novelty as a substitute for consideration"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-accessibility"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
+  ],
+  "verification": "journey-level craft, performance, accessibility, and emotion review",
+  "status": "canon"
+}

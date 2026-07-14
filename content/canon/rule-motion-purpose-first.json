@@ -1,0 +1,28 @@
+{
+  "id": "rule.motion.purpose-first",
+  "title": "Motion communicates state, not decoration",
+  "domain": "motion",
+  "summary": "Every animation needs intent, reduced-motion fallback, and performance bounds.",
+  "guidance": "Use intent recipes; prefer transform/opacity; honor prefers-reduced-motion.",
+  "do": [
+    "Link recipe to rule IDs",
+    "Provide reduced-motion alternative"
+  ],
+  "dont": [
+    "Infinite decorative motion"
+  ],
+  "referenceIds": [
+    "ref.ibm.carbon-motion",
+    "ref.microsoft.fluent-motion",
+    "ref.motion.motion-react",
+    "ref.web.scroll-driven",
+    "ref.web.view-transitions"
+  ],
+  "artifactIds": [
+    "artifact.component.accordion",
+    "artifact.motion.recipe-set",
+    "artifact.test.motion-recipes"
+  ],
+  "verification": "motion package tests + reduced-motion CSS",
+  "status": "canon"
+}

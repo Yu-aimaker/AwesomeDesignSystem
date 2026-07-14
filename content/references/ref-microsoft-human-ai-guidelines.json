@@ -1,0 +1,40 @@
+{
+  "id": "ref.microsoft.human-ai-guidelines",
+  "title": "Microsoft Guidelines for Human-AI Interaction",
+  "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
+  "owner": "microsoft",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "ai",
+    "human-ai",
+    "interaction"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Research-derived interaction guidance across initial use, normal use, failure and adaptation.",
+  "lessons": [
+    "Support efficient correction and scope services when wrong."
+  ],
+  "caveats": [
+    "Research guidance must be contextualized for present capabilities and stakes."
+  ],
+  "licenseNote": "Public research guidance; cite and synthesize.",
+  "antiImitationNote": "Transfer interaction principles, not Microsoft identity.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract",
+    "rule.ai.ux-capability-contract",
+    "rule.ai.ux-failure-contract"
+  ],
+  "linkedArtifactIds": [
+    "artifact.script.ai-interaction-contract",
+    "artifact.script.design-decision-contract"
+  ],
+  "contentHash": "elite-ms-human-ai-20260713"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "rule.foundations.semantic-tokens",
+  "title": "Components consume semantic tokens only",
+  "domain": "foundations",
+  "summary": "Theme by rebinding roles, never hard-coding product colors in components.",
+  "guidance": "Use --color-* / --space-* / --dur-* contracts. Primitives stay in tokens package.",
+  "do": [
+    "Reference CSS variables",
+    "Support light/dark/high-contrast"
+  ],
+  "dont": [
+    "Hard-code hex/oklch in component source"
+  ],
+  "referenceIds": [
+    "ref.adobe.spectrum",
+    "ref.apple.hig-color",
+    "ref.apple.hig-foundations",
+    "ref.apple.liquid-glass",
+    "ref.atlassian.design-system",
+    "ref.duolingo.brand-family",
+    "ref.duolingo.color",
+    "ref.duolingo.imagery",
+    "ref.duolingo.logos",
+    "ref.duolingo.typography",
+    "ref.figma.variables",
+    "ref.github.primer",
+    "ref.google.material-3",
+    "ref.ibm.carbon",
+    "ref.microsoft.fluent-2",
+    "ref.shopify.polaris",
+    "ref.tailwind.v4",
+    "ref.w3c.dtcg",
+    "ref.w3c.dtcg-format"
+  ],
+  "artifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.grid",
+    "artifact.component.stack",
+    "artifact.token.semantic-system"
+  ],
+  "verification": "token tests + no raw color in packages/react",
+  "status": "canon"
+}

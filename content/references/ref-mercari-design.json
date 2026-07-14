@@ -1,0 +1,32 @@
+{
+  "id": "ref.mercari.design",
+  "title": "Mercari Design",
+  "url": "https://design.mercari.com/",
+  "owner": "mercari",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "jp-product"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Mercari Design — Japanese design excellence source for AwesomeDS regional coverage.",
+  "lessons": [
+    "Study JP product content design and process rigor.",
+    "Pair with international typography module."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; synthesize.",
+  "antiImitationNote": "Transfer process and clarity patterns; original brand expression only.",
+  "linkedRuleIds": [
+    "rule.brand.personality-system"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "jp-mercari-design"
+}

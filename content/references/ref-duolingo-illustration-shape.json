@@ -1,0 +1,39 @@
+{
+  "id": "ref.duolingo.illustration-shape",
+  "title": "Duolingo Design — Illustration shape language",
+  "url": "https://design.duolingo.com/illustration/shape-language",
+  "owner": "duolingo",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "illustration",
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "due",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Duolingo Design page: Illustration shape language. Part of 16-page public brand bible inventory.",
+  "lessons": [
+    "Extract transferable production constraints from Illustration shape language.",
+    "Prefer system documentation sequences with misuse examples."
+  ],
+  "caveats": [
+    "Historical product claims may be stale.",
+    "Do not reproduce proprietary assets."
+  ],
+  "licenseNote": "Public brand guidelines; synthesize only.",
+  "antiImitationNote": "Transfer rules and process; invent original brand expression.",
+  "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence",
+    "rule.brand.illustration-grammar"
+  ],
+  "linkedArtifactIds": [
+    "artifact.doc.illustration"
+  ],
+  "contentHash": "duolingo-illustration-shape-2026-07-13"
+}

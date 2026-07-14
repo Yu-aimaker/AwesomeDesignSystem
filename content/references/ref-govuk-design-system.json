@@ -1,0 +1,58 @@
+{
+  "id": "ref.govuk.design-system",
+  "title": "GOV.UK Design System",
+  "url": "https://design-system.service.gov.uk/",
+  "owner": "govuk",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "gov"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "GOV.UK Design System — primary reference for AwesomeDS synthesis on gov.",
+  "lessons": [
+    "Extract transferable gov principles from GOV.UK Design System.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa",
+    "rule.interaction.product-quality"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.skeleton",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.toast",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden"
+  ],
+  "contentHash": "seed-govuk-design-system"
+}

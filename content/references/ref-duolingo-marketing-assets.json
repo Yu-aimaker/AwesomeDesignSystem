@@ -1,0 +1,37 @@
+{
+  "id": "ref.duolingo.marketing-assets",
+  "title": "Duolingo Design — Marketing asset packaging",
+  "url": "https://design.duolingo.com/marketing/assets",
+  "owner": "duolingo",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "marketing",
+    "brand"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "due",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Duolingo Design page: Marketing asset packaging. Part of 16-page public brand bible inventory.",
+  "lessons": [
+    "Extract transferable production constraints from Marketing asset packaging.",
+    "Prefer system documentation sequences with misuse examples."
+  ],
+  "caveats": [
+    "Historical product claims may be stale.",
+    "Do not reproduce proprietary assets."
+  ],
+  "licenseNote": "Public brand guidelines; synthesize only.",
+  "antiImitationNote": "Transfer rules and process; invent original brand expression.",
+  "linkedRuleIds": [
+    "rule.brand.asset-governance",
+    "rule.brand.cross-medium-coherence"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "duolingo-marketing-assets-2026-07-13"
+}

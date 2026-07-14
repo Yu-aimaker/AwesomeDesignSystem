@@ -1,0 +1,44 @@
+{
+  "id": "ref.microsoft.fluent-2",
+  "title": "Fluent 2 Design System",
+  "url": "https://fluent2.microsoft.design/",
+  "owner": "microsoft",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "system"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Fluent 2 Design System — primary reference for AwesomeDS synthesis on system.",
+  "lessons": [
+    "Extract transferable system principles from Fluent 2 Design System.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.components.state-matrix",
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.dialog",
+    "artifact.component.grid",
+    "artifact.component.input",
+    "artifact.component.stack",
+    "artifact.component.tabs"
+  ],
+  "contentHash": "seed-microsoft-fluent-2"
+}

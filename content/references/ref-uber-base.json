@@ -1,0 +1,35 @@
+{
+  "id": "ref.uber.base",
+  "title": "Uber Base design system",
+  "url": "https://base.uber.com/",
+  "owner": "uber",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "brand",
+    "mobility",
+    "localization"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Company design language for global, multimodal mobility contexts.",
+  "lessons": [
+    "Expose location freshness, status change and non-map alternatives."
+  ],
+  "caveats": [
+    "Base brand doctrine and Base Web implementation are distinct artifacts."
+  ],
+  "licenseNote": "Public documentation; no brand asset rights implied.",
+  "antiImitationNote": "Do not copy Uber identity or assume mobility context universally.",
+  "linkedRuleIds": [
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-uber-base-20260713"
+}

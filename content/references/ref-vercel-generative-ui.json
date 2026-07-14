@@ -1,0 +1,36 @@
+{
+  "id": "ref.vercel.generative-ui",
+  "title": "Vercel AI SDK Generative UI",
+  "url": "https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces",
+  "owner": "vercel",
+  "sourceClass": "design-engineering",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "ai-ui"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Vercel AI SDK Generative UI — primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "lessons": [
+    "Incorporate transferable ai-ui guidance from Vercel AI SDK Generative UI.",
+    "Prefer schema/contract-bound generative UI over freeform HTML."
+  ],
+  "caveats": [
+    "Verify URL path still resolves; some vendor docs reorganize frequently."
+  ],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
+  "linkedRuleIds": [
+    "rule.ai.generative-boundaries"
+  ],
+  "linkedArtifactIds": [
+    "artifact.script.ai-interaction-contract"
+  ],
+  "contentHash": "gap-vercel-generative-ui"
+}

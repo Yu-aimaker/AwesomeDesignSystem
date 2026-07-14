@@ -56,3 +56,26 @@ For each finding give: **what** (the tell), **where** (selector/file/line or reg
 (principle), **fix** (concrete change using the `--color-*`/`--space-*`/`--text-*` tokens). End
 with the top 3 highest-leverage changes and an overall verdict (ship / fix-then-ship / rework).
 If asked, apply the fixes — but keep the audit and the fixing as distinct steps.
+
+
+## AwesomeDS Platform (required routing)
+
+Before major UI work, also load:
+- `../../DESIGN.md` (agent contract)
+- `../../skills/shared/rule-contract.md`
+- `../../skills/shared/reference-atlas.md`
+- Relevant canon under `../../design-system/` via INDEX
+- Executable packages: `@awesome-ds/tokens`, `@awesome-ds/react`, `@awesome-ds/motion`
+
+### Review / QA
+- Interface quality: `../../design-system/review/interface-quality-checklist.md` (cite IQ-* IDs)
+- Local site: `pnpm --filter @awesome-ds/docs dev`
+- Graph: `pnpm validate`
+- Tests: `pnpm test` and `pnpm test:e2e` when UI changes
+
+### Non-negotiables
+- Semantic tokens only (no raw product colors in components)
+- Full states: empty/loading/error as first-class
+- WCAG 2.2 AA + keyboard paths
+- Evidence for doctrine (`ref.*` / `rule.*`)
+- No auto-promotion of social signals into canon

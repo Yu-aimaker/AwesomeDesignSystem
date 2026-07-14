@@ -1,0 +1,35 @@
+{
+  "id": "ref.mailchimp.style-guide",
+  "title": "Mailchimp Content Style Guide",
+  "url": "https://styleguide.mailchimp.com/",
+  "owner": "mailchimp",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "content",
+    "voice",
+    "localization"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 120,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Operational voice, tone and editorial mechanics with boundaries and examples.",
+  "lessons": [
+    "Separate durable voice from risk- and emotion-dependent tone."
+  ],
+  "caveats": [
+    "Classic guidance may outlive current product strategy; date and scope each extraction."
+  ],
+  "licenseNote": "Public guidance; quote sparingly and attribute.",
+  "antiImitationNote": "Do not copy Mailchimp humor, voice or examples into another brand.",
+  "linkedRuleIds": [
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-mailchimp-style-20260713"
+}

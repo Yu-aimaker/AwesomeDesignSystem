@@ -1,0 +1,34 @@
+{
+  "id": "ref.spotify.design",
+  "title": "Engineering at Spotify",
+  "url": "https://engineering.atspotify.com/",
+  "owner": "spotify",
+  "sourceClass": "design-engineering",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "design-engineering",
+    "editorial"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "observed-behavior",
+  "summary": "Spotify's first-party engineering publication exposes production constraints, system evolution, and the editorial structure used to explain technical design decisions.",
+  "lessons": [
+    "Treat engineering narratives as evidence of production constraints rather than copying the consumer brand surface.",
+    "Pair system decisions with the problem, trade-offs, implementation context, and measurable outcome."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.brand.editorial-style",
+    "rule.design-eng.docs-as-product"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "spotify-engineering-editorial-2026-07"
+}

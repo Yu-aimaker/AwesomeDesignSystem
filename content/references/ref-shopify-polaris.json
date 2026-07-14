@@ -1,0 +1,51 @@
+{
+  "id": "ref.shopify.polaris",
+  "title": "Shopify Polaris",
+  "url": "https://polaris-react.shopify.com/",
+  "owner": "shopify",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "system"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Shopify Polaris — primary reference for AwesomeDS synthesis on system.",
+  "lessons": [
+    "Extract transferable system principles from Shopify Polaris.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.brand.content-design",
+    "rule.components.state-matrix",
+    "rule.foundations.semantic-tokens",
+    "rule.interaction.product-quality"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.badge",
+    "artifact.component.button",
+    "artifact.component.callout",
+    "artifact.component.card",
+    "artifact.component.cluster",
+    "artifact.component.container",
+    "artifact.component.dialog",
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.grid",
+    "artifact.component.input",
+    "artifact.component.skeleton",
+    "artifact.component.stack",
+    "artifact.component.tabs",
+    "artifact.component.toast"
+  ],
+  "contentHash": "seed-shopify-polaris"
+}

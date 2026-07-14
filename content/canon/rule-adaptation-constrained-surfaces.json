@@ -1,0 +1,24 @@
+{
+  "id": "rule.adaptation.constrained-surfaces",
+  "title": "Constrained surfaces expose bounded meaning and action",
+  "domain": "interaction",
+  "summary": "Glanceable, live, and system-mediated surfaces prioritize identity, value, freshness, privacy, and direct handoff.",
+  "guidance": "Define placeholder, current, stale, paused, ended, failed, and redacted states; keep consequential work in the full destination.",
+  "do": [
+    "Declare freshness and lifecycle",
+    "Deep-link to the exact entity or task"
+  ],
+  "dont": [
+    "Shrink an app screen into a widget or imply stale data is live"
+  ],
+  "referenceIds": [
+    "ref.apple.hig",
+    "ref.apple.hig-accessibility"
+  ],
+  "artifactIds": [
+    "artifact.doc.platform-literacy",
+    "artifact.script.design-decision-contract"
+  ],
+  "verification": "surface lifecycle, privacy, localization, and deep-link matrix",
+  "status": "canon"
+}

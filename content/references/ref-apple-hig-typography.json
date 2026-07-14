@@ -1,0 +1,32 @@
+{
+  "id": "ref.apple.hig-typography",
+  "title": "Apple HIG Typography",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+  "owner": "apple",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "typography"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Apple HIG Typography — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "lessons": [
+    "Extract transferable typography doctrine from Apple HIG Typography.",
+    "Prefer first-party production constraints over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.foundations.core-literacy"
+  ],
+  "linkedArtifactIds": [],
+  "contentHash": "elite-apple-hig-typography"
+}

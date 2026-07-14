@@ -1,0 +1,25 @@
+{
+  "id": "rule.brand.editorial-style",
+  "title": "Editorial rules are locale- and channel-aware executable policy",
+  "domain": "brand",
+  "summary": "Machine-readable profiles govern interface language while explicit exceptions preserve local ownership.",
+  "guidance": "Load locale, channel, and lexicon profiles before writing; lint only deterministic rules and show rationale for judgment.",
+  "do": [
+    "Give every error-level rule accepted and rejected fixtures",
+    "Scope exceptions by reason, approver, and expiry"
+  ],
+  "dont": [
+    "Apply US-English conventions globally",
+    "Use opaque AI voice scores as enforcement"
+  ],
+  "referenceIds": [
+    "ref.duolingo.writing-style",
+    "ref.spotify.design"
+  ],
+  "artifactIds": [
+    "artifact.doc.content-design",
+    "artifact.script.brand-contract"
+  ],
+  "verification": "Profile schema plus golden lint fixtures and locale-owner review",
+  "status": "canon"
+}

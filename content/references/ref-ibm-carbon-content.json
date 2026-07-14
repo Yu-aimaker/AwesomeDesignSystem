@@ -1,0 +1,34 @@
+{
+  "id": "ref.ibm.carbon-content",
+  "title": "Carbon Content Guidelines",
+  "url": "https://carbondesignsystem.com/guidelines/content/overview/",
+  "owner": "ibm",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "content-design"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Carbon Content Guidelines — elite primary source for AwesomeDS expansion (2026-07 quality upgrade).",
+  "lessons": [
+    "Extract transferable content-design doctrine from Carbon Content Guidelines.",
+    "Prefer first-party production constraints over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer principles; never copy proprietary visual identity or assets.",
+  "linkedRuleIds": [
+    "rule.brand.content-design"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.callout"
+  ],
+  "contentHash": "elite-ibm-carbon-content"
+}

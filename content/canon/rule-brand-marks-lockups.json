@@ -1,0 +1,24 @@
+{
+  "id": "rule.brand.marks-lockups",
+  "title": "Marks are responsive governed interfaces",
+  "domain": "brand",
+  "summary": "Every mark variant has a role, safe area, minimum size, background permission, and misuse contract.",
+  "guidance": "Select approved original variants by context and recognition need; never improvise or distort identity artwork.",
+  "do": [
+    "Declare digital and print limits",
+    "Test safe areas, contrast, clipping, and optical avatar crops"
+  ],
+  "dont": [
+    "Recreate marks from reference brands",
+    "Silently scale below a variant minimum"
+  ],
+  "referenceIds": [
+    "ref.duolingo.logos"
+  ],
+  "artifactIds": [
+    "artifact.doc.brand-system",
+    "artifact.script.brand-contract"
+  ],
+  "verification": "Mark manifest validation plus visual matrix across sizes and approved backgrounds",
+  "status": "canon"
+}

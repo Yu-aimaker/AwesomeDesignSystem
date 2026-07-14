@@ -1,0 +1,13 @@
+{
+  "failureAllowlistSourceIds": [],
+  "sources": {
+    "ref.airbnb.design": {
+      "hashMode": "status-only",
+      "reason": "The rotating editorial homepage changes even between immediate requests. Automation monitors reachability; the 90-day human cadence remains the content-review gate."
+    },
+    "ref.linear.brand": {
+      "hashMode": "headings-links",
+      "reason": "The brand page emits volatile hydration content; headings and link labels retain a stable fingerprint of its published information architecture."
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "id": "ref.govuk.accessibility",
+  "title": "GOV.UK Design System Accessibility",
+  "url": "https://design-system.service.gov.uk/accessibility/",
+  "owner": "govuk",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "accessibility",
+    "public-service",
+    "testing"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "GOV.UK Design System guidance on accessibility responsibilities, component assurance, and service-level testing.",
+  "lessons": [
+    "Test complete services as well as shared components and publish known accessibility limits."
+  ],
+  "caveats": [
+    "UK public-service obligations may exceed or differ from another product's legal context."
+  ],
+  "licenseNote": "Public first-party documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer assurance practices, not government visual identity.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.accordion",
+    "artifact.component.alert-dialog",
+    "artifact.component.breadcrumb",
+    "artifact.component.button",
+    "artifact.component.checkbox",
+    "artifact.component.dialog",
+    "artifact.component.dropdown-menu",
+    "artifact.component.icon-button",
+    "artifact.component.input",
+    "artifact.component.link",
+    "artifact.component.popover",
+    "artifact.component.progress",
+    "artifact.component.radio-group",
+    "artifact.component.select",
+    "artifact.component.spinner",
+    "artifact.component.switch",
+    "artifact.component.tabs",
+    "artifact.component.textarea",
+    "artifact.component.tooltip",
+    "artifact.component.visually-hidden",
+    "artifact.test.a11y-suite"
+  ],
+  "contentHash": "govuk-accessibility-20260713"
+}

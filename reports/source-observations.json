@@ -1,0 +1,1575 @@
+{
+  "generatedAt": "2026-07-13T14:01:30.670Z",
+  "observations": [
+    {
+      "sourceId": "ref.a11y.axe-core",
+      "url": "https://github.com/dequelabs/axe-core",
+      "observedAt": "2026-07-13T14:01:30.774Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:84c34f416142364f7e43f448ad55183743fabfaafc0ebabb8653bb6a3005d907",
+      "lastSuccessfulHash": "sha256:84c34f416142364f7e43f448ad55183743fabfaafc0ebabb8653bb6a3005d907",
+      "lastSuccessfulHashes": {
+        "github": "sha256:84c34f416142364f7e43f448ad55183743fabfaafc0ebabb8653bb6a3005d907"
+      },
+      "adapter": "github",
+      "adapterHealth": "healthy",
+      "revision": "develop|2026-07-01T17:20:00Z|v4.12.1|2026-06-10T10:27:13Z"
+    },
+    {
+      "sourceId": "ref.adobe.react-aria",
+      "url": "https://react-spectrum.adobe.com/react-aria/",
+      "observedAt": "2026-07-13T14:01:30.872Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:f37874d2213a3f0d08c2cfec869830cdbeee33b0484cdbc7d03bd34f59ad9c99",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:f37874d2213a3f0d08c2cfec869830cdbeee33b0484cdbc7d03bd34f59ad9c99",
+      "lastSuccessfulHashes": {
+        "http": "sha256:f37874d2213a3f0d08c2cfec869830cdbeee33b0484cdbc7d03bd34f59ad9c99"
+      },
+      "etag": "W/\"a3af4632563ea10ae57cf7b3452f6e15\"",
+      "lastModified": "Wed, 24 Jun 2026 19:07:33 GMT",
+      "lastSuccessfulEtag": "W/\"a3af4632563ea10ae57cf7b3452f6e15\"",
+      "lastSuccessfulLastModified": "Wed, 24 Jun 2026 19:07:33 GMT"
+    },
+    {
+      "sourceId": "ref.adobe.spectrum-principles",
+      "url": "https://spectrum.adobe.com/page/design-principles/",
+      "observedAt": "2026-07-13T14:01:31.693Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:1061d03cc89333e959317fe4a95b87ec4d19a9e62d8023b1298bc6fe00178990",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:1061d03cc89333e959317fe4a95b87ec4d19a9e62d8023b1298bc6fe00178990",
+      "lastSuccessfulHashes": {
+        "http": "sha256:1061d03cc89333e959317fe4a95b87ec4d19a9e62d8023b1298bc6fe00178990"
+      },
+      "etag": "W/\"fe8bd21f166d097b57f170d5eed8e63c\"",
+      "lastModified": "Wed, 28 Feb 2024 21:04:53 GMT",
+      "lastSuccessfulEtag": "W/\"fe8bd21f166d097b57f170d5eed8e63c\"",
+      "lastSuccessfulLastModified": "Wed, 28 Feb 2024 21:04:53 GMT"
+    },
+    {
+      "sourceId": "ref.adobe.spectrum",
+      "url": "https://spectrum.adobe.com/",
+      "observedAt": "2026-07-13T14:01:30.789Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:694f36ce4513879b5fd0f93367866eee06ff48bed86f84a2d8e6cfb540652556",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:694f36ce4513879b5fd0f93367866eee06ff48bed86f84a2d8e6cfb540652556",
+      "lastSuccessfulHashes": {
+        "http": "sha256:694f36ce4513879b5fd0f93367866eee06ff48bed86f84a2d8e6cfb540652556"
+      },
+      "etag": "W/\"bf464d5e8515e7fb8f54b84f85825628\"",
+      "lastModified": "Wed, 28 Feb 2024 21:04:55 GMT",
+      "lastSuccessfulEtag": "W/\"bf464d5e8515e7fb8f54b84f85825628\"",
+      "lastSuccessfulLastModified": "Wed, 28 Feb 2024 21:04:55 GMT"
+    },
+    {
+      "sourceId": "ref.airbnb.design",
+      "url": "https://airbnb.design/",
+      "observedAt": "2026-07-13T14:01:32.225Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc",
+      "lastSuccessfulHashes": {
+        "http": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc"
+      }
+    },
+    {
+      "sourceId": "ref.anthropic.mcp-spec",
+      "url": "https://modelcontextprotocol.io/",
+      "observedAt": "2026-07-13T14:01:31.117Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:95b9a3e9c3494bef047fb9a7ed76a1559c1b0703561e6f9d811596089dd5b485",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:95b9a3e9c3494bef047fb9a7ed76a1559c1b0703561e6f9d811596089dd5b485",
+      "lastSuccessfulHashes": {
+        "http": "sha256:95b9a3e9c3494bef047fb9a7ed76a1559c1b0703561e6f9d811596089dd5b485"
+      },
+      "lastModified": "Sun, 12 Jul 2026 18:06:43 GMT",
+      "lastSuccessfulLastModified": "Sun, 12 Jul 2026 18:06:43 GMT"
+    },
+    {
+      "sourceId": "ref.apple.hig-accessibility",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "observedAt": "2026-07-13T14:01:32.081Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:9884131cc01a211ada9b1ceac491fd972c0f9581e49e6973f2e96976f1a7c5a9",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:9884131cc01a211ada9b1ceac491fd972c0f9581e49e6973f2e96976f1a7c5a9",
+      "lastSuccessfulHashes": {
+        "http": "sha256:9884131cc01a211ada9b1ceac491fd972c0f9581e49e6973f2e96976f1a7c5a9"
+      },
+      "etag": "132133d5e669be691b7061959116126c",
+      "lastSuccessfulEtag": "132133d5e669be691b7061959116126c"
+    },
+    {
+      "sourceId": "ref.apple.hig-color",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "observedAt": "2026-07-13T14:01:32.081Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:4eeddde6fb43bbe5a42445d7acc809ebe7dbc442baecdb704ccaccc783fd9260",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:4eeddde6fb43bbe5a42445d7acc809ebe7dbc442baecdb704ccaccc783fd9260",
+      "lastSuccessfulHashes": {
+        "http": "sha256:4eeddde6fb43bbe5a42445d7acc809ebe7dbc442baecdb704ccaccc783fd9260"
+      },
+      "etag": "109219db90e9552c7a48fb14d301803f",
+      "lastSuccessfulEtag": "109219db90e9552c7a48fb14d301803f"
+    },
+    {
+      "sourceId": "ref.apple.hig-foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/foundations",
+      "observedAt": "2026-07-13T14:01:31.998Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:597e722de1ba862403bbf888bb0008d21e2f573946d081b2dcb846a3f875ec0b",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:597e722de1ba862403bbf888bb0008d21e2f573946d081b2dcb846a3f875ec0b",
+      "lastSuccessfulHashes": {
+        "http": "sha256:597e722de1ba862403bbf888bb0008d21e2f573946d081b2dcb846a3f875ec0b"
+      },
+      "etag": "3179508e7a87848f2c2aa5645d2f086e",
+      "lastSuccessfulEtag": "3179508e7a87848f2c2aa5645d2f086e"
+    },
+    {
+      "sourceId": "ref.apple.hig-spatial",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/spatial-layout",
+      "observedAt": "2026-07-13T14:01:32.557Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:6d6c13c1f7f852f91e84663daffa3f4775deac4a9c1fe0124e7bdf0a42d9f636",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:6d6c13c1f7f852f91e84663daffa3f4775deac4a9c1fe0124e7bdf0a42d9f636",
+      "lastSuccessfulHashes": {
+        "http": "sha256:6d6c13c1f7f852f91e84663daffa3f4775deac4a9c1fe0124e7bdf0a42d9f636"
+      },
+      "etag": "5874282696bfda1e0f3d42dce9ca3d0a",
+      "lastSuccessfulEtag": "5874282696bfda1e0f3d42dce9ca3d0a"
+    },
+    {
+      "sourceId": "ref.apple.hig-typography",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "observedAt": "2026-07-13T14:01:32.818Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:3422fb68d28a79e3a70abd49df8027602acbddbdd67ba381292d55d85fff59cb",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:3422fb68d28a79e3a70abd49df8027602acbddbdd67ba381292d55d85fff59cb",
+      "lastSuccessfulHashes": {
+        "http": "sha256:3422fb68d28a79e3a70abd49df8027602acbddbdd67ba381292d55d85fff59cb"
+      },
+      "etag": "97c74e0876cba26fcf816bb0e65ce99e",
+      "lastSuccessfulEtag": "97c74e0876cba26fcf816bb0e65ce99e"
+    },
+    {
+      "sourceId": "ref.apple.hig",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/",
+      "observedAt": "2026-07-13T14:01:32.759Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:67b7c7a316f003b98fecc343115f76ee43e7ecf1c891f69c5f95f480d8ead801",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:67b7c7a316f003b98fecc343115f76ee43e7ecf1c891f69c5f95f480d8ead801",
+      "lastSuccessfulHashes": {
+        "http": "sha256:67b7c7a316f003b98fecc343115f76ee43e7ecf1c891f69c5f95f480d8ead801"
+      },
+      "etag": "46f15ea324e56b8048ebd35a2b238b12",
+      "lastSuccessfulEtag": "46f15ea324e56b8048ebd35a2b238b12"
+    },
+    {
+      "sourceId": "ref.apple.liquid-glass",
+      "url": "https://developer.apple.com/design/",
+      "observedAt": "2026-07-13T14:01:32.138Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:fd2e0eb65ef59565ecd694913ca2d560a092d7c4ae7bd26902554d5683850ac2",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:fd2e0eb65ef59565ecd694913ca2d560a092d7c4ae7bd26902554d5683850ac2",
+      "lastSuccessfulHashes": {
+        "http": "sha256:fd2e0eb65ef59565ecd694913ca2d560a092d7c4ae7bd26902554d5683850ac2"
+      }
+    },
+    {
+      "sourceId": "ref.atlassian.content",
+      "url": "https://atlassian.design/content",
+      "observedAt": "2026-07-13T14:01:32.201Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "lastSuccessfulHashes": {
+        "http": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "etag": "\"a51f0b726b67473c40fe9bf43aeef999\"",
+      "lastModified": "Mon, 13 Jul 2026 08:55:48 GMT",
+      "lastSuccessfulEtag": "\"a51f0b726b67473c40fe9bf43aeef999\"",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 08:55:48 GMT"
+    },
+    {
+      "sourceId": "ref.atlassian.design-system",
+      "url": "https://atlassian.design/",
+      "observedAt": "2026-07-13T14:01:32.306Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:5aa083e4df9c0ab13050e8ce2ad365cb659637f7a4c5faa61d41a29245bd2cd8",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:5aa083e4df9c0ab13050e8ce2ad365cb659637f7a4c5faa61d41a29245bd2cd8",
+      "lastSuccessfulHashes": {
+        "http": "sha256:5aa083e4df9c0ab13050e8ce2ad365cb659637f7a4c5faa61d41a29245bd2cd8"
+      },
+      "lastModified": "Mon, 13 Jul 2026 08:55:48 GMT",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 08:55:48 GMT"
+    },
+    {
+      "sourceId": "ref.baseui.base-ui",
+      "url": "https://base-ui.com/",
+      "observedAt": "2026-07-13T14:01:32.291Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:8ce99f3c2f3819c1eb6f3e0b2dcc34c9e92667d35b32034265438607849a5d37",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:8ce99f3c2f3819c1eb6f3e0b2dcc34c9e92667d35b32034265438607849a5d37",
+      "lastSuccessfulHashes": {
+        "http": "sha256:8ce99f3c2f3819c1eb6f3e0b2dcc34c9e92667d35b32034265438607849a5d37"
+      },
+      "etag": "\"a735841a0cd0b9bf511511aed1f24443-ssl-df\"",
+      "lastSuccessfulEtag": "\"a735841a0cd0b9bf511511aed1f24443-ssl-df\""
+    },
+    {
+      "sourceId": "ref.chakra.v3",
+      "url": "https://chakra-ui.com/",
+      "observedAt": "2026-07-13T14:01:32.361Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:b8fc2fa818e6e532599fccca9077cbfd3bd34aff020085fec4a07c83ec401702",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:b8fc2fa818e6e532599fccca9077cbfd3bd34aff020085fec4a07c83ec401702",
+      "lastSuccessfulHashes": {
+        "http": "sha256:b8fc2fa818e6e532599fccca9077cbfd3bd34aff020085fec4a07c83ec401702"
+      },
+      "etag": "W/\"86f81610c1b297399044c676bc8b5c62\"",
+      "lastSuccessfulEtag": "W/\"86f81610c1b297399044c676bc8b5c62\""
+    },
+    {
+      "sourceId": "ref.copilotkit.ag-ui",
+      "url": "https://docs.copilotkit.ai/",
+      "observedAt": "2026-07-13T14:01:32.668Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:631bd129a76f4ce2f33567547719d012e3b4f71eaf5bf9a69f0de3ea7fa3a54b",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:631bd129a76f4ce2f33567547719d012e3b4f71eaf5bf9a69f0de3ea7fa3a54b",
+      "lastSuccessfulHashes": {
+        "http": "sha256:631bd129a76f4ce2f33567547719d012e3b4f71eaf5bf9a69f0de3ea7fa3a54b"
+      }
+    },
+    {
+      "sourceId": "ref.dropbox.brand",
+      "url": "https://brand.dropbox.com/",
+      "observedAt": "2026-07-13T14:01:32.489Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:ba22f8d9210c8c170996ee97dce3f6e9bd4ec7707d2986ea0294f8970c02c7bb",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:ba22f8d9210c8c170996ee97dce3f6e9bd4ec7707d2986ea0294f8970c02c7bb",
+      "lastSuccessfulHashes": {
+        "http": "sha256:ba22f8d9210c8c170996ee97dce3f6e9bd4ec7707d2986ea0294f8970c02c7bb"
+      },
+      "lastModified": "Thu, 18 Jun 2026 15:58:28 GMT",
+      "lastSuccessfulLastModified": "Thu, 18 Jun 2026 15:58:28 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.brand-family",
+      "url": "https://design.duolingo.com/identity/brand-family",
+      "observedAt": "2026-07-13T14:01:33.131Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.brand-narrative",
+      "url": "https://design.duolingo.com/writing/brand-narrative",
+      "observedAt": "2026-07-13T14:01:33.194Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.color",
+      "url": "https://design.duolingo.com/identity/color",
+      "observedAt": "2026-07-13T14:01:33.097Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.design",
+      "url": "https://design.duolingo.com/",
+      "observedAt": "2026-07-13T14:01:33.379Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.illustration-characters",
+      "url": "https://design.duolingo.com/illustration/characters",
+      "observedAt": "2026-07-13T14:01:33.468Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.illustration-duo",
+      "url": "https://design.duolingo.com/illustration/duo",
+      "observedAt": "2026-07-13T14:01:33.344Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.illustration-shape",
+      "url": "https://design.duolingo.com/illustration/shape-language",
+      "observedAt": "2026-07-13T14:01:33.613Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.imagery",
+      "url": "https://design.duolingo.com/identity/imagery",
+      "observedAt": "2026-07-13T14:01:33.813Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.logos",
+      "url": "https://design.duolingo.com/identity/logos",
+      "observedAt": "2026-07-13T14:01:33.758Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.marketing-assets",
+      "url": "https://design.duolingo.com/marketing/assets",
+      "observedAt": "2026-07-13T14:01:33.874Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.resources",
+      "url": "https://design.duolingo.com/resources",
+      "observedAt": "2026-07-13T14:01:33.916Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.typography",
+      "url": "https://design.duolingo.com/identity/typography",
+      "observedAt": "2026-07-13T14:01:34.138Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.writing-duo",
+      "url": "https://design.duolingo.com/writing/duo",
+      "observedAt": "2026-07-13T14:01:34.150Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.writing-glossary",
+      "url": "https://design.duolingo.com/writing/glossary",
+      "observedAt": "2026-07-13T14:01:34.327Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.writing-style",
+      "url": "https://design.duolingo.com/writing/style",
+      "observedAt": "2026-07-13T14:01:34.197Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.writing-tone",
+      "url": "https://design.duolingo.com/writing/tone",
+      "observedAt": "2026-07-13T14:01:34.276Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.duolingo.writing-voice",
+      "url": "https://design.duolingo.com/writing/voice",
+      "observedAt": "2026-07-13T14:01:34.433Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58",
+      "lastSuccessfulHashes": {
+        "http": "sha256:68baa322ac53222c98349daa465c726d218904959037f74ee6509eb58a45bb58"
+      },
+      "etag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastModified": "Thu, 09 Apr 2026 18:44:51 GMT",
+      "lastSuccessfulEtag": "\"216a167b8fca56f32ce94c8f27b38e84\"",
+      "lastSuccessfulLastModified": "Thu, 09 Apr 2026 18:44:51 GMT"
+    },
+    {
+      "sourceId": "ref.figma.variables",
+      "url": "https://help.figma.com/hc/en-us/articles/15339657135383",
+      "observedAt": "2026-07-13T14:01:36.017Z",
+      "result": "unchanged",
+      "attempts": 2,
+      "status": 200,
+      "contentHash": "sha256:b893dc0982333dd19a2b09a6aeccdb64c1ebc65dba9ea00ec3455b5db43044f8",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:b893dc0982333dd19a2b09a6aeccdb64c1ebc65dba9ea00ec3455b5db43044f8",
+      "lastSuccessfulHashes": {
+        "http": "sha256:b893dc0982333dd19a2b09a6aeccdb64c1ebc65dba9ea00ec3455b5db43044f8"
+      }
+    },
+    {
+      "sourceId": "ref.github.primer",
+      "url": "https://primer.style/",
+      "observedAt": "2026-07-13T14:01:35.567Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:7d1b106a1490b721ea1813b34aedc2537f9cb3226d6eaf5b920931151642e21d",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:7d1b106a1490b721ea1813b34aedc2537f9cb3226d6eaf5b920931151642e21d",
+      "lastSuccessfulHashes": {
+        "http": "sha256:7d1b106a1490b721ea1813b34aedc2537f9cb3226d6eaf5b920931151642e21d"
+      },
+      "etag": "\"2znqpicudl4jm8\"",
+      "lastSuccessfulEtag": "\"2znqpicudl4jm8\""
+    },
+    {
+      "sourceId": "ref.goodpatch.blog",
+      "url": "https://goodpatch.com/blog/",
+      "observedAt": "2026-07-13T14:01:34.702Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:2b8c38d79729c39ce9a1b54562f108da2370c4721000e7c7985d7ccca1fc8b0c",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:2b8c38d79729c39ce9a1b54562f108da2370c4721000e7c7985d7ccca1fc8b0c",
+      "lastSuccessfulHashes": {
+        "http": "sha256:2b8c38d79729c39ce9a1b54562f108da2370c4721000e7c7985d7ccca1fc8b0c"
+      },
+      "etag": "W/\"1606hp7ybfm1xx9\"",
+      "lastSuccessfulEtag": "W/\"1606hp7ybfm1xx9\""
+    },
+    {
+      "sourceId": "ref.goodpatch.design",
+      "url": "https://goodpatch.com/",
+      "observedAt": "2026-07-13T14:01:36.372Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:593a14b9e241910a1022b7b630bb7eb932c65cb042ff25436b0fe14ecd99d420",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:593a14b9e241910a1022b7b630bb7eb932c65cb042ff25436b0fe14ecd99d420",
+      "lastSuccessfulHashes": {
+        "http": "sha256:593a14b9e241910a1022b7b630bb7eb932c65cb042ff25436b0fe14ecd99d420"
+      },
+      "etag": "W/\"o1k07vhutv29in\"",
+      "lastSuccessfulEtag": "W/\"o1k07vhutv29in\""
+    },
+    {
+      "sourceId": "ref.google.material-3",
+      "url": "https://m3.material.io/",
+      "observedAt": "2026-07-13T14:01:36.426Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64",
+      "lastSuccessfulHashes": {
+        "http": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64"
+      },
+      "etag": "W/\"315532801.0-62280-2265778700\"",
+      "lastModified": "Tue, 01 Jan 1980 00:00:01 GMT",
+      "lastSuccessfulEtag": "W/\"315532801.0-62280-2265778700\"",
+      "lastSuccessfulLastModified": "Tue, 01 Jan 1980 00:00:01 GMT"
+    },
+    {
+      "sourceId": "ref.google.pair-guidebook",
+      "url": "https://pair.withgoogle.com/guidebook/",
+      "observedAt": "2026-07-13T14:01:34.834Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:d2f7413425e25c9808b4ce9405c1f9820d17fa94bbe713b9f82084e1f4b4b9f6",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:d2f7413425e25c9808b4ce9405c1f9820d17fa94bbe713b9f82084e1f4b4b9f6",
+      "lastSuccessfulHashes": {
+        "http": "sha256:d2f7413425e25c9808b4ce9405c1f9820d17fa94bbe713b9f82084e1f4b4b9f6"
+      }
+    },
+    {
+      "sourceId": "ref.google.stitch",
+      "url": "https://m3.material.io/blog",
+      "observedAt": "2026-07-13T14:01:35.939Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:185725137bae848679bfd6b8e0fd6a5dc1ce5acc2012902dcbe45722e49861a5",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:185725137bae848679bfd6b8e0fd6a5dc1ce5acc2012902dcbe45722e49861a5",
+      "lastSuccessfulHashes": {
+        "http": "sha256:185725137bae848679bfd6b8e0fd6a5dc1ce5acc2012902dcbe45722e49861a5"
+      },
+      "etag": "W/\"315532801.0-62580-3179547615\"",
+      "lastModified": "Tue, 01 Jan 1980 00:00:01 GMT",
+      "lastSuccessfulEtag": "W/\"315532801.0-62580-3179547615\"",
+      "lastSuccessfulLastModified": "Tue, 01 Jan 1980 00:00:01 GMT"
+    },
+    {
+      "sourceId": "ref.govuk.design-system",
+      "url": "https://design-system.service.gov.uk/",
+      "observedAt": "2026-07-13T14:01:35.310Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:afed31f4da6b5873e60e0d0f36492648c05ff93b34a40a8ff2b7a557264174f4",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:afed31f4da6b5873e60e0d0f36492648c05ff93b34a40a8ff2b7a557264174f4",
+      "lastSuccessfulHashes": {
+        "http": "sha256:afed31f4da6b5873e60e0d0f36492648c05ff93b34a40a8ff2b7a557264174f4"
+      },
+      "etag": "\"d3d3c999620a60a2687de0e88180d066-ssl-df\"",
+      "lastSuccessfulEtag": "\"d3d3c999620a60a2687de0e88180d066-ssl-df\""
+    },
+    {
+      "sourceId": "ref.ibm.carbon-content",
+      "url": "https://carbondesignsystem.com/guidelines/content/overview/",
+      "observedAt": "2026-07-13T14:01:36.601Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:c8d32521554cbd57cb233e5f0e9507d399ff1c7be24d04053d21f878ebadd4ef",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:c8d32521554cbd57cb233e5f0e9507d399ff1c7be24d04053d21f878ebadd4ef",
+      "lastSuccessfulHashes": {
+        "http": "sha256:c8d32521554cbd57cb233e5f0e9507d399ff1c7be24d04053d21f878ebadd4ef"
+      },
+      "lastModified": "Wed, 08 Jul 2026 15:34:23 GMT",
+      "lastSuccessfulLastModified": "Wed, 08 Jul 2026 15:34:23 GMT"
+    },
+    {
+      "sourceId": "ref.ibm.carbon-for-ai",
+      "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
+      "observedAt": "2026-07-13T14:01:36.684Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:bb6bb24e0bb0a4a093ca811f910f9f41e6efb8f7b32f10b95909a99cf60689f5",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:bb6bb24e0bb0a4a093ca811f910f9f41e6efb8f7b32f10b95909a99cf60689f5",
+      "lastSuccessfulHashes": {
+        "http": "sha256:bb6bb24e0bb0a4a093ca811f910f9f41e6efb8f7b32f10b95909a99cf60689f5"
+      },
+      "lastModified": "Wed, 08 Jul 2026 15:34:23 GMT",
+      "lastSuccessfulLastModified": "Wed, 08 Jul 2026 15:34:23 GMT"
+    },
+    {
+      "sourceId": "ref.ibm.carbon-motion",
+      "url": "https://carbondesignsystem.com/elements/motion/overview/",
+      "observedAt": "2026-07-13T14:01:37.430Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:9a796b3f529c0112d0deb2871feb3837a777d3e427c1ca01868204e6293c4d40",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:9a796b3f529c0112d0deb2871feb3837a777d3e427c1ca01868204e6293c4d40",
+      "lastSuccessfulHashes": {
+        "http": "sha256:9a796b3f529c0112d0deb2871feb3837a777d3e427c1ca01868204e6293c4d40"
+      },
+      "lastModified": "Wed, 08 Jul 2026 15:34:23 GMT",
+      "lastSuccessfulLastModified": "Wed, 08 Jul 2026 15:34:23 GMT"
+    },
+    {
+      "sourceId": "ref.ibm.carbon",
+      "url": "https://carbondesignsystem.com/",
+      "observedAt": "2026-07-13T14:01:37.109Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:5e071b046c5cd9527fca31745a1e530ea22efe246aa43dcbf64e6c828db9b6b6",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:5e071b046c5cd9527fca31745a1e530ea22efe246aa43dcbf64e6c828db9b6b6",
+      "lastSuccessfulHashes": {
+        "http": "sha256:5e071b046c5cd9527fca31745a1e530ea22efe246aa43dcbf64e6c828db9b6b6"
+      },
+      "lastModified": "Wed, 08 Jul 2026 15:34:23 GMT",
+      "lastSuccessfulLastModified": "Wed, 08 Jul 2026 15:34:23 GMT"
+    },
+    {
+      "sourceId": "ref.intuit.content-design",
+      "url": "https://contentdesign.intuit.com/",
+      "observedAt": "2026-07-13T14:01:38.434Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:b4e4a1c585433f4240124cd5c3c8428baeb60d112c2feaf09e4dd6a64a17efac",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:b4e4a1c585433f4240124cd5c3c8428baeb60d112c2feaf09e4dd6a64a17efac",
+      "lastSuccessfulHashes": {
+        "http": "sha256:b4e4a1c585433f4240124cd5c3c8428baeb60d112c2feaf09e4dd6a64a17efac"
+      }
+    },
+    {
+      "sourceId": "ref.intuit.design-system",
+      "url": "https://designsystem.intuit.com/",
+      "observedAt": "2026-07-13T14:01:38.948Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:518a67e450a3fc21ae8ccf51fc22fbe7a7563acc9d8a60cab3a67492defb3e96",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:518a67e450a3fc21ae8ccf51fc22fbe7a7563acc9d8a60cab3a67492defb3e96",
+      "lastSuccessfulHashes": {
+        "http": "sha256:518a67e450a3fc21ae8ccf51fc22fbe7a7563acc9d8a60cab3a67492defb3e96"
+      }
+    },
+    {
+      "sourceId": "ref.kzhrknt.awesome-design-md-jp",
+      "url": "https://github.com/kzhrknt/awesome-design-md-jp",
+      "observedAt": "2026-07-13T14:01:36.644Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:d4652cc4496da242ded280b0808f0080f366e9162f259300767c6b6fc0e2cd9d",
+      "lastSuccessfulHash": "sha256:d4652cc4496da242ded280b0808f0080f366e9162f259300767c6b6fc0e2cd9d",
+      "lastSuccessfulHashes": {
+        "github": "sha256:d4652cc4496da242ded280b0808f0080f366e9162f259300767c6b6fc0e2cd9d"
+      },
+      "adapter": "github",
+      "adapterHealth": "healthy",
+      "revision": "main|2026-07-04T08:36:45Z"
+    },
+    {
+      "sourceId": "ref.linear.brand",
+      "url": "https://linear.app/",
+      "observedAt": "2026-07-13T14:01:38.237Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:be7c1ba198a4041679c0c90afabd05289df9b54deb03d99022e1315fb21b8f00",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:be7c1ba198a4041679c0c90afabd05289df9b54deb03d99022e1315fb21b8f00",
+      "lastSuccessfulHashes": {
+        "http": "sha256:be7c1ba198a4041679c0c90afabd05289df9b54deb03d99022e1315fb21b8f00"
+      }
+    },
+    {
+      "sourceId": "ref.mailchimp.brand-assets",
+      "url": "https://mailchimp.com/about/brand-assets/",
+      "observedAt": "2026-07-13T14:01:36.798Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:6c454420d8f40911d8efcf416221ae2aec32b879f04904ac5ea7f2720dfb2a5f",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:6c454420d8f40911d8efcf416221ae2aec32b879f04904ac5ea7f2720dfb2a5f",
+      "lastSuccessfulHashes": {
+        "http": "sha256:6c454420d8f40911d8efcf416221ae2aec32b879f04904ac5ea7f2720dfb2a5f"
+      }
+    },
+    {
+      "sourceId": "ref.mailchimp.style-guide",
+      "url": "https://styleguide.mailchimp.com/",
+      "observedAt": "2026-07-13T14:01:37.273Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:6f841715773b44661063add47875f8af6706236017ac6e057e0a1bddbd222ed4",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:6f841715773b44661063add47875f8af6706236017ac6e057e0a1bddbd222ed4",
+      "lastSuccessfulHashes": {
+        "http": "sha256:6f841715773b44661063add47875f8af6706236017ac6e057e0a1bddbd222ed4"
+      },
+      "etag": "\"60d04f7bac63390fab5d2bca989e9fab-ssl-df\"",
+      "lastSuccessfulEtag": "\"60d04f7bac63390fab5d2bca989e9fab-ssl-df\""
+    },
+    {
+      "sourceId": "ref.mdn.css",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
+      "observedAt": "2026-07-13T14:01:37.178Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:4c3ca71ce752453957cdd3402ea6053b09540983707026e34ea0e8e26f2c3770",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:4c3ca71ce752453957cdd3402ea6053b09540983707026e34ea0e8e26f2c3770",
+      "lastSuccessfulHashes": {
+        "http": "sha256:4c3ca71ce752453957cdd3402ea6053b09540983707026e34ea0e8e26f2c3770"
+      },
+      "etag": "\"04edabb9764ba84c21665d047998c076\"",
+      "lastModified": "Mon, 13 Jul 2026 01:13:13 GMT",
+      "lastSuccessfulEtag": "\"04edabb9764ba84c21665d047998c076\"",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 01:13:13 GMT"
+    },
+    {
+      "sourceId": "ref.mercari.design",
+      "url": "https://design.mercari.com/",
+      "observedAt": "2026-07-13T14:01:38.098Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:62d44a96432dc5277c3fcac648a5cf6dcd78836439e32f3efbd09f0f50031150",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:62d44a96432dc5277c3fcac648a5cf6dcd78836439e32f3efbd09f0f50031150",
+      "lastSuccessfulHashes": {
+        "http": "sha256:62d44a96432dc5277c3fcac648a5cf6dcd78836439e32f3efbd09f0f50031150"
+      },
+      "etag": "\"eef49-64eee585df700\"",
+      "lastModified": "Wed, 08 Apr 2026 08:04:12 GMT",
+      "lastSuccessfulEtag": "\"eef49-64eee585df700\"",
+      "lastSuccessfulLastModified": "Wed, 08 Apr 2026 08:04:12 GMT"
+    },
+    {
+      "sourceId": "ref.microsoft.fluent-2",
+      "url": "https://fluent2.microsoft.design/",
+      "observedAt": "2026-07-13T14:01:39.569Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:03af8992729d278d6a2e668564801d472e70392069bb27651dbe3f9abebfc5e4",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:03af8992729d278d6a2e668564801d472e70392069bb27651dbe3f9abebfc5e4",
+      "lastSuccessfulHashes": {
+        "http": "sha256:03af8992729d278d6a2e668564801d472e70392069bb27651dbe3f9abebfc5e4"
+      }
+    },
+    {
+      "sourceId": "ref.microsoft.fluent-motion",
+      "url": "https://fluent2.microsoft.design/motion",
+      "observedAt": "2026-07-13T14:01:39.747Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:2482257cab5038fc933d09f7bb6e41ae1e3ac69b60d5b7ef5587f6c00f03852c",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:2482257cab5038fc933d09f7bb6e41ae1e3ac69b60d5b7ef5587f6c00f03852c",
+      "lastSuccessfulHashes": {
+        "http": "sha256:2482257cab5038fc933d09f7bb6e41ae1e3ac69b60d5b7ef5587f6c00f03852c"
+      }
+    },
+    {
+      "sourceId": "ref.microsoft.human-ai-guidelines",
+      "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
+      "observedAt": "2026-07-13T14:01:39.944Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:dc7dff215c80f8a99bd9c0eb39d03fb44ad7acfd6426ce183337990dbedf2db8",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:dc7dff215c80f8a99bd9c0eb39d03fb44ad7acfd6426ce183337990dbedf2db8",
+      "lastSuccessfulHashes": {
+        "http": "sha256:dc7dff215c80f8a99bd9c0eb39d03fb44ad7acfd6426ce183337990dbedf2db8"
+      }
+    },
+    {
+      "sourceId": "ref.motion.motion-react",
+      "url": "https://motion.dev/",
+      "observedAt": "2026-07-13T14:01:38.474Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:f5c8af3838c5ae8aca678250c2dac76ff28e6dd82d8481507ee2bfae19d42528",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:f5c8af3838c5ae8aca678250c2dac76ff28e6dd82d8481507ee2bfae19d42528",
+      "lastSuccessfulHashes": {
+        "http": "sha256:f5c8af3838c5ae8aca678250c2dac76ff28e6dd82d8481507ee2bfae19d42528"
+      }
+    },
+    {
+      "sourceId": "ref.nielsen.usability",
+      "url": "https://www.nngroup.com/",
+      "observedAt": "2026-07-13T14:01:38.551Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:1e29e5d6917bfd387323a5be61e6b0cd7b46046ec7b85dcf9f7437e9013315d5",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:1e29e5d6917bfd387323a5be61e6b0cd7b46046ec7b85dcf9f7437e9013315d5",
+      "lastSuccessfulHashes": {
+        "http": "sha256:1e29e5d6917bfd387323a5be61e6b0cd7b46046ec7b85dcf9f7437e9013315d5"
+      }
+    },
+    {
+      "sourceId": "ref.nist.ai-rmf",
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "observedAt": "2026-07-13T14:01:39.170Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:0e4ffc19ec8c707da66a176629466c0c53370e126a4881ab3b6e4fe18b22be36",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:0e4ffc19ec8c707da66a176629466c0c53370e126a4881ab3b6e4fe18b22be36",
+      "lastSuccessfulHashes": {
+        "http": "sha256:0e4ffc19ec8c707da66a176629466c0c53370e126a4881ab3b6e4fe18b22be36"
+      },
+      "lastModified": "Mon, 13 Jul 2026 13:15:46 GMT",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 13:15:46 GMT"
+    },
+    {
+      "sourceId": "ref.nothing.design",
+      "url": "https://nothing.tech/",
+      "observedAt": "2026-07-13T14:01:38.945Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:29f7eb956085a07892581f45e733fc9efd0e479a923ac9070f144c7f1ac93014",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:29f7eb956085a07892581f45e733fc9efd0e479a923ac9070f144c7f1ac93014",
+      "lastSuccessfulHashes": {
+        "http": "sha256:29f7eb956085a07892581f45e733fc9efd0e479a923ac9070f144c7f1ac93014"
+      }
+    },
+    {
+      "sourceId": "ref.notion.design",
+      "url": "https://www.notion.so/",
+      "observedAt": "2026-07-13T14:01:40.158Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:0a4bc2b2d7b835d599c4347669f655af24b0e2d0253dc4aef9d025d9c3a7b703",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:0a4bc2b2d7b835d599c4347669f655af24b0e2d0253dc4aef9d025d9c3a7b703",
+      "lastSuccessfulHashes": {
+        "http": "sha256:0a4bc2b2d7b835d599c4347669f655af24b0e2d0253dc4aef9d025d9c3a7b703"
+      }
+    },
+    {
+      "sourceId": "ref.openai.ai-elements",
+      "url": "https://platform.openai.com/docs/guides/text",
+      "observedAt": "2026-07-13T14:01:39.451Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:10ba944699dcdb776d637969fba31d69d459ad594f3c068e7664cf73c9867b34",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:10ba944699dcdb776d637969fba31d69d459ad594f3c068e7664cf73c9867b34",
+      "lastSuccessfulHashes": {
+        "http": "sha256:10ba944699dcdb776d637969fba31d69d459ad594f3c068e7664cf73c9867b34"
+      },
+      "etag": "W/\"e9e5bf39d1cb28bf7ab3efc1d2d766cf\"",
+      "lastModified": "Mon, 13 Jul 2026 13:05:18 GMT",
+      "lastSuccessfulEtag": "W/\"e9e5bf39d1cb28bf7ab3efc1d2d766cf\"",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 13:05:18 GMT"
+    },
+    {
+      "sourceId": "ref.openui.open-ui",
+      "url": "https://open-ui.org/",
+      "observedAt": "2026-07-13T14:01:39.631Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:3c1ff93609baedde84286288a36f6bcf37fd4e6f3cbb13d8f92bf12cbcc2e316",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:3c1ff93609baedde84286288a36f6bcf37fd4e6f3cbb13d8f92bf12cbcc2e316",
+      "lastSuccessfulHashes": {
+        "http": "sha256:3c1ff93609baedde84286288a36f6bcf37fd4e6f3cbb13d8f92bf12cbcc2e316"
+      },
+      "etag": "\"530c7969806413ac394742cf58d0b310-ssl-df\"",
+      "lastSuccessfulEtag": "\"530c7969806413ac394742cf58d0b310-ssl-df\""
+    },
+    {
+      "sourceId": "ref.pinterest.gestalt-accessibility",
+      "url": "https://github.com/pinterest/gestalt/blob/master/docs/pages/foundations/accessibility.tsx",
+      "observedAt": "2026-07-13T14:01:39.478Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:3eea4007f5d03dae2e8a0af94eb8669f2ba6d1292bac33d78232c86555832679",
+      "lastSuccessfulHash": "sha256:3eea4007f5d03dae2e8a0af94eb8669f2ba6d1292bac33d78232c86555832679",
+      "lastSuccessfulHashes": {
+        "github": "sha256:3eea4007f5d03dae2e8a0af94eb8669f2ba6d1292bac33d78232c86555832679"
+      },
+      "adapter": "github",
+      "adapterHealth": "healthy",
+      "revision": "master|2026-03-18T09:02:16Z|v177.0.13|2026-01-07T17:32:36Z"
+    },
+    {
+      "sourceId": "ref.pinterest.gestalt",
+      "url": "https://gestalt.pinterest.systems/",
+      "observedAt": "2026-07-13T14:01:40.910Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:82157b7dc7cb915d92e256458f635c56880cc7baa6094c55ef20b4ae9f246b11",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:82157b7dc7cb915d92e256458f635c56880cc7baa6094c55ef20b4ae9f246b11",
+      "lastSuccessfulHashes": {
+        "http": "sha256:82157b7dc7cb915d92e256458f635c56880cc7baa6094c55ef20b4ae9f246b11"
+      }
+    },
+    {
+      "sourceId": "ref.radix.primitives",
+      "url": "https://www.radix-ui.com/primitives",
+      "observedAt": "2026-07-13T14:01:39.680Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:0b7d8b0fea25a6925b9056a76cf3cb50d0d12575dce18f4e0ca90ebe06ff1032",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:0b7d8b0fea25a6925b9056a76cf3cb50d0d12575dce18f4e0ca90ebe06ff1032",
+      "lastSuccessfulHashes": {
+        "http": "sha256:0b7d8b0fea25a6925b9056a76cf3cb50d0d12575dce18f4e0ca90ebe06ff1032"
+      },
+      "etag": "W/\"a9f30ff40c5dceea1f417876e3848426\"",
+      "lastSuccessfulEtag": "W/\"a9f30ff40c5dceea1f417876e3848426\""
+    },
+    {
+      "sourceId": "ref.react.docs",
+      "url": "https://react.dev/",
+      "observedAt": "2026-07-13T14:01:39.733Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:aa73f90131c79da04fb40a55727dc4d608873fb76deb947baa0a9f3c50561f0b",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:aa73f90131c79da04fb40a55727dc4d608873fb76deb947baa0a9f3c50561f0b",
+      "lastSuccessfulHashes": {
+        "http": "sha256:aa73f90131c79da04fb40a55727dc4d608873fb76deb947baa0a9f3c50561f0b"
+      },
+      "etag": "W/\"88668f220ecb1613399cb06710464d23\"",
+      "lastSuccessfulEtag": "W/\"88668f220ecb1613399cb06710464d23\""
+    },
+    {
+      "sourceId": "ref.salesforce.lightning-guidelines",
+      "url": "https://www.lightningdesignsystem.com/guidelines/overview/",
+      "observedAt": "2026-07-13T14:01:44.374Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c",
+      "lastSuccessfulHashes": {
+        "http": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c"
+      },
+      "etag": "W/\"04068ddd226500c8b59eabbfff2fd12d\"",
+      "lastSuccessfulEtag": "W/\"04068ddd226500c8b59eabbfff2fd12d\""
+    },
+    {
+      "sourceId": "ref.salesforce.lightning",
+      "url": "https://www.lightningdesignsystem.com/",
+      "observedAt": "2026-07-13T14:01:44.428Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c",
+      "lastSuccessfulHashes": {
+        "http": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c"
+      },
+      "etag": "W/\"4653d36a223ca792b16d26dc3ceb2014\"",
+      "lastSuccessfulEtag": "W/\"4653d36a223ca792b16d26dc3ceb2014\""
+    },
+    {
+      "sourceId": "ref.shadcn.ui",
+      "url": "https://ui.shadcn.com/",
+      "observedAt": "2026-07-13T14:01:39.859Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:7781a744d5f6301cd24854344a7b0e5d7eabdc0a6df99b2e0738ad6c60f239d6",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:7781a744d5f6301cd24854344a7b0e5d7eabdc0a6df99b2e0738ad6c60f239d6",
+      "lastSuccessfulHashes": {
+        "http": "sha256:7781a744d5f6301cd24854344a7b0e5d7eabdc0a6df99b2e0738ad6c60f239d6"
+      },
+      "etag": "W/\"846eb09b1b5d84ef35f0377f08a469b6\"",
+      "lastSuccessfulEtag": "W/\"846eb09b1b5d84ef35f0377f08a469b6\""
+    },
+    {
+      "sourceId": "ref.shopify.polaris",
+      "url": "https://polaris.shopify.com/",
+      "observedAt": "2026-07-13T14:01:40.412Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:784e572608cdb8cebfa7176cae66a5822bfe097c68bd9f2bd81b190fa1841fc3",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:784e572608cdb8cebfa7176cae66a5822bfe097c68bd9f2bd81b190fa1841fc3",
+      "lastSuccessfulHashes": {
+        "http": "sha256:784e572608cdb8cebfa7176cae66a5822bfe097c68bd9f2bd81b190fa1841fc3"
+      },
+      "etag": "\"z91u2p9ri70w\"",
+      "lastSuccessfulEtag": "\"z91u2p9ri70w\""
+    },
+    {
+      "sourceId": "ref.smarthr.design",
+      "url": "https://smarthr.design/",
+      "observedAt": "2026-07-13T14:01:40.573Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:e694d7febbabe48838db77340d774b40019710d97a6838735dc5f2cab9e822ba",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:e694d7febbabe48838db77340d774b40019710d97a6838735dc5f2cab9e822ba",
+      "lastSuccessfulHashes": {
+        "http": "sha256:e694d7febbabe48838db77340d774b40019710d97a6838735dc5f2cab9e822ba"
+      },
+      "etag": "\"958ad5e18a2ad75d7f51e6c9f10fbec2-ssl-df\"",
+      "lastSuccessfulEtag": "\"958ad5e18a2ad75d7f51e6c9f10fbec2-ssl-df\""
+    },
+    {
+      "sourceId": "ref.spotify.design",
+      "url": "https://engineering.atspotify.com/",
+      "observedAt": "2026-07-13T14:01:42.789Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:b4069045e11fedd11b288778a857d14f5f62035d091ee714d40091504d289e31",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:b4069045e11fedd11b288778a857d14f5f62035d091ee714d40091504d289e31",
+      "lastSuccessfulHashes": {
+        "http": "sha256:b4069045e11fedd11b288778a857d14f5f62035d091ee714d40091504d289e31"
+      }
+    },
+    {
+      "sourceId": "ref.storybook.docs",
+      "url": "https://storybook.js.org/",
+      "observedAt": "2026-07-13T14:01:41.442Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:ff464616bbdd3f86f197d606042cb4eea22361fba3371de1b37b9a12f2b537b3",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:ff464616bbdd3f86f197d606042cb4eea22361fba3371de1b37b9a12f2b537b3",
+      "lastSuccessfulHashes": {
+        "http": "sha256:ff464616bbdd3f86f197d606042cb4eea22361fba3371de1b37b9a12f2b537b3"
+      },
+      "etag": "W/\"k97fre82arw4e7-df\"",
+      "lastSuccessfulEtag": "W/\"k97fre82arw4e7-df\""
+    },
+    {
+      "sourceId": "ref.stripe.design",
+      "url": "https://stripe.com/",
+      "observedAt": "2026-07-13T14:01:41.744Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:6903bdaeb947dea85e850d845803911da5647c782ad6b90800b8cbe2db0a2c5a",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:6903bdaeb947dea85e850d845803911da5647c782ad6b90800b8cbe2db0a2c5a",
+      "lastSuccessfulHashes": {
+        "http": "sha256:6903bdaeb947dea85e850d845803911da5647c782ad6b90800b8cbe2db0a2c5a"
+      }
+    },
+    {
+      "sourceId": "ref.tailwind.v4",
+      "url": "https://tailwindcss.com/docs",
+      "observedAt": "2026-07-13T14:01:41.186Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:1478cf4f1f452f9784b51843471491f2a1fd850d6214669a9edc16d203603e93",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:1478cf4f1f452f9784b51843471491f2a1fd850d6214669a9edc16d203603e93",
+      "lastSuccessfulHashes": {
+        "http": "sha256:1478cf4f1f452f9784b51843471491f2a1fd850d6214669a9edc16d203603e93"
+      },
+      "etag": "W/\"80770643a2121132d7a9bfec0fd1d905\"",
+      "lastSuccessfulEtag": "W/\"80770643a2121132d7a9bfec0fd1d905\""
+    },
+    {
+      "sourceId": "ref.uber.base-web",
+      "url": "https://baseweb.design/",
+      "observedAt": "2026-07-13T14:01:42.040Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:a7279c322397fcaf32a1e5ef0e255180c948bdc6454e3418fc999d99bbda0390",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:a7279c322397fcaf32a1e5ef0e255180c948bdc6454e3418fc999d99bbda0390",
+      "lastSuccessfulHashes": {
+        "http": "sha256:a7279c322397fcaf32a1e5ef0e255180c948bdc6454e3418fc999d99bbda0390"
+      }
+    },
+    {
+      "sourceId": "ref.uber.base",
+      "url": "https://base.uber.com/",
+      "observedAt": "2026-07-13T14:01:44.601Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:cd6c245363aae2728d20b9e40913eb6bed9baa1708b970f226690784b4ced7b1",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:cd6c245363aae2728d20b9e40913eb6bed9baa1708b970f226690784b4ced7b1",
+      "lastSuccessfulHashes": {
+        "http": "sha256:cd6c245363aae2728d20b9e40913eb6bed9baa1708b970f226690784b4ced7b1"
+      },
+      "etag": "W/\"a14251e03884951462c0d2d20d76b3ee\"",
+      "lastSuccessfulEtag": "W/\"a14251e03884951462c0d2d20d76b3ee\""
+    },
+    {
+      "sourceId": "ref.uswds.uswds",
+      "url": "https://designsystem.digital.gov/",
+      "observedAt": "2026-07-13T14:01:42.948Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:ce8b310237816e49c1fb94f2a7193b9b1b766f09ef976c1ec5efadcc0a5c464f",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:ce8b310237816e49c1fb94f2a7193b9b1b766f09ef976c1ec5efadcc0a5c464f",
+      "lastSuccessfulHashes": {
+        "http": "sha256:ce8b310237816e49c1fb94f2a7193b9b1b766f09ef976c1ec5efadcc0a5c464f"
+      },
+      "etag": "\"e1880523774d340b2dadbe20a01608db\"",
+      "lastModified": "Thu, 04 Sep 2025 20:08:23 GMT",
+      "lastSuccessfulEtag": "\"e1880523774d340b2dadbe20a01608db\"",
+      "lastSuccessfulLastModified": "Thu, 04 Sep 2025 20:08:23 GMT"
+    },
+    {
+      "sourceId": "ref.vercel.ai-elements",
+      "url": "https://ai-sdk.dev/elements/overview",
+      "observedAt": "2026-07-13T14:01:43.585Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:1fc54e43398ebeee74a8b5c456ba78e092632ce37deae6a6ab805913bfab489e",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:1fc54e43398ebeee74a8b5c456ba78e092632ce37deae6a6ab805913bfab489e",
+      "lastSuccessfulHashes": {
+        "http": "sha256:1fc54e43398ebeee74a8b5c456ba78e092632ce37deae6a6ab805913bfab489e"
+      }
+    },
+    {
+      "sourceId": "ref.vercel.design",
+      "url": "https://vercel.com/design",
+      "observedAt": "2026-07-13T14:01:42.940Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:2464890a0cba5649005b1f2e3b234377976046f9a364c29c6b0ba5603a58b6d5",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:2464890a0cba5649005b1f2e3b234377976046f9a364c29c6b0ba5603a58b6d5",
+      "lastSuccessfulHashes": {
+        "http": "sha256:2464890a0cba5649005b1f2e3b234377976046f9a364c29c6b0ba5603a58b6d5"
+      },
+      "etag": "W/\"e00948531be73cb377bcba472ff0953e\"",
+      "lastSuccessfulEtag": "W/\"e00948531be73cb377bcba472ff0953e\""
+    },
+    {
+      "sourceId": "ref.vercel.generative-ui",
+      "url": "https://sdk.vercel.ai/docs/ai-sdk-ui/generative-user-interfaces",
+      "observedAt": "2026-07-13T14:01:43.358Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:0376cccb3fc35f7a7aea8d95be95b6373c9b657209681156ba174be95539efe6",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:0376cccb3fc35f7a7aea8d95be95b6373c9b657209681156ba174be95539efe6",
+      "lastSuccessfulHashes": {
+        "http": "sha256:0376cccb3fc35f7a7aea8d95be95b6373c9b657209681156ba174be95539efe6"
+      },
+      "etag": "W/\"fa8b39722b3f6ab48a69e5ee84e949dc\"",
+      "lastSuccessfulEtag": "W/\"fa8b39722b3f6ab48a69e5ee84e949dc\""
+    },
+    {
+      "sourceId": "ref.vercel.web-interface-guidelines",
+      "url": "https://vercel.com/design/guidelines",
+      "observedAt": "2026-07-13T14:01:43.063Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:aa87525615db3ef5e3f6cd0ea703f778258e7a00a355f071f59d031f5fab77c7",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:aa87525615db3ef5e3f6cd0ea703f778258e7a00a355f071f59d031f5fab77c7",
+      "lastSuccessfulHashes": {
+        "http": "sha256:aa87525615db3ef5e3f6cd0ea703f778258e7a00a355f071f59d031f5fab77c7"
+      },
+      "etag": "W/\"09276861d1c4c048cdff74e15bd9bea0\"",
+      "lastSuccessfulEtag": "W/\"09276861d1c4c048cdff74e15bd9bea0\""
+    },
+    {
+      "sourceId": "ref.voltagent.awesome-design-md",
+      "url": "https://github.com/voltagent/awesome-design-md",
+      "observedAt": "2026-07-13T14:01:43.086Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:9b1da2c3d8d3991a223c8a55e235be8514039c1decfc147363588ebe5aa20b63",
+      "lastSuccessfulHash": "sha256:9b1da2c3d8d3991a223c8a55e235be8514039c1decfc147363588ebe5aa20b63",
+      "lastSuccessfulHashes": {
+        "github": "sha256:9b1da2c3d8d3991a223c8a55e235be8514039c1decfc147363588ebe5aa20b63"
+      },
+      "adapter": "github",
+      "adapterHealth": "healthy",
+      "revision": "main|2026-06-16T14:21:08Z"
+    },
+    {
+      "sourceId": "ref.w3c.apg",
+      "url": "https://www.w3.org/WAI/ARIA/apg/",
+      "observedAt": "2026-07-13T14:01:43.216Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:bfce9a9d0f8e0b575392207fc2e2219774e9e9414cdda009c953dbb750f31365",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:bfce9a9d0f8e0b575392207fc2e2219774e9e9414cdda009c953dbb750f31365",
+      "lastSuccessfulHashes": {
+        "http": "sha256:bfce9a9d0f8e0b575392207fc2e2219774e9e9414cdda009c953dbb750f31365"
+      },
+      "lastModified": "Thu, 09 Jul 2026 07:07:36 GMT",
+      "lastSuccessfulLastModified": "Thu, 09 Jul 2026 07:07:36 GMT"
+    },
+    {
+      "sourceId": "ref.w3c.dtcg-format",
+      "url": "https://tr.designtokens.org/format/",
+      "observedAt": "2026-07-13T14:01:45.192Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:87cbeaa93c2b1c786ab92daa687c33794c33f9bad77485b56f0f24a0d6e6a8ee",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:87cbeaa93c2b1c786ab92daa687c33794c33f9bad77485b56f0f24a0d6e6a8ee",
+      "lastSuccessfulHashes": {
+        "http": "sha256:87cbeaa93c2b1c786ab92daa687c33794c33f9bad77485b56f0f24a0d6e6a8ee"
+      },
+      "etag": "\"23c837f5184d58d4f199572f5e8121be-ssl-df\"",
+      "lastSuccessfulEtag": "\"23c837f5184d58d4f199572f5e8121be-ssl-df\""
+    },
+    {
+      "sourceId": "ref.w3c.dtcg",
+      "url": "https://www.designtokens.org/",
+      "observedAt": "2026-07-13T14:01:43.826Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:62b9657e051d608c1d634cc926413a1ba41e6fde56b23126c235073c0818f52e",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:62b9657e051d608c1d634cc926413a1ba41e6fde56b23126c235073c0818f52e",
+      "lastSuccessfulHashes": {
+        "http": "sha256:62b9657e051d608c1d634cc926413a1ba41e6fde56b23126c235073c0818f52e"
+      },
+      "etag": "\"69ddfff1d668fb53e92a7e73d6036bad-ssl-df\"",
+      "lastSuccessfulEtag": "\"69ddfff1d668fb53e92a7e73d6036bad-ssl-df\""
+    },
+    {
+      "sourceId": "ref.w3c.wcag-22",
+      "url": "https://www.w3.org/TR/WCAG22/",
+      "observedAt": "2026-07-13T14:01:43.726Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:b20273ff9319615267ac98f4e90220915aeb31075e44cee27cd04154be57ce75",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:b20273ff9319615267ac98f4e90220915aeb31075e44cee27cd04154be57ce75",
+      "lastSuccessfulHashes": {
+        "http": "sha256:b20273ff9319615267ac98f4e90220915aeb31075e44cee27cd04154be57ce75"
+      },
+      "lastModified": "Thu, 12 Dec 2024 10:36:22 GMT",
+      "lastSuccessfulLastModified": "Thu, 12 Dec 2024 10:36:22 GMT"
+    },
+    {
+      "sourceId": "ref.w3c.wcag-3",
+      "url": "https://www.w3.org/TR/wcag3/",
+      "observedAt": "2026-07-13T14:01:43.869Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:6290ac4671e45d5c82980a1c3d5f378f222268672f859c8d4821ba28eacc545e",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:6290ac4671e45d5c82980a1c3d5f378f222268672f859c8d4821ba28eacc545e",
+      "lastSuccessfulHashes": {
+        "http": "sha256:6290ac4671e45d5c82980a1c3d5f378f222268672f859c8d4821ba28eacc545e"
+      },
+      "lastModified": "Fri, 27 Feb 2026 12:27:01 GMT",
+      "lastSuccessfulLastModified": "Fri, 27 Feb 2026 12:27:01 GMT"
+    },
+    {
+      "sourceId": "ref.web.scroll-driven",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations",
+      "observedAt": "2026-07-13T14:01:43.999Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:359500ed2027702e72a11e1389d1f01dfb37e2717b0f425279715df6982a77f2",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:359500ed2027702e72a11e1389d1f01dfb37e2717b0f425279715df6982a77f2",
+      "lastSuccessfulHashes": {
+        "http": "sha256:359500ed2027702e72a11e1389d1f01dfb37e2717b0f425279715df6982a77f2"
+      },
+      "etag": "\"98e9ddcd59252c1fbd4cbf4b6ac0d343\"",
+      "lastModified": "Mon, 13 Jul 2026 01:13:13 GMT",
+      "lastSuccessfulEtag": "\"98e9ddcd59252c1fbd4cbf4b6ac0d343\"",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 01:13:13 GMT"
+    },
+    {
+      "sourceId": "ref.web.view-transitions",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
+      "observedAt": "2026-07-13T14:01:43.939Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:f01c87359faafecff3b17db10e9edc972a24da06a9ae9d708cb14b18e3f272b7",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:f01c87359faafecff3b17db10e9edc972a24da06a9ae9d708cb14b18e3f272b7",
+      "lastSuccessfulHashes": {
+        "http": "sha256:f01c87359faafecff3b17db10e9edc972a24da06a9ae9d708cb14b18e3f272b7"
+      },
+      "etag": "\"0ddc99b56f5deea2b151a3d35ae03369\"",
+      "lastModified": "Mon, 13 Jul 2026 01:13:02 GMT",
+      "lastSuccessfulEtag": "\"0ddc99b56f5deea2b151a3d35ae03369\"",
+      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 01:13:02 GMT"
+    },
+    {
+      "sourceId": "ref.williams.non-designers",
+      "url": "https://www.nngroup.com/articles/principles-visual-design/",
+      "observedAt": "2026-07-13T14:01:44.008Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:4658b7b3baabda579e69cf673bf0da1ef7eb651b0b1770f9665098d7be0b6e50",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:4658b7b3baabda579e69cf673bf0da1ef7eb651b0b1770f9665098d7be0b6e50",
+      "lastSuccessfulHashes": {
+        "http": "sha256:4658b7b3baabda579e69cf673bf0da1ef7eb651b0b1770f9665098d7be0b6e50"
+      },
+      "etag": "W/\"1c7f2d224739932a458edc4b0c90e7e1\"",
+      "lastModified": "Thu, 19 Mar 2026 20:55:58 GMT",
+      "lastSuccessfulEtag": "W/\"1c7f2d224739932a458edc4b0c90e7e1\"",
+      "lastSuccessfulLastModified": "Thu, 19 Mar 2026 20:55:58 GMT"
+    },
+    {
+      "sourceId": "ref.zendesk.garden-components",
+      "url": "https://garden.zendesk.com/components/",
+      "observedAt": "2026-07-13T14:01:44.533Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:7d090fd7cd822013d051382b1cef1f8a5b7a12a5cd4b2da7a2b98922a5aefeaa",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:7d090fd7cd822013d051382b1cef1f8a5b7a12a5cd4b2da7a2b98922a5aefeaa",
+      "lastSuccessfulHashes": {
+        "http": "sha256:7d090fd7cd822013d051382b1cef1f8a5b7a12a5cd4b2da7a2b98922a5aefeaa"
+      },
+      "etag": "\"db3d58a6c7d4cde66dabd872369a681f-ssl-df\"",
+      "lastSuccessfulEtag": "\"db3d58a6c7d4cde66dabd872369a681f-ssl-df\""
+    },
+    {
+      "sourceId": "ref.zendesk.garden",
+      "url": "https://garden.zendesk.com/",
+      "observedAt": "2026-07-13T14:01:44.542Z",
+      "result": "unchanged",
+      "attempts": 1,
+      "status": 200,
+      "contentHash": "sha256:dff7b20279122cfd0134d4c824f846445d4a66753480d56297c7f7207b04da43",
+      "adapter": "http",
+      "lastSuccessfulHash": "sha256:dff7b20279122cfd0134d4c824f846445d4a66753480d56297c7f7207b04da43",
+      "lastSuccessfulHashes": {
+        "http": "sha256:dff7b20279122cfd0134d4c824f846445d4a66753480d56297c7f7207b04da43"
+      },
+      "etag": "\"c7fe5e0a9a8f5700c5fd022d6e794a97-ssl-df\"",
+      "lastSuccessfulEtag": "\"c7fe5e0a9a8f5700c5fd022d6e794a97-ssl-df\""
+    }
+  ]
+}

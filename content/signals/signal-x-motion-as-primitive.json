@@ -1,0 +1,21 @@
+{
+  "id": "signal.x.motion-as-primitive",
+  "title": "Motion treated as reusable design primitive",
+  "url": "https://x.com/search?q=design%20motion%20tokens",
+  "observedDate": "2026-06-15",
+  "summary": "Teams discuss motion styles akin to color tokens.",
+  "relatedTopics": [
+    "motion"
+  ],
+  "promotionBlockedReason": "Corroborate with first-party system docs and performance budgets.",
+  "candidateRuleIds": [
+    "rule.motion.purpose-first"
+  ],
+  "promotionAssessment": {
+    "primaryEvidenceCount": 0,
+    "workingImplementation": false,
+    "accessibilityReviewed": false,
+    "performanceReviewed": false,
+    "decision": "pending"
+  }
+}

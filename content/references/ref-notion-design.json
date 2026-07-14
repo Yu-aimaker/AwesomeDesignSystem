@@ -1,0 +1,37 @@
+{
+  "id": "ref.notion.design",
+  "title": "Notion",
+  "url": "https://www.notion.so/",
+  "owner": "notion",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "saas"
+  ],
+  "observedDate": "2026-07-13",
+  "lastVerifiedDate": "2026-07-13",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "observed-behavior",
+  "summary": "Notion — primary reference for AwesomeDS synthesis on saas.",
+  "lessons": [
+    "Extract transferable saas principles from Notion.",
+    "Prefer primary guidance over secondary summaries."
+  ],
+  "caveats": [],
+  "licenseNote": "Public web documentation or standard; cite and synthesize.",
+  "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
+  "linkedRuleIds": [
+    "rule.interaction.product-quality"
+  ],
+  "linkedArtifactIds": [
+    "artifact.component.empty-state",
+    "artifact.component.error-state",
+    "artifact.component.skeleton",
+    "artifact.component.toast"
+  ],
+  "contentHash": "seed-notion-design"
+}

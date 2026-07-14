@@ -1,0 +1,27 @@
+{
+  "id": "rule.ai.generative-boundaries",
+  "title": "Agents compose approved contracts",
+  "domain": "ai-driven",
+  "summary": "Generative UI must stay inside tokens, components, and reviewed rules.",
+  "guidance": "Agents cite rule IDs, avoid freeform HTML styling, and fail closed on a11y.",
+  "do": [
+    "Route skills through canon",
+    "Validate evidence graph"
+  ],
+  "dont": [
+    "Unbounded one-off styling from prompts"
+  ],
+  "referenceIds": [
+    "ref.anthropic.mcp-spec",
+    "ref.copilotkit.ag-ui",
+    "ref.google.stitch",
+    "ref.openai.ai-elements",
+    "ref.vercel.generative-ui",
+    "ref.voltagent.awesome-design-md"
+  ],
+  "artifactIds": [
+    "artifact.skill.awesome-ds"
+  ],
+  "verification": "skill smoke tests + graph validation",
+  "status": "canon"
+}
