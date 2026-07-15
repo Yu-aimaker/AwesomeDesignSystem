@@ -17,6 +17,7 @@ jobs:
           node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
       - run: pnpm qa:core
       - name: Verify generated Next.js declarations are stable
         run: git diff --exit-code -- apps/docs/next-env.d.ts
