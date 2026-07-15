@@ -23,28 +23,28 @@
 
 ## 🧭 Why this exists
 
-Ask an LLM to “build a landing page” and you rarely get *design* — you get the **statistical median** of every Tailwind tutorial: Inter, purple-to-blue gradient, centered hero, three emoji cards. Models default to the center unless steered.
+Ask an LLM to “build a landing page” and you rarely get _design_ — you get the **statistical median** of every Tailwind tutorial: Inter, purple-to-blue gradient, centered hero, three emoji cards. Models default to the center unless steered.
 
 AwesomeDesignSystem supplies the steering in **four layers that stay linked**:
 
-| Layer | What it is | Where |
-| --- | --- | --- |
-| **Doctrine** | Opinionated, code-embedded design knowledge | `design-system/` |
-| **Evidence** | Structured, validated primary sources + canon rules | `content/` |
-| **Executable system** | Tokens, React baseline, motion, brand contracts | `packages/` |
-| **Verbs** | Progressive-disclosure agent skills | `skills/` + `install.sh` |
+| Layer                 | What it is                                          | Where                    |
+| --------------------- | --------------------------------------------------- | ------------------------ |
+| **Doctrine**          | Opinionated, code-embedded design knowledge         | `design-system/`         |
+| **Evidence**          | Structured, validated primary sources + canon rules | `content/`               |
+| **Executable system** | Tokens, React baseline, motion, brand contracts     | `packages/`              |
+| **Verbs**             | Progressive-disclosure agent skills                 | `skills/` + `install.sh` |
 
 ## 🎁 What you get
 
-| Outcome | How |
-| --- | --- |
-| **Stop shipping AI slop** | Taste principles, anti-median patterns, review skill |
-| **Trace every claim** | Reference Atlas → canon rules → artifacts → tests |
-| **Ship accessible UI faster** | 32 React components with shared contracts + React Aria |
-| **Motion with intent** | Recipe library honoring `prefers-reduced-motion` |
-| **Brand as code** | Product lexicon, voice rules, copy lint contracts |
-| **Stay current** | Freshness + link governance scripts and CI hooks |
-| **Browse locally** | Next.js docs site in **English / Japanese** (`/en/*`, `/ja/*`) |
+| Outcome                       | How                                                            |
+| ----------------------------- | -------------------------------------------------------------- |
+| **Stop shipping AI slop**     | Taste principles, anti-median patterns, review skill           |
+| **Trace every claim**         | Reference Atlas → canon rules → artifacts → tests              |
+| **Ship accessible UI faster** | 32 React components with shared contracts + React Aria         |
+| **Motion with intent**        | Recipe library honoring `prefers-reduced-motion`               |
+| **Brand as code**             | Product lexicon, voice rules, copy lint contracts              |
+| **Stay current**              | Freshness + link governance scripts and CI hooks               |
+| **Browse locally**            | Next.js docs site in **English / Japanese** (`/en/*`, `/ja/*`) |
 
 Current evidence graph (validated): **105 Reference Atlas records · 42 canon rules · 54 artifacts · 6 quarantined signals**.
 
@@ -70,26 +70,26 @@ scripts/           validate, freshness, evidence, link checks
 <details>
 <summary><b>Doctrine modules (design-system/)</b></summary>
 
-- `00-philosophy/` — taste layer, modern 2026, anti-slop principles  
-- `foundations/` — color (OKLCH), typography (incl. Japanese), spacing, tokens, literacy  
-- `brand/` — brand systems, voice/tone, illustration, Duolingo-derived doctrine  
-- `platforms/apple-derived/` — Apple-derived product doctrine  
-- `case-studies/elite-systems/` — cross-system synthesis from elite design orgs  
-- `ai-driven/` — agent workflow, generative UI, evaluation  
-- `interaction/` — states/recovery, product quality, browser correctness  
+- `00-philosophy/` — taste layer, modern 2026, anti-slop principles
+- `foundations/` — color (OKLCH), typography (incl. Japanese), spacing, tokens, literacy
+- `brand/` — brand systems, voice/tone, illustration, Duolingo-derived doctrine
+- `platforms/apple-derived/` — Apple-derived product doctrine
+- `case-studies/elite-systems/` — cross-system synthesis from elite design orgs
+- `ai-driven/` — agent workflow, generative UI, evaluation
+- `interaction/` — states/recovery, product quality, browser correctness
 - `motion/` · `components/` · `patterns/` · `accessibility/` · `governance/`
 
 </details>
 
 ## 🛠️ The five skills
 
-|  | Skill | Use it to… |
-| :-: | --- | --- |
-| 🎨 | **/AwesomeDS** | Build or refine UI with the taste layer; load only needed modules |
-| 🏗️ | **/MakeAwesomeDS** | Generate a product’s own DS (OKLCH tokens + `DESIGN.md` + previews) |
-| 📄 | **/AwesomeHTML** | Turn Markdown / notes into a polished single-file HTML document |
-| 🔍 | **/AwesomeReview** | Audit UI/code for AI slop and a11y failures; prioritized fixes |
-| ✨ | **/AwesomeMotion** | Design purpose-driven motion (Motion for React + CSS recipes) |
+|     | Skill              | Use it to…                                                          |
+| :-: | ------------------ | ------------------------------------------------------------------- |
+| 🎨  | **/AwesomeDS**     | Build or refine UI with the taste layer; load only needed modules   |
+| 🏗️  | **/MakeAwesomeDS** | Generate a product’s own DS (OKLCH tokens + `DESIGN.md` + previews) |
+| 📄  | **/AwesomeHTML**   | Turn Markdown / notes into a polished single-file HTML document     |
+| 🔍  | **/AwesomeReview** | Audit UI/code for AI slop and a11y failures; prioritized fixes      |
+| ✨  | **/AwesomeMotion** | Design purpose-driven motion (Motion for React + CSS recipes)       |
 
 ## 🚀 Quick start
 
@@ -134,29 +134,29 @@ See [`docs/architecture.md`](./docs/architecture.md), [`docs/maintenance.md`](./
 
 Semantic OKLCH tokens, multi-theme, generated for CSS / Tailwind-friendly use via `@awesome-ds/tokens`.
 
-| Group | Examples |
-| --- | --- |
-| **Color** | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
-| **Space** | `--space-1` … `--space-32` |
-| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
-| **Type** | `--text-xs` … `--text-7xl` · `--font-display` · `--font-body` · `--font-mono` |
-| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
+| Group      | Examples                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| **Color**  | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
+| **Space**  | `--space-1` … `--space-32`                                                                             |
+| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full`                                        |
+| **Type**   | `--text-xs` … `--text-7xl` · `--font-display` · `--font-body` · `--font-mono`                          |
+| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow`                                                |
 
 Human-readable contract → [`design-system/foundations/tokens.md`](./design-system/foundations/tokens.md)
 
 ## 🔬 Evidence & freshness
 
-- **Reference Atlas** (`content/references/`): first-party systems (Apple, Material, Fluent, Polaris, Carbon, Primer, Spectrum, Atlassian, GOV.UK, Duolingo, Vercel, W3C, …) with medium, drift risk, and verification cadence  
-- **Canon rules** (`content/canon/`): transferable doctrine with bidirectional links to refs + artifacts  
-- **Signals** (`content/signals/`): emerging X/social notes — quarantined until promotion gates pass  
+- **Reference Atlas** (`content/references/`): first-party systems (Apple, Material, Fluent, Polaris, Carbon, Primer, Spectrum, Atlassian, GOV.UK, Duolingo, Vercel, W3C, …) with medium, drift risk, and verification cadence
+- **Canon rules** (`content/canon/`): transferable doctrine with bidirectional links to refs + artifacts
+- **Signals** (`content/signals/`): emerging X/social notes — quarantined until promotion gates pass
 - **Governance**: `pnpm check:links`, `pnpm check:freshness`, `pnpm evidence:check`
 
 This is **not** a link dump. Sources are absorbed into doctrine and executable contracts, then kept honest by graph validation.
 
 ## 🌐 Localization
 
-- Docs UI: English + Japanese routes (`/en/*`, `/ja/*`), locale negotiation, hreflang + x-default  
-- Canon Markdown remains English-first; Japanese UI labels English fallback content when a translation is not yet reviewed  
+- Docs UI: English + Japanese routes (`/en/*`, `/ja/*`), locale negotiation, hreflang + x-default
+- Canon Markdown remains English-first; Japanese UI labels English fallback content when a translation is not yet reviewed
 - Skills install and agent workflows stay language-agnostic
 
 ## 🤝 Contributing
