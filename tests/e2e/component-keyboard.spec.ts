@@ -19,8 +19,8 @@ test("tooltip has one trigger and supports keyboard dismissal", async ({ page })
   const trigger = page.getByRole("button", { name: "ホバー・フォーカス" });
   await expect(trigger).toHaveCount(1);
   await trigger.focus();
-  await trigger.press("Space");
   await page.keyboard.press("Tab");
+  await expect(trigger).not.toBeFocused();
   await page.keyboard.press("Shift+Tab");
   await expect(trigger).toBeFocused();
   await expect(page.getByRole("tooltip")).toHaveText("詳しい情報");

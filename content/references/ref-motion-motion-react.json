@@ -28,8 +28,6 @@
     "rule.motion.purpose-first"
   ],
   "linkedArtifactIds": [
-    "artifact.component.accordion",
     "artifact.motion.recipe-set"
-  ],
-  "contentHash": "seed-motion-motion-react"
+  ]
 }

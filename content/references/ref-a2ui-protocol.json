@@ -1,0 +1,45 @@
+{
+  "id": "ref.a2ui.protocol",
+  "title": "A2UI — Declarative Agent-to-UI Protocol",
+  "url": "https://a2ui.org/",
+  "sourceUrls": [
+    "https://github.com/a2ui-project/a2ui"
+  ],
+  "owner": "a2ui-project",
+  "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "generated-ui",
+    "ui-schema",
+    "declarative-rendering",
+    "agent-ui",
+    "component-catalog"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 30,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "A2UI is an open, framework-independent declarative JSON UI protocol for agent-generated interfaces. It governs the generated-UI schema and rendering layer through a trusted client component catalog, incremental updates, and no arbitrary generated code. The official project describes v0.9.1 as production, v1.0 as a release candidate, and the project as early-stage. The old google/A2UI repository redirects to a2ui-project/a2ui, so the publisher is recorded as the A2UI project. Review frequently until 1.0 stabilizes.",
+  "lessons": [
+    "Define an AwesomeDS component catalog schema with explicitly allowed component types, props, and action schemas — only catalog-registered components may be generated.",
+    "Require semantic-token-only values in generated UI; validator must reject raw colors, spacing, z-index, or arbitrary CSS from agent output.",
+    "Provide a static fallback for every generated surface and define renderer/version compatibility and an expiry/review date for each generated-surface manifest.",
+    "Mark all A2UI-derived patterns as experimental until the v1.0 protocol stabilizes."
+  ],
+  "caveats": [
+    "Project self-identifies as early-stage; v1.0 is a release candidate — treat all schema details as subject to breaking change until 1.0 is formally released.",
+    "Do not describe A2UI as 'Google's current production standard'; the canonical repository is a2ui-project/a2ui and the project is publisher-independent.",
+    "High drift risk: use a 30-day review cadence; pin to a specific protocol version in any conformance fixture.",
+    "The old google/A2UI URL redirects to a2ui-project/a2ui — always use the current canonical URL."
+  ],
+  "licenseNote": "Apache-2.0 licensed; cite and synthesize.",
+  "antiImitationNote": "Transfer the declarative component catalog schema pattern and semantic-token-only constraint; do not assume v0.9.x API stability or use A2UI as a finished production standard.",
+  "linkedRuleIds": [
+    "rule.ai.generative-boundaries"
+  ],
+  "linkedArtifactIds": []
+}

@@ -25,18 +25,11 @@
   "licenseNote": "Public web documentation or standard; cite and synthesize.",
   "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
   "linkedRuleIds": [
-    "rule.foundations.semantic-tokens"
+    "rule.foundations.semantic-tokens",
+    "rule.foundations.token-lifecycle"
   ],
   "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.grid",
-    "artifact.component.stack",
     "artifact.script.validate-content",
     "artifact.token.semantic-system"
-  ],
-  "contentHash": "seed-w3c-dtcg"
+  ]
 }

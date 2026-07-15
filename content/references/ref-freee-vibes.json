@@ -1,0 +1,42 @@
+{
+  "id": "ref.freee.vibes",
+  "title": "Vibes Design System",
+  "url": "https://vibes.freee.co.jp/",
+  "sourceUrls": [
+    "https://github.com/freee/vibes"
+  ],
+  "owner": "freee",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "jp-financial",
+    "high-density",
+    "components",
+    "forms",
+    "error-recovery"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 60,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "freee's Vibes design system for Japanese financial-product web applications, covering React/CSS components, Japanese label conventions, high-density data layouts, and contribution material. The official repository is unarchived but its last observed code push was 2024-08-01, so it is implementation-history evidence rather than a current production baseline.",
+  "lessons": [
+    "Use for high-density financial workflow patterns, Japanese label/data formatting, and disclosure and error-recovery case studies specific to accounting and business software.",
+    "Treat as implementation-history evidence: study interaction patterns and accessibility decisions from the period of active development, but verify every implementation claim against current web standards before adoption."
+  ],
+  "caveats": [
+    "Repository (freee/vibes) last pushed 2024-08-01; treat all implementation details (APIs, dependencies, component behaviour) as potentially outdated — revalidate every claim before adopting any pattern.",
+    "Do not adopt Vibes component APIs, CSS variables, or token names as current AwesomeDS stack; extract decision rationale and UX patterns only.",
+    "Revalidate this record if the repository resumes active development."
+  ],
+  "licenseNote": "Public first-party freee documentation and repository; cite and synthesize.",
+  "antiImitationNote": "Extract Japanese financial UX patterns and high-density layout decisions; do not import Vibes component APIs or freee brand identity.",
+  "linkedRuleIds": [
+    "rule.foundations.platform-literacy"
+  ],
+  "linkedArtifactIds": []
+}

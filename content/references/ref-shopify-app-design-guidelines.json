@@ -1,0 +1,38 @@
+{
+  "id": "ref.shopify.app-design-guidelines",
+  "title": "Shopify App Design Guidelines",
+  "url": "https://shopify.dev/docs/apps/design",
+  "owner": "shopify",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "host-integration",
+    "embedded-apps",
+    "mobile",
+    "accessibility",
+    "merchant-trust"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Shopify's official app design guidelines covering predictability, host-surface consistency, adaptive/mobile behavior, accessibility, and merchant trust for apps embedded in the Shopify admin. Provides a first-party Markdown representation.",
+  "lessons": [
+    "Define an embedded/hosted product profile: inherit host navigation and behavior, minimize novelty in cross-surface workflows.",
+    "Require mobile-first testing for embedded apps and define boundary between product brand and host conventions."
+  ],
+  "caveats": [
+    "Guidelines are scoped to Shopify's admin surface and merchant workflows; generalize host-integration principles without importing Shopify-specific patterns."
+  ],
+  "licenseNote": "Public developer documentation; cite and synthesize. Documentation reuse terms were not verified for redistribution.",
+  "antiImitationNote": "Transfer host-integration and embedded-app quality principles; do not copy Shopify admin patterns or merchant-specific workflows as universal defaults.",
+  "linkedRuleIds": [
+    "rule.adaptation.hosted-embedded-surfaces",
+    "rule.interaction.product-quality"
+  ],
+  "linkedArtifactIds": []
+}

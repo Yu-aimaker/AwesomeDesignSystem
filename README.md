@@ -5,8 +5,8 @@
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
 [![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-the-five-skills)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-quick-start)
@@ -113,7 +113,7 @@ Then: `/AwesomeDS` · `/MakeAwesomeDS` · `/AwesomeHTML` · `/AwesomeReview` · 
 
 ### 3) Local monorepo + docs site
 
-Requires **Node ≥ 22.12** and **pnpm 10.5.2**.
+Requires **Node ≥ 22.13.0** and **pnpm 10.5.2**.
 
 ```bash
 pnpm install

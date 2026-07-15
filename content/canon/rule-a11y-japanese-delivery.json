@@ -1,0 +1,33 @@
+{
+  "id": "rule.a11y.japanese-delivery",
+  "title": "Gate Japanese accessibility in the delivery process",
+  "domain": "accessibility",
+  "summary": "WCAG conformance for Japanese products requires mixed-script, expansion, low-vision and multilingual checks with named ownership before release.",
+  "guidance": "Apply WCAG 2.2 AA through a Japanese delivery matrix rather than translation review alone. Test real Japanese content mixed with Latin text, numerals, symbols, emoji and ruby; preserve meaning and operation under text expansion, zoom, text-spacing overrides and low-vision settings; assign a named accessibility owner who can block release and time-bound every exception.",
+  "do": [
+    "Set the page language and mark language changes so assistive technology selects the intended pronunciation",
+    "Test representative headings, body copy, forms, tables, dates, names, addresses, errors and controls with mixed Japanese and Latin scripts",
+    "Allow line wrapping and content expansion without clipping, overlap, hidden controls or meaning that depends on manual line breaks",
+    "Verify zoom, reflow, text-spacing overrides, contrast, forced colors and magnification with low-vision users or documented representative checks",
+    "Review localized accessible names, descriptions, status messages, validation errors and reading order with native-language QA",
+    "Pair guidance with executable component stories and tests while preserving DADS React's status as samples rather than a conformance claim",
+    "Name an accessibility owner for each release and record severity, remediation owner, due date and expiry for every approved exception"
+  ],
+  "dont": [
+    "Approve accessibility from machine translation or automated checks alone",
+    "Force Japanese copy into fixed-height or single-line containers designed around English length",
+    "Use visual spacing, glyph shape or color as the only cue for language, grouping, status or required input",
+    "Assume an imported Japanese component sample makes the product conformant",
+    "Waive a release-blocking issue without an accountable owner, user impact, remediation date and expiry"
+  ],
+  "referenceIds": [
+    "ref.ameba.spindle",
+    "ref.digital-agency-jp.dads",
+    "ref.digital-agency-jp.dads-react",
+    "ref.smarthr.accessibility-process",
+    "ref.w3c.wcag-22"
+  ],
+  "artifactIds": [],
+  "verification": "Before release, the named owner signs a ja-JP matrix covering mixed-script fixtures, native-language screen-reader and keyboard tasks, 200% text sizing, 400% zoom/reflow, text-spacing overrides, forced colors and low-vision review; automated WCAG checks have no serious/critical failures; localized names, errors and announcements are manually verified; no unexpired release-blocking defect lacks an approved exception record.",
+  "status": "draft"
+}

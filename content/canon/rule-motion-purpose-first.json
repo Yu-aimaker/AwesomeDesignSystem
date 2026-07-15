@@ -12,6 +12,8 @@
     "Infinite decorative motion"
   ],
   "referenceIds": [
+    "ref.apple.hig-motion",
+    "ref.google.material-motion",
     "ref.ibm.carbon-motion",
     "ref.microsoft.fluent-motion",
     "ref.motion.motion-react",

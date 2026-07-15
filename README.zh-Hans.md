@@ -5,8 +5,8 @@
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
 [![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-五个技能)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-快速开始)
@@ -23,28 +23,28 @@
 
 ## 🧭 为什么存在
 
-让 LLM「做一个落地页」，你得到的往往不是 *设计*，而是全网 Tailwind 教程的**统计中位数**：Inter、紫到蓝渐变、居中 hero、三张 emoji 卡片。模型默认落在中心，除非被舵控。
+让 LLM「做一个落地页」，你得到的往往不是 _设计_，而是全网 Tailwind 教程的**统计中位数**：Inter、紫到蓝渐变、居中 hero、三张 emoji 卡片。模型默认落在中心，除非被舵控。
 
 AwesomeDesignSystem 用 **四层互相链接** 来舵控：
 
-| 层 | 是什么 | 位置 |
-| --- | --- | --- |
-| **Doctrine** | 带代码的有观点设计知识 | `design-system/` |
-| **Evidence** | 结构化、可校验的一手来源与 canon 规则 | `content/` |
-| **Executable** | Tokens、React 基线、动效、品牌契约 | `packages/` |
-| **Verbs** | 渐进披露的代理技能 | `skills/` + `install.sh` |
+| 层             | 是什么                                | 位置                     |
+| -------------- | ------------------------------------- | ------------------------ |
+| **Doctrine**   | 带代码的有观点设计知识                | `design-system/`         |
+| **Evidence**   | 结构化、可校验的一手来源与 canon 规则 | `content/`               |
+| **Executable** | Tokens、React 基线、动效、品牌契约    | `packages/`              |
+| **Verbs**      | 渐进披露的代理技能                    | `skills/` + `install.sh` |
 
 ## 🎁 你能得到什么
 
-| 结果 | 方式 |
-| --- | --- |
-| **停止产出 AI slop** | 品味原则、反中位数模式、审查技能 |
-| **主张可追溯** | Reference Atlas → canon → artifact → 测试 |
-| **更快交付无访问 UI** | 32 个带共享契约 + React Aria 的组件 |
-| **有意图的动效** | 尊重 `prefers-reduced-motion` 的配方库 |
-| **品牌即代码** | Product Lexicon、语气规则、文案 lint |
-| **保持新鲜** | Freshness / 链接治理脚本与 CI |
-| **本地浏览** | Next.js 文档站（**英 / 日**，`/en/*` `/ja/*`） |
+| 结果                  | 方式                                           |
+| --------------------- | ---------------------------------------------- |
+| **停止产出 AI slop**  | 品味原则、反中位数模式、审查技能               |
+| **主张可追溯**        | Reference Atlas → canon → artifact → 测试      |
+| **更快交付无访问 UI** | 32 个带共享契约 + React Aria 的组件            |
+| **有意图的动效**      | 尊重 `prefers-reduced-motion` 的配方库         |
+| **品牌即代码**        | Product Lexicon、语气规则、文案 lint           |
+| **保持新鲜**          | Freshness / 链接治理脚本与 CI                  |
+| **本地浏览**          | Next.js 文档站（**英 / 日**，`/en/*` `/ja/*`） |
 
 当前证据图（已校验）：**105 Reference Atlas · 42 canon 规则 · 54 artifact · 6 隔离 signal**。
 
@@ -63,13 +63,13 @@ scripts/           校验、鲜度、证据、链接检查
 
 ## 🛠️ 五个技能
 
-|  | 技能 | 用途 |
-| :-: | --- | --- |
-| 🎨 | **/AwesomeDS** | 用品味层构建或打磨 UI |
-| 🏗️ | **/MakeAwesomeDS** | 生成产品自有 DS（OKLCH + `DESIGN.md` + 预览） |
-| 📄 | **/AwesomeHTML** | 将 Markdown / 笔记变成精美单文件 HTML |
-| 🔍 | **/AwesomeReview** | 审查 AI slop 与 a11y 问题 |
-| ✨ | **/AwesomeMotion** | 设计有目的的动效 |
+|     | 技能               | 用途                                          |
+| :-: | ------------------ | --------------------------------------------- |
+| 🎨  | **/AwesomeDS**     | 用品味层构建或打磨 UI                         |
+| 🏗️  | **/MakeAwesomeDS** | 生成产品自有 DS（OKLCH + `DESIGN.md` + 预览） |
+| 📄  | **/AwesomeHTML**   | 将 Markdown / 笔记变成精美单文件 HTML         |
+| 🔍  | **/AwesomeReview** | 审查 AI slop 与 a11y 问题                     |
+| ✨  | **/AwesomeMotion** | 设计有目的的动效                              |
 
 ## 🚀 快速开始
 
@@ -87,7 +87,7 @@ cd AwesomeDesignSystem
 
 ### 3) 本地 monorepo + 文档站
 
-需要 **Node ≥ 22.12** 与 **pnpm 10.5.2**。
+需要 **Node ≥ 22.13.0** 与 **pnpm 10.5.2**。
 
 ```bash
 pnpm install
@@ -103,8 +103,8 @@ pnpm validate && pnpm test && pnpm qa:core
 
 ## 🔬 证据与鲜度
 
-- Reference Atlas、canon 规则、隔离 signals  
-- 命令：`pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`  
+- Reference Atlas、canon 规则、隔离 signals
+- 命令：`pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 - **不是链接合集**——一手来源被吸收为教义与可执行契约，再经图校验保持诚实。
 
 ## 🌐 本地化

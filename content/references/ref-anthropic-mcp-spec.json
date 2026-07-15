@@ -27,8 +27,8 @@
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
   "linkedRuleIds": [
-    "rule.ai.generative-boundaries"
+    "rule.ai.generative-boundaries",
+    "rule.trust.embedded-ui-boundary"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "gap-anthropic-mcp-spec"
+  "linkedArtifactIds": []
 }

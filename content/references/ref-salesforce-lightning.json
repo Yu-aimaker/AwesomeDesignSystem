@@ -29,11 +29,5 @@
   "linkedRuleIds": [
     "rule.components.state-matrix"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.button",
-    "artifact.component.dialog",
-    "artifact.component.input",
-    "artifact.component.tabs"
-  ],
-  "contentHash": "gap-salesforce-lightning"
+  "linkedArtifactIds": []
 }

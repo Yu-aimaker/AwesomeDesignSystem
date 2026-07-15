@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { persistTheme } from "../../lib/client-theme";
 import { Button, Card, Input, Stack, Switch, Badge } from "@awesome-ds/react";
-import type { Dictionary } from "../../lib/i18n";
+import type { Dictionary, Locale } from "../../lib/i18n";
 
 const themes = ["light", "dark", "high-contrast"] as const;
 const variants = ["primary", "secondary", "ghost", "danger"] as const;
@@ -13,17 +13,17 @@ const defaults = {
   theme: "light" as (typeof themes)[number],
   variant: "primary" as (typeof variants)[number],
   size: "md" as (typeof sizes)[number],
-  label: "Launch",
   loading: false,
   disabled: false,
   showBadge: true,
 };
 
-export function PlaygroundControls({ labels }: { labels: Dictionary["playground"] }) {
+export function PlaygroundControls({ labels, locale }: { labels: Dictionary["playground"]; locale: Locale }) {
+  const defaultLabel = locale === "ja" ? "実行する" : "Launch";
   const [theme, setTheme] = useState(defaults.theme);
   const [variant, setVariant] = useState(defaults.variant);
   const [size, setSize] = useState(defaults.size);
-  const [label, setLabel] = useState(defaults.label);
+  const [label, setLabel] = useState(defaultLabel);
   const [loading, setLoading] = useState(defaults.loading);
   const [disabled, setDisabled] = useState(defaults.disabled);
   const [showBadge, setShowBadge] = useState(defaults.showBadge);
@@ -53,7 +53,7 @@ export function PlaygroundControls({ labels }: { labels: Dictionary["playground"
     setTheme(defaults.theme);
     setVariant(defaults.variant);
     setSize(defaults.size);
-    setLabel(defaults.label);
+    setLabel(defaultLabel);
     setLoading(defaults.loading);
     setDisabled(defaults.disabled);
     setShowBadge(defaults.showBadge);
@@ -81,8 +81,6 @@ export function PlaygroundControls({ labels }: { labels: Dictionary["playground"
 
   return (
     <div className="playground-root" data-theme={theme}>
-      <h1>{labels.title}</h1>
-      <p className="muted">{labels.intro}</p>
       <div className="theme-bar" role="group" aria-label={labels.theme}>
         {themes.map((t) => (
           <button key={t} type="button" className="ads-btn ads-btn--secondary ads-btn--sm" aria-pressed={theme === t} onClick={() => applyTheme(t)}>{t}</button>

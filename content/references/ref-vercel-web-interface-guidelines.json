@@ -30,14 +30,7 @@
     "rule.interaction.url-state"
   ],
   "linkedArtifactIds": [
-    "artifact.component.empty-state",
-    "artifact.component.error-state",
-    "artifact.component.link",
-    "artifact.component.pagination",
-    "artifact.component.skeleton",
-    "artifact.component.toast",
     "artifact.doc.interface-quality",
     "artifact.script.design-decision-contract"
-  ],
-  "contentHash": "seed-vercel-web-interface-guidelines"
+  ]
 }

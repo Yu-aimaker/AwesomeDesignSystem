@@ -11,7 +11,7 @@ test("primary knowledge routes remain readable without JavaScript", async ({ pag
 
 test("native component fallbacks remain operable without JavaScript", async ({ page }) => {
   await page.goto("/en/components/accordion", { waitUntil: "domcontentloaded" });
-  const disclosure = page.locator("details").first();
+  const disclosure = page.locator("main#main .ads-accordion details").first();
   await expect(disclosure).toBeVisible();
   await disclosure.locator("summary").click({ force: true });
   await expect(disclosure).toHaveAttribute("open", "");

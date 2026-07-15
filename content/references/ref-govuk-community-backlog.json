@@ -1,0 +1,38 @@
+{
+  "id": "ref.govuk.community-backlog",
+  "title": "GOV.UK Upcoming Components and Patterns",
+  "url": "https://design-system.service.gov.uk/community/upcoming-components-patterns/",
+  "owner": "govuk",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "low",
+  "region": "eu",
+  "language": "en",
+  "topics": [
+    "governance",
+    "research-input",
+    "contribution",
+    "pattern-maturity"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "GOV.UK's current public list of components and patterns under consideration, showing how community needs, examples, use cases, code, and research findings inform prioritisation alongside maintenance of essential system components.",
+  "lessons": [
+    "Publish upcoming work and the evidence still needed instead of presenting proposals as finished guidance.",
+    "Invite concrete designs, code, use cases, and research findings through a visible contribution path.",
+    "Balance community requests with maintenance of essential components and patterns."
+  ],
+  "caveats": [
+    "GOV.UK's governance process reflects UK government service standards; adapt the transparency and evidence framework without importing government-specific process requirements."
+  ],
+  "licenseNote": "OGL v3.0 for GOV.UK content; MIT for code.",
+  "antiImitationNote": "Transfer transparent prioritisation and evidence-seeking practices; do not import UK government procurement or service-standard processes.",
+  "linkedRuleIds": [
+    "rule.governance.evidence-first",
+    "rule.governance.promotion-maturity"
+  ],
+  "linkedArtifactIds": []
+}

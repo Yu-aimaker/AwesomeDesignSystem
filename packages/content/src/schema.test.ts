@@ -1,6 +1,10 @@
 import { describe, expect, test } from "vitest";
 
-import { ReferenceRecordSchema, CanonRuleSchema, SignalRecordSchema } from "./schema";
+import {
+  ReferenceRecordSchema,
+  CanonRuleSchema,
+  SignalRecordSchema,
+} from "./schema";
 
 const validRef = {
   id: "ref.vercel.web-interface-guidelines",
@@ -34,6 +38,18 @@ describe("content schemas", () => {
     expect(parsed.lessons).toHaveLength(2);
   });
 
+  test("accepts only observed SHA-256 values when a content hash is present", () => {
+    expect(
+      ReferenceRecordSchema.parse({
+        ...validRef,
+        contentHash: `sha256:${"a".repeat(64)}`,
+      }).contentHash,
+    ).toBe(`sha256:${"a".repeat(64)}`);
+    expect(() =>
+      ReferenceRecordSchema.parse({ ...validRef, contentHash: "seed-vercel" }),
+    ).toThrow(/sha256/);
+  });
+
   test("rejects invalid URLs and dates", () => {
     expect(() =>
       ReferenceRecordSchema.parse({ ...validRef, url: "not-a-url" }),
@@ -42,6 +58,12 @@ describe("content schemas", () => {
       ReferenceRecordSchema.parse({
         ...validRef,
         lastVerifiedDate: "13/07/2026",
+      }),
+    ).toThrow();
+    expect(() =>
+      ReferenceRecordSchema.parse({
+        ...validRef,
+        sourceUrls: ["not-a-url"],
       }),
     ).toThrow();
   });
@@ -88,12 +110,28 @@ describe("content schemas", () => {
       relatedTopics: ["interaction"],
       promotionBlockedReason: "Awaiting corroboration.",
       candidateRuleIds: [],
-      promotionAssessment: { primaryEvidenceCount: 1, workingImplementation: false, accessibilityReviewed: false, performanceReviewed: false, decision: "promote" },
+      promotionAssessment: {
+        primaryEvidenceCount: 1,
+        workingImplementation: false,
+        accessibilityReviewed: false,
+        performanceReviewed: false,
+        decision: "promote",
+      },
     } as const;
-    expect(() => SignalRecordSchema.parse(signal)).toThrow(/promotion requires/);
-    expect(SignalRecordSchema.parse({
-      ...signal,
-      promotionAssessment: { primaryEvidenceCount: 2, workingImplementation: true, accessibilityReviewed: true, performanceReviewed: true, decision: "promote" },
-    }).promotionAssessment.decision).toBe("promote");
+    expect(() => SignalRecordSchema.parse(signal)).toThrow(
+      /promotion requires/,
+    );
+    expect(
+      SignalRecordSchema.parse({
+        ...signal,
+        promotionAssessment: {
+          primaryEvidenceCount: 2,
+          workingImplementation: true,
+          accessibilityReviewed: true,
+          performanceReviewed: true,
+          decision: "promote",
+        },
+      }).promotionAssessment.decision,
+    ).toBe("promote");
   });
 });

@@ -15,7 +15,7 @@
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
-  "freshnessState": "due",
+  "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
   "summary": "Duolingo Design page: Designer resources hub. Part of 16-page public brand bible inventory.",
   "lessons": [
@@ -32,6 +32,5 @@
     "rule.brand.asset-governance",
     "rule.governance.evidence-first"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "duolingo-resources-2026-07-13"
+  "linkedArtifactIds": []
 }

@@ -27,16 +27,8 @@
   "licenseNote": "Public documentation; cite and synthesize.",
   "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
   "linkedRuleIds": [
-    "rule.foundations.semantic-tokens"
+    "rule.foundations.semantic-tokens",
+    "rule.foundations.token-lifecycle"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.grid",
-    "artifact.component.stack"
-  ],
-  "contentHash": "gap-w3c-dtcg-format"
+  "linkedArtifactIds": []
 }

@@ -31,6 +31,5 @@
   ],
   "linkedArtifactIds": [
     "artifact.script.ai-interaction-contract"
-  ],
-  "contentHash": "gap-vercel-generative-ui"
+  ]
 }

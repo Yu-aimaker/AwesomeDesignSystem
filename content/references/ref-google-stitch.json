@@ -27,6 +27,5 @@
   "linkedRuleIds": [
     "rule.ai.generative-boundaries"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "seed-google-stitch"
+  "linkedArtifactIds": []
 }

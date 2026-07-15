@@ -1,0 +1,39 @@
+{
+  "id": "ref.digital-agency-jp.dads",
+  "title": "デジタル庁デザインシステム (DADS)",
+  "url": "https://design.digital.go.jp/dads/",
+  "owner": "digital-agency-jp",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "jp-public-service",
+    "components",
+    "accessibility",
+    "typography",
+    "forms"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Japan Digital Agency's design system (DADS) β版, observed at v2.16.0 on 2026-07-16. Covers Japanese design language, UI components, usability/accessibility implementation guidelines for administrative digital services.",
+  "lessons": [
+    "Create a ja-public-service evidence profile: Japanese typography, form/error clarity, administrative-task resilience, and keyboard/AT behavior.",
+    "Compare directly with GOV.UK and USWDS for cross-government design system benchmarking."
+  ],
+  "caveats": [
+    "DADS is labeled β版; version-specific claims must cite the observed version (v2.16.0).",
+    "Guidelines are scoped to Japanese government digital services; adapt usability patterns without importing administrative branding."
+  ],
+  "licenseNote": "Public government documentation; verify component code license terms separately.",
+  "antiImitationNote": "Transfer Japanese public-service usability patterns and accessibility guidance; do not import government branding, logos, or administrative-specific visual identity.",
+  "linkedRuleIds": [
+    "rule.a11y.japanese-delivery",
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": []
+}

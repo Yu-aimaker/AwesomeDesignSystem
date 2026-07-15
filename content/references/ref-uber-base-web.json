@@ -30,6 +30,5 @@
   "linkedRuleIds": [
     "rule.governance.promotion-maturity"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "elite-uber-baseweb-20260713"
+  "linkedArtifactIds": []
 }

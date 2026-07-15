@@ -16,7 +16,8 @@ export type GraphIssue = {
     | "missing-artifact-forward-link"
     | "unknown-verification-target"
     | "unverified-artifact"
-    | "unimplemented-rule";
+    | "unimplemented-rule"
+    | "empty-collection";
   message: string;
   id?: string;
 };
@@ -67,6 +68,25 @@ export function buildEvidenceGraph(input: {
 }): EvidenceGraph {
   const issues: GraphIssue[] = [];
 
+  if (input.references.length === 0) {
+    issues.push({
+      code: "empty-collection",
+      message: "References collection is empty",
+    });
+  }
+  if (input.rules.length === 0) {
+    issues.push({
+      code: "empty-collection",
+      message: "Rules collection is empty",
+    });
+  }
+  if (input.artifacts.length === 0) {
+    issues.push({
+      code: "empty-collection",
+      message: "Artifacts collection is empty",
+    });
+  }
+
   collectDuplicates(
     input.references.map((r) => r.id),
     "reference",
@@ -95,8 +115,7 @@ export function buildEvidenceGraph(input: {
           id: rule.id,
           message: `Rule ${rule.id} references missing source ${refId}`,
         });
-      }
-      else if (!references.get(refId)?.linkedRuleIds.includes(rule.id)) {
+      } else if (!references.get(refId)?.linkedRuleIds.includes(rule.id)) {
         issues.push({
           code: "missing-reference-backlink",
           id: rule.id,
@@ -121,11 +140,13 @@ export function buildEvidenceGraph(input: {
     }
     const hasExecutableImplementation = rule.artifactIds.some((artifactId) => {
       const artifact = artifacts.get(artifactId);
-      return artifact !== undefined
-        && isExecutableArtifact(artifact)
-        && artifact.ruleIds.includes(rule.id);
+      return (
+        artifact !== undefined &&
+        isExecutableArtifact(artifact) &&
+        artifact.ruleIds.includes(rule.id)
+      );
     });
-    if (!hasExecutableImplementation) {
+    if (rule.status === "canon" && !hasExecutableImplementation) {
       issues.push({
         code: "unimplemented-rule",
         id: rule.id,
@@ -158,8 +179,9 @@ export function buildEvidenceGraph(input: {
           id: artifact.id,
           message: `Artifact ${artifact.id} references missing source ${refId}`,
         });
-      }
-      else if (!references.get(refId)?.linkedArtifactIds.includes(artifact.id)) {
+      } else if (
+        !references.get(refId)?.linkedArtifactIds.includes(artifact.id)
+      ) {
         issues.push({
           code: "missing-artifact-reference-backlink",
           id: artifact.id,
@@ -179,9 +201,12 @@ export function buildEvidenceGraph(input: {
   }
 
   for (const artifact of input.artifacts) {
-    if (artifact.kind !== "component" && artifact.kind !== "motion-recipe") continue;
-    const verified = input.artifacts.some((candidate) =>
-      candidate.kind === "test" && candidate.verifiesArtifactIds?.includes(artifact.id),
+    if (artifact.kind !== "component" && artifact.kind !== "motion-recipe")
+      continue;
+    const verified = input.artifacts.some(
+      (candidate) =>
+        candidate.kind === "test" &&
+        candidate.verifiesArtifactIds?.includes(artifact.id),
     );
     if (!verified) {
       issues.push({
@@ -200,8 +225,7 @@ export function buildEvidenceGraph(input: {
           id: ref.id,
           message: `Reference ${ref.id} links unknown rule ${ruleId}`,
         });
-      }
-      else if (!rules.get(ruleId)?.referenceIds.includes(ref.id)) {
+      } else if (!rules.get(ruleId)?.referenceIds.includes(ref.id)) {
         issues.push({
           code: "missing-rule-forward-link",
           id: ref.id,
@@ -231,10 +255,11 @@ export function buildEvidenceGraph(input: {
     const linkedFromRef = input.references.some((r) =>
       r.linkedRuleIds.includes(rule.id),
     );
-    const implemented = input.artifacts.some((artifact) =>
-      isExecutableArtifact(artifact)
-      && artifact.ruleIds.includes(rule.id)
-      && rule.artifactIds.includes(artifact.id),
+    const implemented = input.artifacts.some(
+      (artifact) =>
+        isExecutableArtifact(artifact) &&
+        artifact.ruleIds.includes(rule.id) &&
+        rule.artifactIds.includes(artifact.id),
     );
     if (!linkedFromRef && !implemented && rule.artifactIds.length === 0) {
       issues.push({

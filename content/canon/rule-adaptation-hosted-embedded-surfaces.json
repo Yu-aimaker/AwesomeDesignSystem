@@ -1,0 +1,31 @@
+{
+  "id": "rule.adaptation.hosted-embedded-surfaces",
+  "title": "Adapt product surfaces to the host without surrendering task continuity",
+  "domain": "adaptation",
+  "summary": "Hosted and embedded experiences must declare which host conventions they inherit, which product identity they retain, and how users continue when the host surface is constrained or unavailable.",
+  "guidance": "Create a target-host profile before designing an embedded surface: navigation ownership, display modes, theme and spacing inputs, viewport limits, persistence, escape routes and unsupported capabilities. Use the smallest surface that completes the immediate task, preserve edits and state across host transitions, and provide a responsive, accessible manual path outside the embed.",
+  "do": [
+    "Document host-owned navigation, layout, theme, action placement and dismissal separately from product-owned content and identity",
+    "Select inline, card, modal or full-surface presentation from task complexity and available space rather than brand preference",
+    "Keep actions few, explicit and adjacent to the object they affect; move multi-step work to a suitable full surface",
+    "Persist user edits, selection and task state across rerenders, conversation turns and supported display-mode changes",
+    "Use host-provided semantics and controls where available, then verify product controls against the host accessibility model",
+    "Test narrow and mobile host viewports, localization expansion, host themes, reduced motion and loss of host capabilities",
+    "Provide a deep link or manual product route that preserves enough context to finish the task"
+  ],
+  "dont": [
+    "Recreate host navigation or place a second application shell inside the host shell",
+    "Create nested scrolling, deep navigation or dense multi-step flows inside a compact card",
+    "Duplicate the same explanation in both host response and embedded surface",
+    "Reset user-authored changes when the host rerenders or the conversation advances",
+    "Make the embedded surface the only route for a core task"
+  ],
+  "referenceIds": [
+    "ref.openai.apps-sdk-ui-guidelines",
+    "ref.shopify.app-design-guidelines",
+    "ref.w3c.wcag-22"
+  ],
+  "artifactIds": [],
+  "verification": "For every target host, review the host profile and run keyboard, screen-reader, narrow/mobile, localization, theme and reduced-motion scenarios; assert edits survive rerender and mode changes; assert compact surfaces have no nested scroll or deep flow; and complete the same core task through the documented fallback route.",
+  "status": "draft"
+}

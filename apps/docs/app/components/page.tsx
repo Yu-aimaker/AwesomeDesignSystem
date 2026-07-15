@@ -9,6 +9,7 @@ import { getRequestLocale } from "../../lib/i18n-server";
 import { createLocalizedMetadata } from "../../lib/metadata";
 import { localizeComponentContract } from "../../lib/component-localization";
 import { ComponentGalleryStates } from "../../components/component-gallery-states";
+import { PageHeader } from "../../components/page-header";
 export const generateMetadata = () => createLocalizedMetadata("/components", (dictionary) => dictionary.components.title, (dictionary) => dictionary.components.intro.replace("{count}", String(componentCatalog.length)));
 
 const families = ["primitives", "forms", "overlay", "navigation", "status", "layout"] as const;
@@ -19,17 +20,19 @@ export default async function ComponentsPage() {
   const t = (english: string, japanese: string) => locale === "ja" ? japanese : english;
   const familyLabels = { primitives: t("Primitives", "基本要素"), forms: t("Forms", "フォーム"), overlay: t("Overlays", "オーバーレイ"), navigation: t("Navigation", "ナビゲーション"), status: t("Status", "状態表示"), layout: t("Layout", "レイアウト") };
   return (
-    <div className="ads-motion-enter">
-      <h1>{d.title}</h1>
-      <p className="muted">
-        {formatMessage(d.intro, { count: componentCatalog.length })}
-      </p>
+    <div className="ads-motion-enter route-page">
+      <PageHeader
+        eyebrow={t("Executable UI contracts", "実行可能なUI契約")}
+        title={d.title}
+        description={formatMessage(d.intro, { count: componentCatalog.length })}
+        meta={<code>{componentCatalog.length} components · @awesome-ds/react</code>}
+      />
       {families.map((family) => {
         const items = componentCatalog.filter((c) => c.family === family);
         if (!items.length) return null;
         return (
-          <section key={family}>
-            <h2>{familyLabels[family]}</h2>
+          <section className="catalog-section" key={family}>
+            <header><p className="eyebrow">{family}</p><h2>{familyLabels[family]}</h2><span>{items.length}</span></header>
             <div className="grid-cards">
               {items.map((sourceItem) => {
                 const item = localizeComponentContract(sourceItem, locale);
@@ -44,7 +47,7 @@ export default async function ComponentsPage() {
           </section>
         );
       })}
-      <h2>{d.gallery}</h2>
+      <section className="live-gallery"><p className="eyebrow">@awesome-ds/react</p><h2>{d.gallery}</h2>
       <Stack gap={6}>
         <Card title={t("Actions", "アクション")}>
           <div className="ads-cluster">
@@ -71,6 +74,7 @@ export default async function ComponentsPage() {
         <ComponentGalleryStates locale={locale} />
         <Accordion items={[{ id: "a1", title: t("Catalog size", "登録数"), content: <p>{t(`${componentCatalog.length} components registered.`, `${componentCatalog.length}個のコンポーネントを登録しています。`)}</p> }]} />
       </Stack>
+      </section>
     </div>
   );
 }

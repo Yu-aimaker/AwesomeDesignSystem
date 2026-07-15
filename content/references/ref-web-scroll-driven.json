@@ -27,8 +27,5 @@
   "linkedRuleIds": [
     "rule.motion.purpose-first"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.accordion"
-  ],
-  "contentHash": "seed-web-scroll-driven"
+  "linkedArtifactIds": []
 }

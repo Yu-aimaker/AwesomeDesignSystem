@@ -1,0 +1,31 @@
+{
+  "id": "rule.foundations.token-lifecycle",
+  "title": "Deprecate tokens through a versioned migration contract",
+  "domain": "foundations",
+  "summary": "A token change is complete only when lifecycle metadata, replacements, consumer migration, compatibility and removal gates agree across platforms.",
+  "guidance": "Keep DTCG-compatible token values and aliases separate from AwesomeDS lifecycle metadata. Every deprecated token must declare its introduction version, deprecation version, replacement or documented no-replacement reason, compatibility window, removal version and owner; removal is blocked until code, design assets and supported platform mappings have migrated.",
+  "do": [
+    "Model global-to-alias-to-semantic relationships explicitly and keep platform-specific mappings reviewable",
+    "Publish introduced, deprecated, replacement, removeAfter and owner metadata in a versioned migration manifest",
+    "Ship a codemod or exact replacement recipe and visual-equivalence fixtures for each renamed or split token",
+    "Inventory token use in source, generated assets, design libraries and supported runtime themes before removal",
+    "Warn on first deprecation, fail new deprecated usage in CI, and fail removal while supported consumers remain",
+    "Document any platform exception with scope, rationale, owner and expiry date"
+  ],
+  "dont": [
+    "Delete or silently repoint a public token without a migration window",
+    "Encode lifecycle metadata as an invalid extension of the standardized token value shape",
+    "Replace a semantic token with a raw color, dimension or product-specific alias",
+    "Declare migration complete from repository search alone when generated or design-tool consumers exist",
+    "Keep deprecated aliases indefinitely without an owner and scheduled removal"
+  ],
+  "referenceIds": [
+    "ref.atlassian.design-tokens",
+    "ref.microsoft.fluent-design-tokens",
+    "ref.w3c.dtcg",
+    "ref.w3c.dtcg-format"
+  ],
+  "artifactIds": [],
+  "verification": "Validate all token files against the pinned DTCG schema and the lifecycle manifest; CI rejects raw values where a semantic token exists, new deprecated-token use, missing replacements or owners, and removal with remaining consumers; migration fixtures must preserve light, dark and high-contrast output on every supported platform.",
+  "status": "draft"
+}

@@ -215,7 +215,7 @@ export const collections = { blog };
 </UserAvatar>
 ```
 
-Migration (v5→v6): Node `^22.12 || ^24`, Zod major bump (`.nonempty()` → `.min(1)`), removed `Astro.glob` and `getEntryBySlug`.
+Migration (v5→v6): Node `^22.13.0 || ^24`, Zod major bump (`.nonempty()` → `.min(1)`), removed `Astro.glob` and `getEntryBySlug`.
 
 ### TanStack Start v1 — type-safe, no lock-in
 

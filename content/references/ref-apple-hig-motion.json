@@ -1,0 +1,41 @@
+{
+  "id": "ref.apple.hig-motion",
+  "title": "Apple HIG — Motion",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+  "owner": "apple",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "motion",
+    "animation",
+    "platform-apple",
+    "reduced-motion",
+    "continuity"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Apple Human Interface Guidelines motion page covering responsiveness, continuity, platform convention, and respect for Reduce Motion. It defines motion as purposeful, platform-appropriate, and responsive to accessibility preferences; the guidance is version-sensitive.",
+  "lessons": [
+    "Bind platform-specific Apple motion guidance to AwesomeDS motion contracts: responsiveness (immediate feedback), continuity (spatial awareness), and Reduce Motion compliance must all be testable.",
+    "Never copy Apple choreography as a cross-platform default; extract the intent model (motion = navigation orientation + state communication + delight) and apply it to AwesomeDS motion tokens.",
+    "Test reduced-motion alternatives as first-class paths, not afterthoughts."
+  ],
+  "caveats": [
+    "HIG guidance is version-sensitive; Apple updates it with OS releases without versioned page URLs — revalidate on major iOS/macOS releases.",
+    "Apple motion conventions (spring physics, share-motion) are platform-specific; use for platform literacy, not as universal cross-platform defaults.",
+    "Do not apply Apple's specific duration values or easing parameters outside Apple platform contexts."
+  ],
+  "licenseNote": "Public first-party Apple developer documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer motion intent model and Reduce Motion contract; do not copy Apple spring physics parameters or choreography as cross-platform defaults.",
+  "linkedRuleIds": [
+    "rule.adaptation.capability-first",
+    "rule.motion.purpose-first"
+  ],
+  "linkedArtifactIds": []
+}

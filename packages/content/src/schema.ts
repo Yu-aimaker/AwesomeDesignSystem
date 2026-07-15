@@ -73,6 +73,7 @@ export const ReferenceRecordSchema = z.object({
   id: refId,
   title: z.string().min(1),
   url: z.string().url(),
+  sourceUrls: z.array(z.string().url()).min(1).optional(),
   owner: z.string().min(1),
   sourceClass: z.enum(SOURCE_CLASSES),
   medium: z.enum(REFERENCE_MEDIA),
@@ -92,7 +93,13 @@ export const ReferenceRecordSchema = z.object({
   antiImitationNote: z.string().min(1),
   linkedRuleIds: z.array(ruleId).default([]),
   linkedArtifactIds: z.array(artifactId).default([]),
-  contentHash: z.string().optional(),
+  contentHash: z
+    .string()
+    .regex(
+      /^sha256:[a-f0-9]{64}$/,
+      "expected a lowercase sha256:<hex> content hash",
+    )
+    .optional(),
 });
 
 export const CanonRuleSchema = z.object({
@@ -129,38 +136,46 @@ export const ArtifactClaimSchema = z.object({
   verifiesArtifactIds: z.array(artifactId).optional(),
 });
 
-export const SignalRecordSchema = z.object({
-  id: z
-    .string()
-    .regex(/^signal\.[a-z0-9-]+\.[a-z0-9-]+$/, "expected signal.<owner>.<slug>"),
-  title: z.string().min(1),
-  url: z.string().url(),
-  observedDate: isoDate,
-  summary: z.string().min(1),
-  relatedTopics: z.array(z.string()).default([]),
-  promotionBlockedReason: z.string().min(1),
-  candidateRuleIds: z.array(ruleId).default([]),
-  promotionAssessment: z.object({
-    primaryEvidenceCount: z.number().int().nonnegative(),
-    workingImplementation: z.boolean(),
-    accessibilityReviewed: z.boolean(),
-    performanceReviewed: z.boolean(),
-    decision: z.enum(["pending", "promote", "reject"]),
-  }),
-}).superRefine((signal, context) => {
-  if (signal.promotionAssessment.decision !== "promote") return;
-  const assessment = signal.promotionAssessment;
-  if (assessment.primaryEvidenceCount < 2
-    || !assessment.workingImplementation
-    || !assessment.accessibilityReviewed
-    || !assessment.performanceReviewed) {
-    context.addIssue({
-      code: z.ZodIssueCode.custom,
-      path: ["promotionAssessment"],
-      message: "promotion requires two primary sources, a working implementation, and accessibility/performance review",
-    });
-  }
-});
+export const SignalRecordSchema = z
+  .object({
+    id: z
+      .string()
+      .regex(
+        /^signal\.[a-z0-9-]+\.[a-z0-9-]+$/,
+        "expected signal.<owner>.<slug>",
+      ),
+    title: z.string().min(1),
+    url: z.string().url(),
+    observedDate: isoDate,
+    summary: z.string().min(1),
+    relatedTopics: z.array(z.string()).default([]),
+    promotionBlockedReason: z.string().min(1),
+    candidateRuleIds: z.array(ruleId).default([]),
+    promotionAssessment: z.object({
+      primaryEvidenceCount: z.number().int().nonnegative(),
+      workingImplementation: z.boolean(),
+      accessibilityReviewed: z.boolean(),
+      performanceReviewed: z.boolean(),
+      decision: z.enum(["pending", "promote", "reject"]),
+    }),
+  })
+  .superRefine((signal, context) => {
+    if (signal.promotionAssessment.decision !== "promote") return;
+    const assessment = signal.promotionAssessment;
+    if (
+      assessment.primaryEvidenceCount < 2 ||
+      !assessment.workingImplementation ||
+      !assessment.accessibilityReviewed ||
+      !assessment.performanceReviewed
+    ) {
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["promotionAssessment"],
+        message:
+          "promotion requires two primary sources, a working implementation, and accessibility/performance review",
+      });
+    }
+  });
 
 export type ReferenceRecord = z.infer<typeof ReferenceRecordSchema>;
 export type CanonRule = z.infer<typeof CanonRuleSchema>;

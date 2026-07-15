@@ -30,22 +30,5 @@
     "rule.foundations.semantic-tokens",
     "rule.interaction.product-quality"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.callout",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.dialog",
-    "artifact.component.empty-state",
-    "artifact.component.error-state",
-    "artifact.component.grid",
-    "artifact.component.input",
-    "artifact.component.skeleton",
-    "artifact.component.stack",
-    "artifact.component.tabs",
-    "artifact.component.toast"
-  ],
-  "contentHash": "seed-shopify-polaris"
+  "linkedArtifactIds": []
 }

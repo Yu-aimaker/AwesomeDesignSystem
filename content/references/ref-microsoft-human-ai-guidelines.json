@@ -30,11 +30,11 @@
   "linkedRuleIds": [
     "rule.ai.ux-agency-contract",
     "rule.ai.ux-capability-contract",
-    "rule.ai.ux-failure-contract"
+    "rule.ai.ux-failure-contract",
+    "rule.trust.embedded-ui-boundary"
   ],
   "linkedArtifactIds": [
     "artifact.script.ai-interaction-contract",
     "artifact.script.design-decision-contract"
-  ],
-  "contentHash": "elite-ms-human-ai-20260713"
+  ]
 }

@@ -19,8 +19,8 @@ async function readJsonFiles<T>(
   let entries: string[] = [];
   try {
     entries = await readdir(dir);
-  } catch {
-    return [];
+  } catch (error) {
+    throw new Error(`Failed to read required source directory: ${dir}. Details: ${error instanceof Error ? error.message : String(error)}`);
   }
 
   const parsed = await Promise.all(entries.filter((entry) => entry.endsWith(".json")).map(async (entry) => {

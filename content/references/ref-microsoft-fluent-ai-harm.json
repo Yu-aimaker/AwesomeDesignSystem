@@ -1,0 +1,42 @@
+{
+  "id": "ref.microsoft.fluent-ai-harm",
+  "title": "Fluent 2 — AI Harm",
+  "url": "https://fluent2.microsoft.design/ai-harm",
+  "sourceUrls": [
+    "https://github.com/microsoft/fluentui"
+  ],
+  "owner": "microsoft",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "ai-harm",
+    "ai-safety",
+    "product-design",
+    "risk"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 60,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Fluent 2 product-design framing for AI harms, categorising harm types, severity, product-responsibility boundaries, and the design decisions required before high-impact automation ships.",
+  "lessons": [
+    "Require an explicit harm model and severity-weighted test cases before any high-impact automation feature ships.",
+    "Distinguish AI harm categories (e.g., unfair outcomes, privacy, reliability, safety) as separate design and QA concerns, not a single 'risk' checkbox.",
+    "Link harm assessment outcomes to rule.ai.ux-failure-contract, rule.ai.ux-agency-contract, and rule.ai.ux-uncertainty-contract so each harm type maps to a concrete design response."
+  ],
+  "caveats": [
+    "The page carries no visible update date and may lag behind current Fluent releases.",
+    "Harm taxonomy reflects Microsoft's product context; apply principles, do not import Microsoft-specific severity thresholds without revalidation."
+  ],
+  "licenseNote": "Public first-party Fluent documentation; cite and synthesize.",
+  "antiImitationNote": "Adopt harm-model discipline and severity-weighted testing practices; do not import Microsoft product-specific harm classifications or brand materials.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract",
+    "rule.ai.ux-failure-contract"
+  ],
+  "linkedArtifactIds": []
+}

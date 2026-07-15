@@ -1,0 +1,45 @@
+{
+  "id": "ref.mcp.apps",
+  "title": "MCP Apps — Embedded Interactive Tool UI",
+  "url": "https://modelcontextprotocol.io/extensions/apps/overview",
+  "owner": "anthropic",
+  "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "mcp",
+    "embedded-ui",
+    "tool-host",
+    "iframe",
+    "csp",
+    "security",
+    "agent-ui"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 30,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Official MCP extension documentation for the Apps layer: ui:// resources, sandboxed iframe rendering, CSP and permissions policy, JSON-RPC host communication, tool-call approval, context updates, and guidance on when an embedded app surface is preferable to a normal link. Review frequently as the extension evolves.",
+  "lessons": [
+    "Apply a hostile-boundary threat model for every MCP App surface: least-privilege capability grant, explicit CSP allowlist, origin isolation between host and embedded app, and tool-call approval UX before any external action.",
+    "Accessible iframe implementation requires: descriptive title attribute, focus management on open/close, keyboard-reachable close/fallback, and responsive host sizing.",
+    "Provide fallback content for every embedded surface so MCP Apps are additive, not required, for core task completion.",
+    "Define a teardown and cleanup contract for every App lifecycle event."
+  ],
+  "caveats": [
+    "MCP spec is actively evolving; Apps extension is high drift risk — use 30-day review cadence and pin to specific spec version in conformance fixtures.",
+    "Vendor-specific host CSP policies may be more restrictive than the spec minimum; validate against each target host separately.",
+    "Fallback content and teardown behavior must be explicitly tested; do not assume host environments provide recovery automatically."
+  ],
+  "licenseNote": "Official MCP documentation; cite and synthesize.",
+  "antiImitationNote": "Adopt the hostile-boundary threat model and explicit CSP/permission patterns; do not assume embedded UI is safe without explicit origin isolation and tool-call approval.",
+  "linkedRuleIds": [
+    "rule.ai.generative-boundaries",
+    "rule.ai.ux-streaming-contract",
+    "rule.trust.embedded-ui-boundary"
+  ],
+  "linkedArtifactIds": []
+}

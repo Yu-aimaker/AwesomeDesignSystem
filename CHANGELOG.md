@@ -6,7 +6,7 @@ Major upgrade from a Markdown + skills knowledge base into an **executable, evid
 
 ### Added
 
-- pnpm / Turborepo monorepo (Node ≥ 22.12, pnpm 10.5.2)
+- pnpm / Turborepo monorepo (Node ≥ 22.13.0, pnpm 10.5.2)
 - `@awesome-ds/content` — Zod-validated evidence graph (references, canon rules, artifacts, signals)
 - `@awesome-ds/tokens` — semantic multi-theme OKLCH tokens + CSS generators
 - `@awesome-ds/core` — framework-neutral utilities and design / AI interaction contracts

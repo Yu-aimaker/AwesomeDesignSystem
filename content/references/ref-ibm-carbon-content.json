@@ -27,8 +27,5 @@
   "linkedRuleIds": [
     "rule.brand.content-design"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.callout"
-  ],
-  "contentHash": "elite-ibm-carbon-content"
+  "linkedArtifactIds": []
 }

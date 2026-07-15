@@ -1,0 +1,41 @@
+{
+  "id": "ref.google.android-adaptive-layout",
+  "title": "Build adaptive apps — Android Developers",
+  "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/get-started-with-adaptive-apps",
+  "owner": "google",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "adaptive-layout",
+    "window-class",
+    "navigation",
+    "pane-layout",
+    "platform-android"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Current Android platform implementation guidance for adapting navigation patterns and pane layouts to window posture and size class rather than device labels. It covers compact, medium, and expanded window classes plus folding-posture APIs in Jetpack Compose.",
+  "lessons": [
+    "Add capability/window-class decisions to the platform matrix: navigation rail vs. bottom bar vs. drawer should derive from window size class, not device type.",
+    "Distinguish list-detail, supporting-pane, and feed pane layouts by window class and user task, not by hardcoded breakpoints.",
+    "Keep Compose-specific APIs as implementation evidence, not web requirements; extract the capability-based decision model for cross-platform use."
+  ],
+  "caveats": [
+    "The page carries no reliable update date; re-verify when major Android platform APIs or Compose releases ship.",
+    "Window size class thresholds and fold-posture APIs are Android-specific; transfer the capability-based reasoning pattern, not raw dp breakpoints, to web/cross-platform rules.",
+    "Jetpack Compose examples are illustrative; do not treat them as web component requirements."
+  ],
+  "licenseNote": "Public first-party Android developer documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer window-class and capability-based adaptation patterns; do not import Android-specific dp thresholds or Compose APIs as cross-platform requirements.",
+  "linkedRuleIds": [
+    "rule.adaptation.capability-first",
+    "rule.foundations.platform-literacy"
+  ],
+  "linkedArtifactIds": []
+}

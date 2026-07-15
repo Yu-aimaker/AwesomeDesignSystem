@@ -1,0 +1,37 @@
+{
+  "id": "ref.atlassian.design-tokens",
+  "title": "Atlassian Design Tokens",
+  "url": "https://atlassian.design/tokens/design-tokens",
+  "owner": "atlassian",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "design-tokens",
+    "token-lifecycle",
+    "migration",
+    "theming"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Atlassian's design token documentation covering semantic token use and migration discipline in a large product ecosystem. Demonstrates token lifecycle fields — introduced, replacement, deprecated, removed — and CI enforcement of deprecated/raw token usage.",
+  "lessons": [
+    "Add token lifecycle stages (introduced, deprecated, replacement, removed) as first-class metadata.",
+    "Enforce CI checks for deprecated token usage and raw value references in component code."
+  ],
+  "caveats": [
+    "Atlassian's product-specific token names and color palettes should not be imported into AwesomeDS."
+  ],
+  "licenseNote": "Public documentation; Atlassian Design System tokens are documented publicly. Verify implementation package licenses separately.",
+  "antiImitationNote": "Transfer token lifecycle and migration discipline patterns; do not import Atlassian product names, colors, or brand tokens.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens",
+    "rule.foundations.token-lifecycle"
+  ],
+  "linkedArtifactIds": []
+}

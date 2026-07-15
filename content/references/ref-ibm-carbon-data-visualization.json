@@ -1,0 +1,42 @@
+{
+  "id": "ref.ibm.carbon-data-visualization",
+  "title": "Carbon Data Visualization",
+  "url": "https://carbondesignsystem.com/data-visualization/getting-started/",
+  "sourceUrls": [
+    "https://github.com/carbon-design-system/carbon"
+  ],
+  "owner": "ibm",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "data-visualization",
+    "charts",
+    "accessibility",
+    "color"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "IBM Carbon's data visualization guidelines covering chart selection, visual encodings, legends, color, interaction, and accessibility as part of a maintained design system. carbon-design-system/carbon repository active as of 2026-07-15.",
+  "lessons": [
+    "Use question-to-chart decision guidance for selecting appropriate visualization types.",
+    "Require semantic series tokens, non-color encodings, and table fallbacks for chart accessibility.",
+    "Define empty, loading, error, and annotation states as first-class data visualization concerns."
+  ],
+  "caveats": [
+    "Carbon chart APIs are IBM-specific implementations; transfer the decision framework and accessibility contracts, not the library."
+  ],
+  "licenseNote": "Carbon is Apache-2.0; documentation is public. Verify current chart package license separately.",
+  "antiImitationNote": "Transfer chart selection logic, encoding rules, and accessibility contracts; do not adopt IBM's chart component API as the AwesomeDS implementation.",
+  "linkedRuleIds": [
+    "rule.a11y.data-visualization-contract",
+    "rule.a11y.wcag-aa",
+    "rule.components.state-matrix"
+  ],
+  "linkedArtifactIds": []
+}

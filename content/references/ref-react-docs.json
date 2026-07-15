@@ -27,6 +27,5 @@
   "linkedRuleIds": [
     "rule.design-eng.platform-first"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "seed-react-docs"
+  "linkedArtifactIds": []
 }

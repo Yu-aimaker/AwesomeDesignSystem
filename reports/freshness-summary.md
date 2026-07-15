@@ -1,12 +1,14 @@
 # Freshness summary
 
-Generated: 2026-07-13T14:01:30.670Z
+Generated: 2026-07-15T16:01:01.939Z
 
-- Sources: 97
-- Changed: 0
-- Unchanged: 97
-- Fetch failed: 0
+- Sources: 127
+- Changed: 12
+- Unchanged: 113
+- Fetch failed: 2
 - GitHub adapter degraded: 0
 - GitHub adapter recovered: 0
+- Recorded/age-calculated freshness matches: 127
+- Recorded/age-calculated freshness mismatches: 0
 - Persistent failures (>= 7 days): 0
-- Review queue: 0
+- Review queue: 14

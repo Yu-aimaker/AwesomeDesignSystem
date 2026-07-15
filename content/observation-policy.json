@@ -5,6 +5,14 @@
       "hashMode": "status-only",
       "reason": "The rotating editorial homepage changes even between immediate requests. Automation monitors reachability; the 90-day human cadence remains the content-review gate."
     },
+    "ref.atlassian.content": {
+      "hashMode": "status-only",
+      "reason": "The official Atlassian page returns an empty client-rendered shell to the observer. Automation checks reachability; scheduled human review verifies the guidance."
+    },
+    "ref.atlassian.design-tokens": {
+      "hashMode": "status-only",
+      "reason": "The official Atlassian page returns an empty client-rendered shell to the observer. Automation checks reachability; scheduled human review verifies the token guidance."
+    },
     "ref.linear.brand": {
       "hashMode": "headings-links",
       "reason": "The brand page emits volatile hydration content; headings and link labels retain a stable fingerprint of its published information architecture."

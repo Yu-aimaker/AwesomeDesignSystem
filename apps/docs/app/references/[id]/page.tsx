@@ -4,6 +4,7 @@ import { getDictionary, localizePathname } from "../../../lib/i18n";
 import { getRequestLocale } from "../../../lib/i18n-server";
 import { createLocalizedMetadata } from "../../../lib/metadata";
 import Link from "next/link";
+import { PageHeader } from "../../../components/page-header";
 
 export async function generateStaticParams() {
   const { references } = await getAtlas();
@@ -28,12 +29,10 @@ export default async function ReferenceDetail({ params }: { params: Promise<{ id
   const linked = rules.filter((rule) => ref.linkedRuleIds.includes(rule.id) || rule.referenceIds.includes(ref.id));
   const implementations = artifacts.filter((artifact) => ref.linkedArtifactIds.includes(artifact.id) || artifact.referenceIds.includes(ref.id));
   return (
-    <article>
-      <p className="meta">{ref.id}</p>
-      <h1>{ref.title}</h1>
-      <p><a href={ref.url} rel="noreferrer">{ref.url}</a></p>
+    <article className="ads-motion-enter route-page reference-detail">
+      <PageHeader eyebrow={`${ref.id} · ${ref.sourceClass}`} title={ref.title} description={ref.summary} meta={<span>{d.verified} <time dateTime={ref.lastVerifiedDate}>{ref.lastVerifiedDate}</time> · {d.cadence} {ref.reviewCadenceDays}d</span>} />
+      <p className="source-url"><a href={ref.url} rel="noreferrer">{ref.url}<span aria-hidden="true">↗</span></a></p>
       {locale === "ja" && ref.language !== "ja" ? <p className="translation-notice">{dictionary.canon.fallbackNotice}</p> : null}
-      <p lang={ref.language}>{ref.summary}</p>
       <h2>{d.teaches}</h2>
       <ul lang={ref.language}>{ref.lessons.map((l) => <li key={l}>{l}</li>)}</ul>
       <h2>{d.applied}</h2>

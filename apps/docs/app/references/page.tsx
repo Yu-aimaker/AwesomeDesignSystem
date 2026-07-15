@@ -4,6 +4,7 @@ import { formatMessage, getDictionary, localizePathname } from "../../lib/i18n";
 import { getRequestLocale } from "../../lib/i18n-server";
 
 import { createLocalizedMetadata } from "../../lib/metadata";
+import { PageHeader } from "../../components/page-header";
 export const generateMetadata = () => createLocalizedMetadata("/references", (dictionary) => dictionary.references.title, (dictionary) => dictionary.references.intro);
 
 export default async function ReferencesPage({
@@ -32,9 +33,13 @@ export default async function ReferencesPage({
   const d = getDictionary(locale).references;
 
   return (
-    <div>
-      <h1>{d.title}</h1>
-      <p className="muted">{d.intro}</p>
+    <div className="ads-motion-enter route-page">
+      <PageHeader
+        eyebrow={locale === "ja" ? "一次情報・来歴・鮮度" : "Primary evidence · provenance · freshness"}
+        title={d.title}
+        description={d.intro}
+        meta={<code>{references.length} sources · {filtered.length} in current view</code>}
+      />
       <form className="filters" method="get" aria-label={d.filterLabel}>
         <label className="ads-field">
           <span className="ads-label">{d.search}</span>
@@ -105,7 +110,7 @@ export default async function ReferencesPage({
         </label>
         <button className="ads-btn ads-btn--primary ads-btn--md" type="submit">{d.apply}</button>
       </form>
-      <p className="meta">{formatMessage(d.count, { shown: filtered.length, total: references.length })}</p>
+      <p className="meta" id="results" tabIndex={-1}>{formatMessage(d.count, { shown: filtered.length, total: references.length })}</p>
       <div className="table-wrap"><table className="table">
         <thead><tr><th>{d.source}</th><th>{d.sourceClass}</th><th>{d.medium}</th><th>{d.topics}</th><th>{d.freshness}</th><th>{d.linkedRules}</th></tr></thead>
         <tbody>
@@ -121,7 +126,7 @@ export default async function ReferencesPage({
           ))}
         </tbody>
       </table></div>
-      {filtered.length === 0 ? <p role="status">{d.noResults}</p> : null}
+      {filtered.length === 0 ? <div className="empty-result" role="status"><strong>{d.noResults}</strong><p>{locale === "ja" ? "検索条件を減らすか、すべての情報源に戻ってください。" : "Remove a filter or return to the complete Atlas."}</p><Link className="text-link" href={localizePathname("/references", locale)}>{locale === "ja" ? "絞り込みを解除" : "Clear all filters"}<span aria-hidden="true">→</span></Link></div> : null}
     </div>
   );
 }

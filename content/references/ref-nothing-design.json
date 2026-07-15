@@ -27,6 +27,5 @@
   "linkedRuleIds": [
     "rule.brand.personality-system"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "seed-nothing-design"
+  "linkedArtifactIds": []
 }

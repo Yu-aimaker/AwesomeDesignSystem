@@ -1,0 +1,41 @@
+{
+  "id": "ref.digital-agency-jp.dads-react",
+  "title": "DADS React Samples",
+  "url": "https://github.com/digital-go-jp/design-system-example-components-react",
+  "sourceUrls": [
+    "https://design.digital.go.jp/dads/react/"
+  ],
+  "owner": "digital-agency-jp",
+  "sourceClass": "repository",
+  "medium": "repository",
+  "driftRisk": "medium",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "jp-public-service",
+    "react",
+    "storybook",
+    "implementation"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-implementation",
+  "summary": "Official React/TypeScript/Storybook example components for DADS, demonstrating token usage, testable component code, and documented React 18→19 compatibility caveat. MIT-licensed repository pushed 2026-07-15.",
+  "lessons": [
+    "Link guidance to executable Storybook stories and tests for verifiable component conformance.",
+    "Preserve the source's status as sample snippets — not a claim of full DADS conformance."
+  ],
+  "caveats": [
+    "These are sample snippets with documented React 18→19 compatibility caveats; do not treat as a drop-in production library.",
+    "Repository is actively maintained but component coverage may not match the full DADS specification."
+  ],
+  "licenseNote": "MIT license on the official repository.",
+  "antiImitationNote": "Transfer testable component patterns and DADS token usage examples; do not import government-specific component implementations as AwesomeDS defaults.",
+  "linkedRuleIds": [
+    "rule.a11y.japanese-delivery",
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": []
+}

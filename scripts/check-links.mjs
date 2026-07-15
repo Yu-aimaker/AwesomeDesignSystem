@@ -24,6 +24,6 @@ const results = observations.map((row) => ({ ...row, allowlisted: allowlisted.ha
 const failures = results.filter((row) => row.result === "fetch_failed" && !row.allowlisted);
 
 await mkdir(path.join(root, "reports"), { recursive: true });
-await writeFile(path.join(root, "reports/link-check.json"), JSON.stringify({ checkedAt: new Date().toISOString(), strict, results }, null, 2));
-console.log(JSON.stringify({ checked: results.length, failed: failures.length, allowlisted: results.filter((row) => row.allowlisted).length }, null, 2));
+await writeFile(path.join(root, "reports/link-check.json"), JSON.stringify({ checkedAt: new Date().toISOString(), sourceCount: references.length, strict, results }, null, 2));
+console.log(JSON.stringify({ sourceCount: references.length, checked: results.length, failed: failures.length, allowlisted: results.filter((row) => row.allowlisted).length }, null, 2));
 if (strict && failures.length > 0) process.exitCode = 1;

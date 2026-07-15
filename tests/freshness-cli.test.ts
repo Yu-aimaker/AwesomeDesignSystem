@@ -10,25 +10,38 @@ const execFileAsync = promisify(execFile);
 const temporaryDirectories: string[] = [];
 
 afterEach(async () => {
-  await Promise.all(temporaryDirectories.splice(0).map((directory) => rm(directory, { recursive: true, force: true })));
+  await Promise.all(
+    temporaryDirectories
+      .splice(0)
+      .map((directory) => rm(directory, { recursive: true, force: true })),
+  );
 });
 
 async function runFreshness(dataRoot: string): Promise<number> {
   try {
-    await execFileAsync("pnpm", ["exec", "tsx", "scripts/check-freshness.mjs", "--strict"], {
-      cwd: process.cwd(),
-      env: {
-        ...process.env,
-        AWESOME_DS_DATA_ROOT: dataRoot,
-        AWESOME_DS_FAILURE_THRESHOLD_DAYS: "7",
-        AWESOME_DS_OBSERVATION_RETRIES: "0",
-        AWESOME_DS_OBSERVATION_TIMEOUT_MS: "1000",
+    await execFileAsync(
+      "pnpm",
+      ["exec", "tsx", "scripts/check-freshness.mjs", "--strict"],
+      {
+        cwd: process.cwd(),
+        env: {
+          ...process.env,
+          AWESOME_DS_DATA_ROOT: dataRoot,
+          AWESOME_DS_FAILURE_THRESHOLD_DAYS: "7",
+          AWESOME_DS_OBSERVATION_RETRIES: "0",
+          AWESOME_DS_OBSERVATION_TIMEOUT_MS: "1000",
+        },
+        timeout: 15_000,
       },
-      timeout: 15_000,
-    });
+    );
     return 0;
   } catch (error) {
-    return typeof error === "object" && error && "code" in error && typeof error.code === "number" ? error.code : -1;
+    return typeof error === "object" &&
+      error &&
+      "code" in error &&
+      typeof error.code === "number"
+      ? error.code
+      : -1;
   }
 }
 
@@ -43,11 +56,23 @@ test("freshness CLI preserves failure age, applies allowlists, and resets after 
 
   try {
     const address = server.address();
-    if (!address || typeof address === "string") throw new Error("fixture server did not expose a port");
-    const dataRoot = await mkdtemp(path.join(tmpdir(), "awesome-ds-freshness-"));
+    if (!address || typeof address === "string")
+      throw new Error("fixture server did not expose a port");
+    const dataRoot = await mkdtemp(
+      path.join(tmpdir(), "awesome-ds-freshness-"),
+    );
     temporaryDirectories.push(dataRoot);
-    await mkdir(path.join(dataRoot, "content", "references"), { recursive: true });
-    await writeFile(path.join(dataRoot, "content", "references", "fixture.json"), JSON.stringify({
+    await mkdir(path.join(dataRoot, "content", "references"), {
+      recursive: true,
+    });
+    const referencePath = path.join(
+      dataRoot,
+      "content",
+      "references",
+      "fixture.json",
+    );
+    const initialContentHash = `sha256:${"a".repeat(64)}`;
+    const reference = {
       id: "ref.test.cli",
       title: "CLI fixture",
       url: `http://127.0.0.1:${address.port}/guide`,
@@ -69,34 +94,113 @@ test("freshness CLI preserves failure age, applies allowlists, and resets after 
       licenseNote: "Test fixture.",
       antiImitationNote: "Test fixture.",
       linkedRuleIds: [],
-      contentHash: "seed-cli",
-    }, null, 2));
-    await writeFile(path.join(dataRoot, "content", "observation-policy.json"), JSON.stringify({ sources: {}, failureAllowlistSourceIds: [] }));
+      contentHash: initialContentHash,
+    };
+    await writeFile(referencePath, JSON.stringify(reference, null, 2));
+    await writeFile(
+      path.join(dataRoot, "content", "observation-policy.json"),
+      JSON.stringify({ sources: {}, failureAllowlistSourceIds: [] }),
+    );
 
     expect(await runFreshness(dataRoot)).toBe(0);
+    const initialFreshness = JSON.parse(
+      await readFile(path.join(dataRoot, "reports", "freshness.json"), "utf8"),
+    ) as {
+      sourceCount: number;
+      ageCalculatedSummary: Record<string, number>;
+      recordedStateMatch: { matching: number; mismatched: number };
+      rows: Array<{
+        ageCalculatedState: string;
+        recordedStateMatchesAgeCalculated: boolean;
+      }>;
+    };
+    expect(initialFreshness).toMatchObject({
+      sourceCount: 1,
+      ageCalculatedSummary: { healthy: 1 },
+      recordedStateMatch: { matching: 1, mismatched: 0 },
+    });
+    expect(initialFreshness.rows[0]).toMatchObject({
+      ageCalculatedState: "healthy",
+      recordedStateMatchesAgeCalculated: true,
+    });
 
-    await writeFile(path.join(dataRoot, "reports", "source-observations.json"), JSON.stringify({ observations: [{
-      sourceId: "ref.test.cli",
-      url: `http://127.0.0.1:${address.port}/guide`,
-      observedAt: "2026-07-01T00:00:00.000Z",
-      result: "fetch_failed",
-      attempts: 1,
-      firstFailedAt: "2026-07-01T00:00:00.000Z",
-      lastSuccessfulHash: "seed-cli",
-    }] }));
+    await writeFile(
+      path.join(dataRoot, "reports", "source-observations.json"),
+      JSON.stringify({
+        observations: [
+          {
+            sourceId: "ref.test.cli",
+            url: `http://127.0.0.1:${address.port}/guide`,
+            observedAt: "2026-07-01T00:00:00.000Z",
+            result: "fetch_failed",
+            attempts: 1,
+            firstFailedAt: "2026-07-01T00:00:00.000Z",
+            lastSuccessfulHash: initialContentHash,
+          },
+        ],
+      }),
+    );
     expect(await runFreshness(dataRoot)).toBe(1);
 
-    await writeFile(path.join(dataRoot, "content", "observation-policy.json"), JSON.stringify({ sources: {}, failureAllowlistSourceIds: ["ref.test.cli"] }));
+    await writeFile(
+      path.join(dataRoot, "content", "observation-policy.json"),
+      JSON.stringify({
+        sources: {},
+        failureAllowlistSourceIds: ["ref.test.cli"],
+      }),
+    );
     expect(await runFreshness(dataRoot)).toBe(0);
 
     failing = false;
-    await writeFile(path.join(dataRoot, "content", "observation-policy.json"), JSON.stringify({ sources: {}, failureAllowlistSourceIds: [] }));
+    await writeFile(
+      path.join(dataRoot, "content", "observation-policy.json"),
+      JSON.stringify({ sources: {}, failureAllowlistSourceIds: [] }),
+    );
     expect(await runFreshness(dataRoot)).toBe(0);
     failing = true;
     expect(await runFreshness(dataRoot)).toBe(0);
-    const stored = JSON.parse(await readFile(path.join(dataRoot, "reports", "source-observations.json"), "utf8")) as { observations: Array<{ firstFailedAt?: string }> };
-    expect(new Date(stored.observations[0]!.firstFailedAt!).getTime()).toBeGreaterThan(new Date("2026-07-01T00:00:00.000Z").getTime());
+    const stored = JSON.parse(
+      await readFile(
+        path.join(dataRoot, "reports", "source-observations.json"),
+        "utf8",
+      ),
+    ) as { observations: Array<{ firstFailedAt?: string }> };
+    expect(
+      new Date(stored.observations[0]!.firstFailedAt!).getTime(),
+    ).toBeGreaterThan(new Date("2026-07-01T00:00:00.000Z").getTime());
+
+    failing = false;
+    await writeFile(
+      referencePath,
+      JSON.stringify({ ...reference, freshnessState: "due" }, null, 2),
+    );
+    expect(await runFreshness(dataRoot)).toBe(1);
+    const mismatched = JSON.parse(
+      await readFile(path.join(dataRoot, "reports", "freshness.json"), "utf8"),
+    ) as {
+      recordedStateMatch: {
+        mismatched: number;
+        mismatches: Array<{
+          id: string;
+          recordedState: string;
+          ageCalculatedState: string;
+        }>;
+      };
+    };
+    expect(mismatched.recordedStateMatch).toEqual({
+      matching: 0,
+      mismatched: 1,
+      mismatches: [
+        {
+          id: "ref.test.cli",
+          recordedState: "due",
+          ageCalculatedState: "healthy",
+        },
+      ],
+    });
   } finally {
-    await new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
+    await new Promise<void>((resolve, reject) =>
+      server.close((error) => (error ? reject(error) : resolve())),
+    );
   }
 }, 30_000);

@@ -1,0 +1,35 @@
+{
+  "id": "rule.trust.embedded-ui-boundary",
+  "title": "Treat every embedded agent UI as a hostile capability boundary",
+  "domain": "trust",
+  "summary": "Sandboxing, origin isolation, least privilege, explicit action approval, accessible focus and deterministic teardown are one release contract for embedded UI.",
+  "guidance": "Render embedded tool UI on an isolated origin with the narrowest sandbox and Permissions Policy, an explicit CSP allowlist, schema-validated host messages and no ambient credentials. Grant capabilities per task and require approval before external side effects; provide a titled, keyboard-operable iframe with focus entry, focus restoration, teardown and an equivalent fallback path.",
+  "do": [
+    "Serve untrusted embedded content from an origin isolated from host sessions, storage and privileged application code",
+    "Default CSP and network access to deny, then allowlist each required script, style, image, connection and frame destination",
+    "Grant sandbox flags, Permissions Policy features and host APIs individually with an owner, reason and review date",
+    "Validate message origin, direction, schema, correlation and capability before processing every host-embed message",
+    "Show the action, target and consequence and obtain scoped approval before any external or irreversible tool call",
+    "Give each iframe a descriptive title, intentional focus entry, keyboard-reachable close or escape, and focus restoration to the invoker",
+    "On close, navigation, error and host disconnect, revoke capabilities and remove listeners, pending requests, timers, connections and sensitive in-memory state",
+    "Render a safe fallback or link that lets users understand and continue the task when the embed is blocked or fails"
+  ],
+  "dont": [
+    "Use wildcard CSP sources, unrestricted network access or a permissive sandbox as a convenience default",
+    "Share host cookies, local storage, DOM access or bearer credentials with an embedded origin",
+    "Trust a message because it has the expected shape without verifying its origin and granted capability",
+    "Bundle unrelated tool permissions or approvals into one consent",
+    "Trap focus inside a failed frame, discard the pre-open focus target or leave background work alive after teardown",
+    "Require the iframe for core content or task completion"
+  ],
+  "referenceIds": [
+    "ref.anthropic.mcp-spec",
+    "ref.mcp.apps",
+    "ref.microsoft.human-ai-guidelines",
+    "ref.openai.apps-sdk-ui-guidelines",
+    "ref.w3c.wcag-22"
+  ],
+  "artifactIds": [],
+  "verification": "Automated security tests must block unlisted origins, CSP destinations, sandbox capabilities, malformed or replayed messages and unapproved side effects; keyboard and screen-reader tests must verify iframe title, entry, escape and restored focus; lifecycle tests must show zero active listeners, requests, timers, connections or retained secrets after every teardown path; the fallback must complete the core task without the iframe.",
+  "status": "draft"
+}

@@ -15,6 +15,7 @@
     "Hide material data or latency constraints"
   ],
   "referenceIds": [
+    "ref.apple.hig-machine-learning",
     "ref.google.pair-guidebook",
     "ref.ibm.carbon-for-ai",
     "ref.microsoft.human-ai-guidelines"

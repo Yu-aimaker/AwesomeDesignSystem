@@ -31,6 +31,5 @@
     "rule.ai.ux-failure-contract",
     "rule.ai.ux-streaming-contract"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "elite-vercel-ai-elements-20260713"
+  "linkedArtifactIds": []
 }
