@@ -14,6 +14,7 @@ const noScreenshots = process.env.PLAYWRIGHT_NO_SCREENSHOTS === "1";
 type VisualRoute = {
   path: string;
   name: string;
+  linuxBaseline?: boolean;
   theme?: "dark" | "high-contrast";
   viewport?: { width: number; height: number };
   direction?: "rtl";
@@ -25,14 +26,14 @@ const routes: VisualRoute[] = [
   { path: "/", name: "home-dark", theme: "dark" },
   { path: "/", name: "home-high-contrast", theme: "high-contrast" },
   { path: "/ja", name: "home-ja" },
-  { path: "/ja", name: "home-ja-mobile", viewport: { width: 320, height: 640 } },
+  { path: "/ja", name: "home-ja-mobile", viewport: { width: 320, height: 640 }, linuxBaseline: true },
   { path: "/components", name: "components" },
   { path: "/components", name: "components-rtl", direction: "rtl" },
   { path: "/motion", name: "motion-reduced", reducedMotion: true },
-  { path: "/references", name: "references" },
+  { path: "/references", name: "references", linuxBaseline: true },
   { path: "/ja/components/alert-dialog", name: "component-detail-ja-mobile", viewport: { width: 320, height: 640 } },
   { path: "/ja/motion/enter", name: "motion-detail-ja" },
-  { path: "/ja/references/ref.apple.hig-accessibility", name: "reference-detail-ja-mobile", viewport: { width: 320, height: 640 } },
+  { path: "/ja/references/ref.apple.hig-accessibility", name: "reference-detail-ja-mobile", viewport: { width: 320, height: 640 }, linuxBaseline: true },
 ];
 
 test.describe("docs visual smoke", () => {
@@ -56,7 +57,13 @@ test.describe("docs visual smoke", () => {
 
       // Soft baseline: tolerate AA / font raster differences.
       // First run: playwright test --update-snapshots
-      await expect(page).toHaveScreenshot(`${route.name}.png`, {
+      // Long text-heavy pages accumulate small glyph-metric differences between
+      // macOS and Linux even with the same bundled variable fonts and Chromium.
+      // Keep reviewed Linux baselines instead of weakening regression tolerance.
+      const snapshotName = route.linuxBaseline && process.platform === "linux"
+        ? `${route.name}-linux.png`
+        : `${route.name}.png`;
+      await expect(page).toHaveScreenshot(snapshotName, {
         maxDiffPixelRatio: 0.03,
         fullPage: true,
       });

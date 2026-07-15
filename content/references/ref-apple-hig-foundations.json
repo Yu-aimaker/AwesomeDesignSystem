@@ -30,14 +30,5 @@
     "rule.product.familiar-flexible-simple",
     "rule.product.purpose-before-feature"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.grid",
-    "artifact.component.stack"
-  ],
-  "contentHash": "elite-apple-hig-foundations"
+  "linkedArtifactIds": []
 }

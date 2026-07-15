@@ -30,6 +30,5 @@
   "linkedRuleIds": [
     "rule.governance.promotion-maturity"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "elite-gestalt-a11y-20260713"
+  "linkedArtifactIds": []
 }

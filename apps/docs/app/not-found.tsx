@@ -5,9 +5,29 @@ import type { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const dictionary = getDictionary(await getRequestLocale());
+  const { title, description } = dictionary.notFound;
   return {
-    title: dictionary.notFound.title,
-    description: dictionary.notFound.description,
+    title,
+    description,
+    alternates: {
+      canonical: null,
+      languages: {
+        en: null,
+        ja: null,
+        "x-default": null,
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "AwesomeDS",
+      title,
+      description,
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
     robots: { index: false, follow: false },
   };
 }

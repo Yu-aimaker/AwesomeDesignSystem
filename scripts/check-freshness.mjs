@@ -44,6 +44,11 @@ const observations = await mapWithConcurrency(references, 6, (ref) =>
 );
 const rows = references.map((ref) => {
   const observation = observations.find((row) => row.sourceId === ref.id);
+  const ageCalculated = evaluateFreshness({
+    lastVerifiedDate: ref.lastVerifiedDate,
+    reviewCadenceDays: ref.reviewCadenceDays,
+    now,
+  });
   const result = evaluateFreshness({
     lastVerifiedDate: ref.lastVerifiedDate,
     reviewCadenceDays: ref.reviewCadenceDays,
@@ -54,7 +59,15 @@ const rows = references.map((ref) => {
       ? (previous.get(ref.id)?.contentHash ?? previous.get(ref.id)?.lastSuccessfulHash ?? ref.contentHash)
       : observation?.contentHash,
   });
-  return { id: ref.id, title: ref.title, ...result, recordedState: ref.freshnessState, observation: observation?.result };
+  return {
+    id: ref.id,
+    title: ref.title,
+    ...result,
+    recordedState: ref.freshnessState,
+    ageCalculatedState: ageCalculated.state,
+    recordedStateMatchesAgeCalculated: ref.freshnessState === ageCalculated.state,
+    observation: observation?.result,
+  };
 });
 const summary = rows.reduce((acc, row) => {
   acc[row.state] = (acc[row.state] ?? 0) + 1;
@@ -66,6 +79,18 @@ const observationSummary = observations.reduce((acc, row) => {
   if (row.adapterRecoveredAt) acc.adapter_recovered = (acc.adapter_recovered ?? 0) + 1;
   return acc;
 }, {});
+const ageCalculatedSummary = rows.reduce((acc, row) => {
+  acc[row.ageCalculatedState] = (acc[row.ageCalculatedState] ?? 0) + 1;
+  return acc;
+}, {});
+const recordedStateMismatches = rows
+  .filter((row) => !row.recordedStateMatchesAgeCalculated)
+  .map((row) => ({ id: row.id, recordedState: row.recordedState, ageCalculatedState: row.ageCalculatedState }));
+const recordedStateMatch = {
+  matching: rows.length - recordedStateMismatches.length,
+  mismatched: recordedStateMismatches.length,
+  mismatches: recordedStateMismatches,
+};
 const reviewQueue = references.flatMap((ref) => {
   const observation = observations.find((row) => row.sourceId === ref.id);
   return observation ? buildObservationReviewItems(ref, observation, failureAllowlist, failureThresholdDays, now) : [];
@@ -73,14 +98,30 @@ const reviewQueue = references.flatMap((ref) => {
 const persistentFailures = observations.filter((row) =>
   isActionablePersistentFailure(row, failureAllowlist, failureThresholdDays, now)
   || isActionablePersistentAdapterFailure(row, failureAllowlist, failureThresholdDays, now));
-const markdown = `# Freshness summary\n\nGenerated: ${now.toISOString()}\n\n- Sources: ${observations.length}\n- Changed: ${observationSummary.changed ?? 0}\n- Unchanged: ${observationSummary.unchanged ?? 0}\n- Fetch failed: ${observationSummary.fetch_failed ?? 0}\n- GitHub adapter degraded: ${observationSummary.adapter_degraded ?? 0}\n- GitHub adapter recovered: ${observationSummary.adapter_recovered ?? 0}\n- Persistent failures (>= ${failureThresholdDays} days): ${persistentFailures.length}\n- Review queue: ${reviewQueue.length}\n`;
+const markdown = `# Freshness summary\n\nGenerated: ${now.toISOString()}\n\n- Sources: ${references.length}\n- Changed: ${observationSummary.changed ?? 0}\n- Unchanged: ${observationSummary.unchanged ?? 0}\n- Fetch failed: ${observationSummary.fetch_failed ?? 0}\n- GitHub adapter degraded: ${observationSummary.adapter_degraded ?? 0}\n- GitHub adapter recovered: ${observationSummary.adapter_recovered ?? 0}\n- Recorded/age-calculated freshness matches: ${recordedStateMatch.matching}\n- Recorded/age-calculated freshness mismatches: ${recordedStateMatch.mismatched}\n- Persistent failures (>= ${failureThresholdDays} days): ${persistentFailures.length}\n- Review queue: ${reviewQueue.length}\n`;
 
 await mkdir(reportsRoot, { recursive: true });
 await Promise.all([
-  writeFile(path.join(reportsRoot, "freshness.json"), JSON.stringify({ generatedAt: now.toISOString(), summary, observationSummary, rows }, null, 2)),
+  writeFile(path.join(reportsRoot, "freshness.json"), JSON.stringify({
+    generatedAt: now.toISOString(),
+    sourceCount: references.length,
+    summary,
+    ageCalculatedSummary,
+    recordedStateMatch,
+    observationSummary,
+    rows,
+  }, null, 2)),
   writeFile(path.join(reportsRoot, "source-observations.json"), JSON.stringify({ generatedAt: now.toISOString(), observations }, null, 2)),
   writeFile(path.join(reportsRoot, "review-queue.json"), JSON.stringify({ generatedAt: now.toISOString(), items: reviewQueue }, null, 2)),
   writeFile(path.join(reportsRoot, "freshness-summary.md"), markdown),
 ]);
-console.log(JSON.stringify({ freshness: summary, observations: observationSummary, reviewQueue: reviewQueue.length, persistentFailures: persistentFailures.length }, null, 2));
-if (strict && persistentFailures.length > 0) process.exitCode = 1;
+console.log(JSON.stringify({
+  sourceCount: references.length,
+  freshness: summary,
+  ageCalculatedFreshness: ageCalculatedSummary,
+  recordedStateMatch,
+  observations: observationSummary,
+  reviewQueue: reviewQueue.length,
+  persistentFailures: persistentFailures.length,
+}, null, 2));
+if (strict && (persistentFailures.length > 0 || recordedStateMismatches.length > 0)) process.exitCode = 1;

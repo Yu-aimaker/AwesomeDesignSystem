@@ -1,7 +1,7 @@
 {
   "id": "ref.figma.variables",
   "title": "Figma Variables & Modes",
-  "url": "https://help.figma.com/hc/en-us/articles/15339657135383",
+  "url": "https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma",
   "owner": "figma",
   "sourceClass": "implementation",
   "medium": "documentation",
@@ -11,30 +11,25 @@
   "topics": [
     "tokens"
   ],
-  "observedDate": "2026-07-13",
-  "lastVerifiedDate": "2026-07-13",
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
   "reviewCadenceDays": 90,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "Figma Variables & Modes — primary reference for AwesomeDS synthesis on tokens.",
+  "summary": "Figma's first-party guide to variables, collections, modes, aliases, scopes, and team-library publication for reusable design decisions across themes and products.",
   "lessons": [
-    "Extract transferable tokens principles from Figma Variables & Modes.",
-    "Prefer primary guidance over secondary summaries."
+    "Model theme and brand variants as modes on shared collections instead of duplicating token sets.",
+    "Use aliases to preserve semantic relationships between primitives and contextual values.",
+    "Publish and consume variables through explicit library boundaries with controlled scopes."
   ],
-  "caveats": [],
+  "caveats": [
+    "Figma's editor concepts and plan-specific library features are implementation evidence, not a universal runtime token format.",
+    "Verify exported code and platform mappings separately; a design variable does not prove production usage."
+  ],
   "licenseNote": "Public web documentation or standard; cite and synthesize.",
   "antiImitationNote": "Transfer principles and patterns; never copy brand identity, assets, or proprietary visuals.",
   "linkedRuleIds": [
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.grid",
-    "artifact.component.stack"
-  ],
-  "contentHash": "seed-figma-variables"
+  "linkedArtifactIds": []
 }

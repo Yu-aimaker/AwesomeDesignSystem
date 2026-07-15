@@ -1,5 +1,3 @@
-import path from "node:path";
-import { fileURLToPath } from "node:url";
 import {
   buildEvidenceGraph,
   loadArtifactClaims,
@@ -13,8 +11,9 @@ import {
 } from "@awesome-ds/content";
 import { cache } from "react";
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const contentRoot = path.join(repoRoot, "content");
+import { getContentRoot } from "./path-resolver";
+
+const contentRoot = getContentRoot();
 
 export const getAtlas = cache(async function getAtlas() {
   const [references, rules, artifacts, signals] = await Promise.all([

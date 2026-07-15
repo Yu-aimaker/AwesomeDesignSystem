@@ -29,18 +29,5 @@
     "rule.components.state-matrix",
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.callout",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.dialog",
-    "artifact.component.grid",
-    "artifact.component.input",
-    "artifact.component.stack",
-    "artifact.component.tabs"
-  ],
-  "contentHash": "seed-ibm-carbon"
+  "linkedArtifactIds": []
 }

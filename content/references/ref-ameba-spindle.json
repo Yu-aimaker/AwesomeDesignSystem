@@ -1,0 +1,45 @@
+{
+  "id": "ref.ameba.spindle",
+  "title": "Spindle Design System",
+  "url": "https://spindle.ameba.design/",
+  "sourceUrls": [
+    "https://github.com/openameba/spindle"
+  ],
+  "owner": "ameba",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "jp-cross-medium",
+    "tokens",
+    "accessibility",
+    "components",
+    "icons",
+    "principles"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "CyberAgent/Ameba's Spindle design system joining brand principles, accessibility, tokens, icons, React components, hooks, syntax themes, contribution guidelines, and an MCP server. Official repository (openameba/spindle) pushed 2026-07-15. An unusually complete Japanese source spanning the full principle→token→component→machine-queryable pipeline.",
+  "lessons": [
+    "Model the bridge from narrative principle → semantic token → accessible component → machine-queryable context.",
+    "Record icon asset licensing separately from MIT code licensing."
+  ],
+  "caveats": [
+    "Code is MIT, but icon assets are separately licensed CC BY-NC-ND 4.0 — equivalent per-artifact checks are required.",
+    "Spindle reflects Ameba's media/entertainment context; do not adopt its visual identity as a cross-domain default."
+  ],
+  "licenseNote": "Code: MIT license. Icon assets: CC BY-NC-ND 4.0 — separate license tracking required per asset type.",
+  "antiImitationNote": "Transfer the principle→token→component→MCP architecture pattern; copy no Ameba brand identity, and record icon license separately from code license.",
+  "linkedRuleIds": [
+    "rule.a11y.japanese-delivery",
+    "rule.a11y.wcag-aa",
+    "rule.brand.cross-medium-coherence",
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": []
+}

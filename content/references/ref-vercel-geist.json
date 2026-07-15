@@ -1,0 +1,40 @@
+{
+  "id": "ref.vercel.geist",
+  "title": "Geist Design System",
+  "url": "https://vercel.com/geist/introduction",
+  "sourceUrls": [
+    "https://github.com/vercel/geist-font"
+  ],
+  "owner": "vercel",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "foundations",
+    "components",
+    "typography",
+    "tokens"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Vercel's public foundation and component system providing typeface, React building blocks, and consistent web experience primitives. Useful for component anatomy, token naming, and responsive behavior evidence.",
+  "lessons": [
+    "Study component anatomy and token naming conventions for monochrome-first systems.",
+    "Use Geist as evidence for responsive behavior and live example patterns alongside existing Vercel interface rules."
+  ],
+  "caveats": [
+    "Geist is tightly coupled to Vercel's monochrome brand recipe; keep brand-specific choices separate from universal rules.",
+    "No reliable page-level update date is exposed on the documentation."
+  ],
+  "licenseNote": "Public documentation; Geist font software is published under SIL Open Font License 1.1. Verify documentation and non-font asset terms separately.",
+  "antiImitationNote": "Transfer component structure and token patterns; do not copy Vercel's monochrome brand identity or treat its open font as a universal brand choice.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": []
+}

@@ -5,8 +5,8 @@
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
 [![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#️-다섯-스킬)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-빠른-시작)
@@ -23,28 +23,28 @@
 
 ## 🧭 존재 이유
 
-LLM에게 “랜딩 페이지 만들어 줘”라고 하면 *디자인* 대신 Tailwind 튜토리얼의 **통계적 중앙값**이 자주 나옵니다. Inter, 보라→파랑 그라데이션, 중앙 히어로, 이모지 카드 3장. 조타하지 않으면 중심으로 떨어집니다.
+LLM에게 “랜딩 페이지 만들어 줘”라고 하면 _디자인_ 대신 Tailwind 튜토리얼의 **통계적 중앙값**이 자주 나옵니다. Inter, 보라→파랑 그라데이션, 중앙 히어로, 이모지 카드 3장. 조타하지 않으면 중심으로 떨어집니다.
 
 AwesomeDesignSystem은 **서로 연결된 4개 레이어**로 조타합니다.
 
-| 레이어 | 내용 | 위치 |
-| --- | --- | --- |
-| **Doctrine** | 코드가 박힌 의견 있는 디자인 지식 | `design-system/` |
-| **Evidence** | 구조화·검증된 1차 출처와 canon 규칙 | `content/` |
-| **Executable** | 토큰, React 베이스라인, 모션, 브랜드 계약 | `packages/` |
-| **Verbs** | 점진적 공개 에이전트 스킬 | `skills/` + `install.sh` |
+| 레이어         | 내용                                      | 위치                     |
+| -------------- | ----------------------------------------- | ------------------------ |
+| **Doctrine**   | 코드가 박힌 의견 있는 디자인 지식         | `design-system/`         |
+| **Evidence**   | 구조화·검증된 1차 출처와 canon 규칙       | `content/`               |
+| **Executable** | 토큰, React 베이스라인, 모션, 브랜드 계약 | `packages/`              |
+| **Verbs**      | 점진적 공개 에이전트 스킬                 | `skills/` + `install.sh` |
 
 ## 🎁 얻을 수 있는 것
 
-| 결과 | 방법 |
-| --- | --- |
-| **AI 슬롭 중단** | 취향 원칙, 반-중앙값 패턴, 리뷰 스킬 |
-| **주장 추적** | Reference Atlas → canon → artifact → 테스트 |
-| **접근성 UI 가속** | 공유 계약 + React Aria 32 컴포넌트 |
-| **의도 있는 모션** | `prefers-reduced-motion` 준수 레시피 |
-| **브랜드 as code** | Product Lexicon, 보이스 규칙, 카피 lint |
-| **신선도 유지** | freshness / 링크 거버넌스 + CI |
-| **로컬 탐색** | Next.js 문서 (**EN/JA**, `/en/*` `/ja/*`) |
+| 결과               | 방법                                        |
+| ------------------ | ------------------------------------------- |
+| **AI 슬롭 중단**   | 취향 원칙, 반-중앙값 패턴, 리뷰 스킬        |
+| **주장 추적**      | Reference Atlas → canon → artifact → 테스트 |
+| **접근성 UI 가속** | 공유 계약 + React Aria 32 컴포넌트          |
+| **의도 있는 모션** | `prefers-reduced-motion` 준수 레시피        |
+| **브랜드 as code** | Product Lexicon, 보이스 규칙, 카피 lint     |
+| **신선도 유지**    | freshness / 링크 거버넌스 + CI              |
+| **로컬 탐색**      | Next.js 문서 (**EN/JA**, `/en/*` `/ja/*`)   |
 
 현재 증거 그래프(검증됨): **105 Reference Atlas · 42 canon · 54 artifact · 6 quarantine signal**.
 
@@ -61,13 +61,13 @@ research/ · docs/ · scripts/
 
 ## 🛠️ 다섯 스킬
 
-|  | 스킬 | 용도 |
-| :-: | --- | --- |
-| 🎨 | **/AwesomeDS** | 취향 레이어로 UI 구축·다듬기 |
-| 🏗️ | **/MakeAwesomeDS** | 제품 고유 DS 생성 (OKLCH + `DESIGN.md`) |
-| 📄 | **/AwesomeHTML** | Markdown → 단일 HTML |
-| 🔍 | **/AwesomeReview** | AI 슬롭·a11y 감사 |
-| ✨ | **/AwesomeMotion** | 목적 지향 모션 |
+|     | 스킬               | 용도                                    |
+| :-: | ------------------ | --------------------------------------- |
+| 🎨  | **/AwesomeDS**     | 취향 레이어로 UI 구축·다듬기            |
+| 🏗️  | **/MakeAwesomeDS** | 제품 고유 DS 생성 (OKLCH + `DESIGN.md`) |
+| 📄  | **/AwesomeHTML**   | Markdown → 단일 HTML                    |
+| 🔍  | **/AwesomeReview** | AI 슬롭·a11y 감사                       |
+| ✨  | **/AwesomeMotion** | 목적 지향 모션                          |
 
 ## 🚀 빠른 시작
 
@@ -85,7 +85,7 @@ cd AwesomeDesignSystem
 
 ### 3) 로컬 monorepo + 문서 사이트
 
-**Node ≥ 22.12**, **pnpm 10.5.2** 필요.
+**Node ≥ 22.13.0**, **pnpm 10.5.2** 필요.
 
 ```bash
 pnpm install
@@ -101,8 +101,8 @@ pnpm validate && pnpm test && pnpm qa:core
 
 ## 🔬 증거와 신선도
 
-- Reference Atlas, canon 규칙, quarantine signals  
-- `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`  
+- Reference Atlas, canon 규칙, quarantine signals
+- `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 - **링크 모음이 아님** — 1차 출처를 교의와 실행 계약으로 흡수하고 그래프 검증으로 정직함을 유지합니다.
 
 ## 🌐 로컬라이제이션

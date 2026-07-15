@@ -1,0 +1,37 @@
+{
+  "id": "ref.govuk.error-summary",
+  "title": "GOV.UK Error Summary Pattern",
+  "url": "https://design-system.service.gov.uk/components/error-summary/",
+  "owner": "govuk",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "low",
+  "region": "eu",
+  "language": "en",
+  "topics": [
+    "forms",
+    "error-handling",
+    "accessibility",
+    "validation"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 180,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "A complete, testable validation pattern from GOV.UK covering focus management, linked field-level errors, content structure, and implementation guidance for form error summaries. Evidence-rich with extensive usability research backing.",
+  "lessons": [
+    "Implement error summary as a state-machine with focus management, linked errors, and field-level messages together.",
+    "Use as a model for turning form validation into automated accessibility acceptance tests."
+  ],
+  "caveats": [
+    "GOV.UK patterns are optimized for UK government service contexts; adapt interaction patterns without importing GOV.UK visual styling."
+  ],
+  "licenseNote": "MIT license on GOV.UK Design System code; documentation is OGL v3.0.",
+  "antiImitationNote": "Transfer the error-handling state machine and accessibility contracts; do not copy GOV.UK visual identity or crown branding.",
+  "linkedRuleIds": [
+    "rule.a11y.wcag-aa",
+    "rule.components.state-matrix"
+  ],
+  "linkedArtifactIds": []
+}

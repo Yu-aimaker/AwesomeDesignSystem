@@ -1,0 +1,44 @@
+{
+  "id": "ref.apple.hig-machine-learning",
+  "title": "Apple HIG — Machine Learning",
+  "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+  "owner": "apple",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "machine-learning",
+    "ai-ux",
+    "capability",
+    "privacy",
+    "feedback",
+    "platform-apple"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Apple Human Interface Guidelines page for ML-enabled experiences covering product-level considerations such as appropriate confidence thresholds, graceful degradation, privacy, correction and feedback mechanisms, and when not to use ML. The guidance is version-sensitive and scoped to Apple platforms.",
+  "lessons": [
+    "Cross-check existing capability, agency, uncertainty, privacy, and feedback contracts against Apple's ML design considerations — in particular: show only high-confidence results, provide easy correction, and design graceful degradation.",
+    "Do not use the existence of an ML capability as justification for a feature; require a clear user benefit and a tested degraded-state.",
+    "Add privacy considerations for on-device vs. server-side ML as a capability disclosure requirement."
+  ],
+  "caveats": [
+    "HIG guidance is version-sensitive; revalidate on major iOS/macOS releases.",
+    "Claims are scoped to Apple platforms and Core ML / Create ML context — do not apply iOS-specific ML APIs as universal web or cross-platform requirements.",
+    "Add only claims that the page actually supports; the existence of a page does not justify a new product feature."
+  ],
+  "licenseNote": "Public first-party Apple developer documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer product-level ML design considerations (capability, privacy, correction, degradation); do not import Apple platform APIs or iOS-specific interaction patterns as cross-platform requirements.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract",
+    "rule.ai.ux-capability-contract",
+    "rule.ai.ux-failure-contract",
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": []
+}

@@ -33,6 +33,5 @@
   "linkedArtifactIds": [
     "artifact.doc.reference-atlas",
     "artifact.skill.awesome-ds"
-  ],
-  "contentHash": "seed-voltagent-awesome-design-md"
+  ]
 }

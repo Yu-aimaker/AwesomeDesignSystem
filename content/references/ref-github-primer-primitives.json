@@ -1,0 +1,35 @@
+{
+  "id": "ref.github.primer-primitives",
+  "title": "Primer Primitives",
+  "url": "https://github.com/primer/primitives",
+  "owner": "github",
+  "sourceClass": "repository",
+  "medium": "repository",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "design-tokens",
+    "color-modes",
+    "token-architecture"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-implementation",
+  "summary": "GitHub Primer's official primitives repository containing inspectable base and functional tokens that back a dense, multi-theme product UI. Demonstrates base→functional→component token dependency and color-mode contracts. Active Primer ecosystem pushed 2026-07-15.",
+  "lessons": [
+    "Use as evidence for base→functional→component token dependency chains.",
+    "Study color-mode contracts for multi-theme token architecture."
+  ],
+  "caveats": [
+    "Primitives reflect GitHub's product density and brand; link token architecture patterns to existing Primer guidance rather than importing values."
+  ],
+  "licenseNote": "MIT license; verify before using any token values directly.",
+  "antiImitationNote": "Transfer token dependency architecture; do not import GitHub's specific color values or brand-specific functional token names.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens"
+  ],
+  "linkedArtifactIds": []
+}

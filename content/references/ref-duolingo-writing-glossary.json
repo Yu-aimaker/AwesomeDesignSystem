@@ -15,7 +15,7 @@
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
-  "freshnessState": "due",
+  "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
   "summary": "Duolingo Design page: Canonical and prohibited terms. Part of 16-page public brand bible inventory.",
   "lessons": [
@@ -33,8 +33,6 @@
     "rule.brand.product-lexicon"
   ],
   "linkedArtifactIds": [
-    "artifact.component.callout",
     "artifact.script.brand-contract"
-  ],
-  "contentHash": "duolingo-writing-glossary-2026-07-13"
+  ]
 }

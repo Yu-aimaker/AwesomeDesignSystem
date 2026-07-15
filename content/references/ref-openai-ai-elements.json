@@ -29,6 +29,5 @@
   ],
   "linkedArtifactIds": [
     "artifact.script.ai-interaction-contract"
-  ],
-  "contentHash": "seed-openai-ai-elements"
+  ]
 }

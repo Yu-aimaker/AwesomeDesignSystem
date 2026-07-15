@@ -15,8 +15,11 @@
     "Remove manual paths after automation begins"
   ],
   "referenceIds": [
+    "ref.anthropic.building-effective-agents",
+    "ref.apple.hig-machine-learning",
     "ref.google.pair-guidebook",
     "ref.intuit.design-system",
+    "ref.microsoft.fluent-ai-harm",
     "ref.microsoft.human-ai-guidelines",
     "ref.salesforce.lightning-guidelines"
   ],

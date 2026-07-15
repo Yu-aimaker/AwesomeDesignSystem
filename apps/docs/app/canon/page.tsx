@@ -3,6 +3,7 @@ import { loadAllCanonDocs } from "../../lib/markdown";
 import { getRequestLocale } from "../../lib/i18n-server";
 import { localizePathname } from "../../lib/i18n";
 import { formatMessage, getDictionary } from "../../lib/i18n";
+import { PageHeader } from "../../components/page-header";
 
 import { createLocalizedMetadata } from "../../lib/metadata";
 export const generateMetadata = () => createLocalizedMetadata("/canon", (dictionary) => dictionary.nav.Canon);
@@ -18,22 +19,28 @@ export default async function CanonIndexPage() {
     byDomain.set(doc.domain, list);
   }
   return (
-    <div className="ads-motion-enter">
-      <h1>{dictionary.canon.libraryTitle}</h1>
-      <p className="muted">{formatMessage(dictionary.canon.libraryIntro, { count: docs.length })}</p>
-      {[...byDomain.entries()].map(([domain, items]) => (
-        <section key={domain}>
-          <h2>{domain}</h2>
+    <div className="ads-motion-enter route-page">
+      <PageHeader
+        eyebrow={locale === "ja" ? "人とAIの共通言語" : "A shared language for people and agents"}
+        title={dictionary.canon.libraryTitle}
+        description={formatMessage(dictionary.canon.libraryIntro, { count: docs.length })}
+        meta={<code>{docs.length} modules · design-system/</code>}
+      />
+      <div className="canon-domain-grid">
+      {[...byDomain.entries()].map(([domain, items], domainIndex) => (
+        <section className="canon-domain" key={domain}>
+          <header><span>{String(domainIndex + 1).padStart(2, "0")}</span><h2>{domain}</h2><small>{items.length}</small></header>
           <ul>
             {items.map((doc) => (
               <li key={doc.slug}>
                 <Link href={localizePathname("/canon/" + doc.slug, locale)}>{doc.title}</Link>
-                <span className="meta"> — {doc.slug}</span>
+                <span className="meta">{doc.slug}</span>
               </li>
             ))}
           </ul>
         </section>
       ))}
+      </div>
     </div>
   );
 }

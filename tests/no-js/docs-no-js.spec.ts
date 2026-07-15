@@ -11,7 +11,7 @@ test("primary knowledge routes remain readable without JavaScript", async ({ pag
 
 test("native component fallbacks remain operable without JavaScript", async ({ page }) => {
   await page.goto("/en/components/accordion", { waitUntil: "domcontentloaded" });
-  const disclosure = page.locator("details").first();
+  const disclosure = page.locator("main#main .ads-accordion details").first();
   await expect(disclosure).toBeVisible();
   await disclosure.locator("summary").click({ force: true });
   await expect(disclosure).toHaveAttribute("open", "");
@@ -38,4 +38,25 @@ test("locale switch preserves query parameters before hydration", async ({ page 
     "href",
     "/en/references?q=apple&region=global",
   );
+});
+
+test("site navigation remains operable when a persisted desktop rail was collapsed", async ({ page, context }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/en", { waitUntil: "domcontentloaded" });
+  await context.addCookies([
+    { name: "awesome-sidebar", value: "collapsed", url: new URL(page.url()).origin },
+  ]);
+  await page.reload({ waitUntil: "domcontentloaded" });
+
+  await expect(page.locator("#desktop-site-navigation")).toBeVisible();
+  await expect(page.locator(".sidebar-toggle")).toBeHidden();
+  await expect(page.locator("#desktop-site-navigation").getByRole("link", { name: "Canon" })).toBeVisible();
+
+  await context.clearCookies();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/en", { waitUntil: "domcontentloaded" });
+  const disclosure = page.locator(".nav-disclosure");
+  await disclosure.locator("summary").click();
+  await expect(disclosure).toHaveAttribute("open", "");
+  await expect(page.locator("#mobile-site-navigation").getByRole("link", { name: "Canon" })).toBeVisible();
 });

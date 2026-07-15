@@ -1,0 +1,41 @@
+{
+  "id": "ref.anthropic.building-effective-agents",
+  "title": "Building Effective Agents — Anthropic Engineering",
+  "url": "https://www.anthropic.com/engineering/building-effective-agents",
+  "owner": "anthropic",
+  "sourceClass": "design-engineering",
+  "medium": "article",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "agent-architecture",
+    "workflow-vs-agent",
+    "orchestration",
+    "autonomy",
+    "agentic-ux"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Anthropic engineering article distinguishing predefined workflows from autonomous agents, recommending simple composable patterns before complex frameworks, and describing when task complexity and tool use justify greater autonomy. It is practitioner guidance for orchestration decisions, not a visual-design standard.",
+  "lessons": [
+    "Use only to determine appropriate autonomy and orchestration levels: simple composable workflow patterns before complex agent frameworks; increase autonomy only when task complexity and tool diversity genuinely require it.",
+    "Map workflow/agent architecture choices to visible user controls: approval boundaries, trace visibility, stop, retry, and escalation paths must be proportionate to autonomy level.",
+    "Distinguish predefined workflow steps from agent decisions; users must be able to understand, interrupt, and recover from both."
+  ],
+  "caveats": [
+    "This is a first-party engineering article, not a normative standard; treat it as practitioner guidance contextual to Anthropic's model capabilities and publication date.",
+    "Not a visual-design or component source; do not use to justify UI patterns or component choices — only autonomy and orchestration decisions.",
+    "Architecture patterns described are illustrative; validate against actual system requirements before adopting."
+  ],
+  "licenseNote": "Anthropic engineering blog article; public first-party content; cite and synthesize.",
+  "antiImitationNote": "Transfer orchestration level selection and visible-control proportionality principles; this source does not govern visual design, token use, or component behaviour.",
+  "linkedRuleIds": [
+    "rule.ai.ux-agency-contract",
+    "rule.ai.ux-uncertainty-contract"
+  ],
+  "linkedArtifactIds": []
+}

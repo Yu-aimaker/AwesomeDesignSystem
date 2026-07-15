@@ -1,0 +1,40 @@
+{
+  "id": "ref.google.material-motion",
+  "title": "Material 3 Motion — How it works",
+  "url": "https://m3.material.io/styles/motion/overview/how-it-works",
+  "owner": "google",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "motion",
+    "animation",
+    "spatial-continuity",
+    "transition-design"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Material 3 motion guidance covering spatial continuity, expressive motion roles, and transition intent, including entrance, exit, and emphasis roles with easing and duration tokens.",
+  "lessons": [
+    "Add semantic motion roles — entrance, exit, emphasis, spatial continuity — and bind each to a transition intent rather than arbitrary timing.",
+    "Every motion mapping must include interrupt/cancel behavior and a prefers-reduced-motion alternative; brand choreography is contextual, not universal.",
+    "Distinguish expressive (brand-reinforcing) from functional (state-communicating) motion and apply separately governed rules."
+  ],
+  "caveats": [
+    "The page carries no reliable update date; re-verify on major Material releases.",
+    "Material motion tokens and easing curves reflect Android/Google platform conventions; adapt intent, not raw values, for cross-platform AwesomeDS motion contracts.",
+    "Do not adopt Material choreography as a cross-platform default; extract decisions and test reduced-motion alternatives."
+  ],
+  "licenseNote": "Public first-party Google Material documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer semantic motion role concepts and interrupt/cancel patterns; do not copy Google easing values or choreography sequences as universal defaults.",
+  "linkedRuleIds": [
+    "rule.foundations.platform-literacy",
+    "rule.motion.purpose-first"
+  ],
+  "linkedArtifactIds": []
+}

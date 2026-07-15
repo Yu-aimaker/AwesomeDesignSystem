@@ -29,11 +29,6 @@
     "rule.interaction.product-quality"
   ],
   "linkedArtifactIds": [
-    "artifact.component.empty-state",
-    "artifact.component.error-state",
-    "artifact.component.skeleton",
-    "artifact.component.toast",
     "artifact.script.design-decision-contract"
-  ],
-  "contentHash": "seed-nielsen-usability"
+  ]
 }

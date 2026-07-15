@@ -1,0 +1,40 @@
+{
+  "id": "ref.microsoft.fluent-design-tokens",
+  "title": "Fluent 2 Design Tokens",
+  "url": "https://fluent2.microsoft.design/design-tokens",
+  "sourceUrls": [
+    "https://github.com/microsoft/fluentui"
+  ],
+  "owner": "microsoft",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "design-tokens",
+    "theming",
+    "token-architecture"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "Fluent 2 design tokens documentation covering global and alias tokens, naming conventions, theme assignment, and the principle of avoiding raw pixel/hex values across platforms. microsoft/fluentui repository active as of 2026-07-15.",
+  "lessons": [
+    "Compare global→alias token mapping with AwesomeDS token architecture for cross-platform consistency.",
+    "Enforce a lintable ban on raw color/spacing values where a semantic token exists.",
+    "Document platform-specific token mapping exceptions explicitly."
+  ],
+  "caveats": [
+    "Fluent token names reflect Microsoft product conventions; adapt naming to AwesomeDS conventions rather than importing directly."
+  ],
+  "licenseNote": "Fluent UI is MIT-licensed; documentation is public.",
+  "antiImitationNote": "Transfer global→alias token architecture and raw-value ban patterns; do not import Microsoft product token names or brand colors.",
+  "linkedRuleIds": [
+    "rule.foundations.semantic-tokens",
+    "rule.foundations.token-lifecycle"
+  ],
+  "linkedArtifactIds": []
+}

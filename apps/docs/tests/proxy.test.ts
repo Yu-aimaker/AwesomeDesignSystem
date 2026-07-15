@@ -3,6 +3,21 @@ import { NextRequest } from "next/server";
 import { proxy } from "../proxy";
 
 describe("locale proxy trust boundary", () => {
+  test.each(["/llms.txt", "/api/v1/manifest", "/api/v1/references"])(
+    "keeps machine endpoint %s locale-neutral",
+    (pathname) => {
+      const response = proxy(
+        new NextRequest(`https://awesome.test${pathname}`, {
+          headers: { "accept-language": "ja" },
+        }),
+      );
+
+      expect(response.status).toBe(200);
+      expect(response.headers.get("location")).toBeNull();
+      expect(response.cookies.get("awesome-locale")).toBeUndefined();
+    },
+  );
+
   test("a client-supplied internal locale header cannot bypass negotiation", () => {
     const request = new NextRequest("https://awesome.test/rules", {
       headers: { "accept-language": "ja", "x-awesome-locale": "en" },
@@ -11,7 +26,11 @@ describe("locale proxy trust boundary", () => {
     const response = proxy(request);
 
     expect(response.status).toBe(307);
-    expect(response.headers.get("location")).toBe("https://awesome.test/ja/rules");
+    expect(response.headers.get("location")).toBe(
+      "https://awesome.test/ja/rules",
+    );
+    expect(response.headers.get("cache-control")).toBe("private, no-store");
+    expect(response.headers.get("vary")).toBe("Cookie, Accept-Language");
   });
 
   test("a client cannot guess the rewrite token to bypass negotiation", () => {
@@ -25,7 +44,9 @@ describe("locale proxy trust boundary", () => {
 
     const response = proxy(request);
     expect(response.status).toBe(307);
-    expect(response.headers.get("location")).toBe("https://awesome.test/ja/rules");
+    expect(response.headers.get("location")).toBe(
+      "https://awesome.test/ja/rules",
+    );
   });
 
   test("a localized route overwrites a forged internal locale header", () => {
@@ -34,8 +55,14 @@ describe("locale proxy trust boundary", () => {
     });
 
     const response = proxy(request);
-    expect(response.headers.get("x-middleware-rewrite")).toBe("https://awesome.test/rules");
-    expect(response.headers.get("x-middleware-override-headers")).toContain("x-awesome-locale");
-    expect(response.headers.get("x-middleware-request-x-awesome-locale")).toBe("ja");
+    expect(response.headers.get("x-middleware-rewrite")).toBe(
+      "https://awesome.test/rules",
+    );
+    expect(response.headers.get("x-middleware-override-headers")).toContain(
+      "x-awesome-locale",
+    );
+    expect(response.headers.get("x-middleware-request-x-awesome-locale")).toBe(
+      "ja",
+    );
   });
 });

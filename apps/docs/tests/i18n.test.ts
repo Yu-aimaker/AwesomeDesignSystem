@@ -51,6 +51,8 @@ describe("translation fallback", () => {
 
   test("provides localized shell and theme labels", () => {
     expect(getDictionary("ja").shell.skipToContent).toBe("本文へ移動");
+    expect(getDictionary("ja").shell.expandSidebar).toBe("サイドバーを開く");
+    expect(getDictionary("en").shell.collapseSidebar).toBe("Collapse sidebar");
     expect(getDictionary("ja").theme.dark).toBe("ダーク");
     expect(getDictionary("en").theme.dark).toBe("Dark");
     expect(getDictionary("ja").home.repositoryProof).toBe("リポジトリの検証結果");

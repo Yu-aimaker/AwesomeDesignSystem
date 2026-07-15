@@ -1,15 +1,13 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { Marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import { cache } from "react";
 
-const repoRoot = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../../..",
-);
-const canonRoot = path.join(repoRoot, "design-system");
+import { findRepoRoot, getDesignSystemRoot } from "./path-resolver";
+
+const repoRoot = findRepoRoot();
+const canonRoot = getDesignSystemRoot();
 
 function resolveCanonFile(relPath: string): string {
   const full = path.resolve(repoRoot, relPath);
@@ -121,7 +119,10 @@ export async function listMarkdownFiles(
     let entries;
     try {
       entries = await readdir(dir, { withFileTypes: true });
-    } catch {
+    } catch (error) {
+      if (dir === base) {
+        throw new Error(`Required directory missing: ${dir}. Details: ${error instanceof Error ? error.message : String(error)}`);
+      }
       return;
     }
     for (const entry of entries) {

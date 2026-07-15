@@ -5,8 +5,8 @@
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
 [![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#️-5つのスキル)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-クイックスタート)
@@ -23,28 +23,28 @@
 
 ## 🧭 なぜ存在するのか
 
-LLM に「ランディングページを作って」と頼んでも、返ってくるのは *デザイン* ではないことが多い。Inter、紫→青グラデ、中央ヒーロー、絵文字カード3枚——**操舵しない限り中央値に落ちる**。
+LLM に「ランディングページを作って」と頼んでも、返ってくるのは _デザイン_ ではないことが多い。Inter、紫→青グラデ、中央ヒーロー、絵文字カード3枚——**操舵しない限り中央値に落ちる**。
 
 AwesomeDesignSystem は、次の **4層を互いにリンクしたまま** 操舵する。
 
-| 層 | 内容 | 場所 |
-| --- | --- | --- |
-| **Doctrine（教義）** | コード埋め込みの意見あるデザイン知識 | `design-system/` |
-| **Evidence（証拠）** | 構造化・検証済みの一次情報と canon ルール | `content/` |
-| **Executable（実行系）** | トークン、React ベースライン、モーション、ブランド契約 | `packages/` |
-| **Verbs（動詞）** | 段階的開示のエージェント・スキル | `skills/` + `install.sh` |
+| 層                       | 内容                                                   | 場所                     |
+| ------------------------ | ------------------------------------------------------ | ------------------------ |
+| **Doctrine（教義）**     | コード埋め込みの意見あるデザイン知識                   | `design-system/`         |
+| **Evidence（証拠）**     | 構造化・検証済みの一次情報と canon ルール              | `content/`               |
+| **Executable（実行系）** | トークン、React ベースライン、モーション、ブランド契約 | `packages/`              |
+| **Verbs（動詞）**        | 段階的開示のエージェント・スキル                       | `skills/` + `install.sh` |
 
 ## 🎁 これを使うと得られること
 
-| 得られるもの | 仕組み |
-| --- | --- |
-| **AIスロップを止める** | テイスト原則、アンチ中央値パターン、レビュー用スキル |
-| **主張を辿れる** | Reference Atlas → canon ルール → artifact → テスト |
-| **アクセシブル UI を速く** | 共有契約 + React Aria 付き 32 コンポーネント |
-| **意図のあるモーション** | `prefers-reduced-motion` を尊重するレシピ群 |
-| **ブランドをコードに** | Product Lexicon、ボイス規則、コピー lint 契約 |
-| **鮮度を保つ** | freshness / リンク検査スクリプトと CI |
-| **ローカルで閲覧** | Next.js docs（**英語 / 日本語**、`/en/*` `/ja/*`） |
+| 得られるもの               | 仕組み                                               |
+| -------------------------- | ---------------------------------------------------- |
+| **AIスロップを止める**     | テイスト原則、アンチ中央値パターン、レビュー用スキル |
+| **主張を辿れる**           | Reference Atlas → canon ルール → artifact → テスト   |
+| **アクセシブル UI を速く** | 共有契約 + React Aria 付き 32 コンポーネント         |
+| **意図のあるモーション**   | `prefers-reduced-motion` を尊重するレシピ群          |
+| **ブランドをコードに**     | Product Lexicon、ボイス規則、コピー lint 契約        |
+| **鮮度を保つ**             | freshness / リンク検査スクリプトと CI                |
+| **ローカルで閲覧**         | Next.js docs（**英語 / 日本語**、`/en/*` `/ja/*`）   |
 
 現在の証拠グラフ（検証済み）: **105 Reference Atlas · 42 canon ルール · 54 artifact · 6 隔離 signal**。
 
@@ -70,26 +70,26 @@ scripts/           validate / freshness / evidence / リンク検査
 <details>
 <summary><b>教義モジュール（design-system/）</b></summary>
 
-- `00-philosophy/` — テイスト層、モダン 2026、アンチスロップ  
-- `foundations/` — color (OKLCH)、typography（日本語含む）、spacing、tokens  
-- `brand/` — ブランド体系、ボイス／トーン、イラスト、Duolingo 由来の教義  
-- `platforms/apple-derived/` — Apple 由来のプロダクト教義  
-- `case-studies/elite-systems/` — 一流デザイン組織の横断合成  
-- `ai-driven/` — エージェント運用、生成 UI、評価  
-- `interaction/` — 状態／リカバリ、プロダクト品質、ブラウザ正しさ  
+- `00-philosophy/` — テイスト層、モダン 2026、アンチスロップ
+- `foundations/` — color (OKLCH)、typography（日本語含む）、spacing、tokens
+- `brand/` — ブランド体系、ボイス／トーン、イラスト、Duolingo 由来の教義
+- `platforms/apple-derived/` — Apple 由来のプロダクト教義
+- `case-studies/elite-systems/` — 一流デザイン組織の横断合成
+- `ai-driven/` — エージェント運用、生成 UI、評価
+- `interaction/` — 状態／リカバリ、プロダクト品質、ブラウザ正しさ
 - `motion/` · `components/` · `patterns/` · `accessibility/` · `governance/`
 
 </details>
 
 ## 🛠️ 5つのスキル
 
-|  | スキル | 用途 |
-| :-: | --- | --- |
-| 🎨 | **/AwesomeDS** | テイスト層で UI を構築・洗練。必要なモジュールだけ読む |
-| 🏗️ | **/MakeAwesomeDS** | プロダクト独自 DS を生成（OKLCH + `DESIGN.md` + プレビュー） |
-| 📄 | **/AwesomeHTML** | Markdown / メモを洗練された単一 HTML に |
-| 🔍 | **/AwesomeReview** | AIスロップと a11y 失敗を監査し、優先度付き修正を出す |
-| ✨ | **/AwesomeMotion** | 目的駆動のモーション設計（Motion for React + CSS） |
+|     | スキル             | 用途                                                         |
+| :-: | ------------------ | ------------------------------------------------------------ |
+| 🎨  | **/AwesomeDS**     | テイスト層で UI を構築・洗練。必要なモジュールだけ読む       |
+| 🏗️  | **/MakeAwesomeDS** | プロダクト独自 DS を生成（OKLCH + `DESIGN.md` + プレビュー） |
+| 📄  | **/AwesomeHTML**   | Markdown / メモを洗練された単一 HTML に                      |
+| 🔍  | **/AwesomeReview** | AIスロップと a11y 失敗を監査し、優先度付き修正を出す         |
+| ✨  | **/AwesomeMotion** | 目的駆動のモーション設計（Motion for React + CSS）           |
 
 ## 🚀 クイックスタート
 
@@ -113,7 +113,7 @@ cd AwesomeDesignSystem
 
 ### 3) ローカル monorepo + docs サイト
 
-**Node ≥ 22.12** と **pnpm 10.5.2** が必要。
+**Node ≥ 22.13.0** と **pnpm 10.5.2** が必要。
 
 ```bash
 pnpm install
@@ -134,29 +134,29 @@ pnpm qa:core
 
 セマンティック OKLCH、多テーマ。`@awesome-ds/tokens` から CSS / Tailwind 向けに生成。
 
-| グループ | 例 |
-| --- | --- |
-| **Color** | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
-| **Space** | `--space-1` … `--space-32` |
-| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full` |
-| **Type** | `--text-xs` … `--text-7xl` · `--font-display` · `--font-body` · `--font-mono` |
-| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow` |
+| グループ   | 例                                                                                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| **Color**  | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
+| **Space**  | `--space-1` … `--space-32`                                                                             |
+| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full`                                        |
+| **Type**   | `--text-xs` … `--text-7xl` · `--font-display` · `--font-body` · `--font-mono`                          |
+| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow`                                                |
 
 人が読む契約 → [`design-system/foundations/tokens.md`](./design-system/foundations/tokens.md)
 
 ## 🔬 証拠と鮮度
 
-- **Reference Atlas**（`content/references/`）: Apple / Material / Fluent / Polaris / Carbon / Primer / Spectrum / Atlassian / GOV.UK / Duolingo / Vercel / W3C など。medium・drift risk・検証周期付き  
-- **Canon ルール**（`content/canon/`）: 移植可能な教義。ref / artifact と双方向リンク  
-- **Signals**（`content/signals/`）: 新興の X 等 — 昇格ゲート通過まで隔離  
+- **Reference Atlas**（`content/references/`）: Apple / Material / Fluent / Polaris / Carbon / Primer / Spectrum / Atlassian / GOV.UK / Duolingo / Vercel / W3C など。medium・drift risk・検証周期付き
+- **Canon ルール**（`content/canon/`）: 移植可能な教義。ref / artifact と双方向リンク
+- **Signals**（`content/signals/`）: 新興の X 等 — 昇格ゲート通過まで隔離
 - **運用**: `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 
 **リンク集ではない。** 一次情報を教義と実行契約に落とし込み、グラフ検証で嘘をつかせない。
 
 ## 🌐 ローカライズ
 
-- Docs UI: 英語 + 日本語（`/en/*` `/ja/*`）、ロケール交渉、hreflang + x-default  
-- Canon Markdown は英語優先。未翻訳は日本語 UI が明示的フォールバック表示  
+- Docs UI: 英語 + 日本語（`/en/*` `/ja/*`）、ロケール交渉、hreflang + x-default
+- Canon Markdown は英語優先。未翻訳は日本語 UI が明示的フォールバック表示
 - スキルとエージェント導線は言語非依存
 
 ## 🤝 コントリビュート

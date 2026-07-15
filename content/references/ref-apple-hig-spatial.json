@@ -30,11 +30,5 @@
     "rule.adaptation.capability-first",
     "rule.interaction.product-quality"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.empty-state",
-    "artifact.component.error-state",
-    "artifact.component.skeleton",
-    "artifact.component.toast"
-  ],
-  "contentHash": "gap-apple-hig-spatial"
+  "linkedArtifactIds": []
 }

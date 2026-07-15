@@ -1,34 +1,47 @@
 {
   "id": "ref.copilotkit.ag-ui",
-  "title": "CopilotKit AG-UI",
-  "url": "https://docs.copilotkit.ai/",
-  "owner": "copilotkit",
+  "title": "AG-UI Protocol",
+  "url": "https://docs.ag-ui.com/introduction",
+  "sourceUrls": [
+    "https://github.com/ag-ui-protocol/ag-ui"
+  ],
+  "owner": "ag-ui-protocol",
   "sourceClass": "implementation",
   "medium": "documentation",
   "driftRisk": "high",
   "region": "global",
   "language": "en",
   "topics": [
-    "ai-ui"
+    "agent-transport",
+    "streaming",
+    "shared-state",
+    "event-protocol",
+    "agent-ui",
+    "cancel-resume",
+    "generative-ui"
   ],
-  "observedDate": "2026-07-13",
-  "lastVerifiedDate": "2026-07-13",
-  "reviewCadenceDays": 90,
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 30,
   "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
-  "summary": "CopilotKit AG-UI — primary source for agent-era design platform gaps (gap-audit-2026-07).",
+  "summary": "AG-UI is an open, bidirectional, event-based transport protocol for agent-to-frontend communication: streaming state, multimodality, typed shared state, tool events, cancel/resume, and generative UI payloads. It explicitly distinguishes transport from A2UI UI description. The protocol is evolving rapidly, so this record uses a 30-day review cadence and the canonical AG-UI protocol owner rather than the former generic CopilotKit URL.",
   "lessons": [
-    "Incorporate transferable ai-ui guidance from CopilotKit AG-UI.",
-    "Prefer schema/contract-bound generative UI over freeform HTML."
+    "Define ordered event semantics, reconnect/idempotency, and partial-failure handling for every AG-UI integration — the protocol governs transport reliability, not UI composition.",
+    "Cancellation and resume must be first-class in every streaming UI surface backed by AG-UI: cancel must be keyboard-reachable and immediately effective.",
+    "Shared-state conflict resolution and accessible streaming-announcement behavior (live regions, partial-output labelling) must be explicitly designed, not assumed from the transport.",
+    "Distinguish AG-UI transport from A2UI UI description: AG-UI carries events and state, A2UI describes component schemas — they are complementary layers, not alternatives."
   ],
   "caveats": [
-    "Verify URL path still resolves; some vendor docs reorganize frequently."
+    "Protocol is evolving; do not cite a generic CopilotKit homepage as the AG-UI specification — use the canonical ag-ui-protocol/ag-ui repository and docs.ag-ui.com.",
+    "High drift risk: use 30-day review cadence and pin conformance fixtures to a specific protocol version.",
+    "Transport compliance does not guarantee accessible, agency-preserving, or deception-free UI — the normative product layer (PAIR, Carbon for AI, Microsoft HAX) governs those concerns independently."
   ],
-  "licenseNote": "Public documentation; cite and synthesize.",
-  "antiImitationNote": "Transfer protocols and principles; do not copy proprietary brand systems.",
+  "licenseNote": "MIT licensed protocol; public documentation at docs.ag-ui.com; cite and synthesize.",
+  "antiImitationNote": "Transfer ordered event semantics, cancel/resume, and shared-state conflict patterns; do not conflate AG-UI transport with the UI schema or product policy layers.",
   "linkedRuleIds": [
-    "rule.ai.generative-boundaries"
+    "rule.ai.generative-boundaries",
+    "rule.ai.ux-streaming-contract"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "gap-copilotkit-ag-ui"
+  "linkedArtifactIds": []
 }

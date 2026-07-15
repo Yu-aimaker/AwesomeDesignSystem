@@ -29,17 +29,5 @@
     "rule.design-eng.docs-as-product",
     "rule.foundations.semantic-tokens"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.badge",
-    "artifact.component.button",
-    "artifact.component.card",
-    "artifact.component.cluster",
-    "artifact.component.container",
-    "artifact.component.dialog",
-    "artifact.component.grid",
-    "artifact.component.input",
-    "artifact.component.stack",
-    "artifact.component.tabs"
-  ],
-  "contentHash": "seed-github-primer"
+  "linkedArtifactIds": []
 }

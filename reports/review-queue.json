@@ -1,4 +1,151 @@
 {
-  "generatedAt": "2026-07-13T14:01:30.670Z",
-  "items": []
+  "generatedAt": "2026-07-15T16:01:01.939Z",
+  "items": [
+    {
+      "sourceId": "ref.a2ui.protocol",
+      "title": "A2UI — Declarative Agent-to-UI Protocol",
+      "url": "https://a2ui.org/",
+      "observedAt": "2026-07-15T16:01:02.244Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.anthropic.building-effective-agents",
+      "title": "Building Effective Agents — Anthropic Engineering",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "observedAt": "2026-07-15T16:01:07.087Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.apple.hig-machine-learning",
+      "title": "Apple HIG — Machine Learning",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+      "observedAt": "2026-07-15T16:01:04.469Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.apple.hig-motion",
+      "title": "Apple HIG — Motion",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "observedAt": "2026-07-15T16:01:05.327Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.atlassian.content",
+      "title": "Atlassian Content Design",
+      "url": "https://atlassian.design/content",
+      "observedAt": "2026-07-15T16:01:06.286Z",
+      "allowlisted": false,
+      "reason": "source-fetch-failed",
+      "firstFailedAt": "2026-07-15T15:51:39.460Z",
+      "failureAgeDays": 0.0065101736111111115,
+      "persistent": false,
+      "error": "Source returned HTML without usable content",
+      "errorCategory": "empty-content"
+    },
+    {
+      "sourceId": "ref.atlassian.design-tokens",
+      "title": "Atlassian Design Tokens",
+      "url": "https://atlassian.design/tokens/design-tokens",
+      "observedAt": "2026-07-15T16:01:06.436Z",
+      "allowlisted": false,
+      "reason": "source-fetch-failed",
+      "firstFailedAt": "2026-07-15T15:51:39.877Z",
+      "failureAgeDays": 0.006505347222222222,
+      "persistent": false,
+      "error": "Source returned HTML without usable content",
+      "errorCategory": "empty-content"
+    },
+    {
+      "sourceId": "ref.copilotkit.ag-ui",
+      "title": "AG-UI Protocol",
+      "url": "https://docs.ag-ui.com/introduction",
+      "observedAt": "2026-07-15T16:01:06.049Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.freee.vibes",
+      "title": "Vibes Design System",
+      "url": "https://vibes.freee.co.jp/",
+      "observedAt": "2026-07-15T16:01:09.412Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.google.android-adaptive-layout",
+      "title": "Build adaptive apps — Android Developers",
+      "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/get-started-with-adaptive-apps",
+      "observedAt": "2026-07-15T16:01:10.780Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.google.material-motion",
+      "title": "Material 3 Motion — How it works",
+      "url": "https://m3.material.io/styles/motion/overview/how-it-works",
+      "observedAt": "2026-07-15T16:01:11.379Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.mcp.apps",
+      "title": "MCP Apps — Embedded Interactive Tool UI",
+      "url": "https://modelcontextprotocol.io/extensions/apps/overview",
+      "observedAt": "2026-07-15T16:01:14.156Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.microsoft.fluent-ai-harm",
+      "title": "Fluent 2 — AI Harm",
+      "url": "https://fluent2.microsoft.design/ai-harm",
+      "observedAt": "2026-07-15T16:01:16.251Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.openai.apps-sdk-ui-guidelines",
+      "title": "OpenAI Apps SDK UI Guidelines",
+      "url": "https://developers.openai.com/apps-sdk/concepts/ui-guidelines",
+      "observedAt": "2026-07-15T16:01:16.825Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    },
+    {
+      "sourceId": "ref.vercel.ai-elements",
+      "title": "Vercel AI Elements",
+      "url": "https://ai-sdk.dev/elements/overview",
+      "observedAt": "2026-07-15T16:01:23.736Z",
+      "allowlisted": false,
+      "reason": "upstream-content-changed",
+      "failureAgeDays": 0,
+      "persistent": false
+    }
+  ]
 }

@@ -1,6 +1,8 @@
 name: ci
 on:
   push:
+    branches:
+      - main
   pull_request:
 jobs:
   core:
@@ -12,7 +14,7 @@ jobs:
           version: 10.5.2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22.12
+          node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm qa:core
@@ -28,7 +30,7 @@ jobs:
           version: 10.5.2
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22.12
+          node-version: 24
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm exec playwright install --with-deps chromium

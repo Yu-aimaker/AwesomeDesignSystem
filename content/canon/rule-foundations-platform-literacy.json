@@ -14,7 +14,10 @@
   "referenceIds": [
     "ref.apple.hig",
     "ref.apple.hig-foundations",
-    "ref.google.material-3"
+    "ref.freee.vibes",
+    "ref.google.android-adaptive-layout",
+    "ref.google.material-3",
+    "ref.google.material-motion"
   ],
   "artifactIds": [
     "artifact.doc.platform-literacy",

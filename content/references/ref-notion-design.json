@@ -27,11 +27,5 @@
   "linkedRuleIds": [
     "rule.interaction.product-quality"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.empty-state",
-    "artifact.component.error-state",
-    "artifact.component.skeleton",
-    "artifact.component.toast"
-  ],
-  "contentHash": "seed-notion-design"
+  "linkedArtifactIds": []
 }

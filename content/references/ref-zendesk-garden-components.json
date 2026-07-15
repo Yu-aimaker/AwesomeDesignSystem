@@ -30,6 +30,5 @@
   "linkedRuleIds": [
     "rule.ai.ux-failure-contract"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "elite-zendesk-components-20260713"
+  "linkedArtifactIds": []
 }

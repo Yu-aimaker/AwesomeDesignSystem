@@ -1,0 +1,44 @@
+{
+  "id": "ref.openai.apps-sdk-ui-guidelines",
+  "title": "OpenAI Apps SDK UI Guidelines",
+  "url": "https://developers.openai.com/apps-sdk/concepts/ui-guidelines",
+  "owner": "openai",
+  "sourceClass": "implementation",
+  "medium": "documentation",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "conversational-ui",
+    "host-ux",
+    "cards",
+    "display-mode",
+    "inline-ui",
+    "agent-ui"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 30,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "OpenAI Apps SDK UI guidelines for conversation-embedded surfaces: display-mode selection, a two-action limit, inline cards and carousels, no nested scrolling or deep navigation inside cards, persistent edits, and accessible host-native components. The rules are specific to the ChatGPT host; only the bounded conversational-surface principles generalise beyond it.",
+  "lessons": [
+    "Generalize into a host-agnostic 'conversation-embedded surface' contract: choose the smallest sufficient display mode, eliminate duplicate assistant/card content, keep actions few and explicit.",
+    "Persistent edits contract: user changes to generated content must persist across conversation turns unless explicitly reset.",
+    "No nested scroll inside card surfaces and no deep navigation — these constraints protect conversational spatial coherence and should be applied to any conversation-embedded UI.",
+    "Always preserve a non-chat/manual path for every task that a conversational agent can perform."
+  ],
+  "caveats": [
+    "Guidelines are scoped to ChatGPT host context; vendor-specific display modes, card types, and action counts reflect OpenAI's current implementation — revalidate if deploying to a different conversational host.",
+    "High drift risk as the Apps SDK evolves; use 30-day review cadence.",
+    "Do not treat ChatGPT-specific interaction conventions as universal conversational UI standards; extract generalizable principles and mark host-specific details explicitly."
+  ],
+  "licenseNote": "Official OpenAI developer documentation; cite and synthesize.",
+  "antiImitationNote": "Transfer the smallest-sufficient-mode, few-explicit-actions, and persistent-edits principles; keep ChatGPT-specific display modes and action counts scoped to OpenAI host context.",
+  "linkedRuleIds": [
+    "rule.adaptation.hosted-embedded-surfaces",
+    "rule.ai.generative-boundaries",
+    "rule.trust.embedded-ui-boundary"
+  ],
+  "linkedArtifactIds": []
+}

@@ -6,7 +6,7 @@
 
 ## Environment
 
-- Node: `>=22.12.0`
+- Node: `>=22.13.0`
 - pnpm: `10.5.2`
 - Next.js: `16.2.10`
 - React: `19.2.7`

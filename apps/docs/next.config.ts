@@ -32,6 +32,13 @@ const nextConfig: NextConfig = {
   turbopack: {
     root,
   },
+  outputFileTracingIncludes: {
+    "/**/*": [
+      "content/**/*.json",
+      "design-system/**/*.md",
+      "reports/**/*.json",
+    ],
+  },
 };
 
 export default nextConfig;

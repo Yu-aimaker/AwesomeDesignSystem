@@ -12,7 +12,14 @@ export type SourceObservation = {
   contentHash?: string;
   etag?: string;
   lastModified?: string;
-  errorCategory?: "http" | "network" | "timeout" | "body-too-large";
+  errorCategory?:
+    | "http"
+    | "network"
+    | "timeout"
+    | "body-too-large"
+    | "empty-content"
+    | "login-gate"
+    | "challenge-page";
   error?: string;
   adapter?: "http" | "github";
   revision?: string;
@@ -50,7 +57,120 @@ type Options = {
 
 const DEFAULT_MAX_BYTES = 5 * 1024 * 1024;
 
-function normalizeContent(content: string, contentType: string, hashMode: Options["hashMode"] = "full"): string {
+class InvalidSourceContentError extends Error {
+  constructor(
+    readonly category: "empty-content" | "login-gate" | "challenge-page",
+    message: string,
+  ) {
+    super(message);
+    this.name = "InvalidSourceContentError";
+  }
+}
+
+function visibleHtmlText(content: string): string {
+  return content
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<!--\s*[\s\S]*?-->/g, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&(?:nbsp|#160);/gi, " ")
+    .replace(/&[a-z]+;|&#\d+;|&#x[0-9a-f]+;/gi, "x")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** Reject successful HTTP responses that do not contain usable source material. */
+function validateSourceContent(
+  content: string,
+  contentType: string,
+  hashMode: Options["hashMode"] = "full",
+): void {
+  if (!content.trim()) {
+    throw new InvalidSourceContentError(
+      "empty-content",
+      "Source returned an empty response body",
+    );
+  }
+  if (!contentType.toLowerCase().includes("html")) return;
+
+  const lower = content.toLowerCase();
+  const title =
+    lower
+      .match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1]
+      ?.replace(/<[^>]+>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim() ?? "";
+  const visibleText = visibleHtmlText(content);
+  const hasPasswordField = /<input\b[^>]*\btype\s*=\s*["']?password\b/i.test(
+    content,
+  );
+  const hasLoginForm =
+    /<form\b[^>]*(?:action|id|class)\s*=\s*["'][^"']*(?:log[-_ ]?in|sign[-_ ]?in|auth|sso|saml)[^"']*["']/i.test(
+      content,
+    );
+  const loginTitle =
+    /^(?:sign in|log in|login|authentication required)(?:\s*(?:[|:\-–—]|to\b).*)?$/i.test(
+      title,
+    );
+  const loginCue =
+    /\b(?:sign in|log in|authentication required|continue with (?:google|github|apple|sso))\b/i.test(
+      visibleText,
+    );
+  if (
+    (hasPasswordField && loginCue) ||
+    (loginTitle && (hasPasswordField || hasLoginForm))
+  ) {
+    throw new InvalidSourceContentError(
+      "login-gate",
+      "Source resolved to an authentication gate",
+    );
+  }
+
+  const knownChallengeMarker =
+    /(?:cf-chl-|\/cdn-cgi\/challenge-platform\/|g-recaptcha|h-captcha|hcaptcha|data-sitekey)/i.test(
+      content,
+    );
+  const challengeTitle =
+    /^(?:just a moment|attention required|security checkpoint|security verification)(?:[.!\s|:\-–—].*)?$/i.test(
+      title,
+    );
+  const challengeCue =
+    /\b(?:verify (?:that )?you are human|checking your browser|complete the security check|enable javascript and cookies to continue)\b/i.test(
+      visibleText,
+    );
+  if (knownChallengeMarker && (challengeTitle || challengeCue)) {
+    throw new InvalidSourceContentError(
+      "challenge-page",
+      "Source resolved to an automated-access challenge page",
+    );
+  }
+
+  // An empty app shell can be legitimate when a first-party site renders on the
+  // client. Only reject markup-only responses when there is no boot or rendered
+  // media signal, avoiding false positives for React/Next/Nuxt documentation.
+  if (!visibleText) {
+    if (hashMode === "status-only") return;
+    const hasClientBootstrap =
+      /<script\b[^>]*(?:\bsrc\s*=|\btype\s*=\s*["']module["'])|__next|__nuxt|<[^>]+\bid\s*=\s*["'](?:root|app|__next)["']/i.test(
+        content,
+      );
+    const hasRenderableMedia = /<(?:img|svg|video|canvas|iframe)\b/i.test(
+      content,
+    );
+    if (!hasClientBootstrap && !hasRenderableMedia) {
+      throw new InvalidSourceContentError(
+        "empty-content",
+        "Source returned HTML without usable content",
+      );
+    }
+  }
+}
+
+function normalizeContent(
+  content: string,
+  contentType: string,
+  hashMode: Options["hashMode"] = "full",
+): string {
   if (hashMode === "status-only") return "reachable";
   if (!contentType.includes("html")) return content.trim();
   const normalized = content
@@ -66,7 +186,9 @@ function normalizeContent(content: string, contentType: string, hashMode: Option
     .replace(/\s+/g, " ")
     .trim();
   if (hashMode === "headings-links") {
-    const landmarks = normalized.match(/<(?:h[1-6]|a)>[\s\S]*?<\/(?:h[1-6]|a)>/gi);
+    const landmarks = normalized.match(
+      /<(?:h[1-6]|a)>[\s\S]*?<\/(?:h[1-6]|a)>/gi,
+    );
     return landmarks?.join(" ") || normalized;
   }
   return normalized;
@@ -76,7 +198,10 @@ function hashContent(content: string): string {
   return `sha256:${createHash("sha256").update(content).digest("hex")}`;
 }
 
-async function readLimited(response: Response, maxBytes: number): Promise<string> {
+async function readLimited(
+  response: Response,
+  maxBytes: number,
+): Promise<string> {
   const reader = response.body?.getReader();
   if (!reader) return "";
   const decoder = new TextDecoder();
@@ -99,7 +224,10 @@ function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function observeSource(source: Source, options: Options = {}): Promise<SourceObservation> {
+export async function observeSource(
+  source: Source,
+  options: Options = {},
+): Promise<SourceObservation> {
   const fetchImpl = options.fetchImpl ?? fetch;
   const retries = options.retries ?? 2;
   const timeoutMs = options.timeoutMs ?? 8_000;
@@ -113,21 +241,35 @@ export async function observeSource(source: Source, options: Options = {}): Prom
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
     try {
-      const headers = { "user-agent": "AwesomeDS-SourceObserver/0.1 (+local-governance)" };
-      const head = await fetchImpl(source.url, { method: "HEAD", redirect: "follow", signal: controller.signal, headers });
+      const headers = {
+        "user-agent": "AwesomeDS-SourceObserver/0.1 (+local-governance)",
+      };
+      const head = await fetchImpl(source.url, {
+        method: "HEAD",
+        redirect: "follow",
+        signal: controller.signal,
+        headers,
+      });
       lastStatus = head.status;
       if (!head.ok && head.status !== 405 && head.status !== 501) {
         errorCategory = "http";
         throw new Error(`HTTP ${head.status}`);
       }
-      const response = await fetchImpl(source.url, { method: "GET", redirect: "follow", signal: controller.signal, headers });
+      const response = await fetchImpl(source.url, {
+        method: "GET",
+        redirect: "follow",
+        signal: controller.signal,
+        headers,
+      });
       lastStatus = response.status;
       if (!response.ok) {
         errorCategory = "http";
         throw new Error(`HTTP ${response.status}`);
       }
       const body = await readLimited(response, maxBytes);
-      const normalized = normalizeContent(body, response.headers.get("content-type") ?? "", options.hashMode);
+      const contentType = response.headers.get("content-type") ?? "";
+      validateSourceContent(body, contentType, options.hashMode);
+      const normalized = normalizeContent(body, contentType, options.hashMode);
       const contentHash = hashContent(normalized);
       const etag = response.headers.get("etag") ?? undefined;
       const lastModified = response.headers.get("last-modified") ?? undefined;
@@ -136,9 +278,11 @@ export async function observeSource(source: Source, options: Options = {}): Prom
         sourceId: source.id,
         url: source.url,
         observedAt: new Date().toISOString(),
-        result: options.previousHash === contentHash || (!options.previousHash && options.assumeUnchangedWithoutBaseline)
-          ? "unchanged"
-          : "changed",
+        result:
+          options.previousHash === contentHash ||
+          (!options.previousHash && options.assumeUnchangedWithoutBaseline)
+            ? "unchanged"
+            : "changed",
         attempts: attempt,
         status: response.status,
         contentHash,
@@ -154,8 +298,13 @@ export async function observeSource(source: Source, options: Options = {}): Prom
     } catch (error) {
       clearTimeout(timer);
       lastError = error instanceof Error ? error.message : String(error);
-      if (lastError === "body-too-large") errorCategory = "body-too-large";
-      else if (error instanceof DOMException && error.name === "AbortError") errorCategory = "timeout";
+      if (error instanceof InvalidSourceContentError)
+        errorCategory = error.category;
+      else if (lastError === "body-too-large") errorCategory = "body-too-large";
+      else if (error instanceof DOMException && error.name === "AbortError")
+        errorCategory = "timeout";
+      else if (/^HTTP \d+$/.test(lastError)) errorCategory = "http";
+      else errorCategory = "network";
       if (attempt <= retries) await delay(retryDelayMs * attempt);
     }
   }
@@ -172,19 +321,36 @@ export async function observeSource(source: Source, options: Options = {}): Prom
   };
   if (options.previousHash) failure.lastSuccessfulHash = options.previousHash;
   if (options.previousEtag) failure.lastSuccessfulEtag = options.previousEtag;
-  if (options.previousLastModified) failure.lastSuccessfulLastModified = options.previousLastModified;
-  if (options.previousHashes) failure.lastSuccessfulHashes = { ...options.previousHashes };
+  if (options.previousLastModified)
+    failure.lastSuccessfulLastModified = options.previousLastModified;
+  if (options.previousHashes)
+    failure.lastSuccessfulHashes = { ...options.previousHashes };
   if (lastStatus !== undefined) failure.status = lastStatus;
   return failure;
 }
 
-export function failureAgeDays(observation: Pick<SourceObservation, "result" | "firstFailedAt">, now = new Date()): number {
-  if (observation.result !== "fetch_failed" || !observation.firstFailedAt) return 0;
-  return Math.max(0, (now.getTime() - new Date(observation.firstFailedAt).getTime()) / 86_400_000);
+export function failureAgeDays(
+  observation: Pick<SourceObservation, "result" | "firstFailedAt">,
+  now = new Date(),
+): number {
+  if (observation.result !== "fetch_failed" || !observation.firstFailedAt)
+    return 0;
+  return Math.max(
+    0,
+    (now.getTime() - new Date(observation.firstFailedAt).getTime()) /
+      86_400_000,
+  );
 }
 
-export function isPersistentFailure(observation: Pick<SourceObservation, "result" | "firstFailedAt">, thresholdDays = 7, now = new Date()): boolean {
-  return observation.result === "fetch_failed" && failureAgeDays(observation, now) >= thresholdDays;
+export function isPersistentFailure(
+  observation: Pick<SourceObservation, "result" | "firstFailedAt">,
+  thresholdDays = 7,
+  now = new Date(),
+): boolean {
+  return (
+    observation.result === "fetch_failed" &&
+    failureAgeDays(observation, now) >= thresholdDays
+  );
 }
 
 export function isActionablePersistentFailure(
@@ -193,33 +359,56 @@ export function isActionablePersistentFailure(
   thresholdDays = 7,
   now = new Date(),
 ): boolean {
-  return !allowlistedSourceIds.has(observation.sourceId) && isPersistentFailure(observation, thresholdDays, now);
+  return (
+    !allowlistedSourceIds.has(observation.sourceId) &&
+    isPersistentFailure(observation, thresholdDays, now)
+  );
 }
 
 export function adapterFailureAgeDays(
-  observation: Pick<SourceObservation, "adapterHealth" | "adapterFirstFailedAt">,
+  observation: Pick<
+    SourceObservation,
+    "adapterHealth" | "adapterFirstFailedAt"
+  >,
   now = new Date(),
 ): number {
-  if (observation.adapterHealth !== "degraded" || !observation.adapterFirstFailedAt) return 0;
-  return Math.max(0, (now.getTime() - new Date(observation.adapterFirstFailedAt).getTime()) / 86_400_000);
+  if (
+    observation.adapterHealth !== "degraded" ||
+    !observation.adapterFirstFailedAt
+  )
+    return 0;
+  return Math.max(
+    0,
+    (now.getTime() - new Date(observation.adapterFirstFailedAt).getTime()) /
+      86_400_000,
+  );
 }
 
 export function isActionablePersistentAdapterFailure(
-  observation: Pick<SourceObservation, "sourceId" | "adapterHealth" | "adapterFirstFailedAt">,
+  observation: Pick<
+    SourceObservation,
+    "sourceId" | "adapterHealth" | "adapterFirstFailedAt"
+  >,
   allowlistedSourceIds: ReadonlySet<string>,
   thresholdDays = 7,
   now = new Date(),
 ): boolean {
-  return !allowlistedSourceIds.has(observation.sourceId)
-    && observation.adapterHealth === "degraded"
-    && adapterFailureAgeDays(observation, now) >= thresholdDays;
+  return (
+    !allowlistedSourceIds.has(observation.sourceId) &&
+    observation.adapterHealth === "degraded" &&
+    adapterFailureAgeDays(observation, now) >= thresholdDays
+  );
 }
 
 export type ObservationReviewItem = {
   sourceId: string;
   title: string;
   url: string;
-  reason: "upstream-content-changed" | "source-fetch-failed" | "github-adapter-failed" | "github-adapter-recovered";
+  reason:
+    | "upstream-content-changed"
+    | "source-fetch-failed"
+    | "github-adapter-failed"
+    | "github-adapter-recovered";
   observedAt: string;
   firstFailedAt?: string;
   failureAgeDays: number;
@@ -245,35 +434,54 @@ export function buildObservationReviewItems(
     allowlisted: allowlistedSourceIds.has(source.id),
   };
   if (observation.result === "changed") {
-    items.push({ ...common, reason: "upstream-content-changed", failureAgeDays: 0, persistent: false });
+    items.push({
+      ...common,
+      reason: "upstream-content-changed",
+      failureAgeDays: 0,
+      persistent: false,
+    });
   } else if (observation.result === "fetch_failed") {
     items.push({
       ...common,
       reason: "source-fetch-failed",
-      ...(observation.firstFailedAt ? { firstFailedAt: observation.firstFailedAt } : {}),
+      ...(observation.firstFailedAt
+        ? { firstFailedAt: observation.firstFailedAt }
+        : {}),
       failureAgeDays: failureAgeDays(observation, now),
       persistent: isPersistentFailure(observation, thresholdDays, now),
       ...(observation.error ? { error: observation.error } : {}),
-      ...(observation.errorCategory ? { errorCategory: observation.errorCategory } : {}),
+      ...(observation.errorCategory
+        ? { errorCategory: observation.errorCategory }
+        : {}),
     });
   }
   if (observation.adapterHealth === "degraded") {
     items.push({
       ...common,
       reason: "github-adapter-failed",
-      ...(observation.adapterFirstFailedAt ? { firstFailedAt: observation.adapterFirstFailedAt } : {}),
+      ...(observation.adapterFirstFailedAt
+        ? { firstFailedAt: observation.adapterFirstFailedAt }
+        : {}),
       failureAgeDays: adapterFailureAgeDays(observation, now),
-      persistent: observation.adapterHealth === "degraded"
-        && adapterFailureAgeDays(observation, now) >= thresholdDays,
+      persistent:
+        observation.adapterHealth === "degraded" &&
+        adapterFailureAgeDays(observation, now) >= thresholdDays,
       ...(observation.adapterError ? { error: observation.adapterError } : {}),
     });
   } else if (observation.adapterRecoveredAt) {
-    items.push({ ...common, reason: "github-adapter-recovered", failureAgeDays: 0, persistent: false });
+    items.push({
+      ...common,
+      reason: "github-adapter-recovered",
+      failureAgeDays: 0,
+      persistent: false,
+    });
   }
   return items;
 }
 
-export function parseGitHubRepository(url: string): { owner: string; repo: string } | null {
+export function parseGitHubRepository(
+  url: string,
+): { owner: string; repo: string } | null {
   try {
     const parsed = new URL(url);
     if (parsed.hostname !== "github.com") return null;
@@ -285,12 +493,17 @@ export function parseGitHubRepository(url: string): { owner: string; repo: strin
   }
 }
 
-export async function observeTrackedSource(source: Source, options: Options = {}): Promise<SourceObservation> {
+export async function observeTrackedSource(
+  source: Source,
+  options: Options = {},
+): Promise<SourceObservation> {
   const repository = parseGitHubRepository(source.url);
   if (!repository) return observeSource(source, options);
   const previousHashes = {
     ...options.previousHashes,
-    ...(!options.previousHashes?.github && options.previousHash ? { github: options.previousHash } : {}),
+    ...(!options.previousHashes?.github && options.previousHash
+      ? { github: options.previousHash }
+      : {}),
   };
   const fetchImpl = options.fetchImpl ?? fetch;
   const headers: Record<string, string> = {
@@ -298,15 +511,33 @@ export async function observeTrackedSource(source: Source, options: Options = {}
     "user-agent": "AwesomeDS-SourceObserver/0.1 (+local-governance)",
     "x-github-api-version": "2022-11-28",
   };
-  if (options.githubToken) headers.authorization = `Bearer ${options.githubToken}`;
+  if (options.githubToken)
+    headers.authorization = `Bearer ${options.githubToken}`;
   try {
     const apiRoot = `https://api.github.com/repos/${repository.owner}/${repository.repo}`;
     const repoResponse = await fetchImpl(apiRoot, { headers });
     if (!repoResponse.ok) throw new Error(`GitHub HTTP ${repoResponse.status}`);
-    const repo = await repoResponse.json() as { default_branch?: string; pushed_at?: string };
-    const releaseResponse = await fetchImpl(`${apiRoot}/releases/latest`, { headers });
-    const release = releaseResponse.ok ? await releaseResponse.json() as { tag_name?: string; published_at?: string } : {};
-    const revision = [repo.default_branch, repo.pushed_at, release.tag_name, release.published_at].filter(Boolean).join("|");
+    const repo = (await repoResponse.json()) as {
+      default_branch?: string;
+      pushed_at?: string;
+    };
+    const releaseResponse = await fetchImpl(`${apiRoot}/releases/latest`, {
+      headers,
+    });
+    const release = releaseResponse.ok
+      ? ((await releaseResponse.json()) as {
+          tag_name?: string;
+          published_at?: string;
+        })
+      : {};
+    const revision = [
+      repo.default_branch,
+      repo.pushed_at,
+      release.tag_name,
+      release.published_at,
+    ]
+      .filter(Boolean)
+      .join("|");
     if (!revision) throw new Error("GitHub response omitted revision metadata");
     const contentHash = hashContent(revision);
     const previousGitHubHash = previousHashes.github;
@@ -323,7 +554,9 @@ export async function observeTrackedSource(source: Source, options: Options = {}
       lastSuccessfulHashes: { ...previousHashes, github: contentHash },
       adapter: "github",
       adapterHealth: "healthy",
-      ...(options.previousAdapterHealth === "degraded" ? { adapterRecoveredAt: observedAt } : {}),
+      ...(options.previousAdapterHealth === "degraded"
+        ? { adapterRecoveredAt: observedAt }
+        : {}),
       revision,
     };
   } catch (error) {
@@ -341,17 +574,23 @@ export async function observeTrackedSource(source: Source, options: Options = {}
       previousHashes,
       assumeUnchangedWithoutBaseline: !previousHashes.http,
     });
-    fallback.adapterWarning = error instanceof Error ? error.message : String(error);
+    fallback.adapterWarning =
+      error instanceof Error ? error.message : String(error);
     fallback.adapterHealth = "degraded";
     fallback.adapterError = fallback.adapterWarning;
-    fallback.adapterFirstFailedAt = options.previousAdapterHealth === "degraded"
-      ? (options.previousAdapterFirstFailedAt ?? fallback.observedAt)
-      : fallback.observedAt;
+    fallback.adapterFirstFailedAt =
+      options.previousAdapterHealth === "degraded"
+        ? (options.previousAdapterFirstFailedAt ?? fallback.observedAt)
+        : fallback.observedAt;
     return fallback;
   }
 }
 
-export async function mapWithConcurrency<T, R>(items: T[], concurrency: number, worker: (item: T) => Promise<R>): Promise<R[]> {
+export async function mapWithConcurrency<T, R>(
+  items: T[],
+  concurrency: number,
+  worker: (item: T) => Promise<R>,
+): Promise<R[]> {
   const results = new Array<R>(items.length);
   let cursor = 0;
   async function run() {
@@ -360,6 +599,11 @@ export async function mapWithConcurrency<T, R>(items: T[], concurrency: number, 
       results[index] = await worker(items[index]!);
     }
   }
-  await Promise.all(Array.from({ length: Math.min(Math.max(1, concurrency), items.length) }, run));
+  await Promise.all(
+    Array.from(
+      { length: Math.min(Math.max(1, concurrency), items.length) },
+      run,
+    ),
+  );
   return results;
 }

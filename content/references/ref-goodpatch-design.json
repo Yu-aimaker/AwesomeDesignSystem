@@ -27,6 +27,5 @@
   "linkedRuleIds": [
     "rule.design-eng.docs-as-product"
   ],
-  "linkedArtifactIds": [],
-  "contentHash": "seed-goodpatch-design"
+  "linkedArtifactIds": []
 }

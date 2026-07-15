@@ -5,8 +5,8 @@
 &nbsp;
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 105](https://img.shields.io/badge/Reference_Atlas-105-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 42](https://img.shields.io/badge/canon_rules-42-7C5CFC?style=flat-square)](./content/canon)
+[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
 [![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-las-cinco-skills)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-inicio-rápido)
@@ -23,28 +23,28 @@
 
 ## 🧭 Por qué existe
 
-Pide a un LLM “haz un landing” y casi nunca obtienes *diseño*: obtienes la **mediana estadística** de cada tutorial de Tailwind. Inter, degradado púrpura-azul, hero centrado, tres tarjetas con emoji. El modelo cae al centro salvo que lo dirijas.
+Pide a un LLM “haz un landing” y casi nunca obtienes _diseño_: obtienes la **mediana estadística** de cada tutorial de Tailwind. Inter, degradado púrpura-azul, hero centrado, tres tarjetas con emoji. El modelo cae al centro salvo que lo dirijas.
 
 AwesomeDesignSystem dirige con **cuatro capas enlazadas**:
 
-| Capa | Qué es | Dónde |
-| --- | --- | --- |
-| **Doctrine** | Conocimiento de diseño con código embebido | `design-system/` |
-| **Evidence** | Fuentes primarias estructuradas + reglas canon | `content/` |
-| **Executable** | Tokens, React base, motion, contratos de marca | `packages/` |
-| **Verbs** | Skills de agente con divulgación progresiva | `skills/` + `install.sh` |
+| Capa           | Qué es                                         | Dónde                    |
+| -------------- | ---------------------------------------------- | ------------------------ |
+| **Doctrine**   | Conocimiento de diseño con código embebido     | `design-system/`         |
+| **Evidence**   | Fuentes primarias estructuradas + reglas canon | `content/`               |
+| **Executable** | Tokens, React base, motion, contratos de marca | `packages/`              |
+| **Verbs**      | Skills de agente con divulgación progresiva    | `skills/` + `install.sh` |
 
 ## 🎁 Qué obtienes
 
-| Resultado | Cómo |
-| --- | --- |
+| Resultado                   | Cómo                                                        |
+| --------------------------- | ----------------------------------------------------------- |
 | **Dejar de enviar AI slop** | Principios de gusto, patrones anti-mediana, skill de review |
-| **Trazar cada afirmación** | Reference Atlas → reglas canon → artifacts → tests |
-| **UI accesible más rápido** | 32 componentes React con contratos + React Aria |
-| **Motion con intención** | Recetas que respetan `prefers-reduced-motion` |
-| **Marca como código** | Product Lexicon, voz y lint de copy |
-| **Mantenerse actualizado** | Freshness, links y CI |
-| **Explorar en local** | Docs Next.js en **EN/JA** (`/en/*`, `/ja/*`) |
+| **Trazar cada afirmación**  | Reference Atlas → reglas canon → artifacts → tests          |
+| **UI accesible más rápido** | 32 componentes React con contratos + React Aria             |
+| **Motion con intención**    | Recetas que respetan `prefers-reduced-motion`               |
+| **Marca como código**       | Product Lexicon, voz y lint de copy                         |
+| **Mantenerse actualizado**  | Freshness, links y CI                                       |
+| **Explorar en local**       | Docs Next.js en **EN/JA** (`/en/*`, `/ja/*`)                |
 
 Grafo actual (validado): **105 Reference Atlas · 42 reglas canon · 54 artifacts · 6 signals en cuarentena**.
 
@@ -61,13 +61,13 @@ research/ · docs/ · scripts/
 
 ## 🛠️ Las cinco skills
 
-|  | Skill | Para… |
-| :-: | --- | --- |
-| 🎨 | **/AwesomeDS** | Construir o refinar UI con la capa de gusto |
-| 🏗️ | **/MakeAwesomeDS** | Generar el DS propio del producto |
-| 📄 | **/AwesomeHTML** | Markdown → HTML de un solo archivo |
-| 🔍 | **/AwesomeReview** | Auditar slop y fallos de a11y |
-| ✨ | **/AwesomeMotion** | Motion con propósito |
+|     | Skill              | Para…                                       |
+| :-: | ------------------ | ------------------------------------------- |
+| 🎨  | **/AwesomeDS**     | Construir o refinar UI con la capa de gusto |
+| 🏗️  | **/MakeAwesomeDS** | Generar el DS propio del producto           |
+| 📄  | **/AwesomeHTML**   | Markdown → HTML de un solo archivo          |
+| 🔍  | **/AwesomeReview** | Auditar slop y fallos de a11y               |
+| ✨  | **/AwesomeMotion** | Motion con propósito                        |
 
 ## 🚀 Inicio rápido
 
@@ -85,7 +85,7 @@ cd AwesomeDesignSystem
 
 ### 3) Monorepo local + sitio de docs
 
-Requiere **Node ≥ 22.12** y **pnpm 10.5.2**.
+Requiere **Node ≥ 22.13.0** y **pnpm 10.5.2**.
 
 ```bash
 pnpm install
@@ -101,8 +101,8 @@ Ver [`docs/architecture.md`](./docs/architecture.md) y [`docs/completion-audit.m
 
 ## 🔬 Evidencia y frescura
 
-- Reference Atlas, reglas canon, signals en cuarentena  
-- `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`  
+- Reference Atlas, reglas canon, signals en cuarentena
+- `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 - **No es un listado de enlaces** — las fuentes se absorben en doctrina y contratos ejecutables, validados por el grafo.
 
 ## 🌐 Localización

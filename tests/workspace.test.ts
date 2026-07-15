@@ -41,7 +41,7 @@ describe("workspace foundation", () => {
       engines?: { node?: string };
     };
 
-    expect(manifest.engines?.node).toBe(">=22.12.0");
+    expect(manifest.engines?.node).toBe(">=22.13.0");
   });
 
   test("uses Vitest projects instead of the deprecated workspace flag", async () => {

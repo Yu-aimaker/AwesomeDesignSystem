@@ -16,7 +16,7 @@
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
-  "freshnessState": "due",
+  "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
   "summary": "Public brand bible SPA covering identity, writing, illustration, marketing assets. Excellent for personality→production systems; not a product component library. Content contains historical product fossils — revalidate product facts.",
   "lessons": [
@@ -37,11 +37,9 @@
     "rule.brand.personality-system"
   ],
   "linkedArtifactIds": [
-    "artifact.component.callout",
     "artifact.doc.brand-coherence",
     "artifact.doc.brand-system",
     "artifact.doc.brand-workbench",
     "artifact.script.brand-contract"
-  ],
-  "contentHash": "duolingo-hub-2026-07-13"
+  ]
 }

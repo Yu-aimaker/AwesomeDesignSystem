@@ -1,0 +1,42 @@
+{
+  "id": "ref.smarthr.accessibility-process",
+  "title": "SmartHR Accessibility Quality and Process",
+  "url": "https://smarthr.design/accessibility/",
+  "sourceUrls": [
+    "https://smarthr.design/accessibility/standards-and-process/"
+  ],
+  "owner": "smarthr",
+  "sourceClass": "official-system",
+  "medium": "documentation",
+  "driftRisk": "medium",
+  "region": "jp",
+  "language": "ja",
+  "topics": [
+    "accessibility",
+    "quality-process",
+    "low-vision",
+    "multilingual",
+    "jp-saas"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "first-party-guidance",
+  "summary": "SmartHR's accessibility quality criteria and delivery process documentation, including testing guidance, low-vision insights, and multilingual quality/process in a Japanese B2B SaaS context. Covers standards at smarthr.design/accessibility/standards-and-process/.",
+  "lessons": [
+    "Extend generic WCAG rules with Japanese product-specific checks: mixed-script typography, text expansion, low-vision usability.",
+    "Define accessibility ownership and release gates in the delivery process."
+  ],
+  "caveats": [
+    "No page-level update date is exposed; verify process currency against current product releases.",
+    "Guidelines are scoped to SmartHR's B2B SaaS context; generalize process patterns without importing product-specific workflows."
+  ],
+  "licenseNote": "Public documentation; verify code/component license separately.",
+  "antiImitationNote": "Transfer accessibility process rigor and Japanese-context quality checks; do not copy SmartHR product branding or SaaS-specific workflow patterns.",
+  "linkedRuleIds": [
+    "rule.a11y.japanese-delivery",
+    "rule.a11y.wcag-aa"
+  ],
+  "linkedArtifactIds": []
+}

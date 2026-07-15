@@ -15,7 +15,7 @@
   "observedDate": "2026-07-13",
   "lastVerifiedDate": "2026-07-13",
   "reviewCadenceDays": 90,
-  "freshnessState": "due",
+  "freshnessState": "healthy",
   "evidenceLevel": "first-party-guidance",
   "summary": "Duolingo Design page: Illustration shape language. Part of 16-page public brand bible inventory.",
   "lessons": [
@@ -34,6 +34,5 @@
   ],
   "linkedArtifactIds": [
     "artifact.doc.illustration"
-  ],
-  "contentHash": "duolingo-illustration-shape-2026-07-13"
+  ]
 }

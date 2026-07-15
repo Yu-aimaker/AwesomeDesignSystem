@@ -1,0 +1,32 @@
+{
+  "id": "rule.a11y.data-visualization-contract",
+  "title": "Make every data visualization an accessible decision contract",
+  "domain": "accessibility",
+  "summary": "A chart is acceptable only when its choice, encodings, equivalent data, states, operation, and data integrity are explicit and testable.",
+  "guidance": "Before implementation, record the user question and data shape that justify the chart type. Bind each series to semantic tokens and at least one non-color cue, expose an equivalent data table, define loading, empty and error recovery, and preserve keyboard and assistive-technology access without changing or obscuring the underlying values.",
+  "do": [
+    "Record the user question, comparison task, data shape, chart choice and rejected alternatives in the design decision",
+    "Bind series to semantic color tokens plus labels, shapes, patterns or line styles that remain distinguishable without color",
+    "Provide an adjacent or user-reachable table containing the same labels, units, values, ordering and filters as the chart",
+    "Define loading, empty, partial-data and error states with status announcements and a recovery action where recovery is possible",
+    "Give interactive marks, legends and controls a logical keyboard order, visible focus, accessible names and equivalent non-pointer operation",
+    "Expose a concise chart name and summary while keeping exact values and relationships available to assistive technology",
+    "Document units, source, time range, aggregation, missing-data treatment and every non-zero axis or truncated scale"
+  ],
+  "dont": [
+    "Use color as the only series, threshold or status encoding",
+    "Render a canvas or SVG chart as the sole representation of the data",
+    "Choose a chart for visual novelty when a table or simpler chart answers the task more directly",
+    "Hide inconvenient values through omitted baselines, unexplained normalization, misleading area or inconsistent aggregation",
+    "Reuse the success visualization for loading, empty, partial or failed data"
+  ],
+  "referenceIds": [
+    "ref.ibm.carbon-accessibility",
+    "ref.ibm.carbon-data-visualization",
+    "ref.w3c.apg",
+    "ref.w3c.wcag-22"
+  ],
+  "artifactIds": [],
+  "verification": "For every chart, review the signed decision record; assert chart and table values, labels, units, ordering and filters are identical; test loading/empty/partial/error fixtures; pass automated contrast and axe checks; complete the task by keyboard and screen reader; and reject color-only distinctions or an unjustified scale/truncation.",
+  "status": "draft"
+}

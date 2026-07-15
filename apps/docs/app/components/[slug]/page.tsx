@@ -9,6 +9,7 @@ import { PreviewBoundary } from "../../../components/preview-boundary";
 import { PreviewErrorFixture } from "../../../components/preview-error-fixture";
 import { createLocalizedMetadata } from "../../../lib/metadata";
 import { localizeComponentContract } from "../../../lib/component-localization";
+import { PageHeader } from "../../../components/page-header";
 
 export function generateStaticParams() {
   return componentCatalog.map((c) => ({ slug: c.slug }));
@@ -32,11 +33,9 @@ export default async function ComponentDetailPage({ params, searchParams }: { pa
   const dictionary = getDictionary(locale);
   const d = dictionary.componentDetail;
   return (
-    <article className="ads-motion-enter">
+    <article className="ads-motion-enter route-page component-detail">
       <p className="meta"><Link href={localizePathname("/components", locale)}>{d.breadcrumb}</Link> / {item.family}</p>
-      <h1>{item.name}</h1>
-      <p className="muted">{item.description}</p>
-      <p className="meta">{d.rules}: {item.ruleIds.map((ruleId, index) => <span key={ruleId}>{index ? ", " : ""}<Link href={localizePathname(`/rules/${encodeURIComponent(ruleId)}`, locale)}>{ruleId}</Link></span>)}</p>
+      <PageHeader eyebrow={`${item.family} · @awesome-ds/react`} title={item.name} description={item.description} meta={<span>{d.rules}: {item.ruleIds.map((ruleId, index) => <span key={ruleId}>{index ? ", " : ""}<Link href={localizePathname(`/rules/${encodeURIComponent(ruleId)}`, locale)}>{ruleId}</Link></span>)}</span>} />
       <h2>{d.stateMatrix}</h2>
       <div className="state-matrix">
         {item.states.map((state) => (

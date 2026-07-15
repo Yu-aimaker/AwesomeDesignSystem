@@ -12,10 +12,13 @@
     "Unbounded one-off styling from prompts"
   ],
   "referenceIds": [
+    "ref.a2ui.protocol",
     "ref.anthropic.mcp-spec",
     "ref.copilotkit.ag-ui",
     "ref.google.stitch",
+    "ref.mcp.apps",
     "ref.openai.ai-elements",
+    "ref.openai.apps-sdk-ui-guidelines",
     "ref.vercel.generative-ui",
     "ref.voltagent.awesome-design-md"
   ],

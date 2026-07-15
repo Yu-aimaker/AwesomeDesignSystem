@@ -27,11 +27,5 @@
   "linkedRuleIds": [
     "rule.components.state-matrix"
   ],
-  "linkedArtifactIds": [
-    "artifact.component.button",
-    "artifact.component.dialog",
-    "artifact.component.input",
-    "artifact.component.tabs"
-  ],
-  "contentHash": "seed-shadcn-ui"
+  "linkedArtifactIds": []
 }

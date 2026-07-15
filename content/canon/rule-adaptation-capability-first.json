@@ -14,7 +14,9 @@
   "referenceIds": [
     "ref.apple.hig",
     "ref.apple.hig-accessibility",
-    "ref.apple.hig-spatial"
+    "ref.apple.hig-motion",
+    "ref.apple.hig-spatial",
+    "ref.google.android-adaptive-layout"
   ],
   "artifactIds": [
     "artifact.doc.platform-literacy",

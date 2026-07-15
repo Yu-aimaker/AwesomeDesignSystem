@@ -29,6 +29,5 @@
   ],
   "linkedArtifactIds": [
     "artifact.doc.docs-shell"
-  ],
-  "contentHash": "seed-storybook-docs"
+  ]
 }
