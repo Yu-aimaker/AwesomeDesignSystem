@@ -178,11 +178,15 @@ test.describe("docs smoke", () => {
   });
 
   test("Japanese not-found UI preserves locale", async ({ page }) => {
-    await page.goto("/ja/not-a-real-route", { waitUntil: "domcontentloaded" });
+    const response = await page.goto("/ja/not-a-real-route", { waitUntil: "domcontentloaded" });
+    expect(response?.status()).toBe(404);
     await expect(page.getByRole("heading", { name: "ページが見つかりません" })).toBeVisible();
     await expect(page.getByRole("link", { name: "ホームへ戻る" })).toHaveAttribute("href", "/ja");
     await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
     await expect(page.locator('link[rel="alternate"]')).toHaveCount(0);
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute("content", "ページが見つかりません");
+    await expect(page.locator('meta[property="og:url"]')).toHaveCount(0);
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute("content", "ページが見つかりません");
   });
 
   test("evidence is navigable from source and component to a structured rule", async ({ page }) => {
@@ -221,7 +225,7 @@ test.describe("docs smoke", () => {
     const dimensions = await tableRegion.evaluate((element) => ({ client: element.clientWidth, scroll: element.scrollWidth }));
     expect(dimensions.scroll).toBeGreaterThan(dimensions.client);
     expect(await page.locator("html").evaluate((element) => element.scrollWidth)).toBeLessThanOrEqual(320);
-    for (const control of await page.locator(".theme-bar button, .locale-switcher a").all()) {
+    for (const control of await page.locator(".theme-bar button:visible, .locale-switcher a:visible").all()) {
       const box = await control.boundingBox();
       expect(box?.height ?? 0).toBeGreaterThanOrEqual(44);
       expect(box?.width ?? 0).toBeGreaterThanOrEqual(44);

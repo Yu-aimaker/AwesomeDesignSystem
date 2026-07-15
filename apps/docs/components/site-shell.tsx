@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { getDictionary, localizePathname } from "../lib/i18n";
 import { getRequestLocale } from "../lib/i18n-server";
+import { parseSidebarState, SIDEBAR_COOKIE } from "../lib/sidebar-state";
 import { LocaleSwitcher } from "./locale-switcher";
+import { MobileNavigationDisclosure } from "./mobile-navigation-disclosure";
+import { SidebarToggle } from "./sidebar-toggle";
 import { SiteNav } from "./site-nav";
 
 export async function SiteShell({
@@ -13,10 +17,11 @@ export async function SiteShell({
 }) {
   const locale = await getRequestLocale();
   const dictionary = getDictionary(locale);
+  const sidebarState = parseSidebarState((await cookies()).get(SIDEBAR_COOKIE)?.value);
   return (
     <>
       <a className="skip-link" href="#main">{dictionary.shell.skipToContent}</a>
-      <div className="shell">
+      <div className="shell" data-sidebar-state={sidebarState}>
         <aside className="sidebar" aria-label={dictionary.shell.primary}>
           <div className="rail-heading">
             <div className="brand">
@@ -25,15 +30,23 @@ export async function SiteShell({
                 <span><strong translate="no">AwesomeDS</strong><small>{dictionary.shell.tagline}</small></span>
               </Link>
             </div>
-            <details className="nav-disclosure">
-              <summary aria-label={locale === "ja" ? "ナビゲーションメニュー" : "Navigation menu"}><span /><span /></summary>
-              <div className="nav-panel">
+            <SidebarToggle
+              initialState={sidebarState}
+              collapseLabel={dictionary.shell.collapseSidebar}
+              expandLabel={dictionary.shell.expandSidebar}
+            />
+            <MobileNavigationDisclosure label={dictionary.shell.navigationMenu}>
+              <div className="nav-panel" id="mobile-site-navigation">
                 <SiteNav locale={locale} labels={dictionary.nav} ariaLabel={dictionary.shell.site} />
+                <div className="rail-utilities rail-utilities--mobile">
+                  {controls}
+                  <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
+                </div>
               </div>
-            </details>
+            </MobileNavigationDisclosure>
           </div>
-          <div className="desktop-navigation"><SiteNav locale={locale} labels={dictionary.nav} ariaLabel={dictionary.shell.site} /></div>
-          <div className="rail-utilities">
+          <div className="desktop-navigation" id="desktop-site-navigation"><SiteNav locale={locale} labels={dictionary.nav} ariaLabel={dictionary.shell.site} /></div>
+          <div className="rail-utilities rail-utilities--desktop">
             {controls}
             <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
           </div>
@@ -54,6 +67,17 @@ export async function SiteShell({
           </footer>
         </div>
       </div>
+      <noscript>
+        <style>{`@media (min-width: 68rem) {
+          html .shell[data-sidebar-state="collapsed"] { grid-template-columns: var(--docs-rail) minmax(0, 1fr); }
+          html .shell[data-sidebar-state="collapsed"] .sidebar { padding: var(--space-6) var(--space-5); }
+          html .shell[data-sidebar-state="collapsed"] .rail-heading { flex-direction: row; }
+          html .shell[data-sidebar-state="collapsed"] .brand-lockup > span:last-child { display: flex; }
+          html .shell[data-sidebar-state="collapsed"] .desktop-navigation { display: block; }
+          html .shell[data-sidebar-state="collapsed"] .rail-utilities--desktop { display: flex; }
+          html .shell[data-sidebar-state="collapsed"] .sidebar-toggle { display: none; }
+        }`}</style>
+      </noscript>
     </>
   );
 }

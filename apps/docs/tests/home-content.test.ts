@@ -10,7 +10,12 @@ describe("redesigned docs information architecture", () => {
     expect(ja.paths.items).toHaveLength(en.paths.items.length);
     expect(ja.motion.demos).toHaveLength(en.motion.demos.length);
     expect(ja.agents.steps).toHaveLength(en.agents.steps.length);
+    expect(ja.proof.intents).toHaveLength(en.proof.intents.length);
+    expect(ja.hero.titleSegments.join("")).toBe(ja.hero.title);
+    expect(en.hero.titleSegments.join("")).toBe(en.hero.title);
     expect(ja.foundations.tokenLabels).toHaveLength(en.foundations.tokenLabels.length);
+    expect(en.proof.eyebrow).toContain("Canon → Build → Evidence");
+    expect(en.proof.instrumentLabel).toContain("provenance");
     expect(en.hero.title).not.toBe(ja.hero.title);
   });
 
@@ -24,4 +29,3 @@ describe("redesigned docs information architecture", () => {
     }
   });
 });
-

@@ -3,10 +3,11 @@ import type { Locale } from "./i18n";
 const content = {
   en: {
     hero: {
-      eyebrow: "AI Design Intelligence · Evidence first",
-      title: "The design bible that agents can actually use.",
+      eyebrow: "Evidence-backed design intelligence",
+      title: "Build with taste. Prove every choice.",
+      titleSegments: ["Build with taste. ", "Prove every choice."],
       description:
-        "AwesomeDS turns first-party evidence into a living Canon, semantic tokens, accessible React components, motion contracts, and verification-ready instructions.",
+        "AwesomeDS turns first-party design knowledge into a living Canon, semantic tokens, accessible React components, motion contracts, and instructions that people and AI agents can verify.",
       primaryAction: "Read the Canon",
       secondaryAction: "Open the Reference Atlas",
       trustLabel: "Live repository truth",
@@ -18,15 +19,21 @@ const content = {
       componentsLabel: "live components",
     },
     proof: {
-      eyebrow: "From question to verified interface",
-      title: "One evidence chain. No invented design truth.",
+      eyebrow: "The method · Canon → Build → Evidence",
+      title: "From design judgment to verified interface.",
       description:
-        "Every recommendation can be traced through a source, a rule, an implementation artifact, and a test. Agents get finite choices; people keep judgment and control.",
+        "Read the Canon to decide, compose approved foundations and components to build, then trace every outcome through sources, artifacts, and tests. Agents get finite choices; people keep judgment and control.",
+      instrumentLabel: "Live provenance instrument",
       input: "Product intent",
-      inputValue: "Design a trustworthy approval flow",
+      intents: [
+        "Trace every doctrine claim to maintained evidence",
+        "Scale UI through semantic design tokens",
+        "Ship every interactive component state",
+        "Bound a generative design agent to approved contracts",
+      ],
       source: "Primary evidence",
       rule: "Canonical contract",
-      output: "Approved UI",
+      output: "Implementation artifact",
       verify: "Verification",
       verified: "Traceable",
     },
@@ -151,10 +158,11 @@ const content = {
   },
   ja: {
     hero: {
-      eyebrow: "AIデザイン・インテリジェンス · 根拠を起点に",
-      title: "人が読めて、AIが実践できるデザインのバイブル",
+      eyebrow: "根拠に基づくデザイン・インテリジェンス",
+      title: "美意識をもって作る。すべての選択に根拠を。",
+      titleSegments: ["美意識をもって", "作る。", "すべての選択に", "根拠を。"],
       description:
-        "AwesomeDSは、一次情報を、進化し続ける体系、セマンティックトークン、アクセシブルなReactコンポーネント、モーション契約、検証可能な指示へ変換します。",
+        "AwesomeDSは、一次情報に基づくデザイン知識を、進化し続ける体系、セマンティックトークン、アクセシブルなReactコンポーネント、モーション契約、人とAIが検証できる指示へ変換します。",
       primaryAction: "体系を読む",
       secondaryAction: "リファレンス・アトラスを開く",
       trustLabel: "リポジトリの現在値",
@@ -166,15 +174,21 @@ const content = {
       componentsLabel: "個のライブコンポーネント",
     },
     proof: {
-      eyebrow: "問いから、検証済みUIまで",
-      title: "ひとつながりの根拠。推測で作らない。",
+      eyebrow: "実践法 · 体系 → 実装 → 根拠",
+      title: "デザインの判断を、検証済みのUIへ。",
       description:
-        "すべての提案を、情報源、ルール、実装成果物、テストまで遡れます。AIには有限の選択肢を、人には判断と主導権を残します。",
+        "体系を読んで判断し、承認済みの基礎と部品で実装し、情報源、成果物、テストまで遡って証明します。AIには有限の選択肢を、人には判断と主導権を残します。",
+      instrumentLabel: "ライブ根拠インストルメント",
       input: "プロダクトの意図",
-      inputValue: "信頼できる承認フローを設計する",
+      intents: [
+        "すべての標準ルールを保守された根拠へ結びつける",
+        "セマンティックトークンでUIを拡張する",
+        "インタラクティブ部品の全状態を実装する",
+        "生成AIを承認済みの契約内に制約する",
+      ],
       source: "一次情報",
       rule: "標準契約",
-      output: "承認済みUI",
+      output: "実装・検証成果物",
       verify: "検証",
       verified: "追跡可能",
     },

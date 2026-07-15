@@ -6,6 +6,7 @@ import { getHomeContent } from "../lib/home-content";
 import { localizePathname } from "../lib/i18n";
 import { getRequestLocale } from "../lib/i18n-server";
 import { MotionDemo } from "../components/motion-demo";
+import { HomeEvidenceInstrument, type EvidenceTrace } from "../components/home-evidence-instrument";
 
 const featuredRuleIds = [
   "rule.governance.evidence-first",
@@ -30,11 +31,32 @@ export default async function HomePage() {
   const featuredReferences = featuredReferenceIds
     .map((id) => references.find((reference) => reference.id === id))
     .filter((reference): reference is NonNullable<typeof reference> => Boolean(reference));
-  const traceRule = featuredRules[0] ?? rules[0];
-  const traceReference = references.find((reference) => traceRule?.referenceIds.includes(reference.id)) ?? references[0];
-  const traceArtifact = artifacts.find(
-    (artifact) => traceRule?.artifactIds.includes(artifact.id) || artifact.ruleIds.includes(traceRule?.id ?? ""),
-  ) ?? artifacts[0];
+  const evidenceTraces = featuredRules
+    .map((rule, index): EvidenceTrace | null => {
+      const reference = references.find((item) => rule.referenceIds.includes(item.id));
+      const artifact = artifacts.find(
+        (item) => rule.artifactIds.includes(item.id) || item.ruleIds.includes(rule.id),
+      );
+      if (!reference || !artifact) return null;
+      return {
+        id: rule.id,
+        intent: c.proof.intents[index] ?? c.proof.intents[0],
+        reference: {
+          title: reference.title,
+          href: localizePathname(`/references/${encodeURIComponent(reference.id)}`, locale),
+        },
+        rule: {
+          id: rule.id,
+          title: rule.title,
+          href: localizePathname(`/rules/${encodeURIComponent(rule.id)}`, locale),
+        },
+        artifact: {
+          title: artifact.title,
+          href: localizePathname(`/artifacts/${encodeURIComponent(artifact.id)}`, locale),
+        },
+      };
+    })
+    .filter((trace): trace is EvidenceTrace => Boolean(trace));
   const unimplemented = new Set(
     validation.issues
       .filter((issue) => issue.code === "unimplemented-rule")
@@ -49,7 +71,12 @@ export default async function HomePage() {
       <section className="product-hero" aria-labelledby="home-title">
         <div className="product-hero__copy">
           <p className="eyebrow">{c.hero.eyebrow}</p>
-          <h1 id="home-title">{c.hero.title}</h1>
+          <h1 id="home-title" aria-label={c.hero.title}>
+            {c.hero.titleSegments.flatMap((segment, index) => [
+              <span aria-hidden="true" key={`${segment}-text`}>{segment}</span>,
+              index < c.hero.titleSegments.length - 1 ? <wbr key={`${segment}-break`} /> : null,
+            ])}
+          </h1>
           <p className="product-hero__lede">{c.hero.description}</p>
           <div className="action-row">
             <Link className="primary-link" href={localizePathname("/canon", locale)}>
@@ -61,31 +88,18 @@ export default async function HomePage() {
           </div>
         </div>
 
-        <aside className="trace-console" aria-label={c.proof.eyebrow}>
-          <div className="trace-console__header">
-            <span>{c.proof.input}</span>
-            <span className="status-label"><span className="status-dot" />{c.proof.verified}</span>
-          </div>
-          <p className="trace-console__intent">{c.proof.inputValue}</p>
-          <ol className="trace-console__chain">
-            <li>
-              <span>01</span>
-              <div><small>{c.proof.source}</small><strong>{traceReference?.title}</strong></div>
-            </li>
-            <li>
-              <span>02</span>
-              <div><small>{c.proof.rule}</small><code>{traceRule?.id}</code></div>
-            </li>
-            <li>
-              <span>03</span>
-              <div><small>{c.proof.output}</small><strong>{traceArtifact?.title}</strong></div>
-            </li>
-            <li>
-              <span>04</span>
-              <div><small>{c.proof.verify}</small><strong>{validation.ok ? c.hero.graphHealthy : c.hero.graphNeedsReview}</strong></div>
-            </li>
-          </ol>
-        </aside>
+        <HomeEvidenceInstrument
+          label={c.proof.instrumentLabel}
+          selectLabel={c.proof.input}
+          verifiedLabel={c.proof.verified}
+          sourceLabel={c.proof.source}
+          ruleLabel={c.proof.rule}
+          outputLabel={c.proof.output}
+          verificationLabel={c.proof.verify}
+          verificationValue={validation.ok ? c.hero.graphHealthy : c.hero.graphNeedsReview}
+          verificationHealthy={validation.ok}
+          traces={evidenceTraces}
+        />
 
         <section className="truth-strip" aria-labelledby="trust-label">
           <p id="trust-label">{c.hero.trustLabel}</p>
