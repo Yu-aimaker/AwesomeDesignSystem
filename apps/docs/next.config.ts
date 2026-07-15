@@ -5,10 +5,10 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const isProd = process.env.NODE_ENV === "production";
 const tracedContent = [
-  "assets/**/*.svg",
-  "content/**/*.json",
-  "design-system/**/*.md",
-  "reports/**/*.json",
+  "../../assets/**/*.svg",
+  "../../content/**/*.json",
+  "../../design-system/**/*.md",
+  "../../reports/**/*.json",
 ];
 const contentBackedRoutes = [
   "/",
@@ -33,6 +33,7 @@ const contentBackedRoutes = [
   "/references",
   "/references/[id]",
   "/review",
+  "/reports",
   "/rules/[id]",
   "/sitemap.xml",
   "/status",

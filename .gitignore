@@ -29,6 +29,7 @@ reports/*.md
 !reports/source-observations.json
 !reports/review-queue.json
 !reports/link-check.json
+!reports/release-readiness.json
 !reports/freshness-summary.md
 .firecrawl/
 .playwright-cli/

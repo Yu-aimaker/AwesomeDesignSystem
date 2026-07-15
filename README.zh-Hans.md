@@ -45,15 +45,16 @@ AwesomeDesignSystem 用 **四层互相链接** 来舵控：
 
 ## 你能得到什么
 
-| 结果                  | 方式                                           |
-| --------------------- | ---------------------------------------------- |
-| **停止产出 AI slop**  | 品味原则、反中位数模式、审查技能               |
-| **主张可追溯**        | Reference Atlas → canon → artifact → 测试      |
-| **更快交付无访问 UI** | 32 个带共享契约 + React Aria 的组件            |
-| **有意图的动效**      | 尊重 `prefers-reduced-motion` 的配方库         |
-| **品牌即代码**        | Product Lexicon、语气规则、文案 lint           |
-| **保持新鲜**          | Freshness / 链接治理脚本与 CI                  |
-| **本地浏览**          | Next.js 文档站（**英 / 日**，`/en/*` `/ja/*`） |
+| 结果                        | 方式                                           |
+| --------------------------- | ---------------------------------------------- |
+| **停止产出 AI slop**        | 品味原则、反中位数模式、审查技能               |
+| **主张可追溯**              | Reference Atlas → canon → artifact → 测试      |
+| **更快交付无访问 UI**       | 32 个带共享契约 + React Aria 的组件            |
+| **有意图的动效**            | 尊重 `prefers-reduced-motion` 的配方库         |
+| **品牌即代码**              | Product Lexicon、语气规则、文案 lint           |
+| **保持新鲜**                | Freshness / 链接治理脚本与 CI                  |
+| **Prove release readiness** | 具有安全、a11y、性能与 QA 关卡的公开 Reports   |
+| **本地浏览**                | Next.js 文档站（**英 / 日**，`/en/*` `/ja/*`） |
 
 当前证据图（已校验）：**128 Reference Atlas · 47 canon 规则 · 54 artifact · 6 隔离 signal**。
 
@@ -67,6 +68,7 @@ apps/docs/         本地 Next.js 16 文档 + Reference Atlas + 预览
 skills/            五个可移植技能
 research/          一手调研笔记
 docs/              架构 / 运维 / QA / 完成审计
+reports/           机器可读的 readiness、freshness、链接与审查证据
 scripts/           校验、鲜度、证据、链接检查
 ```
 
@@ -106,9 +108,25 @@ pnpm validate && pnpm test && pnpm qa:core
 
 详见 [`docs/architecture.md`](./docs/architecture.md) 与 [`docs/completion-audit.md`](./docs/completion-audit.md)。
 
+公开发布证据: [`/reports`](https://awesome-design-system.yumaker.studio/en/reports) · 实时图谱/鲜度: [`/status`](https://awesome-design-system.yumaker.studio/en/status)
+
 ## 一句话标准
 
 > 避开中位数。坚持观点。主色 + 锐利强调色。有意识的字体选择。真实层级；一屏一个焦点。克制即自信。动效传达状态而非装饰。主题化原语。设计错误 / 空 / 加载态。满足 WCAG 2.2 AA。交付连贯整体。
+
+## Design tokens — shared vocabulary
+
+语义化 OKLCH token，多主题，通过 `@awesome-ds/tokens` 生成以供 CSS / Tailwind 友好使用。
+
+| 分组       | 示例                                                                                                   |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| **Color**  | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
+| **Space**  | `--space-1` … `--space-32`                                                                             |
+| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full`                                        |
+| **Type**   | `--text-xs` … `--text-7xl` · `--font-display` · `--font-body` · `--font-mono`                          |
+| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow`                                                |
+
+人类可读契约 → [`design-system/foundations/tokens.md`](./design-system/foundations/tokens.md)
 
 ## 证据与鲜度
 
@@ -116,12 +134,27 @@ pnpm validate && pnpm test && pnpm qa:core
 - 命令：`pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 - **不是链接合集**——一手来源被吸收为教义与可执行契约，再经图校验保持诚实。
 
+## Release reports & repository trust
+
+AwesomeDS 不仅依赖绿色徽章，更会发布带有日期的机器可读 readiness 快照：
+
+- [`reports/release-readiness.json`](./reports/release-readiness.json) — 有边界的 SHIP/HOLD 判定、可测量的关卡与可复现的命令
+- [`docs/qa-report.md`](./docs/qa-report.md) — 浏览器、无障碍、安全、性能与包证据
+- [`docs/completion-audit.md`](./docs/completion-audit.md) — 需求到 artifact 的映射及诚实的边界
+- [`SECURITY.md`](./SECURITY.md) — 隐私漏洞报告与受支持版本策略
+
+CI 会锁定依赖扫描，拦截视觉测试绕过，验证证据/链接完整性，并将本地代理状态（`.claude/`、`.codex/`、`.tokensave/`）排除在公开仓库之外。
+
 ## 本地化
 
 文档 UI 为英 / 日；canon Markdown 以英文为准，未翻译处有明确回退提示。
 
-## 贡献 · 许可
+## 贡献
 
-见 [CONTRIBUTING.md](./CONTRIBUTING.md)。[MIT](./LICENSE)。
+见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+
+## 许可
+
+[MIT](./LICENSE)。
 
 <div align="center"><sub>让 AI 用可证明的品味做设计。</sub></div>

@@ -11,6 +11,46 @@ import { test, expect } from "@playwright/test";
 const skip = process.env.PLAYWRIGHT_SKIP === "1";
 const noScreenshots = process.env.PLAYWRIGHT_NO_SCREENSHOTS === "1";
 
+async function waitForStableVisualLayout(page: import("@playwright/test").Page) {
+  await page.evaluate(async () => {
+    const viewportStep = Math.max(window.innerHeight, 640);
+    for (let offset = 0; offset < document.documentElement.scrollHeight; offset += viewportStep) {
+      window.scrollTo(0, offset);
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+    }
+    window.scrollTo(0, 0);
+
+    await Promise.all(
+      Array.from(document.images, (image) =>
+        image.complete
+          ? image.decode().catch(() => undefined)
+          : new Promise<void>((resolve) => {
+              const timeout = window.setTimeout(resolve, 5_000);
+              const finish = () => {
+                window.clearTimeout(timeout);
+                resolve();
+              };
+              image.addEventListener("load", finish, { once: true });
+              image.addEventListener("error", finish, { once: true });
+            }),
+      ),
+    );
+
+    let previousHeight = -1;
+    let stableFrames = 0;
+    for (let attempt = 0; attempt < 12; attempt += 1) {
+      await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+      const height = document.documentElement.scrollHeight;
+      stableFrames = height === previousHeight ? stableFrames + 1 : 0;
+      if (stableFrames >= 2) return;
+      previousHeight = height;
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+
+    throw new Error("Visual layout did not stabilize before screenshot capture");
+  });
+}
+
 if (process.env.CI && (skip || noScreenshots)) {
   throw new Error("CI must run the visual suite with screenshot assertions enabled");
 }
@@ -35,6 +75,8 @@ const routes: VisualRoute[] = [
   { path: "/en/brand", name: "brand-mobile", viewport: { width: 360, height: 720 }, linuxBaseline: true },
   { path: "/ja/brand", name: "brand-ja", linuxBaseline: true },
   { path: "/ja/brand", name: "brand-ja-mobile", viewport: { width: 360, height: 720 }, linuxBaseline: true },
+  { path: "/en/reports", name: "reports", linuxBaseline: true },
+  { path: "/ja/reports", name: "reports-ja-mobile", viewport: { width: 360, height: 720 }, linuxBaseline: true },
   { path: "/components", name: "components" },
   { path: "/components", name: "components-rtl", direction: "rtl" },
   { path: "/motion", name: "motion-reduced", reducedMotion: true, linuxBaseline: true },
@@ -58,10 +100,13 @@ test.describe("docs visual smoke", () => {
       }
       await page.goto(route.path, { waitUntil: "domcontentloaded" });
       await expect(page.locator("main#main")).toBeVisible();
+      if (route.name === "reports") await expect(page.getByRole("heading", { name: "Release reports" })).toBeVisible();
+      if (route.name === "reports-ja-mobile") await expect(page.getByRole("heading", { name: "リリースレポート" })).toBeVisible();
       if (route.name === "reference-detail-ja-mobile") await expect(page.getByRole("heading", { name: "Apple HIG Accessibility" })).toBeVisible();
       if (route.name === "component-detail-ja-mobile") await expect(page.getByRole("heading", { name: "スクリーンリーダー契約" })).toBeVisible();
       if (route.direction) await page.locator("html").evaluate((element, direction) => element.setAttribute("dir", direction), route.direction);
       await page.evaluate(() => document.fonts.ready);
+      await waitForStableVisualLayout(page);
 
       // Soft baseline: tolerate AA / font raster differences.
       // First run: playwright test --update-snapshots

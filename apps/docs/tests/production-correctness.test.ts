@@ -10,6 +10,7 @@ import path from "node:path";
 import { findRepoRoot, getContentRoot, getDesignSystemRoot, getReportsRoot } from "../lib/path-resolver";
 import { getSiteUrl } from "../lib/metadata";
 import robots from "../app/robots";
+import nextConfig from "../next.config";
 
 describe("production correctness and paths", () => {
   const originalEnv = process.env.AWESOME_DS_SITE_URL;
@@ -43,6 +44,19 @@ describe("production correctness and paths", () => {
     const reports = getReportsRoot();
     expect(reports).toContain("reports");
     expect(fs.existsSync(reports)).toBe(true);
+  });
+
+  test("traces repository content from the docs project root", () => {
+    const includes = nextConfig.outputFileTracingIncludes as Record<string, string[]>;
+
+    expect(includes["/"]).toEqual(
+      expect.arrayContaining([
+        "../../assets/**/*.svg",
+        "../../content/**/*.json",
+        "../../design-system/**/*.md",
+        "../../reports/**/*.json",
+      ]),
+    );
   });
 
   test("fails loudly on missing required directories", () => {

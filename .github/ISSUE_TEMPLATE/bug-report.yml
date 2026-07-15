@@ -1,0 +1,48 @@
+name: Bug report
+description: Report a reproducible problem in the site, packages, skills, or evidence graph.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping keep AwesomeDS verifiable. Please remove secrets and personal data.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - Documentation site
+        - React components
+        - Tokens or motion
+        - Agent skills
+        - Evidence graph or reports
+        - Installation or tooling
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the smallest deterministic sequence, route, or repository command.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: AwesomeDS revision, browser/OS, Node/pnpm, and locale when relevant.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, private URLs, and personal data.
+          required: true

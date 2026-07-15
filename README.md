@@ -45,15 +45,16 @@ AwesomeDesignSystem supplies the steering in **four layers that stay linked**:
 
 ## What you get
 
-| Outcome                       | How                                                            |
-| ----------------------------- | -------------------------------------------------------------- |
-| **Stop shipping AI slop**     | Taste principles, anti-median patterns, review skill           |
-| **Trace every claim**         | Reference Atlas → canon rules → artifacts → tests              |
-| **Ship accessible UI faster** | 32 React components with shared contracts + React Aria         |
-| **Motion with intent**        | Recipe library honoring `prefers-reduced-motion`               |
-| **Brand as code**             | Product lexicon, voice rules, copy lint contracts              |
-| **Stay current**              | Freshness + link governance scripts and CI hooks               |
-| **Browse locally**            | Next.js docs site in **English / Japanese** (`/en/*`, `/ja/*`) |
+| Outcome                       | How                                                                   |
+| ----------------------------- | --------------------------------------------------------------------- |
+| **Stop shipping AI slop**     | Taste principles, anti-median patterns, review skill                  |
+| **Trace every claim**         | Reference Atlas → canon rules → artifacts → tests                     |
+| **Ship accessible UI faster** | 32 React components with shared contracts + React Aria                |
+| **Motion with intent**        | Recipe library honoring `prefers-reduced-motion`                      |
+| **Brand as code**             | Product lexicon, voice rules, copy lint contracts                     |
+| **Stay current**              | Freshness + link governance scripts and CI hooks                      |
+| **Prove release readiness**   | Public Reports surface with security, a11y, performance, and QA gates |
+| **Browse locally**            | Next.js docs site in **English / Japanese** (`/en/*`, `/ja/*`)        |
 
 Current evidence graph (validated): **128 Reference Atlas records · 47 canon rules · 54 artifacts · 6 quarantined signals**.
 
@@ -73,6 +74,7 @@ apps/docs/         local Next.js 16 docs + Reference Atlas + live previews
 skills/            five portable agent skills
 research/          primary-source research notes
 docs/              architecture, maintenance, QA, completion audit
+reports/           machine-readable readiness, freshness, link, and review evidence
 scripts/           validate, freshness, evidence, link checks
 ```
 
@@ -135,6 +137,8 @@ pnpm qa:core                         # lint + build + validate + tests
 
 See [`docs/architecture.md`](./docs/architecture.md), [`docs/maintenance.md`](./docs/maintenance.md), [`docs/completion-audit.md`](./docs/completion-audit.md), and [`docs/qa-report.md`](./docs/qa-report.md).
 
+Public release evidence: [`/reports`](https://awesome-design-system.yumaker.studio/en/reports) · live graph/freshness: [`/status`](https://awesome-design-system.yumaker.studio/en/status)
+
 ## The standard, in one breath
 
 > Avoid the median. Commit to a point of view. One dominant color **+** sharp accents. A deliberate typeface — never Inter-as-the-only-choice. Real hierarchy; one focal point per screen. Restraint **=** confidence. Motion communicates state, not decoration. Theme primitives; never ship raw defaults. Design error / empty / loading states. Meet WCAG 2.2 AA. A coherent **whole**, not a pile of parts.
@@ -161,6 +165,17 @@ Human-readable contract → [`design-system/foundations/tokens.md`](./design-sys
 - **Governance**: `pnpm check:links`, `pnpm check:freshness`, `pnpm evidence:check`
 
 This is **not** a link dump. Sources are absorbed into doctrine and executable contracts, then kept honest by graph validation.
+
+## Release reports & repository trust
+
+AwesomeDS publishes a dated, machine-readable readiness snapshot instead of relying on green badges alone:
+
+- [`reports/release-readiness.json`](./reports/release-readiness.json) — bounded SHIP/HOLD verdict, measured gates, and reproducible commands
+- [`docs/qa-report.md`](./docs/qa-report.md) — browser, accessibility, security, performance, and package evidence
+- [`docs/completion-audit.md`](./docs/completion-audit.md) — requirement-to-artifact mapping and honest boundaries
+- [`SECURITY.md`](./SECURITY.md) — private vulnerability reporting and supported-version policy
+
+CI pins dependency scanning, blocks visual-test bypasses, verifies evidence/link integrity, and keeps local agent state (`.claude/`, `.codex/`, `.tokensave/`) outside the public repository.
 
 ## Localization
 

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-07-16T07:34:33+09:00",
+  "verdict": "ship",
+  "verification": {
+    "unitTests": 243,
+    "unitTestFiles": 34,
+    "browserTests": {
+      "macos": 97,
+      "linux": 97
+    },
+    "visualTests": 18,
+    "staticGenerationUnits": 358
+  },
+  "evidence": {
+    "references": 128,
+    "rules": 47,
+    "artifacts": 54,
+    "signals": 6,
+    "graphIssues": 0,
+    "linksChecked": 128,
+    "linkFailures": 0,
+    "reviewQueue": 12
+  },
+  "security": {
+    "scanner": "OSV Scanner 2.4.0",
+    "packagesScanned": 611,
+    "vulnerabilities": 0,
+    "csp": "nonce + strict-dynamic"
+  },
+  "performance": {
+    "largestRouteBytes": 713964,
+    "routeBudgetBytes": 750000,
+    "englishScriptBytes": 200571,
+    "japaneseScriptBytes": 200571,
+    "japaneseFontBytes": 0
+  },
+  "gates": [
+    { "id": "core", "status": "pass", "command": "pnpm qa:core", "evidence": "docs/qa-report.md" },
+    { "id": "browser", "status": "pass", "command": "pnpm exec playwright test --retries=0", "evidence": "docs/qa-report.md" },
+    { "id": "accessibility", "status": "pass", "command": "pnpm test:a11y", "evidence": "tests/a11y/docs-a11y.spec.ts" },
+    { "id": "security", "status": "pass", "command": "osv-scanner scan --lockfile=pnpm-lock.yaml", "evidence": ".github/workflows/security.yml" },
+    { "id": "performance", "status": "pass", "command": "pnpm performance:check", "evidence": "docs/qa-report.md" },
+    { "id": "provenance", "status": "pass", "command": "pnpm evidence:check", "evidence": "docs/completion-audit.md" },
+    { "id": "localization", "status": "pass", "command": "pnpm test:e2e", "evidence": "tests/e2e/smoke.spec.ts" }
+  ]
+}

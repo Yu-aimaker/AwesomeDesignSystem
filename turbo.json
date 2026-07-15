@@ -1,5 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "assets/diagram-*.svg",
+    "content/**",
+    "design-system/**",
+    "reports/freshness.json",
+    "reports/release-readiness.json",
+    "reports/review-queue.json"
+  ],
   "tasks": {
     "build": {
       "dependsOn": [

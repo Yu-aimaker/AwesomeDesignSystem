@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-07-15T21:52:31.847Z",
+  "checkedAt": "2026-07-15T22:39:09.856Z",
   "sourceCount": 128,
   "strict": true,
   "results": [
     {
       "sourceId": "ref.a11y.axe-core",
       "url": "https://github.com/dequelabs/axe-core",
-      "observedAt": "2026-07-15T21:52:08.259Z",
+      "observedAt": "2026-07-15T22:38:49.522Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -23,7 +23,7 @@
     {
       "sourceId": "ref.a2ui.protocol",
       "url": "https://a2ui.org/",
-      "observedAt": "2026-07-15T21:52:08.096Z",
+      "observedAt": "2026-07-15T22:38:49.270Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -42,7 +42,7 @@
     {
       "sourceId": "ref.adobe.react-aria",
       "url": "https://react-spectrum.adobe.com/react-aria/",
-      "observedAt": "2026-07-15T21:52:08.722Z",
+      "observedAt": "2026-07-15T22:38:50.110Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -61,7 +61,7 @@
     {
       "sourceId": "ref.adobe.spectrum-accessibility",
       "url": "https://spectrum.adobe.com/page/accessibility/",
-      "observedAt": "2026-07-15T21:52:09.520Z",
+      "observedAt": "2026-07-15T22:38:50.427Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -80,7 +80,7 @@
     {
       "sourceId": "ref.adobe.spectrum-principles",
       "url": "https://spectrum.adobe.com/page/design-principles/",
-      "observedAt": "2026-07-15T21:52:09.371Z",
+      "observedAt": "2026-07-15T22:38:50.517Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -99,7 +99,7 @@
     {
       "sourceId": "ref.adobe.spectrum",
       "url": "https://spectrum.adobe.com/",
-      "observedAt": "2026-07-15T21:52:08.117Z",
+      "observedAt": "2026-07-15T22:38:49.234Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -118,7 +118,7 @@
     {
       "sourceId": "ref.airbnb.design",
       "url": "https://airbnb.design/",
-      "observedAt": "2026-07-15T21:52:10.106Z",
+      "observedAt": "2026-07-15T22:38:50.940Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -133,7 +133,7 @@
     {
       "sourceId": "ref.ameba.spindle",
       "url": "https://spindle.ameba.design/",
-      "observedAt": "2026-07-15T21:52:08.251Z",
+      "observedAt": "2026-07-15T22:38:49.516Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -152,9 +152,9 @@
     {
       "sourceId": "ref.anthropic.building-effective-agents",
       "url": "https://www.anthropic.com/engineering/building-effective-agents",
-      "observedAt": "2026-07-15T21:52:19.630Z",
+      "observedAt": "2026-07-15T22:38:51.323Z",
       "result": "changed",
-      "attempts": 2,
+      "attempts": 1,
       "status": 200,
       "contentHash": "sha256:e755858b5e73e20dfb5016ec9412cb26f29d1167e7a541fb8ea67131eac105cb",
       "adapter": "http",
@@ -167,7 +167,7 @@
     {
       "sourceId": "ref.anthropic.mcp-spec",
       "url": "https://modelcontextprotocol.io/",
-      "observedAt": "2026-07-15T21:52:08.897Z",
+      "observedAt": "2026-07-15T22:38:49.999Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -184,7 +184,7 @@
     {
       "sourceId": "ref.apple.hig-accessibility",
       "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
-      "observedAt": "2026-07-15T21:52:09.707Z",
+      "observedAt": "2026-07-15T22:38:51.285Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -201,7 +201,7 @@
     {
       "sourceId": "ref.apple.hig-color",
       "url": "https://developer.apple.com/design/human-interface-guidelines/color",
-      "observedAt": "2026-07-15T21:52:10.126Z",
+      "observedAt": "2026-07-15T22:38:51.377Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -218,7 +218,7 @@
     {
       "sourceId": "ref.apple.hig-foundations",
       "url": "https://developer.apple.com/design/human-interface-guidelines/foundations",
-      "observedAt": "2026-07-15T21:52:10.304Z",
+      "observedAt": "2026-07-15T22:38:51.605Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -235,7 +235,7 @@
     {
       "sourceId": "ref.apple.hig-machine-learning",
       "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
-      "observedAt": "2026-07-15T21:52:10.671Z",
+      "observedAt": "2026-07-15T22:38:51.778Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -252,7 +252,7 @@
     {
       "sourceId": "ref.apple.hig-motion",
       "url": "https://developer.apple.com/design/human-interface-guidelines/motion",
-      "observedAt": "2026-07-15T21:52:10.982Z",
+      "observedAt": "2026-07-15T22:38:52.196Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -269,7 +269,7 @@
     {
       "sourceId": "ref.apple.hig-spatial",
       "url": "https://developer.apple.com/design/human-interface-guidelines/spatial-layout",
-      "observedAt": "2026-07-15T21:52:11.343Z",
+      "observedAt": "2026-07-15T22:38:52.117Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -286,7 +286,7 @@
     {
       "sourceId": "ref.apple.hig-typography",
       "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
-      "observedAt": "2026-07-15T21:52:11.120Z",
+      "observedAt": "2026-07-15T22:38:52.468Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -303,7 +303,7 @@
     {
       "sourceId": "ref.apple.hig",
       "url": "https://developer.apple.com/design/human-interface-guidelines/",
-      "observedAt": "2026-07-15T21:52:11.547Z",
+      "observedAt": "2026-07-15T22:38:52.390Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -320,7 +320,7 @@
     {
       "sourceId": "ref.apple.liquid-glass",
       "url": "https://developer.apple.com/design/",
-      "observedAt": "2026-07-15T21:52:11.762Z",
+      "observedAt": "2026-07-15T22:38:52.732Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -335,7 +335,7 @@
     {
       "sourceId": "ref.atlassian.accessibility",
       "url": "https://atlassian.design/foundations/accessibility",
-      "observedAt": "2026-07-15T21:52:11.311Z",
+      "observedAt": "2026-07-15T22:38:52.094Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -352,7 +352,7 @@
     {
       "sourceId": "ref.atlassian.content",
       "url": "https://atlassian.design/content",
-      "observedAt": "2026-07-15T21:52:12.861Z",
+      "observedAt": "2026-07-15T22:38:52.268Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -371,7 +371,7 @@
     {
       "sourceId": "ref.atlassian.design-system",
       "url": "https://atlassian.design/",
-      "observedAt": "2026-07-15T21:52:11.507Z",
+      "observedAt": "2026-07-15T22:38:52.301Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -388,7 +388,7 @@
     {
       "sourceId": "ref.atlassian.design-tokens",
       "url": "https://atlassian.design/tokens/design-tokens",
-      "observedAt": "2026-07-15T21:52:11.481Z",
+      "observedAt": "2026-07-15T22:38:52.373Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -407,7 +407,7 @@
     {
       "sourceId": "ref.baseui.base-ui",
       "url": "https://base-ui.com/",
-      "observedAt": "2026-07-15T21:52:11.652Z",
+      "observedAt": "2026-07-15T22:38:52.370Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -424,7 +424,7 @@
     {
       "sourceId": "ref.chakra.v3",
       "url": "https://chakra-ui.com/",
-      "observedAt": "2026-07-15T21:52:11.906Z",
+      "observedAt": "2026-07-15T22:38:52.628Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -441,7 +441,7 @@
     {
       "sourceId": "ref.copilotkit.ag-ui",
       "url": "https://docs.ag-ui.com/introduction",
-      "observedAt": "2026-07-15T21:52:12.074Z",
+      "observedAt": "2026-07-15T22:38:52.728Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -458,7 +458,7 @@
     {
       "sourceId": "ref.digital-agency-jp.dads-react",
       "url": "https://github.com/digital-go-jp/design-system-example-components-react",
-      "observedAt": "2026-07-15T21:52:12.096Z",
+      "observedAt": "2026-07-15T22:38:52.814Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -475,7 +475,7 @@
     {
       "sourceId": "ref.digital-agency-jp.dads",
       "url": "https://design.digital.go.jp/dads/",
-      "observedAt": "2026-07-15T21:52:12.032Z",
+      "observedAt": "2026-07-15T22:38:52.631Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -494,7 +494,7 @@
     {
       "sourceId": "ref.dropbox.brand",
       "url": "https://brand.dropbox.com/",
-      "observedAt": "2026-07-15T21:52:12.470Z",
+      "observedAt": "2026-07-15T22:38:52.984Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -511,7 +511,7 @@
     {
       "sourceId": "ref.duolingo.brand-family",
       "url": "https://design.duolingo.com/identity/brand-family",
-      "observedAt": "2026-07-15T21:52:13.213Z",
+      "observedAt": "2026-07-15T22:38:53.691Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -530,7 +530,7 @@
     {
       "sourceId": "ref.duolingo.brand-narrative",
       "url": "https://design.duolingo.com/writing/brand-narrative",
-      "observedAt": "2026-07-15T21:52:13.394Z",
+      "observedAt": "2026-07-15T22:38:53.334Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -549,7 +549,7 @@
     {
       "sourceId": "ref.duolingo.color",
       "url": "https://design.duolingo.com/identity/color",
-      "observedAt": "2026-07-15T21:52:13.353Z",
+      "observedAt": "2026-07-15T22:38:53.800Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -568,7 +568,7 @@
     {
       "sourceId": "ref.duolingo.design",
       "url": "https://design.duolingo.com/",
-      "observedAt": "2026-07-15T21:52:13.004Z",
+      "observedAt": "2026-07-15T22:38:53.379Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -587,7 +587,7 @@
     {
       "sourceId": "ref.duolingo.illustration-characters",
       "url": "https://design.duolingo.com/illustration/characters",
-      "observedAt": "2026-07-15T21:52:14.252Z",
+      "observedAt": "2026-07-15T22:38:53.510Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -606,7 +606,7 @@
     {
       "sourceId": "ref.duolingo.illustration-duo",
       "url": "https://design.duolingo.com/illustration/duo",
-      "observedAt": "2026-07-15T21:52:14.168Z",
+      "observedAt": "2026-07-15T22:38:53.644Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -625,7 +625,7 @@
     {
       "sourceId": "ref.duolingo.illustration-shape",
       "url": "https://design.duolingo.com/illustration/shape-language",
-      "observedAt": "2026-07-15T21:52:14.589Z",
+      "observedAt": "2026-07-15T22:38:53.715Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -644,7 +644,7 @@
     {
       "sourceId": "ref.duolingo.imagery",
       "url": "https://design.duolingo.com/identity/imagery",
-      "observedAt": "2026-07-15T21:52:14.571Z",
+      "observedAt": "2026-07-15T22:38:53.937Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -663,7 +663,7 @@
     {
       "sourceId": "ref.duolingo.logos",
       "url": "https://design.duolingo.com/identity/logos",
-      "observedAt": "2026-07-15T21:52:13.753Z",
+      "observedAt": "2026-07-15T22:38:54.834Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -682,7 +682,7 @@
     {
       "sourceId": "ref.duolingo.marketing-assets",
       "url": "https://design.duolingo.com/marketing/assets",
-      "observedAt": "2026-07-15T21:52:15.060Z",
+      "observedAt": "2026-07-15T22:38:54.483Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -701,7 +701,7 @@
     {
       "sourceId": "ref.duolingo.resources",
       "url": "https://design.duolingo.com/resources",
-      "observedAt": "2026-07-15T21:52:15.371Z",
+      "observedAt": "2026-07-15T22:38:54.717Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -720,7 +720,7 @@
     {
       "sourceId": "ref.duolingo.typography",
       "url": "https://design.duolingo.com/identity/typography",
-      "observedAt": "2026-07-15T21:52:15.420Z",
+      "observedAt": "2026-07-15T22:38:54.727Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -739,7 +739,7 @@
     {
       "sourceId": "ref.duolingo.writing-duo",
       "url": "https://design.duolingo.com/writing/duo",
-      "observedAt": "2026-07-15T21:52:15.593Z",
+      "observedAt": "2026-07-15T22:38:54.954Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -758,7 +758,7 @@
     {
       "sourceId": "ref.duolingo.writing-glossary",
       "url": "https://design.duolingo.com/writing/glossary",
-      "observedAt": "2026-07-15T21:52:15.930Z",
+      "observedAt": "2026-07-15T22:38:54.964Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -777,7 +777,7 @@
     {
       "sourceId": "ref.duolingo.writing-style",
       "url": "https://design.duolingo.com/writing/style",
-      "observedAt": "2026-07-15T21:52:16.215Z",
+      "observedAt": "2026-07-15T22:38:54.992Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -796,7 +796,7 @@
     {
       "sourceId": "ref.duolingo.writing-tone",
       "url": "https://design.duolingo.com/writing/tone",
-      "observedAt": "2026-07-15T21:52:16.587Z",
+      "observedAt": "2026-07-15T22:38:55.908Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -815,7 +815,7 @@
     {
       "sourceId": "ref.duolingo.writing-voice",
       "url": "https://design.duolingo.com/writing/voice",
-      "observedAt": "2026-07-15T21:52:16.283Z",
+      "observedAt": "2026-07-15T22:38:55.232Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -834,7 +834,7 @@
     {
       "sourceId": "ref.figma.variables",
       "url": "https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma",
-      "observedAt": "2026-07-15T21:52:16.027Z",
+      "observedAt": "2026-07-15T22:38:55.307Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -849,7 +849,7 @@
     {
       "sourceId": "ref.freee.vibes",
       "url": "https://vibes.freee.co.jp/",
-      "observedAt": "2026-07-15T21:52:16.077Z",
+      "observedAt": "2026-07-15T22:38:55.186Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -868,7 +868,7 @@
     {
       "sourceId": "ref.github.primer-accessibility",
       "url": "https://primer.style/accessibility/",
-      "observedAt": "2026-07-15T21:52:17.677Z",
+      "observedAt": "2026-07-15T22:38:56.503Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -885,24 +885,24 @@
     {
       "sourceId": "ref.github.primer-primitives",
       "url": "https://github.com/primer/primitives",
-      "observedAt": "2026-07-15T21:52:16.508Z",
+      "observedAt": "2026-07-15T22:38:55.426Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:f680db1a4ba0faed99bd0838d8dbca9574303b0a08772642059620cb7fa69e4d",
-      "lastSuccessfulHash": "sha256:f680db1a4ba0faed99bd0838d8dbca9574303b0a08772642059620cb7fa69e4d",
+      "contentHash": "sha256:33a088f438436ad99a1d189ca6b7985c477082325bdf42aa7895144c3f7b715d",
+      "lastSuccessfulHash": "sha256:33a088f438436ad99a1d189ca6b7985c477082325bdf42aa7895144c3f7b715d",
       "lastSuccessfulHashes": {
-        "github": "sha256:f680db1a4ba0faed99bd0838d8dbca9574303b0a08772642059620cb7fa69e4d"
+        "github": "sha256:33a088f438436ad99a1d189ca6b7985c477082325bdf42aa7895144c3f7b715d"
       },
       "adapter": "github",
       "adapterHealth": "healthy",
-      "revision": "main|2026-07-15T03:08:31Z|v11.9.0|2026-05-13T12:47:52Z",
+      "revision": "main|2026-07-15T22:32:54Z|v11.9.0|2026-05-13T12:47:52Z",
       "allowlisted": false
     },
     {
       "sourceId": "ref.github.primer",
       "url": "https://primer.style/",
-      "observedAt": "2026-07-15T21:52:17.584Z",
+      "observedAt": "2026-07-15T22:38:56.565Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -919,7 +919,7 @@
     {
       "sourceId": "ref.goodpatch.blog",
       "url": "https://goodpatch.com/blog/",
-      "observedAt": "2026-07-15T21:52:16.732Z",
+      "observedAt": "2026-07-15T22:38:55.633Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -936,7 +936,7 @@
     {
       "sourceId": "ref.goodpatch.design",
       "url": "https://goodpatch.com/",
-      "observedAt": "2026-07-15T21:52:18.403Z",
+      "observedAt": "2026-07-15T22:38:57.122Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -953,7 +953,7 @@
     {
       "sourceId": "ref.google.android-adaptive-layout",
       "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/get-started-with-adaptive-apps",
-      "observedAt": "2026-07-15T21:52:17.532Z",
+      "observedAt": "2026-07-15T22:38:57.197Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -970,7 +970,7 @@
     {
       "sourceId": "ref.google.material-3",
       "url": "https://m3.material.io/",
-      "observedAt": "2026-07-15T21:52:17.688Z",
+      "observedAt": "2026-07-15T22:38:56.263Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -989,7 +989,7 @@
     {
       "sourceId": "ref.google.material-accessibility",
       "url": "https://m3.material.io/foundations/accessible-design/overview",
-      "observedAt": "2026-07-15T21:52:18.205Z",
+      "observedAt": "2026-07-15T22:38:56.656Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1008,7 +1008,7 @@
     {
       "sourceId": "ref.google.material-motion",
       "url": "https://m3.material.io/styles/motion/overview/how-it-works",
-      "observedAt": "2026-07-15T21:52:18.202Z",
+      "observedAt": "2026-07-15T22:38:56.865Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1027,7 +1027,7 @@
     {
       "sourceId": "ref.google.pair-guidebook",
       "url": "https://pair.withgoogle.com/guidebook/",
-      "observedAt": "2026-07-15T21:52:18.137Z",
+      "observedAt": "2026-07-15T22:38:56.930Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1042,7 +1042,7 @@
     {
       "sourceId": "ref.google.stitch",
       "url": "https://m3.material.io/blog",
-      "observedAt": "2026-07-15T21:52:18.382Z",
+      "observedAt": "2026-07-15T22:38:57.179Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1061,7 +1061,7 @@
     {
       "sourceId": "ref.govuk.accessibility",
       "url": "https://design-system.service.gov.uk/accessibility/",
-      "observedAt": "2026-07-15T21:52:19.058Z",
+      "observedAt": "2026-07-15T22:38:57.149Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1078,7 +1078,7 @@
     {
       "sourceId": "ref.govuk.community-backlog",
       "url": "https://design-system.service.gov.uk/community/upcoming-components-patterns/",
-      "observedAt": "2026-07-15T21:52:18.904Z",
+      "observedAt": "2026-07-15T22:38:57.323Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1095,7 +1095,7 @@
     {
       "sourceId": "ref.govuk.design-system",
       "url": "https://design-system.service.gov.uk/",
-      "observedAt": "2026-07-15T21:52:19.041Z",
+      "observedAt": "2026-07-15T22:38:57.402Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1112,7 +1112,7 @@
     {
       "sourceId": "ref.govuk.error-summary",
       "url": "https://design-system.service.gov.uk/components/error-summary/",
-      "observedAt": "2026-07-15T21:52:19.150Z",
+      "observedAt": "2026-07-15T22:38:57.675Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1129,7 +1129,7 @@
     {
       "sourceId": "ref.ibm.carbon-accessibility",
       "url": "https://carbondesignsystem.com/guidelines/accessibility/overview/",
-      "observedAt": "2026-07-15T21:52:19.989Z",
+      "observedAt": "2026-07-15T22:38:58.654Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1139,14 +1139,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:09784f6a1949b9f3c6cf450794bf8638ae6698390b4f66367151ce4c9413af3a"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
+      "lastModified": "Wed, 15 Jul 2026 11:55:24 GMT",
+      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:24 GMT",
       "allowlisted": false
     },
     {
       "sourceId": "ref.ibm.carbon-content",
       "url": "https://carbondesignsystem.com/guidelines/content/overview/",
-      "observedAt": "2026-07-15T21:52:20.634Z",
+      "observedAt": "2026-07-15T22:38:58.401Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1163,7 +1163,7 @@
     {
       "sourceId": "ref.ibm.carbon-data-visualization",
       "url": "https://carbondesignsystem.com/data-visualization/getting-started/",
-      "observedAt": "2026-07-15T21:52:20.338Z",
+      "observedAt": "2026-07-15T22:38:58.704Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1180,7 +1180,7 @@
     {
       "sourceId": "ref.ibm.carbon-for-ai",
       "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
-      "observedAt": "2026-07-15T21:52:20.361Z",
+      "observedAt": "2026-07-15T22:38:58.686Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1197,7 +1197,7 @@
     {
       "sourceId": "ref.ibm.carbon-motion",
       "url": "https://carbondesignsystem.com/elements/motion/overview/",
-      "observedAt": "2026-07-15T21:52:20.656Z",
+      "observedAt": "2026-07-15T22:38:58.787Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1207,14 +1207,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:3197920174ad0e40a944f9af760d4dbfb3e9e5847bb1b9ec8222e6b96f96e281"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
+      "lastModified": "Wed, 15 Jul 2026 11:55:24 GMT",
+      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:24 GMT",
       "allowlisted": false
     },
     {
       "sourceId": "ref.ibm.carbon",
       "url": "https://carbondesignsystem.com/",
-      "observedAt": "2026-07-15T21:52:20.822Z",
+      "observedAt": "2026-07-15T22:38:58.830Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1231,7 +1231,7 @@
     {
       "sourceId": "ref.intuit.content-design",
       "url": "https://contentdesign.intuit.com/",
-      "observedAt": "2026-07-15T21:52:21.349Z",
+      "observedAt": "2026-07-15T22:38:59.680Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1246,7 +1246,7 @@
     {
       "sourceId": "ref.intuit.design-system",
       "url": "https://designsystem.intuit.com/",
-      "observedAt": "2026-07-15T21:52:22.877Z",
+      "observedAt": "2026-07-15T22:39:00.906Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1261,7 +1261,7 @@
     {
       "sourceId": "ref.kzhrknt.awesome-design-md-jp",
       "url": "https://github.com/kzhrknt/awesome-design-md-jp",
-      "observedAt": "2026-07-15T21:52:20.788Z",
+      "observedAt": "2026-07-15T22:38:59.104Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1278,7 +1278,7 @@
     {
       "sourceId": "ref.linear.brand",
       "url": "https://linear.app/",
-      "observedAt": "2026-07-15T21:52:22.423Z",
+      "observedAt": "2026-07-15T22:39:00.272Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1293,7 +1293,7 @@
     {
       "sourceId": "ref.mailchimp.brand-assets",
       "url": "https://mailchimp.com/about/brand-assets/",
-      "observedAt": "2026-07-15T21:52:20.799Z",
+      "observedAt": "2026-07-15T22:38:59.065Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1308,7 +1308,7 @@
     {
       "sourceId": "ref.mailchimp.style-guide",
       "url": "https://styleguide.mailchimp.com/",
-      "observedAt": "2026-07-15T21:52:21.507Z",
+      "observedAt": "2026-07-15T22:38:59.538Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1325,7 +1325,7 @@
     {
       "sourceId": "ref.matrix.build",
       "url": "https://matrix.build/",
-      "observedAt": "2026-07-15T21:52:21.833Z",
+      "observedAt": "2026-07-15T22:38:59.871Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1340,7 +1340,7 @@
     {
       "sourceId": "ref.mcp.apps",
       "url": "https://modelcontextprotocol.io/extensions/apps/overview",
-      "observedAt": "2026-07-15T21:52:21.021Z",
+      "observedAt": "2026-07-15T22:38:59.332Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1357,7 +1357,7 @@
     {
       "sourceId": "ref.mdn.css",
       "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
-      "observedAt": "2026-07-15T21:52:21.235Z",
+      "observedAt": "2026-07-15T22:38:59.451Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1376,7 +1376,7 @@
     {
       "sourceId": "ref.mercari.design",
       "url": "https://design.mercari.com/",
-      "observedAt": "2026-07-15T21:52:21.739Z",
+      "observedAt": "2026-07-15T22:38:59.937Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1395,7 +1395,7 @@
     {
       "sourceId": "ref.microsoft.fluent-2",
       "url": "https://fluent2.microsoft.design/",
-      "observedAt": "2026-07-15T21:52:23.205Z",
+      "observedAt": "2026-07-15T22:39:01.355Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1410,7 +1410,7 @@
     {
       "sourceId": "ref.microsoft.fluent-accessibility",
       "url": "https://fluent2.microsoft.design/accessibility",
-      "observedAt": "2026-07-15T21:52:23.428Z",
+      "observedAt": "2026-07-15T22:39:01.468Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1425,7 +1425,7 @@
     {
       "sourceId": "ref.microsoft.fluent-ai-harm",
       "url": "https://fluent2.microsoft.design/ai-harm",
-      "observedAt": "2026-07-15T21:52:23.452Z",
+      "observedAt": "2026-07-15T22:39:01.620Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1440,7 +1440,7 @@
     {
       "sourceId": "ref.microsoft.fluent-design-tokens",
       "url": "https://fluent2.microsoft.design/design-tokens",
-      "observedAt": "2026-07-15T21:52:23.589Z",
+      "observedAt": "2026-07-15T22:39:01.691Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1455,7 +1455,7 @@
     {
       "sourceId": "ref.microsoft.fluent-motion",
       "url": "https://fluent2.microsoft.design/motion",
-      "observedAt": "2026-07-15T21:52:24.207Z",
+      "observedAt": "2026-07-15T22:39:02.064Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1470,7 +1470,7 @@
     {
       "sourceId": "ref.microsoft.human-ai-guidelines",
       "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
-      "observedAt": "2026-07-15T21:52:24.072Z",
+      "observedAt": "2026-07-15T22:39:02.395Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1485,7 +1485,7 @@
     {
       "sourceId": "ref.motion.motion-react",
       "url": "https://motion.dev/",
-      "observedAt": "2026-07-15T21:52:23.953Z",
+      "observedAt": "2026-07-15T22:39:01.811Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1500,7 +1500,7 @@
     {
       "sourceId": "ref.nielsen.usability",
       "url": "https://www.nngroup.com/",
-      "observedAt": "2026-07-15T21:52:23.804Z",
+      "observedAt": "2026-07-15T22:39:01.991Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1515,7 +1515,7 @@
     {
       "sourceId": "ref.nist.ai-rmf",
       "url": "https://www.nist.gov/itl/ai-risk-management-framework",
-      "observedAt": "2026-07-15T21:52:24.156Z",
+      "observedAt": "2026-07-15T22:39:02.274Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1525,14 +1525,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:0e4ffc19ec8c707da66a176629466c0c53370e126a4881ab3b6e4fe18b22be36"
       },
-      "lastModified": "Wed, 15 Jul 2026 20:50:33 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 20:50:33 GMT",
+      "lastModified": "Wed, 15 Jul 2026 22:35:23 GMT",
+      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 22:35:23 GMT",
       "allowlisted": false
     },
     {
       "sourceId": "ref.nothing.design",
       "url": "https://nothing.tech/",
-      "observedAt": "2026-07-15T21:52:24.123Z",
+      "observedAt": "2026-07-15T22:39:02.225Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1547,7 +1547,7 @@
     {
       "sourceId": "ref.notion.design",
       "url": "https://www.notion.so/",
-      "observedAt": "2026-07-15T21:52:25.198Z",
+      "observedAt": "2026-07-15T22:39:03.698Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1562,7 +1562,7 @@
     {
       "sourceId": "ref.openai.ai-elements",
       "url": "https://platform.openai.com/docs/guides/text",
-      "observedAt": "2026-07-15T21:52:24.617Z",
+      "observedAt": "2026-07-15T22:39:02.560Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1572,16 +1572,16 @@
       "lastSuccessfulHashes": {
         "http": "sha256:6071b228a85670e0bb9adca5435dd6a84ffe36b2bf1b3d2bb4bf2271059619c0"
       },
-      "etag": "W/\"ad7b41faac83fa559bc9cbe8e1d002f1\"",
-      "lastModified": "Wed, 15 Jul 2026 20:57:11 GMT",
-      "lastSuccessfulEtag": "W/\"ad7b41faac83fa559bc9cbe8e1d002f1\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 20:57:11 GMT",
+      "etag": "W/\"723b2739a94f3a114fe0f415a2044d16\"",
+      "lastModified": "Wed, 15 Jul 2026 22:16:46 GMT",
+      "lastSuccessfulEtag": "W/\"723b2739a94f3a114fe0f415a2044d16\"",
+      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 22:16:46 GMT",
       "allowlisted": false
     },
     {
       "sourceId": "ref.openai.apps-sdk-ui-guidelines",
       "url": "https://developers.openai.com/apps-sdk/concepts/ui-guidelines",
-      "observedAt": "2026-07-15T21:52:24.410Z",
+      "observedAt": "2026-07-15T22:39:02.436Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1591,16 +1591,16 @@
       "lastSuccessfulHashes": {
         "http": "sha256:4c34b1827acaeaddaea53b61282c86d6bc4025106c2dec9be66ab1441940ae26"
       },
-      "etag": "W/\"f64289cfe70af5b1068ee86c2c851b22\"",
-      "lastModified": "Wed, 15 Jul 2026 20:59:38 GMT",
-      "lastSuccessfulEtag": "W/\"f64289cfe70af5b1068ee86c2c851b22\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 20:59:38 GMT",
+      "etag": "W/\"5f23a95dad07e0142c0f1efdb3e2b8b0\"",
+      "lastModified": "Wed, 15 Jul 2026 22:39:02 GMT",
+      "lastSuccessfulEtag": "W/\"5f23a95dad07e0142c0f1efdb3e2b8b0\"",
+      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 22:39:02 GMT",
       "allowlisted": false
     },
     {
       "sourceId": "ref.openui.open-ui",
       "url": "https://open-ui.org/",
-      "observedAt": "2026-07-15T21:52:25.438Z",
+      "observedAt": "2026-07-15T22:39:02.832Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1617,7 +1617,7 @@
     {
       "sourceId": "ref.pinterest.gestalt-accessibility",
       "url": "https://github.com/pinterest/gestalt/blob/master/docs/pages/foundations/accessibility.tsx",
-      "observedAt": "2026-07-15T21:52:24.662Z",
+      "observedAt": "2026-07-15T22:39:02.725Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1634,7 +1634,7 @@
     {
       "sourceId": "ref.pinterest.gestalt",
       "url": "https://gestalt.pinterest.systems/",
-      "observedAt": "2026-07-15T21:52:26.399Z",
+      "observedAt": "2026-07-15T22:39:04.350Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1649,7 +1649,7 @@
     {
       "sourceId": "ref.radix.primitives",
       "url": "https://www.radix-ui.com/primitives",
-      "observedAt": "2026-07-15T21:52:24.772Z",
+      "observedAt": "2026-07-15T22:39:03.147Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1666,7 +1666,7 @@
     {
       "sourceId": "ref.react.docs",
       "url": "https://react.dev/",
-      "observedAt": "2026-07-15T21:52:24.760Z",
+      "observedAt": "2026-07-15T22:39:02.687Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1683,7 +1683,7 @@
     {
       "sourceId": "ref.salesforce.lightning-guidelines",
       "url": "https://www.lightningdesignsystem.com/guidelines/overview/",
-      "observedAt": "2026-07-15T21:52:29.289Z",
+      "observedAt": "2026-07-15T22:39:07.743Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1693,14 +1693,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c"
       },
-      "etag": "W/\"7cd2314f9a62ddbd11daab057edf1786\"",
-      "lastSuccessfulEtag": "W/\"7cd2314f9a62ddbd11daab057edf1786\"",
+      "etag": "W/\"1156c1f77f7a5eabb4677e8a4d447331\"",
+      "lastSuccessfulEtag": "W/\"1156c1f77f7a5eabb4677e8a4d447331\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.salesforce.lightning",
       "url": "https://www.lightningdesignsystem.com/",
-      "observedAt": "2026-07-15T21:52:29.355Z",
+      "observedAt": "2026-07-15T22:39:07.211Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1710,14 +1710,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c"
       },
-      "etag": "W/\"fa28714de25368f620dd379b13c2905a\"",
-      "lastSuccessfulEtag": "W/\"fa28714de25368f620dd379b13c2905a\"",
+      "etag": "W/\"a1c83ee5c5421084c160ac801851f9a8\"",
+      "lastSuccessfulEtag": "W/\"a1c83ee5c5421084c160ac801851f9a8\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.shadcn.ui",
       "url": "https://ui.shadcn.com/",
-      "observedAt": "2026-07-15T21:52:25.033Z",
+      "observedAt": "2026-07-15T22:39:03.138Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1734,7 +1734,7 @@
     {
       "sourceId": "ref.shopify.app-design-guidelines",
       "url": "https://shopify.dev/docs/apps/design",
-      "observedAt": "2026-07-15T21:52:25.582Z",
+      "observedAt": "2026-07-15T22:39:03.709Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1744,14 +1744,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:0bd06e35f12891e0dabe30b5e91e311015a4f2b8a218ea6884236ae12a8b957f"
       },
-      "etag": "W/\"82d2479b67936175\"",
-      "lastSuccessfulEtag": "W/\"82d2479b67936175\"",
+      "etag": "W/\"a27810a97940996b\"",
+      "lastSuccessfulEtag": "W/\"a27810a97940996b\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.shopify.polaris-accessibility",
       "url": "https://polaris-react.shopify.com/foundations/accessibility",
-      "observedAt": "2026-07-15T21:52:25.695Z",
+      "observedAt": "2026-07-15T22:39:03.643Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1768,7 +1768,7 @@
     {
       "sourceId": "ref.shopify.polaris",
       "url": "https://polaris-react.shopify.com/",
-      "observedAt": "2026-07-15T21:52:25.950Z",
+      "observedAt": "2026-07-15T22:39:04.129Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1785,7 +1785,7 @@
     {
       "sourceId": "ref.smarthr.accessibility-process",
       "url": "https://smarthr.design/accessibility/",
-      "observedAt": "2026-07-15T21:52:26.359Z",
+      "observedAt": "2026-07-15T22:39:04.422Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1802,7 +1802,7 @@
     {
       "sourceId": "ref.smarthr.design",
       "url": "https://smarthr.design/",
-      "observedAt": "2026-07-15T21:52:26.305Z",
+      "observedAt": "2026-07-15T22:39:04.332Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1819,7 +1819,7 @@
     {
       "sourceId": "ref.spotify.design",
       "url": "https://engineering.atspotify.com/",
-      "observedAt": "2026-07-15T21:52:28.547Z",
+      "observedAt": "2026-07-15T22:39:06.573Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1834,7 +1834,7 @@
     {
       "sourceId": "ref.storybook.docs",
       "url": "https://storybook.js.org/",
-      "observedAt": "2026-07-15T21:52:27.357Z",
+      "observedAt": "2026-07-15T22:39:05.549Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1851,7 +1851,7 @@
     {
       "sourceId": "ref.stripe.design",
       "url": "https://stripe.com/",
-      "observedAt": "2026-07-15T21:52:27.759Z",
+      "observedAt": "2026-07-15T22:39:05.202Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1866,7 +1866,7 @@
     {
       "sourceId": "ref.tailwind.v4",
       "url": "https://tailwindcss.com/docs",
-      "observedAt": "2026-07-15T21:52:26.774Z",
+      "observedAt": "2026-07-15T22:39:04.689Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1883,7 +1883,7 @@
     {
       "sourceId": "ref.uber.base-web",
       "url": "https://baseweb.design/",
-      "observedAt": "2026-07-15T21:52:27.669Z",
+      "observedAt": "2026-07-15T22:39:05.509Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1898,7 +1898,7 @@
     {
       "sourceId": "ref.uber.base",
       "url": "https://base.uber.com/",
-      "observedAt": "2026-07-15T21:52:30.302Z",
+      "observedAt": "2026-07-15T22:39:07.974Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1908,14 +1908,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:cd6c245363aae2728d20b9e40913eb6bed9baa1708b970f226690784b4ced7b1"
       },
-      "etag": "W/\"68e3c0f26d7c93f10a2fd76c09791c80\"",
-      "lastSuccessfulEtag": "W/\"68e3c0f26d7c93f10a2fd76c09791c80\"",
+      "etag": "W/\"99a612802902c5eb87e5767a0c692427\"",
+      "lastSuccessfulEtag": "W/\"99a612802902c5eb87e5767a0c692427\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.uswds.uswds",
       "url": "https://designsystem.digital.gov/",
-      "observedAt": "2026-07-15T21:52:28.425Z",
+      "observedAt": "2026-07-15T22:39:06.315Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1934,7 +1934,7 @@
     {
       "sourceId": "ref.vercel.ai-elements",
       "url": "https://ai-sdk.dev/elements/overview",
-      "observedAt": "2026-07-15T21:52:29.940Z",
+      "observedAt": "2026-07-15T22:39:08.321Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1949,7 +1949,7 @@
     {
       "sourceId": "ref.vercel.design",
       "url": "https://vercel.com/design",
-      "observedAt": "2026-07-15T21:52:28.853Z",
+      "observedAt": "2026-07-15T22:39:06.805Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1959,14 +1959,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:9f33daf895d9fd117f068601876118fe4f3c8d4947414f4e4c5044d9f4da3e08"
       },
-      "etag": "W/\"56a9677a1724d5d8fbb5324e68f8e911\"",
-      "lastSuccessfulEtag": "W/\"56a9677a1724d5d8fbb5324e68f8e911\"",
+      "etag": "W/\"47286cd5931c2768649789a009e45f49\"",
+      "lastSuccessfulEtag": "W/\"47286cd5931c2768649789a009e45f49\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.vercel.geist",
       "url": "https://vercel.com/geist/introduction",
-      "observedAt": "2026-07-15T21:52:28.704Z",
+      "observedAt": "2026-07-15T22:39:06.713Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -1976,14 +1976,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:e2f4dc393e9f420a943b32a2f8bd5b1a9f47de52e943296055ab3556c0739206"
       },
-      "etag": "W/\"92341107cb70d02a3ab081419bd13afa\"",
-      "lastSuccessfulEtag": "W/\"92341107cb70d02a3ab081419bd13afa\"",
+      "etag": "W/\"0ad35ecc079796f3a8fdf55d7a4bb18a\"",
+      "lastSuccessfulEtag": "W/\"0ad35ecc079796f3a8fdf55d7a4bb18a\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.vercel.generative-ui",
       "url": "https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces",
-      "observedAt": "2026-07-15T21:52:28.881Z",
+      "observedAt": "2026-07-15T22:39:06.903Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2000,7 +2000,7 @@
     {
       "sourceId": "ref.vercel.web-interface-guidelines",
       "url": "https://vercel.com/design/guidelines",
-      "observedAt": "2026-07-15T21:52:29.258Z",
+      "observedAt": "2026-07-15T22:39:07.323Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2010,14 +2010,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:aa87525615db3ef5e3f6cd0ea703f778258e7a00a355f071f59d031f5fab77c7"
       },
-      "etag": "W/\"3974560ddadf1001643f6d64364f7d36\"",
-      "lastSuccessfulEtag": "W/\"3974560ddadf1001643f6d64364f7d36\"",
+      "etag": "W/\"e1a6ae926b63d8d193d4545175fafdd5\"",
+      "lastSuccessfulEtag": "W/\"e1a6ae926b63d8d193d4545175fafdd5\"",
       "allowlisted": false
     },
     {
       "sourceId": "ref.voltagent.awesome-design-md",
       "url": "https://github.com/voltagent/awesome-design-md",
-      "observedAt": "2026-07-15T21:52:29.337Z",
+      "observedAt": "2026-07-15T22:39:07.458Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2034,7 +2034,7 @@
     {
       "sourceId": "ref.w3c.apg",
       "url": "https://www.w3.org/WAI/ARIA/apg/",
-      "observedAt": "2026-07-15T21:52:29.391Z",
+      "observedAt": "2026-07-15T22:39:07.335Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2051,7 +2051,7 @@
     {
       "sourceId": "ref.w3c.dtcg-format",
       "url": "https://tr.designtokens.org/format/",
-      "observedAt": "2026-07-15T21:52:31.847Z",
+      "observedAt": "2026-07-15T22:39:09.856Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2068,7 +2068,7 @@
     {
       "sourceId": "ref.w3c.dtcg",
       "url": "https://www.designtokens.org/",
-      "observedAt": "2026-07-15T21:52:30.200Z",
+      "observedAt": "2026-07-15T22:39:08.263Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2085,7 +2085,7 @@
     {
       "sourceId": "ref.w3c.wcag-22",
       "url": "https://www.w3.org/TR/WCAG22/",
-      "observedAt": "2026-07-15T21:52:29.496Z",
+      "observedAt": "2026-07-15T22:39:07.603Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2102,7 +2102,7 @@
     {
       "sourceId": "ref.w3c.wcag-3",
       "url": "https://www.w3.org/TR/wcag3/",
-      "observedAt": "2026-07-15T21:52:29.580Z",
+      "observedAt": "2026-07-15T22:39:07.781Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2119,7 +2119,7 @@
     {
       "sourceId": "ref.web.scroll-driven",
       "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations",
-      "observedAt": "2026-07-15T21:52:29.803Z",
+      "observedAt": "2026-07-15T22:39:07.965Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2138,7 +2138,7 @@
     {
       "sourceId": "ref.web.view-transitions",
       "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
-      "observedAt": "2026-07-15T21:52:29.900Z",
+      "observedAt": "2026-07-15T22:39:07.860Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2157,7 +2157,7 @@
     {
       "sourceId": "ref.williams.non-designers",
       "url": "https://www.nngroup.com/articles/principles-visual-design/",
-      "observedAt": "2026-07-15T21:52:31.104Z",
+      "observedAt": "2026-07-15T22:39:09.208Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2176,7 +2176,7 @@
     {
       "sourceId": "ref.zendesk.garden-components",
       "url": "https://garden.zendesk.com/components/",
-      "observedAt": "2026-07-15T21:52:30.720Z",
+      "observedAt": "2026-07-15T22:39:08.556Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
@@ -2193,7 +2193,7 @@
     {
       "sourceId": "ref.zendesk.garden",
       "url": "https://garden.zendesk.com/",
-      "observedAt": "2026-07-15T21:52:30.725Z",
+      "observedAt": "2026-07-15T22:39:08.550Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,

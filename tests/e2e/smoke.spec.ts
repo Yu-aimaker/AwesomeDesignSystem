@@ -72,6 +72,14 @@ test.describe("docs smoke", () => {
     await expect(page.getByRole("heading", { name: /system status/i })).toBeVisible();
   });
 
+  test("release reports expose a localized, reproducible ship verdict", async ({ page }) => {
+    await page.goto("/ja/reports", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "リリースレポート" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "SHIP" })).toBeVisible();
+    await expect(page.getByText("pnpm qa:core", { exact: true })).toBeVisible();
+    await expect(page.locator("main#main")).not.toContainText("Release reports");
+  });
+
   test("playground page", async ({ page }) => {
     await page.goto("/playground", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Playground" })).toBeVisible();
@@ -91,7 +99,7 @@ test.describe("docs smoke", () => {
   test("Japanese locale is URL-addressable and language switch preserves the route", async ({ page }) => {
     await page.goto("/ja/references?q=apple#results", { waitUntil: "domcontentloaded" });
     await expect(page.locator("html")).toHaveAttribute("lang", "ja");
-    await expect(page.getByRole("heading", { name: "リファレンス・アトラス" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Reference Atlas" })).toBeVisible();
     const englishLink = page.getByRole("link", { name: "English" });
     await expect(englishLink).toHaveAttribute("href", "/en/references?q=apple#results");
     await englishLink.click();

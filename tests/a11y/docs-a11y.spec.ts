@@ -11,6 +11,7 @@ const skip = process.env.PLAYWRIGHT_SKIP === "1";
 const routes = [
   "/en", "/ja", "/en/references", "/ja/references", "/en/components",
   "/en/brand", "/ja/brand",
+  "/en/reports", "/ja/reports",
   "/ja/brand/workbench", "/ja/components/alert-dialog", "/ja/components/tooltip", "/ja/motion/enter",
   "/ja/references/ref.apple.hig-accessibility",
 ] as const;

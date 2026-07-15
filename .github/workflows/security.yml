@@ -2,21 +2,9 @@ name: dependency security
 
 on:
   pull_request:
-    paths:
-      - "pnpm-lock.yaml"
-      - "package.json"
-      - "packages/**/package.json"
-      - "apps/**/package.json"
-      - ".github/workflows/security.yml"
   push:
     branches:
       - main
-    paths:
-      - "pnpm-lock.yaml"
-      - "package.json"
-      - "packages/**/package.json"
-      - "apps/**/package.json"
-      - ".github/workflows/security.yml"
   schedule:
     - cron: "17 3 * * 1"
   workflow_dispatch:
@@ -27,6 +15,22 @@ permissions:
   security-events: write
 
 jobs:
+  secret-history:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Scan repository history for secrets
+        run: >-
+          docker run --rm
+          -v "$PWD:/repo" -w /repo
+          zricethezav/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f
+          git --redact --no-banner --exit-code 1
+
   osv-pr:
     if: github.event_name == 'pull_request'
     uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable-pr.yml@9a498708959aeaef5ef730655706c5a1df1edbc2 # v2.3.8

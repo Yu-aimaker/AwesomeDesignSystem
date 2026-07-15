@@ -71,3 +71,21 @@ describe("translation fallback", () => {
     expect(ja.status.latestLinks).toContain("外部リンク");
   });
 });
+
+describe("localization terminology", () => {
+  test("preserves brand terms and blocks banned words in Japanese dictionary", () => {
+    const ja = getDictionary("ja");
+    const allJapaneseText = JSON.stringify(ja);
+
+    // Banned words and drift
+    expect(allJapaneseText).not.toContain("部品");
+    expect(allJapaneseText).not.toContain("プルーフ文法");
+    expect(allJapaneseText).not.toContain("リファレンス・アトラス");
+
+    // Must contain brand terms
+    expect(allJapaneseText).toContain("Proof Grammar");
+    expect(allJapaneseText).toContain("Reference Atlas");
+    expect(allJapaneseText).toContain("SHIP");
+    expect(allJapaneseText).toContain("PASS");
+  });
+});

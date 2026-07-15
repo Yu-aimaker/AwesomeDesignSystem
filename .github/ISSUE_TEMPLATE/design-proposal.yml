@@ -1,0 +1,37 @@
+name: Design-system proposal
+description: Propose a doctrine, component, motion, or platform change with evidence.
+title: "[Proposal]: "
+labels: ["proposal"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and audience
+      description: What decision or user outcome is currently unsupported?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: First-party evidence
+      description: Link standards or first-party operational sources. Social signals alone do not enter Canon.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Proposed contract
+      description: Describe tokens, states, keyboard behavior, motion, locale, and verification impact.
+    validations:
+      required: true
+  - type: checkboxes
+    id: quality
+    attributes:
+      label: Quality boundary
+      options:
+        - label: I considered accessibility and keyboard behavior.
+          required: true
+        - label: I considered Japanese and responsive behavior.
+          required: true
+        - label: I identified how this proposal can be verified.
+          required: true

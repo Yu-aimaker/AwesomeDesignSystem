@@ -45,15 +45,16 @@ AwesomeDesignSystem dirige con **cuatro capas enlazadas**:
 
 ## Qué obtienes
 
-| Resultado                   | Cómo                                                        |
-| --------------------------- | ----------------------------------------------------------- |
-| **Dejar de enviar AI slop** | Principios de gusto, patrones anti-mediana, skill de review |
-| **Trazar cada afirmación**  | Reference Atlas → reglas canon → artifacts → tests          |
-| **UI accesible más rápido** | 32 componentes React con contratos + React Aria             |
-| **Motion con intención**    | Recetas que respetan `prefers-reduced-motion`               |
-| **Marca como código**       | Product Lexicon, voz y lint de copy                         |
-| **Mantenerse actualizado**  | Freshness, links y CI                                       |
-| **Explorar en local**       | Docs Next.js en **EN/JA** (`/en/*`, `/ja/*`)                |
+| Resultado                   | Cómo                                                              |
+| --------------------------- | ----------------------------------------------------------------- |
+| **Dejar de enviar AI slop** | Principios de gusto, patrones anti-mediana, skill de review       |
+| **Trazar cada afirmación**  | Reference Atlas → reglas canon → artifacts → tests                |
+| **UI accesible más rápido** | 32 componentes React con contratos + React Aria                   |
+| **Motion con intención**    | Recetas que respetan `prefers-reduced-motion`                     |
+| **Marca como código**       | Product Lexicon, voz y lint de copy                               |
+| **Mantenerse actualizado**  | Freshness, links y CI                                             |
+| **Prove release readiness** | Public Reports surface con security, a11y, performance y QA gates |
+| **Explorar en local**       | Docs Next.js en **EN/JA** (`/en/*`, `/ja/*`)                      |
 
 Grafo actual (validado): **128 Reference Atlas · 47 reglas canon · 54 artifacts · 6 signals en cuarentena**.
 
@@ -65,7 +66,7 @@ content/           grafo máquina: references / canon / artifacts / signals
 packages/          tokens · core · react · motion · brand · content
 apps/docs/         docs Next.js 16 + Reference Atlas + previews
 skills/            cinco skills portátiles
-research/ · docs/ · scripts/
+research/ · docs/ · reports/ · scripts/
 ```
 
 ## Las cinco skills
@@ -104,9 +105,25 @@ pnpm validate && pnpm test && pnpm qa:core
 
 Ver [`docs/architecture.md`](./docs/architecture.md) y [`docs/completion-audit.md`](./docs/completion-audit.md).
 
+Public release evidence: [`/reports`](https://awesome-design-system.yumaker.studio/en/reports) · live graph/freshness: [`/status`](https://awesome-design-system.yumaker.studio/en/status)
+
 ## El estándar en un aliento
 
 > Evita la mediana. Un color dominante + acentos nítidos. Tipografía deliberada. Jerarquía real; un foco por pantalla. La contención es confianza. El motion comunica estado. Tematiza primitivos. Diseña error / vacío / carga. WCAG 2.2 AA. Un **todo** coherente.
+
+## Design tokens — shared vocabulary
+
+Tokens semánticos OKLCH, multitema, generados para uso amigable con CSS / Tailwind a través de `@awesome-ds/tokens`.
+
+| Grupo      | Ejemplos                                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------ |
+| **Color**  | `--color-bg` · `--color-surface` · `--color-fg` · `--color-border` · `--color-accent` · `--color-ring` |
+| **Space**  | `--space-1` … `--space-32`                                                                             |
+| **Radius** | `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-full`                                        |
+| **Type**   | `--text-xs` … `--text-7xl` · `--font-display` · `--font-body` · `--font-mono`                          |
+| **Motion** | `--ease-out` · `--ease-spring` · `--dur-fast/base/slow`                                                |
+
+Contrato legible por humanos → [`design-system/foundations/tokens.md`](./design-system/foundations/tokens.md)
 
 ## Evidencia y frescura
 
@@ -114,12 +131,27 @@ Ver [`docs/architecture.md`](./docs/architecture.md) y [`docs/completion-audit.m
 - `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 - **No es un listado de enlaces** — las fuentes se absorben en doctrina y contratos ejecutables, validados por el grafo.
 
+## Release reports & repository trust
+
+AwesomeDS publica una instantánea de readiness fechada y legible por máquina en lugar de depender solo de insignias verdes:
+
+- [`reports/release-readiness.json`](./reports/release-readiness.json) — veredicto SHIP/HOLD limitado, puertas de calidad medidas y comandos reproducibles
+- [`docs/qa-report.md`](./docs/qa-report.md) — evidencia de navegador, accesibilidad, seguridad, rendimiento y paquetes
+- [`docs/completion-audit.md`](./docs/completion-audit.md) — mapeo de requisitos a artifacts y límites honestos
+- [`SECURITY.md`](./SECURITY.md) — reporte privado de vulnerabilidades y política de versiones soportadas
+
+CI fija el escaneo de dependencias, bloquea evasiones de pruebas visuales, verifica la integridad de la evidencia/enlaces y mantiene el estado local del agente (`.claude/`, `.codex/`, `.tokensave/`) fuera del repositorio público.
+
 ## Localización
 
 UI de docs en inglés y japonés. El Markdown canon es inglés primero; el fallback se marca de forma explícita.
 
-## Contribuir · Licencia
+## Contribuir
 
-[CONTRIBUTING.md](./CONTRIBUTING.md) · [MIT](./LICENSE)
+[CONTRIBUTING.md](./CONTRIBUTING.md)
+
+## Licencia
+
+[MIT](./LICENSE)
 
 <div align="center"><sub>Hecho para que la IA diseñe con una estética que puede probar.</sub></div>

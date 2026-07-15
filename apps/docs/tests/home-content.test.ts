@@ -28,7 +28,7 @@ describe("redesigned docs information architecture", () => {
     expect(new Set(nav.map((item) => item.section))).toEqual(
       new Set(["start", "explore", "build", "verify"]),
     );
-    for (const href of ["/canon", "/components", "/motion", "/references", "/ai-design", "/status"]) {
+    for (const href of ["/canon", "/components", "/motion", "/references", "/ai-design", "/reports", "/status"]) {
       expect(nav.some((item) => item.href === href)).toBe(true);
     }
   });

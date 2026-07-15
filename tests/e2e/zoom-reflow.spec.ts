@@ -9,12 +9,19 @@ const skip = process.env.PLAYWRIGHT_SKIP === "1";
 test.describe("zoom / reflow", () => {
   test.skip(skip, "PLAYWRIGHT_SKIP=1");
 
-  test("home and references reflow at 320x640 without horizontal overflow", async ({
+  test("representative routes reflow at 320x640 without horizontal overflow", async ({
     page,
   }) => {
     await page.setViewportSize({ width: 320, height: 640 });
 
-    for (const route of ["/en", "/en/references", "/en/brand", "/ja/brand"] as const) {
+    for (const route of [
+      "/en",
+      "/en/references",
+      "/en/brand",
+      "/ja/brand",
+      "/en/reports",
+      "/ja/reports",
+    ] as const) {
       await page.goto(route, { waitUntil: "domcontentloaded" });
       await expect(page.locator("main#main")).toBeVisible();
       await page.waitForLoadState("networkidle");
