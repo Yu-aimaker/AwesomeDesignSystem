@@ -6,13 +6,15 @@
   "exports": {
     ".": { "types": "./src/index.ts", "development": "./src/index.ts", "import": "./dist/index.js" },
     "./contracts": { "types": "./src/component-contracts.ts", "development": "./src/component-contracts.ts", "import": "./dist/component-contracts.js" },
+    "./metadata": { "types": "./src/component-metadata.ts", "development": "./src/component-metadata.ts", "import": "./dist/component-metadata.js" },
+    "./runtime": { "types": "./src/runtime.ts", "development": "./src/runtime.ts", "import": "./dist/runtime.js" },
     "./styles.css": "./src/styles.css"
   },
   "scripts": {
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
     "lint": "tsc --noEmit -p tsconfig.json",
-    "build": "tsup src/index.ts src/component-contracts.ts --format esm --dts --clean"
+    "build": "tsup src/index.ts src/component-contracts.ts src/component-metadata.ts src/runtime.ts --format esm --dts --clean"
   },
   "dependencies": {
     "zod": "3.25.76"

@@ -4,7 +4,7 @@ import { SiteShell } from "../components/site-shell";
 import { ThemeControls } from "../components/theme-controls";
 
 import { getDictionary, localeConfig } from "../lib/i18n";
-import { getRequestLocale } from "../lib/i18n-server";
+import { getRequestLocale, getRequestNonce } from "../lib/i18n-server";
 import { cookies } from "next/headers";
 import type { DocsTheme } from "../components/theme-controls";
 import { getSiteUrl } from "../lib/metadata";
@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     manifest: "/manifest.webmanifest",
     icons: {
       icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-      apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
     },
     openGraph: {
       type: "website",
@@ -46,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: "/opengraph-image",
           width: 1200,
           height: 630,
-          alt: "AwesomeDS — evidence-backed design intelligence",
+          alt: dictionary.metadata.ogAlt,
         },
       ],
     },
@@ -65,6 +65,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const locale = await getRequestLocale();
+  const nonce = await getRequestNonce();
   const dictionary = getDictionary(locale);
   const storedTheme = (await cookies()).get("awesome-theme")?.value;
   const theme: DocsTheme =
@@ -111,6 +112,7 @@ export default async function RootLayout({
     <html lang={locale} dir={localeConfig[locale].dir} data-theme={theme}>
       <body>
         <script
+          nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),

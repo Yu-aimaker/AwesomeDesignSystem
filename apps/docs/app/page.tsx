@@ -6,7 +6,7 @@ import { getHomeContent } from "../lib/home-content";
 import { localizePathname } from "../lib/i18n";
 import { getRequestLocale } from "../lib/i18n-server";
 import { MotionDemo } from "../components/motion-demo";
-import { HomeEvidenceInstrument, type EvidenceTrace } from "../components/home-evidence-instrument";
+import { ProofCalibrator, type EvidenceTrace } from "../components/proof-calibrator";
 
 const featuredRuleIds = [
   "rule.governance.evidence-first",
@@ -22,15 +22,17 @@ const featuredReferenceIds = [
 ] as const;
 
 export default async function HomePage() {
-  const { references, rules, artifacts, validation, freshness } = await getAtlas();
+  const { references, rules, artifacts, validation } = await getAtlas();
   const locale = await getRequestLocale();
   const c = getHomeContent(locale);
+
   const featuredRules = featuredRuleIds
     .map((id) => rules.find((rule) => rule.id === id))
     .filter((rule): rule is NonNullable<typeof rule> => Boolean(rule));
   const featuredReferences = featuredReferenceIds
     .map((id) => references.find((reference) => reference.id === id))
     .filter((reference): reference is NonNullable<typeof reference> => Boolean(reference));
+
   const evidenceTraces = featuredRules
     .map((rule, index): EvidenceTrace | null => {
       const reference = references.find((item) => rule.referenceIds.includes(item.id));
@@ -40,7 +42,7 @@ export default async function HomePage() {
       if (!reference || !artifact) return null;
       return {
         id: rule.id,
-        intent: c.proof.intents[index] ?? c.proof.intents[0],
+        intent: c.calibrator.intents[index] ?? c.calibrator.intents[0],
         reference: {
           title: reference.title,
           href: localizePathname(`/references/${encodeURIComponent(reference.id)}`, locale),
@@ -57,6 +59,7 @@ export default async function HomePage() {
       };
     })
     .filter((trace): trace is EvidenceTrace => Boolean(trace));
+
   const unimplemented = new Set(
     validation.issues
       .filter((issue) => issue.code === "unimplemented-rule")
@@ -66,71 +69,112 @@ export default async function HomePage() {
     ? Math.round(((rules.length - unimplemented.size) / rules.length) * 100)
     : 100;
 
+  const scaleValues = [rules.length, references.length, componentCatalog.length, implementationCoverage];
+
   return (
     <div className="home-page ads-motion-enter">
+      {/* 1 — HERO: the signature claim + live proof instrument. */}
       <section className="product-hero" aria-labelledby="home-title">
         <div className="product-hero__copy">
+          <p className="hero-registration" translate="no">{c.hero.registration}</p>
           <p className="eyebrow">{c.hero.eyebrow}</p>
-          <h1 id="home-title" aria-label={c.hero.title}>
-            {c.hero.titleSegments.flatMap((segment, index) => [
-              <span aria-hidden="true" key={`${segment}-text`}>{segment}</span>,
-              index < c.hero.titleSegments.length - 1 ? <wbr key={`${segment}-break`} /> : null,
-            ])}
+          <h1 id="home-title" aria-label={`${c.hero.titleLead} ${c.hero.titleWord}${c.hero.titleTrail}`}>
+            <span aria-hidden="true">{c.hero.titleLead}</span>
+            <span aria-hidden="true" className="hero-word" translate="no">{c.hero.titleWord}{c.hero.titleTrail}</span>
           </h1>
           <p className="product-hero__lede">{c.hero.description}</p>
           <div className="action-row">
-            <Link className="primary-link" href={localizePathname("/canon", locale)}>
+            <Link className="primary-link" href={localizePathname(c.hero.primaryHref, locale)}>
               {c.hero.primaryAction}<span aria-hidden="true">→</span>
             </Link>
-            <Link className="text-link" href={localizePathname("/references", locale)}>
-              {c.hero.secondaryAction}<span aria-hidden="true">↗</span>
+            <Link className="text-link" href={c.hero.secondaryHref}>
+              {c.hero.secondaryAction}<span aria-hidden="true">↓</span>
             </Link>
           </div>
         </div>
 
-        <HomeEvidenceInstrument
-          label={c.proof.instrumentLabel}
-          selectLabel={c.proof.input}
-          verifiedLabel={c.proof.verified}
-          sourceLabel={c.proof.source}
-          ruleLabel={c.proof.rule}
-          outputLabel={c.proof.output}
-          verificationLabel={c.proof.verify}
-          verificationValue={validation.ok ? c.hero.graphHealthy : c.hero.graphNeedsReview}
-          verificationHealthy={validation.ok}
+        <ProofCalibrator
+          labels={c.calibrator}
           traces={evidenceTraces}
+          healthy={validation.ok}
         />
 
-        <section className="truth-strip" aria-labelledby="trust-label">
-          <p id="trust-label">{c.hero.trustLabel}</p>
-          <dl>
-            <div><dt>{c.hero.rulesLabel}</dt><dd>{rules.length}</dd></div>
-            <div><dt>{c.hero.sourcesLabel}</dt><dd>{references.length}</dd></div>
-            <div><dt>{c.hero.componentsLabel}</dt><dd>{componentCatalog.length}</dd></div>
-            <div><dt>{c.hero.freshnessLabel}</dt><dd>{freshness.healthy}</dd></div>
-          </dl>
-        </section>
       </section>
 
-      <section className="home-section" aria-labelledby="proof-title">
-        <header className="editorial-heading">
-          <p className="eyebrow">{c.proof.eyebrow}</p>
-          <h2 id="proof-title">{c.proof.title}</h2>
-          <p>{c.proof.description}</p>
+      {/* 2 — START HERE: Read → Build → Prove spine. */}
+      <section className="home-section how-section" id="how-it-works" aria-labelledby="how-title">
+        <header className="split-heading">
+          <div>
+            <p className="eyebrow">{c.how.eyebrow}</p>
+            <h2 id="how-title">{c.how.title}</h2>
+          </div>
+          <p>{c.how.description}</p>
         </header>
-        <div className="path-grid">
-          {c.paths.items.map((item) => (
-            <article className="path-card" key={item.index}>
-              <span className="path-card__index">{item.index}</span>
-              <p className="path-card__meta">{item.meta}</p>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-              <Link href={localizePathname(item.href, locale)}>{item.action}<span aria-hidden="true">→</span></Link>
-            </article>
+        <ol className="process-spine">
+          {c.how.steps.map((step) => (
+            <li className="process-step" key={step.key}>
+              <div className="process-step__mark"><span>{step.key}</span><em translate="no">{step.tag}</em></div>
+              <h3>{step.title}</h3>
+              <p>{step.body}</p>
+              <p className="process-step__meta" translate="no">{step.meta}</p>
+              <Link href={localizePathname(step.href, locale)}>{step.action}<span aria-hidden="true">→</span></Link>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
 
+      {/* 3 — SCALE BAND: aesthetics with receipts, at industrial scale. */}
+      <section className="scale-band" aria-labelledby="scale-title">
+        <div className="scale-band__intro">
+          <p className="eyebrow">{c.scale.eyebrow}</p>
+          <h2 id="scale-title">{c.scale.lead}<span> {c.scale.leadEmphasis}</span></h2>
+          <p>{c.scale.description}</p>
+        </div>
+        <dl className="scale-metrics">
+          {c.scale.metrics.map((metric, index) => (
+            <div className="scale-metric" key={metric.label}>
+              <dt><span className="scale-metric__value" translate="no">{scaleValues[index]}<i>{"suffix" in metric ? metric.suffix : ""}</i></span></dt>
+              <dd><strong>{metric.label}</strong><span>{metric.sub}</span></dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* 4 — BUILD: executable components. */}
+      <section className="home-section component-showcase" aria-labelledby="components-title">
+        <header className="split-heading">
+          <div>
+            <p className="eyebrow">{c.build.eyebrow}</p>
+            <h2 id="components-title">{c.build.title}</h2>
+          </div>
+          <p>{c.build.description}</p>
+        </header>
+        <div className="component-stage">
+          <section className="component-stage__actions" aria-label={c.build.actionCard}>
+            <div className="component-stage__title">
+              <div><span className="status-dot" /><strong>{c.build.actionCard}</strong></div>
+              <Badge tone="accent">@awesome-ds/react</Badge>
+            </div>
+            <Input id="home-design-intent" label={c.build.fieldLabel} hint={c.build.fieldHint} placeholder={c.build.fieldPlaceholder} />
+            <div className="component-stage__buttons">
+              <Button>{c.build.primary}</Button>
+              <Button variant="secondary">{c.build.secondary}</Button>
+              <Button variant="ghost" loading>{c.build.loading}</Button>
+            </div>
+          </section>
+          <section className="component-stage__status" aria-label={c.build.statusTitle}>
+            <Toast>{c.build.statusTitle}</Toast>
+            <Callout title={c.build.statusTitle}>{c.build.statusBody}</Callout>
+            <div className="coverage-meter">
+              <div><span>{c.build.progress}</span><strong>{implementationCoverage}%</strong></div>
+              <Progress value={implementationCoverage} label={c.build.progress} />
+            </div>
+          </section>
+        </div>
+        <Link className="section-link" href={localizePathname("/components", locale)}>{c.build.browse}<span aria-hidden="true">→</span></Link>
+      </section>
+
+      {/* 5 — THE CANON: the dark ledger. */}
       <section className="home-section canon-showcase" aria-labelledby="canon-title">
         <header className="split-heading">
           <div>
@@ -159,6 +203,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* 6 — FOUNDATIONS. */}
       <section className="home-section" aria-labelledby="foundations-title">
         <header className="editorial-heading">
           <p className="eyebrow">{c.foundations.eyebrow}</p>
@@ -187,46 +232,14 @@ export default async function HomePage() {
             <div className="type-specimen">
               <p lang="en">{c.foundations.typeSample}</p>
               <p lang="ja">{c.foundations.typeSampleJa}</p>
-              <span>Newsreader · IBM Plex Sans · Noto Sans JP</span>
+              <span translate="no">Newsreader · IBM Plex Sans · Native Japanese UI</span>
             </div>
           </article>
         </div>
         <Link className="section-link" href={localizePathname("/foundations", locale)}>{c.foundations.openFoundations}<span aria-hidden="true">→</span></Link>
       </section>
 
-      <section className="home-section component-showcase" aria-labelledby="components-title">
-        <header className="split-heading">
-          <div>
-            <p className="eyebrow">{c.components.eyebrow}</p>
-            <h2 id="components-title">{c.components.title}</h2>
-          </div>
-          <p>{c.components.description}</p>
-        </header>
-        <div className="component-stage">
-          <section className="component-stage__actions" aria-label={c.components.actionCard}>
-            <div className="component-stage__title">
-              <div><span className="status-dot" /><strong>{c.components.actionCard}</strong></div>
-              <Badge tone="accent">@awesome-ds/react</Badge>
-            </div>
-            <Input id="home-design-intent" label={c.components.fieldLabel} hint={c.components.fieldHint} placeholder={c.components.fieldPlaceholder} />
-            <div className="component-stage__buttons">
-              <Button>{c.components.primary}</Button>
-              <Button variant="secondary">{c.components.secondary}</Button>
-              <Button variant="ghost" loading>{c.components.loading}</Button>
-            </div>
-          </section>
-          <section className="component-stage__status" aria-label={c.components.statusTitle}>
-            <Toast>{c.components.statusTitle}</Toast>
-            <Callout title={c.components.statusTitle}>{c.components.statusBody}</Callout>
-            <div className="coverage-meter">
-              <div><span>{c.components.progress}</span><strong>{implementationCoverage}%</strong></div>
-              <Progress value={implementationCoverage} label={c.components.progress} />
-            </div>
-          </section>
-        </div>
-        <Link className="section-link" href={localizePathname("/components", locale)}>{c.components.browse}<span aria-hidden="true">→</span></Link>
-      </section>
-
+      {/* 7 — MOTION. */}
       <section className="home-section" aria-labelledby="motion-title">
         <header className="split-heading">
           <div>
@@ -239,6 +252,7 @@ export default async function HomePage() {
         <Link className="section-link" href={localizePathname("/motion", locale)}>{c.motion.browse}<span aria-hidden="true">→</span></Link>
       </section>
 
+      {/* 8 — REFERENCE ATLAS. */}
       <section className="home-section atlas-showcase" aria-labelledby="atlas-title">
         <header className="editorial-heading">
           <p className="eyebrow">{c.atlas.eyebrow}</p>
@@ -261,14 +275,38 @@ export default async function HomePage() {
         <Link className="section-link" href={localizePathname("/references", locale)}>{c.atlas.browse}<span aria-hidden="true">→</span></Link>
       </section>
 
+      {/* 9 — BRAND DS: signature grammar, self-proven. */}
+      <section className="home-section brand-showcase" aria-labelledby="brand-title">
+        <header className="split-heading">
+          <div>
+            <p className="eyebrow">{c.brand.eyebrow}</p>
+            <h2 id="brand-title">{c.brand.title}</h2>
+          </div>
+          <div>
+            <p>{c.brand.description}</p>
+            <Link className="text-link" href={localizePathname(c.brand.href, locale)}>{c.brand.action}<span aria-hidden="true">→</span></Link>
+          </div>
+        </header>
+        <ul className="grammar-grid">
+          {c.brand.grammar.map((item) => (
+            <li className={`grammar-card grammar-card--${item.mark}`} key={item.mark}>
+              <span className="grammar-card__mark" aria-hidden="true" />
+              <strong>{item.term}</strong>
+              <p>{item.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 10 — ADOPT: bound the agent. */}
       <section className="home-section agent-workflow" aria-labelledby="agents-title">
         <div className="agent-workflow__copy">
           <p className="eyebrow">{c.agents.eyebrow}</p>
           <h2 id="agents-title">{c.agents.title}</h2>
           <p>{c.agents.description}</p>
           <div className="agent-instruction">
-            <span>{c.agents.codeLabel}</span>
-            <code>{c.agents.code}</code>
+            <span translate="no">{c.agents.codeLabel}</span>
+            <code translate="no">{c.agents.code}</code>
           </div>
           <Link className="text-link" href={localizePathname("/ai-design", locale)}>{c.agents.open}<span aria-hidden="true">→</span></Link>
         </div>
@@ -282,13 +320,23 @@ export default async function HomePage() {
         </ol>
       </section>
 
+      {/* 11 — CLOSING: four ways in. */}
       <section className="closing-section" aria-labelledby="closing-title">
-        <p className="eyebrow">{c.closing.eyebrow}</p>
-        <h2 id="closing-title">{c.closing.title}</h2>
-        <div className="action-row">
-          <Link className="primary-link" href={localizePathname("/canon", locale)}>{c.closing.primary}<span aria-hidden="true">→</span></Link>
-          <Link className="text-link" href={localizePathname("/status", locale)}>{c.closing.secondary}<span aria-hidden="true">↗</span></Link>
-        </div>
+        <header>
+          <p className="eyebrow">{c.closing.eyebrow}</p>
+          <h2 id="closing-title">{c.closing.title}</h2>
+        </header>
+        <ul className="closing-quad">
+          {c.closing.quad.map((item) => (
+            <li key={item.tag}>
+              <Link href={localizePathname(item.href, locale)}>
+                <em translate="no">{item.tag}</em>
+                <strong>{item.title}</strong>
+                <span aria-hidden="true">→</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
   );

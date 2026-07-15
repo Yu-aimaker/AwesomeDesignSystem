@@ -1,43 +1,54 @@
-# Completion Audit — AwesomeDS Platform
+# Completion Audit — AwesomeDS Design Bible
 
-Maps design specification sections and definition-of-done items to artifacts and evidence.
+**Evidence date:** 2026-07-16  
+**Scope:** repository-owned design intelligence, packages, skills, and the Next.js documentation site
 
-## Spec section mapping
+This audit maps the current product requirements to concrete, reproducible evidence. A row is marked complete only when the referenced artifact and a current verification path both exist.
 
-| Spec section                   | Status          | Evidence                                                                                   |
-| ------------------------------ | --------------- | ------------------------------------------------------------------------------------------ |
-| 1 Product definition           | Done            | monorepo packages + apps/docs + content graph                                              |
-| 2 Product principles           | Done            | design-system modules + content/canon rules                                                |
-| 3.1 Canonical knowledge        | Done            | 42 rules + design-system brand/platform/AI/interaction modules                             |
-| 3.2 Reference Atlas            | Done            | 105 versioned records + localized medium/drift-risk filters + rule trace routes            |
-| 3.3 Executable system          | Done            | six built ESM/type artifact sets + package smoke test                                      |
-| 4 Component library            | Done (baseline) | 32 shared contracts + React Aria + live-preview crawl + tests                              |
-| 5 Motion library               | Done            | packages/motion recipes (10 intents)                                                       |
-| 6 Documentation website        | Done            | Next.js 16 app, 329 pages, English/Japanese localized routes                               |
-| 7 Data flow consistency        | Done            | bidirectional graph + 54 artifacts + explicit executable coverage and verification metrics |
-| 8 Freshness governance         | Done            | freshness/link reports, integrity errors, timestamps, aged strict queue                    |
-| Local-only constraint          | Done            | no deploy scripts in this phase                                                            |
-| Preserve legacy skills/install | Done            | baseline tests green                                                                       |
+## Requirement mapping
 
-## Definition of done
+| Requirement                      | Status                     | Authoritative evidence                                                                                                                                          |
+| -------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Evidence-first design bible      | Verified                   | `design-system/`, 128 versioned records, 47 rules, 54 artifacts, 6 signals; `pnpm validate` reports 0 issues                                                    |
+| Clear information architecture   | Verified                   | Four stable verbs in `apps/docs/lib/navigation.ts`: START, EXPLORE, BUILD, VERIFY; unit and E2E coverage                                                        |
+| AwesomeDS-owned brand system     | Verified                   | `design-system/brand/awesomeds-brand.md`, Proof Mark, blueprint plane, one-ember registration system, voice and motion contracts                                |
+| Cross-medium brand coherence     | Verified                   | Site, five localized READMEs, `assets/banner.svg`, OG image, icons, diagrams, docs brand token layer, and brand asset contract tests                            |
+| Bold but usable visual direction | Verified                   | Proof Calibrator, editorial/industrial type pairing, registration grammar, restrained motion, reviewed desktop/mobile snapshots                                 |
+| Japanese-first bilingual surface | Verified                   | `/en/*` and `/ja/*`, native Japanese brand contract/personality, localized metadata/OG alt, explicit English-source fallback boundaries                         |
+| Responsive diagrams and layout   | Verified                   | Stacked localized mobile diagrams at 320–390px; 1px reflow budget; EN/JA desktop/mobile brand snapshots on macOS and Linux                                      |
+| Executable foundations           | Verified                   | semantic tokens, 32 React component contracts, 10 motion intents, six built ESM/declaration artifact sets                                                       |
+| Agent-ready distribution         | Verified                   | five portable skills, shared rule contract, `DESIGN.md`, evidence IDs, install flow, and graph-backed instructions                                              |
+| Accessibility                    | Verified                   | hydrated axe scans with all automated WCAG 2.2 A/AA violations blocked, keyboard suites, forced colors, no-JS, forced-RTL logical-layout bounds, reduced motion |
+| Security                         | Verified                   | nonce-bound strict CSP, security headers, dependency scanning CI, Dependabot, OSV v2.4.0 scan of 611 packages with no issues                                    |
+| Performance                      | Verified                   | runtime and bundle gates; largest route bundle 713,913 B under 750,000 B; Japanese routes load no webfonts                                                      |
+| SEO and install surface          | Verified                   | localized canonical/hreflang/x-default metadata, sitemap, robots, locale-neutral manifest, OG, maskable and Apple icons                                         |
+| Freshness governance             | Verified with review queue | strict source-liveness 128/128; current observation has 12 upstream changes queued, 0 fetch failures, 0 persistent failures                                     |
 
-| Item                                        | Met? | Evidence                                                                                    |
-| ------------------------------------------- | ---- | ------------------------------------------------------------------------------------------- |
-| Local website runs/builds                   | Yes  | `pnpm --filter @awesome-ds/docs build`                                                      |
-| React library installable in workspace      | Yes  | `@awesome-ds/react` workspace package                                                       |
-| Motion recipes + reduced motion             | Yes  | recipes + CSS media query                                                                   |
-| Knowledge system expanded                   | Yes  | brand/AI/interaction/governance modules                                                     |
-| Reference Atlas searchable                  | Yes  | `/references` filters URL-serialized                                                        |
-| Automated QA/freshness                      | Yes  | `pnpm qa:full`, strict links, repeatable source observation                                 |
-| Critical/High unresolved = 0 in audit scope | Yes  | independent architecture/spec/UI re-audits closed all findings; `qa:full` green             |
-| Requirement matrix present                  | Yes  | `docs/requirements-matrix.md` REQ-001…021                                                   |
-| English/Japanese website localization       | Yes  | Brand/Canon/Reference/component UI, x-default sitemap, fallback semantics, JP mobile visual |
+## Current definition-of-done evidence
 
-## How to run locally
+| Gate                       | Current result                                                                                |
+| -------------------------- | --------------------------------------------------------------------------------------------- |
+| Production docs build      | Pass; 357 static generation units completed                                                   |
+| Unit tests                 | 238 passed across 33 files                                                                    |
+| Full browser suite         | 92 passed with retries disabled on macOS and official Playwright Ubuntu                       |
+| Visual regression          | 16 passed, including EN/JA brand desktop/mobile                                               |
+| Content graph              | 128 references / 47 rules / 54 artifacts / 6 signals / 0 issues                               |
+| Package artifacts          | 6 verified package artifact sets                                                              |
+| Strict source-liveness     | 128 checked / 0 failed / 0 allowlisted                                                        |
+| Dependency vulnerabilities | Local OSV Scanner 2.4.0: 611 packages / no issues; CI uses the latest released action, v2.3.8 |
+| Runtime budget             | `/en` 200,563 B script transfer; `/ja` 200,563 B and 0 font bytes                             |
+
+## Honest boundaries
+
+- The Reference Atlas is maintained evidence, not a claim that upstream sources never change. Twelve current changes remain intentionally visible in `reports/review-queue.json` for human review.
+- Canon source Markdown remains English-first where a reviewed Japanese translation does not exist. Japanese routes localize the product surface and label the source boundary.
+- The OG visual is deliberately language-neutral; locale-specific pages provide localized metadata and alt text.
+- Automated accessibility checks supplement, but do not replace, manual assistive-technology review.
+
+## Reproduce
 
 ```bash
-cd .worktrees/awesome-ds-platform   # or merge branch first
 pnpm install
-pnpm --filter @awesome-ds/docs dev  # http://127.0.0.1:3000
 pnpm qa:full
+pnpm check:links -- --strict
 ```

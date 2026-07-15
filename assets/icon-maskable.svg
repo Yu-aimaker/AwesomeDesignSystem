@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AwesomeDS proof mark maskable icon">
+  <title>AwesomeDS proof mark</title>
+  <!-- Full-bleed paper background; all meaningful geometry stays inside the
+       central 80% maskable safe zone. -->
+  <rect width="512" height="512" fill="#FAFAF9"/>
+  <rect x="121" y="112" width="90" height="10" rx="5" fill="#C0472A"/>
+  <!-- Canonical proof-mark ratios: side 120, gap 30, stroke 10, knockout 60. -->
+  <rect x="121" y="196" width="120" height="120" fill="#C0472A"/>
+  <rect x="271" y="196" width="120" height="120" fill="none" stroke="#18181B" stroke-width="10"/>
+  <rect x="301" y="226" width="60" height="60" fill="#18181B"/>
+</svg>

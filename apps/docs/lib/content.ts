@@ -10,18 +10,37 @@ import {
   type ReferenceRecord,
 } from "@awesome-ds/content";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 
 import { getContentRoot } from "./path-resolver";
 
 const contentRoot = getContentRoot();
+const deploymentKey =
+  process.env.VERCEL_GIT_COMMIT_SHA ?? process.env.VERCEL_DEPLOYMENT_ID;
 
-export const getAtlas = cache(async function getAtlas() {
+async function loadAtlasRecords() {
   const [references, rules, artifacts, signals] = await Promise.all([
     loadReferenceRecords(contentRoot),
     loadCanonRules(contentRoot),
     loadArtifactClaims(contentRoot),
     loadSignals(contentRoot),
   ]);
+  return { references, rules, artifacts, signals };
+}
+
+// Production content is immutable for the lifetime of a deployment. Cache the
+// filesystem boundary across nonce-rendered requests; keep development live so
+// edits appear without waiting for a revalidation window.
+const loadRuntimeAtlasRecords =
+  process.env.NODE_ENV === "production" && deploymentKey
+    ? unstable_cache(loadAtlasRecords, ["awesome-ds-atlas-v1", deploymentKey], {
+        revalidate: 3600,
+        tags: ["awesome-ds-atlas"],
+      })
+    : loadAtlasRecords;
+
+export const getAtlas = cache(async function getAtlas() {
+  const { references, rules, artifacts, signals } = await loadRuntimeAtlasRecords();
   const graph = buildEvidenceGraph({ references, rules, artifacts });
   const validation = validateEvidenceGraph(graph);
   const freshness = summarizeFreshness(references);

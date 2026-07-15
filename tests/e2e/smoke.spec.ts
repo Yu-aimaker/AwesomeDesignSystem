@@ -162,8 +162,34 @@ test.describe("docs smoke", () => {
 
   test("docs responses include defense-in-depth security headers", async ({ request }) => {
     const response = await request.get("/en/canon");
-    expect(response.headers()["content-security-policy"]).toContain("object-src 'none'");
+    const csp = response.headers()["content-security-policy"] ?? "";
+    expect(csp).not.toBe("");
+    expect(csp).toContain("object-src 'none'");
+    expect(csp).toContain("'strict-dynamic'");
+    expect(csp).toContain("script-src-attr 'none'");
+    expect(csp).not.toMatch(/script-src[^;]*'unsafe-inline'/);
+    const nonce = csp.match(/'nonce-([^']+)'/)?.[1];
+    expect(nonce).toBeTruthy();
+    expect(await response.text()).toContain(`nonce="${nonce}"`);
     expect(response.headers()["x-content-type-options"]).toBe("nosniff");
+  });
+
+  test("machine-readable brand assets bypass locale redirects", async ({ request }) => {
+    const assets = [
+      ["/opengraph-image", "image/png"],
+      ["/manifest.webmanifest", "application/manifest+json"],
+      ["/icon.svg", "image/svg+xml"],
+      ["/icon-192.png", "image/png"],
+      ["/icon-512.png", "image/png"],
+      ["/icon-maskable-512.png", "image/png"],
+      ["/apple-icon.png", "image/png"],
+    ] as const;
+
+    for (const [path, contentType] of assets) {
+      const response = await request.get(path, { maxRedirects: 0 });
+      expect(response.status(), path).toBe(200);
+      expect(response.headers()["content-type"], path).toContain(contentType);
+    }
   });
 
   test("localized metadata exposes canonical and language alternates", async ({ page }) => {

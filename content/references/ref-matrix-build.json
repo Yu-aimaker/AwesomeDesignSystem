@@ -1,0 +1,36 @@
+{
+  "id": "ref.matrix.build",
+  "title": "Matrix Build",
+  "url": "https://matrix.build/",
+  "owner": "matrix",
+  "sourceClass": "brand",
+  "medium": "website",
+  "driftRisk": "high",
+  "region": "global",
+  "language": "en",
+  "topics": [
+    "brand",
+    "narrative",
+    "interaction"
+  ],
+  "observedDate": "2026-07-16",
+  "lastVerifiedDate": "2026-07-16",
+  "reviewCadenceDays": 90,
+  "freshnessState": "healthy",
+  "evidenceLevel": "observed-behavior",
+  "summary": "Matrix Build is a first-party reference for experimental narrative sequencing, expressive interaction, and product storytelling on the web.",
+  "lessons": [
+    "Use interaction to advance a product thesis instead of decorating a conventional landing page.",
+    "Sequence information as a deliberate narrative while preserving a clear path to action."
+  ],
+  "caveats": [
+    "Observed interface behavior can drift quickly; re-verify before promoting implementation details."
+  ],
+  "licenseNote": "Public website; cite observations and transfer principles only.",
+  "antiImitationNote": "Do not copy Matrix identity, layouts, assets, or motion signatures; synthesize the narrative method into AwesomeDS's evidence-first grammar.",
+  "linkedRuleIds": [
+    "rule.brand.cross-medium-coherence",
+    "rule.brand.personality-system"
+  ],
+  "linkedArtifactIds": []
+}

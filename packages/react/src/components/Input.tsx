@@ -1,8 +1,8 @@
 "use client";
 
-import { cx, stateAttributes } from "@awesome-ds/core";
+import { cx, stateAttributes } from "@awesome-ds/core/runtime";
 import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 
 export const inputMetadata = getComponentMetadata("input");
 export type FieldProps = { label: string; hint?: string; error?: string; id: string };

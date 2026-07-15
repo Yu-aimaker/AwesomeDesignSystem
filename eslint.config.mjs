@@ -4,6 +4,10 @@ import nextTypescript from "eslint-config-next/typescript";
 
 const nextWithoutPagesRouterRule = nextVitals.map((config) => ({
   ...config,
+  settings: {
+    ...config.settings,
+    react: { version: "19.2" },
+  },
   rules: { ...config.rules, "@next/next/no-html-link-for-pages": "off" },
 }));
 
@@ -14,6 +18,7 @@ export default defineConfig([
     ".next/**",
     "**/.next/**",
     ".turbo/**",
+    "**/.vercel/**",
     ".worktrees/**",
     "node_modules/**",
     "packages/tokens/dist/**",
@@ -26,7 +31,10 @@ export default defineConfig([
   ]),
   {
     files: ["**/*.{ts,tsx,mjs}"],
-    settings: { next: { rootDir: "apps/docs" } },
+    settings: {
+      next: { rootDir: "apps/docs" },
+      react: { version: "19.2" },
+    },
     rules: {
       "@next/next/no-html-link-for-pages": "off",
       "no-console": "off",

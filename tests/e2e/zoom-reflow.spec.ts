@@ -14,9 +14,10 @@ test.describe("zoom / reflow", () => {
   }) => {
     await page.setViewportSize({ width: 320, height: 640 });
 
-    for (const route of ["/", "/references"] as const) {
+    for (const route of ["/en", "/en/references", "/en/brand", "/ja/brand"] as const) {
       await page.goto(route, { waitUntil: "domcontentloaded" });
       await expect(page.locator("main#main")).toBeVisible();
+      await page.waitForLoadState("networkidle");
 
       const overflow = await page.evaluate(() => {
         const { scrollWidth, clientWidth } = document.documentElement;
@@ -30,7 +31,7 @@ test.describe("zoom / reflow", () => {
       expect(
         overflow.scrollWidth,
         `${route}: horizontal overflow (scrollWidth=${overflow.scrollWidth}, clientWidth=${overflow.clientWidth})`,
-      ).toBeLessThanOrEqual(overflow.clientWidth + 20);
+      ).toBeLessThanOrEqual(overflow.clientWidth + 1);
     }
   });
 

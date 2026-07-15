@@ -1,35 +1,33 @@
 {
-  "generatedAt": "2026-07-15T16:01:01.939Z",
-  "sourceCount": 127,
+  "generatedAt": "2026-07-15T20:14:48.481Z",
+  "sourceCount": 128,
   "summary": {
-    "healthy": 123,
-    "fetch_failed": 2,
-    "changed": 2
+    "changed": 10,
+    "healthy": 118
   },
   "ageCalculatedSummary": {
-    "healthy": 127
+    "healthy": 128
   },
   "recordedStateMatch": {
-    "matching": 127,
+    "matching": 128,
     "mismatched": 0,
     "mismatches": []
   },
   "observationSummary": {
-    "unchanged": 113,
     "changed": 12,
-    "fetch_failed": 2
+    "unchanged": 116
   },
   "rows": [
     {
       "id": "ref.a11y.axe-core",
       "title": "axe-core",
-      "state": "healthy",
-      "daysSinceVerified": 2,
-      "daysUntilDue": 88,
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 90,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "unchanged"
+      "observation": "changed"
     },
     {
       "id": "ref.a2ui.protocol",
@@ -40,7 +38,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.adobe.react-aria",
@@ -117,7 +115,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.anthropic.mcp-spec",
@@ -172,7 +170,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.apple.hig-motion",
@@ -183,7 +181,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.apple.hig-spatial",
@@ -243,13 +241,13 @@
     {
       "id": "ref.atlassian.content",
       "title": "Atlassian Content Design",
-      "state": "fetch_failed",
+      "state": "changed",
       "daysSinceVerified": 0,
       "daysUntilDue": 90,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "fetch_failed"
+      "observation": "changed"
     },
     {
       "id": "ref.atlassian.design-system",
@@ -265,13 +263,13 @@
     {
       "id": "ref.atlassian.design-tokens",
       "title": "Atlassian Design Tokens",
-      "state": "fetch_failed",
-      "daysSinceVerified": 0,
-      "daysUntilDue": 90,
+      "state": "healthy",
+      "daysSinceVerified": -1,
+      "daysUntilDue": 91,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "fetch_failed"
+      "observation": "changed"
     },
     {
       "id": "ref.baseui.base-ui",
@@ -530,8 +528,8 @@
       "id": "ref.figma.variables",
       "title": "Figma Variables & Modes",
       "state": "healthy",
-      "daysSinceVerified": 2,
-      "daysUntilDue": 88,
+      "daysSinceVerified": -1,
+      "daysUntilDue": 91,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
@@ -546,7 +544,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.github.primer-accessibility",
@@ -606,9 +604,9 @@
     {
       "id": "ref.google.android-adaptive-layout",
       "title": "Build adaptive apps — Android Developers",
-      "state": "healthy",
-      "daysSinceVerified": -1,
-      "daysUntilDue": 91,
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 90,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
@@ -645,7 +643,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.google.pair-guidebook",
@@ -682,14 +680,14 @@
     },
     {
       "id": "ref.govuk.community-backlog",
-      "title": "GOV.UK Design System Community Backlog",
-      "state": "healthy",
-      "daysSinceVerified": -1,
-      "daysUntilDue": 181,
+      "title": "GOV.UK Upcoming Components and Patterns",
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 180,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "unchanged"
+      "observation": "changed"
     },
     {
       "id": "ref.govuk.design-system",
@@ -846,11 +844,22 @@
       "observation": "unchanged"
     },
     {
-      "id": "ref.mcp.apps",
-      "title": "MCP Apps — Embedded Interactive Tool UI",
+      "id": "ref.matrix.build",
+      "title": "Matrix Build",
       "state": "healthy",
       "daysSinceVerified": -1,
-      "daysUntilDue": 31,
+      "daysUntilDue": 91,
+      "recordedState": "healthy",
+      "ageCalculatedState": "healthy",
+      "recordedStateMatchesAgeCalculated": true,
+      "observation": "changed"
+    },
+    {
+      "id": "ref.mcp.apps",
+      "title": "MCP Apps — Embedded Interactive Tool UI",
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 30,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
@@ -909,7 +918,7 @@
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.microsoft.fluent-design-tokens",
@@ -958,13 +967,13 @@
     {
       "id": "ref.nielsen.usability",
       "title": "Nielsen Norman Group",
-      "state": "healthy",
-      "daysSinceVerified": 2,
-      "daysUntilDue": 88,
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 90,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "unchanged"
+      "observation": "changed"
     },
     {
       "id": "ref.nist.ai-rmf",
@@ -1002,20 +1011,20 @@
     {
       "id": "ref.openai.ai-elements",
       "title": "AI Elements patterns (research)",
-      "state": "healthy",
-      "daysSinceVerified": 2,
-      "daysUntilDue": 88,
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 90,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "unchanged"
+      "observation": "changed"
     },
     {
       "id": "ref.openai.apps-sdk-ui-guidelines",
       "title": "OpenAI Apps SDK UI Guidelines",
-      "state": "healthy",
-      "daysSinceVerified": -1,
-      "daysUntilDue": 31,
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 30,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
@@ -1244,13 +1253,13 @@
     {
       "id": "ref.vercel.ai-elements",
       "title": "Vercel AI Elements",
-      "state": "changed",
-      "daysSinceVerified": 0,
-      "daysUntilDue": 60,
+      "state": "healthy",
+      "daysSinceVerified": 2,
+      "daysUntilDue": 58,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "changed"
+      "observation": "unchanged"
     },
     {
       "id": "ref.vercel.design",
@@ -1387,13 +1396,13 @@
     {
       "id": "ref.williams.non-designers",
       "title": "Non-Designer's Design Book (principles synthesis)",
-      "state": "healthy",
-      "daysSinceVerified": 2,
-      "daysUntilDue": 88,
+      "state": "changed",
+      "daysSinceVerified": 0,
+      "daysUntilDue": 90,
       "recordedState": "healthy",
       "ageCalculatedState": "healthy",
       "recordedStateMatchesAgeCalculated": true,
-      "observation": "unchanged"
+      "observation": "changed"
     },
     {
       "id": "ref.zendesk.garden-components",

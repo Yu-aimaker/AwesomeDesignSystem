@@ -1,6 +1,6 @@
 export {
   componentCatalog,
   getComponent,
-  getComponentMetadata,
   type ComponentCatalogItem,
 } from "@awesome-ds/core/contracts";
+export { getComponentMetadata, type ComponentMetadata } from "@awesome-ds/core/metadata";

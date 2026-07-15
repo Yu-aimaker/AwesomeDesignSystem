@@ -79,9 +79,6 @@ importers:
       '@fontsource-variable/newsreader':
         specifier: 5.2.10
         version: 5.2.10
-      '@fontsource-variable/noto-sans-jp':
-        specifier: 5.2.10
-        version: 5.2.10
       marked:
         specifier: 18.0.6
         version: 18.0.6
@@ -553,9 +550,6 @@ packages:
 
   '@fontsource-variable/newsreader@5.2.10':
     resolution: {integrity: sha512-MdI2iRwrqWpMOU/2aV2BgfZ4dJNlj/XlYaY8Zb7t87mWqHskYW0XiUANkt1cyOCiEfW2VQ0bQ5vZgGPp6B2B4w==}
-
-  '@fontsource-variable/noto-sans-jp@5.2.10':
-    resolution: {integrity: sha512-m0XfZ38rZtCaGAuAQL0cBPQ6fc/RguYEOqw66zvuLOV9vNRUBf9MFqyoazTu2JVCRIcnkrxbwF29UUaHHgTKdg==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -3292,8 +3286,6 @@ snapshots:
   '@fontsource-variable/ibm-plex-sans@5.2.8': {}
 
   '@fontsource-variable/newsreader@5.2.10': {}
-
-  '@fontsource-variable/noto-sans-jp@5.2.10': {}
 
   '@humanfs/core@0.19.2':
     dependencies:

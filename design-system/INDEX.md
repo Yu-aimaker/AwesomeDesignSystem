@@ -105,4 +105,9 @@ Structured rule metadata lives in `content/canon/`. Reference Atlas records live
 
 **Apple current-source audit:** `research/apple-hig-complete-audit-2026-07.md` tracks current Design Resources, WWDC26 principles, and the agent-prototyping workflow. Treat older iOS 26 / SF Symbols 7 material as a dated snapshot.
 
-**Always-read for brand work:** `brand/cross-medium-coherence.md` then voice/illustration modules.
+**AwesomeDS's own brand (the bible):** `brand/awesomeds-brand.md` — Purpose/Tone/Constraints/Differentiation,
+the signature visual grammar (proof mark · blueprint plane · registration labels · ember signal),
+voice/tone matrix, and the cross-medium ship gate. Read it for any AwesomeDS-facing surface (site,
+README imagery, `assets/banner.svg`, OG, diagrams).
+
+**Always-read for brand work:** `brand/awesomeds-brand.md` + `brand/cross-medium-coherence.md`, then voice/illustration modules.

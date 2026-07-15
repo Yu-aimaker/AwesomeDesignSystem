@@ -1,8 +1,8 @@
 "use client";
 
-import { cx, stateAttributes } from "@awesome-ds/core";
+import { cx, stateAttributes } from "@awesome-ds/core/runtime";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 
 export const iconButtonMetadata = getComponentMetadata("icon-button");
 

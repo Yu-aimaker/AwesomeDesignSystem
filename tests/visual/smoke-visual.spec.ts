@@ -11,6 +11,10 @@ import { test, expect } from "@playwright/test";
 const skip = process.env.PLAYWRIGHT_SKIP === "1";
 const noScreenshots = process.env.PLAYWRIGHT_NO_SCREENSHOTS === "1";
 
+if (process.env.CI && (skip || noScreenshots)) {
+  throw new Error("CI must run the visual suite with screenshot assertions enabled");
+}
+
 type VisualRoute = {
   path: string;
   name: string;
@@ -25,14 +29,18 @@ const routes: VisualRoute[] = [
   { path: "/", name: "home" },
   { path: "/", name: "home-dark", theme: "dark" },
   { path: "/", name: "home-high-contrast", theme: "high-contrast" },
-  { path: "/ja", name: "home-ja" },
+  { path: "/ja", name: "home-ja", linuxBaseline: true },
   { path: "/ja", name: "home-ja-mobile", viewport: { width: 320, height: 640 }, linuxBaseline: true },
+  { path: "/en/brand", name: "brand", linuxBaseline: true },
+  { path: "/en/brand", name: "brand-mobile", viewport: { width: 360, height: 720 }, linuxBaseline: true },
+  { path: "/ja/brand", name: "brand-ja", linuxBaseline: true },
+  { path: "/ja/brand", name: "brand-ja-mobile", viewport: { width: 360, height: 720 }, linuxBaseline: true },
   { path: "/components", name: "components" },
   { path: "/components", name: "components-rtl", direction: "rtl" },
-  { path: "/motion", name: "motion-reduced", reducedMotion: true },
+  { path: "/motion", name: "motion-reduced", reducedMotion: true, linuxBaseline: true },
   { path: "/references", name: "references", linuxBaseline: true },
-  { path: "/ja/components/alert-dialog", name: "component-detail-ja-mobile", viewport: { width: 320, height: 640 } },
-  { path: "/ja/motion/enter", name: "motion-detail-ja" },
+  { path: "/ja/components/alert-dialog", name: "component-detail-ja-mobile", viewport: { width: 320, height: 640 }, linuxBaseline: true },
+  { path: "/ja/motion/enter", name: "motion-detail-ja", linuxBaseline: true },
   { path: "/ja/references/ref.apple.hig-accessibility", name: "reference-detail-ja-mobile", viewport: { width: 320, height: 640 }, linuxBaseline: true },
 ];
 
@@ -64,7 +72,7 @@ test.describe("docs visual smoke", () => {
         ? `${route.name}-linux.png`
         : `${route.name}.png`;
       await expect(page).toHaveScreenshot(snapshotName, {
-        maxDiffPixelRatio: 0.03,
+        maxDiffPixelRatio: 0.01,
         fullPage: true,
       });
     });

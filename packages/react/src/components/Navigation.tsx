@@ -1,6 +1,6 @@
 "use client";
 
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 import { Button } from "./Button";
 import { Link } from "./Link";
 

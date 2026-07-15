@@ -2,6 +2,10 @@
 .remember/
 .planning/
 .worktrees/
+.claude/
+.codex/
+.tokensave/
+.superpowers/
 Awesome DS要件.md
 
 # OS / editor
@@ -28,3 +32,4 @@ reports/*.md
 !reports/freshness-summary.md
 .firecrawl/
 .playwright-cli/
+.vercel/

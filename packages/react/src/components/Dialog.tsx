@@ -1,6 +1,6 @@
 "use client";
 
-import { cx } from "@awesome-ds/core";
+import { cx } from "@awesome-ds/core/runtime";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import {
   Button as AriaButton,
@@ -9,7 +9,7 @@ import {
   Modal,
   ModalOverlay,
 } from "react-aria-components";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 
 export const dialogMetadata = getComponentMetadata("dialog");
 

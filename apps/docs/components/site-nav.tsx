@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { nav } from "../lib/navigation";
 import { type Dictionary, type Locale, localizePathname, stripLocaleFromPathname } from "../lib/i18n";
 
-const sections = ["explore", "build", "practice", "assure"] as const;
+const sections = ["start", "explore", "build", "verify"] as const;
 
 const sectionLabels = {
-  en: { explore: "Understand", build: "Build", practice: "Practice", assure: "Assure" },
-  ja: { explore: "理解する", build: "つくる", practice: "実践する", assure: "確かめる" },
+  en: { start: "Start", explore: "Explore", build: "Build", verify: "Verify" },
+  ja: { start: "はじめる", explore: "見つける", build: "つくる", verify: "確かめる" },
 } as const;
 
 export function SiteNav({ locale, labels, ariaLabel }: { locale: Locale; labels: Dictionary["nav"]; ariaLabel: string }) {
@@ -22,7 +22,7 @@ export function SiteNav({ locale, labels, ariaLabel }: { locale: Locale; labels:
           <div>
             {nav.filter((item) => item.section === section).map((item) => {
               const current = item.href === "/" ? pathname === "/" : pathname === item.href || pathname.startsWith(item.href + "/");
-              return <Link key={item.href} href={localizePathname(item.href, locale)} aria-current={current ? "page" : undefined}><span>{labels[item.label] ?? item.label}</span><i aria-hidden="true" /></Link>;
+              return <Link key={item.href} href={localizePathname(item.href, locale)} prefetch={false} aria-current={current ? "page" : undefined}><span>{labels[item.label] ?? item.label}</span><i aria-hidden="true" /></Link>;
             })}
           </div>
         </div>

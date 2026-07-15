@@ -26,6 +26,18 @@ describe("semantic tokens", () => {
     }
   });
 
+  test("framework accent default is brand-neutral, not the AwesomeDS ember", () => {
+    // The portable package must not ship AwesomeDS's warm ember (hue ~43-48) as
+    // its default identity; the docs brand layer applies the ember by overriding
+    // the same semantic role. The neutral placeholder is a blue (hue 255).
+    for (const theme of [lightTheme, darkTheme, highContrastTheme]) {
+      expect(theme["color-accent"]).toContain("255");
+    }
+    expect(lightTheme["color-accent"]).not.toContain(" 43)");
+    expect(darkTheme["color-accent"]).not.toContain(" 48)");
+    expect(highContrastTheme["color-accent"]).not.toContain(" 42)");
+  });
+
   test("themes share the same role keys", () => {
     const keys = Object.keys(lightTheme).sort();
     expect(Object.keys(darkTheme).sort()).toEqual(keys);

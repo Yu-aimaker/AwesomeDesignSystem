@@ -1,16 +1,20 @@
 import type { ColorRoles, MotionTokens, SpaceScale, ThemeName } from "./types";
 
 export const primitives = {
-  brand: {
-    50: "oklch(0.971 0.013 264)",
-    100: "oklch(0.936 0.032 264)",
-    500: "oklch(0.637 0.200 264)",
-    600: "oklch(0.560 0.190 264)",
-    700: "oklch(0.476 0.160 264)",
-  },
-  accent: {
-    500: "oklch(0.780 0.210 84)",
-    600: "oklch(0.700 0.190 84)",
+  // Portable, BRAND-NEUTRAL interaction signal. The framework ships a neutral blue
+  // placeholder so no consuming product inherits AwesomeDS's identity by default.
+  // AwesomeDS's own ember (warm vermilion, hue ~43) is NOT defined here — it lives
+  // in the docs brand layer (apps/docs/app/globals.css), which overrides the
+  // `--color-accent`/`--color-accent-hover`/`--color-ring` roles. Consumers re-theme
+  // by pointing these same roles at their own hue, without touching component logic.
+  // Lightness/chroma mirror the retired ember scale so WCAG 2.2 AA contrast holds.
+  signal: {
+    50: "oklch(0.972 0.014 255)",
+    100: "oklch(0.940 0.033 255)",
+    500: "oklch(0.685 0.150 255)",
+    600: "oklch(0.600 0.170 255)",
+    700: "oklch(0.520 0.160 255)",
+    800: "oklch(0.455 0.150 255)",
   },
   neutral: {
     0: "oklch(1 0 0)",
@@ -110,16 +114,16 @@ export const lightTheme: ColorRoles = {
   "color-fg-subtle": primitives.neutral[500],
   "color-border": primitives.neutral[200],
   "color-border-subtle": primitives.neutral[100],
-  "color-accent": primitives.brand[700],
+  "color-accent": primitives.signal[700],
   "color-accent-fg": primitives.neutral[0],
-  "color-accent-hover": primitives.brand[600],
+  "color-accent-hover": primitives.signal[800],
   "color-success": "oklch(0.48 0.14 150)",
   "color-success-fg": primitives.neutral[0],
   "color-warning": "oklch(0.72 0.14 80)",
   "color-warning-fg": primitives.neutral[950],
   "color-danger": "oklch(0.48 0.20 25)",
   "color-danger-fg": primitives.neutral[0],
-  "color-ring": primitives.brand[600],
+  "color-ring": primitives.signal[600],
 };
 
 export const darkTheme: ColorRoles = {
@@ -132,16 +136,17 @@ export const darkTheme: ColorRoles = {
   "color-fg-subtle": primitives.neutral[500],
   "color-border": primitives.neutral[700],
   "color-border-subtle": primitives.neutral[800],
-  "color-accent": "oklch(0.704 0.165 264)",
+  // Brand-neutral accent on the dark plane (see primitives.signal comment).
+  "color-accent": "oklch(0.735 0.150 255)",
   "color-accent-fg": primitives.neutral[950],
-  "color-accent-hover": primitives.brand[500],
+  "color-accent-hover": primitives.signal[500],
   "color-success": primitives.success,
   "color-success-fg": primitives.neutral[950],
   "color-warning": primitives.warning,
   "color-warning-fg": primitives.neutral[950],
   "color-danger": primitives.danger,
   "color-danger-fg": primitives.neutral[0],
-  "color-ring": "oklch(0.704 0.165 264)",
+  "color-ring": "oklch(0.735 0.150 255)",
 };
 
 export const highContrastTheme: ColorRoles = {
@@ -154,9 +159,10 @@ export const highContrastTheme: ColorRoles = {
   "color-fg-subtle": "oklch(0.25 0 0)",
   "color-border": "oklch(0 0 0)",
   "color-border-subtle": "oklch(0.2 0 0)",
-  "color-accent": "oklch(0.35 0.2 264)",
+  // Brand-neutral accent for the forced high-contrast accommodation.
+  "color-accent": "oklch(0.42 0.19 255)",
   "color-accent-fg": "oklch(1 0 0)",
-  "color-accent-hover": "oklch(0.25 0.18 264)",
+  "color-accent-hover": "oklch(0.33 0.17 255)",
   "color-success": "oklch(0.35 0.16 150)",
   "color-success-fg": "oklch(1 0 0)",
   "color-warning": "oklch(0.55 0.16 80)",

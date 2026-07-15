@@ -18,9 +18,31 @@ test("tooltip has one trigger and supports keyboard dismissal", async ({ page })
   await page.goto("/ja/components/tooltip", { waitUntil: "networkidle" });
   const trigger = page.getByRole("button", { name: "ホバー・フォーカス" });
   await expect(trigger).toHaveCount(1);
+  // The trigger is present in SSR HTML before React Aria has attached its
+  // focus handlers. Under parallel load, focusing during that narrow window
+  // loses the event and leaves focus parked forever without opening a tooltip.
+  // Wait for the actual hydrated node instead of adding a timing sleep/retry.
+  await expect
+    .poll(() =>
+      trigger.evaluate((element) =>
+        Object.keys(element).some((key) => key.startsWith("__reactProps$")),
+      ),
+    )
+    .toBe(true);
+  // Position next to the trigger, then enter it through a real keyboard path.
+  // React Aria intentionally distinguishes keyboard focus from a scripted
+  // `.focus()` call when deciding whether a tooltip should open.
   await trigger.focus();
   await page.keyboard.press("Tab");
   await expect(trigger).not.toBeFocused();
+  await page.keyboard.press("Shift+Tab");
+  await expect(trigger).toBeFocused();
+  await expect(page.getByRole("tooltip")).toHaveText("詳しい情報");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
+  await page.keyboard.press("Tab");
+  await expect(trigger).not.toBeFocused();
+  await expect(page.getByRole("tooltip")).toHaveCount(0);
   await page.keyboard.press("Shift+Tab");
   await expect(trigger).toBeFocused();
   await expect(page.getByRole("tooltip")).toHaveText("詳しい情報");

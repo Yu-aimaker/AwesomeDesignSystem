@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="AwesomeDesignSystem — la capa de gusto para agentes de IA" width="100%">
+<img src="./assets/banner.svg" alt="AwesomeDS — estética que puedes probar; el instrumento de diseño evidence-first para personas y agentes de IA" width="100%">
 
 &nbsp;
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
-[![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
-[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-las-cinco-skills)
-[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-inicio-rápido)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-18181B?style=flat-square)](./LICENSE)
+[![Reference Atlas: 128](https://img.shields.io/badge/Reference_Atlas-128-C0472A?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-18181B?style=flat-square)](./content/canon)
+[![Components: 32](https://img.shields.io/badge/components-32-18181B?style=flat-square)](./packages/react)
+[![Skills: 5](https://img.shields.io/badge/skills-5-18181B?style=flat-square)](#las-cinco-skills)
+[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#inicio-rápido)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-18181B?style=flat-square)](./CONTRIBUTING.md)
 
 [English](./README.md) · [日本語](./README.ja.md) · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · **Español**
 
@@ -18,10 +18,19 @@
 
 ---
 
-> **Evita la mediana. Comprométete con un punto de vista.**  
-> AwesomeDesignSystem ya no es solo “Markdown + skills”. Es una **plataforma de diseño para agentes de IA**: doctrina curada, grafo de evidencia versionado, tokens/componentes/motion ejecutables y un sitio de docs local bilingüe (EN/JA) — para que los agentes entreguen UI moderna (2026) con sensación humana, no “AI slop”.
+> **Estética que puedes probar. Evita la mediana.**
+>
+> AwesomeDesignSystem ya no es solo “Markdown + skills”. Es un **instrumento de diseño evidence-first** para personas y agentes de IA: doctrina curada, un grafo de evidencia versionado, tokens/componentes/motion ejecutables y un sitio de docs bilingüe (EN/JA) — para que cada decisión se remonte a una fuente primaria, no a la mediana genérica del “AI slop”.
+>
+> Cuatro verbos de navegación lo organizan todo: **Start** (el Canon y sus principios) · **Explore** (Reference Atlas, guía de IA, marca) · **Build** (fundamentos, componentes, motion, patrones, interacción) · **Verify** (review, estado, playground). El bucle de producción es **Start → Build → Verify**; **Explore** es la capa de referencia que abres en cualquier paso.
 
-## 🧭 Por qué existe
+## El sistema, dibujado
+
+<img src="./assets/diagram-evidence-loop.svg" alt="Bucle de evidencia de AwesomeDS: una regla canónica enlaza con una referencia mantenida, se convierte en un artefacto y vuelve a verificarse con pruebas, accesibilidad y frescura" width="100%">
+
+<img src="./assets/diagram-canon-to-verify.svg" alt="Ruta de construcción de AwesomeDS: las reglas canónicas se ramifican en tokens semánticos, componentes y contratos de movimiento antes de converger en la verificación" width="100%">
+
+## Por qué existe
 
 Pide a un LLM “haz un landing” y casi nunca obtienes _diseño_: obtienes la **mediana estadística** de cada tutorial de Tailwind. Inter, degradado púrpura-azul, hero centrado, tres tarjetas con emoji. El modelo cae al centro salvo que lo dirijas.
 
@@ -34,7 +43,7 @@ AwesomeDesignSystem dirige con **cuatro capas enlazadas**:
 | **Executable** | Tokens, React base, motion, contratos de marca | `packages/`              |
 | **Verbs**      | Skills de agente con divulgación progresiva    | `skills/` + `install.sh` |
 
-## 🎁 Qué obtienes
+## Qué obtienes
 
 | Resultado                   | Cómo                                                        |
 | --------------------------- | ----------------------------------------------------------- |
@@ -46,9 +55,9 @@ AwesomeDesignSystem dirige con **cuatro capas enlazadas**:
 | **Mantenerse actualizado**  | Freshness, links y CI                                       |
 | **Explorar en local**       | Docs Next.js en **EN/JA** (`/en/*`, `/ja/*`)                |
 
-Grafo actual (validado): **105 Reference Atlas · 42 reglas canon · 54 artifacts · 6 signals en cuarentena**.
+Grafo actual (validado): **128 Reference Atlas · 47 reglas canon · 54 artifacts · 6 signals en cuarentena**.
 
-## 📂 Qué hay dentro
+## Qué hay dentro
 
 ```
 design-system/     canon legible por humanos
@@ -59,17 +68,17 @@ skills/            cinco skills portátiles
 research/ · docs/ · scripts/
 ```
 
-## 🛠️ Las cinco skills
+## Las cinco skills
 
-|     | Skill              | Para…                                       |
-| :-: | ------------------ | ------------------------------------------- |
-| 🎨  | **/AwesomeDS**     | Construir o refinar UI con la capa de gusto |
-| 🏗️  | **/MakeAwesomeDS** | Generar el DS propio del producto           |
-| 📄  | **/AwesomeHTML**   | Markdown → HTML de un solo archivo          |
-| 🔍  | **/AwesomeReview** | Auditar slop y fallos de a11y               |
-| ✨  | **/AwesomeMotion** | Motion con propósito                        |
+|      | Skill              | Para…                                       |
+| :--: | ------------------ | ------------------------------------------- |
+| `01` | **/AwesomeDS**     | Construir o refinar UI con la capa de gusto |
+| `02` | **/MakeAwesomeDS** | Generar el DS propio del producto           |
+| `03` | **/AwesomeHTML**   | Markdown → HTML de un solo archivo          |
+| `04` | **/AwesomeReview** | Auditar slop y fallos de a11y               |
+| `05` | **/AwesomeMotion** | Motion con propósito                        |
 
-## 🚀 Inicio rápido
+## Inicio rápido
 
 ### 1) Agente de IA — sin instalar
 
@@ -95,22 +104,22 @@ pnpm validate && pnpm test && pnpm qa:core
 
 Ver [`docs/architecture.md`](./docs/architecture.md) y [`docs/completion-audit.md`](./docs/completion-audit.md).
 
-## 📐 El estándar en un aliento
+## El estándar en un aliento
 
 > Evita la mediana. Un color dominante + acentos nítidos. Tipografía deliberada. Jerarquía real; un foco por pantalla. La contención es confianza. El motion comunica estado. Tematiza primitivos. Diseña error / vacío / carga. WCAG 2.2 AA. Un **todo** coherente.
 
-## 🔬 Evidencia y frescura
+## Evidencia y frescura
 
 - Reference Atlas, reglas canon, signals en cuarentena
 - `pnpm check:links` · `pnpm check:freshness` · `pnpm evidence:check`
 - **No es un listado de enlaces** — las fuentes se absorben en doctrina y contratos ejecutables, validados por el grafo.
 
-## 🌐 Localización
+## Localización
 
 UI de docs en inglés y japonés. El Markdown canon es inglés primero; el fallback se marca de forma explícita.
 
-## 🤝 Contribuir · ⚖️ Licencia
+## Contribuir · Licencia
 
 [CONTRIBUTING.md](./CONTRIBUTING.md) · [MIT](./LICENSE)
 
-<div align="center"><sub>Hecho para que la IA diseñe como si tuviera gusto. 🎨</sub></div>
+<div align="center"><sub>Hecho para que la IA diseñe con una estética que puede probar.</sub></div>

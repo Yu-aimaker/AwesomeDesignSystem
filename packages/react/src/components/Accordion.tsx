@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 
 export const accordionMetadata = getComponentMetadata("accordion");
 export type AccordionItem = { id: string; title: string; content: ReactNode };

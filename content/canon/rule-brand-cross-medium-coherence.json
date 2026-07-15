@@ -23,7 +23,8 @@
     "ref.duolingo.logos",
     "ref.duolingo.marketing-assets",
     "ref.duolingo.typography",
-    "ref.duolingo.writing-voice"
+    "ref.duolingo.writing-voice",
+    "ref.matrix.build"
   ],
   "artifactIds": [
     "artifact.doc.brand-coherence",

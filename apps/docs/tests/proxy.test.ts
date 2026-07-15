@@ -66,3 +66,24 @@ describe("locale proxy trust boundary", () => {
     );
   });
 });
+
+describe("locale-aware OG image routing", () => {
+  test("the bare /opengraph-image stays locale-neutral (one shared raster)", () => {
+    const response = proxy(
+      new NextRequest("https://awesome.test/opengraph-image", {
+        headers: { "accept-language": "ja" },
+      }),
+    );
+    expect(response.status).toBe(200);
+    expect(response.headers.get("location")).toBeNull();
+    expect(response.cookies.get("awesome-locale")).toBeUndefined();
+  });
+
+  test("a direct /ja/opengraph-image request resolves the OG route with the ja locale", () => {
+    const response = proxy(new NextRequest("https://awesome.test/ja/opengraph-image"));
+    expect(response.headers.get("x-middleware-rewrite")).toBe(
+      "https://awesome.test/opengraph-image",
+    );
+    expect(response.headers.get("x-middleware-request-x-awesome-locale")).toBe("ja");
+  });
+});

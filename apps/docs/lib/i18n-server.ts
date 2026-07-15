@@ -6,3 +6,7 @@ export async function getRequestLocale(): Promise<Locale> {
   const value = (await headers()).get("x-awesome-locale");
   return value && isLocale(value) ? value : DEFAULT_LOCALE;
 }
+
+export async function getRequestNonce(): Promise<string | undefined> {
+  return (await headers()).get("x-nonce") ?? undefined;
+}

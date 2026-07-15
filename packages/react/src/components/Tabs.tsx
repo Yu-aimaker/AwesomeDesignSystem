@@ -7,7 +7,7 @@ import {
   TabPanel,
   Tabs as AriaTabs,
 } from "react-aria-components";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 
 export const tabsMetadata = getComponentMetadata("tabs");
 

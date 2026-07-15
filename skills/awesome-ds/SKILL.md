@@ -88,6 +88,7 @@ Before shipping, run the **Anti-AI-Slop Pre-Flight checklist** in `human-not-ai.
 
 Before major UI work, also load:
 - `../../DESIGN.md` (agent contract)
+- For AwesomeDS-facing output, also load `../../design-system/brand/awesomeds-brand.md`; do not impose AwesomeDS's proof-mark/ember identity on third-party brands.
 - `../../skills/shared/rule-contract.md`
 - `../../skills/shared/reference-atlas.md`
 - Relevant canon under `../../design-system/` via INDEX

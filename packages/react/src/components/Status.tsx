@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 import { Button } from "./Button";
 
 export const statusMetadata = getComponentMetadata("empty-state");

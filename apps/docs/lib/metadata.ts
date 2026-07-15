@@ -54,7 +54,9 @@ export async function createLocalizedMetadata(
       url: canonical,
       locale: locale === "ja" ? "ja_JP" : "en_US",
       alternateLocale: [locale === "ja" ? "en_US" : "ja_JP"],
-      images: ["/opengraph-image"],
+      // The OG raster is intentionally locale-neutral (see opengraph-image.tsx);
+      // locale awareness is carried by og:locale + the localized alt text.
+      images: [{ url: "/opengraph-image", alt: dictionary.metadata.ogAlt }],
     },
     twitter: {
       card: "summary_large_image",

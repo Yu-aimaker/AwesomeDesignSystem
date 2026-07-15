@@ -5,6 +5,7 @@ import { getRequestLocale } from "../lib/i18n-server";
 import { parseSidebarState, SIDEBAR_COOKIE } from "../lib/sidebar-state";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigationDisclosure } from "./mobile-navigation-disclosure";
+import { ProofMark } from "./proof-mark";
 import { SidebarToggle } from "./sidebar-toggle";
 import { SiteNav } from "./site-nav";
 
@@ -26,7 +27,7 @@ export async function SiteShell({
           <div className="rail-heading">
             <div className="brand">
               <Link href={`/${locale}`} className="brand-lockup" aria-label={dictionary.shell.home}>
-                <span className="brand-mark" aria-hidden="true"><i /><i /><i /></span>
+                <ProofMark className="brand-mark" size={22} />
                 <span><strong translate="no">AwesomeDS</strong><small>{dictionary.shell.tagline}</small></span>
               </Link>
             </div>

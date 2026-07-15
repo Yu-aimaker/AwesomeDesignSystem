@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 — Proof Grammar Rebrand (2026-07-16)
+
+- Rebuilt the docs narrative around START, EXPLORE, BUILD, and VERIFY, with an interactive Proof Calibrator and evidence-first home page.
+- Established the AwesomeDS brand system across site, five localized READMEs, banner, OG, icons, diagrams, token boundaries, motion, copy, and distributed skills.
+- Expanded the validated graph to **128** references, **47** canon rules, **54** artifacts, and **6** quarantined signals.
+- Added native English/Japanese brand contract and personality content plus accessible stacked mobile diagrams.
+- Separated neutral framework-package accents from the AwesomeDS-only ember brand layer.
+- Added locale-aware metadata, locale-neutral PWA/OG surfaces, maskable icons, strict nonce CSP, OSV/Dependabot automation, and runtime/bundle budgets.
+- Strengthened browser QA with hydrated WCAG scans, 1px mobile reflow, forced-RTL logical-layout bounds, 1% visual tolerance, and EN/JA brand desktop/mobile baselines for macOS and Linux.
+- Removed Japanese webfont payloads and split lightweight metadata/runtime entry points from authoring-only catalogs.
+
 ## 0.2.0 — AwesomeDS Platform (2026-07-13)
 
 Major upgrade from a Markdown + skills knowledge base into an **executable, evidence-linked design platform**.

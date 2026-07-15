@@ -15,8 +15,8 @@ import {
   type ButtonProps as AriaButtonProps,
   type LinkProps as AriaLinkProps,
 } from "react-aria-components";
-import { cx, stateAttributes } from "@awesome-ds/core";
-import { getComponentMetadata } from "../contracts";
+import { cx, stateAttributes } from "@awesome-ds/core/runtime";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 import { Button, type ButtonProps } from "./Button";
 import { IconButton, type IconButtonProps } from "./IconButton";
 import { Link, type LinkProps } from "./Link";

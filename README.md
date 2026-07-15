@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="AwesomeDesignSystem — the taste layer for AI agents" width="100%">
+<img src="./assets/banner.svg" alt="AwesomeDS — taste you can prove · the evidence-first design instrument for people and AI agents" width="100%">
 
 &nbsp;
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
-[![Reference Atlas: 127](https://img.shields.io/badge/Reference_Atlas-127-E5484D?style=flat-square)](./content/references)
-[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
-[![Components: 32](https://img.shields.io/badge/components-32-D6409F?style=flat-square)](./packages/react)
-[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#-the-five-skills)
-[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#-quick-start)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-18181B?style=flat-square)](./LICENSE)
+[![Reference Atlas: 128](https://img.shields.io/badge/Reference_Atlas-128-C0472A?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-18181B?style=flat-square)](./content/canon)
+[![Components: 32](https://img.shields.io/badge/components-32-18181B?style=flat-square)](./packages/react)
+[![Skills: 5](https://img.shields.io/badge/skills-5-18181B?style=flat-square)](#the-five-skills)
+[![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#quick-start)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-18181B?style=flat-square)](./CONTRIBUTING.md)
 
 **English** · [日本語](./README.ja.md) · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
 
@@ -18,10 +18,19 @@
 
 ---
 
-> **Avoid the median. Commit to a point of view.**  
-> AwesomeDesignSystem is no longer “just Markdown + skills.” It is an **AI-agent-first design platform**: curated doctrine, a versioned evidence graph, executable tokens/components/motion, and a bilingual local docs site — so agents ship modern (2026), human-feeling UI instead of generic “AI slop.”
+> **Taste you can prove. Avoid the median.**
+>
+> AwesomeDesignSystem is no longer “just Markdown + skills.” It is an **evidence-first design instrument** for people and AI agents: curated doctrine, a versioned evidence graph, executable tokens/components/motion, and a bilingual docs site — so every choice traces back to a first-party source instead of the generic “AI slop” median.
+>
+> Four navigation verbs organize everything: **Start** (the Canon and its principles) · **Explore** (the Reference Atlas, AI-design guidance, brand) · **Build** (foundations, components, motion, patterns, interaction) · **Verify** (review, status, playground). The production loop runs **Start → Build → Verify**; **Explore** is the reference layer you can open at any step. The site opens on a live _PROOF calibrator_: pick a design intent and watch it resolve to source → rule → artifact → verdict.
 
-## 🧭 Why this exists
+## The system, drawn
+
+<img src="./assets/diagram-evidence-loop.svg" alt="AwesomeDS evidence loop: a canon rule links to a maintained reference, becomes an implementation artifact, is verified by tests, accessibility, and freshness checks, then feeds evidence back into the rule" width="100%">
+
+<img src="./assets/diagram-canon-to-verify.svg" alt="AwesomeDS build path: canon rules branch into semantic tokens, components, and motion contracts, then converge at verification" width="100%">
+
+## Why this exists
 
 Ask an LLM to “build a landing page” and you rarely get _design_ — you get the **statistical median** of every Tailwind tutorial: Inter, purple-to-blue gradient, centered hero, three emoji cards. Models default to the center unless steered.
 
@@ -34,7 +43,7 @@ AwesomeDesignSystem supplies the steering in **four layers that stay linked**:
 | **Executable system** | Tokens, React baseline, motion, brand contracts     | `packages/`              |
 | **Verbs**             | Progressive-disclosure agent skills                 | `skills/` + `install.sh` |
 
-## 🎁 What you get
+## What you get
 
 | Outcome                       | How                                                            |
 | ----------------------------- | -------------------------------------------------------------- |
@@ -46,9 +55,9 @@ AwesomeDesignSystem supplies the steering in **four layers that stay linked**:
 | **Stay current**              | Freshness + link governance scripts and CI hooks               |
 | **Browse locally**            | Next.js docs site in **English / Japanese** (`/en/*`, `/ja/*`) |
 
-Current evidence graph (validated): **105 Reference Atlas records · 42 canon rules · 54 artifacts · 6 quarantined signals**.
+Current evidence graph (validated): **128 Reference Atlas records · 47 canon rules · 54 artifacts · 6 quarantined signals**.
 
-## 📂 What's inside
+## What's inside
 
 ```
 design-system/     human-readable canon (philosophy, foundations, brand, AI UX, a11y…)
@@ -81,17 +90,17 @@ scripts/           validate, freshness, evidence, link checks
 
 </details>
 
-## 🛠️ The five skills
+## The five skills
 
-|     | Skill              | Use it to…                                                          |
-| :-: | ------------------ | ------------------------------------------------------------------- |
-| 🎨  | **/AwesomeDS**     | Build or refine UI with the taste layer; load only needed modules   |
-| 🏗️  | **/MakeAwesomeDS** | Generate a product’s own DS (OKLCH tokens + `DESIGN.md` + previews) |
-| 📄  | **/AwesomeHTML**   | Turn Markdown / notes into a polished single-file HTML document     |
-| 🔍  | **/AwesomeReview** | Audit UI/code for AI slop and a11y failures; prioritized fixes      |
-| ✨  | **/AwesomeMotion** | Design purpose-driven motion (Motion for React + CSS recipes)       |
+|      | Skill              | Use it to…                                                          |
+| :--: | ------------------ | ------------------------------------------------------------------- |
+| `01` | **/AwesomeDS**     | Build or refine UI with the taste layer; load only needed modules   |
+| `02` | **/MakeAwesomeDS** | Generate a product’s own DS (OKLCH tokens + `DESIGN.md` + previews) |
+| `03` | **/AwesomeHTML**   | Turn Markdown / notes into a polished single-file HTML document     |
+| `04` | **/AwesomeReview** | Audit UI/code for AI slop and a11y failures; prioritized fixes      |
+| `05` | **/AwesomeMotion** | Design purpose-driven motion (Motion for React + CSS recipes)       |
 
-## 🚀 Quick start
+## Quick start
 
 ### 1) AI agent — no install
 
@@ -126,11 +135,11 @@ pnpm qa:core                         # lint + build + validate + tests
 
 See [`docs/architecture.md`](./docs/architecture.md), [`docs/maintenance.md`](./docs/maintenance.md), [`docs/completion-audit.md`](./docs/completion-audit.md), and [`docs/qa-report.md`](./docs/qa-report.md).
 
-## 📐 The standard, in one breath
+## The standard, in one breath
 
 > Avoid the median. Commit to a point of view. One dominant color **+** sharp accents. A deliberate typeface — never Inter-as-the-only-choice. Real hierarchy; one focal point per screen. Restraint **=** confidence. Motion communicates state, not decoration. Theme primitives; never ship raw defaults. Design error / empty / loading states. Meet WCAG 2.2 AA. A coherent **whole**, not a pile of parts.
 
-## 🎨 Design tokens — shared vocabulary
+## Design tokens — shared vocabulary
 
 Semantic OKLCH tokens, multi-theme, generated for CSS / Tailwind-friendly use via `@awesome-ds/tokens`.
 
@@ -144,7 +153,7 @@ Semantic OKLCH tokens, multi-theme, generated for CSS / Tailwind-friendly use vi
 
 Human-readable contract → [`design-system/foundations/tokens.md`](./design-system/foundations/tokens.md)
 
-## 🔬 Evidence & freshness
+## Evidence & freshness
 
 - **Reference Atlas** (`content/references/`): first-party systems (Apple, Material, Fluent, Polaris, Carbon, Primer, Spectrum, Atlassian, GOV.UK, Duolingo, Vercel, W3C, …) with medium, drift risk, and verification cadence
 - **Canon rules** (`content/canon/`): transferable doctrine with bidirectional links to refs + artifacts
@@ -153,18 +162,18 @@ Human-readable contract → [`design-system/foundations/tokens.md`](./design-sys
 
 This is **not** a link dump. Sources are absorbed into doctrine and executable contracts, then kept honest by graph validation.
 
-## 🌐 Localization
+## Localization
 
 - Docs UI: English + Japanese routes (`/en/*`, `/ja/*`), locale negotiation, hreflang + x-default
 - Canon Markdown remains English-first; Japanese UI labels English fallback content when a translation is not yet reviewed
 - Skills install and agent workflows stay language-agnostic
 
-## 🤝 Contributing
+## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md). Bar: every claim is **sourced**, substance is **embedded**, skills stay **token-thrifty**, and nothing ships that fails the anti-AI-slop pre-flight.
 
-## ⚖️ License
+## License
 
 [MIT](./LICENSE) — free to use, adapt, and build on.
 
-<div align="center"><sub>Built so AI can design like it has taste. 🎨</sub></div>
+<div align="center"><sub>Built so AI can design with taste it can prove.</sub></div>

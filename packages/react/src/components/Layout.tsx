@@ -1,6 +1,6 @@
-import { cx } from "@awesome-ds/core";
+import { cx } from "@awesome-ds/core/runtime";
 import type { HTMLAttributes, ReactNode } from "react";
-import { getComponentMetadata } from "../contracts";
+import { getComponentMetadata } from "@awesome-ds/core/metadata";
 
 export const layoutMetadata = getComponentMetadata("stack");
 export type BoxProps = HTMLAttributes<HTMLDivElement> & { children?: ReactNode };

@@ -62,6 +62,7 @@ If asked, apply the fixes — but keep the audit and the fixing as distinct step
 
 Before major UI work, also load:
 - `../../DESIGN.md` (agent contract)
+- For AwesomeDS-facing output, also load `../../design-system/brand/awesomeds-brand.md`; do not impose AwesomeDS's proof-mark/ember identity on third-party brands.
 - `../../skills/shared/rule-contract.md`
 - `../../skills/shared/reference-atlas.md`
 - Relevant canon under `../../design-system/` via INDEX
