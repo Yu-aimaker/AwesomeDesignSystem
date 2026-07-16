@@ -9,18 +9,15 @@ describe("redesigned docs information architecture", () => {
 
     expect(ja.how.steps).toHaveLength(en.how.steps.length);
     expect(ja.motion.demos).toHaveLength(en.motion.demos.length);
-    expect(ja.agents.steps).toHaveLength(en.agents.steps.length);
-    expect(ja.calibrator.intents).toHaveLength(en.calibrator.intents.length);
+    expect(ja.promise.cards).toHaveLength(en.promise.cards.length);
+    expect(ja.character.moods).toHaveLength(en.character.moods.length);
     expect(ja.scale.metrics).toHaveLength(en.scale.metrics.length);
-    expect(ja.brand.grammar).toHaveLength(en.brand.grammar.length);
+    expect(ja.install.skills).toHaveLength(en.install.skills.length);
     expect(ja.closing.quad).toHaveLength(en.closing.quad.length);
-    expect(ja.foundations.tokenLabels).toHaveLength(en.foundations.tokenLabels.length);
-    // The giant signature word stays constant across locales (one personality).
-    expect(en.hero.titleWord).toBe("PROVE");
-    expect(ja.hero.titleWord).toBe("PROVE");
     // Localized narrative copy actually differs.
     expect(en.hero.description).not.toBe(ja.hero.description);
-    expect(en.calibrator.title).not.toBe(ja.calibrator.title);
+    expect(en.hero.titleAccent).not.toBe(ja.hero.titleAccent);
+    expect(en.install.title).not.toBe(ja.install.title);
   });
 
   test("groups every public route once, into a first-time-user path", () => {
@@ -49,16 +46,15 @@ describe("redesigned docs information architecture", () => {
     const en = getHomeContent("en");
     expect(en.how.steps.map((step) => step.tag)).toEqual(["START", "BUILD", "VERIFY"]);
     expect(en.how.steps.map((step) => step.href)).toEqual(["/canon", "/components", "/status"]);
-    // The description names EXPLORE as the cross-cutting reference layer.
-    expect(en.how.description).toContain("Explore");
   });
 
-  test("Proof Calibrator stage 03 is the Artifact, not a Component", () => {
+  test("CMY identity and install path are first-class on the LP", () => {
     const en = getHomeContent("en");
     const ja = getHomeContent("ja");
-    expect(en.calibrator.stageArtifact).toBe("Artifact");
-    expect(ja.calibrator.stageArtifact).toBe("成果物");
-    expect(en.calibrator.hint).toContain("artifact");
-    expect(ja.calibrator.hint).toContain("成果物");
+    expect(en.spectrum.title.toLowerCase()).toContain("spectrum");
+    expect(ja.spectrum.body).toMatch(/シアン|CMY|3原色/);
+    expect(en.install.skills).toHaveLength(5);
+    expect(en.install.code).toContain("install.sh");
+    expect(en.character.moods.map((m) => m.mood)).toEqual(["wave", "think", "cheer"]);
   });
 });

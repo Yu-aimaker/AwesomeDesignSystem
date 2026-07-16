@@ -1,16 +1,16 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="AwesomeDS — taste you can prove · the evidence-first design instrument for people and AI agents" width="100%">
+<img src="./assets/banner.svg" alt="AwesomeDesignSystem — the taste layer for AI agents (CMY mark + OKLCH spectrum)" width="100%">
 
 &nbsp;
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-18181B?style=flat-square)](./LICENSE)
-[![Reference Atlas: 128](https://img.shields.io/badge/Reference_Atlas-128-C0472A?style=flat-square)](./content/references)
-[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-18181B?style=flat-square)](./content/canon)
+[![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
+[![Reference Atlas: 128](https://img.shields.io/badge/Reference_Atlas-128-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-18181B?style=flat-square)](./packages/react)
-[![Skills: 5](https://img.shields.io/badge/skills-5-18181B?style=flat-square)](#the-five-skills)
+[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#the-five-skills)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#quick-start)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-18181B?style=flat-square)](./CONTRIBUTING.md)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
 
 **English** · [日本語](./README.ja.md) · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
 
@@ -22,7 +22,7 @@
 >
 > AwesomeDesignSystem is no longer “just Markdown + skills.” It is an **evidence-first design instrument** for people and AI agents: curated doctrine, a versioned evidence graph, executable tokens/components/motion, and a bilingual docs site — so every choice traces back to a first-party source instead of the generic “AI slop” median.
 >
-> Four navigation verbs organize everything: **Start** (the Canon and its principles) · **Explore** (the Reference Atlas, AI-design guidance, brand) · **Build** (foundations, components, motion, patterns, interaction) · **Verify** (review, status, playground). The production loop runs **Start → Build → Verify**; **Explore** is the reference layer you can open at any step. The site opens on a live _PROOF calibrator_: pick a design intent and watch it resolve to source → rule → artifact → verdict.
+> Four navigation verbs organize everything: **Start** (the Canon and its principles) · **Explore** (the Reference Atlas, AI-design guidance, brand) · **Build** (foundations, components, motion, patterns, interaction) · **Verify** (review, status, playground). The production loop runs **Start → Build → Verify**; **Explore** is the reference layer you can open at any step. The site opens as an LP: CMY identity, Dotto the mascot, live components, motion library, and a one-command skill install.
 
 ## The system, drawn
 

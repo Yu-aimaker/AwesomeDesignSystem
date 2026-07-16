@@ -3,11 +3,10 @@ import type { ColorRoles, MotionTokens, SpaceScale, ThemeName } from "./types";
 export const primitives = {
   // Portable, BRAND-NEUTRAL interaction signal. The framework ships a neutral blue
   // placeholder so no consuming product inherits AwesomeDS's identity by default.
-  // AwesomeDS's own ember (warm vermilion, hue ~43) is NOT defined here — it lives
-  // in the docs brand layer (apps/docs/app/globals.css), which overrides the
-  // `--color-accent`/`--color-accent-hover`/`--color-ring` roles. Consumers re-theme
-  // by pointing these same roles at their own hue, without touching component logic.
-  // Lightness/chroma mirror the retired ember scale so WCAG 2.2 AA contrast holds.
+  // AwesomeDS's own CMY identity + deep-magenta accent live ONLY in the docs brand
+  // layer (apps/docs/app/globals.css), which overrides `--color-accent` /
+  // `--color-accent-hover` / `--color-ring`. Consumers re-theme by pointing these
+  // same roles at their own hue, without touching component logic.
   signal: {
     50: "oklch(0.972 0.014 255)",
     100: "oklch(0.940 0.033 255)",

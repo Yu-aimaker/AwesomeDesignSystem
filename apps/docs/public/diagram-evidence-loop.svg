@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img"
      aria-labelledby="evloop-title evloop-desc">
   <title id="evloop-title">The AwesomeDS evidence loop</title>
-  <desc id="evloop-desc">A closed loop in four stations, read left to right. Station one, Canon, holds a rule identified as rule dot star. An arrow leads to station two, Reference, a first-party source identified as ref dot star. An arrow leads to station three, Implementation, an executable artifact — a token, component, or motion recipe. An arrow leads to station four, Verify, marked with the ember proof mark, which confirms the claim against tests, accessibility, and freshness. A single ember return path arcs from Verify back to Canon, closing the loop: every rule is re-checked against its evidence. The reading surface stays white; the ember is the only signal.</desc>
+  <desc id="evloop-desc">A closed loop in four stations, read left to right. Station one, Canon, holds a rule identified as rule dot star. An arrow leads to station two, Reference, a first-party source identified as ref dot star. An arrow leads to station three, Implementation, an executable artifact — a token, component, or motion recipe. An arrow leads to station four, Verify, marked with the CMY signal mark, which confirms the claim against tests, accessibility, and freshness. A single signal return path arcs from Verify back to Canon, closing the loop: every rule is re-checked against its evidence. The reading surface stays white; the magenta signal is the only signal.</desc>
 
   <defs>
     <style>
@@ -12,12 +12,12 @@
       <path d="M0 0 L10 5 L0 10 z" fill="#18181B"/>
     </marker>
     <marker id="ev-arrow-ember" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#C0472A"/>
+      <path d="M0 0 L10 5 L0 10 z" fill="#FF2EA6"/>
     </marker>
   </defs>
 
   <rect width="960" height="380" fill="#FAFAF9"/>
-  <rect x="24" y="20" width="96" height="3" rx="1.5" fill="#C0472A"/>
+  <rect x="24" y="20" width="96" height="3" rx="1.5" fill="#FF2EA6"/>
   <text class="mono" x="24" y="52" font-size="13" letter-spacing="1.4" fill="#8C8C85">[ EVIDENCE LOOP · RULE→REF→ARTIFACT→VERIFY→RULE ]</text>
 
   <!-- Stations -->
@@ -43,12 +43,12 @@
       <text class="mono" x="20" y="70" font-size="20" font-weight="600" fill="#18181B">artifact</text>
       <text x="20" y="98" font-size="14" fill="#57574F">Token · UI · motion.</text>
     </g>
-    <!-- 04 Verify (ember proof mark) -->
+    <!-- 04 Verify (CMY signal mark) -->
     <g transform="translate(768,110)">
       <rect width="168" height="120" rx="14" fill="#FFFFFF" stroke="#E7E7E2" stroke-width="1.5"/>
       <text class="mono" x="20" y="34" font-size="12" letter-spacing="1" fill="#A2A29A">04 · VERIFY</text>
       <g transform="translate(20,52)">
-        <rect x="0" y="0" width="24" height="24" fill="#C0472A"/>
+        <rect x="0" y="0" width="24" height="24" fill="#FF2EA6"/>
         <rect x="30" y="0" width="24" height="24" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
         <rect x="36" y="6" width="12" height="12" fill="#18181B"/>
       </g>
@@ -64,7 +64,7 @@
   </g>
 
   <!-- Ember return path: Verify → Canon, closing the loop. -->
-  <path d="M852 232 C 852 320, 122 320, 122 234" fill="none" stroke="#C0472A" stroke-width="2.5"
+  <path d="M852 232 C 852 320, 122 320, 122 234" fill="none" stroke="#FF2EA6" stroke-width="2.5"
         marker-end="url(#ev-arrow-ember)"/>
-  <text class="mono" x="480" y="312" text-anchor="middle" font-size="12" letter-spacing="1.2" fill="#C0472A">re-verify against evidence</text>
+  <text class="mono" x="480" y="312" text-anchor="middle" font-size="12" letter-spacing="1.2" fill="#FF2EA6">re-verify against evidence</text>
 </svg>

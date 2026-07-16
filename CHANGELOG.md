@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — CMY Rebrand + LP Site (2026-07-16)
+
+- Restored the **CMY logomark** (cyan · magenta · yellow subtractive mixing) and designed OKLCH spectrum as the brand signature (banner, OG, icons, diagrams).
+- Retired the ember “proof mark” identity; interactive chrome now uses deep magenta `--color-accent` in the docs brand layer only.
+- Rebuilt the docs site shell as a top-header LP layout (mega “All docs” menu, no sidebar rail).
+- Redesigned the home page as a playful LP: hero, Dotto mascot moods, promise cards, spectrum stage, live components, motion library, skill install, Atlas, closing doors.
+- Updated brand bible, DESIGN.md, skills identity notes, EN/JA copy, and unit/e2e/no-js tests to the new IA.
+
 ## 0.3.0 — Proof Grammar Rebrand (2026-07-16)
 
 - Rebuilt the docs narrative around START, EXPLORE, BUILD, and VERIFY, with an interactive Proof Calibrator and evidence-first home page.

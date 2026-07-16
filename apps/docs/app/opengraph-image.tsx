@@ -1,181 +1,183 @@
 import { ImageResponse } from "next/og";
+import { CMY, CMY_MARK_UNIT, computeCmyMark } from "../lib/cmy-mark";
 import { getSiteUrl } from "../lib/metadata";
-import { computeProofMark, PROOF_MARK_UNIT } from "../lib/proof-mark";
 
-export const alt = "AwesomeDS — the evidence-first design instrument";
+export const alt = "AwesomeDS — the taste layer for AI agents";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// This OG raster is intentionally LOCALE-NEUTRAL. It is served identically to
-// /en and /ja because its language-bearing marks are the brand's locale-invariant
-// signature — the proof mark, mono registration labels, the ember signal, and the
-// Latin "prove" voice the brand bible defines as invariant across locales. Locale
-// awareness for social embeds is carried by metadata (og:locale + the localized
-// image `alt`), not by re-rendering CJK text through Satori (whose default font
-// ships no CJK glyphs). Per-locale text OG can be added later behind a CJK font.
+// Locale-neutral OG raster. Brand identity is the CMY mark + spectrum stripe.
+// Every multi-child container needs explicit display:flex (Satori constraint).
 
-// Brand grammar (kept in sync with assets/banner.svg + tokens ember signal):
-const PAPER = "#FAFAF9";
-const INK = "#18181B";
+const PAPER = CMY.paper;
+const INK = CMY.ink;
 const MUTED = "#57574F";
 const FAINT = "#A2A29A";
-const HAIRLINE = "#E4E4DF";
-const GRID_DOT = "#D7D7D0";
-const EMBER = "#C0472A";
+const HAIRLINE = "#E6E6E0";
 
 export default function OpenGraphImage() {
   const host = getSiteUrl().host;
-  // One geometry spec, shared with the header + banner (lib/proof-mark.ts).
-  const mark = computeProofMark(PROOF_MARK_UNIT);
+  const mark = computeCmyMark(CMY_MARK_UNIT);
   return new ImageResponse(
     (
       <div
         style={{
           position: "relative",
-          alignItems: "stretch",
-          background: PAPER,
-          color: INK,
           display: "flex",
           flexDirection: "column",
+          alignItems: "stretch",
+          justifyContent: "space-between",
+          background: PAPER,
+          color: INK,
           fontFamily: "Arial, sans-serif",
           height: "100%",
-          justifyContent: "space-between",
-          padding: "68px 80px",
+          padding: "64px 72px 56px",
           width: "100%",
         }}
       >
-        {/* Blueprint plane — SVG pattern is deterministic in Satori, unlike a
-            CSS radial-gradient background. */}
-        <svg
-          width={size.width}
-          height={size.height}
-          viewBox={`0 0 ${size.width} ${size.height}`}
-          style={{ position: "absolute", top: 0, left: 0 }}
-        >
-          <defs>
-            <pattern id="blueprint-dots" width="28" height="28" patternUnits="userSpaceOnUse">
-              <circle cx="1.5" cy="1.5" r="1.35" fill={GRID_DOT} />
-            </pattern>
-            <linearGradient id="blueprint-fade" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor={PAPER} stopOpacity="0" />
-              <stop offset="0.72" stopColor={PAPER} stopOpacity="0.94" />
-            </linearGradient>
-          </defs>
-          <rect width={size.width} height={size.height} fill="url(#blueprint-dots)" />
-          <rect width={size.width} height={size.height} fill="url(#blueprint-fade)" />
-        </svg>
-        {/* Instrument registration bar — the ember signature edge. */}
         <div
           style={{
             position: "absolute",
             top: 0,
-            left: 80,
-            width: 108,
-            height: 5,
-            background: EMBER,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: "flex",
+            backgroundImage:
+              "radial-gradient(circle at 12% 18%, rgba(21,199,222,0.16), transparent 32%), radial-gradient(circle at 88% 22%, rgba(255,46,166,0.12), transparent 30%), radial-gradient(circle at 70% 88%, rgba(255,212,0,0.14), transparent 34%)",
           }}
         />
-        {/* Content paints above the plane by DOM order (Satori ignores z-index). */}
+
         <div
           style={{
-            alignItems: "center",
+            position: "relative",
             display: "flex",
+            alignItems: "center",
             justifyContent: "space-between",
           }}
         >
-          <div style={{ alignItems: "center", display: "flex" }}>
-            {/* The proof mark — ember square + knocked-out registration square. */}
-            <div style={{ display: "flex", marginRight: 20 }}>
-              <div style={{ width: mark.side, height: mark.side, background: EMBER }} />
-              <div
-                style={{
-                  width: mark.side,
-                  height: mark.side,
-                  marginLeft: mark.gap,
-                  border: `${mark.stroke}px solid ${INK}`,
-                  boxSizing: "border-box",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <div style={{ width: mark.knockout, height: mark.knockout, background: INK }} />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              style={{
+                position: "relative",
+                display: "flex",
+                width: mark.width,
+                height: mark.height,
+                marginRight: 20,
+              }}
+            >
+              {mark.circles.map((circle) => (
+                <div
+                  key={circle.id}
+                  style={{
+                    position: "absolute",
+                    display: "flex",
+                    left: circle.cx - circle.r,
+                    top: circle.cy - circle.r,
+                    width: circle.r * 2,
+                    height: circle.r * 2,
+                    borderRadius: 9999,
+                    background: circle.fill,
+                    opacity: 0.92,
+                  }}
+                />
+              ))}
+            </div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ display: "flex", fontSize: 34, fontWeight: 800, letterSpacing: -1 }}>
+                AwesomeDesignSystem
+              </div>
+              <div style={{ display: "flex", color: MUTED, fontSize: 18, marginTop: 4 }}>
+                The taste layer for AI agents
               </div>
             </div>
-            <span style={{ fontSize: 26, fontWeight: 700, letterSpacing: "-0.02em" }}>
-              AwesomeDS
-            </span>
           </div>
-          <span
+          <div
             style={{
+              display: "flex",
               color: FAINT,
-              fontSize: 18,
-              fontWeight: 500,
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
+              fontFamily: "ui-monospace, monospace",
+              fontSize: 16,
             }}
           >
-            x1200 · y630 · v2026.07
-          </span>
+            {host}
+          </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            gap: 18,
+          }}
+        >
           <div
             style={{
-              color: EMBER,
               display: "flex",
-              fontSize: 20,
-              fontWeight: 700,
-              letterSpacing: "0.16em",
-              marginBottom: 22,
-              textTransform: "uppercase",
-            }}
-          >
-            Evidence-first · Agent-readable · Japanese-first
-          </div>
-          <div
-            style={{
-              fontFamily: "Georgia, serif",
-              fontSize: 92,
-              fontWeight: 500,
-              letterSpacing: "-0.045em",
-              lineHeight: 1.0,
-              maxWidth: 1000,
-            }}
-          >
-            Taste you can prove.
-          </div>
-          <div
-            style={{
-              color: MUTED,
-              display: "flex",
-              fontSize: 26,
-              lineHeight: 1.3,
-              marginTop: 26,
+              fontSize: 56,
+              fontWeight: 800,
+              letterSpacing: -1.8,
+              lineHeight: 1.05,
               maxWidth: 900,
             }}
           >
-            A source-cited Canon, semantic tokens, live components, and skills — one
-            design instrument for people and AI agents.
+            Stop shipping AI slop. Ship taste.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              color: MUTED,
+              fontSize: 24,
+              maxWidth: 820,
+              lineHeight: 1.4,
+            }}
+          >
+            Living Canon · semantic tokens · accessible React · motion with a job — every claim
+            traceable to a source.
           </div>
         </div>
 
         <div
           style={{
-            alignItems: "center",
-            borderTop: `2px solid ${HAIRLINE}`,
-            color: FAINT,
+            position: "relative",
             display: "flex",
-            fontSize: 19,
-            justifyContent: "space-between",
-            paddingTop: 26,
+            flexDirection: "column",
+            gap: 16,
           }}
         >
-          <span>rule.* → ref.* evidence · WCAG 2.2 AA · freshness-tracked</span>
-          <span>{host}</span>
+          <div style={{ display: "flex", gap: 8 }}>
+            {CMY.spectrum.map((color) => (
+              <div
+                key={color}
+                style={{
+                  display: "flex",
+                  width: 48,
+                  height: 18,
+                  borderRadius: 999,
+                  background: color,
+                }}
+              />
+            ))}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderTop: `1px solid ${HAIRLINE}`,
+              paddingTop: 18,
+              color: FAINT,
+              fontFamily: "ui-monospace, monospace",
+              fontSize: 15,
+            }}
+          >
+            <span style={{ display: "flex" }}>CMY · OKLCH · WCAG 2.2 AA · JP-first</span>
+            <span style={{ display: "flex" }}>read design-system/INDEX.md first</span>
+          </div>
         </div>
       </div>
     ),
-    size,
+    { ...size },
   );
 }

@@ -4,13 +4,13 @@
 
 &nbsp;
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-18181B?style=flat-square)](./LICENSE)
-[![Reference Atlas: 128](https://img.shields.io/badge/Reference_Atlas-128-C0472A?style=flat-square)](./content/references)
-[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-18181B?style=flat-square)](./content/canon)
+[![License: MIT](https://img.shields.io/badge/License-MIT-1FB8B8?style=flat-square)](./LICENSE)
+[![Reference Atlas: 128](https://img.shields.io/badge/Reference_Atlas-128-E5484D?style=flat-square)](./content/references)
+[![Canon rules: 47](https://img.shields.io/badge/canon_rules-47-7C5CFC?style=flat-square)](./content/canon)
 [![Components: 32](https://img.shields.io/badge/components-32-18181B?style=flat-square)](./packages/react)
-[![Skills: 5](https://img.shields.io/badge/skills-5-18181B?style=flat-square)](#5つのスキル)
+[![Skills: 5](https://img.shields.io/badge/skills-5-46C26B?style=flat-square)](#5つのスキル)
 [![Built for: AI agents](https://img.shields.io/badge/built_for-AI_agents-18181D?style=flat-square)](#クイックスタート)
-[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-18181B?style=flat-square)](./CONTRIBUTING.md)
+[![PRs: welcome](https://img.shields.io/badge/PRs-welcome-1FB8B8?style=flat-square)](./CONTRIBUTING.md)
 
 [English](./README.md) · **日本語** · [简体中文](./README.zh-Hans.md) · [한국어](./README.ko.md) · [Español](./README.es.md)
 
@@ -22,7 +22,7 @@
 >
 > AwesomeDesignSystem はもう「Markdown + スキルだけ」ではない。人とAIエージェントのための **根拠を起点にするデザインの計器**だ。キュレーションされた教義、版管理された証拠グラフ、実行可能なトークン／コンポーネント／モーション、そして日英のドキュメントサイト——あらゆる選択が、汎用的な「AIスロップ」の中央値ではなく一次情報まで辿れる。
 >
-> すべてを4つのナビゲーション動詞で編成する。**はじめる**（体系と原則）· **見つける**（リファレンス・アトラス、AIデザイン指針、ブランド）· **つくる**（基礎・コンポーネント・モーション・パターン・インタラクション）· **確かめる**（レビュー・ステータス・プレイグラウンド）。制作ループは **はじめる → つくる → 確かめる**、**見つける** はどの段階でも開ける参照レイヤー。サイトを開くとライブの _PROOF calibrator_ が動く：デザインの意図を選ぶと、情報源 → ルール → 成果物 → 判定へと解決していく。
+> すべてを4つのナビゲーション動詞で編成する。**はじめる**（体系と原則）· **見つける**（リファレンス・アトラス、AIデザイン指針、ブランド）· **つくる**（基礎・コンポーネント・モーション・パターン・インタラクション）· **確かめる**（レビュー・ステータス・プレイグラウンド）。制作ループは **はじめる → つくる → 確かめる**、**見つける** はどの段階でも開ける参照レイヤー。サイトはLPとして開く：CMYアイデンティティ、マスコットDotto、ライブコンポーネント、モーションライブラリ、ワンコマンドのスキル導入。
 
 ## 図で見るAwesomeDS
 

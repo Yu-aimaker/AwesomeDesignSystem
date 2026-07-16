@@ -1,11 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AwesomeDS proof mark maskable icon">
-  <title>AwesomeDS proof mark</title>
-  <!-- Full-bleed paper background; all meaningful geometry stays inside the
-       central 80% maskable safe zone. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AwesomeDS CMY mark maskable icon">
+  <title>AwesomeDS</title>
   <rect width="512" height="512" fill="#FAFAF9"/>
-  <rect x="121" y="112" width="90" height="10" rx="5" fill="#C0472A"/>
-  <!-- Canonical proof-mark ratios: side 120, gap 30, stroke 10, knockout 60. -->
-  <rect x="121" y="196" width="120" height="120" fill="#C0472A"/>
-  <rect x="271" y="196" width="120" height="120" fill="none" stroke="#18181B" stroke-width="10"/>
-  <rect x="301" y="226" width="60" height="60" fill="#18181B"/>
+  <g style="mix-blend-mode:multiply" transform="translate(96,96)">
+    <circle cx="160" cy="96" r="96" fill="#15C7DE"/>
+    <circle cx="96" cy="208" r="96" fill="#FF2EA6"/>
+    <circle cx="224" cy="208" r="96" fill="#FFD400"/>
+  </g>
 </svg>

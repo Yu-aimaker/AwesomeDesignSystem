@@ -45,10 +45,11 @@ describe("brand surface is bilingual, readable, and honest", () => {
       expect(publicSvg).toBe(svg);
       expect(svg.startsWith("<svg")).toBe(true);
       expect(svg).toContain("viewBox");
-      expect(svg).toContain("#C0472A"); // the single ember signal
+      expect(svg).toContain("#FF2EA6"); // magenta brand signal
       expect(svg).toContain("#FAFAF9"); // white/paper reading plane
       expect(svg).toContain("<title");
       expect(svg).toContain("<desc");
+      expect(svg).not.toContain("#C0472A");
     }
   });
 
@@ -61,11 +62,15 @@ describe("brand surface is bilingual, readable, and honest", () => {
     expect(generated.start_url).toBe("/");
     expect(generated.id).toBe("/");
     expect(generated.lang).toBeUndefined();
+    expect(generated.theme_color).toBe("#FF2EA6");
   });
 
-  test("the ember hue is applied in the docs brand layer, not baked into tokens", () => {
+  test("the CMY brand accent is applied in the docs brand layer, not baked into tokens", () => {
     const globals = readFileSync(path.resolve(here, "../app/globals.css"), "utf8");
-    expect(globals).toContain("--color-accent: oklch(0.522 0.166 43)");
+    expect(globals).toContain("--ads-cmy-cyan");
+    expect(globals).toContain("--ads-cmy-magenta");
+    expect(globals).toContain("--ads-cmy-yellow");
+    expect(globals).toContain("oklch(0.50 0.22 350)");
     expect(globals.toLowerCase()).toContain("docs brand layer");
   });
 });

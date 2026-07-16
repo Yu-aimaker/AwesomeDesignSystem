@@ -42,7 +42,7 @@ pnpm --filter @awesome-ds/docs dev
 
 ## Brand bible requirements
 - **AwesomeDS's own brand is defined in `design-system/brand/awesomeds-brand.md`** (Purpose/Tone/Constraints/Differentiation, signature visual grammar, voice/tone matrix, ship gate). Load it first for any AwesomeDS-facing surface, then `design-system/brand/cross-medium-coherence.md` for product-brand work.
-- Signature grammar (implemented in `globals.css`, `assets/banner.svg`, `opengraph-image.tsx`): the ember **proof mark**, the blueprint dot plane, monospace registration labels, and the single ember `--color-accent` signal. No rainbow/stock-gradient decoration.
+- Signature grammar (implemented in `globals.css`, `assets/banner.svg`, `opengraph-image.tsx`): the **CMY logomark** (cyan · magenta · yellow subtractive mixing), the designed OKLCH **spectrum** stripe, white paper + dark ink, and a deep-magenta `--color-accent` for interactive chrome. No dark heroes; no retired ember identity.
 - Voice/tone matrix is mandatory for product copy.
 - Illustration/character work requires grammar + misuse rules (original IP only).
 - Duolingo Design is a case study source (`ref.duolingo.*`); never copy Duo assets.

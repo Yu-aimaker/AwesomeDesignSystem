@@ -40,23 +40,20 @@ test("locale switch preserves query parameters before hydration", async ({ page 
   );
 });
 
-test("site navigation remains operable when a persisted desktop rail was collapsed", async ({ page, context }) => {
+test("site navigation remains operable without JavaScript", async ({ page, context }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/en", { waitUntil: "domcontentloaded" });
-  await context.addCookies([
-    { name: "awesome-sidebar", value: "collapsed", url: new URL(page.url()).origin },
-  ]);
-  await page.reload({ waitUntil: "domcontentloaded" });
 
-  await expect(page.locator("#desktop-site-navigation")).toBeVisible();
-  await expect(page.locator(".sidebar-toggle")).toBeHidden();
-  await expect(page.locator("#desktop-site-navigation").getByRole("link", { name: "Canon" })).toBeVisible();
+  await expect(page.locator(".site-header")).toBeVisible();
+  await expect(page.locator(".site-header__desktop").getByRole("link", { name: "Canon" })).toBeVisible();
+  await expect(page.locator(".site-header__desktop").getByRole("link", { name: "Motion" })).toBeVisible();
 
   await context.clearCookies();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/en", { waitUntil: "domcontentloaded" });
-  const disclosure = page.locator(".nav-disclosure");
-  await disclosure.locator("summary").click();
+  const disclosure = page.locator("details.nav-disclosure");
+  await disclosure.locator(":scope > summary").click();
   await expect(disclosure).toHaveAttribute("open", "");
   await expect(page.locator("#mobile-site-navigation").getByRole("link", { name: "Canon" })).toBeVisible();
 });
+

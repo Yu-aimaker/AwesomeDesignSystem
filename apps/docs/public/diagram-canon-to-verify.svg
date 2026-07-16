@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img"
      aria-labelledby="c2v-title c2v-desc">
   <title id="c2v-title">Canon to verify — the AwesomeDS build path</title>
-  <desc id="c2v-desc">A left-to-right build path in three stages. Stage one, Canon, is a single rule identified as rule dot star. It fans out into stage two, a bounded set of three executable artifacts stacked together: semantic tokens, accessible components, and motion contracts. These converge into stage three, Verify, marked with the ember proof mark, where the composed interface is checked against states, accessibility, evidence, and freshness before it ships. Fan-out arrows are ink; the converging arrow into Verify is ember, the single signal. The reading surface stays white throughout.</desc>
+  <desc id="c2v-desc">A left-to-right build path in three stages. Stage one, Canon, is a single rule identified as rule dot star. It fans out into stage two, a bounded set of three executable artifacts stacked together: semantic tokens, accessible components, and motion contracts. These converge into stage three, Verify, marked with the CMY signal mark, where the composed interface is checked against states, accessibility, evidence, and freshness before it ships. Fan-out arrows are ink; the converging arrow into Verify is magenta, the brand signal. The reading surface stays white throughout.</desc>
 
   <defs>
     <style>
@@ -12,12 +12,12 @@
       <path d="M0 0 L10 5 L0 10 z" fill="#18181B"/>
     </marker>
     <marker id="c2v-arrow-ember" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0 L10 5 L0 10 z" fill="#C0472A"/>
+      <path d="M0 0 L10 5 L0 10 z" fill="#FF2EA6"/>
     </marker>
   </defs>
 
   <rect width="960" height="380" fill="#FAFAF9"/>
-  <rect x="24" y="20" width="96" height="3" rx="1.5" fill="#C0472A"/>
+  <rect x="24" y="20" width="96" height="3" rx="1.5" fill="#FF2EA6"/>
   <text class="mono" x="24" y="52" font-size="13" letter-spacing="1.4" fill="#8C8C85">[ BUILD PATH · CANON→TOKENS·COMPONENTS·MOTION→VERIFY ]</text>
 
   <!-- Stage 1 — Canon -->
@@ -38,17 +38,17 @@
   <g class="body">
     <g transform="translate(394,80)">
       <rect width="220" height="56" rx="12" fill="#FFFFFF" stroke="#E7E7E2" stroke-width="1.5"/>
-      <rect x="20" y="24" width="10" height="10" fill="#C0472A"/>
+      <rect x="20" y="24" width="10" height="10" fill="#FF2EA6"/>
       <text class="mono" x="42" y="34" font-size="15" fill="#18181B">semantic tokens</text>
     </g>
     <g transform="translate(394,162)">
       <rect width="220" height="56" rx="12" fill="#FFFFFF" stroke="#E7E7E2" stroke-width="1.5"/>
-      <rect x="20" y="24" width="10" height="10" fill="#C0472A"/>
+      <rect x="20" y="24" width="10" height="10" fill="#FF2EA6"/>
       <text class="mono" x="42" y="34" font-size="15" fill="#18181B">components</text>
     </g>
     <g transform="translate(394,244)">
       <rect width="220" height="56" rx="12" fill="#FFFFFF" stroke="#E7E7E2" stroke-width="1.5"/>
-      <rect x="20" y="24" width="10" height="10" fill="#C0472A"/>
+      <rect x="20" y="24" width="10" height="10" fill="#FF2EA6"/>
       <text class="mono" x="42" y="34" font-size="15" fill="#18181B">motion contracts</text>
     </g>
   </g>
@@ -60,16 +60,16 @@
     <path d="M616 272 C 690 272, 690 190, 726 190"/>
   </g>
 
-  <!-- Stage 3 — Verify (ember proof mark) -->
+  <!-- Stage 3 — Verify (CMY signal mark) -->
   <g class="body" transform="translate(760,140)">
     <rect width="176" height="100" rx="14" fill="#FFFFFF" stroke="#E7E7E2" stroke-width="1.5"/>
     <text class="mono" x="20" y="32" font-size="12" letter-spacing="1" fill="#A2A29A">VERIFY</text>
     <g transform="translate(20,44)">
-      <rect x="0" y="0" width="24" height="24" fill="#C0472A"/>
+      <rect x="0" y="0" width="24" height="24" fill="#FF2EA6"/>
       <rect x="30" y="0" width="24" height="24" fill="#FFFFFF" stroke="#18181B" stroke-width="2"/>
       <rect x="36" y="6" width="12" height="12" fill="#18181B"/>
     </g>
   </g>
   <!-- Ember signal into verify -->
-  <line x1="726" y1="190" x2="758" y2="190" stroke="#C0472A" stroke-width="2.5" marker-end="url(#c2v-arrow-ember)"/>
+  <line x1="726" y1="190" x2="758" y2="190" stroke="#FF2EA6" stroke-width="2.5" marker-end="url(#c2v-arrow-ember)"/>
 </svg>

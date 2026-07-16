@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { getDictionary, localizePathname } from "../lib/i18n";
 import { getRequestLocale } from "../lib/i18n-server";
-import { parseSidebarState, SIDEBAR_COOKIE } from "../lib/sidebar-state";
+import { AdsCharacter } from "./ads-character";
+import { CmyMark } from "./cmy-mark";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNavigationDisclosure } from "./mobile-navigation-disclosure";
-import { ProofMark } from "./proof-mark";
-import { SidebarToggle } from "./sidebar-toggle";
 import { SiteNav } from "./site-nav";
 
 export async function SiteShell({
@@ -18,67 +16,123 @@ export async function SiteShell({
 }) {
   const locale = await getRequestLocale();
   const dictionary = getDictionary(locale);
-  const sidebarState = parseSidebarState((await cookies()).get(SIDEBAR_COOKIE)?.value);
+  const isJa = locale === "ja";
+
   return (
     <>
-      <a className="skip-link" href="#main">{dictionary.shell.skipToContent}</a>
-      <div className="shell" data-sidebar-state={sidebarState}>
-        <aside className="sidebar" aria-label={dictionary.shell.primary}>
-          <div className="rail-heading">
+      <a className="skip-link" href="#main">
+        {dictionary.shell.skipToContent}
+      </a>
+
+      <div className="shell">
+        <header className="site-header">
+          <div className="site-header__inner">
             <div className="brand">
-              <Link href={`/${locale}`} className="brand-lockup" aria-label={dictionary.shell.home}>
-                <ProofMark className="brand-mark" size={22} />
-                <span><strong translate="no">AwesomeDS</strong><small>{dictionary.shell.tagline}</small></span>
+              <Link
+                href={`/${locale}`}
+                className="brand-lockup"
+                aria-label={dictionary.shell.home}
+              >
+                <CmyMark className="brand-mark" size={32} />
+                <span>
+                  <strong translate="no">AwesomeDS</strong>
+                  <small>{dictionary.shell.tagline}</small>
+                </span>
               </Link>
             </div>
-            <SidebarToggle
-              initialState={sidebarState}
-              collapseLabel={dictionary.shell.collapseSidebar}
-              expandLabel={dictionary.shell.expandSidebar}
-            />
-            <MobileNavigationDisclosure label={dictionary.shell.navigationMenu}>
-              <div className="nav-panel" id="mobile-site-navigation">
-                <SiteNav locale={locale} labels={dictionary.nav} ariaLabel={dictionary.shell.site} />
-                <div className="rail-utilities rail-utilities--mobile">
-                  {controls}
-                  <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
-                </div>
-              </div>
-            </MobileNavigationDisclosure>
-          </div>
-          <div className="desktop-navigation" id="desktop-site-navigation"><SiteNav locale={locale} labels={dictionary.nav} ariaLabel={dictionary.shell.site} /></div>
-          <div className="rail-utilities rail-utilities--desktop">
-            {controls}
-            <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
-          </div>
-        </aside>
-        <div className="main-column">
-          <main id="main" className="main">{children}</main>
-          <footer className="site-footer">
-            <div>
-              <Link href={`/${locale}`} className="footer-brand" translate="no">AwesomeDS</Link>
-              <p>{locale === "ja" ? "根拠に基づく、AI時代のデザイン実践体系。" : "Evidence-backed design intelligence for the AI era."}</p>
+
+            <div className="site-header__desktop">
+              <SiteNav
+                locale={locale}
+                labels={dictionary.nav}
+                ariaLabel={dictionary.shell.site}
+              />
             </div>
-            <p className="footer-path"><code>DESIGN.md</code><span>→</span><code>rule.*</code><span>→</span><code>UI</code><span>→</span><code>verify</code></p>
-            <nav aria-label={locale === "ja" ? "フッター" : "Footer"}>
-              <Link href={localizePathname("/canon", locale)}>{dictionary.nav.Canon}</Link>
-              <Link href={localizePathname("/references", locale)}>{dictionary.nav["Reference Atlas"]}</Link>
-              <Link href={localizePathname("/status", locale)}>{dictionary.nav.Status}</Link>
-            </nav>
-          </footer>
-        </div>
+
+            <div className="site-header__actions">
+              <div className="site-header__utilities site-header__utilities--desktop">
+                {controls}
+                <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
+              </div>
+              <Link
+                className="header-cta"
+                href={localizePathname("/canon", locale)}
+              >
+                {isJa ? "体系を読む" : "Enter the Canon"}
+              </Link>
+              <MobileNavigationDisclosure label={dictionary.shell.navigationMenu}>
+                <div className="nav-panel" id="mobile-site-navigation">
+                  <SiteNav
+                    locale={locale}
+                    labels={dictionary.nav}
+                    ariaLabel={dictionary.shell.site}
+                  />
+                  <div className="site-header__utilities site-header__utilities--mobile">
+                    {controls}
+                    <LocaleSwitcher locale={locale} label={dictionary.shell.language} />
+                  </div>
+                </div>
+              </MobileNavigationDisclosure>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" className="main">
+          {children}
+        </main>
+
+        <footer className="site-footer">
+          <div className="site-footer__brand">
+            <Link href={`/${locale}`} className="footer-brand" translate="no">
+              <CmyMark size={28} breathe={false} />
+              AwesomeDS
+            </Link>
+            <p>
+              {isJa
+                ? "AIに美意識を。根拠つきで、遊び心つきで。"
+                : "Taste for AI agents — with receipts, and a little joy."}
+            </p>
+          </div>
+
+          <div className="site-footer__mascot" aria-hidden="true">
+            <AdsCharacter mood="cheer" size={88} />
+          </div>
+
+          <nav
+            className="site-footer__nav"
+            aria-label={isJa ? "フッター" : "Footer"}
+          >
+            <Link href={localizePathname("/canon", locale)}>
+              {dictionary.nav.Canon}
+            </Link>
+            <Link href={localizePathname("/components", locale)}>
+              {dictionary.nav.Components}
+            </Link>
+            <Link href={localizePathname("/motion", locale)}>
+              {dictionary.nav.Motion}
+            </Link>
+            <Link href={localizePathname("/references", locale)}>
+              {dictionary.nav["Reference Atlas"]}
+            </Link>
+            <Link href={localizePathname("/status", locale)}>
+              {dictionary.nav.Status}
+            </Link>
+            <Link href={localizePathname("/reports", locale)}>
+              {dictionary.nav.Reports}
+            </Link>
+          </nav>
+
+          <p className="footer-path">
+            <code>DESIGN.md</code>
+            <span>→</span>
+            <code>rule.*</code>
+            <span>→</span>
+            <code>UI</code>
+            <span>→</span>
+            <code>verify</code>
+          </p>
+        </footer>
       </div>
-      <noscript>
-        <style>{`@media (min-width: 68rem) {
-          html .shell[data-sidebar-state="collapsed"] { grid-template-columns: var(--docs-rail) minmax(0, 1fr); }
-          html .shell[data-sidebar-state="collapsed"] .sidebar { padding: var(--space-6) var(--space-5); }
-          html .shell[data-sidebar-state="collapsed"] .rail-heading { flex-direction: row; }
-          html .shell[data-sidebar-state="collapsed"] .brand-lockup > span:last-child { display: flex; }
-          html .shell[data-sidebar-state="collapsed"] .desktop-navigation { display: block; }
-          html .shell[data-sidebar-state="collapsed"] .rail-utilities--desktop { display: flex; }
-          html .shell[data-sidebar-state="collapsed"] .sidebar-toggle { display: none; }
-        }`}</style>
-      </noscript>
     </>
   );
 }

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Awesome Design System",
     short_name: "AwesomeDS",
     description:
-      "Evidence-backed design intelligence for humans and AI agents.",
+      "The taste layer for AI agents — doctrine, tokens, components, and motion with receipts.",
     // Locale-neutral entry: "/" is negotiated by the proxy (cookie →
     // Accept-Language → default) and redirected to /en or /ja, so a Japanese
     // install is never forced onto the English route. `id` stays "/" so the PWA
@@ -14,7 +14,7 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "standalone",
     background_color: "#FAFAF9",
-    theme_color: "#C0472A",
+    theme_color: "#FF2EA6",
     categories: ["design", "developer", "education"],
     icons: [
       {

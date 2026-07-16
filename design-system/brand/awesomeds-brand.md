@@ -31,21 +31,17 @@ AwesomeDS's own **evidence-first · agent-readable · Japanese-first** identity.
 living Canon, semantic tokens, accessible components, motion contracts, and instructions that
 **both people and AI agents** can verify — so a good decision can always be traced to a source.
 
-**Tone.** *Confident instrument.* Editorial and calm like a well-set publication; engineered and
-exact like measurement equipment. Never cute, never hype, never a logo wall. We show the reading,
-not the applause.
+**Tone.** *Playful precision.* Editorial enough to teach, bold enough to remember — like matrix.build's
+narrative courage, Nothing's industrial restraint, and Duolingo's one personality across media.
+White paper, CMY energy, dark ink. Never sterile, never hype-slop, never a logo wall.
 
 **Constraints (non-negotiable).**
-- White reading surface, dark ink. A dark instrument panel may appear as one isolated,
-  content-bounded data plane in a long page; it is deliberate, never the hero, and never the page.
-  This is the brand's *default* surface and the one every marketing/hero/README/OG surface uses.
-  The site's `data-theme="dark"` is **not** a second brand look: it is an explicit, user-opted
-  accommodation (a preference/accessibility choice, defaulting to light and set only via the theme
-  control), governed by the same semantic tokens. Light-first is the contract; dark is an opt-in
-  rendering of it, never the authored first impression. High-contrast is likewise an accommodation,
-  not a separate identity.
-- One authored interaction color (the ember **signal**). Status colors carry only status.
-- Semantic tokens only; no raw hex/oklch in product UI.
+- White reading surface, dark ink. Never a dark hero. A dark panel may appear as one isolated,
+  content-bounded data plane; it is deliberate, never the page. Light-first is the contract;
+  `data-theme="dark"` is an opt-in accommodation, not a second identity.
+- **CMY logomark** (cyan · magenta · yellow) + designed OKLCH **spectrum** as brand decoration.
+  Interactive chrome uses a **deep magenta** `--color-accent` (AA on white). Status colors carry only status.
+- Semantic tokens only; no raw hex/oklch in product UI (brand assets and the docs brand layer are the exception).
 - WCAG 2.2 AA, visible `:focus-visible`, full keyboard paths, `prefers-reduced-motion` honored.
 - Japanese-first typography is a first-class citizen, not a translation afterthought.
 - Every doctrine claim links to maintained evidence (`rule.* → ref.*`). No unsourced authority.
@@ -53,7 +49,7 @@ not the applause.
 **Differentiation.** Design references usually sell *aesthetics*. AwesomeDS ships *aesthetics with
 receipts*: a freshness-tracked Reference Atlas, an evidence graph you can validate (`pnpm validate`),
 executable components as the documentation, and a contract compact enough for an agent to obey.
-The signature is the **proof mark**: taste that points back at its evidence.
+The signature is the **CMY mark + spectrum**: taste you can open, run, and verify — with a little joy.
 
 ---
 
@@ -75,49 +71,38 @@ AwesomeDS behaves like a **principal designer who keeps their sources open on th
 The grammar is what makes an AwesomeDS surface recognizable in one glance, independent of content.
 It is implemented in `apps/docs/app/globals.css`, `assets/banner.svg`, and `app/opengraph-image.tsx`.
 
-### 3.1 The proof mark (primary signature)
-A small **ember square** (the `--color-accent` signal) paired with a knocked-out registration
-square — a target/registration glyph meaning *"this is verified; here is where it points."* It
-appears as: the eyebrow tick before every section label, the wordmark accent, the banner/OG mark.
-- Rule: **one dominant ember signal per hierarchy level** — never a second, competing accent hue.
-  The *same* ember signal may recur as several marks (the registration bar, the proof mark, the
-  wordmark tick, the measured ruler) **only when they read as one coherent registration system**,
-  not as scattered decoration. So the banner's ember bar + proof mark + underline + ruler are on
-  contract (one signal, one registration system); a second accent, or ember spread as ornament,
-  is not. Ember never becomes a large fill field.
+### 3.1 The CMY logomark (primary signature)
+Three overlapping circles — **cyan `#15C7DE` · magenta `#FF2EA6` · yellow `#FFD400`** — in
+subtractive mixing (`mix-blend-mode: multiply`). The 🎨 metaphor, drawn. It is the brand's
+primary signature on the site header, README banner, OG image, and app icon.
 
-**One geometry, three surfaces.** The mark's proportions are defined once, as ratios of the shared
-square side, in `apps/docs/lib/proof-mark.ts` (`gap = ¼·side`, `stroke = 1⁄12·side`, `knockout =
-½·side`, centered). The site header renders it via the shared `<ProofMark>` React component, the
-Open Graph image (`app/opengraph-image.tsx`) computes the same geometry through `computeProofMark`,
-and the static `assets/banner.svg` reproduces it by hand at the canonical unit (side 36 → gap 9,
-stroke 3, knockout 18). `apps/docs/tests/proof-mark-geometry.test.ts` asserts the static banner and
-the OG source stay locked to that spec, so the signature can never silently drift between media.
-The eyebrow tick is the mark's reduced form (ember square only). Ink and ember map to `--color-fg`
-and `--color-accent`, so the mark tracks the active theme and survives `forced-colors` as a signal.
+**One geometry, three surfaces.** Ratios live in `apps/docs/lib/cmy-mark.ts`. The site renders
+`<CmyMark>`, OG uses `computeCmyMark`, and `assets/banner.svg` hand-authors the same cluster.
+`apps/docs/tests/cmy-mark-geometry.test.ts` locks the contract so the mark cannot silently drift.
+A calm "breathe" motion is decorative only and halts under `prefers-reduced-motion`.
 
-### 3.2 The blueprint plane
-A faint hairline **dot field** (`--color-border` dots on `--color-bg`), faded out toward content.
-It signals "measuring surface" without darkening the reading area. Used behind the hero.
+### 3.2 The OKLCH spectrum
+An 8-stop hue-stepped spectrum (same lightness/chroma, designed — not a random rainbow) as the
+signature underline and footer stripe. It appears on the banner, OG, and hero accent chips.
 
-### 3.3 Registration / instrument labels
-Monospace, uppercase, letter-spaced labels rendered as engineered indices:
-`[ DS · CANON→BUILD→EVIDENCE ]`, `x1200 · y630 · v2026.07`, `01 · COLOR`. Coordinates over
-adjectives. This is the Nothing lesson expressed in our own vocabulary.
+### 3.3 Soft CMY field
+Faint cyan / magenta / yellow radial washes plus a hairline dot grid behind the LP hero —
+energy without darkening the reading surface.
 
-### 3.4 The live-instrument bar
-A 2px ember segment on the top-left edge of "instrument" surfaces (the evidence instrument),
-reading as a *powered / verifying* indicator.
+### 3.4 Registration labels
+Monospace, uppercase, letter-spaced indices (`01 · COLOR`, `CANON → BUILD → VERIFY`). Coordinates
+over adjectives. This is the Nothing lesson in our vocabulary.
 
-### 3.5 Type pairing
+### 3.5 Character (Dotto)
+An original CMY mascot used on the LP and motion demos. Playful motion that still honors reduced
+motion. Never third-party IP (no Duo assets).
+
+### 3.6 Type pairing
 - **Display / editorial:** Newsreader (serif) — the publication voice; big, tight, `text-wrap: balance`.
 - **UI / body:** IBM Plex Sans — precise, neutral, engineered.
 - **Mono / labels:** IBM Plex Mono — the instrument's readout.
-- **Japanese:** Noto Sans JP with its own leading, tracking, and line-breaking (`<wbr>` per phrase,
-  heavier weight, looser line-height). Latin-centric bans (em-dash/curly-quote rules) relax under JP.
-- **Locale-invariant signature word:** `PROVE.` stays Latin in the Japanese hero as a compact
-  product mark, paired with a Japanese lead sentence and Japanese-first body rhythm. It is not a
-  translation fallback; if the lead or supporting copy disappears, the invariant word must not stand alone.
+- **Japanese:** Platform native Japanese UI faces with their own leading, tracking, and line-breaking.
+  Latin-centric bans (em-dash/curly-quote rules) relax under JP.
 
 The generated Open Graph image uses Georgia/Arial as an explicit Satori rendering fallback. Variable
 Newsreader/Plex webfonts remain canonical for browser and SVG surfaces; OG preserves their editorial/UI
@@ -133,12 +118,18 @@ role contrast, spacing, proof mark, grid, and ember signal without adding duplic
 The former purple (hue 264) was retired: it violated the system's own "no purple-on-white"
 non-negotiable and read as generic. Ember is authored, warm, and legible as "signal / verified".
 
-### 3.7 Misuse (forbidden)
-- ✗ Rainbow / spectrum decoration (the old banner) — replaced by one measured ember ruler.
-- ✗ Ember as a large background fill, or two accents competing.
+### 3.7 Color signal — interaction accent
+The CMY mark is the *identity*. Interactive chrome uses deep magenta
+`--color-accent: oklch(0.50 0.22 350)` (docs brand layer) so UI chrome meets WCAG 2.2 AA on white.
+Yellow and cyan decorate; they are not body text colors.
+
+### 3.8 Misuse (forbidden)
+- ✗ Random multi-hue decoration that is not the designed OKLCH spectrum.
+- ✗ Magenta/cyan/yellow as large full-bleed backgrounds that kill contrast.
 - ✗ Dark full-page hero, white-on-black reading surfaces.
-- ✗ Decorative dot-grid over text (it is a *plane behind*, always faded).
+- ✗ Decorative field over text (washes and grids stay *behind*, always faded).
 - ✗ Registration labels used as body copy.
+- ✗ Retired ember proof-mark geometry (`#C0472A` squares) on any AwesomeDS surface.
 
 ---
 
@@ -158,16 +149,17 @@ example, cite the evidence, and stop. We prefer verbs to adjectives and readings
 | Error / needs-review | honest, actionable | "Evidence graph needs review — 2 rules lack a linked source." |
 | Agent instruction | imperative, compact | "Read DESIGN.md → cite `rule.*` → compose `@awesome-ds/react` → verify states + a11y + evidence." |
 
-**Verbal character — who speaks:** the *instrument*, not a mascot. It reports; it does not sell.
-It never says "revolutionary", "magic", "effortless", or claims authority without a citation.
+**Verbal character — who speaks:** a principal designer who keeps sources open — with Dotto as
+optional joy on marketing surfaces, never as the voice of doctrine. We never say "revolutionary",
+"magic", or "effortless", and never claim authority without a citation.
 
 ---
 
 ## 5. Motion personality
 
-`MOTION_INTENSITY 6/10`. Movement is a *readout*, not a performance.
+`MOTION_INTENSITY 6/10`. Movement is purposeful play, not decoration spam.
 - One orchestrated entrance per page load; then stillness. (`ads-motion-enter`.)
-- Ember marks may **pulse slowly** (calm "powered" breathing, ≥4s), never flash.
+- CMY orbs may **breathe slowly** (≥5s); Dotto may bob/wave; both halt under reduced motion.
 - Enter/feedback/reveal recipes are purpose-declared (`@awesome-ds/motion`); each states where it
   does *not* belong and its reduced-motion replacement.
 - `prefers-reduced-motion: reduce` → all decorative motion halts; state changes remain instant.
