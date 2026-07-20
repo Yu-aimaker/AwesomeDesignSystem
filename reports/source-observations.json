@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-07-15T20:14:48.481Z",
+  "generatedAt": "2026-07-20T08:52:18.741Z",
   "observations": [
     {
       "sourceId": "ref.a11y.axe-core",
       "url": "https://github.com/dequelabs/axe-core",
-      "observedAt": "2026-07-15T20:14:48.988Z",
+      "observedAt": "2026-07-20T08:52:19.021Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:7e2a26c69641abc8574bf23e2fd6d2345ec436d9cac0aab07b822a24a6d737ac",
-      "lastSuccessfulHash": "sha256:7e2a26c69641abc8574bf23e2fd6d2345ec436d9cac0aab07b822a24a6d737ac",
+      "contentHash": "sha256:223e6b564d984ec6d31b96f6610ffe1e95a350bcb83969d78bb2c61635c51384",
+      "lastSuccessfulHash": "sha256:223e6b564d984ec6d31b96f6610ffe1e95a350bcb83969d78bb2c61635c51384",
       "lastSuccessfulHashes": {
-        "github": "sha256:7e2a26c69641abc8574bf23e2fd6d2345ec436d9cac0aab07b822a24a6d737ac"
+        "github": "sha256:223e6b564d984ec6d31b96f6610ffe1e95a350bcb83969d78bb2c61635c51384"
       },
       "adapter": "github",
       "adapterHealth": "healthy",
-      "revision": "develop|2026-07-15T19:41:50Z|v4.12.1|2026-06-10T10:27:13Z"
+      "revision": "develop|2026-07-17T16:27:23Z|v4.12.1|2026-06-10T10:27:13Z"
     },
     {
       "sourceId": "ref.a2ui.protocol",
       "url": "https://a2ui.org/",
-      "observedAt": "2026-07-15T20:14:48.605Z",
+      "observedAt": "2026-07-20T08:52:19.193Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -30,15 +30,15 @@
       "lastSuccessfulHashes": {
         "http": "sha256:8f5e52066af1d2b5e46308fa57bff927b06e5e22987433b80660254217ff3958"
       },
-      "etag": "W/\"6a552ddf-13217\"",
-      "lastModified": "Mon, 13 Jul 2026 18:26:39 GMT",
-      "lastSuccessfulEtag": "W/\"6a552ddf-13217\"",
-      "lastSuccessfulLastModified": "Mon, 13 Jul 2026 18:26:39 GMT"
+      "etag": "W/\"6a5ab168-13217\"",
+      "lastModified": "Fri, 17 Jul 2026 22:49:12 GMT",
+      "lastSuccessfulEtag": "W/\"6a5ab168-13217\"",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 22:49:12 GMT"
     },
     {
       "sourceId": "ref.adobe.react-aria",
       "url": "https://react-spectrum.adobe.com/react-aria/",
-      "observedAt": "2026-07-15T20:14:49.033Z",
+      "observedAt": "2026-07-20T08:52:19.386Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -56,7 +56,7 @@
     {
       "sourceId": "ref.adobe.spectrum-accessibility",
       "url": "https://spectrum.adobe.com/page/accessibility/",
-      "observedAt": "2026-07-15T20:14:49.722Z",
+      "observedAt": "2026-07-20T08:52:19.496Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -74,7 +74,7 @@
     {
       "sourceId": "ref.adobe.spectrum-principles",
       "url": "https://spectrum.adobe.com/page/design-principles/",
-      "observedAt": "2026-07-15T20:14:49.687Z",
+      "observedAt": "2026-07-20T08:52:19.275Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -92,7 +92,7 @@
     {
       "sourceId": "ref.adobe.spectrum",
       "url": "https://spectrum.adobe.com/",
-      "observedAt": "2026-07-15T20:14:48.621Z",
+      "observedAt": "2026-07-20T08:52:19.169Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -110,7 +110,7 @@
     {
       "sourceId": "ref.airbnb.design",
       "url": "https://airbnb.design/",
-      "observedAt": "2026-07-15T20:14:50.118Z",
+      "observedAt": "2026-07-20T08:52:20.742Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -124,7 +124,7 @@
     {
       "sourceId": "ref.ameba.spindle",
       "url": "https://spindle.ameba.design/",
-      "observedAt": "2026-07-15T20:14:48.940Z",
+      "observedAt": "2026-07-20T08:52:19.354Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -142,37 +142,37 @@
     {
       "sourceId": "ref.anthropic.building-effective-agents",
       "url": "https://www.anthropic.com/engineering/building-effective-agents",
-      "observedAt": "2026-07-15T20:15:10.527Z",
-      "result": "unchanged",
-      "attempts": 3,
+      "observedAt": "2026-07-20T08:52:21.195Z",
+      "result": "changed",
+      "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:d5dee063be8dced9a10333ad336be6694624a0ce2bf5fb91ef335dd8f87b883c",
+      "contentHash": "sha256:e755858b5e73e20dfb5016ec9412cb26f29d1167e7a541fb8ea67131eac105cb",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:d5dee063be8dced9a10333ad336be6694624a0ce2bf5fb91ef335dd8f87b883c",
+      "lastSuccessfulHash": "sha256:e755858b5e73e20dfb5016ec9412cb26f29d1167e7a541fb8ea67131eac105cb",
       "lastSuccessfulHashes": {
-        "http": "sha256:d5dee063be8dced9a10333ad336be6694624a0ce2bf5fb91ef335dd8f87b883c"
+        "http": "sha256:e755858b5e73e20dfb5016ec9412cb26f29d1167e7a541fb8ea67131eac105cb"
       }
     },
     {
       "sourceId": "ref.anthropic.mcp-spec",
       "url": "https://modelcontextprotocol.io/",
-      "observedAt": "2026-07-15T20:14:49.354Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:19.686Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:40503bcbac399972b5a6d076d5e635d79de1609825d907e0c94f14cfb8d04812",
+      "contentHash": "sha256:d4c788bc4fb1272a4449cdb97edac666092c48e0ffec9f9d7e71d7ae764d9fda",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:40503bcbac399972b5a6d076d5e635d79de1609825d907e0c94f14cfb8d04812",
+      "lastSuccessfulHash": "sha256:d4c788bc4fb1272a4449cdb97edac666092c48e0ffec9f9d7e71d7ae764d9fda",
       "lastSuccessfulHashes": {
-        "http": "sha256:40503bcbac399972b5a6d076d5e635d79de1609825d907e0c94f14cfb8d04812"
+        "http": "sha256:d4c788bc4fb1272a4449cdb97edac666092c48e0ffec9f9d7e71d7ae764d9fda"
       },
-      "lastModified": "Wed, 15 Jul 2026 18:23:49 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 18:23:49 GMT"
+      "lastModified": "Sat, 18 Jul 2026 18:08:39 GMT",
+      "lastSuccessfulLastModified": "Sat, 18 Jul 2026 18:08:39 GMT"
     },
     {
       "sourceId": "ref.apple.hig-accessibility",
       "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
-      "observedAt": "2026-07-15T20:14:50.080Z",
+      "observedAt": "2026-07-20T08:52:19.930Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -188,7 +188,7 @@
     {
       "sourceId": "ref.apple.hig-color",
       "url": "https://developer.apple.com/design/human-interface-guidelines/color",
-      "observedAt": "2026-07-15T20:14:50.331Z",
+      "observedAt": "2026-07-20T08:52:19.578Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -204,7 +204,7 @@
     {
       "sourceId": "ref.apple.hig-foundations",
       "url": "https://developer.apple.com/design/human-interface-guidelines/foundations",
-      "observedAt": "2026-07-15T20:14:50.564Z",
+      "observedAt": "2026-07-20T08:52:20.042Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -220,7 +220,7 @@
     {
       "sourceId": "ref.apple.hig-machine-learning",
       "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
-      "observedAt": "2026-07-15T20:14:50.742Z",
+      "observedAt": "2026-07-20T08:52:19.763Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -236,7 +236,7 @@
     {
       "sourceId": "ref.apple.hig-motion",
       "url": "https://developer.apple.com/design/human-interface-guidelines/motion",
-      "observedAt": "2026-07-15T20:14:51.498Z",
+      "observedAt": "2026-07-20T08:52:20.231Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -252,7 +252,7 @@
     {
       "sourceId": "ref.apple.hig-spatial",
       "url": "https://developer.apple.com/design/human-interface-guidelines/spatial-layout",
-      "observedAt": "2026-07-15T20:14:50.968Z",
+      "observedAt": "2026-07-20T08:52:19.931Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -268,7 +268,7 @@
     {
       "sourceId": "ref.apple.hig-typography",
       "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
-      "observedAt": "2026-07-15T20:14:51.268Z",
+      "observedAt": "2026-07-20T08:52:20.139Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -284,7 +284,7 @@
     {
       "sourceId": "ref.apple.hig",
       "url": "https://developer.apple.com/design/human-interface-guidelines/",
-      "observedAt": "2026-07-15T20:14:51.540Z",
+      "observedAt": "2026-07-20T08:52:20.119Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -300,7 +300,7 @@
     {
       "sourceId": "ref.apple.liquid-glass",
       "url": "https://developer.apple.com/design/",
-      "observedAt": "2026-07-15T20:14:52.146Z",
+      "observedAt": "2026-07-20T08:52:20.601Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -314,7 +314,7 @@
     {
       "sourceId": "ref.atlassian.accessibility",
       "url": "https://atlassian.design/foundations/accessibility",
-      "observedAt": "2026-07-15T20:14:51.366Z",
+      "observedAt": "2026-07-20T08:52:20.312Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -324,14 +324,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:bd85987d68bb00dbece492b42e62961f319f1ba9885530bbcfec131ebf0cffab"
       },
-      "lastModified": "Wed, 15 Jul 2026 08:56:17 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 08:56:17 GMT"
+      "lastModified": "Mon, 20 Jul 2026 08:33:40 GMT",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 08:33:40 GMT"
     },
     {
       "sourceId": "ref.atlassian.content",
       "url": "https://atlassian.design/content",
-      "observedAt": "2026-07-15T20:14:51.436Z",
-      "result": "changed",
+      "observedAt": "2026-07-20T08:52:20.395Z",
+      "result": "unchanged",
       "attempts": 1,
       "status": 200,
       "contentHash": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc",
@@ -341,14 +341,14 @@
         "http": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc"
       },
       "etag": "\"a51f0b726b67473c40fe9bf43aeef999\"",
-      "lastModified": "Wed, 15 Jul 2026 08:56:17 GMT",
+      "lastModified": "Mon, 20 Jul 2026 08:33:40 GMT",
       "lastSuccessfulEtag": "\"a51f0b726b67473c40fe9bf43aeef999\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 08:56:17 GMT"
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 08:33:40 GMT"
     },
     {
       "sourceId": "ref.atlassian.design-system",
       "url": "https://atlassian.design/",
-      "observedAt": "2026-07-15T20:14:51.528Z",
+      "observedAt": "2026-07-20T08:52:20.373Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -358,14 +358,14 @@
       "lastSuccessfulHashes": {
         "http": "sha256:5aa083e4df9c0ab13050e8ce2ad365cb659637f7a4c5faa61d41a29245bd2cd8"
       },
-      "lastModified": "Wed, 15 Jul 2026 08:56:09 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 08:56:09 GMT"
+      "lastModified": "Mon, 20 Jul 2026 08:33:40 GMT",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 08:33:40 GMT"
     },
     {
       "sourceId": "ref.atlassian.design-tokens",
       "url": "https://atlassian.design/tokens/design-tokens",
-      "observedAt": "2026-07-15T20:14:51.581Z",
-      "result": "changed",
+      "observedAt": "2026-07-20T08:52:20.457Z",
+      "result": "unchanged",
       "attempts": 1,
       "status": 200,
       "contentHash": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc",
@@ -375,14 +375,14 @@
         "http": "sha256:6ef788f215cfb10bfc09047fa20e07171e49557482bbddb3b5998e8d02d347dc"
       },
       "etag": "\"8b843c85c490928e07c76f2fad0eed63\"",
-      "lastModified": "Wed, 15 Jul 2026 08:56:17 GMT",
+      "lastModified": "Mon, 20 Jul 2026 08:33:40 GMT",
       "lastSuccessfulEtag": "\"8b843c85c490928e07c76f2fad0eed63\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 08:56:17 GMT"
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 08:33:40 GMT"
     },
     {
       "sourceId": "ref.baseui.base-ui",
       "url": "https://base-ui.com/",
-      "observedAt": "2026-07-15T20:14:51.580Z",
+      "observedAt": "2026-07-20T08:52:20.463Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -392,61 +392,61 @@
       "lastSuccessfulHashes": {
         "http": "sha256:8ce99f3c2f3819c1eb6f3e0b2dcc34c9e92667d35b32034265438607849a5d37"
       },
-      "etag": "\"9706998d5cfbe3977f29243f22f6d621-ssl-df\"",
-      "lastSuccessfulEtag": "\"9706998d5cfbe3977f29243f22f6d621-ssl-df\""
+      "etag": "\"fdc2a91248e5a2b5b866be25938bbf38-ssl-df\"",
+      "lastSuccessfulEtag": "\"fdc2a91248e5a2b5b866be25938bbf38-ssl-df\""
     },
     {
       "sourceId": "ref.chakra.v3",
       "url": "https://chakra-ui.com/",
-      "observedAt": "2026-07-15T20:14:51.784Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:20.709Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:256458c0beafee5eb2d133d09925f73b53005f6c660632d813b88163a797d295",
+      "contentHash": "sha256:8a9db0741f2bce72bf089d79d148c29649c4a56a2253bed153eb159c8e2054c7",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:256458c0beafee5eb2d133d09925f73b53005f6c660632d813b88163a797d295",
+      "lastSuccessfulHash": "sha256:8a9db0741f2bce72bf089d79d148c29649c4a56a2253bed153eb159c8e2054c7",
       "lastSuccessfulHashes": {
-        "http": "sha256:256458c0beafee5eb2d133d09925f73b53005f6c660632d813b88163a797d295"
+        "http": "sha256:8a9db0741f2bce72bf089d79d148c29649c4a56a2253bed153eb159c8e2054c7"
       },
-      "etag": "W/\"e75387cd84d13bc9bea9c420befdbeb1\"",
-      "lastSuccessfulEtag": "W/\"e75387cd84d13bc9bea9c420befdbeb1\""
+      "etag": "W/\"f463361642977a4b1e77f214b379f39d\"",
+      "lastSuccessfulEtag": "W/\"f463361642977a4b1e77f214b379f39d\""
     },
     {
       "sourceId": "ref.copilotkit.ag-ui",
       "url": "https://docs.ag-ui.com/introduction",
-      "observedAt": "2026-07-15T20:14:52.008Z",
+      "observedAt": "2026-07-20T08:52:20.784Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:6090931251878f5a0efca285cb6f4aea5eed8047072573a5c75067fdb1c398f2",
+      "contentHash": "sha256:09d3aa08b5c0342dbbc98c5b100e4be841b50cedfaafc71429613385d9aedd24",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:6090931251878f5a0efca285cb6f4aea5eed8047072573a5c75067fdb1c398f2",
+      "lastSuccessfulHash": "sha256:09d3aa08b5c0342dbbc98c5b100e4be841b50cedfaafc71429613385d9aedd24",
       "lastSuccessfulHashes": {
-        "http": "sha256:6090931251878f5a0efca285cb6f4aea5eed8047072573a5c75067fdb1c398f2"
+        "http": "sha256:09d3aa08b5c0342dbbc98c5b100e4be841b50cedfaafc71429613385d9aedd24"
       },
-      "lastModified": "Wed, 15 Jul 2026 19:09:35 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 19:09:35 GMT"
+      "lastModified": "Sat, 18 Jul 2026 18:22:59 GMT",
+      "lastSuccessfulLastModified": "Sat, 18 Jul 2026 18:22:59 GMT"
     },
     {
       "sourceId": "ref.digital-agency-jp.dads-react",
       "url": "https://github.com/digital-go-jp/design-system-example-components-react",
-      "observedAt": "2026-07-15T20:14:52.061Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:20.679Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:876f0dd8608a85362a744b0c6d69794c4a2a546e895af3821e6a2f1f5bde6217",
-      "lastSuccessfulHash": "sha256:876f0dd8608a85362a744b0c6d69794c4a2a546e895af3821e6a2f1f5bde6217",
+      "contentHash": "sha256:f4ec80b36ed51bb381e027017606a2274dfb12212cfa8caec5477c36f613ed08",
+      "lastSuccessfulHash": "sha256:f4ec80b36ed51bb381e027017606a2274dfb12212cfa8caec5477c36f613ed08",
       "lastSuccessfulHashes": {
-        "github": "sha256:876f0dd8608a85362a744b0c6d69794c4a2a546e895af3821e6a2f1f5bde6217"
+        "github": "sha256:f4ec80b36ed51bb381e027017606a2274dfb12212cfa8caec5477c36f613ed08"
       },
       "adapter": "github",
       "adapterHealth": "healthy",
-      "revision": "main|2026-07-15T04:51:33Z"
+      "revision": "main|2026-07-16T08:08:51Z"
     },
     {
       "sourceId": "ref.digital-agency-jp.dads",
       "url": "https://design.digital.go.jp/dads/",
-      "observedAt": "2026-07-15T20:14:51.850Z",
+      "observedAt": "2026-07-20T08:52:20.772Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -464,7 +464,7 @@
     {
       "sourceId": "ref.dropbox.brand",
       "url": "https://brand.dropbox.com/",
-      "observedAt": "2026-07-15T20:14:52.023Z",
+      "observedAt": "2026-07-20T08:52:20.858Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -474,13 +474,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:ba22f8d9210c8c170996ee97dce3f6e9bd4ec7707d2986ea0294f8970c02c7bb"
       },
-      "lastModified": "Thu, 18 Jun 2026 15:58:28 GMT",
-      "lastSuccessfulLastModified": "Thu, 18 Jun 2026 15:58:28 GMT"
+      "lastModified": "Sat, 11 Jul 2026 07:47:19 GMT",
+      "lastSuccessfulLastModified": "Sat, 11 Jul 2026 07:47:19 GMT"
     },
     {
       "sourceId": "ref.duolingo.brand-family",
       "url": "https://design.duolingo.com/identity/brand-family",
-      "observedAt": "2026-07-15T20:14:52.412Z",
+      "observedAt": "2026-07-20T08:52:20.985Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -498,7 +498,7 @@
     {
       "sourceId": "ref.duolingo.brand-narrative",
       "url": "https://design.duolingo.com/writing/brand-narrative",
-      "observedAt": "2026-07-15T20:14:52.514Z",
+      "observedAt": "2026-07-20T08:52:20.929Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -516,7 +516,7 @@
     {
       "sourceId": "ref.duolingo.color",
       "url": "https://design.duolingo.com/identity/color",
-      "observedAt": "2026-07-15T20:14:52.578Z",
+      "observedAt": "2026-07-20T08:52:20.988Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -534,7 +534,7 @@
     {
       "sourceId": "ref.duolingo.design",
       "url": "https://design.duolingo.com/",
-      "observedAt": "2026-07-15T20:14:52.732Z",
+      "observedAt": "2026-07-20T08:52:20.891Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -552,7 +552,7 @@
     {
       "sourceId": "ref.duolingo.illustration-characters",
       "url": "https://design.duolingo.com/illustration/characters",
-      "observedAt": "2026-07-15T20:14:52.558Z",
+      "observedAt": "2026-07-20T08:52:21.179Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -570,7 +570,7 @@
     {
       "sourceId": "ref.duolingo.illustration-duo",
       "url": "https://design.duolingo.com/illustration/duo",
-      "observedAt": "2026-07-15T20:14:52.964Z",
+      "observedAt": "2026-07-20T08:52:21.197Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -588,7 +588,7 @@
     {
       "sourceId": "ref.duolingo.illustration-shape",
       "url": "https://design.duolingo.com/illustration/shape-language",
-      "observedAt": "2026-07-15T20:14:53.186Z",
+      "observedAt": "2026-07-20T08:52:21.206Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -606,7 +606,7 @@
     {
       "sourceId": "ref.duolingo.imagery",
       "url": "https://design.duolingo.com/identity/imagery",
-      "observedAt": "2026-07-15T20:14:52.892Z",
+      "observedAt": "2026-07-20T08:52:21.205Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -624,7 +624,7 @@
     {
       "sourceId": "ref.duolingo.logos",
       "url": "https://design.duolingo.com/identity/logos",
-      "observedAt": "2026-07-15T20:14:53.257Z",
+      "observedAt": "2026-07-20T08:52:21.228Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -642,7 +642,7 @@
     {
       "sourceId": "ref.duolingo.marketing-assets",
       "url": "https://design.duolingo.com/marketing/assets",
-      "observedAt": "2026-07-15T20:14:53.274Z",
+      "observedAt": "2026-07-20T08:52:21.349Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -660,7 +660,7 @@
     {
       "sourceId": "ref.duolingo.resources",
       "url": "https://design.duolingo.com/resources",
-      "observedAt": "2026-07-15T20:14:53.592Z",
+      "observedAt": "2026-07-20T08:52:21.327Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -678,7 +678,7 @@
     {
       "sourceId": "ref.duolingo.typography",
       "url": "https://design.duolingo.com/identity/typography",
-      "observedAt": "2026-07-15T20:14:53.559Z",
+      "observedAt": "2026-07-20T08:52:21.326Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -696,7 +696,7 @@
     {
       "sourceId": "ref.duolingo.writing-duo",
       "url": "https://design.duolingo.com/writing/duo",
-      "observedAt": "2026-07-15T20:14:53.757Z",
+      "observedAt": "2026-07-20T08:52:21.338Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -714,7 +714,7 @@
     {
       "sourceId": "ref.duolingo.writing-glossary",
       "url": "https://design.duolingo.com/writing/glossary",
-      "observedAt": "2026-07-15T20:14:53.831Z",
+      "observedAt": "2026-07-20T08:52:21.334Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -732,7 +732,7 @@
     {
       "sourceId": "ref.duolingo.writing-style",
       "url": "https://design.duolingo.com/writing/style",
-      "observedAt": "2026-07-15T20:14:53.854Z",
+      "observedAt": "2026-07-20T08:52:21.346Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -750,7 +750,7 @@
     {
       "sourceId": "ref.duolingo.writing-tone",
       "url": "https://design.duolingo.com/writing/tone",
-      "observedAt": "2026-07-15T20:14:53.918Z",
+      "observedAt": "2026-07-20T08:52:22.014Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -768,7 +768,7 @@
     {
       "sourceId": "ref.duolingo.writing-voice",
       "url": "https://design.duolingo.com/writing/voice",
-      "observedAt": "2026-07-15T20:14:54.080Z",
+      "observedAt": "2026-07-20T08:52:21.434Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -786,7 +786,7 @@
     {
       "sourceId": "ref.figma.variables",
       "url": "https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma",
-      "observedAt": "2026-07-15T20:14:53.932Z",
+      "observedAt": "2026-07-20T08:52:22.031Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -800,7 +800,7 @@
     {
       "sourceId": "ref.freee.vibes",
       "url": "https://vibes.freee.co.jp/",
-      "observedAt": "2026-07-15T20:14:53.954Z",
+      "observedAt": "2026-07-20T08:52:22.637Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -810,165 +810,165 @@
       "lastSuccessfulHashes": {
         "http": "sha256:81a2dde6653202db167ca9c5c21c1ba29b6aa17bff41ef42572ffd6a99133d0c"
       },
-      "etag": "W/\"1738d89a5e0ae0f8d0372c9e046d487e\"",
+      "etag": "\"1738d89a5e0ae0f8d0372c9e046d487e\"",
       "lastModified": "Fri, 19 Jan 2024 10:48:54 GMT",
-      "lastSuccessfulEtag": "W/\"1738d89a5e0ae0f8d0372c9e046d487e\"",
+      "lastSuccessfulEtag": "\"1738d89a5e0ae0f8d0372c9e046d487e\"",
       "lastSuccessfulLastModified": "Fri, 19 Jan 2024 10:48:54 GMT"
     },
     {
       "sourceId": "ref.github.primer-accessibility",
       "url": "https://primer.style/accessibility/",
-      "observedAt": "2026-07-15T20:14:55.488Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:22.521Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:b53ce105d0f1989f8fb5ebc11d02e8c894ba40d8144f20caa897d7b4f03bf5c5",
+      "contentHash": "sha256:78d611212ae6f63a0b051f7ebfc8d8a8e287293c726e526a4736ff835af6f7a3",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:b53ce105d0f1989f8fb5ebc11d02e8c894ba40d8144f20caa897d7b4f03bf5c5",
+      "lastSuccessfulHash": "sha256:78d611212ae6f63a0b051f7ebfc8d8a8e287293c726e526a4736ff835af6f7a3",
       "lastSuccessfulHashes": {
-        "http": "sha256:b53ce105d0f1989f8fb5ebc11d02e8c894ba40d8144f20caa897d7b4f03bf5c5"
+        "http": "sha256:78d611212ae6f63a0b051f7ebfc8d8a8e287293c726e526a4736ff835af6f7a3"
       },
-      "etag": "\"rb1r87w7sx7yew\"",
-      "lastSuccessfulEtag": "\"rb1r87w7sx7yew\""
+      "etag": "\"such74pqql8020\"",
+      "lastSuccessfulEtag": "\"such74pqql8020\""
     },
     {
       "sourceId": "ref.github.primer-primitives",
       "url": "https://github.com/primer/primitives",
-      "observedAt": "2026-07-15T20:14:54.365Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:21.553Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:f680db1a4ba0faed99bd0838d8dbca9574303b0a08772642059620cb7fa69e4d",
-      "lastSuccessfulHash": "sha256:f680db1a4ba0faed99bd0838d8dbca9574303b0a08772642059620cb7fa69e4d",
+      "contentHash": "sha256:27bd1093a3de158598a4943b8e608cb913dc626b204bab11663bd4dd7839f5a4",
+      "lastSuccessfulHash": "sha256:27bd1093a3de158598a4943b8e608cb913dc626b204bab11663bd4dd7839f5a4",
       "lastSuccessfulHashes": {
-        "github": "sha256:f680db1a4ba0faed99bd0838d8dbca9574303b0a08772642059620cb7fa69e4d"
+        "github": "sha256:27bd1093a3de158598a4943b8e608cb913dc626b204bab11663bd4dd7839f5a4"
       },
       "adapter": "github",
       "adapterHealth": "healthy",
-      "revision": "main|2026-07-15T03:08:31Z|v11.9.0|2026-05-13T12:47:52Z"
+      "revision": "main|2026-07-16T15:54:27Z|v11.9.0|2026-05-13T12:47:52Z"
     },
     {
       "sourceId": "ref.github.primer",
       "url": "https://primer.style/",
-      "observedAt": "2026-07-15T20:14:55.367Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:22.313Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:7d1b106a1490b721ea1813b34aedc2537f9cb3226d6eaf5b920931151642e21d",
+      "contentHash": "sha256:870db8282ae545d573cae7dfb875833f1371d300ec66a07b16ac462bc3e25f1d",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:7d1b106a1490b721ea1813b34aedc2537f9cb3226d6eaf5b920931151642e21d",
+      "lastSuccessfulHash": "sha256:870db8282ae545d573cae7dfb875833f1371d300ec66a07b16ac462bc3e25f1d",
       "lastSuccessfulHashes": {
-        "http": "sha256:7d1b106a1490b721ea1813b34aedc2537f9cb3226d6eaf5b920931151642e21d"
+        "http": "sha256:870db8282ae545d573cae7dfb875833f1371d300ec66a07b16ac462bc3e25f1d"
       },
-      "etag": "\"6ubukywaf84jm8\"",
-      "lastSuccessfulEtag": "\"6ubukywaf84jm8\""
+      "etag": "\"10ri57m54nw4jwy\"",
+      "lastSuccessfulEtag": "\"10ri57m54nw4jwy\""
     },
     {
       "sourceId": "ref.goodpatch.blog",
       "url": "https://goodpatch.com/blog/",
-      "observedAt": "2026-07-15T20:14:54.710Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.044Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:7bb7a0aeffd3009b3265619607a0c43c609660bf212c89b8ca48e1d9c50e597d",
+      "contentHash": "sha256:e4cd777d80f316860eb9a1bd6ebb359de27e3595a5c8e944df17f544e8f01e17",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:7bb7a0aeffd3009b3265619607a0c43c609660bf212c89b8ca48e1d9c50e597d",
+      "lastSuccessfulHash": "sha256:e4cd777d80f316860eb9a1bd6ebb359de27e3595a5c8e944df17f544e8f01e17",
       "lastSuccessfulHashes": {
-        "http": "sha256:7bb7a0aeffd3009b3265619607a0c43c609660bf212c89b8ca48e1d9c50e597d"
+        "http": "sha256:e4cd777d80f316860eb9a1bd6ebb359de27e3595a5c8e944df17f544e8f01e17"
       },
-      "etag": "W/\"jzqwy13z031xvr\"",
-      "lastSuccessfulEtag": "W/\"jzqwy13z031xvr\""
+      "etag": "W/\"181eyysq5xo1ydt\"",
+      "lastSuccessfulEtag": "W/\"181eyysq5xo1ydt\""
     },
     {
       "sourceId": "ref.goodpatch.design",
       "url": "https://goodpatch.com/",
-      "observedAt": "2026-07-15T20:14:56.135Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:24.421Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:13a688261ade076ce90e93b57752b23a2f4df820a534f1e20ffe23dc42f2f59e",
+      "contentHash": "sha256:0484b46feb5746b8fd476c5d105d7cbfc3216430c1130ebfc7a7503ce576753f",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:13a688261ade076ce90e93b57752b23a2f4df820a534f1e20ffe23dc42f2f59e",
+      "lastSuccessfulHash": "sha256:0484b46feb5746b8fd476c5d105d7cbfc3216430c1130ebfc7a7503ce576753f",
       "lastSuccessfulHashes": {
-        "http": "sha256:13a688261ade076ce90e93b57752b23a2f4df820a534f1e20ffe23dc42f2f59e"
+        "http": "sha256:0484b46feb5746b8fd476c5d105d7cbfc3216430c1130ebfc7a7503ce576753f"
       },
-      "etag": "W/\"98pblysivx29iu\"",
-      "lastSuccessfulEtag": "W/\"98pblysivx29iu\""
+      "etag": "W/\"1893fyehwc42a7a\"",
+      "lastSuccessfulEtag": "W/\"1893fyehwc42a7a\""
     },
     {
       "sourceId": "ref.google.android-adaptive-layout",
       "url": "https://developer.android.com/develop/ui/compose/layouts/adaptive/get-started-with-adaptive-apps",
-      "observedAt": "2026-07-15T20:14:56.295Z",
+      "observedAt": "2026-07-20T08:52:23.161Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:1ec63c76c8dce13af5121cf1359b68898d410374a85a12668911e232e41ad24e",
+      "contentHash": "sha256:2f3750e851c5650cbc85d71c2364464cb4967a261f20b9cb8c2d787cc402bb21",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:1ec63c76c8dce13af5121cf1359b68898d410374a85a12668911e232e41ad24e",
+      "lastSuccessfulHash": "sha256:2f3750e851c5650cbc85d71c2364464cb4967a261f20b9cb8c2d787cc402bb21",
       "lastSuccessfulHashes": {
-        "http": "sha256:1ec63c76c8dce13af5121cf1359b68898d410374a85a12668911e232e41ad24e"
+        "http": "sha256:2f3750e851c5650cbc85d71c2364464cb4967a261f20b9cb8c2d787cc402bb21"
       },
-      "lastModified": "Tue, 14 Jul 2026 10:38:26 GMT",
-      "lastSuccessfulLastModified": "Tue, 14 Jul 2026 10:38:26 GMT"
+      "lastModified": "Tue, 14 Jul 2026 10:38:31 GMT",
+      "lastSuccessfulLastModified": "Tue, 14 Jul 2026 10:38:31 GMT"
     },
     {
       "sourceId": "ref.google.material-3",
       "url": "https://m3.material.io/",
-      "observedAt": "2026-07-15T20:14:55.312Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:24.073Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:03bbff1d2c51124eb2e814d60ad018f5c8fd2225269b1dfd6360cd499e54a2c8",
+      "contentHash": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:03bbff1d2c51124eb2e814d60ad018f5c8fd2225269b1dfd6360cd499e54a2c8",
+      "lastSuccessfulHash": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64",
       "lastSuccessfulHashes": {
-        "http": "sha256:03bbff1d2c51124eb2e814d60ad018f5c8fd2225269b1dfd6360cd499e54a2c8"
+        "http": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64"
       },
-      "etag": "W/\"f419c2854fac339e1be74b7b60645b3d\"",
+      "etag": "W/\"315532801.0-62280-2265778700\"",
       "lastModified": "Tue, 01 Jan 1980 00:00:01 GMT",
-      "lastSuccessfulEtag": "W/\"f419c2854fac339e1be74b7b60645b3d\"",
+      "lastSuccessfulEtag": "W/\"315532801.0-62280-2265778700\"",
       "lastSuccessfulLastModified": "Tue, 01 Jan 1980 00:00:01 GMT"
     },
     {
       "sourceId": "ref.google.material-accessibility",
       "url": "https://m3.material.io/foundations/accessible-design/overview",
-      "observedAt": "2026-07-15T20:14:55.938Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.989Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:03bbff1d2c51124eb2e814d60ad018f5c8fd2225269b1dfd6360cd499e54a2c8",
+      "contentHash": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:03bbff1d2c51124eb2e814d60ad018f5c8fd2225269b1dfd6360cd499e54a2c8",
+      "lastSuccessfulHash": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64",
       "lastSuccessfulHashes": {
-        "http": "sha256:03bbff1d2c51124eb2e814d60ad018f5c8fd2225269b1dfd6360cd499e54a2c8"
+        "http": "sha256:5e4fbd0ec97d590a46fd85c2370b93083a2d375238a3d7077c3dad7542ee5d64"
       },
-      "etag": "W/\"f419c2854fac339e1be74b7b60645b3d\"",
+      "etag": "W/\"315532801.0-62280-2265778700\"",
       "lastModified": "Tue, 01 Jan 1980 00:00:01 GMT",
-      "lastSuccessfulEtag": "W/\"f419c2854fac339e1be74b7b60645b3d\"",
+      "lastSuccessfulEtag": "W/\"315532801.0-62280-2265778700\"",
       "lastSuccessfulLastModified": "Tue, 01 Jan 1980 00:00:01 GMT"
     },
     {
       "sourceId": "ref.google.material-motion",
       "url": "https://m3.material.io/styles/motion/overview/how-it-works",
-      "observedAt": "2026-07-15T20:14:56.101Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:22.792Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:3090ba71115dda99b8edd1c27ab5884aefae0434dfdccdc0a7c5b57d860c2f3b",
+      "contentHash": "sha256:99b693b3b5a7d4552532e977cda1744daf72871085b0558190c81a0a917af62f",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:3090ba71115dda99b8edd1c27ab5884aefae0434dfdccdc0a7c5b57d860c2f3b",
+      "lastSuccessfulHash": "sha256:99b693b3b5a7d4552532e977cda1744daf72871085b0558190c81a0a917af62f",
       "lastSuccessfulHashes": {
-        "http": "sha256:3090ba71115dda99b8edd1c27ab5884aefae0434dfdccdc0a7c5b57d860c2f3b"
+        "http": "sha256:99b693b3b5a7d4552532e977cda1744daf72871085b0558190c81a0a917af62f"
       },
-      "etag": "W/\"e8f9240af4262045142fcb8e426d806d\"",
+      "etag": "W/\"315532801.0-61682-4221769780\"",
       "lastModified": "Tue, 01 Jan 1980 00:00:01 GMT",
-      "lastSuccessfulEtag": "W/\"e8f9240af4262045142fcb8e426d806d\"",
+      "lastSuccessfulEtag": "W/\"315532801.0-61682-4221769780\"",
       "lastSuccessfulLastModified": "Tue, 01 Jan 1980 00:00:01 GMT"
     },
     {
       "sourceId": "ref.google.pair-guidebook",
       "url": "https://pair.withgoogle.com/guidebook/",
-      "observedAt": "2026-07-15T20:14:55.905Z",
+      "observedAt": "2026-07-20T08:52:22.955Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -982,185 +982,185 @@
     {
       "sourceId": "ref.google.stitch",
       "url": "https://m3.material.io/blog",
-      "observedAt": "2026-07-15T20:14:56.605Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.087Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:ba2e6b7d5572b84e2bac60eaa486d3896562de99965a20a99d5091e77767c644",
+      "contentHash": "sha256:185725137bae848679bfd6b8e0fd6a5dc1ce5acc2012902dcbe45722e49861a5",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:ba2e6b7d5572b84e2bac60eaa486d3896562de99965a20a99d5091e77767c644",
+      "lastSuccessfulHash": "sha256:185725137bae848679bfd6b8e0fd6a5dc1ce5acc2012902dcbe45722e49861a5",
       "lastSuccessfulHashes": {
-        "http": "sha256:ba2e6b7d5572b84e2bac60eaa486d3896562de99965a20a99d5091e77767c644"
+        "http": "sha256:185725137bae848679bfd6b8e0fd6a5dc1ce5acc2012902dcbe45722e49861a5"
       },
-      "etag": "W/\"99a53183fcf1f4ec6055bac3c9551dd1\"",
+      "etag": "W/\"315532801.0-62580-3179547615\"",
       "lastModified": "Tue, 01 Jan 1980 00:00:01 GMT",
-      "lastSuccessfulEtag": "W/\"99a53183fcf1f4ec6055bac3c9551dd1\"",
+      "lastSuccessfulEtag": "W/\"315532801.0-62580-3179547615\"",
       "lastSuccessfulLastModified": "Tue, 01 Jan 1980 00:00:01 GMT"
     },
     {
       "sourceId": "ref.govuk.accessibility",
       "url": "https://design-system.service.gov.uk/accessibility/",
-      "observedAt": "2026-07-15T20:14:56.530Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.259Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:b622033d7ec108239ad7d8b02edd2f9e000a1558ee556682921c76cae7fa7d07",
+      "contentHash": "sha256:84beac15f363c2f2e7458e61495a6819131d60944fe332482e7dc8c8a0f19b6d",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:b622033d7ec108239ad7d8b02edd2f9e000a1558ee556682921c76cae7fa7d07",
+      "lastSuccessfulHash": "sha256:84beac15f363c2f2e7458e61495a6819131d60944fe332482e7dc8c8a0f19b6d",
       "lastSuccessfulHashes": {
-        "http": "sha256:b622033d7ec108239ad7d8b02edd2f9e000a1558ee556682921c76cae7fa7d07"
+        "http": "sha256:84beac15f363c2f2e7458e61495a6819131d60944fe332482e7dc8c8a0f19b6d"
       },
-      "etag": "\"a2fd79626b2f2ffac4451efed2fae727-ssl-df\"",
-      "lastSuccessfulEtag": "\"a2fd79626b2f2ffac4451efed2fae727-ssl-df\""
+      "etag": "\"fbfba392ae1bc58f14aa5c31d36dcf1d-ssl-df\"",
+      "lastSuccessfulEtag": "\"fbfba392ae1bc58f14aa5c31d36dcf1d-ssl-df\""
     },
     {
       "sourceId": "ref.govuk.community-backlog",
       "url": "https://design-system.service.gov.uk/community/upcoming-components-patterns/",
-      "observedAt": "2026-07-15T20:14:56.562Z",
+      "observedAt": "2026-07-20T08:52:23.225Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:3ff669b2e67a6e1ea83c327f9f9983e1c1c9b51877f025ecd0c49dd4dfb4f7d2",
+      "contentHash": "sha256:dc0bca6fe3f8b0ae16e8b19a0b81d7547c3ec0eb43bf83101e7f72de9057f283",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:3ff669b2e67a6e1ea83c327f9f9983e1c1c9b51877f025ecd0c49dd4dfb4f7d2",
+      "lastSuccessfulHash": "sha256:dc0bca6fe3f8b0ae16e8b19a0b81d7547c3ec0eb43bf83101e7f72de9057f283",
       "lastSuccessfulHashes": {
-        "http": "sha256:3ff669b2e67a6e1ea83c327f9f9983e1c1c9b51877f025ecd0c49dd4dfb4f7d2"
+        "http": "sha256:dc0bca6fe3f8b0ae16e8b19a0b81d7547c3ec0eb43bf83101e7f72de9057f283"
       },
-      "etag": "\"c900fd2149360ed6b24ae603c06e55f9-ssl-df\"",
-      "lastSuccessfulEtag": "\"c900fd2149360ed6b24ae603c06e55f9-ssl-df\""
+      "etag": "\"f1286d15c57d49868db4ade7e5e7ea15-ssl-df\"",
+      "lastSuccessfulEtag": "\"f1286d15c57d49868db4ade7e5e7ea15-ssl-df\""
     },
     {
       "sourceId": "ref.govuk.design-system",
       "url": "https://design-system.service.gov.uk/",
-      "observedAt": "2026-07-15T20:14:56.597Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.320Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:afed31f4da6b5873e60e0d0f36492648c05ff93b34a40a8ff2b7a557264174f4",
+      "contentHash": "sha256:45678ba505b3d3c6755cac44b66de1fd4b84c4680a57a138c73873d807c81819",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:afed31f4da6b5873e60e0d0f36492648c05ff93b34a40a8ff2b7a557264174f4",
+      "lastSuccessfulHash": "sha256:45678ba505b3d3c6755cac44b66de1fd4b84c4680a57a138c73873d807c81819",
       "lastSuccessfulHashes": {
-        "http": "sha256:afed31f4da6b5873e60e0d0f36492648c05ff93b34a40a8ff2b7a557264174f4"
+        "http": "sha256:45678ba505b3d3c6755cac44b66de1fd4b84c4680a57a138c73873d807c81819"
       },
-      "etag": "\"ac762d674f59087fe29ed032962dd912-ssl-df\"",
-      "lastSuccessfulEtag": "\"ac762d674f59087fe29ed032962dd912-ssl-df\""
+      "etag": "\"0476e1c4d873218733392a09d4838be7-ssl-df\"",
+      "lastSuccessfulEtag": "\"0476e1c4d873218733392a09d4838be7-ssl-df\""
     },
     {
       "sourceId": "ref.govuk.error-summary",
       "url": "https://design-system.service.gov.uk/components/error-summary/",
-      "observedAt": "2026-07-15T20:14:56.836Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.718Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:2921842a0186b2557f9778badd9b667fab2c9a2762bbbcf2a9dc6246daebff1a",
+      "contentHash": "sha256:23a4697b3a2c722837a0f69b7080d750767bc08aa64f390f73393f82316990dd",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:2921842a0186b2557f9778badd9b667fab2c9a2762bbbcf2a9dc6246daebff1a",
+      "lastSuccessfulHash": "sha256:23a4697b3a2c722837a0f69b7080d750767bc08aa64f390f73393f82316990dd",
       "lastSuccessfulHashes": {
-        "http": "sha256:2921842a0186b2557f9778badd9b667fab2c9a2762bbbcf2a9dc6246daebff1a"
+        "http": "sha256:23a4697b3a2c722837a0f69b7080d750767bc08aa64f390f73393f82316990dd"
       },
-      "etag": "\"29412beb4b8939982c8394e77f94a2c2-ssl-df\"",
-      "lastSuccessfulEtag": "\"29412beb4b8939982c8394e77f94a2c2-ssl-df\""
+      "etag": "\"662641dfa2797442c19eaa0e416c87d3-ssl-df\"",
+      "lastSuccessfulEtag": "\"662641dfa2797442c19eaa0e416c87d3-ssl-df\""
     },
     {
       "sourceId": "ref.ibm.carbon-accessibility",
       "url": "https://carbondesignsystem.com/guidelines/accessibility/overview/",
-      "observedAt": "2026-07-15T20:14:57.812Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.561Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:09784f6a1949b9f3c6cf450794bf8638ae6698390b4f66367151ce4c9413af3a",
+      "contentHash": "sha256:7c1b22bfcb88f7fee98c37660b3c99b1dcec657cc5f5f90066c4acf6e9813434",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:09784f6a1949b9f3c6cf450794bf8638ae6698390b4f66367151ce4c9413af3a",
+      "lastSuccessfulHash": "sha256:7c1b22bfcb88f7fee98c37660b3c99b1dcec657cc5f5f90066c4acf6e9813434",
       "lastSuccessfulHashes": {
-        "http": "sha256:09784f6a1949b9f3c6cf450794bf8638ae6698390b4f66367151ce4c9413af3a"
+        "http": "sha256:7c1b22bfcb88f7fee98c37660b3c99b1dcec657cc5f5f90066c4acf6e9813434"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT"
+      "lastModified": "Fri, 17 Jul 2026 13:24:56 GMT",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 13:24:56 GMT"
     },
     {
       "sourceId": "ref.ibm.carbon-content",
       "url": "https://carbondesignsystem.com/guidelines/content/overview/",
-      "observedAt": "2026-07-15T20:14:57.864Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.608Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:871631db9bee5651b1c33d75eda01f6b5fe31f238a0faea8291f8dbd42900013",
+      "contentHash": "sha256:cddc8ec0b366dede793b65dfbb42904c28d2ed3992a17642c534313029e13ea2",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:871631db9bee5651b1c33d75eda01f6b5fe31f238a0faea8291f8dbd42900013",
+      "lastSuccessfulHash": "sha256:cddc8ec0b366dede793b65dfbb42904c28d2ed3992a17642c534313029e13ea2",
       "lastSuccessfulHashes": {
-        "http": "sha256:871631db9bee5651b1c33d75eda01f6b5fe31f238a0faea8291f8dbd42900013"
+        "http": "sha256:cddc8ec0b366dede793b65dfbb42904c28d2ed3992a17642c534313029e13ea2"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT"
+      "lastModified": "Fri, 17 Jul 2026 13:19:11 GMT",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 13:19:11 GMT"
     },
     {
       "sourceId": "ref.ibm.carbon-data-visualization",
       "url": "https://carbondesignsystem.com/data-visualization/getting-started/",
-      "observedAt": "2026-07-15T20:14:57.747Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.756Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:fba164eb0ec626c1f90a4be6e3d46d4cd335c780dfc38006134d008a329cfa10",
+      "contentHash": "sha256:536a86cff0895778f300fa44a9bf04e84d70ad8e3e5ea6fa964323e772785c9b",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:fba164eb0ec626c1f90a4be6e3d46d4cd335c780dfc38006134d008a329cfa10",
+      "lastSuccessfulHash": "sha256:536a86cff0895778f300fa44a9bf04e84d70ad8e3e5ea6fa964323e772785c9b",
       "lastSuccessfulHashes": {
-        "http": "sha256:fba164eb0ec626c1f90a4be6e3d46d4cd335c780dfc38006134d008a329cfa10"
+        "http": "sha256:536a86cff0895778f300fa44a9bf04e84d70ad8e3e5ea6fa964323e772785c9b"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT"
+      "lastModified": "Fri, 17 Jul 2026 13:19:10 GMT",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 13:19:10 GMT"
     },
     {
       "sourceId": "ref.ibm.carbon-for-ai",
       "url": "https://carbondesignsystem.com/guidelines/carbon-for-ai/",
-      "observedAt": "2026-07-15T20:14:57.901Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.813Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:c15f636512099d7a593b99843a0248ed83f7d4179619bbf7dea24555f16598fe",
+      "contentHash": "sha256:d3155b4154d1926b2a5da25107b5a9b2e274bf1ecffbd7fb39d0fd99bc4d155a",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:c15f636512099d7a593b99843a0248ed83f7d4179619bbf7dea24555f16598fe",
+      "lastSuccessfulHash": "sha256:d3155b4154d1926b2a5da25107b5a9b2e274bf1ecffbd7fb39d0fd99bc4d155a",
       "lastSuccessfulHashes": {
-        "http": "sha256:c15f636512099d7a593b99843a0248ed83f7d4179619bbf7dea24555f16598fe"
+        "http": "sha256:d3155b4154d1926b2a5da25107b5a9b2e274bf1ecffbd7fb39d0fd99bc4d155a"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT"
+      "lastModified": "Fri, 17 Jul 2026 13:24:56 GMT",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 13:24:56 GMT"
     },
     {
       "sourceId": "ref.ibm.carbon-motion",
       "url": "https://carbondesignsystem.com/elements/motion/overview/",
-      "observedAt": "2026-07-15T20:14:58.162Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.914Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:3197920174ad0e40a944f9af760d4dbfb3e9e5847bb1b9ec8222e6b96f96e281",
+      "contentHash": "sha256:78bfa8deb9418fabc7c59a8feba80faca01bbf0376c426bef71642324572dcdb",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:3197920174ad0e40a944f9af760d4dbfb3e9e5847bb1b9ec8222e6b96f96e281",
+      "lastSuccessfulHash": "sha256:78bfa8deb9418fabc7c59a8feba80faca01bbf0376c426bef71642324572dcdb",
       "lastSuccessfulHashes": {
-        "http": "sha256:3197920174ad0e40a944f9af760d4dbfb3e9e5847bb1b9ec8222e6b96f96e281"
+        "http": "sha256:78bfa8deb9418fabc7c59a8feba80faca01bbf0376c426bef71642324572dcdb"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT"
+      "lastModified": "Fri, 17 Jul 2026 13:24:03 GMT",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 13:24:03 GMT"
     },
     {
       "sourceId": "ref.ibm.carbon",
       "url": "https://carbondesignsystem.com/",
-      "observedAt": "2026-07-15T20:14:58.990Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:23.943Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:8fcb339e95e0daf50b1c3f6fe561786d7e9dd645fd1d13fba9f444af56c3285b",
+      "contentHash": "sha256:0f70215893a28fa4daeda4432656675ea90043d15316080c20ecf29c39e39c3a",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:8fcb339e95e0daf50b1c3f6fe561786d7e9dd645fd1d13fba9f444af56c3285b",
+      "lastSuccessfulHash": "sha256:0f70215893a28fa4daeda4432656675ea90043d15316080c20ecf29c39e39c3a",
       "lastSuccessfulHashes": {
-        "http": "sha256:8fcb339e95e0daf50b1c3f6fe561786d7e9dd645fd1d13fba9f444af56c3285b"
+        "http": "sha256:0f70215893a28fa4daeda4432656675ea90043d15316080c20ecf29c39e39c3a"
       },
-      "lastModified": "Wed, 15 Jul 2026 11:55:23 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 11:55:23 GMT"
+      "lastModified": "Fri, 17 Jul 2026 13:19:08 GMT",
+      "lastSuccessfulLastModified": "Fri, 17 Jul 2026 13:19:08 GMT"
     },
     {
       "sourceId": "ref.intuit.content-design",
       "url": "https://contentdesign.intuit.com/",
-      "observedAt": "2026-07-15T20:14:59.071Z",
+      "observedAt": "2026-07-20T08:52:24.236Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1174,7 +1174,7 @@
     {
       "sourceId": "ref.intuit.design-system",
       "url": "https://designsystem.intuit.com/",
-      "observedAt": "2026-07-15T20:15:00.050Z",
+      "observedAt": "2026-07-20T08:52:25.045Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1188,23 +1188,23 @@
     {
       "sourceId": "ref.kzhrknt.awesome-design-md-jp",
       "url": "https://github.com/kzhrknt/awesome-design-md-jp",
-      "observedAt": "2026-07-15T20:14:58.316Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:24.175Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:f81fb2c0c8afac430f683d4a7e4963fecbaa4a81cc5cc6ed4e67366c37644023",
-      "lastSuccessfulHash": "sha256:f81fb2c0c8afac430f683d4a7e4963fecbaa4a81cc5cc6ed4e67366c37644023",
+      "contentHash": "sha256:6bbc2be8581b5c521221abc0954e0a1d2773de42358bb19be925855c685afbb2",
+      "lastSuccessfulHash": "sha256:6bbc2be8581b5c521221abc0954e0a1d2773de42358bb19be925855c685afbb2",
       "lastSuccessfulHashes": {
-        "github": "sha256:f81fb2c0c8afac430f683d4a7e4963fecbaa4a81cc5cc6ed4e67366c37644023"
+        "github": "sha256:6bbc2be8581b5c521221abc0954e0a1d2773de42358bb19be925855c685afbb2"
       },
       "adapter": "github",
       "adapterHealth": "healthy",
-      "revision": "main|2026-07-15T03:44:03Z"
+      "revision": "main|2026-07-20T04:11:16Z"
     },
     {
       "sourceId": "ref.linear.brand",
       "url": "https://linear.app/",
-      "observedAt": "2026-07-15T20:14:59.181Z",
+      "observedAt": "2026-07-20T08:52:24.229Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1218,21 +1218,21 @@
     {
       "sourceId": "ref.mailchimp.brand-assets",
       "url": "https://mailchimp.com/about/brand-assets/",
-      "observedAt": "2026-07-15T20:14:58.431Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:24.811Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:6c454420d8f40911d8efcf416221ae2aec32b879f04904ac5ea7f2720dfb2a5f",
+      "contentHash": "sha256:9f4059d6ce368e1c4f8f0ff3d06a415306ed6c217c20009f7a75f8e58498698f",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:6c454420d8f40911d8efcf416221ae2aec32b879f04904ac5ea7f2720dfb2a5f",
+      "lastSuccessfulHash": "sha256:9f4059d6ce368e1c4f8f0ff3d06a415306ed6c217c20009f7a75f8e58498698f",
       "lastSuccessfulHashes": {
-        "http": "sha256:6c454420d8f40911d8efcf416221ae2aec32b879f04904ac5ea7f2720dfb2a5f"
+        "http": "sha256:9f4059d6ce368e1c4f8f0ff3d06a415306ed6c217c20009f7a75f8e58498698f"
       }
     },
     {
       "sourceId": "ref.mailchimp.style-guide",
       "url": "https://styleguide.mailchimp.com/",
-      "observedAt": "2026-07-15T20:14:58.930Z",
+      "observedAt": "2026-07-20T08:52:24.285Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1248,8 +1248,8 @@
     {
       "sourceId": "ref.matrix.build",
       "url": "https://matrix.build/",
-      "observedAt": "2026-07-15T20:14:59.704Z",
-      "result": "changed",
+      "observedAt": "2026-07-20T08:52:24.334Z",
+      "result": "unchanged",
       "attempts": 1,
       "status": 200,
       "contentHash": "sha256:4af59133d17ee9c486f5a71dd2950729148601163ec9116cedc5a4938ca1c122",
@@ -1262,41 +1262,41 @@
     {
       "sourceId": "ref.mcp.apps",
       "url": "https://modelcontextprotocol.io/extensions/apps/overview",
-      "observedAt": "2026-07-15T20:14:59.187Z",
+      "observedAt": "2026-07-20T08:52:24.429Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:283d97015dc0c9fd782c7dd5210a93c1e2a2b8aaea7b9598112245f7709a9f7a",
+      "contentHash": "sha256:d0799aa061b6e7bfe9a1a74e07ee64a689f20be64f1014d962c2dde2079b5cc4",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:283d97015dc0c9fd782c7dd5210a93c1e2a2b8aaea7b9598112245f7709a9f7a",
+      "lastSuccessfulHash": "sha256:d0799aa061b6e7bfe9a1a74e07ee64a689f20be64f1014d962c2dde2079b5cc4",
       "lastSuccessfulHashes": {
-        "http": "sha256:283d97015dc0c9fd782c7dd5210a93c1e2a2b8aaea7b9598112245f7709a9f7a"
+        "http": "sha256:d0799aa061b6e7bfe9a1a74e07ee64a689f20be64f1014d962c2dde2079b5cc4"
       },
-      "lastModified": "Wed, 15 Jul 2026 18:30:12 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 18:30:12 GMT"
+      "lastModified": "Sat, 18 Jul 2026 18:09:35 GMT",
+      "lastSuccessfulLastModified": "Sat, 18 Jul 2026 18:09:35 GMT"
     },
     {
       "sourceId": "ref.mdn.css",
       "url": "https://developer.mozilla.org/en-US/docs/Web/CSS",
-      "observedAt": "2026-07-15T20:14:59.191Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:24.368Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:4c3ca71ce752453957cdd3402ea6053b09540983707026e34ea0e8e26f2c3770",
+      "contentHash": "sha256:001597c7c7c95bbd5da2b842c8b487ebe2459a22115a76c8806d5133cb6e526f",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:4c3ca71ce752453957cdd3402ea6053b09540983707026e34ea0e8e26f2c3770",
+      "lastSuccessfulHash": "sha256:001597c7c7c95bbd5da2b842c8b487ebe2459a22115a76c8806d5133cb6e526f",
       "lastSuccessfulHashes": {
-        "http": "sha256:4c3ca71ce752453957cdd3402ea6053b09540983707026e34ea0e8e26f2c3770"
+        "http": "sha256:001597c7c7c95bbd5da2b842c8b487ebe2459a22115a76c8806d5133cb6e526f"
       },
-      "etag": "\"a73ed532ad4aeabe6d01ead9eb19ce7f\"",
-      "lastModified": "Wed, 15 Jul 2026 01:04:53 GMT",
-      "lastSuccessfulEtag": "\"a73ed532ad4aeabe6d01ead9eb19ce7f\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 01:04:53 GMT"
+      "etag": "\"1fc7456ac997a3538400e0b6a28176ea\"",
+      "lastModified": "Mon, 20 Jul 2026 03:36:15 GMT",
+      "lastSuccessfulEtag": "\"1fc7456ac997a3538400e0b6a28176ea\"",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 03:36:15 GMT"
     },
     {
       "sourceId": "ref.mercari.design",
       "url": "https://design.mercari.com/",
-      "observedAt": "2026-07-15T20:14:59.635Z",
+      "observedAt": "2026-07-20T08:52:26.166Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1314,7 +1314,7 @@
     {
       "sourceId": "ref.microsoft.fluent-2",
       "url": "https://fluent2.microsoft.design/",
-      "observedAt": "2026-07-15T20:15:00.980Z",
+      "observedAt": "2026-07-20T08:52:24.633Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1328,7 +1328,7 @@
     {
       "sourceId": "ref.microsoft.fluent-accessibility",
       "url": "https://fluent2.microsoft.design/accessibility",
-      "observedAt": "2026-07-15T20:15:01.128Z",
+      "observedAt": "2026-07-20T08:52:24.680Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1342,7 +1342,7 @@
     {
       "sourceId": "ref.microsoft.fluent-ai-harm",
       "url": "https://fluent2.microsoft.design/ai-harm",
-      "observedAt": "2026-07-15T20:15:01.375Z",
+      "observedAt": "2026-07-20T08:52:24.716Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1356,7 +1356,7 @@
     {
       "sourceId": "ref.microsoft.fluent-design-tokens",
       "url": "https://fluent2.microsoft.design/design-tokens",
-      "observedAt": "2026-07-15T20:15:01.704Z",
+      "observedAt": "2026-07-20T08:52:24.776Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1370,7 +1370,7 @@
     {
       "sourceId": "ref.microsoft.fluent-motion",
       "url": "https://fluent2.microsoft.design/motion",
-      "observedAt": "2026-07-15T20:15:01.851Z",
+      "observedAt": "2026-07-20T08:52:24.815Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1384,7 +1384,7 @@
     {
       "sourceId": "ref.microsoft.human-ai-guidelines",
       "url": "https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/",
-      "observedAt": "2026-07-15T20:15:01.985Z",
+      "observedAt": "2026-07-20T08:52:25.327Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1398,35 +1398,35 @@
     {
       "sourceId": "ref.motion.motion-react",
       "url": "https://motion.dev/",
-      "observedAt": "2026-07-15T20:15:01.358Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:24.973Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:b9db73d285ff719ca22581161a0b80bf6235cafbb8e8d8ff5b8bff657edf0f15",
+      "contentHash": "sha256:e64d484079483d3d1f46d69b4148b8b430728ba88a8de22148e7faad8848bf06",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:b9db73d285ff719ca22581161a0b80bf6235cafbb8e8d8ff5b8bff657edf0f15",
+      "lastSuccessfulHash": "sha256:e64d484079483d3d1f46d69b4148b8b430728ba88a8de22148e7faad8848bf06",
       "lastSuccessfulHashes": {
-        "http": "sha256:b9db73d285ff719ca22581161a0b80bf6235cafbb8e8d8ff5b8bff657edf0f15"
+        "http": "sha256:e64d484079483d3d1f46d69b4148b8b430728ba88a8de22148e7faad8848bf06"
       }
     },
     {
       "sourceId": "ref.nielsen.usability",
       "url": "https://www.nngroup.com/",
-      "observedAt": "2026-07-15T20:15:01.797Z",
+      "observedAt": "2026-07-20T08:52:25.482Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:79121ad2215c53fdd91ea3c82483b79f2439937016854814d0c0ea71dde13263",
+      "contentHash": "sha256:4cbcbf84edd363d03a71d3e50e9e0bbdc319d59af3f89f4e21a2083bf378c27d",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:79121ad2215c53fdd91ea3c82483b79f2439937016854814d0c0ea71dde13263",
+      "lastSuccessfulHash": "sha256:4cbcbf84edd363d03a71d3e50e9e0bbdc319d59af3f89f4e21a2083bf378c27d",
       "lastSuccessfulHashes": {
-        "http": "sha256:79121ad2215c53fdd91ea3c82483b79f2439937016854814d0c0ea71dde13263"
+        "http": "sha256:4cbcbf84edd363d03a71d3e50e9e0bbdc319d59af3f89f4e21a2083bf378c27d"
       }
     },
     {
       "sourceId": "ref.nist.ai-rmf",
       "url": "https://www.nist.gov/itl/ai-risk-management-framework",
-      "observedAt": "2026-07-15T20:15:02.066Z",
+      "observedAt": "2026-07-20T08:52:25.081Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1436,27 +1436,27 @@
       "lastSuccessfulHashes": {
         "http": "sha256:0e4ffc19ec8c707da66a176629466c0c53370e126a4881ab3b6e4fe18b22be36"
       },
-      "lastModified": "Wed, 15 Jul 2026 20:00:38 GMT",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 20:00:38 GMT"
+      "lastModified": "Mon, 20 Jul 2026 07:50:50 GMT",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 07:50:50 GMT"
     },
     {
       "sourceId": "ref.nothing.design",
       "url": "https://nothing.tech/",
-      "observedAt": "2026-07-15T20:15:02.160Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:25.494Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:38759cafc840840733cfdcf0039fc93cdcfb517b4438e46c82720c46281693ba",
+      "contentHash": "sha256:7a0f9912b2fa6ff482374cbe445310e03a25467264d551b411c1a5ca5752d2e2",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:38759cafc840840733cfdcf0039fc93cdcfb517b4438e46c82720c46281693ba",
+      "lastSuccessfulHash": "sha256:7a0f9912b2fa6ff482374cbe445310e03a25467264d551b411c1a5ca5752d2e2",
       "lastSuccessfulHashes": {
-        "http": "sha256:38759cafc840840733cfdcf0039fc93cdcfb517b4438e46c82720c46281693ba"
+        "http": "sha256:7a0f9912b2fa6ff482374cbe445310e03a25467264d551b411c1a5ca5752d2e2"
       }
     },
     {
       "sourceId": "ref.notion.design",
       "url": "https://www.notion.so/",
-      "observedAt": "2026-07-15T20:15:03.496Z",
+      "observedAt": "2026-07-20T08:52:26.187Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1470,59 +1470,59 @@
     {
       "sourceId": "ref.openai.ai-elements",
       "url": "https://platform.openai.com/docs/guides/text",
-      "observedAt": "2026-07-15T20:15:02.618Z",
+      "observedAt": "2026-07-20T08:52:25.643Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:6071b228a85670e0bb9adca5435dd6a84ffe36b2bf1b3d2bb4bf2271059619c0",
+      "contentHash": "sha256:86ac392d139fd033761d81fd5e429c1e468f2233b045d9611378c6b0b5838c8b",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:6071b228a85670e0bb9adca5435dd6a84ffe36b2bf1b3d2bb4bf2271059619c0",
+      "lastSuccessfulHash": "sha256:86ac392d139fd033761d81fd5e429c1e468f2233b045d9611378c6b0b5838c8b",
       "lastSuccessfulHashes": {
-        "http": "sha256:6071b228a85670e0bb9adca5435dd6a84ffe36b2bf1b3d2bb4bf2271059619c0"
+        "http": "sha256:86ac392d139fd033761d81fd5e429c1e468f2233b045d9611378c6b0b5838c8b"
       },
-      "etag": "W/\"22eecaf244f0b4601ad2df1fc74b464f\"",
-      "lastModified": "Wed, 15 Jul 2026 19:13:26 GMT",
-      "lastSuccessfulEtag": "W/\"22eecaf244f0b4601ad2df1fc74b464f\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 19:13:26 GMT"
+      "etag": "W/\"b4cfce4cd2ac4b8cf4bfbf80f218efb8\"",
+      "lastModified": "Mon, 20 Jul 2026 04:56:24 GMT",
+      "lastSuccessfulEtag": "W/\"b4cfce4cd2ac4b8cf4bfbf80f218efb8\"",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 04:56:24 GMT"
     },
     {
       "sourceId": "ref.openai.apps-sdk-ui-guidelines",
       "url": "https://developers.openai.com/apps-sdk/concepts/ui-guidelines",
-      "observedAt": "2026-07-15T20:15:02.093Z",
+      "observedAt": "2026-07-20T08:52:25.520Z",
       "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:4c34b1827acaeaddaea53b61282c86d6bc4025106c2dec9be66ab1441940ae26",
+      "contentHash": "sha256:9e50f01dde1d380314c98221aa9924eef70ff36a1e24036c4bbe21a482401d46",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:4c34b1827acaeaddaea53b61282c86d6bc4025106c2dec9be66ab1441940ae26",
+      "lastSuccessfulHash": "sha256:9e50f01dde1d380314c98221aa9924eef70ff36a1e24036c4bbe21a482401d46",
       "lastSuccessfulHashes": {
-        "http": "sha256:4c34b1827acaeaddaea53b61282c86d6bc4025106c2dec9be66ab1441940ae26"
+        "http": "sha256:9e50f01dde1d380314c98221aa9924eef70ff36a1e24036c4bbe21a482401d46"
       },
-      "etag": "W/\"b8cdb43e3b04fa20ca63bdf41caf8b86\"",
-      "lastModified": "Wed, 15 Jul 2026 19:32:36 GMT",
-      "lastSuccessfulEtag": "W/\"b8cdb43e3b04fa20ca63bdf41caf8b86\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 19:32:36 GMT"
+      "etag": "W/\"f56c63f73b13bb732baddf6cca2cc1a2\"",
+      "lastModified": "Mon, 20 Jul 2026 04:57:13 GMT",
+      "lastSuccessfulEtag": "W/\"f56c63f73b13bb732baddf6cca2cc1a2\"",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 04:57:13 GMT"
     },
     {
       "sourceId": "ref.openui.open-ui",
       "url": "https://open-ui.org/",
-      "observedAt": "2026-07-15T20:15:02.805Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:25.782Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:3dffe954d4e7e41d7cf09a377a58e3bf839a46a79c1b342826a58628b44e480d",
+      "contentHash": "sha256:017acf5a51c4200e40da2b2cde2ab7224d4e96919a618a0a08dcefd6a4b141ed",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:3dffe954d4e7e41d7cf09a377a58e3bf839a46a79c1b342826a58628b44e480d",
+      "lastSuccessfulHash": "sha256:017acf5a51c4200e40da2b2cde2ab7224d4e96919a618a0a08dcefd6a4b141ed",
       "lastSuccessfulHashes": {
-        "http": "sha256:3dffe954d4e7e41d7cf09a377a58e3bf839a46a79c1b342826a58628b44e480d"
+        "http": "sha256:017acf5a51c4200e40da2b2cde2ab7224d4e96919a618a0a08dcefd6a4b141ed"
       },
-      "etag": "\"a34fad49d1125ed3af5632ce87bb8500-ssl-df\"",
-      "lastSuccessfulEtag": "\"a34fad49d1125ed3af5632ce87bb8500-ssl-df\""
+      "etag": "\"23a1e1f175e8a2a253c0a4e271029363-ssl-df\"",
+      "lastSuccessfulEtag": "\"23a1e1f175e8a2a253c0a4e271029363-ssl-df\""
     },
     {
       "sourceId": "ref.pinterest.gestalt-accessibility",
       "url": "https://github.com/pinterest/gestalt/blob/master/docs/pages/foundations/accessibility.tsx",
-      "observedAt": "2026-07-15T20:15:02.536Z",
+      "observedAt": "2026-07-20T08:52:25.720Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1538,7 +1538,7 @@
     {
       "sourceId": "ref.pinterest.gestalt",
       "url": "https://gestalt.pinterest.systems/",
-      "observedAt": "2026-07-15T20:15:04.337Z",
+      "observedAt": "2026-07-20T08:52:26.284Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1552,7 +1552,7 @@
     {
       "sourceId": "ref.radix.primitives",
       "url": "https://www.radix-ui.com/primitives",
-      "observedAt": "2026-07-15T20:15:02.647Z",
+      "observedAt": "2026-07-20T08:52:25.902Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1562,13 +1562,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:0b7d8b0fea25a6925b9056a76cf3cb50d0d12575dce18f4e0ca90ebe06ff1032"
       },
-      "etag": "W/\"a9f30ff40c5dceea1f417876e3848426\"",
-      "lastSuccessfulEtag": "W/\"a9f30ff40c5dceea1f417876e3848426\""
+      "etag": "W/\"50d9f800d6bda6b34f6a1e6555caa83a\"",
+      "lastSuccessfulEtag": "W/\"50d9f800d6bda6b34f6a1e6555caa83a\""
     },
     {
       "sourceId": "ref.react.docs",
       "url": "https://react.dev/",
-      "observedAt": "2026-07-15T20:15:02.820Z",
+      "observedAt": "2026-07-20T08:52:26.109Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1584,7 +1584,7 @@
     {
       "sourceId": "ref.salesforce.lightning-guidelines",
       "url": "https://www.lightningdesignsystem.com/guidelines/overview/",
-      "observedAt": "2026-07-15T20:15:07.419Z",
+      "observedAt": "2026-07-20T08:52:27.738Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1594,13 +1594,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c"
       },
-      "etag": "W/\"e8de995735e2cd0916427a2e61f41f20\"",
-      "lastSuccessfulEtag": "W/\"e8de995735e2cd0916427a2e61f41f20\""
+      "etag": "W/\"00f9549768353adb94d320b261e9bf26\"",
+      "lastSuccessfulEtag": "W/\"00f9549768353adb94d320b261e9bf26\""
     },
     {
       "sourceId": "ref.salesforce.lightning",
       "url": "https://www.lightningdesignsystem.com/",
-      "observedAt": "2026-07-15T20:15:07.322Z",
+      "observedAt": "2026-07-20T08:52:27.785Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1610,29 +1610,29 @@
       "lastSuccessfulHashes": {
         "http": "sha256:2fc9a41f28e3c58dcc6462c229069f1c66397afcba7567a6edbee5e55baeac7c"
       },
-      "etag": "W/\"9864c561583956a33235ce0d55175531\"",
-      "lastSuccessfulEtag": "W/\"9864c561583956a33235ce0d55175531\""
+      "etag": "W/\"e7194e6cfcee4c5ef33372a4fd08e654\"",
+      "lastSuccessfulEtag": "W/\"e7194e6cfcee4c5ef33372a4fd08e654\""
     },
     {
       "sourceId": "ref.shadcn.ui",
       "url": "https://ui.shadcn.com/",
-      "observedAt": "2026-07-15T20:15:02.935Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:26.280Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:7781a744d5f6301cd24854344a7b0e5d7eabdc0a6df99b2e0738ad6c60f239d6",
+      "contentHash": "sha256:d567b4341161690b5e156abee717036e6f20fc0c225895ea504078b58e875432",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:7781a744d5f6301cd24854344a7b0e5d7eabdc0a6df99b2e0738ad6c60f239d6",
+      "lastSuccessfulHash": "sha256:d567b4341161690b5e156abee717036e6f20fc0c225895ea504078b58e875432",
       "lastSuccessfulHashes": {
-        "http": "sha256:7781a744d5f6301cd24854344a7b0e5d7eabdc0a6df99b2e0738ad6c60f239d6"
+        "http": "sha256:d567b4341161690b5e156abee717036e6f20fc0c225895ea504078b58e875432"
       },
-      "etag": "W/\"q1fmmz25chg19b\"",
-      "lastSuccessfulEtag": "W/\"q1fmmz25chg19b\""
+      "etag": "W/\"f144ng0g5ggdz9\"",
+      "lastSuccessfulEtag": "W/\"f144ng0g5ggdz9\""
     },
     {
       "sourceId": "ref.shopify.app-design-guidelines",
       "url": "https://shopify.dev/docs/apps/design",
-      "observedAt": "2026-07-15T20:15:03.064Z",
+      "observedAt": "2026-07-20T08:52:26.492Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1642,13 +1642,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:0bd06e35f12891e0dabe30b5e91e311015a4f2b8a218ea6884236ae12a8b957f"
       },
-      "etag": "W/\"c40ebc33f755561a\"",
-      "lastSuccessfulEtag": "W/\"c40ebc33f755561a\""
+      "etag": "W/\"a2e2bae95391e433\"",
+      "lastSuccessfulEtag": "W/\"a2e2bae95391e433\""
     },
     {
       "sourceId": "ref.shopify.polaris-accessibility",
       "url": "https://polaris-react.shopify.com/foundations/accessibility",
-      "observedAt": "2026-07-15T20:15:03.536Z",
+      "observedAt": "2026-07-20T08:52:26.416Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1664,7 +1664,7 @@
     {
       "sourceId": "ref.shopify.polaris",
       "url": "https://polaris-react.shopify.com/",
-      "observedAt": "2026-07-15T20:15:04.441Z",
+      "observedAt": "2026-07-20T08:52:26.496Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1680,7 +1680,7 @@
     {
       "sourceId": "ref.smarthr.accessibility-process",
       "url": "https://smarthr.design/accessibility/",
-      "observedAt": "2026-07-15T20:15:04.244Z",
+      "observedAt": "2026-07-20T08:52:26.845Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1690,13 +1690,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:320584002bfaa2880c5aea2071609b5dd9035afa336ad0bab2837de34909ad97"
       },
-      "etag": "\"6f2b799347e43134ca8829c4910ddee6-ssl-df\"",
-      "lastSuccessfulEtag": "\"6f2b799347e43134ca8829c4910ddee6-ssl-df\""
+      "etag": "\"4fe319964345c4ed4333c9b7161840a6-ssl-df\"",
+      "lastSuccessfulEtag": "\"4fe319964345c4ed4333c9b7161840a6-ssl-df\""
     },
     {
       "sourceId": "ref.smarthr.design",
       "url": "https://smarthr.design/",
-      "observedAt": "2026-07-15T20:15:04.868Z",
+      "observedAt": "2026-07-20T08:52:26.939Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1706,13 +1706,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:e694d7febbabe48838db77340d774b40019710d97a6838735dc5f2cab9e822ba"
       },
-      "etag": "\"509eefa5e6b705ad20e3839f85089750-ssl-df\"",
-      "lastSuccessfulEtag": "\"509eefa5e6b705ad20e3839f85089750-ssl-df\""
+      "etag": "\"8e17fae467668904ce85d65608311c23-ssl-df\"",
+      "lastSuccessfulEtag": "\"8e17fae467668904ce85d65608311c23-ssl-df\""
     },
     {
       "sourceId": "ref.spotify.design",
       "url": "https://engineering.atspotify.com/",
-      "observedAt": "2026-07-15T20:15:08.394Z",
+      "observedAt": "2026-07-20T08:52:28.012Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1726,37 +1726,37 @@
     {
       "sourceId": "ref.storybook.docs",
       "url": "https://storybook.js.org/",
-      "observedAt": "2026-07-15T20:15:05.460Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:26.783Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:b935faf74272a4b96409bd90c07779d127c07c2c07afa5dd223adaf89a02e2a0",
+      "contentHash": "sha256:0f359d50723541a298355d667ba7398a67e1fce3c50e9d683b95196b01230880",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:b935faf74272a4b96409bd90c07779d127c07c2c07afa5dd223adaf89a02e2a0",
+      "lastSuccessfulHash": "sha256:0f359d50723541a298355d667ba7398a67e1fce3c50e9d683b95196b01230880",
       "lastSuccessfulHashes": {
-        "http": "sha256:b935faf74272a4b96409bd90c07779d127c07c2c07afa5dd223adaf89a02e2a0"
+        "http": "sha256:0f359d50723541a298355d667ba7398a67e1fce3c50e9d683b95196b01230880"
       },
-      "etag": "W/\"urgliw78bmw4e7-df\"",
-      "lastSuccessfulEtag": "W/\"urgliw78bmw4e7-df\""
+      "etag": "W/\"c4en8k572zw2yk-df\"",
+      "lastSuccessfulEtag": "W/\"c4en8k572zw2yk-df\""
     },
     {
       "sourceId": "ref.stripe.design",
       "url": "https://stripe.com/",
-      "observedAt": "2026-07-15T20:15:05.678Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:27.164Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:a98c3eac361ab08ef18b07379269066a546bad3f4b706ec272770993614ffd22",
+      "contentHash": "sha256:4ddd6b47e2cdfda9e79eb664d68876fa8760a5c7540fba58bd5bf6305613a75a",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:a98c3eac361ab08ef18b07379269066a546bad3f4b706ec272770993614ffd22",
+      "lastSuccessfulHash": "sha256:4ddd6b47e2cdfda9e79eb664d68876fa8760a5c7540fba58bd5bf6305613a75a",
       "lastSuccessfulHashes": {
-        "http": "sha256:a98c3eac361ab08ef18b07379269066a546bad3f4b706ec272770993614ffd22"
+        "http": "sha256:4ddd6b47e2cdfda9e79eb664d68876fa8760a5c7540fba58bd5bf6305613a75a"
       }
     },
     {
       "sourceId": "ref.tailwind.v4",
       "url": "https://tailwindcss.com/docs",
-      "observedAt": "2026-07-15T20:15:05.762Z",
+      "observedAt": "2026-07-20T08:52:27.066Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1766,13 +1766,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:1478cf4f1f452f9784b51843471491f2a1fd850d6214669a9edc16d203603e93"
       },
-      "etag": "W/\"80770643a2121132d7a9bfec0fd1d905\"",
-      "lastSuccessfulEtag": "W/\"80770643a2121132d7a9bfec0fd1d905\""
+      "etag": "W/\"6252b0884efd735d7bdc3d16bd29db9c\"",
+      "lastSuccessfulEtag": "W/\"6252b0884efd735d7bdc3d16bd29db9c\""
     },
     {
       "sourceId": "ref.uber.base-web",
       "url": "https://baseweb.design/",
-      "observedAt": "2026-07-15T20:15:06.486Z",
+      "observedAt": "2026-07-20T08:52:27.087Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1786,7 +1786,7 @@
     {
       "sourceId": "ref.uber.base",
       "url": "https://base.uber.com/",
-      "observedAt": "2026-07-15T20:15:08.369Z",
+      "observedAt": "2026-07-20T08:52:28.227Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1796,13 +1796,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:cd6c245363aae2728d20b9e40913eb6bed9baa1708b970f226690784b4ced7b1"
       },
-      "etag": "W/\"900f0478b63c5be4640ababdecb4226d\"",
-      "lastSuccessfulEtag": "W/\"900f0478b63c5be4640ababdecb4226d\""
+      "etag": "W/\"8447ee78c2afa4116a866368f89ba55f\"",
+      "lastSuccessfulEtag": "W/\"8447ee78c2afa4116a866368f89ba55f\""
     },
     {
       "sourceId": "ref.uswds.uswds",
       "url": "https://designsystem.digital.gov/",
-      "observedAt": "2026-07-15T20:15:07.284Z",
+      "observedAt": "2026-07-20T08:52:27.359Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1820,21 +1820,21 @@
     {
       "sourceId": "ref.vercel.ai-elements",
       "url": "https://ai-sdk.dev/elements/overview",
-      "observedAt": "2026-07-15T20:15:09.376Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:34.692Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:1fc54e43398ebeee74a8b5c456ba78e092632ce37deae6a6ab805913bfab489e",
+      "contentHash": "sha256:4fec9afd9f8fe9dfddc13bf6b00ceeeb8be0fc82b940e9c7dd1eadf6e22c6459",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:1fc54e43398ebeee74a8b5c456ba78e092632ce37deae6a6ab805913bfab489e",
+      "lastSuccessfulHash": "sha256:4fec9afd9f8fe9dfddc13bf6b00ceeeb8be0fc82b940e9c7dd1eadf6e22c6459",
       "lastSuccessfulHashes": {
-        "http": "sha256:1fc54e43398ebeee74a8b5c456ba78e092632ce37deae6a6ab805913bfab489e"
+        "http": "sha256:4fec9afd9f8fe9dfddc13bf6b00ceeeb8be0fc82b940e9c7dd1eadf6e22c6459"
       }
     },
     {
       "sourceId": "ref.vercel.design",
       "url": "https://vercel.com/design",
-      "observedAt": "2026-07-15T20:15:07.968Z",
+      "observedAt": "2026-07-20T08:52:27.639Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1844,13 +1844,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:9f33daf895d9fd117f068601876118fe4f3c8d4947414f4e4c5044d9f4da3e08"
       },
-      "etag": "W/\"d9ff472922232c95b73843f086814d44\"",
-      "lastSuccessfulEtag": "W/\"d9ff472922232c95b73843f086814d44\""
+      "etag": "W/\"ab786cf79f0e295e16cb09907bbc0784\"",
+      "lastSuccessfulEtag": "W/\"ab786cf79f0e295e16cb09907bbc0784\""
     },
     {
       "sourceId": "ref.vercel.geist",
       "url": "https://vercel.com/geist/introduction",
-      "observedAt": "2026-07-15T20:15:07.566Z",
+      "observedAt": "2026-07-20T08:52:28.701Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1860,13 +1860,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:e2f4dc393e9f420a943b32a2f8bd5b1a9f47de52e943296055ab3556c0739206"
       },
-      "etag": "W/\"b30ef09a1ec5a330128dc06d3a5a2101\"",
-      "lastSuccessfulEtag": "W/\"b30ef09a1ec5a330128dc06d3a5a2101\""
+      "etag": "W/\"5c5ba4417bb5137f1ade4f62ee40d993\"",
+      "lastSuccessfulEtag": "W/\"5c5ba4417bb5137f1ade4f62ee40d993\""
     },
     {
       "sourceId": "ref.vercel.generative-ui",
       "url": "https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces",
-      "observedAt": "2026-07-15T20:15:07.785Z",
+      "observedAt": "2026-07-20T08:52:27.994Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1876,13 +1876,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:0376cccb3fc35f7a7aea8d95be95b6373c9b657209681156ba174be95539efe6"
       },
-      "etag": "W/\"04427e41132837718ded4dc6f41ee002\"",
-      "lastSuccessfulEtag": "W/\"04427e41132837718ded4dc6f41ee002\""
+      "etag": "W/\"af12700eb0539ae4910e9bcb7d9c3425\"",
+      "lastSuccessfulEtag": "W/\"af12700eb0539ae4910e9bcb7d9c3425\""
     },
     {
       "sourceId": "ref.vercel.web-interface-guidelines",
       "url": "https://vercel.com/design/guidelines",
-      "observedAt": "2026-07-15T20:15:08.466Z",
+      "observedAt": "2026-07-20T08:52:27.901Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1892,13 +1892,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:aa87525615db3ef5e3f6cd0ea703f778258e7a00a355f071f59d031f5fab77c7"
       },
-      "etag": "W/\"c1293ea0bad7076075d9e6cf1cc61fb8\"",
-      "lastSuccessfulEtag": "W/\"c1293ea0bad7076075d9e6cf1cc61fb8\""
+      "etag": "W/\"fad4916e01b639928d940273bdb9bf73\"",
+      "lastSuccessfulEtag": "W/\"fad4916e01b639928d940273bdb9bf73\""
     },
     {
       "sourceId": "ref.voltagent.awesome-design-md",
       "url": "https://github.com/voltagent/awesome-design-md",
-      "observedAt": "2026-07-15T20:15:08.407Z",
+      "observedAt": "2026-07-20T08:52:28.185Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1914,7 +1914,7 @@
     {
       "sourceId": "ref.w3c.apg",
       "url": "https://www.w3.org/WAI/ARIA/apg/",
-      "observedAt": "2026-07-15T20:15:08.496Z",
+      "observedAt": "2026-07-20T08:52:28.202Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1924,13 +1924,13 @@
       "lastSuccessfulHashes": {
         "http": "sha256:bfce9a9d0f8e0b575392207fc2e2219774e9e9414cdda009c953dbb750f31365"
       },
-      "lastModified": "Thu, 09 Jul 2026 07:07:36 GMT",
-      "lastSuccessfulLastModified": "Thu, 09 Jul 2026 07:07:36 GMT"
+      "lastModified": "Mon, 20 Jul 2026 08:05:33 GMT",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 08:05:33 GMT"
     },
     {
       "sourceId": "ref.w3c.dtcg-format",
       "url": "https://tr.designtokens.org/format/",
-      "observedAt": "2026-07-15T20:15:10.606Z",
+      "observedAt": "2026-07-20T08:52:29.141Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1946,7 +1946,7 @@
     {
       "sourceId": "ref.w3c.dtcg",
       "url": "https://www.designtokens.org/",
-      "observedAt": "2026-07-15T20:15:09.309Z",
+      "observedAt": "2026-07-20T08:52:28.575Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1962,7 +1962,7 @@
     {
       "sourceId": "ref.w3c.wcag-22",
       "url": "https://www.w3.org/TR/WCAG22/",
-      "observedAt": "2026-07-15T20:15:08.628Z",
+      "observedAt": "2026-07-20T08:52:28.312Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1978,7 +1978,7 @@
     {
       "sourceId": "ref.w3c.wcag-3",
       "url": "https://www.w3.org/TR/wcag3/",
-      "observedAt": "2026-07-15T20:15:08.672Z",
+      "observedAt": "2026-07-20T08:52:28.359Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -1994,25 +1994,25 @@
     {
       "sourceId": "ref.web.scroll-driven",
       "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations",
-      "observedAt": "2026-07-15T20:15:08.980Z",
-      "result": "unchanged",
+      "observedAt": "2026-07-20T08:52:28.451Z",
+      "result": "changed",
       "attempts": 1,
       "status": 200,
-      "contentHash": "sha256:359500ed2027702e72a11e1389d1f01dfb37e2717b0f425279715df6982a77f2",
+      "contentHash": "sha256:649c5c69c2a1455cbbcee3a6cdd71fc436279cf58c3191e5af2f905b28f43708",
       "adapter": "http",
-      "lastSuccessfulHash": "sha256:359500ed2027702e72a11e1389d1f01dfb37e2717b0f425279715df6982a77f2",
+      "lastSuccessfulHash": "sha256:649c5c69c2a1455cbbcee3a6cdd71fc436279cf58c3191e5af2f905b28f43708",
       "lastSuccessfulHashes": {
-        "http": "sha256:359500ed2027702e72a11e1389d1f01dfb37e2717b0f425279715df6982a77f2"
+        "http": "sha256:649c5c69c2a1455cbbcee3a6cdd71fc436279cf58c3191e5af2f905b28f43708"
       },
-      "etag": "\"cc9c6bf0017d4dfae18825720cea243b\"",
-      "lastModified": "Wed, 15 Jul 2026 01:04:53 GMT",
-      "lastSuccessfulEtag": "\"cc9c6bf0017d4dfae18825720cea243b\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 01:04:53 GMT"
+      "etag": "\"8d40bd17738554b8940b275b55a9481c\"",
+      "lastModified": "Mon, 20 Jul 2026 03:36:13 GMT",
+      "lastSuccessfulEtag": "\"8d40bd17738554b8940b275b55a9481c\"",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 03:36:13 GMT"
     },
     {
       "sourceId": "ref.web.view-transitions",
       "url": "https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API",
-      "observedAt": "2026-07-15T20:15:08.920Z",
+      "observedAt": "2026-07-20T08:52:28.585Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
@@ -2022,16 +2022,16 @@
       "lastSuccessfulHashes": {
         "http": "sha256:f01c87359faafecff3b17db10e9edc972a24da06a9ae9d708cb14b18e3f272b7"
       },
-      "etag": "\"aed9aada3fd9c0c09dda6cbd2a6ce6eb\"",
-      "lastModified": "Wed, 15 Jul 2026 01:04:42 GMT",
-      "lastSuccessfulEtag": "\"aed9aada3fd9c0c09dda6cbd2a6ce6eb\"",
-      "lastSuccessfulLastModified": "Wed, 15 Jul 2026 01:04:42 GMT"
+      "etag": "\"a1a7769e1619007ad2a5efb3d6aba07c\"",
+      "lastModified": "Mon, 20 Jul 2026 03:35:20 GMT",
+      "lastSuccessfulEtag": "\"a1a7769e1619007ad2a5efb3d6aba07c\"",
+      "lastSuccessfulLastModified": "Mon, 20 Jul 2026 03:35:20 GMT"
     },
     {
       "sourceId": "ref.williams.non-designers",
       "url": "https://www.nngroup.com/articles/principles-visual-design/",
-      "observedAt": "2026-07-15T20:15:10.268Z",
-      "result": "changed",
+      "observedAt": "2026-07-20T08:52:29.918Z",
+      "result": "unchanged",
       "attempts": 1,
       "status": 200,
       "contentHash": "sha256:bc062035389e5bf0e93ab8429fdf8130033f88af3931b4f1304c21204b551ea5",
@@ -2048,9 +2048,9 @@
     {
       "sourceId": "ref.zendesk.garden-components",
       "url": "https://garden.zendesk.com/components/",
-      "observedAt": "2026-07-15T20:15:09.551Z",
+      "observedAt": "2026-07-20T08:52:35.806Z",
       "result": "unchanged",
-      "attempts": 1,
+      "attempts": 2,
       "status": 200,
       "contentHash": "sha256:7d090fd7cd822013d051382b1cef1f8a5b7a12a5cd4b2da7a2b98922a5aefeaa",
       "adapter": "http",
@@ -2064,7 +2064,7 @@
     {
       "sourceId": "ref.zendesk.garden",
       "url": "https://garden.zendesk.com/",
-      "observedAt": "2026-07-15T20:15:09.843Z",
+      "observedAt": "2026-07-20T08:52:28.782Z",
       "result": "unchanged",
       "attempts": 1,
       "status": 200,
