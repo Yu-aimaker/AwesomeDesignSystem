@@ -4,15 +4,25 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 39
+件数: 44
+
+## accessibility
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [Inclusive Components (Heydon Pickering)](accessibility/inclusive-components.md) | article | accessibility, inclusive-design, heydon-pickering, components, aria, checklist | 2026-09-06 |
+| [フォーカスとキーボード操作](accessibility/focus-and-keyboard.md) | article | focus, focus-visible, keyboard, roving-tabindex, focus-ring, wcag, aria-practices | 2026-09-06 |
 
 ## animation
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
+| [animations.dev and Emil Kowalski](animation/animations-dev-emil-kowalski.md) | article | animations-dev, emil-kowalski, easing, duration, sonner, vaul, principles | 2026-09-06 |
+| [CSS scroll-driven animations](animation/css-scroll-driven-animations.md) | guideline | css, scroll-driven, animation-timeline, view, scroll, browser-support, reduced-motion | 2026-09-06 |
 | [GSAP and ScrollTrigger](animation/gsap.md) | library | gsap, scrolltrigger, pin, scrub, webflow, free, scrolltelling | 2026-09-06 |
 | [Lottie and dotLottie](animation/lottie-and-dotlottie.md) | library | lottie, dotlottie, illustration, after-effects, bodymovin, wasm, thorvg | 2026-09-06 |
 | [Motion (motion/react)](animation/motion.md) | library | motion, framer-motion, spring, layout, animatepresence, usescroll, usemotionvalue | 2026-09-06 |
+| [Rive state machines](animation/rive.md) | product | rive, state-machine, inputs, data-binding, interactive, wasm, react | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
 
 ## color

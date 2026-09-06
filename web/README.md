@@ -24,7 +24,9 @@ Node 22 and pnpm 10.
 - `src/styles.css` imports Tailwind v4, resets its default palette, then imports
   the token files. Only AwesomeDS roles exist as utilities (`bg-canvas`,
   `text-ink`, `border-hairline`, `rounded-md`, `shadow-2`, `ease-out-ds`,
-  `duration-base`).
+  `duration-base`). Because `src/ds/tokens` is gitignored, Tailwind's automatic
+  source detection skips `src/ds`; `styles.css` lists the source folders with
+  `@source`. Add a new folder there if you create one.
 - `src/lib/knowledge.ts` loads `Knowledge/**/*.md` and `AwesomeDS/foundations/*.md`
   with `import.meta.glob` and parses the frontmatter (`title`, `category`,
   `type`, `sources[{url,title}]`, `tags[]`, `updated`).

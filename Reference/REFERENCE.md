@@ -4,7 +4,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 175  /  ドメイン数: 33
+リンク数: 195  /  ドメイン数: 38
+
+## animations.dev
+
+- [animations.dev: Web Animations course by Emil Kowalski (proxy blocked, link recorded)](https://animations.dev/)  
+  引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
 
 ## blog.duolingo.com
 
@@ -45,6 +50,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
 - [Meet Liquid Glass - WWDC25](https://developer.apple.com/videos/play/wwdc2025/219/)  
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
+
+## emilkowal.ski
+
+- [Emil Kowalski's site and blog (proxy blocked, link recorded)](https://emilkowal.ski/)  
+  引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
 
 ## evilmartians.com
 
@@ -93,6 +103,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
 - [digital-go-jp/design-tokens: デジタル庁デザインシステム（Figma）のデザイントークン](https://github.com/digital-go-jp/design-tokens)  
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
+- [emilkowalski/sonner: An opinionated toast component for React](https://github.com/emilkowalski/sonner)  
+  引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
+- [emilkowalski/vaul: Drawer component for React](https://github.com/emilkowalski/vaul)  
+  引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
 - [evilmartians/oklch-picker: Color picker and converter for OKLCH and LCH](https://github.com/evilmartians/oklch-picker)  
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [google-labs-code/design.md: A format specification for describing a visual identity to coding agents](https://github.com/google-labs-code/design.md)  
@@ -101,14 +115,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
 - [greensock/GSAP: GSAP (GreenSock Animation Platform)](https://github.com/greensock/GSAP)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+- [Heydon/Inclusive-Components: Resources for the inclusive components blog](https://github.com/Heydon/Inclusive-Components)  
+  引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md)
 - [kufu/smarthr-design-system (smarthr.design のソース)](https://github.com/kufu/smarthr-design-system)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kufu/smarthr-ui: React components for creating SmartHR applications](https://github.com/kufu/smarthr-ui)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kzhrknt/awesome-design-md-jp: DESIGN.md collection for Japanese web services](https://github.com/kzhrknt/awesome-design-md-jp)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md)
-- [Leonxlnx/taste-skill SKILL.md §5 (canonical GSAP skeletons)](https://github.com/Leonxlnx/taste-skill)  
-  引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md), [React Bits](../Knowledge/component-libraries/react-bits.md), [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md)
+- [Leonxlnx/taste-skill README (lists Emil Kowalski / animations.dev as a sponsor)](https://github.com/Leonxlnx/taste-skill)  
+  引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md), [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md), [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md), [React Bits](../Knowledge/component-libraries/react-bits.md), [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md)
 - [LottieFiles/dotlottie-web: dotLottie Web player (Rust + WASM, ThorVG)](https://github.com/LottieFiles/dotlottie-web)  
   引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
 - [magicuidesign/magicui: UI Library for Design Engineers](https://github.com/magicuidesign/magicui)  
@@ -129,6 +145,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [radix-ui/colors: A gorgeous, accessible color system](https://github.com/radix-ui/colors)  
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [rive-app/rive-docs: source of rive.app/docs](https://github.com/rive-app/rive-docs)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
+- [rive-app/rive-react: React runtime for Rive](https://github.com/rive-app/rive-react)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
+- [rive-app/rive-wasm: Web (JS/WASM) runtime for Rive](https://github.com/rive-app/rive-wasm)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
 - [shadcn-ui/ui (source of ui.shadcn.com docs; the site itself is proxy blocked)](https://github.com/shadcn-ui/ui)  
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
 - [vercel-labs/agent-skills (the `npx skills add` CLI taste-skill installs through)](https://github.com/vercel-labs/agent-skills)  
@@ -179,6 +201,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [GSAP docs: ScrollTrigger (proxy blocked, link recorded)](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+
+## inclusive-components.design
+
+- [Inclusive Components](https://inclusive-components.design/)  
+  引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md)
 
 ## kzhrknt.github.io
 
@@ -261,6 +288,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
 - [GSAP types/scroll-trigger.d.ts (ScrollTrigger config)](https://raw.githubusercontent.com/greensock/GSAP/master/types/scroll-trigger.d.ts)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+- [Heydon/inclusive-design-checklist: Inclusive Web Design Checklist](https://raw.githubusercontent.com/Heydon/inclusive-design-checklist/HEAD/README.md)  
+  引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md)
 - [smarthr-ui createColor.ts (色トークン)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [smarthr-ui createFontSize.ts (フォントサイズ)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createFontSize.ts)  
@@ -287,6 +316,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
 - [grilling SKILL.md (the reusable interview primitive)](https://raw.githubusercontent.com/mattpocock/skills/main/skills/productivity/grilling/SKILL.md)  
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [MDN browser-compat-data: css.properties.animation-timeline](https://raw.githubusercontent.com/mdn/browser-compat-data/main/css/properties/animation-timeline.json)  
+  引用: [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md)
 - [font-feature-settings - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/font-feature-settings/index.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [line-break - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/line-break/index.md)  
@@ -294,9 +325,13 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [text-autospace - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/text-autospace/index.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [:focus-visible - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/selectors/_colon_focus-visible/index.md)  
-  引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
+  引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md), [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
 - [oklch() - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/values/color_value/oklch/index.md)  
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
+- [MDN: CSS scroll-driven animations (guide, source of developer.mozilla.org which is proxy blocked)](https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/css/guides/scroll-driven_animations/index.md)  
+  引用: [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md)
+- [MDN: animation-timeline](https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/css/reference/properties/animation-timeline/index.md)  
+  引用: [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md)
 - [motion-dom spring.ts (springDefaults)](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/generators/spring.ts)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [motion-dom default-transitions.ts](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/utils/default-transitions.ts)  
@@ -329,6 +364,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
 - [Radix Primitives: Introduction (source of radix-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/introduction.mdx)  
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [Rive docs: State Machine (editor)](https://raw.githubusercontent.com/rive-app/rive-docs/main/editor/state-machine/state-machine.mdx)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
+- [Rive docs: Data Binding (runtimes)](https://raw.githubusercontent.com/rive-app/rive-docs/main/runtimes/data-binding.mdx)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
+- [Rive docs: Inputs (runtimes, marked deprecated in favor of Data Binding)](https://raw.githubusercontent.com/rive-app/rive-docs/main/runtimes/inputs.mdx)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
 - [shadcn/ui docs: CLI](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/cli.mdx)  
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
 - [shadcn/ui docs: components.json](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/components-json.mdx)  
@@ -361,6 +402,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel-labs/web-interface-guidelines command.md (the rules web-design-guidelines fetches)](https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [ARIA Authoring Practices Guide: Developing a Keyboard Interface (source)](https://raw.githubusercontent.com/w3c/aria-practices/main/content/practices/keyboard-interface/keyboard-interface-practice.html)  
+  引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md)
 - [CSS Color Module Level 4 (Editor's Draft source)](https://raw.githubusercontent.com/w3c/csswg-drafts/main/css-color-4/Overview.bs)  
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [WCAG 1.4.3 Contrast (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/20/contrast-minimum.html)  
@@ -376,13 +419,15 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [WCAG 2.5.7 Dragging Movements source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/dragging-movements.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.4.13 Focus Appearance source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/focus-appearance.html)  
-  引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+  引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md), [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.4.11 Focus Not Obscured (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/focus-not-obscured-minimum.html)  
-  引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+  引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md), [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 3.3.7 Redundant Entry source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/redundant-entry.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.5.8 Target Size (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/target-size-minimum.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [WordPress Accessibility Docs: Visual focus](https://raw.githubusercontent.com/wpaccessibility/wp-a11y-docs/HEAD/docs/topics/code/focus-handling/visual-focus.md)  
+  引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md)
 - [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI のノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 
@@ -411,6 +456,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
 - [npm: three latest](https://registry.npmjs.org/three/latest)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
+
+## rive.app
+
+- [rive.app docs: State Machine (proxy blocked, link recorded)](https://rive.app/docs/editor/state-machine/state-machine)  
+  引用: [Rive state machines](../Knowledge/animation/rive.md)
+
+## sarasoueidan.com
+
+- [A guide to designing accessible, WCAG-conformant focus indicators - Sara Soueidan](https://www.sarasoueidan.com/blog/focus-indicators/)  
+  引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md)
 
 ## shadcn.io
 
