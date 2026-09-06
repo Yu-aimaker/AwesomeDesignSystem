@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="{{LANG}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{PRODUCT_NAME}} design system preview</title>
+<link rel="stylesheet" href="./tokens.css">
+<style>
+  body { margin: 0; background: var(--ds-canvas); color: var(--ds-ink); }
+  main { max-width: var(--ds-container); margin: 0 auto; padding: var(--ds-space-12) var(--ds-space-6); }
+  section { padding: var(--ds-space-12) 0; border-top: 1px solid var(--ds-hairline); }
+  section:first-of-type { border-top: 0; }
+  h1 { font-size: var(--ds-text-3xl); line-height: var(--ds-leading-heading); font-weight: var(--ds-weight-semibold); letter-spacing: var(--ds-tracking-display); margin: 0 0 var(--ds-space-2); }
+  h2 { font-size: var(--ds-text-xl); line-height: var(--ds-leading-snug); font-weight: var(--ds-weight-semibold); margin: 0 0 var(--ds-space-6); }
+  p { margin: 0 0 var(--ds-space-4); max-width: var(--ds-measure); }
+  .muted { color: var(--ds-ink-secondary); }
+  .mono { font-family: var(--ds-font-mono); font-size: 13px; }
+  .grid { display: grid; gap: var(--ds-space-4); grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .swatch { border: 1px solid var(--ds-hairline); border-radius: var(--ds-radius-lg); overflow: hidden; }
+  .swatch > div:first-child { height: 64px; }
+  .swatch > div:last-child { padding: var(--ds-space-3); font-size: var(--ds-text-xs); line-height: 1.5; }
+  .type-row { display: grid; grid-template-columns: 140px 1fr; gap: var(--ds-space-4); align-items: baseline; padding: var(--ds-space-3) 0; border-bottom: 1px solid var(--ds-hairline); }
+  .space-bar { height: 8px; background: var(--ds-accent-soft); border: 1px solid var(--ds-accent); border-radius: 2px; margin: 6px 0; }
+  .radius-row { display: flex; gap: var(--ds-space-4); flex-wrap: wrap; }
+  .radius-row div { width: 72px; height: 72px; border: 1px solid var(--ds-hairline-strong); display: grid; place-items: center; font-size: 12px; }
+  .row { display: flex; gap: var(--ds-space-3); flex-wrap: wrap; align-items: center; }
+  .btn { height: var(--ds-control-md); padding: 0 var(--ds-space-4); border-radius: var(--ds-radius-md); border: 1px solid transparent; font: var(--ds-weight-medium) var(--ds-text-sm)/1.2 var(--ds-font-sans); cursor: pointer; transition: background var(--ds-duration-instant) var(--ds-ease-out); }
+  .btn-primary { background: var(--ds-primary); color: var(--ds-on-primary); }
+  .btn-primary:hover, .btn-primary.is-hover { background: var(--ds-primary-hover); }
+  .btn-secondary { background: var(--ds-surface); color: var(--ds-ink); border-color: var(--ds-hairline-strong); }
+  .btn-ghost { background: transparent; color: var(--ds-ink-secondary); }
+  .btn:disabled { background: var(--ds-surface-sunken); color: var(--ds-ink-disabled); border-color: transparent; cursor: not-allowed; }
+  .is-focus { outline: var(--ds-focus-width) solid var(--ds-focus-ring); outline-offset: var(--ds-focus-offset); }
+  .field { display: grid; gap: var(--ds-space-2); max-width: 320px; }
+  .field label { font: var(--ds-weight-medium) var(--ds-text-sm)/1.2 var(--ds-font-sans); }
+  .field input { height: var(--ds-control-md); padding: 0 var(--ds-space-3); border: 1px solid var(--ds-hairline-strong); border-radius: var(--ds-radius-md); background: var(--ds-surface); color: var(--ds-ink); font: 400 var(--ds-text-sm)/1.55 var(--ds-font-sans); }
+  .field input::placeholder { color: var(--ds-ink-muted); }
+  .field .help { font-size: var(--ds-text-xs); color: var(--ds-ink-muted); }
+  .field.is-error input { border-color: var(--ds-danger); }
+  .field.is-error .help { color: var(--ds-danger); }
+  .card { background: var(--ds-surface); border: 1px solid var(--ds-hairline); border-radius: var(--ds-radius-lg); padding: var(--ds-space-6); max-width: 360px; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: var(--ds-radius-pill); background: var(--ds-surface-sunken); color: var(--ds-ink-secondary); font-size: var(--ds-text-xs); line-height: 1.5; }
+  .badge.success { background: var(--ds-success-soft); color: var(--ds-success); }
+  .badge.warning { background: var(--ds-warning-soft); color: var(--ds-warning); }
+  .badge.danger { background: var(--ds-danger-soft); color: var(--ds-danger); }
+  .dialog { background: var(--ds-surface); border: 1px solid var(--ds-hairline); border-radius: var(--ds-radius-xl); padding: var(--ds-space-6); box-shadow: var(--ds-shadow-3); max-width: 420px; }
+  a { color: var(--ds-accent); text-decoration: underline; text-underline-offset: 3px; }
+  .theme-dark { background: var(--ds-canvas); color: var(--ds-ink); }
+</style>
+</head>
+<body>
+{{THEME_BLOCK_START}}
+<main>
+  <h1>{{PRODUCT_NAME}} design system</h1>
+  <p class="muted">Built on AwesomeDS 0.1.0. Theme: <span class="theme-name">light</span>. Accent appears only on the link below, the focus ring, and the selected badge.</p>
+  <p>Reference <a href="#">link with the accent</a>. 日本語のサンプル文章です。文字の大きさ、行間、約物の処理を確認してください。</p>
+
+  <section>
+    <h2>Type</h2>
+    <div class="type-row"><span class="mono muted">display 56/1.1/600</span><span style="font-size:56px;line-height:1.1;font-weight:600;letter-spacing:-0.02em">Display Aa あ</span></div>
+    <div class="type-row"><span class="mono muted">h1 36/1.2/600</span><span style="font-size:36px;line-height:1.2;font-weight:600;letter-spacing:-0.02em">Heading one 見出し</span></div>
+    <div class="type-row"><span class="mono muted">h2 28/1.25/600</span><span style="font-size:28px;line-height:1.25;font-weight:600">Heading two 見出し</span></div>
+    <div class="type-row"><span class="mono muted">h3 20/1.35/600</span><span style="font-size:20px;line-height:1.35;font-weight:600">Heading three 見出し</span></div>
+    <div class="type-row"><span class="mono muted">body 16/1.6/400</span><span>Body text sets the measure at 65ch. 本文は16pxで、日本語の行間は1.8です。</span></div>
+    <div class="type-row"><span class="mono muted">body-sm 14/1.55</span><span style="font-size:14px;line-height:1.55">Small UI text for tables and forms.</span></div>
+    <div class="type-row"><span class="mono muted">caption 12/1.5</span><span style="font-size:12px;line-height:1.5;letter-spacing:.01em">Caption, Latin and numerals only 2026-09-06</span></div>
+    <div class="type-row"><span class="mono muted">mono 13/1.6</span><span class="mono">const ratio = contrast(ink, canvas); // 19.6</span></div>
+  </section>
+
+  <section>
+    <h2>Color roles</h2>
+    <div class="grid">
+      <!-- Repeat one .swatch per role. Fill {{RATIO}} from the contrast script output. -->
+      <div class="swatch"><div style="background:var(--ds-canvas)"></div><div><b>canvas</b><br>{{CANVAS_HEX}}</div></div>
+      <div class="swatch"><div style="background:var(--ds-surface-sunken)"></div><div><b>surface-sunken</b><br>{{SUNKEN_HEX}}</div></div>
+      <div class="swatch"><div style="background:var(--ds-ink)"></div><div><b>ink</b> on canvas {{RATIO_INK}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-ink-secondary)"></div><div><b>ink-secondary</b> {{RATIO_INK_SECONDARY}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-ink-muted)"></div><div><b>ink-muted</b> {{RATIO_INK_MUTED}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-hairline-strong)"></div><div><b>hairline-strong</b> {{RATIO_HAIRLINE}}:1 (3:1 needed)</div></div>
+      <div class="swatch"><div style="background:var(--ds-accent)"></div><div><b>accent</b> {{ACCENT_HEX}} on canvas {{RATIO_ACCENT}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-accent-soft)"></div><div><b>accent-soft</b></div></div>
+      <div class="swatch"><div style="background:var(--ds-primary)"></div><div><b>primary</b> / on-primary {{RATIO_ON_PRIMARY}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-success)"></div><div><b>success</b> {{RATIO_SUCCESS}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-warning)"></div><div><b>warning</b> {{RATIO_WARNING}}:1</div></div>
+      <div class="swatch"><div style="background:var(--ds-danger)"></div><div><b>danger</b> {{RATIO_DANGER}}:1</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Spacing (4px base)</h2>
+    <div class="mono muted">4 8 12 16 20 24 32 40 48 64 80 96 128</div>
+    <div class="space-bar" style="width:4px"></div><div class="space-bar" style="width:8px"></div><div class="space-bar" style="width:12px"></div><div class="space-bar" style="width:16px"></div><div class="space-bar" style="width:24px"></div><div class="space-bar" style="width:32px"></div><div class="space-bar" style="width:48px"></div><div class="space-bar" style="width:64px"></div><div class="space-bar" style="width:96px"></div><div class="space-bar" style="width:128px"></div>
+  </section>
+
+  <section>
+    <h2>Radius</h2>
+    <div class="radius-row">
+      <div style="border-radius:var(--ds-radius-md)">md controls</div>
+      <div style="border-radius:var(--ds-radius-lg)">lg cards</div>
+      <div style="border-radius:var(--ds-radius-xl)">xl dialogs</div>
+      <div style="border-radius:var(--ds-radius-pill)">pill</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Buttons</h2>
+    <div class="row">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-primary is-hover">Hover</button>
+      <button class="btn btn-primary is-focus">Focus</button>
+      <button class="btn btn-primary" disabled>Disabled</button>
+      <button class="btn btn-primary" aria-busy="true">Saving…</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-ghost">Ghost</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Inputs</h2>
+    <div class="row" style="align-items:start">
+      <div class="field"><label for="a">Email</label><input id="a" placeholder="you@example.com"><span class="help">We never share it.</span></div>
+      <div class="field"><label for="b">Focused</label><input id="b" class="is-focus" value="typing"><span class="help">Focus ring 2px accent</span></div>
+      <div class="field is-error"><label for="c">Error</label><input id="c" value="not-an-email"><span class="help">Enter a valid email address.</span></div>
+      <div class="field"><label for="d">Disabled</label><input id="d" disabled value="read only"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Card, badges, dialog</h2>
+    <div class="row" style="align-items:start">
+      <div class="card"><h3 style="margin:0 0 8px;font-size:20px;line-height:1.35">Card title</h3><p class="muted" style="margin:0 0 16px">Supporting text inside a level-1 card. Border, no shadow.</p><div class="row"><span class="badge">Draft</span><span class="badge success">Active</span><span class="badge warning">Pending</span><span class="badge danger">Failed</span><span class="badge" style="background:var(--ds-accent-soft);color:var(--ds-accent)">Selected</span></div></div>
+      <div class="dialog" role="dialog" aria-label="Sample dialog"><h3 style="margin:0 0 8px;font-size:20px;line-height:1.35">Delete project?</h3><p class="muted" style="margin:0 0 24px">This removes 12 files. You can restore them from Trash for 30 days.</p><div class="row" style="justify-content:flex-end"><button class="btn btn-secondary">Cancel</button><button class="btn btn-primary">Delete</button></div></div>
+    </div>
+  </section>
+</main>
+{{THEME_BLOCK_END}}
+<!-- Duplicate the <main> above inside <div data-theme="dark" class="theme-dark"> ... </div> and change .theme-name to "dark". -->
+</body>
+</html>
