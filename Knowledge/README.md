@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 28
+件数: 32
 
 ## component-libraries
 
@@ -58,4 +58,13 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
 | [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, dials, gsap, motion, landing-page, pre-flight, em-dash | 2026-09-06 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
+
+## typography
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [Geist (Geist Sans / Geist Mono)](typography/geist-font.md) | library | geist, font, vercel, ofl, variable, sans, mono | 2026-09-06 |
+| [Noto Sans JP](typography/noto-sans-jp.md) | library | noto, japanese, cjk, google-fonts, variable, ofl, subset | 2026-09-06 |
+| [タイプスケールと測度 (行長)](typography/type-scale-and-measure.md) | article | type-scale, modular-scale, measure, line-length, 65ch, butterick, refactoring-ui | 2026-09-06 |
+| [日本語 Web タイポグラフィ](typography/japanese-web-typography.md) | article | japanese, typography, line-height, letter-spacing, kinsoku, palt, text-autospace, jlreq | 2026-09-06 |
 

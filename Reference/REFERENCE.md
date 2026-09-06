@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 134  /  ドメイン数: 26
+リンク数: 149  /  ドメイン数: 29
 
 ## blog.duolingo.com
 
@@ -53,6 +53,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Duolingo Design System (Figma Community)](https://www.figma.com/community/file/1460744749282136015)  
   引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
 
+## fonts.google.com
+
+- [Noto Sans JP - Google Fonts](https://fonts.google.com/noto/specimen/Noto+Sans+JP)  
+  引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
+
 ## fontsinuse.com
 
 - [NDot in use - Fonts In Use](https://fontsinuse.com/typefaces/233367/ndot)  
@@ -97,6 +102,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
 - [mattpocock/skills: Skills For Real Engineers](https://github.com/mattpocock/skills)  
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [modularscale/modularscale-sass: Modular scale calculator built into your Sass](https://github.com/modularscale/modularscale-sass)  
+  引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [mui/base-ui: unstyled UI components for building accessible web apps](https://github.com/mui/base-ui)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Myndex/SAPC-APCA: APCA Accessible Perceptual Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)  
@@ -112,7 +119,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [vercel-labs/skills: the `npx skills` CLI](https://github.com/vercel-labs/skills)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel/geist-font: Geist Sans, Geist Mono, Geist Pixel](https://github.com/vercel/geist-font)  
-  引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
+  引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md), [Geist (Geist Sans / Geist Mono)](../Knowledge/typography/geist-font.md)
 - [VoltAgent/awesome-design-md (the upstream the JP edition extends)](https://github.com/VoltAgent/awesome-design-md)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
 - [awesome-design-md: claude/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/claude/DESIGN.md)  
@@ -129,12 +136,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Stripe](../Knowledge/design-systems/stripe.md)
 - [awesome-design-md: vercel/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/vercel/DESIGN.md)  
   引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
+- [w3c/jlreq: Text Layout Requirements for Japanese](https://github.com/w3c/jlreq)  
+  引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [xeji01/nothingfont: nothing.tech typeface (Ndot-55, Ndot-57, NType-82)](https://github.com/xeji01/nothingfont)  
   引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
 - [awesome-design-md-jp: goodpatch/DESIGN.md (実測 2026-05-21)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/goodpatch/DESIGN.md)  
   引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
 - [awesome-design-md-jp: smarthr/DESIGN.md](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/smarthr/DESIGN.md)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+- [awesome-design-md-jp: template/DESIGN.md (日本語向けテンプレート)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/template/DESIGN.md)  
+  引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 
 ## goodpatch.com
 
@@ -167,10 +178,20 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [ndot57: the Nothing Typeface - Nothing Community](https://nothing.community/d/104-ndot57-the-nothing-typeface)  
   引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
 
+## npmjs.com
+
+- [geist - npm](https://www.npmjs.com/package/geist)  
+  引用: [Geist (Geist Sans / Geist Mono)](../Knowledge/typography/geist-font.md)
+
 ## phonearena.com
 
 - [Nothing's design boss explains the big change behind Phone (3) - PhoneArena](https://www.phonearena.com/news/nothing-design-boss-explains-the-big-change-behind-phone-3_id171637)  
   引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
+
+## practicaltypography.com
+
+- [Line length | Butterick's Practical Typography](https://practicaltypography.com/line-length.html)  
+  引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 
 ## raw.githubusercontent.com
 
@@ -193,7 +214,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [carbon/packages/type fontFamily.ts (IBM Plex)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/fontFamily.ts)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [carbon/packages/type scale.ts (type scale)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/scale.ts)  
-  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md), [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [carbon/packages/type styles.ts (type tokens)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/styles.ts)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [design-tokens README (develop)](https://raw.githubusercontent.com/digital-go-jp/design-tokens/develop/README.md)  
@@ -202,6 +223,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
 - [design.md PHILOSOPHY.md](https://raw.githubusercontent.com/google-labs-code/design.md/main/PHILOSOPHY.md)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
+- [google/fonts: ofl/notosansjp/DESCRIPTION.en_us.html](https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/DESCRIPTION.en_us.html)  
+  引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
+- [google/fonts: ofl/notosansjp/METADATA.pb](https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/METADATA.pb)  
+  引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
 - [smarthr-ui createColor.ts (色トークン)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [smarthr-ui createFontSize.ts (フォントサイズ)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createFontSize.ts)  
@@ -228,12 +253,22 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
 - [grilling SKILL.md (the reusable interview primitive)](https://raw.githubusercontent.com/mattpocock/skills/main/skills/productivity/grilling/SKILL.md)  
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [font-feature-settings - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/font-feature-settings/index.md)  
+  引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
+- [line-break - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/line-break/index.md)  
+  引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
+- [text-autospace - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/text-autospace/index.md)  
+  引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [Base UI docs: Composition (render prop)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/handbook/composition/page.mdx)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Base UI docs: Quick start (source of base-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [nathanstypographynotes: butterick.md (Practical Typography のノート)](https://raw.githubusercontent.com/nathanlane/nathanstypographynotes/HEAD/butterick.md)  
+  引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [open-design: duolingo/DESIGN.md (二次資料)](https://raw.githubusercontent.com/nexu-io/open-design/main/design-systems/duolingo/DESIGN.md)  
   引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+- [notofonts/noto-cjk: Sans/README.md](https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/README.md)  
+  引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
 - [primer/primitives typography.json5](https://raw.githubusercontent.com/primer/primitives/HEAD/src/tokens/base/typography/typography.json5)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [radix-ui/colors src/light.ts (scale values)](https://raw.githubusercontent.com/radix-ui/colors/main/src/light.ts)  
@@ -294,6 +329,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.5.8 Target Size (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/target-size-minimum.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI のノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
+  引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 
 ## reactbits.dev
 
@@ -335,6 +372,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## vercel.com
 
+- [Geist Font - Vercel](https://vercel.com/font)  
+  引用: [Geist (Geist Sans / Geist Mono)](../Knowledge/typography/geist-font.md)
 - [Geist Design System - Colors (Vercel)](https://vercel.com/geist/colors)  
   引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
 - [Geist Design System - Introduction (Vercel)](https://vercel.com/geist/introduction)  
