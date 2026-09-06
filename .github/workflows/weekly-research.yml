@@ -1,0 +1,33 @@
+name: Weekly design research
+
+# Opens one issue every Monday with the research checklist. The issue is the
+# entry point for the knowledge-curator skill (Plugin/awesome-ds/skills/knowledge-curator).
+# Run it with Claude Code: `/awesome-ds:knowledge-curator #<issue number>`.
+
+on:
+  schedule:
+    - cron: "0 0 * * 1" # Monday 09:00 JST
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  open-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create research issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const date = new Date().toISOString().slice(0, 10);
+            const body = require('fs').readFileSync('.github/weekly-research-template.md', 'utf8');
+            const { data } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Weekly research ${date}`,
+              body,
+              labels: ['research'],
+            });
+            core.info(`Opened #${data.number}`);
