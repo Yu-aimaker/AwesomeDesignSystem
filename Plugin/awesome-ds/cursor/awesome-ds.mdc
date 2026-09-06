@@ -1,0 +1,43 @@
+---
+description: AwesomeDS design system rules for building or restyling web UI. Neutral, content-first, one accent, Geist + Noto Sans JP, 4px grid, borders before shadows.
+globs: ["**/*.tsx", "**/*.jsx", "**/*.css", "**/*.scss", "**/*.vue", "**/*.svelte", "**/*.html"]
+alwaysApply: false
+---
+
+# AwesomeDS
+
+Full system: `design-system/awesome-ds/DESIGN.md` (read it before generating UI). Tokens: `design-system/awesome-ds/tokens/tokens.css` and `tailwind.css`. If the project has its own `DESIGN.md` at the repo root, it wins; use AwesomeDS for gaps only.
+
+Before code: print one line `Design read: <page kind> for <audience>, <density>, <light|dark|both>, accent <hex or default>, lang <en|ja>` and list assumptions. Do not ask a list of questions.
+
+## Tokens (use `var(--ds-*)` or the Tailwind class; never raw hex in components)
+
+```
+canvas #ffffff/#0a0a0a  canvas-soft #fafafa/#111111  surface #ffffff/#141414  surface-sunken #f5f5f5/#1a1a1a
+ink #0a0a0a/#fafafa  ink-secondary #525252/#a3a3a3  ink-muted #737373  hairline #e5e5e5/#262626  hairline-strong #d4d4d4/#333333
+accent #2f5bea/#7a9cff (links, focus ring, selection only)  accent-soft #e8eefc/#16203d
+primary button: bg ink, text canvas.  success #1a7f37  warning #b26a00  danger #c81e1e (always with icon or label)
+font sans "Geist","Noto Sans JP",system-ui  mono "Geist Mono"  body 16/1.6 (ja 1.8)  h1 36/1.2/600/-0.02em  h2 28  h3 20  label 14/500  caption 12
+space 4 8 12 16 20 24 32 40 48 64 80 96 128  sections 64 mobile 96 desktop  card padding 24  container 1200  measure 65ch
+radius 8 controls, 12 cards, 16 dialogs, pill badges. border 1px. shadow only on popovers (0 4px 12px -2px rgb(10 10 10/.08)) and dialogs (0 16px 48px -12px rgb(10 10 10/.18))
+motion 100 hover, 150 small, 200 enter, 300 dialog; ease-out cubic-bezier(.16,1,.3,1); enter travel 4-8px, scale from .98; reduced-motion keeps opacity only
+controls 40px (32 sm, 48 lg); focus ring 2px solid accent, offset 2px; touch targets 44 mobile, 24 desktop
+```
+
+## Rules
+
+- shadcn/ui on Radix, installed into the project, restyled with tokens. Lucide icons strokeWidth 1.75, sizes 16/20/24.
+- Every interactive element: hover, focus-visible, active, disabled, loading. Every data view: skeleton, empty, error.
+- Forms: label above, helper below, error below in danger with icon. Placeholder is never the label.
+- Mobile first; every multi-column layout has a `< 768px` fallback. Hero fits the first viewport at 390px: heading 2 lines max, one paragraph, one primary button. `100dvh`, never `100vh`.
+- Left-align text. Weights 400 body, 500 labels, 600 headings; 700+ only for display.
+- Copy: short, direct, no em dashes, no filler (seamless, unlock, empower, elevate, next generation), no Acme or lorem ipsum in delivered UI.
+- Japanese (`lang="ja"`): line-height 1.8 body, 1.4 to 1.5 headings, letter-spacing 0 to 0.02em never negative, `palt` on headings only, no italics, full-width punctuation, Noto Sans JP loaded as a subset.
+
+## Forbidden
+
+Raw hex or Tailwind `[#...]` in components; accent as button fill or on more than one element per view; gradients, glow, glass, blobs; Inter + slate + purple; uppercase eyebrows above more than a third of headings; three identical cards as default; mixed radius families; `outline: none` without `:focus-visible`; text under 12px or body under 16px; shadows on cards or inputs at rest; missing or wrong `lang`.
+
+## Finish
+
+Run `design-system/awesome-ds/components/checklist.md` and report pass/fail per item. Grep your files for the forbidden list and report `file:line` matches.

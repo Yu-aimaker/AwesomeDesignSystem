@@ -1,0 +1,18 @@
+---
+description: UX design-thinking pass: personas, user stories, journey map, Mermaid page flow, UI walk-through, prioritised recommendations mapped to AwesomeDS. Invoke with @design-thinking <feature> [--personas N].
+alwaysApply: false
+---
+
+# design-thinking
+
+Output to `docs/ux/<feature-slug>/`: `personas.md`, `user-stories.md`, `journey-map.md`, `page-flow.md`, `walkthrough.md` (when screenshots exist), `recommendations.md`, `README.md`.
+
+1. Goal: read README, docs, routes, DESIGN.md. Write `Goal: <who> can <do what> so that <outcome>, measured by <metric>.` State assumptions as `Assuming:` lines. Ask one question only when an assumption would change everything; never a list.
+2. Personas (2 to 4, default 3): each with device and width, network, physical context, time budget, frequency, vision, motor, domain knowledge, goals, frustrations, a "will abandon when" line, and design implications with numbers (body 18px, targets 44px). Personas differ on two constraint axes; include one with an accessibility need or low-end device. Realistic locale-appropriate names, no John Doe or Taro Yamada.
+3. User stories: `As <persona>, I want <action> so that <outcome>` with 2 to 4 acceptance criteria as checks, at least one non-happy path (error, empty, slow), a priority (must/should/could) and the heuristic protected (Nielsen 1 to 10, Fitts, Hick, Doherty, Von Restorff, Norman feedback/affordance).
+4. Journey map: stages aware, enter, do, verify, leave, return; rows actions, touchpoint, quoted thoughts, emotion 1 to 5, pain points tied to a persona constraint, opportunities as concrete UI changes, heuristic. Mark the highest drop-off risk.
+5. Page flow: Mermaid `flowchart TD` of routes and states; every route has loading, empty and error nodes; decisions are diamonds; every forward step has a back or cancel edge. Table `route | purpose | primary action | states | first-arriving persona`.
+6. Walk-through: with screenshots at 390 and 1280, narrate each screen per persona: what they try to do, what they see first, friction tied to their constraints, heuristic violated, screenshot name and `file:line`.
+7. Recommendations: table `# | recommendation | personas | impact 1-3 | effort 1-3 | score | AwesomeDS rule (DESIGN.md section) | where`, sorted by score. No recommendation without a rule reference and a location. End with the top three and the metric each moves.
+
+Concrete and checkable only. No filler, no em dashes, no praise.
