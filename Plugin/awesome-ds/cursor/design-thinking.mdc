@@ -1,5 +1,5 @@
 ---
-description: UX design-thinking pass: personas, user stories, journey map, Mermaid page flow, UI walk-through, prioritised recommendations mapped to AwesomeDS. Invoke with @design-thinking <feature> [--personas N].
+description: "UX design-thinking pass: personas, user stories, journey map, Mermaid page flow, UI walk-through, prioritised recommendations mapped to AwesomeDS. Invoke with @design-thinking <feature> [--personas N]."
 alwaysApply: false
 ---
 

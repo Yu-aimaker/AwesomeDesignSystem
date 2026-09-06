@@ -46,9 +46,18 @@ const heightOverride = opt("height");
 const heightFor = (w) => (heightOverride ? Number(heightOverride) : w < 600 ? 844 : w < 1024 ? 1024 : 800);
 
 async function loadPlaywright() {
+  // 1. project or plugin node_modules; 2. global npm root (npm i -g playwright); 3. give up with instructions.
   for (const mod of ["playwright", "playwright-core"]) {
     try { return await import(mod); } catch { /* try next */ }
   }
+  try {
+    const { execSync } = await import("node:child_process");
+    const root = execSync("npm root -g", { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+    for (const mod of ["playwright", "playwright-core"]) {
+      const p = resolve(root, mod, "index.mjs");
+      if (existsSync(p)) return await import(pathToFileURL(p).href);
+    }
+  } catch { /* no global install */ }
   console.error("capture: playwright not found. Run: npm i -D playwright && npx playwright install chromium");
   process.exit(3);
 }

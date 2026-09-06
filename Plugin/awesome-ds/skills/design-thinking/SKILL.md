@@ -1,6 +1,6 @@
 ---
 name: design-thinking
-description: UX design-thinking pass for a feature or product: personas with real constraints, user stories with acceptance criteria, a journey map, a Mermaid page flow with empty/error/loading states, a per-persona UI walk-through of screenshots, and prioritised recommendations mapped to AwesomeDS rules. Use when the user asks for personas, user stories, a journey map, "UX review", "who is this for", information architecture, or before building a new flow.
+description: 'UX design-thinking pass for a feature or product: personas with real constraints, user stories with acceptance criteria, a journey map, a Mermaid page flow with empty/error/loading states, a per-persona UI walk-through of screenshots, and prioritised recommendations mapped to AwesomeDS rules. Use when the user asks for personas, user stories, a journey map, "UX review", "who is this for", information architecture, or before building a new flow.'
 argument-hint: "[feature or product] [--personas N]"
 allowed-tools: Read, Grep, Glob, Bash(node *), Bash(mkdir *)
 ---

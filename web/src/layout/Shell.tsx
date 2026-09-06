@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router";
-import { Github, Menu, Monitor, Moon, Sun, X } from "lucide-react";
+import { ExternalLink, Menu, Monitor, Moon, Sun, X } from "lucide-react";
 import { repoUrl, sidebar, topNav } from "../lib/nav";
 import { useTheme, type ThemePreference } from "../lib/theme";
 import { cx } from "../ds/cx";
@@ -139,10 +139,10 @@ export function Shell() {
               href={repoUrl}
               target="_blank"
               rel="noreferrer"
-              aria-label="GitHub リポジトリ"
-              className="flex size-10 items-center justify-center rounded-md text-ink-secondary no-underline transition-colors duration-instant ease-out-ds hover:bg-surface-sunken hover:text-ink"
+              className="t-label flex h-10 items-center gap-1 rounded-md px-3 text-ink-secondary no-underline transition-colors duration-instant ease-out-ds hover:bg-surface-sunken hover:text-ink"
             >
-              <Github className="size-5" strokeWidth={1.75} aria-hidden />
+              GitHub
+              <ExternalLink className="size-3.5" strokeWidth={1.75} aria-hidden />
             </a>
           </div>
         </div>

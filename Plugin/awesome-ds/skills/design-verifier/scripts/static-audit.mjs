@@ -50,11 +50,9 @@ for (const file of files) {
     // 1. raw colours
     const colorMatches = line.match(/#[0-9a-fA-F]{3,8}\b|\brgba?\(|\bhsla?\(|\boklch\(/g) || [];
     if (colorMatches.length && !/^\s*(\/\/|\/\*|\*)/.test(line) && !/(url\(|['"]#[a-z-]+['"]|href=|id=)/.test(line)) {
-      counts.colorDecls += colorMatches.length;
-      if (isToken) counts.tokenColorDecls += colorMatches.length;
-      else add(2, "raw-color", file, n, line, "Replace with var(--ds-*) or a token class");
+      if (!isToken) { counts.colorDecls += colorMatches.length; add(2, "raw-color", file, n, line, "Replace with var(--ds-*) or a token class"); }
     }
-    if (/var\(--ds-/.test(line)) { counts.colorDecls++; counts.tokenColorDecls++; }
+    if (!isToken && /var\(--ds-|\b(bg|text|border|ring)-(canvas|surface|ink|hairline|accent|primary|success|warning|danger)/.test(line)) { counts.colorDecls++; counts.tokenColorDecls++; }
     if (/\b(bg|text|border|ring|from|to|via|fill|stroke)-\[#|\[(rgb|hsl|oklch)\(/.test(line)) add(2, "tailwind-arbitrary-color", file, n, line, "Add a token and use its class");
     // 2. decoration
     if (/(linear|radial|conic)-gradient|bg-gradient-/.test(line) && !isToken) add(3, "gradient", file, n, line, "Remove decorative gradient; use canvas-soft for section contrast");
@@ -62,9 +60,9 @@ for (const file of files) {
     if (/drop-shadow|0 0 \d+px .*(rgba?|#)/.test(line) && !isToken) add(3, "glow", file, n, line, "Remove glow; elevation is border or shadow-2/3");
     // 3. AI defaults
     if (/font-family[^;]*\bInter\b|["']Inter["']|fontFamily:\s*["']Inter/.test(line)) add(3, "inter-default", file, n, line, "Use var(--ds-font-sans) (Geist + Noto Sans JP)");
-    if (/\b(bg|text|border)-(slate|violet|purple|indigo|fuchsia)-\d{2,3}\b/.test(line)) add(3, "ai-palette", file, n, line, "Use ink/hairline/accent roles; no slate or purple");
+    if (/\b(bg|text|border|from|to|via|ring)-(slate|violet|purple|indigo|fuchsia)-\d{2,3}\b/.test(line)) add(3, "ai-palette", file, n, line, "Use ink/hairline/accent roles; no slate or purple");
     // 4. focus
-    if (/outline:\s*(none|0)\b|outline-none/.test(line) && !hasFocusVisible) add(1, "focus-removed", file, n, line, "Add :focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px }");
+    if (/outline:\s*["']?(none|0)\b|outline-none/.test(line) && !hasFocusVisible) add(1, "focus-removed", file, n, line, "Add :focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px }");
     // 5. size and weight
     const fs = line.match(/font-size:\s*(\d+(?:\.\d+)?)px/) || line.match(/\btext-\[(\d+)px\]/);
     if (fs && Number(fs[1]) < 12) add(1, "text-under-12", file, n, line, "Minimum 12px; 14px for UI text, 16px body");
