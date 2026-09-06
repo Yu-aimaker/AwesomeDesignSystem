@@ -2,7 +2,7 @@
 // Generates Reference/REFERENCE.md and Knowledge/README.md from the frontmatter of
 // Knowledge/**/*.md. Run: node scripts/build-reference.mjs
 // Frontmatter contract: title, category, type, sources[{url,title}], tags[], updated.
-import { readdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync, statSync, mkdirSync } from "node:fs";
 import { join, relative, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -106,6 +106,7 @@ entries.sort((a, b) => (a.category + a.title).localeCompare(b.category + b.title
     }
     md += "\n";
   }
+  mkdirSync(join(root, "Reference"), { recursive: true });
   writeFileSync(join(root, "Reference", "REFERENCE.md"), md);
 }
 console.log(`entries: ${entries.length}`);
