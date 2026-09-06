@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 44
+件数: 54
 
 ## accessibility
 
@@ -67,6 +67,17 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Stripe](design-systems/stripe.md) | product | stripe, fintech, sohne, gradient, tabular-nums, indigo, navy | 2026-09-06 |
 | [Vercel Geist Design System](design-systems/vercel-geist.md) | design-system | vercel, geist, design-system, monochrome, gray-scale, mono, gradient | 2026-09-06 |
 
+## design-thinking
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [Laws of UX](design-thinking/laws-of-ux.md) | article | laws-of-ux, heuristics, psychology, fitts, hick, doherty, gestalt, jon-yablonski | 2026-09-06 |
+| [Nielsen の 10 ユーザビリティヒューリスティクス](design-thinking/nielsen-heuristics.md) | article | nielsen, heuristics, usability, nngroup, evaluation, review | 2026-09-06 |
+| [Norman『誰のためのデザイン?』(The Design of Everyday Things)](design-thinking/norman-design-of-everyday-things.md) | article | norman, affordance, signifier, feedback, mapping, constraints, conceptual-model | 2026-09-06 |
+| [Refactoring UI](design-thinking/refactoring-ui.md) | article | refactoring-ui, hierarchy, spacing, color-scale, shadows, wathan, schoger, tailwind | 2026-09-06 |
+| [デザインレビューとクリティーク](design-thinking/design-review-and-critique.md) | article | critique, design-review, facilitation, feedback, heuristic-evaluation, adversarial-review | 2026-09-06 |
+| [ペルソナ、ジャーニーマップ、ページフロー](design-thinking/personas-journeys-and-flows.md) | article | persona, user-story, journey-map, page-flow, research, 18f, nngroup | 2026-09-06 |
+
 ## platform-guidelines
 
 | エントリ | 種別 | タグ | 更新 |
@@ -85,6 +96,15 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
 | [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, dials, gsap, motion, landing-page, pre-flight, em-dash | 2026-09-06 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
+
+## tech-stack
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [Font loading: Fontsource, next/font, subsetting, size-adjust](tech-stack/fonts-loading.md) | guideline | fonts, fontsource, next-font, geist, noto-sans-jp, subsetting, size-adjust, font-display, japanese | 2026-09-06 |
+| [Next.js App Router and Vite](tech-stack/nextjs-and-vite.md) | library | nextjs, app-router, rsc, next-font, vite, spa, rolldown, framework-choice | 2026-09-06 |
+| [Playwright visual testing and axe-core](tech-stack/playwright-visual-testing.md) | library | playwright, screenshot, tohavescreenshot, axe-core, accessibility, visual-regression, design-verifier | 2026-09-06 |
+| [Tailwind CSS v4](tech-stack/tailwind-v4.md) | library | tailwind, v4, theme, css-first, oklch, vite, tokens | 2026-09-06 |
 
 ## typography
 

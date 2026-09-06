@@ -67,7 +67,7 @@ frontmatter から読み取った主要値（primary / canvas / rounded）。
 - 採用: Elevation を「Level 0 から 3」の表で書く形式（AwesomeDS 第 6 節）。
 - 変更: README の 9 セクション構成ではなく、実ファイルの 8 見出し（Overview から Do's and Don'ts）と Stitch 仕様を基準にし、AwesomeDS では 12 節に拡張した（Responsive、Accessibility、Agent prompt guide を追加）。
 - 不採用: `ink` を `#171717` や `#010102` のような固有値にすること。AwesomeDS は `#0a0a0a`（ink）と `#ffffff`（canvas）の純グレー軸にし、ブランド色と干渉しない中立を選んだ。
-- 不採用: 本文中の em dash（`—`）多用。コレクションの description は em dash を多く含むが、AwesomeDS 第 9 節は UI コピーでの em dash を禁止している。
+- 不採用: 本文中の em dash 多用。コレクションの description は em dash を多く含むが、AwesomeDS 第 9 節は UI コピーでの em dash を禁止している。
 
 ## 出典
 

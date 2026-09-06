@@ -26,7 +26,7 @@ Inclusive Components は Heydon Pickering が inclusive-components.design で連
   - Focus: 「Provide clear, unambiguous focus styles」「Ensure keyboard focus order is logical regarding visual layout」
   - Keyboard: 「Use screen reader and keyboard accessible HTML」「Make scrollable elements focusable for keyboard users」「Ensure disabled controls are not focusable」
   - Controls: 「Make controls look like controls; give them strong perceived affordance」「Ensure states (pressed, expanded, invalid, etc) are communicated to assistive software」
-  - Links: 「Underline links — at least in body copy」「Make sure the purpose of a link is clearly described: 'read more' vs. 'read more about accessibility'」「Warn users of links that have unusual behaviors, like linking off-site, or loading a new tab」
+  - Links: 「Underline links - at least in body copy」「Make sure the purpose of a link is clearly described: 'read more' vs. 'read more about accessibility'」「Warn users of links that have unusual behaviors, like linking off-site, or loading a new tab」
   - Forms: 「Give all form elements permanently visible labels」「Place labels above form elements」「Mark invalid fields clearly and provide associated error messages」「Do not auto focus form fields, on page load」「Make forms as short as possible」
   - Motion: 「Include only clear, meaningful animations」「Honor requests to remove animation via the `prefers-reduced-motion` media query」
 - 連載の代表的なパターン (一般に知られる内容、今回はサイト未取得): Toggle Button は `<button aria-pressed>` を使いラベルを変えない。Tabs は `role="tablist"` と矢印キー移動。Menu は本来のメニューとナビゲーションを区別する。Card は 1 つのリンクを疑似要素で広げる。Tooltip は hover と focus の両方で出し、Escape で閉じる。Notification は `role="status"` / `aria-live`。Modal は focus trap と `aria-modal`。

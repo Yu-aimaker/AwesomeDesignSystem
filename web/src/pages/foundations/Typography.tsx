@@ -19,7 +19,7 @@ const sources = [
 export function Typography() {
   return (
     <div>
-      <PageHeader title="タイポグラフィ" lead="Geist と Noto Sans JP、8 段階のサイズ、3 つの太さ。階層は文字だけで作ります。" />
+      <PageHeader title="文字" lead="Geist と Noto Sans JP、8 段階のサイズ、3 つの太さ。階層は文字だけで作ります。" />
 
       <Section id="roles" title="タイプロール" lead="tokens.json に定義された 11 のロール。日本語と欧文の実寸を並べています。">
         <div className="flex flex-col divide-y divide-hairline rounded-lg border border-hairline bg-surface">

@@ -28,6 +28,8 @@ React Bits は David Haz が公開する、アニメーション付き React コ
 - ライセンス: MIT + Commons Clause。個人・商用での利用は許可されるが、Commons Clause により「コンポーネント自体を販売する」用途は制限される。
 - taste-skill の README にスポンサーとして掲載され、「animated React components for creative interfaces」と紹介されている。taste-skill §9.E は外部コンポーネントの無検証利用を tell として挙げるので、React Bits を使う場合も依存を確認する（§3.F Dependency Verification）。
 - 動機となる用途: ランディングページのヒーローや背景、テキストの登場演出。製品 UI のフォームやテーブルには向かない。
+- 導入形態の意味: shadcn CLI 対応は React Bits が shadcn 形式の registry を公開していることを示す。`components.json` の `registries` に登録すれば `@react-bits/<name>` の形で入れられる（Knowledge/component-libraries/shadcn-ui.md の namespaced registry）。
+- 未確認事項: reactbits.dev 本体が取得できないため、カテゴリごとの件数、各コンポーネントの依存（GSAP、Motion、three）、Commons Clause の適用範囲の説明文は未確認。
 
 ## 具体的な値・ルール（あれば）
 
@@ -39,6 +41,8 @@ React Bits は David Haz が公開する、アニメーション付き React コ
 | ライセンス | MIT + Commons Clause |
 | 公開サイト | reactbits.dev（未取得） |
 | GitHub | 46.8k stars、2.3k forks |
+| registry | shadcn 形式（namespaced 登録が可能） |
+| 対象 | ランディング、ポートフォリオ、ヒーロー演出 |
 
 ## AwesomeDS への反映
 
@@ -46,6 +50,7 @@ React Bits は David Haz が公開する、アニメーション付き React コ
 - 採用: 「4 変種から Tailwind + TypeScript を選び、コードをプロジェクトに複製して所有する」導入方法。shadcn と同じ Open Code の扱いで、AwesomeDS のトークン（`--color-*`、`--duration-*`）に差し替えてから使う。
 - 制約: 取り込んだコンポーネントも AwesomeDS 第 7 節の規則に従わせる。`prefers-reduced-motion: reduce` で transform を止め opacity だけ残す、無限ループは進捗表示以外禁止、enter の移動量は 4 から 8px。React Bits の多くは無限ループや大きな移動を既定に持つので、そのままでは規則に反する。
 - 不採用: 背景系コンポーネント（パーティクル、グリッド、オーロラなど）を既定 UI に入れること。第 1 節「no decorative blobs by default」、第 9 節「gradients, glow, glass, or blurred blobs as decoration」に反する。
+- 記録: ライセンスの Commons Clause は「販売」を制限する条項なので、AwesomeDS 由来のコンポーネントを registry で有償配布する計画がある場合は React Bits 由来のコードを含めない。
 - 記録: 依存に GSAP や three.js を含むコンポーネントは、AwesomeDS の「GSAP / three.js と Motion を同じツリーで混ぜない」規則（Knowledge/skills/taste-skill.md）に注意。導入前に各コンポーネントの依存を確認する。
 
 ## 出典

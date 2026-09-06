@@ -6,7 +6,7 @@ sources:
   - url: https://github.com/voltagent/awesome-design-md/blob/main/design-md/stripe/DESIGN.md
     title: "awesome-design-md: stripe/DESIGN.md (実測、Stripi-Inspired)"
   - url: https://www.shadcn.io/design/stripe
-    title: "Stripe Design System for React — Indigo #533afd, Sohne, and 21 components"
+    title: "Stripe Design System for React - Indigo #533afd, Sohne, and 21 components"
   - url: https://www.designmd.run/blog/stripe-design-system-breakdown
     title: "Inside Stripe's Design System: A Token-Level Breakdown | DESIGN.md"
   - url: https://stripe.design/

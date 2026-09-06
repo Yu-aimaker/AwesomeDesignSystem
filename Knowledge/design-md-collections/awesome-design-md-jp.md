@@ -23,7 +23,7 @@ updated: 2026-09-06
 
 - リポジトリ構成: `README.md`（日英併記）、`CONTRIBUTING.md`、`LICENSE`、`template/DESIGN.md`、`gallery.html`（9,062 行）、`designmd-jp.jpg`、`design-md/<service>/` に `DESIGN.md`、`preview.html`、`preview-screenshot.png`。
 - 9 セクション: 1 Visual Theme & Atmosphere、2 Color Palette & Roles、3 Typography Rules、4 Component Stylings、5 Layout Principles、6 Depth & Elevation、7 Do's and Don'ts、8 Responsive Behavior、9 Agent Prompt Guide。第 3 節は 3.1 和文フォント、3.2 欧文フォント、3.3 font-family 指定、3.4 文字サイズ・ウェイト階層、3.5 行間・字間、3.6 禁則処理・改行ルール、3.7 OpenType 機能、3.8 縦書き。
-- VoltAgent 版と違い frontmatter を持たず、本文だけで構成される（テンプレートは `# DESIGN.md — [サービス名]` から始まる）。
+- VoltAgent 版と違い frontmatter を持たず、本文だけで構成される（テンプレートは `# DESIGN.md` に em dash とサービス名を続けた見出しから始まる）。
 - テンプレートの日本語ルール: 本文 line-height 1.5 以上（1.7 から 2.0 が読みやすい）、見出し 1.3 から 1.5、本文 letter-spacing 0.04em から 0.1em、見出し 0 から 0.05em。禁則は `line-break: strict`、`overflow-wrap: break-word`、`word-break: break-all` または `keep-all`。行頭禁止 `）」』】〕〉》、。，．・：；？！`、行末禁止 `（「『【〔〈《`。`palt` は見出しやナビに有効で本文には適用しない方が良い場合がある。
 - テンプレートの Don't: 和文フォント 1 つだけの `font-family` 指定、本文 line-height 1.2 以下、全角・半角スペースの混在、テキスト色に純黒 `#000000`。
 - gallery.html: 背景 `#0a0a0a`、カード `#141414`、`grid-template-columns: repeat(auto-fill, minmax(420px, 1fr))`、各カードは 1440x900 の `preview.html` を `iframe` に読み込み `scale(0.3)` で縮小表示。フィルタは `data-category` 属性で consumer 380、media 43、saas 40、agency 23。

@@ -78,7 +78,7 @@ export function Color() {
   const [mode, setMode] = useState<Mode>("light");
   return (
     <div>
-      <PageHeader title="カラー" lead="色は色相ではなくロールで指定します。コンポーネントから hex を直接参照することはありません。" />
+      <PageHeader title="色" lead="色は色相ではなくロールで指定します。コンポーネントから hex を直接参照することはありません。" />
 
       <Section id="roles" title="ロールとコントラスト比" lead="各ロールの値と、canvas に対する WCAG コントラスト比をコード上で計算して表示しています。">
         <ModeSwitch mode={mode} onChange={setMode} />
@@ -185,7 +185,7 @@ export function Color() {
       <Section id="why" title="なぜこの選択か">
         <Why>
           <p>
-            ニュートラルは青みも暖色もない純粋なグレーです。ブランドカラーがどんな色相でも、下地の色と喧嘩しません。ink-secondary は白地で 7.6:1、ink-muted は 4.7:1 なので、補助的な文字でも本文基準を満たします。
+            ニュートラルは青みも暖色もない純粋なグレーです。ブランドカラーがどんな色相でも、下地の色と喧嘩しません。ink-secondary は白地で 7.8:1、ink-muted は 5.3:1 なので、補助的な文字でも本文基準を満たします。
           </p>
           <p>
             アクセントを 1 色に絞り、しかも「リンク、フォーカス、選択」にだけ使うのは、アクセントが現れたときに意味を持たせるためです。主要ボタンまで青にすると、押せるものと移動するものの区別が色でつかなくなります。

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { ArrowRight } from "lucide-react";
 import { Button } from "../ds/components/Button";
 import { Input } from "../ds/components/Input";
 import { Card, CardDescription, CardTitle } from "../ds/components/Card";
@@ -9,19 +8,40 @@ import { Switch } from "../ds/components/Switch";
 import { CodeBlock } from "../layout/Preview";
 import { tokens } from "../lib/tokens";
 
-const links = [
-  { to: "/foundations/typography", label: "システム", body: "文字、色、余白、角丸、影、動き。値と理由。" },
-  { to: "/components", label: "コンポーネント", body: "トークンだけで組んだ部品の一覧。実装コード付き。" },
-  { to: "/knowledge", label: "ナレッジ", body: "調査で集めた根拠。毎週更新。" },
+const light = tokens.color.light;
+
+const facts: Array<{ term: string; body: string; to: string }> = [
+  {
+    term: "文字",
+    body: `Geist と Noto Sans JP。本文 ${tokens.font.size.base.$value}、行間 ${tokens.font.lineHeight.body.$value}（日本語 ${tokens.font.lineHeight["body-ja"].$value}）。見出しは太さと大きさだけで階層を作ります。`,
+    to: "/foundations/typography",
+  },
+  {
+    term: "色",
+    body: `白地 ${light.canvas.$value}、黒 ${light.ink.$value}。アクセント ${light.accent.$value} はリンク、フォーカス、選択にだけ使い、主ボタンは黒地に白文字です。`,
+    to: "/foundations/color",
+  },
+  {
+    term: "余白と形",
+    body: `4px 単位。角丸は操作部品 ${tokens.radius.md.$value}、カード ${tokens.radius.lg.$value}、ダイアログ ${tokens.radius.xl.$value}。区切りは 1px の線で、影は浮いているものにだけ使います。`,
+    to: "/foundations/spacing",
+  },
+  {
+    term: "動き",
+    body: `${tokens.duration.fast.$value} から ${tokens.duration.base.$value}、cubic-bezier(${tokens.easing.out.$value.join(", ")})。移動は 4 から 8px。ユーザーの操作への応答にだけ動かします。`,
+    to: "/foundations/motion",
+  },
 ];
 
 const cheatSheet: Array<[string, string]> = [
-  ["canvas / ink", `${tokens.color.light.canvas.$value} / ${tokens.color.light.ink.$value}`],
-  ["accent", `${tokens.color.light.accent.$value}（リンク、フォーカス、選択のみ）`],
+  ["canvas / ink", `${light.canvas.$value} / ${light.ink.$value}`],
+  ["secondary / muted", `${light["ink-secondary"].$value} / ${light["ink-muted"].$value}`],
+  ["accent", `${light.accent.$value}`],
+  ["hairline / input", `${light.hairline.$value} / ${light["hairline-strong"].$value}`],
   ["sans / mono", "Geist + Noto Sans JP / Geist Mono"],
-  ["body", `${tokens.font.size.base.$value} / ${tokens.font.lineHeight.body.$value}（日本語 ${tokens.font.lineHeight["body-ja"].$value}）`],
+  ["body", `${tokens.font.size.base.$value} / ${tokens.font.lineHeight.body.$value}（ja ${tokens.font.lineHeight["body-ja"].$value}）`],
   ["space", "4 8 12 16 24 32 48 64 96"],
-  ["radius", `${tokens.radius.md.$value} 操作部 / ${tokens.radius.lg.$value} カード / ${tokens.radius.xl.$value} ダイアログ`],
+  ["radius", `${tokens.radius.md.$value} / ${tokens.radius.lg.$value} / ${tokens.radius.xl.$value}`],
   ["motion", `${tokens.duration.base.$value} cubic-bezier(${tokens.easing.out.$value.join(", ")})`],
 ];
 
@@ -32,33 +52,20 @@ export function Home() {
       <section className="max-w-[65ch]">
         <h1 className="t-h1 text-ink">AwesomeDS</h1>
         <p className="t-body-lg mt-4 text-ink-secondary">
-          白いキャンバスに黒い文字、アクセントは 1 色。Claude Code が UI を生成するときの既定のデザインシステムです。
-          このサイトは、その値がなぜそうなっているかを説明し、実物を触って確かめるための場所です。
+          ブランドをまだ持たないプロダクトが、そのまま使えるデザインシステムです。白地に黒文字、アクセント 1
+          色、Geist と Noto Sans JP、4px の余白単位。値にはすべて理由と出典があります。
         </p>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-3">
-          {links.map((l) => (
-            <li key={l.to}>
-              <Link
-                to={l.to}
-                className="group flex h-full flex-col rounded-lg border border-hairline bg-surface p-4 text-ink no-underline transition-colors duration-instant ease-out-ds hover:border-hairline-strong hover:bg-canvas-soft"
-              >
-                <span className="t-label flex items-center justify-between">
-                  {l.label}
-                  <ArrowRight className="size-4 text-ink-muted transition-transform duration-fast ease-out-ds group-hover:translate-x-1" strokeWidth={1.75} aria-hidden />
-                </span>
-                <span className="t-caption mt-1 text-ink-secondary">{l.body}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <p className="t-body mt-4 text-ink-secondary">
+          Claude Code や Cursor が UI を書くときの既定値として使うために作りました。このサイト自身も同じトークンだけで組んでいます。
+        </p>
       </section>
 
       <section aria-labelledby="specimen-title" className="mt-16">
         <h2 id="specimen-title" className="t-h2 text-ink">
-          トークンの見本
+          実物
         </h2>
         <p className="t-body mt-3 max-w-[65ch] text-ink-secondary">
-          下のカードは飾りではなく、実際のコンポーネントです。色、角丸、余白、書体、動きはすべて tokens.css の値を参照しています。
+          下のフォームは飾りではなく、実際に動くコンポーネントです。右上のテーマ切替でライトとダークを行き来し、余白、角丸、フォーカスリング、ボタンの状態を確かめてください。
         </p>
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <Card>
@@ -75,9 +82,7 @@ export function Home() {
               <div className="flex flex-wrap gap-2 pt-2">
                 <Button type="submit">保存</Button>
                 <Button variant="secondary">キャンセル</Button>
-                <Button variant="ghost">
-                  請求履歴を見る
-                </Button>
+                <Button variant="ghost">請求履歴を見る</Button>
               </div>
             </form>
           </Card>
@@ -92,22 +97,57 @@ export function Home() {
               ))}
             </dl>
             <p className="t-caption mt-4 text-ink-muted">
-              出典: <code>AwesomeDS/tokens/tokens.json</code>。詳しい理由は各ファウンデーションのページにあります。
+              出典: <code>AwesomeDS/tokens/tokens.json</code>
             </p>
           </div>
         </div>
       </section>
 
+      <section aria-labelledby="facts-title" className="mt-16 max-w-[65ch]">
+        <h2 id="facts-title" className="t-h2 text-ink">
+          要点
+        </h2>
+        <dl className="mt-6 divide-y divide-hairline border-y border-hairline">
+          {facts.map((f) => (
+            <div key={f.term} className="grid gap-1 py-5 sm:grid-cols-[7rem_1fr] sm:gap-6">
+              <dt className="t-label text-ink">
+                <Link to={f.to} className="text-ink no-underline hover:underline">
+                  {f.term}
+                </Link>
+              </dt>
+              <dd className="t-body-sm text-ink-secondary">{f.body}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
       <section aria-labelledby="install-title" className="mt-16 max-w-[65ch]">
         <h2 id="install-title" className="t-h2 text-ink">
-          Claude Code で使う
+          使い方
         </h2>
-        <p className="t-body mt-3 text-ink-secondary">
-          プラグインを追加すると、Claude Code が UI を書くときにこのシステムの値と規則を参照します。
-        </p>
-        <CodeBlock className="mt-6" code="/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude" />
-        <p className="t-body-sm mt-3 text-ink-secondary">
-          仕組みと更新頻度は <Link to="/about">このリポジトリについて</Link> に書いています。
+        <ol className="mt-6 flex flex-col gap-8">
+          <li>
+            <h3 className="t-h4 text-ink">1. Claude Code に入れる</h3>
+            <p className="t-body-sm mt-2 text-ink-secondary">
+              マーケットプレイスを追加してプラグインを入れると、UI を書く指示のたびにこのシステムの値と規則が参照されます。ブランド専用の
+              DS を作る、デザインを検証する、UX を設計するスキルも同じプラグインに入っています。
+            </p>
+            <CodeBlock className="mt-3" code={"/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude\n/plugin install awesome-ds@awesome-design-systems"} />
+          </li>
+          <li>
+            <h3 className="t-h4 text-ink">2. プラグインなしで使う</h3>
+            <p className="t-body-sm mt-2 text-ink-secondary">
+              <code>AwesomeDS/DESIGN.md</code> をプロジェクトの直下に置き、<code>tokens/tokens.css</code>{" "}
+              を読み込みます。Tailwind v4 なら <code>tokens/tailwind.css</code> も読み込むと <code>bg-canvas</code> や{" "}
+              <code>text-ink</code> のようなクラスが使えます。
+            </p>
+            <CodeBlock className="mt-3" code={'@import "tailwindcss";\n@import "./AwesomeDS/tokens/tokens.css";\n@import "./AwesomeDS/tokens/tailwind.css";'} />
+          </li>
+        </ol>
+        <p className="t-body-sm mt-8 text-ink-secondary">
+          スキルの一覧と更新の流れは <Link to="/about">このサイトについて</Link> にあります。部品は{" "}
+          <Link to="/components">コンポーネント</Link>、動きのライブラリは <Link to="/animation">アニメーション</Link>
+          、根拠は <Link to="/knowledge">ナレッジ</Link> を見てください。
         </p>
       </section>
     </div>

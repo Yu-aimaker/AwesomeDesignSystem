@@ -8,17 +8,17 @@ export interface NavGroup {
 }
 
 export const foundations: NavItem[] = [
-  { label: "タイポグラフィ", to: "/foundations/typography" },
-  { label: "カラー", to: "/foundations/color" },
-  { label: "スペーシング", to: "/foundations/spacing" },
+  { label: "文字", to: "/foundations/typography" },
+  { label: "色", to: "/foundations/color" },
+  { label: "余白とレイアウト", to: "/foundations/spacing" },
   { label: "角丸", to: "/foundations/radius" },
-  { label: "エレベーション", to: "/foundations/elevation" },
+  { label: "奥行き", to: "/foundations/elevation" },
   { label: "モーション", to: "/foundations/motion" },
 ];
 
 export const sidebar: NavGroup[] = [
-  { label: "はじめに", items: [{ label: "概要", to: "/" }, { label: "このリポジトリについて", to: "/about" }] },
-  { label: "ファウンデーション", items: foundations },
+  { label: "はじめに", items: [{ label: "概要", to: "/" }, { label: "このサイトについて", to: "/about" }] },
+  { label: "基盤", items: foundations },
   {
     label: "実装",
     items: [
@@ -27,16 +27,16 @@ export const sidebar: NavGroup[] = [
     ],
   },
   {
-    label: "調査",
+    label: "根拠",
     items: [
       { label: "ナレッジ", to: "/knowledge" },
-      { label: "ソース一覧", to: "/sources" },
+      { label: "出典", to: "/sources" },
     ],
   },
 ];
 
 export const topNav: NavItem[] = [
-  { label: "システム", to: "/foundations/typography" },
+  { label: "基盤", to: "/foundations/typography" },
   { label: "コンポーネント", to: "/components" },
   { label: "アニメーション", to: "/animation" },
   { label: "ナレッジ", to: "/knowledge" },

@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 195  /  ドメイン数: 38
+リンク数: 232  /  ドメイン数: 41
 
 ## animations.dev
 
@@ -85,6 +85,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## github.com
 
+- [18F/methods (heuristic-evaluation, cognitive-walkthrough, design-studio を含む手法集)](https://github.com/18F/methods)  
+  引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md), [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
 - [airbnb/lottie-web: Render After Effects animations natively on Web](https://github.com/airbnb/lottie-web)  
   引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
@@ -97,6 +99,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
   引用: [React Bits](../Knowledge/component-libraries/react-bits.md)
+- [@axe-core/playwright package (dequelabs/axe-core-npm)](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright)  
+  引用: [Playwright visual testing and axe-core](../Knowledge/tech-stack/playwright-visual-testing.md)
 - [digital-go-jp/design-system-example-components (React / Tailwind)](https://github.com/digital-go-jp/design-system-example-components)  
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
 - [digital-go-jp/design-system-example-components-html (HTML/CSS/JS)](https://github.com/digital-go-jp/design-system-example-components-html)  
@@ -109,6 +113,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
 - [evilmartians/oklch-picker: Color picker and converter for OKLCH and LCH](https://github.com/evilmartians/oklch-picker)  
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
+- [fontsource/fontsource: Self-host Open Source fonts in neatly bundled NPM packages](https://github.com/fontsource/fontsource)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
 - [google-labs-code/design.md: A format specification for describing a visual identity to coding agents](https://github.com/google-labs-code/design.md)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
 - [google-labs-code/stitch-skills: Agent skills and plugins for Google Stitch](https://github.com/google-labs-code/stitch-skills)  
@@ -153,6 +159,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Rive state machines](../Knowledge/animation/rive.md)
 - [shadcn-ui/ui (source of ui.shadcn.com docs; the site itself is proxy blocked)](https://github.com/shadcn-ui/ui)  
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)  
+  引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
 - [vercel-labs/agent-skills (the `npx skills add` CLI taste-skill installs through)](https://github.com/vercel-labs/agent-skills)  
   引用: [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md), [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel-labs/skills: the `npx skills` CLI](https://github.com/vercel-labs/skills)  
@@ -212,6 +220,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Awesome Design MD JP Gallery (486 sites)](https://kzhrknt.github.io/awesome-design-md-jp/gallery.html)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md)
 
+## lawsofux.com
+
+- [Laws of UX](https://lawsofux.com/)  
+  引用: [Laws of UX](../Knowledge/design-thinking/laws-of-ux.md)
+
 ## linear.app
 
 - [How we redesigned the Linear UI (part II) - Linear](https://linear.app/now/how-we-redesigned-the-linear-ui)  
@@ -226,6 +239,19 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Motion docs: React (proxy blocked, link recorded)](https://motion.dev/docs/react)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
+
+## nngroup.com
+
+- [Design Critiques: Encourage a Positive Culture to Improve Products - NN/g](https://www.nngroup.com/articles/design-critiques/)  
+  引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
+- [Journey Mapping 101 - NN/g](https://www.nngroup.com/articles/journey-mapping-101/)  
+  引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
+- [Personas Make Users Memorable for Product Team Members - NN/g](https://www.nngroup.com/articles/persona/)  
+  引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
+- [Signifiers, not affordances - Don Norman (jnd.org / NN/g)](https://www.nngroup.com/articles/signifiers-not-affordances/)  
+  引用: [Norman『誰のためのデザイン?』(The Design of Everyday Things)](../Knowledge/design-thinking/norman-design-of-everyday-things.md)
+- [10 Usability Heuristics for User Interface Design - Nielsen Norman Group](https://www.nngroup.com/articles/ten-usability-heuristics/)  
+  引用: [Nielsen の 10 ユーザビリティヒューリスティクス](../Knowledge/design-thinking/nielsen-heuristics.md)
 
 ## nothing.community
 
@@ -254,6 +280,14 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## raw.githubusercontent.com
 
+- [18F Methods: Journey mapping](https://raw.githubusercontent.com/18F/methods/HEAD/_methods/journey-mapping.md)  
+  引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
+- [18F Methods: Personas](https://raw.githubusercontent.com/18F/methods/HEAD/_methods/personas.md)  
+  引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
+- [aashishGitHub/UI-UX: 10 Usability Heuristics by Jakob Nielsen (NN/g 各記事を引用したノート)](https://raw.githubusercontent.com/aashishGitHub/UI-UX/HEAD/Principles/6.%2010%20Usability%20Heuristics%20by%20Jakob%20Nielsen.md)  
+  引用: [Nielsen の 10 ユーザビリティヒューリスティクス](../Knowledge/design-thinking/nielsen-heuristics.md)
+- [ahastudio/til: ux/laws-of-ux.md (lawsofux.com の要約ノート)](https://raw.githubusercontent.com/ahastudio/til/HEAD/ux/laws-of-ux.md)  
+  引用: [Laws of UX](../Knowledge/design-thinking/laws-of-ux.md)
 - [plugins/frontend-design/skills/frontend-design/SKILL.md (anthropics/claude-code)](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/frontend-design/skills/frontend-design/SKILL.md)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
 - [skills/frontend-design/SKILL.md (anthropics/skills)](https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md)  
@@ -289,7 +323,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [GSAP types/scroll-trigger.d.ts (ScrollTrigger config)](https://raw.githubusercontent.com/greensock/GSAP/master/types/scroll-trigger.d.ts)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
 - [Heydon/inclusive-design-checklist: Inclusive Web Design Checklist](https://raw.githubusercontent.com/Heydon/inclusive-design-checklist/HEAD/README.md)  
-  引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md)
+  引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md), [Norman『誰のためのデザイン?』(The Design of Everyday Things)](../Knowledge/design-thinking/norman-design-of-everyday-things.md)
 - [smarthr-ui createColor.ts (色トークン)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [smarthr-ui createFontSize.ts (フォントサイズ)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createFontSize.ts)  
@@ -316,6 +350,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
 - [grilling SKILL.md (the reusable interview primitive)](https://raw.githubusercontent.com/mattpocock/skills/main/skills/productivity/grilling/SKILL.md)  
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [MDN browser-compat-data: css.at-rules.font-face (size-adjust, metric overrides, font-display)](https://raw.githubusercontent.com/mdn/browser-compat-data/main/css/at-rules/font-face.json)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
 - [MDN browser-compat-data: css.properties.animation-timeline](https://raw.githubusercontent.com/mdn/browser-compat-data/main/css/properties/animation-timeline.json)  
   引用: [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md)
 - [font-feature-settings - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/font-feature-settings/index.md)  
@@ -330,12 +366,24 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [MDN: CSS scroll-driven animations (guide, source of developer.mozilla.org which is proxy blocked)](https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/css/guides/scroll-driven_animations/index.md)  
   引用: [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md)
+- [MDN: font-display (@font-face descriptor)](https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/css/reference/at-rules/@font-face/font-display/index.md)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
+- [MDN: size-adjust (@font-face descriptor)](https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/css/reference/at-rules/@font-face/size-adjust/index.md)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
 - [MDN: animation-timeline](https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/css/reference/properties/animation-timeline/index.md)  
   引用: [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md)
+- [Microsoft Code With Engineering Playbook: Usability](https://raw.githubusercontent.com/microsoft/code-with-engineering-playbook/HEAD/docs/non-functional-requirements/usability.md)  
+  引用: [Nielsen の 10 ユーザビリティヒューリスティクス](../Knowledge/design-thinking/nielsen-heuristics.md)
+- [Playwright docs: Accessibility testing](https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/accessibility-testing-js.md)  
+  引用: [Playwright visual testing and axe-core](../Knowledge/tech-stack/playwright-visual-testing.md)
+- [Playwright docs: Visual comparisons (source of playwright.dev, which is proxy blocked)](https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/test-snapshots-js.md)  
+  引用: [Playwright visual testing and axe-core](../Knowledge/tech-stack/playwright-visual-testing.md)
 - [motion-dom spring.ts (springDefaults)](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/generators/spring.ts)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [motion-dom default-transitions.ts](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/utils/default-transitions.ts)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
+- [Mte90/dotfiles: foundations-of-design.md (Refactoring UI の要点)](https://raw.githubusercontent.com/Mte90/dotfiles/HEAD/.config/opencode/skills/design/design/foundations-of-design.md)  
+  引用: [Refactoring UI](../Knowledge/design-thinking/refactoring-ui.md)
 - [Base UI docs: Composition (render prop)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/handbook/composition/page.mdx)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Base UI docs: Quick start (source of base-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx)  
@@ -350,6 +398,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
 - [notofonts/noto-cjk: Sans/README.md](https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/README.md)  
   引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
+- [opensesh/DESIGN-OPS: design-critique-facilitator.md](https://raw.githubusercontent.com/opensesh/DESIGN-OPS/HEAD/skills/design-critique-facilitator.md)  
+  引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
 - [R3F docs: Scaling performance](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/advanced/scaling-performance.mdx)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [R3F docs: Introduction (source of r3f.docs.pmnd.rs, which is proxy blocked)](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/getting-started/introduction.mdx)  
@@ -392,16 +442,32 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [Shopify/polaris polaris-tokens font.ts](https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/font.ts)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [Tailwind CSS v4.0 announcement (source of tailwindcss.com/blog, which is proxy blocked)](https://raw.githubusercontent.com/tailwindlabs/tailwindcss.com/main/src/blog/tailwindcss-v4/index.mdx)  
+  引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
+- [Tailwind docs: Theme variables](https://raw.githubusercontent.com/tailwindlabs/tailwindcss.com/main/src/docs/theme.mdx)  
+  引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
+- [@tailwindcss/vite README](https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/@tailwindcss-vite/README.md)  
+  引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
 - [tailwindcss v4 theme.css (oklch palette)](https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css)  
-  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
+  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md), [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
+- [TrentM6/baseline-core: design-critique.md](https://raw.githubusercontent.com/TrentM6/baseline-core/HEAD/skills/ux-design/references/design-critique.md)  
+  引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
 - [react-best-practices SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md)  
-  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md), [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
 - [react-view-transitions SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-view-transitions/SKILL.md)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [web-design-guidelines SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/web-design-guidelines/SKILL.md)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel-labs/web-interface-guidelines command.md (the rules web-design-guidelines fetches)](https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [Next.js docs: Layouts and Pages (source of nextjs.org, which is proxy blocked)](https://raw.githubusercontent.com/vercel/next.js/canary/docs/01-app/01-getting-started/03-layouts-and-pages.mdx)  
+  引用: [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
+- [Next.js docs: Server and Client Components](https://raw.githubusercontent.com/vercel/next.js/canary/docs/01-app/01-getting-started/05-server-and-client-components.mdx)  
+  引用: [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
+- [Next.js docs: Fonts](https://raw.githubusercontent.com/vercel/next.js/canary/docs/01-app/01-getting-started/13-fonts.mdx)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md), [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
+- [Vite docs: Getting Started (source of vite.dev, which is proxy blocked)](https://raw.githubusercontent.com/vitejs/vite/main/docs/guide/index.md)  
+  引用: [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
 - [ARIA Authoring Practices Guide: Developing a Keyboard Interface (source)](https://raw.githubusercontent.com/w3c/aria-practices/main/content/practices/keyboard-interface/keyboard-interface-practice.html)  
   引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md)
 - [CSS Color Module Level 4 (Editor's Draft source)](https://raw.githubusercontent.com/w3c/csswg-drafts/main/css-color-4/Overview.bs)  
@@ -426,36 +492,53 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.5.8 Target Size (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/target-size-minimum.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [wondelai/skills: design-everyday-things (Norman の概念の整理、MIT)](https://raw.githubusercontent.com/wondelai/skills/HEAD/design-everyday-things/SKILL.md)  
+  引用: [Norman『誰のためのデザイン?』(The Design of Everyday Things)](../Knowledge/design-thinking/norman-design-of-everyday-things.md)
 - [WordPress Accessibility Docs: Visual focus](https://raw.githubusercontent.com/wpaccessibility/wp-a11y-docs/HEAD/docs/topics/code/focus-handling/visual-focus.md)  
   引用: [フォーカスとキーボード操作](../Knowledge/accessibility/focus-and-keyboard.md)
-- [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI のノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
-  引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
+- [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI の要点ノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
+  引用: [Refactoring UI](../Knowledge/design-thinking/refactoring-ui.md), [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 
 ## reactbits.dev
 
 - [React Bits (site, proxy blocked, link recorded)](https://reactbits.dev/)  
   引用: [React Bits](../Knowledge/component-libraries/react-bits.md)
 
+## refactoringui.com
+
+- [Refactoring UI (Adam Wathan & Steve Schoger)](https://www.refactoringui.com/)  
+  引用: [Refactoring UI](../Knowledge/design-thinking/refactoring-ui.md)
+
 ## registry.npmjs.org
 
 - [npm: @base-ui/react latest](https://registry.npmjs.org/@base-ui/react/latest)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [npm: @fontsource-variable/noto-sans-jp latest](https://registry.npmjs.org/@fontsource-variable/noto-sans-jp/latest)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
 - [npm: @lottiefiles/dotlottie-react latest](https://registry.npmjs.org/@lottiefiles/dotlottie-react/latest)  
   引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
 - [npm: @react-three/fiber latest](https://registry.npmjs.org/@react-three/fiber/latest)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [npm: aceternity-ui (CLI) latest](https://registry.npmjs.org/aceternity-ui/latest)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+- [npm: geist (Vercel font package) latest](https://registry.npmjs.org/geist/latest)  
+  引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
 - [npm: gsap latest](https://registry.npmjs.org/gsap/latest)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
 - [npm: motion latest](https://registry.npmjs.org/motion/latest)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
+- [npm: next latest](https://registry.npmjs.org/next/latest)  
+  引用: [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
 - [npm: radix-ui (unified package) latest](https://registry.npmjs.org/radix-ui/latest)  
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
 - [npm: shadcn (CLI) latest](https://registry.npmjs.org/shadcn/latest)  
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [npm: tailwindcss latest](https://registry.npmjs.org/tailwindcss/latest)  
+  引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
 - [npm: three latest](https://registry.npmjs.org/three/latest)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
+- [npm: vite latest](https://registry.npmjs.org/vite/latest)  
+  引用: [Next.js App Router and Vite](../Knowledge/tech-stack/nextjs-and-vite.md)
 
 ## rive.app
 
@@ -469,7 +552,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## shadcn.io
 
-- [Stripe Design System for React — Indigo #533afd, Sohne, and 21 components](https://www.shadcn.io/design/stripe)  
+- [Stripe Design System for React - Indigo #533afd, Sohne, and 21 components](https://www.shadcn.io/design/stripe)  
   引用: [Stripe](../Knowledge/design-systems/stripe.md)
 
 ## stitch.withgoogle.com

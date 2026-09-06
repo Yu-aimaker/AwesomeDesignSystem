@@ -28,7 +28,7 @@ updated: 2026-09-06
 - §5 GSAP skeletons: 5.A Sticky-Stack（`start: "top top"`、`endTrigger` は最後のカード、`pin: true`、`pinSpacing: false`、次カードのトリガーで `scale: 0.92` / `opacity: 0.55`）、5.B Horizontal-Pan、5.C Scroll-Reveal Stagger。`useReducedMotion()` が真なら何もしない。`gsap.context` でクリーンアップ。
 - §5.D 禁止: `window.addEventListener("scroll")`、`window.scrollY` を React state に入れる、`requestAnimationFrame` で state を触る。代替は Motion `useScroll()`、ScrollTrigger、IntersectionObserver、CSS `animation-timeline: view()`。
 - §6: `transform` と `opacity` のみアニメーション、`MOTION_INTENSITY > 3` は `prefers-reduced-motion` 必須、ダークモードは消費者向けページで必須。
-- §9.G Em-dash ban: `—` はページ上のどこにも置かない。見出し、eyebrow、本文、引用、alt まで。ハイフンに置換か文を組み替える。
+- §9.G Em-dash ban: em dash 文字はページ上のどこにも置かない。見出し、eyebrow、本文、引用、alt まで。ハイフンに置換か文を組み替える。
 - §14 Pre-flight: 約 55 項目のチェックリスト。ヒーロー見出し 2 行以内、サブテキスト 20 語以内、ナビ 1 行で高さ 80px 以下、8 セクションで 4 種以上のレイアウト族、`min-h-[100dvh]` で `h-screen` 禁止、eyebrow 数は `ceil(sectionCount / 3)` 以下、など。
 - research/: `laziness/`（LLM が出力を省略する原因と対策）。CHANGELOG.md に v1 から v2 の差分。
 - スポンサーに interfaces.dev、React Bits、animations.dev（Emil Kowalski）、IMG.LY、Kimi、Vercel OSS Program が並ぶ。
