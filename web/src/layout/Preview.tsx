@@ -79,8 +79,8 @@ export function Preview({ id, title, rule, code, codeLabel = "コード", childr
         </div>
       )}
       {tab === "code" && code && (
-        <div role="tabpanel" aria-labelledby={`${base}-code`} className="relative">
-          <div className="absolute top-2 right-2 z-10">
+        <div role="tabpanel" aria-labelledby={`${base}-code`}>
+          <div className="flex justify-end border-b border-hairline bg-canvas-soft px-2 py-1">
             <CopyButton text={code} />
           </div>
           <div className="code-pane">
@@ -101,11 +101,11 @@ export function Preview({ id, title, rule, code, codeLabel = "コード", childr
 
 export function CodeBlock({ code, className }: { code: string; className?: string }) {
   return (
-    <div className={cx("relative rounded-md border border-hairline bg-canvas-soft", className)}>
-      <div className="absolute top-2 right-2">
+    <div className={cx("overflow-hidden rounded-md border border-hairline bg-canvas-soft", className)}>
+      <div className="flex justify-end border-b border-hairline px-2 py-1">
         <CopyButton text={code} />
       </div>
-      <pre className="overflow-x-auto p-4 pr-28 font-mono text-[13px] leading-relaxed text-ink">
+      <pre className="overflow-x-auto p-4 font-mono text-[13px] leading-relaxed text-ink">
         <code>{code}</code>
       </pre>
     </div>

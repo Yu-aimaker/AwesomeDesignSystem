@@ -139,7 +139,7 @@
 .prose hr { margin: var(--ds-space-8) 0; }
 
 /* Code panes in preview blocks. */
-.code-pane { background: var(--ds-canvas-soft); border-top: var(--ds-border) solid var(--ds-hairline); overflow: auto; max-height: 480px; }
+.code-pane { background: var(--ds-canvas-soft); overflow: auto; max-height: 480px; }
 .code-pane pre { padding: var(--ds-space-4); font-family: var(--ds-font-mono); font-size: 13px; line-height: var(--ds-leading-body); tab-size: 2; }
 
 /* Scroll-driven reading progress (CSS scroll timeline) with JS fallback. */
