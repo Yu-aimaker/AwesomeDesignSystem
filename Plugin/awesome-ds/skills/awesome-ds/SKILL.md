@@ -15,7 +15,7 @@ AwesomeDS is a neutral, content-first system: white canvas, near-black ink, one 
 
 Do these in order. Do not skip step 1 because the cheat sheet below "looks like enough".
 
-1. Read `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` top to bottom. Open the foundation file for each area you will touch: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/{color,typography,japanese-typography,spacing,radius,elevation,motion,accessibility}.md`, plus `${CLAUDE_PLUGIN_ROOT}/ds/components/README.md` when building components.
+1. Read `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` top to bottom. Open the foundation file for each area you will touch: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/{principles,color,typography,japanese-typography,spacing,layout,radius,elevation,motion,iconography,accessibility,stack,anti-patterns}.md`, plus `${CLAUDE_PLUGIN_ROOT}/ds/components/README.md` when building components.
 2. Check for a project design system. Search the repo root for `DESIGN.md`, `design-system.md`, `docs/design/`, `tokens.css`, `theme.css`. If a project DESIGN.md exists, it wins. Use AwesomeDS only for the roles, rules and states it does not define, and say which gaps you filled.
 3. Detect the stack (section 2) and decide how tokens get wired.
 4. State assumptions. Write a one-line "design read" and up to three assumptions (see section 1). Do not ask a list of questions. Ask exactly one question only when the answer changes the layout or the token wiring (for example, "Tailwind v3 or v4?" when both configs exist). Otherwise proceed with the stated assumption.
@@ -208,7 +208,7 @@ badge caption text, pill, padding 2 8, bg surface-sunken, text ink-secondary
 
 - `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` canonical system (frontmatter tokens + rules)
 - `${CLAUDE_PLUGIN_ROOT}/ds/tokens/tokens.css`, `tailwind.css`, `tokens.json`
-- `${CLAUDE_PLUGIN_ROOT}/ds/foundations/*.md` reasons and sources per area
+- `${CLAUDE_PLUGIN_ROOT}/ds/foundations/*.md` reasons and sources per area (principles, color, typography, japanese-typography, spacing, layout, radius, elevation, motion, iconography, accessibility, stack, anti-patterns)
 - `${CLAUDE_PLUGIN_ROOT}/ds/components/README.md`, `checklist.md`
 - `${CLAUDE_PLUGIN_ROOT}/skills/awesome-ds/reference/stack-wiring.md` exact wiring snippets per stack
 - `${CLAUDE_PLUGIN_ROOT}/skills/awesome-ds/reference/anti-patterns.md` detection recipes for section 4
