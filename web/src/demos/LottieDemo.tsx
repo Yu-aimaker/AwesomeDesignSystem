@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { DotLottieReact, setWasmUrl } from "@lottiefiles/dotlottie-react";
-import wasmUrl from "@lottiefiles/dotlottie-web/dist/dotlottie-player.wasm?url";
+// The package export map has no entry for the wasm, so it is addressed from the project root.
+import wasmUrl from "/node_modules/@lottiefiles/dotlottie-web/dist/dotlottie-player.wasm?url";
 import { useReducedMotion, useResolvedTheme } from "../lib/theme";
 import { colorValue } from "../lib/tokens";
 import { hexToRgb } from "../lib/contrast";

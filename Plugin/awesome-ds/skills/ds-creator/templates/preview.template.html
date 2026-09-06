@@ -19,7 +19,8 @@
   .swatch { border: 1px solid var(--ds-hairline); border-radius: var(--ds-radius-lg); overflow: hidden; }
   .swatch > div:first-child { height: 64px; }
   .swatch > div:last-child { padding: var(--ds-space-3); font-size: var(--ds-text-xs); line-height: 1.5; }
-  .type-row { display: grid; grid-template-columns: 140px 1fr; gap: var(--ds-space-4); align-items: baseline; padding: var(--ds-space-3) 0; border-bottom: 1px solid var(--ds-hairline); }
+  .type-row { display: grid; grid-template-columns: 140px 1fr; gap: var(--ds-space-4); align-items: baseline; padding: var(--ds-space-3) 0; border-bottom: 1px solid var(--ds-hairline); overflow-wrap: anywhere; }
+  @media (max-width: 639px) { .type-row { grid-template-columns: 1fr; gap: var(--ds-space-1); } .type-row span:last-child { font-size: min(1em, 40px) !important; } }
   .space-bar { height: 8px; background: var(--ds-accent-soft); border: 1px solid var(--ds-accent); border-radius: 2px; margin: 6px 0; }
   .radius-row { display: flex; gap: var(--ds-space-4); flex-wrap: wrap; }
   .radius-row div { width: 72px; height: 72px; border: 1px solid var(--ds-hairline-strong); display: grid; place-items: center; font-size: 12px; }

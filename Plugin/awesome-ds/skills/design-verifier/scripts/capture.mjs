@@ -73,6 +73,7 @@ const themeScript = (scheme, attr) => `(() => {
   const attr = ${JSON.stringify(attr)};
   const apply = () => {
     const el = document.documentElement;
+    if (!el) return;
     if (attr === "class") { el.classList.toggle("dark", s === "dark"); el.classList.toggle("light", s === "light"); }
     else el.setAttribute(attr, s);
   };
