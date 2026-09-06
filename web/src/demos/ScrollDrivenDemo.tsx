@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 /**
  * A progress bar bound to the scroll position of its own container using
@@ -28,9 +28,13 @@ export function ScrollDrivenDemo() {
   return (
     <div className="w-full max-w-md overflow-hidden rounded-lg border border-hairline bg-surface">
       <div className="h-1 w-full bg-surface-sunken">
-        <div ref={bar} className="h-full w-full origin-left bg-accent [animation-timeline:--demo-scroller]" style={supported ? { animation: "demo-grow linear both" } : { transform: "scaleX(0)" }} />
+        <div
+          ref={bar}
+          className="h-full w-full origin-left bg-accent"
+          style={supported ? ({ animation: "demo-grow linear both", animationTimeline: "--demo-scroller" } as CSSProperties) : { transform: "scaleX(0)" }}
+        />
       </div>
-      <div ref={scroller} className="h-48 overflow-y-auto p-4 [scroll-timeline-name:--demo-scroller]" tabIndex={0}>
+      <div ref={scroller} className="h-48 overflow-y-auto p-4" style={{ scrollTimelineName: "--demo-scroller" } as CSSProperties} tabIndex={0}>
         {Array.from({ length: 10 }, (_, i) => (
           <p key={i} className="t-body-sm mb-3 text-ink-secondary">
             段落 {i + 1}。このボックスをスクロールすると上のバーが伸びます。メインスレッドの JavaScript は動いていません。
