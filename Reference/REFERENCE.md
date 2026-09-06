@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 166  /  ドメイン数: 31
+リンク数: 175  /  ドメイン数: 33
 
 ## blog.duolingo.com
 
@@ -45,6 +45,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
 - [Meet Liquid Glass - WWDC25](https://developer.apple.com/videos/play/wwdc2025/219/)  
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
+
+## evilmartians.com
+
+- [OKLCH in CSS: why we moved from RGB and HSL - Evil Martians](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl)  
+  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 
 ## figma.com
 
@@ -88,6 +93,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
 - [digital-go-jp/design-tokens: デジタル庁デザインシステム（Figma）のデザイントークン](https://github.com/digital-go-jp/design-tokens)  
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
+- [evilmartians/oklch-picker: Color picker and converter for OKLCH and LCH](https://github.com/evilmartians/oklch-picker)  
+  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [google-labs-code/design.md: A format specification for describing a visual identity to coding agents](https://github.com/google-labs-code/design.md)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
 - [google-labs-code/stitch-skills: Agent skills and plugins for Google Stitch](https://github.com/google-labs-code/stitch-skills)  
@@ -213,6 +220,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Line length | Butterick's Practical Typography](https://practicaltypography.com/line-length.html)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 
+## radix-ui.com
+
+- [Understanding the scale - Radix Colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale)  
+  引用: [Radix Colors (12 ステップスケール)](../Knowledge/color/radix-colors.md)
+
 ## raw.githubusercontent.com
 
 - [plugins/frontend-design/skills/frontend-design/SKILL.md (anthropics/claude-code)](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/frontend-design/skills/frontend-design/SKILL.md)  
@@ -281,6 +293,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [text-autospace - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/text-autospace/index.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
+- [:focus-visible - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/selectors/_colon_focus-visible/index.md)  
+  引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
+- [oklch() - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/values/color_value/oklch/index.md)  
+  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [motion-dom spring.ts (springDefaults)](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/generators/spring.ts)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [motion-dom default-transitions.ts](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/utils/default-transitions.ts)  
@@ -289,6 +305,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Base UI docs: Quick start (source of base-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [APCA in a Nutshell (Myndex/SAPC-APCA)](https://raw.githubusercontent.com/Myndex/SAPC-APCA/master/documentation/APCA_in_a_Nutshell.md)  
+  引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
+- [Why APCA (Myndex/SAPC-APCA)](https://raw.githubusercontent.com/Myndex/SAPC-APCA/master/documentation/WhyAPCA.md)  
+  引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
 - [nathanstypographynotes: butterick.md (Practical Typography のノート)](https://raw.githubusercontent.com/nathanlane/nathanstypographynotes/HEAD/butterick.md)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [open-design: duolingo/DESIGN.md (二次資料)](https://raw.githubusercontent.com/nexu-io/open-design/main/design-systems/duolingo/DESIGN.md)  
@@ -303,8 +323,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [radix-ui/colors src/light.ts (scale values)](https://raw.githubusercontent.com/radix-ui/colors/main/src/light.ts)  
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
-- [Radix Colors: Understanding the scale](https://raw.githubusercontent.com/radix-ui/website/main/data/colors/docs/palette-composition/understanding-the-scale.mdx)  
-  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [Radix Colors: Understanding the scale (website source)](https://raw.githubusercontent.com/radix-ui/website/main/data/colors/docs/palette-composition/understanding-the-scale.mdx)  
+  引用: [Radix Colors (12 ステップスケール)](../Knowledge/color/radix-colors.md), [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
 - [Radix Primitives: Accessibility](https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/accessibility.mdx)  
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
 - [Radix Primitives: Introduction (source of radix-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/introduction.mdx)  
@@ -331,6 +351,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [Shopify/polaris polaris-tokens font.ts](https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/font.ts)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [tailwindcss v4 theme.css (oklch palette)](https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css)  
+  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [react-best-practices SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [react-view-transitions SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-view-transitions/SKILL.md)  
@@ -339,14 +361,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel-labs/web-interface-guidelines command.md (the rules web-design-guidelines fetches)](https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [CSS Color Module Level 4 (Editor's Draft source)](https://raw.githubusercontent.com/w3c/csswg-drafts/main/css-color-4/Overview.bs)  
+  引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [WCAG 1.4.3 Contrast (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/20/contrast-minimum.html)  
-  引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+  引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md), [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.4.7 Focus Visible source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/20/focus-visible.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.3.3 Animation from Interactions source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/21/animation-from-interactions.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 1.4.11 Non-text Contrast source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/21/non-text-contrast.html)  
-  引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+  引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md), [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 1.4.12 Text Spacing source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/21/text-spacing.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.5.7 Dragging Movements source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/dragging-movements.html)  

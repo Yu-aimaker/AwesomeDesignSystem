@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 36
+件数: 39
 
 ## animation
 
@@ -14,6 +14,14 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Lottie and dotLottie](animation/lottie-and-dotlottie.md) | library | lottie, dotlottie, illustration, after-effects, bodymovin, wasm, thorvg | 2026-09-06 |
 | [Motion (motion/react)](animation/motion.md) | library | motion, framer-motion, spring, layout, animatepresence, usescroll, usemotionvalue | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
+
+## color
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [OKLCH とモダン CSS カラー](color/oklch-and-modern-css-color.md) | article | oklch, oklab, css-color-4, perceptual, p3, tailwind, hsl | 2026-09-06 |
+| [Radix Colors (12 ステップスケール)](color/radix-colors.md) | library | radix, colors, scale, 12-step, semantic, apca, shadcn | 2026-09-06 |
+| [コントラストとアクセシブルな色](color/contrast-and-accessible-color.md) | article | contrast, wcag, apca, accessibility, ink, neutrals, tools | 2026-09-06 |
 
 ## component-libraries
 

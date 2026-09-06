@@ -1,6 +1,13 @@
 /* Site stylesheet. Every value comes from AwesomeDS tokens (src/ds/tokens, copied
    from AwesomeDS/tokens by scripts/sync-tokens.mjs). */
 @import "tailwindcss";
+/* src/ds/tokens is gitignored (it is a build-time copy), and automatic source
+   detection skipped the whole ds folder with it. Register sources explicitly. */
+@source "./ds/components";
+@source "./ds/cx.ts";
+@source "./demos";
+@source "./layout";
+@source "./pages";
 
 /* Drop Tailwind's default palette, radii, shadows and fonts so only
    AwesomeDS roles are available as utilities. Spacing stays: Tailwind's
