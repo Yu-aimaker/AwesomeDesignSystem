@@ -4,7 +4,16 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 32
+件数: 36
+
+## animation
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [GSAP and ScrollTrigger](animation/gsap.md) | library | gsap, scrolltrigger, pin, scrub, webflow, free, scrolltelling | 2026-09-06 |
+| [Lottie and dotLottie](animation/lottie-and-dotlottie.md) | library | lottie, dotlottie, illustration, after-effects, bodymovin, wasm, thorvg | 2026-09-06 |
+| [Motion (motion/react)](animation/motion.md) | library | motion, framer-motion, spring, layout, animatepresence, usescroll, usemotionvalue | 2026-09-06 |
+| [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
 
 ## component-libraries
 

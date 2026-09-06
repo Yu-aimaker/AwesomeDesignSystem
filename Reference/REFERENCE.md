@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 149  /  ドメイン数: 29
+リンク数: 166  /  ドメイン数: 31
 
 ## blog.duolingo.com
 
@@ -70,6 +70,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## github.com
 
+- [airbnb/lottie-web: Render After Effects animations natively on Web](https://github.com/airbnb/lottie-web)  
+  引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
 - [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  
@@ -90,24 +92,32 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
 - [google-labs-code/stitch-skills: Agent skills and plugins for Google Stitch](https://github.com/google-labs-code/stitch-skills)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
+- [greensock/GSAP: GSAP (GreenSock Animation Platform)](https://github.com/greensock/GSAP)  
+  引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
 - [kufu/smarthr-design-system (smarthr.design のソース)](https://github.com/kufu/smarthr-design-system)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kufu/smarthr-ui: React components for creating SmartHR applications](https://github.com/kufu/smarthr-ui)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kzhrknt/awesome-design-md-jp: DESIGN.md collection for Japanese web services](https://github.com/kzhrknt/awesome-design-md-jp)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md)
-- [Leonxlnx/taste-skill README (lists React Bits as a sponsor)](https://github.com/Leonxlnx/taste-skill)  
-  引用: [React Bits](../Knowledge/component-libraries/react-bits.md), [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md)
+- [Leonxlnx/taste-skill SKILL.md §5 (canonical GSAP skeletons)](https://github.com/Leonxlnx/taste-skill)  
+  引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md), [React Bits](../Knowledge/component-libraries/react-bits.md), [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md)
+- [LottieFiles/dotlottie-web: dotLottie Web player (Rust + WASM, ThorVG)](https://github.com/LottieFiles/dotlottie-web)  
+  引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
 - [magicuidesign/magicui: UI Library for Design Engineers](https://github.com/magicuidesign/magicui)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
 - [mattpocock/skills: Skills For Real Engineers](https://github.com/mattpocock/skills)  
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
 - [modularscale/modularscale-sass: Modular scale calculator built into your Sass](https://github.com/modularscale/modularscale-sass)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
+- [motiondivision/motion: An open source animation library for JavaScript, React and Vue](https://github.com/motiondivision/motion)  
+  引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [mui/base-ui: unstyled UI components for building accessible web apps](https://github.com/mui/base-ui)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Myndex/SAPC-APCA: APCA Accessible Perceptual Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [pmndrs/drei: useful helpers for react-three-fiber](https://github.com/pmndrs/drei)  
+  引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [radix-ui/colors: A gorgeous, accessible color system](https://github.com/radix-ui/colors)  
@@ -158,6 +168,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Goodpatch | Prove the Power of Design](https://goodpatch.com/en)  
   引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
 
+## gsap.com
+
+- [GSAP docs: ScrollTrigger (proxy blocked, link recorded)](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)  
+  引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+
 ## kzhrknt.github.io
 
 - [Awesome Design MD JP Gallery (486 sites)](https://kzhrknt.github.io/awesome-design-md-jp/gallery.html)  
@@ -172,6 +187,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Magic UI (site, proxy blocked, link recorded)](https://magicui.design/)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+
+## motion.dev
+
+- [Motion docs: React (proxy blocked, link recorded)](https://motion.dev/docs/react)  
+  引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 
 ## nothing.community
 
@@ -227,6 +247,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
 - [google/fonts: ofl/notosansjp/METADATA.pb](https://raw.githubusercontent.com/google/fonts/main/ofl/notosansjp/METADATA.pb)  
   引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
+- [GSAP types/scroll-trigger.d.ts (ScrollTrigger config)](https://raw.githubusercontent.com/greensock/GSAP/master/types/scroll-trigger.d.ts)  
+  引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
 - [smarthr-ui createColor.ts (色トークン)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [smarthr-ui createFontSize.ts (フォントサイズ)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createFontSize.ts)  
@@ -259,6 +281,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [text-autospace - CSS (MDN content source)](https://raw.githubusercontent.com/mdn/content/HEAD/files/en-us/web/css/reference/properties/text-autospace/index.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
+- [motion-dom spring.ts (springDefaults)](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/generators/spring.ts)  
+  引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
+- [motion-dom default-transitions.ts](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/utils/default-transitions.ts)  
+  引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [Base UI docs: Composition (render prop)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/handbook/composition/page.mdx)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Base UI docs: Quick start (source of base-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx)  
@@ -269,6 +295,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
 - [notofonts/noto-cjk: Sans/README.md](https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/README.md)  
   引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
+- [R3F docs: Scaling performance](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/advanced/scaling-performance.mdx)  
+  引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
+- [R3F docs: Introduction (source of r3f.docs.pmnd.rs, which is proxy blocked)](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/getting-started/introduction.mdx)  
+  引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives typography.json5](https://raw.githubusercontent.com/primer/primitives/HEAD/src/tokens/base/typography/typography.json5)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [radix-ui/colors src/light.ts (scale values)](https://raw.githubusercontent.com/radix-ui/colors/main/src/light.ts)  
@@ -341,12 +371,22 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [npm: @base-ui/react latest](https://registry.npmjs.org/@base-ui/react/latest)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [npm: @lottiefiles/dotlottie-react latest](https://registry.npmjs.org/@lottiefiles/dotlottie-react/latest)  
+  引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
+- [npm: @react-three/fiber latest](https://registry.npmjs.org/@react-three/fiber/latest)  
+  引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [npm: aceternity-ui (CLI) latest](https://registry.npmjs.org/aceternity-ui/latest)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+- [npm: gsap latest](https://registry.npmjs.org/gsap/latest)  
+  引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+- [npm: motion latest](https://registry.npmjs.org/motion/latest)  
+  引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [npm: radix-ui (unified package) latest](https://registry.npmjs.org/radix-ui/latest)  
   引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
 - [npm: shadcn (CLI) latest](https://registry.npmjs.org/shadcn/latest)  
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [npm: three latest](https://registry.npmjs.org/three/latest)  
+  引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 
 ## shadcn.io
 
