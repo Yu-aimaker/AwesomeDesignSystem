@@ -26,7 +26,7 @@ and NN/g research.
 | Inter + slate + purple | The default stack of generated SaaS pages | Geist + true gray + one accent. Inter is fine when a brief asks for it. |
 | Serif display "because it feels premium" | The tested AI response to any "creative" brief | Sans display in the same family; serif only when the brand names one. |
 | Em dashes in UI copy, headlines, captions, alt text | The single most-violated tell in production tests | Period, comma, or a new sentence. |
-| Filler verbs and adjectives: seamless, unlock, elevate, empower, delightful, next-generation, revolutionize | Words that describe nothing the user can do | Concrete verbs and nouns: "Export as CSV", "Invite your team". |
+| Filler verbs and adjectives: `seamless`, `unlock`, `elevate`, `empower`, `delightful`, `next-generation`, `revolutionize` | Words that describe nothing the user can do | Concrete verbs and nouns: "Export as CSV", "Invite your team". |
 | Fake-precise numbers: 99.99%, 4.1x, 48k users | Invented specs | Real numbers or none. If a metric is illustrative, say so in the copy. |
 | Fake-round numbers: 50%, 1,000,000 | Read as placeholders | Same as above. |
 | Generic names: John Doe, Sarah Chan, Acme, Nexus | Placeholder content | Locale-appropriate realistic names or clearly marked sample data. |

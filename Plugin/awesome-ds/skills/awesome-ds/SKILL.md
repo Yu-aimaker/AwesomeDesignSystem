@@ -117,16 +117,16 @@ surface         #ffffff / #141414   cards, inputs, popovers    (bg-surface)
 surface-sunken  #f5f5f5 / #1a1a1a   table header, wells, badge (bg-surface-sunken)
 ink             #0a0a0a / #fafafa   headings, body, primary btn (text-ink)
 ink-secondary   #525252 / #a3a3a3   supporting text, labels    (text-ink-secondary)  7.6:1 on white
-ink-muted       #737373 / #737373   placeholder, timestamp     (text-ink-muted)      4.7:1 on white
+ink-muted       #6b6b6b / #8a8a8a   placeholder, timestamp     (text-ink-muted)      5.3:1 on white
 ink-disabled    #a3a3a3 / #525252   disabled text only, never body
 hairline        #e5e5e5 / #262626   dividers, card border      (border-hairline)
-hairline-strong #d4d4d4 / #333333   input border, hover border (border-hairline-strong)
+hairline-strong #8c8c8c / #666666   input and control border   (border-hairline-strong) 3.4:1 on white
 accent          #2f5bea / #7a9cff   links, focus, selected     (text-accent)
 accent-hover    #264dd0 / #93afff
 accent-soft     #e8eefc / #16203d   selected row bg, info chip (bg-accent-soft)
 primary         #0a0a0a / #fafafa   primary button fill        (bg-primary text-on-primary)
-success         #1a7f37 / #4ade80   + success-soft #e6f4ea / #0f2a18
-warning         #b26a00 / #fbbf24   + warning-soft #fff4e0 / #2a1f05
+success         #167534 / #4ade80   + success-soft #e6f4ea / #0f2a18
+warning         #9a5c00 / #fbbf24   + warning-soft #fff4e0 / #2a1f05
 danger          #c81e1e / #f87171   + danger-soft  #fdecec / #2f1010
 focus-ring      #2f5bea / #7a9cff   2px solid, 2px offset
 selection       #dbe4fd / #1e2a4d

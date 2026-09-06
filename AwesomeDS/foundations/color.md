@@ -29,22 +29,22 @@ Computed with the WCAG 2.x relative-luminance formula. AA requires 4.5:1 for bod
 | ink `#0a0a0a` | canvas-soft `#fafafa` | 18.97 | pass | pass |
 | ink-secondary `#525252` | canvas | 7.81 | pass | pass |
 | ink-secondary | surface-sunken `#f5f5f5` | 7.17 | pass | pass |
-| ink-muted `#737373` | canvas | 4.74 | pass | pass |
-| ink-muted | surface-sunken `#f5f5f5` | 4.35 | fail | pass |
+| ink-muted `#6b6b6b` | canvas | 5.33 | pass | pass |
+| ink-muted | surface-sunken `#f5f5f5` | 4.89 | pass | pass |
 | ink-disabled `#a3a3a3` | canvas | 2.52 | n/a (disabled is exempt) | fail |
 | accent `#2f5bea` | canvas | 5.52 | pass | pass |
 | accent-hover `#264dd0` | canvas | 6.87 | pass | pass |
 | accent | accent-soft `#e8eefc` | 4.75 | pass | pass |
 | on-accent `#ffffff` | accent | 5.52 | pass | pass |
 | on-primary `#ffffff` | primary `#0a0a0a` | 19.80 | pass | pass |
-| success `#1a7f37` | canvas | 5.08 | pass | pass |
+| success `#167534` | canvas | 5.79 | pass | pass |
 | success | success-soft `#e6f4ea` | 4.47 | fail (by 0.03) | pass |
-| warning `#b26a00` | canvas | 4.24 | fail | pass |
+| warning `#9a5c00` | canvas | 5.38 | pass | pass |
 | warning | warning-soft `#fff4e0` | 3.89 | fail | pass |
 | danger `#c81e1e` | canvas | 5.74 | pass | pass |
 | danger | danger-soft `#fdecec` | 5.02 | pass | pass |
 | hairline `#e5e5e5` | canvas | 1.26 | n/a | fail (decorative divider only) |
-| hairline-strong `#d4d4d4` | canvas | 1.48 | n/a | fail as sole boundary |
+| hairline-strong `#8c8c8c` | canvas | 3.36 | n/a | pass (3:1 for control boundaries) |
 
 ### Dark theme
 
@@ -54,7 +54,7 @@ Computed with the WCAG 2.x relative-luminance formula. AA requires 4.5:1 for bod
 | ink | surface-raised `#1a1a1a` | 16.67 | pass | pass |
 | ink-secondary `#a3a3a3` | canvas | 7.85 | pass | pass |
 | ink-secondary | surface-raised | 6.90 | pass | pass |
-| ink-muted `#737373` | canvas | 4.18 | fail | pass |
+| ink-muted `#8a8a8a` | canvas | 5.73 | pass | pass |
 | ink-muted | surface `#141414` | 3.89 | fail | pass |
 | accent `#7a9cff` | canvas | 7.57 | pass | pass |
 | accent | surface | 7.04 | pass | pass |
@@ -66,10 +66,11 @@ Computed with the WCAG 2.x relative-luminance formula. AA requires 4.5:1 for bod
 
 ### Rules that follow from the table
 
-1. `ink-muted` is for placeholders and timestamps on `canvas` or `surface` only. Do not
-   place it on `surface-sunken` in light mode, and do not use it for body text in dark mode.
-2. `warning` in light mode is not a text color at 14 or 16 px. Use it for the icon and the
-   border; write the message in `ink`. This is a known gap in v0.1.0 (see CHANGELOG).
+1. `ink-muted` is for placeholders, timestamps and captions. It passes 4.5:1 on `canvas`,
+   `surface` and `surface-sunken` in both themes, but it is not a body text color.
+2. Status colors (`success`, `warning`, `danger`) pass 4.5:1 on `canvas` and on their soft
+   tints, so a status message may be written in the status color. Always pair it with an
+   icon or a label; color alone is never the message.
 3. `hairline` never carries meaning on its own. A card is recognised by its content and
    padding; the border is a helper. Input borders use `hairline-strong` plus a 2 px focus ring.
 4. Disabled text is exempt from WCAG contrast but must still be visibly present; `#a3a3a3`
@@ -89,8 +90,8 @@ Computed with the WCAG 2.x relative-luminance formula. AA requires 4.5:1 for bod
 
 | Role | Light | Dark | Use |
 |---|---|---|---|
-| success | `#1a7f37` | `#4ade80` | Confirmation, positive delta |
-| warning | `#b26a00` | `#fbbf24` | Needs attention, not blocking |
+| success | `#167534` | `#4ade80` | Confirmation, positive delta |
+| warning | `#9a5c00` | `#fbbf24` | Needs attention, not blocking |
 | danger | `#c81e1e` | `#f87171` | Errors, destructive actions |
 
 Each has a `-soft` background for chips and banners. The soft tint holds the icon and the
@@ -99,7 +100,8 @@ colored border; the text stays `ink` or `ink-secondary` unless the table above s
 ## Dark mode strategy
 
 1. Invert luminance: canvas `#0a0a0a`, ink `#fafafa`. Hues stay the same family.
-2. Surfaces get lighter as they rise: `#0a0a0a` canvas, `#141414` surface, `#1a1a1a` raised.
+2. Surfaces get lighter as they rise: `#0a0a0a` canvas, `#0f0f0f` sunken, `#141414` surface,
+   `#1a1a1a` raised.
    Material's dark theme and Apple's base/elevated background pairs use the same logic:
    shadows have little contrast on dark, so lightness carries elevation.
 3. The accent is lightened (`#2f5bea` to `#7a9cff`) so it reaches 7.6:1 on canvas.

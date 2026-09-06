@@ -40,7 +40,7 @@ Items marked (mechanical) can be checked with grep or a script.
 
 | # | Test | Pass condition |
 |---|---|---|
-| 4.1 | Are there any em dashes in UI strings, alt text, or headings? (mechanical) | `grep -rn "—" src/` returns nothing |
+| 4.1 | Are there any em dashes (U+2014) in UI strings, alt text, or headings? (mechanical) | `grep -rnP "\xE2\x80\x94" src/` returns nothing |
 | 4.2 | Do any strings contain filler words (`seamless`, `unlock`, `elevate`, `empower`, `delightful`, `next-generation`, `revolutionize`)? (mechanical) | grep returns nothing |
 | 4.3 | Are all numbers real, or clearly labelled as examples? | No `99.99%`, `4.1x`, `48k` without a source |
 | 4.4 | Do button labels start with a verb and fit on one line at every breakpoint? | Yes |

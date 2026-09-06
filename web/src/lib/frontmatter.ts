@@ -52,13 +52,13 @@ export function parseFrontmatter(source: string): Parsed {
       i++;
       continue;
     }
-    const kv = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(line);
+    const kv = /^([A-Za-z0-9_-]+):(?:\s+(.*))?$/.exec(line);
     if (!kv) {
       i++;
       continue;
     }
     const key = kv[1];
-    const rest = kv[2].trim();
+    const rest = (kv[2] ?? "").trim();
 
     if (rest && rest !== "|" && rest !== ">") {
       data[key] = rest.startsWith("[") && rest.endsWith("]") ? inlineArray(rest) : scalar(rest);
@@ -92,17 +92,17 @@ export function parseFrontmatter(source: string): Parsed {
         const t = l.trim();
         if (t.startsWith("- ")) {
           const body = t.slice(2).trim();
-          const objKv = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(body);
+          const objKv = /^([A-Za-z0-9_-]+):(?:\s+(.*))?$/.exec(body);
           if (objKv) {
-            current = { [objKv[1]]: scalar(objKv[2]) };
+            current = { [objKv[1]]: scalar(objKv[2] ?? "") };
             items.push(current);
           } else {
             current = null;
             items.push(scalar(body));
           }
         } else if (current) {
-          const objKv = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(t);
-          if (objKv) current[objKv[1]] = scalar(objKv[2]);
+          const objKv = /^([A-Za-z0-9_-]+):(?:\s+(.*))?$/.exec(t);
+          if (objKv) current[objKv[1]] = scalar(objKv[2] ?? "");
         }
       }
       const allObjects = items.every((it) => typeof it === "object");
@@ -113,8 +113,8 @@ export function parseFrontmatter(source: string): Parsed {
     // Nested flat object.
     const obj: Record<string, Scalar> = {};
     for (const l of nonEmpty) {
-      const objKv = /^([A-Za-z0-9_-]+):\s*(.*)$/.exec(l.trim());
-      if (objKv) obj[objKv[1]] = scalar(objKv[2]);
+      const objKv = /^([A-Za-z0-9_-]+):(?:\s+(.*))?$/.exec(l.trim());
+      if (objKv) obj[objKv[1]] = scalar(objKv[2] ?? "");
     }
     data[key] = obj;
   }

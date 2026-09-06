@@ -89,7 +89,7 @@ export function Typography() {
               {tokens.font.family.mono.$value.map((f) => (f.includes(" ") ? `"${f}"` : f)).join(", ")}
             </p>
             <p className="mt-6 font-mono text-ink" style={{ fontSize: 20, lineHeight: 1.6 }}>
-              {"{ ink: '#0a0a0a', il1 O0 }"}
+              {"{ radius: 8, weight: 600 } il1 O0"}
             </p>
           </div>
         </div>

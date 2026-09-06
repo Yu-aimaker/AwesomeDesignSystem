@@ -5,20 +5,23 @@ and the project follows Semantic Versioning 2.0.0.
 
 ## [Unreleased]
 
-### Known issues (to fix in 0.2.0)
+### Changed before release (contrast audit, 2026-09-06)
 
-- `warning` `#b26a00` on `canvas` measures 4.24:1 and fails AA for 14 to 16 px text.
-  Candidate `#9a5a00` measures 5.47:1 on canvas and 5.02:1 on `warning-soft`.
-- `success` `#1a7f37` on `success-soft` measures 4.47:1 (fails by 0.03). Candidate
-  `#177a33` measures 5.43:1 on canvas and 4.78:1 on the soft tint.
-- Dark `ink-muted` `#737373` measures 4.18:1 on `#0a0a0a` and 3.89:1 on `#141414`.
-  Candidate `#8f8f8f` measures 6.12:1 and 5.70:1.
-- Light `ink-muted` `#737373` on `surface-sunken` `#f5f5f5` measures 4.35:1. Either restrict
-  the pairing (current rule) or move `ink-muted` to `#6b6b6b` (5.33:1 on canvas, 4.89:1 on sunken).
-- Dark `surface-sunken` and `surface-raised` are both `#1a1a1a`; sunken should sit below
-  `surface` (`#111111` or `#0f0f0f`) so wells and raised panels differ.
-- DESIGN.md color table says dark status colors are the light values "lightened 20%";
-  tokens.css uses `#4ade80`, `#fbbf24`, `#f87171`. Align the prose with the tokens.
+The first token draft was audited with the WCAG relative-luminance formula. These values
+changed so that every text role reaches 4.5:1 and every control border reaches 3:1:
+
+- `warning` `#b26a00` → `#9a5c00` (5.38:1 on canvas, 4.93:1 on `warning-soft`).
+- `success` `#1a7f37` → `#167534` (5.79:1 on canvas, 5.10:1 on `success-soft`).
+- Light `ink-muted` `#737373` → `#6b6b6b` (5.33:1 on canvas, 4.89:1 on `surface-sunken`).
+- Dark `ink-muted` `#737373` → `#8a8a8a` (5.73:1 on `#0a0a0a`, 5.34:1 on `#141414`).
+- `hairline-strong` `#d4d4d4` → `#8c8c8c` light, `#333333` → `#666666` dark. This token is
+  now defined as the border of controls (inputs, checkboxes) and must reach 3:1 (WCAG 1.4.11).
+  `hairline` stays light and is decorative.
+- Dark `surface-sunken` `#1a1a1a` → `#0f0f0f` so wells sit below `surface` and raised panels
+  sit above it.
+- DESIGN.md prose aligned with tokens: dark status colors are listed explicitly; the weight
+  rule reads "never 700 or heavier"; dark tokens for accent, status, focus and selection are
+  now in the front matter.
 
 ## [0.1.0] - 2026-09-06
 
@@ -31,8 +34,8 @@ Initial release. Decisions recorded with reasons in `foundations/`.
 - `tokens/tokens.css`, `tokens/tailwind.css`, `tokens/tokens.json`.
 - Color: true-gray neutrals `#fafafa` to `#0a0a0a`; ink `#0a0a0a` not `#000`; primary button
   ink on canvas; single accent `#2f5bea` (dark `#7a9cff`) for links, focus, selection and one
-  highlight; status colors success `#1a7f37`, warning `#b26a00`, danger `#c81e1e` with soft
-  tints; dark mode by luminance inversion with a lighter-surface ladder `#0a0a0a`, `#111111`,
+  highlight; status colors success `#167534`, warning `#9a5c00`, danger `#c81e1e` with soft
+  tints; dark mode by luminance inversion with a lighter-surface ladder `#0a0a0a`, `#0f0f0f`, `#111111`,
   `#141414`, `#1a1a1a`. Contrast table computed for every text role. OKLCH accent-swap recipe.
 - Typography: Geist plus Noto Sans JP, Geist Mono plus JetBrains Mono; scale 12 / 14 / 16 /
   18 / 20 / 28 / 36 / 56; weights 400 / 500 / 600; body 16 / 1.6; headings 1.2 to 1.35 with
@@ -75,5 +78,9 @@ Initial release. Decisions recorded with reasons in `foundations/`.
 - Pre-ship checklist with yes/no tests, mechanical items marked.
 - README with usage, file map, semver policy and weekly research cadence.
 
-[Unreleased]: ./CHANGELOG.md
-[0.1.0]: ./CHANGELOG.md
+### Notes
+
+- Values were cross-checked against the measured DESIGN.md files of Linear, Vercel, Stripe,
+  Apple, Notion, Figma, Raycast, Claude and Cursor (awesome-design-md) and 487 Japanese sites
+  (awesome-design-md-jp). Contrast ratios were computed with the WCAG relative-luminance formula.
+- Source URLs in every foundation file were collected during the 2026-09-06 research pass.

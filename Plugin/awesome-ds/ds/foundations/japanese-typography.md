@@ -54,7 +54,7 @@ Example (avoid): manual spaces around Latin, or `word-break: break-all` splittin
   Japanese text is a translation artefact.
 - Do not add a space after 。or 、.
 - Brackets: 「」 for quotes, （） full-width parentheses. Latin `()` only around Latin content.
-- No em dash (―／—) in UI copy. Use 、 or a new sentence. Latin copy uses a period or comma.
+- No dash characters U+2015 or U+2014 in UI copy. Use 、 or a new sentence. Latin copy uses a period or comma.
 - Ellipsis is 三点リーダ …… (two characters) in prose; UI truncation uses one `…`.
 
 ## Kinsoku (line-break prohibitions)

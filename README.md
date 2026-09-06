@@ -70,7 +70,7 @@ scripts/              生成スクリプト
 ## AwesomeDS の要点
 
 ```
-canvas #ffffff  ink #0a0a0a  secondary #525252  muted #737373  hairline #e5e5e5
+canvas #ffffff  ink #0a0a0a  secondary #525252  muted #6b6b6b  hairline #e5e5e5  入力枠 #8c8c8c
 accent #2f5bea（リンク・フォーカス・選択のみ）  主ボタンは黒地に白文字
 sans Geist + Noto Sans JP  mono Geist Mono  本文 16px / 1.6（日本語 1.8）
 余白 4 8 12 16 24 32 48 64 96  角丸 8（操作部品） 12（カード） 16（ダイアログ）

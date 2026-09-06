@@ -18,10 +18,10 @@ colors:
   surface-sunken: "#f5f5f5"
   ink: "#0a0a0a"
   ink-secondary: "#525252"
-  ink-muted: "#737373"
+  ink-muted: "#6b6b6b"
   ink-disabled: "#a3a3a3"
   hairline: "#e5e5e5"
-  hairline-strong: "#d4d4d4"
+  hairline-strong: "#8c8c8c"
   accent: "#2f5bea"
   accent-hover: "#264dd0"
   accent-soft: "#e8eefc"
@@ -29,9 +29,9 @@ colors:
   primary: "#0a0a0a"
   primary-hover: "#262626"
   on-primary: "#ffffff"
-  success: "#1a7f37"
+  success: "#167534"
   success-soft: "#e6f4ea"
-  warning: "#b26a00"
+  warning: "#9a5c00"
   warning-soft: "#fff4e0"
   danger: "#c81e1e"
   danger-soft: "#fdecec"
@@ -41,14 +41,27 @@ colors:
   dark-canvas-soft: "#111111"
   dark-surface: "#141414"
   dark-surface-raised: "#1a1a1a"
+  dark-surface-sunken: "#0f0f0f"
   dark-ink: "#fafafa"
   dark-ink-secondary: "#a3a3a3"
-  dark-ink-muted: "#737373"
+  dark-ink-muted: "#8a8a8a"
   dark-hairline: "#262626"
-  dark-hairline-strong: "#333333"
+  dark-hairline-strong: "#666666"
   dark-accent: "#7a9cff"
+  dark-accent-hover: "#93afff"
+  dark-accent-soft: "#16203d"
+  dark-on-accent: "#0a0a0a"
   dark-primary: "#fafafa"
+  dark-primary-hover: "#e5e5e5"
   dark-on-primary: "#0a0a0a"
+  dark-success: "#4ade80"
+  dark-success-soft: "#0f2a18"
+  dark-warning: "#fbbf24"
+  dark-warning-soft: "#2a1f05"
+  dark-danger: "#f87171"
+  dark-danger-soft: "#2f1010"
+  dark-focus-ring: "#7a9cff"
+  dark-selection: "#1e2a4d"
 
 typography:
   display:
@@ -238,14 +251,14 @@ Roles, not hues. Never reference a raw hex in a component; reference a role.
 | canvas | `#ffffff` | `#0a0a0a` | Page background |
 | canvas-soft | `#fafafa` | `#111111` | Alternate section, code block background |
 | surface | `#ffffff` | `#141414` | Cards, inputs, popovers |
-| surface-sunken | `#f5f5f5` | `#1a1a1a` | Table header, inset wells, badges |
+| surface-sunken | `#f5f5f5` | `#0f0f0f` | Table header, inset wells, badges |
 | ink | `#0a0a0a` | `#fafafa` | Headings, body text, primary button fill |
-| ink-secondary | `#525252` | `#a3a3a3` | Supporting text, labels (7.6:1 on white) |
-| ink-muted | `#737373` | `#737373` | Placeholders, timestamps (4.7:1 on white) |
+| ink-secondary | `#525252` | `#a3a3a3` | Supporting text, labels (7.8:1 on white) |
+| ink-muted | `#6b6b6b` | `#8a8a8a` | Placeholders, timestamps (5.3:1 on white, 4.9:1 on surface-sunken, 5.7:1 on dark) |
 | hairline | `#e5e5e5` | `#262626` | Dividers, card borders |
-| hairline-strong | `#d4d4d4` | `#333333` | Input borders, hover borders |
+| hairline-strong | `#8c8c8c` | `#666666` | Input and control borders (3.4:1 on canvas, WCAG 1.4.11) |
 | accent | `#2f5bea` | `#7a9cff` | Links, focus ring, selected state, one highlight |
-| success / warning / danger | `#1a7f37` / `#b26a00` / `#c81e1e` | same, lightened 20% | Status only, never decoration |
+| success / warning / danger | `#167534` / `#9a5c00` / `#c81e1e` | `#4ade80` / `#fbbf24` / `#f87171` | Status only, never decoration. Each is at least 4.5:1 on canvas and on its soft background |
 
 Rules
 
@@ -253,11 +266,12 @@ Rules
    button color. This keeps the accent meaningful when it appears.
 2. One accent per product. Change the accent to match the brand; keep every neutral.
 3. Neutrals are true grays (no blue or warm cast) so brand colors are never fighting a tint.
-4. Text contrast is at least 4.5:1 for body, 3:1 for large text and UI borders.
-   Check with the values above; do not eyeball.
+4. Text contrast is at least 4.5:1 for body, 3:1 for large text and for borders that
+   identify a control (inputs, checkboxes). Dividers and card borders (`hairline`) are
+   decorative and exempt. Check with the values above; do not eyeball.
 5. Status colors carry an icon or a label. Color alone is never the message.
 6. Dark mode inverts luminance, not hue. Surfaces get lighter as they rise
-   (`#0a0a0a` → `#141414` → `#1a1a1a`); the accent is lightened for contrast.
+   (`#0a0a0a`, `#0f0f0f`, `#141414`, `#1a1a1a`); the accent is lightened for contrast.
 
 ## 3. Typography
 
@@ -273,7 +287,7 @@ Full reasoning: [`foundations/typography.md`](foundations/typography.md) and
 - Noto Sans JP for Japanese (largest glyph coverage, variable, pairs with Geist at the
   same x-height). Load Latin and Japanese as two subsets; never ship one 5 MB file.
 - No serif by default. A serif is a brand decision, made in `ds-creator`, not a default.
-- Weights: 400 body, 500 labels and buttons, 600 headings. Never 700+ except display.
+- Weights: 400 body, 500 labels and buttons, 600 headings. Never 700 or heavier.
 - Scale (px): 12, 14, 16, 18, 20, 28, 36, 56. Body is 16. Small UI text is 14. Never below 12.
 - Line height: 1.6 body (Japanese 1.8), 1.2 to 1.35 headings (Japanese 1.4 to 1.5).
 - Letter spacing: -0.02em on display and h1 Latin, 0 on body. Japanese text: 0 to 0.02em,
@@ -412,7 +426,7 @@ When you build UI with AwesomeDS:
 Quick reference
 
 ```
-canvas #ffffff  ink #0a0a0a  secondary #525252  muted #737373  hairline #e5e5e5
+canvas #ffffff  ink #0a0a0a  secondary #525252  muted #6b6b6b  hairline #e5e5e5  input border #8c8c8c
 accent #2f5bea (links, focus, selected)  primary button: ink on canvas
 sans Geist + Noto Sans JP  mono Geist Mono  body 16/1.6  h1 36/1.2/600/-0.02em
 space 4 8 12 16 24 32 48 64 96  radius 8 (controls) 12 (cards) 16 (dialogs)

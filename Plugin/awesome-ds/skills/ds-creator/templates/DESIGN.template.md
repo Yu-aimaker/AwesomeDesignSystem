@@ -13,10 +13,10 @@ colors:
   surface-sunken: "#f5f5f5"
   ink: "#0a0a0a"
   ink-secondary: "#525252"
-  ink-muted: "#737373"
+  ink-muted: "#6b6b6b"
   ink-disabled: "#a3a3a3"
   hairline: "#e5e5e5"
-  hairline-strong: "#d4d4d4"
+  hairline-strong: "#8c8c8c"
   accent: "{{ACCENT}}"
   accent-hover: "{{ACCENT_HOVER}}"
   accent-soft: "{{ACCENT_SOFT}}"
@@ -24,9 +24,9 @@ colors:
   primary: "#0a0a0a"
   primary-hover: "#262626"
   on-primary: "#ffffff"
-  success: "#1a7f37"
+  success: "#167534"
   success-soft: "#e6f4ea"
-  warning: "#b26a00"
+  warning: "#9a5c00"
   warning-soft: "#fff4e0"
   danger: "#c81e1e"
   danger-soft: "#fdecec"
@@ -38,9 +38,9 @@ colors:
   dark-surface-raised: "#1a1a1a"
   dark-ink: "#fafafa"
   dark-ink-secondary: "#a3a3a3"
-  dark-ink-muted: "#737373"
+  dark-ink-muted: "#8a8a8a"
   dark-hairline: "#262626"
-  dark-hairline-strong: "#333333"
+  dark-hairline-strong: "#666666"
   dark-accent: "{{DARK_ACCENT}}"
   dark-primary: "#fafafa"
   dark-on-primary: "#0a0a0a"
@@ -221,10 +221,10 @@ Keywords: {{ADJ_1}}, {{ADJ_2}}, {{ADJ_3}}. (decided: Q3)
 | surface | `#ffffff` | `#141414` | Cards, inputs, popovers | default |
 | ink | `#0a0a0a` | `#fafafa` | Text, primary button | default |
 | ink-secondary | `#525252` | `#a3a3a3` | Supporting text | default |
-| ink-muted | `#737373` | `#737373` | Placeholder, timestamp | default |
-| hairline / strong | `#e5e5e5` / `#d4d4d4` | `#262626` / `#333333` | Borders | default |
+| ink-muted | `#6b6b6b` | `#8a8a8a` | Placeholder, timestamp | default |
+| hairline / strong | `#e5e5e5` / `#8c8c8c` | `#262626` / `#666666` | Dividers / control borders | default |
 | accent | `{{ACCENT}}` | `{{DARK_ACCENT}}` | Links, focus, selection | {{ACCENT_STATUS}} |
-| success / warning / danger | `#1a7f37` / `#b26a00` / `#c81e1e` | lightened | Status with icon or label | default |
+| success / warning / danger | `#167534` / `#9a5c00` / `#c81e1e` | `#4ade80` / `#fbbf24` / `#f87171` | Status with icon or label | default |
 
 Rules: same as AwesomeDS section 2. Primary buttons are ink on canvas {{OR: "are the brand colour (changed: Q5, quoted answer)"}}. Contrast table: see RATIONALE.md.
 

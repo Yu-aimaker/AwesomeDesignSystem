@@ -19,8 +19,8 @@ Dark theme:
 | Level | Treatment |
 |---|---|
 | 1 | surface `#141414` on canvas `#0a0a0a`, `1px hairline #262626` |
-| 2 | surface-raised `#1a1a1a`, `0 0 0 1px hairline-strong #333` |
-| 3 | surface-raised, `0 0 0 1px #333, 0 24px 64px -16px rgb(0 0 0 / 0.6)` |
+| 2 | surface-raised `#1a1a1a`, `0 0 0 1px hairline-strong #666666` |
+| 3 | surface-raised, `0 0 0 1px #666666, 0 24px 64px -16px rgb(0 0 0 / 0.6)` |
 
 ## Why borders before shadows
 
@@ -62,7 +62,7 @@ surface containers in M3). Apple's Dark Mode uses base and elevated background p
 
 AwesomeDS ladder: canvas `#0a0a0a`, canvas-soft `#111111`, surface `#141414`,
 surface-raised `#1a1a1a`. Each step is about 3 to 4 percent lighter, enough to see, not
-enough to read as a different color. The hairline steps up with it: `#262626` then `#333333`.
+enough to read as a different color. The hairline steps up with it: `#262626` for dividers, `#666666` for control borders.
 
 Material tints the overlay with the primary color; AwesomeDS does not, because a tinted
 gray would break the true-gray rule and fight brand accents.

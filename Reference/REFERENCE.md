@@ -4,7 +4,27 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 38  /  ドメイン数: 8
+リンク数: 134  /  ドメイン数: 26
+
+## blog.duolingo.com
+
+- [Duologues: design conversations - Duolingo Blog](https://blog.duolingo.com/duologues-design-conversations/)  
+  引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+
+## blog.logrocket.com
+
+- [Linear design: The SaaS design trend that's boring and bettering UI - LogRocket Blog](https://blog.logrocket.com/ux-design/linear-design/)  
+  引用: [Linear](../Knowledge/design-systems/linear.md)
+
+## claude.com
+
+- [Improving frontend design through Skills (Claude blog, proxy blocked, link recorded)](https://claude.com/blog/improving-frontend-design-through-skills)  
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+
+## designmd.run
+
+- [Inside Stripe's Design System: A Token-Level Breakdown | DESIGN.md](https://www.designmd.run/blog/stripe-design-system-breakdown)  
+  引用: [Stripe](../Knowledge/design-systems/stripe.md)
 
 ## developer.android.com
 
@@ -30,6 +50,13 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [デジタル庁 デザインシステム (Figma Community)](https://www.figma.com/community/file/1255349027535859598)  
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
+- [Duolingo Design System (Figma Community)](https://www.figma.com/community/file/1460744749282136015)  
+  引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+
+## fontsinuse.com
+
+- [NDot in use - Fonts In Use](https://fontsinuse.com/typefaces/233367/ndot)  
+  引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
 
 ## getdesign.md
 
@@ -38,6 +65,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## github.com
 
+- [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+- [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [assistant-ui apps/registry (the component registry app behind r.assistant-ui.com)](https://github.com/assistant-ui/assistant-ui/tree/main/apps/registry)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [atlassian/atlassian-frontend-mirror (Atlassian Design System packages)](https://github.com/atlassian/atlassian-frontend-mirror)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
+  引用: [React Bits](../Knowledge/component-libraries/react-bits.md)
 - [digital-go-jp/design-system-example-components (React / Tailwind)](https://github.com/digital-go-jp/design-system-example-components)  
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
 - [digital-go-jp/design-system-example-components-html (HTML/CSS/JS)](https://github.com/digital-go-jp/design-system-example-components-html)  
@@ -48,26 +85,135 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
 - [google-labs-code/stitch-skills: Agent skills and plugins for Google Stitch](https://github.com/google-labs-code/stitch-skills)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
+- [kufu/smarthr-design-system (smarthr.design のソース)](https://github.com/kufu/smarthr-design-system)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+- [kufu/smarthr-ui: React components for creating SmartHR applications](https://github.com/kufu/smarthr-ui)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kzhrknt/awesome-design-md-jp: DESIGN.md collection for Japanese web services](https://github.com/kzhrknt/awesome-design-md-jp)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md)
+- [Leonxlnx/taste-skill README (lists React Bits as a sponsor)](https://github.com/Leonxlnx/taste-skill)  
+  引用: [React Bits](../Knowledge/component-libraries/react-bits.md), [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md)
+- [magicuidesign/magicui: UI Library for Design Engineers](https://github.com/magicuidesign/magicui)  
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+- [mattpocock/skills: Skills For Real Engineers](https://github.com/mattpocock/skills)  
+  引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [mui/base-ui: unstyled UI components for building accessible web apps](https://github.com/mui/base-ui)  
+  引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Myndex/SAPC-APCA: APCA Accessible Perceptual Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [radix-ui/colors: A gorgeous, accessible color system](https://github.com/radix-ui/colors)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [shadcn-ui/ui (source of ui.shadcn.com docs; the site itself is proxy blocked)](https://github.com/shadcn-ui/ui)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [vercel-labs/agent-skills (the `npx skills add` CLI taste-skill installs through)](https://github.com/vercel-labs/agent-skills)  
+  引用: [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md), [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [vercel-labs/skills: the `npx skills` CLI](https://github.com/vercel-labs/skills)  
+  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [vercel/geist-font: Geist Sans, Geist Mono, Geist Pixel](https://github.com/vercel/geist-font)  
+  引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
 - [VoltAgent/awesome-design-md (the upstream the JP edition extends)](https://github.com/VoltAgent/awesome-design-md)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
+- [awesome-design-md: claude/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/claude/DESIGN.md)  
+  引用: [Claude / Anthropic](../Knowledge/design-systems/claude-and-anthropic.md)
+- [awesome-design-md: figma/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/figma/DESIGN.md)  
+  引用: [Notion, Figma, Raycast (比較)](../Knowledge/design-systems/notion-figma-raycast.md)
+- [awesome-design-md: linear.app/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/linear.app/DESIGN.md)  
+  引用: [Linear](../Knowledge/design-systems/linear.md)
+- [awesome-design-md: notion/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/notion/DESIGN.md)  
+  引用: [Notion, Figma, Raycast (比較)](../Knowledge/design-systems/notion-figma-raycast.md)
+- [awesome-design-md: raycast/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/raycast/DESIGN.md)  
+  引用: [Notion, Figma, Raycast (比較)](../Knowledge/design-systems/notion-figma-raycast.md)
+- [awesome-design-md: stripe/DESIGN.md (実測、Stripi-Inspired)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/stripe/DESIGN.md)  
+  引用: [Stripe](../Knowledge/design-systems/stripe.md)
+- [awesome-design-md: vercel/DESIGN.md (実測)](https://github.com/voltagent/awesome-design-md/blob/main/design-md/vercel/DESIGN.md)  
+  引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
+- [xeji01/nothingfont: nothing.tech typeface (Ndot-55, Ndot-57, NType-82)](https://github.com/xeji01/nothingfont)  
+  引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
+- [awesome-design-md-jp: goodpatch/DESIGN.md (実測 2026-05-21)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/goodpatch/DESIGN.md)  
+  引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
+- [awesome-design-md-jp: smarthr/DESIGN.md](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/smarthr/DESIGN.md)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+
+## goodpatch.com
+
+- [良いデザインシステムとは？その基本と構造をグッドパッチが解説 | Goodpatch Blog](https://goodpatch.com/blog/2026-04-cz-ds-01)  
+  引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
+- [大集合！Goodpatch流 実践デザインナレッジまとめ | Goodpatch Blog](https://goodpatch.com/blog/design-process-knowledge)  
+  引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
+- [UXエンジニアが知っておきたいデザインシステムの原則 | Goodpatch Blog](https://goodpatch.com/blog/ux-engineer-design-system)  
+  引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
+- [Goodpatch | Prove the Power of Design](https://goodpatch.com/en)  
+  引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)
 
 ## kzhrknt.github.io
 
 - [Awesome Design MD JP Gallery (486 sites)](https://kzhrknt.github.io/awesome-design-md-jp/gallery.html)  
   引用: [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md)
 
+## linear.app
+
+- [How we redesigned the Linear UI (part II) - Linear](https://linear.app/now/how-we-redesigned-the-linear-ui)  
+  引用: [Linear](../Knowledge/design-systems/linear.md)
+
+## magicui.design
+
+- [Magic UI (site, proxy blocked, link recorded)](https://magicui.design/)  
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+
+## nothing.community
+
+- [ndot57: the Nothing Typeface - Nothing Community](https://nothing.community/d/104-ndot57-the-nothing-typeface)  
+  引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
+
+## phonearena.com
+
+- [Nothing's design boss explains the big change behind Phone (3) - PhoneArena](https://www.phonearena.com/news/nothing-design-boss-explains-the-big-change-behind-phone-3_id171637)  
+  引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
+
 ## raw.githubusercontent.com
 
+- [plugins/frontend-design/skills/frontend-design/SKILL.md (anthropics/claude-code)](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/frontend-design/skills/frontend-design/SKILL.md)  
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+- [skills/frontend-design/SKILL.md (anthropics/skills)](https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md)  
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+- [assistant-ui docs: Radix UI and Base UI](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/content/docs/(getting-started)/base-ui.mdx)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md), [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [assistant-ui docs: CLI](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/content/docs/(getting-started)/cli.mdx)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [assistant-ui docs: Installation](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/content/docs/(getting-started)/installation.mdx)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [assistant-ui docs: Composer primitive](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/content/docs/primitives/composer.mdx)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [assistant-ui docs: Thread primitive](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/content/docs/primitives/thread.mdx)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [assistant-ui README](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/README.md)  
+  引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [carbon/packages/type fontFamily.ts (IBM Plex)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/fontFamily.ts)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [carbon/packages/type scale.ts (type scale)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/scale.ts)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [carbon/packages/type styles.ts (type tokens)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/styles.ts)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [design-tokens README (develop)](https://raw.githubusercontent.com/digital-go-jp/design-tokens/develop/README.md)  
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
 - [design.md docs/spec.md (full specification)](https://raw.githubusercontent.com/google-labs-code/design.md/main/docs/spec.md)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
 - [design.md PHILOSOPHY.md](https://raw.githubusercontent.com/google-labs-code/design.md/main/PHILOSOPHY.md)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
+- [smarthr-ui createColor.ts (色トークン)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+- [smarthr-ui createFontSize.ts (フォントサイズ)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createFontSize.ts)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+- [smarthr-ui createLeading.ts (行間)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createLeading.ts)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+- [oh-my-design: duolingo/DESIGN.md (design.duolingo.com/identity/color と www.duolingo.com を照合した二次資料)](https://raw.githubusercontent.com/kwakseongjae/oh-my-design/HEAD/design-md/duolingo/DESIGN.md)  
+  引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+- [magicui registry.json (item list)](https://raw.githubusercontent.com/magicuidesign/magicui/main/registry.json)  
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+- [marcus-skills: linear-design-system.md (二次資料)](https://raw.githubusercontent.com/marcus/marcus-skills/main/skills/linear-design-patterns/references/linear-design-system.md)  
+  引用: [Linear](../Knowledge/design-systems/linear.md)
 - [material-web tokens: md-ref-palette (v0.192)](https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-ref-palette.scss)  
   引用: [Material Design 3](../Knowledge/platform-guidelines/material-3.md)
 - [material-web tokens: md-sys-color (v0.192)](https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-sys-color.scss)  
@@ -78,6 +224,56 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Material Design 3](../Knowledge/platform-guidelines/material-3.md)
 - [material-web tokens: md-sys-typescale (v0.192)](https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-sys-typescale.scss)  
   引用: [Material Design 3](../Knowledge/platform-guidelines/material-3.md)
+- [grill-me SKILL.md](https://raw.githubusercontent.com/mattpocock/skills/main/skills/productivity/grill-me/SKILL.md)  
+  引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [grilling SKILL.md (the reusable interview primitive)](https://raw.githubusercontent.com/mattpocock/skills/main/skills/productivity/grilling/SKILL.md)  
+  引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [Base UI docs: Composition (render prop)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/handbook/composition/page.mdx)  
+  引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [Base UI docs: Quick start (source of base-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx)  
+  引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [open-design: duolingo/DESIGN.md (二次資料)](https://raw.githubusercontent.com/nexu-io/open-design/main/design-systems/duolingo/DESIGN.md)  
+  引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+- [primer/primitives typography.json5](https://raw.githubusercontent.com/primer/primitives/HEAD/src/tokens/base/typography/typography.json5)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [radix-ui/colors src/light.ts (scale values)](https://raw.githubusercontent.com/radix-ui/colors/main/src/light.ts)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [Radix Colors: Understanding the scale](https://raw.githubusercontent.com/radix-ui/website/main/data/colors/docs/palette-composition/understanding-the-scale.mdx)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [Radix Primitives: Accessibility](https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/accessibility.mdx)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [Radix Primitives: Introduction (source of radix-ui.com, which is proxy blocked)](https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/introduction.mdx)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [shadcn/ui docs: CLI](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/cli.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui docs: components.json](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/components-json.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui docs: Introduction](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/index.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui docs: Tailwind v4](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/tailwind-v4.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui docs: Theming](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/theming.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui changelog: Base UI support](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/changelog/2026-01-base-ui.mdx)  
+  引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md), [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui docs: Registry getting started](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/registry/getting-started.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [shadcn/ui docs: registry-item.json](https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/registry/registry-item-json.mdx)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+- [Shopify/polaris polaris-tokens size.ts](https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/size.ts)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [Shopify/polaris polaris-tokens border.ts](https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/border.ts)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [Shopify/polaris polaris-tokens font.ts](https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/font.ts)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [react-best-practices SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md)  
+  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [react-view-transitions SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-view-transitions/SKILL.md)  
+  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [web-design-guidelines SKILL.md](https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/web-design-guidelines/SKILL.md)  
+  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+- [vercel-labs/web-interface-guidelines command.md (the rules web-design-guidelines fetches)](https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md)  
+  引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [WCAG 1.4.3 Contrast (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/20/contrast-minimum.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [WCAG 2.4.7 Focus Visible source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/20/focus-visible.html)  
@@ -99,10 +295,60 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [WCAG 2.5.8 Target Size (Minimum) source (w3c/wcag)](https://raw.githubusercontent.com/w3c/wcag/main/guidelines/sc/22/target-size-minimum.html)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 
+## reactbits.dev
+
+- [React Bits (site, proxy blocked, link recorded)](https://reactbits.dev/)  
+  引用: [React Bits](../Knowledge/component-libraries/react-bits.md)
+
+## registry.npmjs.org
+
+- [npm: @base-ui/react latest](https://registry.npmjs.org/@base-ui/react/latest)  
+  引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [npm: aceternity-ui (CLI) latest](https://registry.npmjs.org/aceternity-ui/latest)  
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+- [npm: radix-ui (unified package) latest](https://registry.npmjs.org/radix-ui/latest)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
+- [npm: shadcn (CLI) latest](https://registry.npmjs.org/shadcn/latest)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
+
+## shadcn.io
+
+- [Stripe Design System for React — Indigo #533afd, Sohne, and 21 components](https://www.shadcn.io/design/stripe)  
+  引用: [Stripe](../Knowledge/design-systems/stripe.md)
+
 ## stitch.withgoogle.com
 
 - [Stitch docs: DESIGN.md overview (proxy blocked, link recorded)](https://stitch.withgoogle.com/docs/design-md/overview/)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
 - [Stitch docs: DESIGN.md specification (proxy blocked, link recorded)](https://stitch.withgoogle.com/docs/design-md/specification/)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
+
+## stripe.design
+
+- [Stripe Design Language Study](https://stripe.design/)  
+  引用: [Stripe](../Knowledge/design-systems/stripe.md)
+
+## ui.aceternity.com
+
+- [Aceternity UI (site, proxy blocked, link recorded)](https://ui.aceternity.com/)  
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+
+## vercel.com
+
+- [Geist Design System - Colors (Vercel)](https://vercel.com/geist/colors)  
+  引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
+- [Geist Design System - Introduction (Vercel)](https://vercel.com/geist/introduction)  
+  引用: [Vercel Geist Design System](../Knowledge/design-systems/vercel-geist.md)
+
+## web.archive.org
+
+- [Duolingo Design (Wayback Machine, 2026-03-10)](https://web.archive.org/web/20260310155248/https://design.duolingo.com/)  
+  引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+
+## x.com
+
+- [Nero (@neropursue) / Posts / X (profile, seen in search results only)](https://x.com/neropursue)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+- [Nero (@neropursue) on X, status 2089263766428950683 (unretrievable, link recorded)](https://x.com/neropursue/status/2089263766428950683)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
