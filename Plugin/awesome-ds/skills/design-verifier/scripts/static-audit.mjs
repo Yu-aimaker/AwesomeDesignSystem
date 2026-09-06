@@ -1,0 +1,117 @@
+#!/usr/bin/env node
+// Static audit for design-verifier. No dependencies.
+// node static-audit.mjs <dir-or-file> [--json] [--ignore glob-ish,comma,list]
+// Scans .css .scss .html .tsx .jsx .ts .js .vue .svelte .astro .mdx and reports findings with file:line.
+// Token files (tokens.css, tailwind.css, base.tokens.css, *.tokens.css, DESIGN.md) are exempt from the raw-colour rule.
+
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join, resolve, basename, extname } from "node:path";
+
+const argv = process.argv.slice(2);
+const target = argv.find((a) => !a.startsWith("--"));
+if (!target) { console.error("usage: node static-audit.mjs <dir-or-file> [--json]"); process.exit(2); }
+const JSON_OUT = argv.includes("--json");
+const ignoreIdx = argv.indexOf("--ignore");
+const ignores = ignoreIdx > -1 ? argv[ignoreIdx + 1].split(",") : [];
+const SKIP_DIRS = new Set(["node_modules", ".git", "dist", "build", ".next", "out", "coverage", ".turbo", "design-review", "storybook-static"]);
+const EXT = new Set([".css", ".scss", ".html", ".tsx", ".jsx", ".ts", ".js", ".vue", ".svelte", ".astro", ".mdx"]);
+const TOKEN_FILE = /(^|\/)(tokens|tailwind|base\.tokens|[a-z0-9-]+\.tokens)\.css$|DESIGN\.md$/;
+
+function walk(p, acc = []) {
+  const st = statSync(p);
+  if (st.isDirectory()) {
+    if (SKIP_DIRS.has(basename(p))) return acc;
+    for (const f of readdirSync(p)) walk(join(p, f), acc);
+  } else if (EXT.has(extname(p)) && !ignores.some((g) => p.includes(g))) acc.push(p);
+  return acc;
+}
+
+const files = walk(resolve(target));
+const findings = [];
+const counts = { colorDecls: 0, tokenColorDecls: 0, eyebrows: 0, sections: 0 };
+const add = (sev, rule, file, line, text, fix) => findings.push({ sev, rule, file, line, text: text.trim().slice(0, 140), fix });
+
+const FILLER = /\b(seamless(ly)?|unlock|empower(ing)?|elevate|next[- ]gen(eration)?|revolutioni[sz]e|supercharge|effortless(ly)?|cutting[- ]edge|robust|game[- ]chang(er|ing)|unleash|leverage)\b/i;
+const PLACEHOLDER = /\b(lorem ipsum|acme|john doe|jane doe|sarah chan)\b/i;
+const JA = /[぀-ヿ一-鿿]/;
+
+for (const file of files) {
+  const src = readFileSync(file, "utf8");
+  const lines = src.split("\n");
+  const isToken = TOKEN_FILE.test(file);
+  const isStyle = /\.(css|scss)$/.test(file) || /<style/.test(src);
+  const hasFocusVisible = /:focus-visible/.test(src);
+  const hasJa = JA.test(src);
+  let eyebrowsHere = 0;
+
+  lines.forEach((raw, i) => {
+    const n = i + 1;
+    const line = raw;
+    // 1. raw colours
+    const colorMatches = line.match(/#[0-9a-fA-F]{3,8}\b|\brgba?\(|\bhsla?\(|\boklch\(/g) || [];
+    if (colorMatches.length && !/^\s*(\/\/|\/\*|\*)/.test(line) && !/(url\(|['"]#[a-z-]+['"]|href=|id=)/.test(line)) {
+      counts.colorDecls += colorMatches.length;
+      if (isToken) counts.tokenColorDecls += colorMatches.length;
+      else add(2, "raw-color", file, n, line, "Replace with var(--ds-*) or a token class");
+    }
+    if (/var\(--ds-/.test(line)) { counts.colorDecls++; counts.tokenColorDecls++; }
+    if (/\b(bg|text|border|ring|from|to|via|fill|stroke)-\[#|\[(rgb|hsl|oklch)\(/.test(line)) add(2, "tailwind-arbitrary-color", file, n, line, "Add a token and use its class");
+    // 2. decoration
+    if (/(linear|radial|conic)-gradient|bg-gradient-/.test(line) && !isToken) add(3, "gradient", file, n, line, "Remove decorative gradient; use canvas-soft for section contrast");
+    if (/backdrop-filter|backdrop-blur|\bblur-(sm|md|lg|xl|\d)|\bblur\(/.test(line)) add(3, "glass-or-blur", file, n, line, "Remove glass/blur; use surface + hairline");
+    if (/drop-shadow|0 0 \d+px .*(rgba?|#)/.test(line) && !isToken) add(3, "glow", file, n, line, "Remove glow; elevation is border or shadow-2/3");
+    // 3. AI defaults
+    if (/font-family[^;]*\bInter\b|["']Inter["']|fontFamily:\s*["']Inter/.test(line)) add(3, "inter-default", file, n, line, "Use var(--ds-font-sans) (Geist + Noto Sans JP)");
+    if (/\b(bg|text|border)-(slate|violet|purple|indigo|fuchsia)-\d{2,3}\b/.test(line)) add(3, "ai-palette", file, n, line, "Use ink/hairline/accent roles; no slate or purple");
+    // 4. focus
+    if (/outline:\s*(none|0)\b|outline-none/.test(line) && !hasFocusVisible) add(1, "focus-removed", file, n, line, "Add :focus-visible { outline: 2px solid var(--ds-focus-ring); outline-offset: 2px }");
+    // 5. size and weight
+    const fs = line.match(/font-size:\s*(\d+(?:\.\d+)?)px/) || line.match(/\btext-\[(\d+)px\]/);
+    if (fs && Number(fs[1]) < 12) add(1, "text-under-12", file, n, line, "Minimum 12px; 14px for UI text, 16px body");
+    if (/\bfont-(bold|extrabold|black)\b|font-weight:\s*(7|8|9)00/.test(line) && !/display/i.test(line)) add(3, "weight-700", file, n, line, "Use 600 for headings, 500 for labels");
+    if (/line-height:\s*1\.[0-4]\b|\bleading-(none|tight)\b/.test(line) && /\b(p|body|text-base|paragraph)\b/.test(line)) add(2, "tight-body-leading", file, n, line, "Body line-height 1.6 (ja 1.8)");
+    // 6. viewport and scroll
+    if (/\b100vh\b|\bh-screen\b|min-h-screen/.test(line)) add(2, "100vh", file, n, line, "Use 100dvh / min-h-[100dvh]");
+    if (/addEventListener\(\s*['"]scroll['"]/.test(line)) add(2, "scroll-listener", file, n, line, "Use IntersectionObserver, Motion useScroll or CSS scroll-driven animations");
+    if (/animation:[^;]*infinite|animate-(pulse|bounce|spin|marquee)/.test(line) && !/progress|loading|spinner|skeleton/i.test(line)) add(2, "infinite-motion", file, n, line, "Nothing loops except progress indicators");
+    // 7. copy
+    if (/—/.test(line) && !/^\s*(\/\/|\/\*|\*|#)/.test(line)) add(3, "em-dash", file, n, line, "Replace with period or comma");
+    if (FILLER.test(line) && !/^\s*(import|\/\/|\/\*|\*)/.test(line)) add(3, "filler-word", file, n, line, "Say the concrete thing instead");
+    if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
+    // 8. eyebrows and sections
+    if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
+    if (/<section\b|<Section\b/.test(line)) counts.sections++;
+    // 9. shadows at rest
+    if (/\b(Card|\.card|card)\b/.test(line) && /shadow-(sm|md|lg|xl|2xl)|box-shadow:\s*(?!none)/.test(line) && !/dialog|popover|menu|tooltip|dropdown/i.test(line)) add(2, "shadow-at-rest", file, n, line, "Cards are level 1: border only");
+    // 10. lang
+    if (/<html\b/.test(line)) {
+      if (!/\blang=/.test(line)) add(1, "missing-lang", file, n, line, "Set lang on <html>");
+      else if (/lang=["']en/.test(line) && hasJa) add(1, "wrong-lang", file, n, line, 'Japanese content with lang="en": set lang="ja"');
+    }
+    // 11. japanese letter spacing
+    if (hasJa && /letter-spacing:\s*-|tracking-tight(er)?/.test(line)) add(2, "ja-negative-tracking", file, n, line, "Japanese text: letter-spacing 0 to 0.02em, never negative");
+    // 12. accent as fill
+    if (/\bbg-accent\b(?!-soft)|background(-color)?:\s*var\(--ds-accent\)\s*;/.test(line)) add(2, "accent-as-fill", file, n, line, "Primary buttons are ink on canvas; accent is for links, focus, selection");
+    // 13. placeholder as label
+    if (/<input\b[^>]*placeholder=/.test(line) && !/aria-label|<label|id=/.test(line)) add(1, "placeholder-as-label", file, n, line, "Add a visible <label> above the input");
+    if (/<(button|a)\b[^>]*>\s*<(svg|[A-Z][A-Za-z]*Icon)\b[^>]*\/?>\s*<\/(button|a)>/.test(line) && !/aria-label/.test(line)) add(1, "icon-button-no-label", file, n, line, "Add aria-label to icon-only buttons");
+  });
+}
+
+// Eyebrow budget: ceil(sections / 3), minimum 1
+if (counts.sections > 0) {
+  const budget = Math.max(1, Math.ceil(counts.sections / 3));
+  if (counts.eyebrows > budget) add(3, "eyebrow-overuse", target, 0, `${counts.eyebrows} uppercase eyebrow labels for ${counts.sections} sections (budget ${budget})`, "Remove eyebrows; let the heading carry the section");
+}
+
+const tokenShare = counts.colorDecls ? Math.round((counts.tokenColorDecls / counts.colorDecls) * 100) : 100;
+findings.sort((a, b) => a.sev - b.sev || a.file.localeCompare(b.file) || a.line - b.line);
+const summary = { files: files.length, findings: findings.length, s1: findings.filter((f) => f.sev === 1).length, s2: findings.filter((f) => f.sev === 2).length, s3: findings.filter((f) => f.sev === 3).length, tokenColorShare: tokenShare, eyebrows: counts.eyebrows, sections: counts.sections };
+
+if (JSON_OUT) {
+  console.log(JSON.stringify({ target, summary, findings }, null, 2));
+} else {
+  console.log(`Static audit of ${target}: ${summary.files} files, ${summary.findings} findings (S1 ${summary.s1}, S2 ${summary.s2}, S3 ${summary.s3}). Token colour share ${tokenShare}% (need 95+). Eyebrows ${counts.eyebrows} / sections ${counts.sections}.\n`);
+  for (const f of findings) console.log(`S${f.sev}  ${f.rule.padEnd(24)} ${f.file}:${f.line}  ${f.text}\n    fix: ${f.fix}`);
+}
+process.exit(summary.s1 ? 1 : 0);
