@@ -46,3 +46,9 @@ Node 22 and pnpm 10.
 `pnpm screenshot` expects Playwright browsers at `/opt/pw-browsers`
 (`PLAYWRIGHT_BROWSERS_PATH`). Pass route paths to limit the run:
 `pnpm screenshot / /components`.
+
+## デプロイ先
+
+- **Vercel**: リポジトリを Vercel に接続し、Root Directory を `web` にします。`vercel.json` がビルド設定と SPA の書き換えを持ち、`VERCEL=1` のときは `base` が `/` になります。
+- **GitHub Pages**: `.github/workflows/deploy-pages.yml` が main への push で配信します。`configure-pages` の `enablement: true` により、初回実行時に Pages を自動で有効化します。`base` は `/Awesome-Design-Systems-Claude/` です。
+- 別のパスで配信するときは `SITE_BASE=/path/ pnpm build` を使います。
