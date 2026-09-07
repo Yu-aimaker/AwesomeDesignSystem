@@ -33,13 +33,7 @@ Node 22 and pnpm 10.
 - `vite.config.ts` sets `base` to `/Awesome-Design-Systems-Claude/` for builds
   and `/` for dev. The router reads `import.meta.env.BASE_URL`.
 - `scripts/postbuild.mjs` copies `index.html` to `404.html` so deep links work
-  on GitHub Pages.
-
-## GitHub Pages
-
-`.github/workflows/deploy-pages.yml` builds on push to `main` and deploys with
-`actions/deploy-pages`. In the repository, set Settings → Pages → Source to
-"GitHub Actions" once.
+  on Vercel.
 
 ## Screenshots
 
@@ -50,5 +44,8 @@ Node 22 and pnpm 10.
 ## デプロイ先
 
 - **Vercel**: リポジトリを Vercel に接続し、Root Directory を `web` にします。`vercel.json` がビルド設定と SPA の書き換えを持ち、`VERCEL=1` のときは `base` が `/` になります。
-- **GitHub Pages**: `.github/workflows/deploy-pages.yml` が main への push で配信します。`configure-pages` の `enablement: true` により、初回実行時に Pages を自動で有効化します。`base` は `/Awesome-Design-Systems-Claude/` です。
 - 別のパスで配信するときは `SITE_BASE=/path/ pnpm build` を使います。
+
+## Deploy
+
+Vercel hosts the site (Root Directory `web`). See `vercel.json` for build settings, the SPA rewrite and the `X-Robots-Tag: noindex` header.
