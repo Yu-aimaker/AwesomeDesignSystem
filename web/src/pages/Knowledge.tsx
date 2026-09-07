@@ -39,7 +39,7 @@ export function Knowledge() {
     <div>
       <PageHeader
         title="ナレッジ"
-        lead={`参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の要約です。${knowledgeCount} 件。各エントリは出典リンクと「AwesomeDS への反映」を持ちます。AwesomeDS 自身の解説もここから読めます。`}
+        lead={`${knowledgeCount} 件の要約。すべて出典と「AwesomeDS への反映」付き。`}
       />
 
       <div className="mb-10 flex flex-col gap-4">

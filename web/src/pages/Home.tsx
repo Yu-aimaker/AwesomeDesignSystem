@@ -1,154 +1,317 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { ArrowRight, Bell, Check } from "lucide-react";
 import { Button } from "../ds/components/Button";
 import { Input } from "../ds/components/Input";
-import { Card, CardDescription, CardTitle } from "../ds/components/Card";
-import { Badge } from "../ds/components/Badge";
 import { Switch } from "../ds/components/Switch";
+import { Badge } from "../ds/components/Badge";
+import { useToast } from "../ds/components/Toast";
+import { KnobsPanel } from "../layout/KnobsPanel";
 import { CodeBlock } from "../layout/Preview";
-import { tokens } from "../lib/tokens";
+import { useKnobs, accents } from "../lib/knobs";
+import { cx } from "../ds/cx";
 
-const light = tokens.color.light;
+function FormSpecimen() {
+  const [notify, setNotify] = useState(true);
+  const toast = useToast();
+  return (
+    <form
+      className="flex h-full flex-col gap-4 p-6"
+      onSubmit={(e) => {
+        e.preventDefault();
+        toast.push({ title: "保存しました", tone: "success" });
+      }}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="t-h4 text-ink">請求先</p>
+          <p className="t-caption text-ink-secondary">毎月 1 日に送ります</p>
+        </div>
+        <Badge tone="success">有効</Badge>
+      </div>
+      <Input label="送付先" type="email" placeholder="billing@example.co.jp" />
+      <Switch label="支払い完了時に通知" checked={notify} onChange={setNotify} />
+      <div className="mt-auto flex flex-wrap gap-2">
+        <Button type="submit">保存</Button>
+        <Button variant="secondary">キャンセル</Button>
+      </div>
+    </form>
+  );
+}
 
-const facts: Array<{ term: string; body: string; to: string }> = [
+function TypeSpecimen() {
+  return (
+    <div className="flex h-full flex-col justify-between p-6">
+      <div className="flex items-baseline justify-between">
+        <span className="t-caption text-ink-muted">Geist + Noto Sans JP</span>
+        <span className="t-mono text-ink-muted">16 / 1.6</span>
+      </div>
+      <div>
+        <p className="t-display-xl text-ink" style={{ fontSize: "clamp(72px, 9vw, 120px)" }}>
+          Aa あ
+        </p>
+        <p className="t-body mt-2 text-ink-secondary">読みやすさは、字面より行間と幅で決まります。</p>
+      </div>
+    </div>
+  );
+}
+
+function PaletteSpecimen() {
+  const { knobs } = useKnobs();
+  const accent = accents.find((a) => a.id === knobs.accent);
+  return (
+    <div className="grid h-full grid-rows-[1fr_auto]">
+      <div className="grid grid-cols-3">
+        <div className="border-r border-hairline bg-canvas" />
+        <div className="bg-primary" />
+        <div className="bg-accent" />
+      </div>
+      <div className="grid grid-cols-3 border-t border-hairline">
+        {["canvas", "ink", accent?.id ?? "accent"].map((n) => (
+          <span key={n} className="t-mono px-3 py-2 text-ink-muted">
+            {n}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MotionSpecimen() {
+  const [done, setDone] = useState(false);
+  return (
+    <div className="flex h-full flex-col items-start justify-between gap-4 p-6">
+      <span className="t-caption text-ink-muted">200ms · ease-out · 4px</span>
+      <button
+        type="button"
+        onClick={() => {
+          setDone(true);
+          window.setTimeout(() => setDone(false), 1600);
+        }}
+        className={cx(
+          "inline-flex h-12 items-center gap-2 rounded-md px-5 text-base font-medium transition-[transform,background-color,color] duration-fast ease-out-ds active:scale-[0.98]",
+          done ? "bg-success-soft text-success" : "bg-primary text-on-primary hover:bg-primary-hover",
+        )}
+      >
+        <span className={cx("grid size-5 place-items-center transition-transform duration-base ease-out-ds", done ? "scale-100" : "scale-0")}>
+          <Check className="size-5" strokeWidth={2.5} aria-hidden />
+        </span>
+        <span className={cx("transition-[margin] duration-base ease-out-ds", done ? "" : "-ml-7")}>{done ? "送信しました" : "送信"}</span>
+      </button>
+    </div>
+  );
+}
+
+function StatsSpecimen() {
+  const rows = [
+    ["月間アクティブ", "12,480", "+4.2%", true],
+    ["解約率", "1.8%", "-0.3pt", true],
+    ["平均応答", "184ms", "+12ms", false],
+  ] as const;
+  return (
+    <ul className="grid h-full grid-rows-3 divide-y divide-hairline">
+      {rows.map(([k, v, d, good]) => (
+        <li key={k} className="flex items-center justify-between gap-4 px-6">
+          <span className="t-body-sm text-ink-secondary">{k}</span>
+          <span className="flex items-baseline gap-3">
+            <span className="t-h3 tabular text-ink">{v}</span>
+            <span className={cx("t-caption tabular", good ? "text-success" : "text-warning")}>{d}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function DarkSpecimen() {
+  return (
+    <div data-theme="dark" className="h-full bg-canvas p-6 text-ink" style={{ colorScheme: "dark" }}>
+      <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface p-4">
+        <div className="flex items-center justify-between">
+          <span className="t-label">通知</span>
+          <Bell className="size-4 text-ink-muted" strokeWidth={1.75} aria-hidden />
+        </div>
+        <p className="t-body-sm text-ink-secondary">面は暗いほど下、明るいほど上。影は使いません。</p>
+        <span className="t-caption text-accent">ダークモードを見る</span>
+      </div>
+    </div>
+  );
+}
+
+const galleries: Array<{ to: string; title: string; caption: string; visual: React.ReactNode }> = [
   {
-    term: "文字",
-    body: `Geist と Noto Sans JP。本文 ${tokens.font.size.base.$value}、行間 ${tokens.font.lineHeight.body.$value}（日本語 ${tokens.font.lineHeight["body-ja"].$value}）。見出しは太さと大きさだけで階層を作ります。`,
-    to: "/foundations/typography",
+    to: "/fonts",
+    title: "フォント",
+    caption: "34 書体。使用数は 261 社から実測",
+    visual: (
+      <div className="grid h-full grid-cols-2 grid-rows-2 place-items-center p-5 text-ink" aria-hidden>
+        <span className="text-4xl font-semibold" style={{ fontFamily: '"Geist Variable", sans-serif' }}>Ag</span>
+        <span className="text-4xl font-semibold" style={{ fontFamily: '"Inter Variable", sans-serif' }}>Ag</span>
+        <span className="text-4xl font-semibold" style={{ fontFamily: '"Manrope Variable", sans-serif' }}>Ag</span>
+        <span className="text-4xl font-semibold" style={{ fontFamily: '"Source Serif 4 Variable", serif' }}>Ag</span>
+      </div>
+    ),
   },
   {
-    term: "色",
-    body: `白地 ${light.canvas.$value}、黒 ${light.ink.$value}。アクセント ${light.accent.$value} はリンク、フォーカス、選択にだけ使い、主ボタンは黒地に白文字です。`,
-    to: "/foundations/color",
+    to: "/palettes",
+    title: "パレット",
+    caption: "261 社の実測配色。クリックで試着",
+    visual: (
+      <div className="grid h-full grid-cols-6 gap-1.5 p-5" aria-hidden>
+        {["#5e6ad2", "#0070f3", "#635bff", "#096fc8", "#1a7f37", "#c81e1e", "#0a0a0a", "#ff7669", "#f5a623", "#2f5bea", "#00a8e1", "#e11d48"].map((c) => (
+          <span key={c} className="aspect-square rounded-sm" style={{ background: c }} />
+        ))}
+      </div>
+    ),
   },
   {
-    term: "余白と形",
-    body: `4px 単位。角丸は操作部品 ${tokens.radius.md.$value}、カード ${tokens.radius.lg.$value}、ダイアログ ${tokens.radius.xl.$value}。区切りは 1px の線で、影は浮いているものにだけ使います。`,
-    to: "/foundations/spacing",
+    to: "/components",
+    title: "コンポーネント",
+    caption: "48 の部品。props を触って確かめる",
+    visual: (
+      <div className="flex h-full flex-col justify-center gap-3 p-5" aria-hidden>
+        <div className="flex gap-2">
+          <span className="h-8 rounded-md bg-primary px-3 text-sm leading-8 text-on-primary">保存</span>
+          <span className="h-8 rounded-md border border-hairline-strong px-3 text-sm leading-8 text-ink">戻る</span>
+        </div>
+        <span className="h-8 rounded-md border border-hairline-strong bg-surface" />
+        <div className="flex gap-2">
+          <span className="h-5 w-9 rounded-full bg-primary" />
+          <span className="size-5 rounded-xs border-2 border-ink" />
+          <span className="size-5 rounded-full border-2 border-ink" />
+        </div>
+      </div>
+    ),
   },
   {
-    term: "動き",
-    body: `${tokens.duration.fast.$value} から ${tokens.duration.base.$value}、cubic-bezier(${tokens.easing.out.$value.join(", ")})。移動は 4 から 8px。ユーザーの操作への応答にだけ動かします。`,
-    to: "/foundations/motion",
+    to: "/motion",
+    title: "モーション",
+    caption: "35 デモ。Motion、GSAP、three.js、Lottie",
+    visual: (
+      <div className="flex h-full items-center justify-center gap-3 p-5" aria-hidden>
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className="size-10 rounded-lg bg-ink motion-safe:animate-[home-bob_1.8s_var(--ds-ease-in-out-ds)_infinite]"
+            style={{ animationDelay: `${i * 160}ms`, opacity: 1 - i * 0.3 }}
+          />
+        ))}
+        <style>{`@keyframes home-bob { 0%,100% { transform: translateY(6px) } 50% { transform: translateY(-6px) } }`}</style>
+      </div>
+    ),
+  },
+  {
+    to: "/stack",
+    title: "スタック",
+    caption: "23 層。採用 1 つと代替の「いつ」",
+    visual: (
+      <div className="flex h-full flex-col justify-center gap-1.5 p-5" aria-hidden>
+        {[92, 76, 60, 44, 30].map((w) => (
+          <span key={w} className="h-3 rounded-xs bg-ink" style={{ width: `${w}%`, opacity: w / 100 }} />
+        ))}
+      </div>
+    ),
+  },
+  {
+    to: "/rankings",
+    title: "ランキング",
+    caption: "109 の OSS をスターで。毎週更新",
+    visual: (
+      <div className="t-mono flex h-full flex-col justify-center gap-2 p-5" aria-hidden>
+        {[["shadcn/ui", 95], ["motion", 70], ["three.js", 100]].map(([n, w]) => (
+          <div key={n as string} className="flex items-center gap-2">
+            <span className="w-16 truncate text-ink-muted">{n}</span>
+            <span className="h-2 rounded-xs bg-accent" style={{ width: `${w}%` }} />
+          </div>
+        ))}
+      </div>
+    ),
   },
 ];
 
-const cheatSheet: Array<[string, string]> = [
-  ["canvas / ink", `${light.canvas.$value} / ${light.ink.$value}`],
-  ["secondary / muted", `${light["ink-secondary"].$value} / ${light["ink-muted"].$value}`],
-  ["accent", `${light.accent.$value}`],
-  ["hairline / input", `${light.hairline.$value} / ${light["hairline-strong"].$value}`],
-  ["sans / mono", "Geist + Noto Sans JP / Geist Mono"],
-  ["body", `${tokens.font.size.base.$value} / ${tokens.font.lineHeight.body.$value}（ja ${tokens.font.lineHeight["body-ja"].$value}）`],
-  ["space", "4 8 12 16 24 32 48 64 96"],
-  ["radius", `${tokens.radius.md.$value} / ${tokens.radius.lg.$value} / ${tokens.radius.xl.$value}`],
-  ["motion", `${tokens.duration.base.$value} cubic-bezier(${tokens.easing.out.$value.join(", ")})`],
-];
+const cell = "overflow-hidden rounded-lg border border-hairline bg-surface";
 
 export function Home() {
-  const [notify, setNotify] = useState(true);
   return (
-    <div>
-      <section className="max-w-[65ch]">
-        <h1 className="t-h1 text-ink">AwesomeDS</h1>
-        <p className="t-body-lg mt-4 text-ink-secondary">
-          ブランドをまだ持たないプロダクトが、そのまま使えるデザインシステムです。白地に黒文字、アクセント 1
-          色、Geist と Noto Sans JP、4px の余白単位。値にはすべて理由と出典があります。
-        </p>
-        <p className="t-body mt-4 text-ink-secondary">
-          Claude Code や Cursor が UI を書くときの既定値として使うために作りました。このサイト自身も同じトークンだけで組んでいます。
-        </p>
+    <div className="flex flex-col gap-24 lg:gap-32">
+      <section aria-labelledby="hero" className="flex flex-col gap-10">
+        <div>
+          <h1 id="hero" className="t-display-xl text-ink">
+            AwesomeDS
+          </h1>
+          <p className="t-body-lg mt-4 max-w-[48ch] text-ink-secondary">白地、黒文字、アクセント 1 色。AI が書く UI の既定値。</p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-canvas-soft p-5 sm:p-6">
+          <p className="t-label mb-4 text-ink">触って変える。サイト全体が追従します。</p>
+          <KnobsPanel layout="bar" />
+        </div>
       </section>
 
-      <section aria-labelledby="specimen-title" className="mt-16">
-        <h2 id="specimen-title" className="t-h2 text-ink">
+      <section aria-labelledby="specimens" className="flex flex-col gap-6">
+        <h2 id="specimens" className="t-h2 text-ink">
           実物
         </h2>
-        <p className="t-body mt-3 max-w-[65ch] text-ink-secondary">
-          下のフォームは飾りではなく、実際に動くコンポーネントです。右上のテーマ切替でライトとダークを行き来し、余白、角丸、フォーカスリング、ボタンの状態を確かめてください。
-        </p>
-        <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <Card>
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <CardTitle>請求先の設定</CardTitle>
-                <CardDescription>毎月 1 日に登録メールへ請求書を送ります。</CardDescription>
-              </div>
-              <Badge tone="success">有効</Badge>
-            </div>
-            <form className="mt-6 flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-              <Input label="請求書の送付先" type="email" placeholder="billing@example.co.jp" helper="複数の宛先はカンマで区切ります。" />
-              <Switch label="支払い完了時に通知する" checked={notify} onChange={setNotify} />
-              <div className="flex flex-wrap gap-2 pt-2">
-                <Button type="submit">保存</Button>
-                <Button variant="secondary">キャンセル</Button>
-                <Button variant="ghost">請求履歴を見る</Button>
-              </div>
-            </form>
-          </Card>
-          <div className="rounded-lg border border-hairline bg-canvas-soft p-6">
-            <h3 className="t-h4 text-ink">早見表</h3>
-            <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2">
-              {cheatSheet.map(([k, v]) => (
-                <div key={k} className="contents">
-                  <dt className="t-mono text-ink-muted">{k}</dt>
-                  <dd className="t-mono text-ink">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="t-caption mt-4 text-ink-muted">
-              出典: <code>AwesomeDS/tokens/tokens.json</code>
-            </p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-[minmax(280px,auto)_minmax(200px,auto)]">
+          <div className={cx(cell, "md:col-span-3")}>
+            <FormSpecimen />
+          </div>
+          <div className={cx(cell, "md:col-span-3")}>
+            <TypeSpecimen />
+          </div>
+          <div className={cx(cell, "md:col-span-2")}>
+            <PaletteSpecimen />
+          </div>
+          <div className={cx(cell, "md:col-span-2")}>
+            <MotionSpecimen />
+          </div>
+          <div className={cx(cell, "md:col-span-2")}>
+            <DarkSpecimen />
+          </div>
+          <div className={cx(cell, "md:col-span-6 lg:col-span-6")}>
+            <StatsSpecimen />
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="facts-title" className="mt-16 max-w-[65ch]">
-        <h2 id="facts-title" className="t-h2 text-ink">
-          要点
+      <section aria-labelledby="galleries" className="flex flex-col gap-6">
+        <h2 id="galleries" className="t-h2 text-ink">
+          ギャラリー
         </h2>
-        <dl className="mt-6 divide-y divide-hairline border-y border-hairline">
-          {facts.map((f) => (
-            <div key={f.term} className="grid gap-1 py-5 sm:grid-cols-[7rem_1fr] sm:gap-6">
-              <dt className="t-label text-ink">
-                <Link to={f.to} className="text-ink no-underline hover:underline">
-                  {f.term}
-                </Link>
-              </dt>
-              <dd className="t-body-sm text-ink-secondary">{f.body}</dd>
-            </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {galleries.map((g) => (
+            <Link
+              key={g.to}
+              to={g.to}
+              className="group flex h-64 flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2"
+            >
+              <div className="relative min-h-0 flex-1 bg-canvas-soft">
+                <div className="absolute inset-0">{g.visual}</div>
+              </div>
+              <div className="flex items-center justify-between gap-3 border-t border-hairline px-5 py-4">
+                <div className="min-w-0">
+                  <p className="t-h4">{g.title}</p>
+                  <p className="t-caption truncate text-ink-secondary">{g.caption}</p>
+                </div>
+                <ArrowRight className="size-4 shrink-0 text-ink-muted transition-transform duration-fast ease-out-ds group-hover:translate-x-1" strokeWidth={1.75} aria-hidden />
+              </div>
+            </Link>
           ))}
-        </dl>
+        </div>
       </section>
 
-      <section aria-labelledby="install-title" className="mt-16 max-w-[65ch]">
-        <h2 id="install-title" className="t-h2 text-ink">
-          使い方
-        </h2>
-        <ol className="mt-6 flex flex-col gap-8">
-          <li>
-            <h3 className="t-h4 text-ink">1. Claude Code に入れる</h3>
-            <p className="t-body-sm mt-2 text-ink-secondary">
-              マーケットプレイスを追加してプラグインを入れると、UI を書く指示のたびにこのシステムの値と規則が参照されます。ブランド専用の
-              DS を作る、デザインを検証する、UX を設計するスキルも同じプラグインに入っています。
-            </p>
-            <CodeBlock className="mt-3" code={"/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude\n/plugin install awesome-ds@awesome-design-systems"} />
-          </li>
-          <li>
-            <h3 className="t-h4 text-ink">2. プラグインなしで使う</h3>
-            <p className="t-body-sm mt-2 text-ink-secondary">
-              <code>AwesomeDS/DESIGN.md</code> をプロジェクトの直下に置き、<code>tokens/tokens.css</code>{" "}
-              を読み込みます。Tailwind v4 なら <code>tokens/tailwind.css</code> も読み込むと <code>bg-canvas</code> や{" "}
-              <code>text-ink</code> のようなクラスが使えます。
-            </p>
-            <CodeBlock className="mt-3" code={'@import "tailwindcss";\n@import "./AwesomeDS/tokens/tokens.css";\n@import "./AwesomeDS/tokens/tailwind.css";'} />
-          </li>
-        </ol>
-        <p className="t-body-sm mt-8 text-ink-secondary">
-          スキルの一覧と更新の流れは <Link to="/about">このサイトについて</Link> にあります。部品は{" "}
-          <Link to="/components">コンポーネント</Link>、動きのライブラリは <Link to="/animation">アニメーション</Link>
-          、根拠は <Link to="/knowledge">ナレッジ</Link> を見てください。
-        </p>
+      <section aria-labelledby="install" className="grid gap-6 lg:grid-cols-2">
+        <div className="min-w-0">
+          <h2 id="install" className="t-h2 text-ink">
+            使う
+          </h2>
+          <p className="t-body mt-3 text-ink-secondary">Claude Code に入れると、UI を書くたびにこの規則が参照されます。</p>
+          <CodeBlock className="mt-4" code={"/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude\n/plugin install awesome-ds@awesome-design-systems"} />
+        </div>
+        <div className="min-w-0">
+          <p className="t-h4 text-ink lg:mt-12">プラグインなしで</p>
+          <p className="t-body mt-3 text-ink-secondary">DESIGN.md を置いて、トークンを読み込むだけ。</p>
+          <CodeBlock className="mt-4" code={'@import "tailwindcss";\n@import "./AwesomeDS/tokens/tokens.css";\n@import "./AwesomeDS/tokens/tailwind.css";'} />
+        </div>
       </section>
     </div>
   );

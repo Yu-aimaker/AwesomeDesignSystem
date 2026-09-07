@@ -13,6 +13,14 @@
       try {
         var t = localStorage.getItem("ds-theme");
         if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+        var k = JSON.parse(localStorage.getItem("ds-knobs") || "{}");
+        var d = { accent: "blue", radius: "soft", font: "geist", density: "comfortable" };
+        for (var key in d) if (k[key] && k[key] !== d[key]) document.documentElement.setAttribute("data-" + key, k[key]);
+        var hex = /^#[0-9a-f]{6}$/i;
+        if (k.accent === "custom" && k.custom && hex.test(k.custom.light) && hex.test(k.custom.dark)) {
+          document.documentElement.style.setProperty("--ds-custom-accent-light", k.custom.light);
+          document.documentElement.style.setProperty("--ds-custom-accent-dark", k.custom.dark);
+        } else if (k.accent === "custom") document.documentElement.removeAttribute("data-accent");
       } catch (e) {}
     </script>
   </head>

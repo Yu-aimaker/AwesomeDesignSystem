@@ -3,7 +3,8 @@
      @import "tailwindcss";
      @import "./path/to/AwesomeDS/tokens/tokens.css";
      @import "./path/to/AwesomeDS/tokens/tailwind.css";
-   Then use classes like bg-canvas text-ink border-hairline rounded-md duration-base ease-out-ds. */
+   Then use classes like bg-canvas text-ink border-hairline rounded-md duration-base ease-out-ds,
+     fill-chart-1, h-control-md, z-dialog, font-display. */
 
 @theme inline {
   --color-canvas: var(--ds-canvas);
@@ -31,8 +32,27 @@
   --color-danger: var(--ds-danger);
   --color-danger-soft: var(--ds-danger-soft);
 
+  --color-chart-1: var(--ds-chart-1);
+  --color-chart-2: var(--ds-chart-2);
+  --color-chart-3: var(--ds-chart-3);
+  --color-chart-4: var(--ds-chart-4);
+  --color-chart-5: var(--ds-chart-5);
+  --color-chart-6: var(--ds-chart-6);
+  --color-chart-7: var(--ds-chart-7);
+  --color-chart-8: var(--ds-chart-8);
+  --color-chart-grid: var(--ds-chart-grid);
+
   --font-sans: var(--ds-font-sans);
   --font-mono: var(--ds-font-mono);
+  --font-display: var(--ds-font-display);
+
+  /* h-control-md, h-row, px-pad-inline, py-pad-block follow density (data-density="compact") */
+  --spacing-control-sm: var(--ds-control-sm);
+  --spacing-control-md: var(--ds-control-md);
+  --spacing-control-lg: var(--ds-control-lg);
+  --spacing-row: var(--ds-row);
+  --spacing-pad-inline: var(--ds-pad-inline);
+  --spacing-pad-block: var(--ds-pad-block);
 
   --text-xs: 12px;
   --text-xs--line-height: 1.5;
@@ -67,3 +87,14 @@
 
   --container-ds: 1200px;
 }
+
+/* Layers: z-index is not a @theme namespace in Tailwind v4, so the scale ships as utilities.
+   Use z-dialog, z-toast and so on; never a bare z-50. See foundations/layers.md. */
+@utility z-base { z-index: var(--ds-z-base); }
+@utility z-raised { z-index: var(--ds-z-raised); }
+@utility z-sticky { z-index: var(--ds-z-sticky); }
+@utility z-overlay { z-index: var(--ds-z-overlay); }
+@utility z-dropdown { z-index: var(--ds-z-dropdown); }
+@utility z-dialog { z-index: var(--ds-z-dialog); }
+@utility z-toast { z-index: var(--ds-z-toast); }
+@utility z-tooltip { z-index: var(--ds-z-tooltip); }

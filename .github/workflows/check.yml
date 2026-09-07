@@ -17,8 +17,12 @@ jobs:
         run: |
           node scripts/build-reference.mjs
           git diff --exit-code -- Reference/REFERENCE.md Knowledge/README.md
+      - name: Knowledge entries pass validation
+        run: node scripts/validate-knowledge.mjs
       - name: Plugin DS copy is in sync with AwesomeDS
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
+      - name: Data files are valid
+        run: node scripts/validate-data.mjs
       - name: Plugin manifests are valid JSON
         run: |
           node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json','utf8'))"
@@ -40,4 +44,12 @@ jobs:
           cache: pnpm
           cache-dependency-path: web/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
+      - name: Sync tokens and data, then type-check
+        run: |
+          node scripts/sync-tokens.mjs
+          pnpm exec tsc --noEmit -p .
       - run: pnpm build
+      - name: Install Chromium for the smoke test
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Every route renders without console errors or horizontal overflow
+        run: node scripts/screenshot.mjs --check

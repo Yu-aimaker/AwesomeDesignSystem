@@ -6,3 +6,4 @@ dist/
 .env
 .env.*
 web/src/ds/tokens/
+web/src/ds/data/

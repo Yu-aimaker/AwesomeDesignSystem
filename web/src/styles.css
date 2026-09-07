@@ -5,6 +5,7 @@
    detection skipped the whole ds folder with it. Register sources explicitly. */
 @source "./ds/components";
 @source "./ds/cx.ts";
+@source "./ds/registry.tsx";
 @source "./demos";
 @source "./layout";
 @source "./pages";
@@ -36,6 +37,14 @@
 @import "@fontsource-variable/geist/index.css";
 @import "@fontsource-variable/geist-mono/index.css";
 @import "@fontsource-variable/noto-sans-jp/index.css";
+/* Alternate pairings for the font knob (loaded on demand by unicode-range). */
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource-variable/manrope/index.css";
+@import "@fontsource-variable/source-serif-4/index.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "./knobs.css";
 
 :root {
   --ds-font-sans: "Geist Variable", "Noto Sans JP Variable", "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
@@ -89,6 +98,7 @@
 }
 
 /* Type roles. Keep these in step with tokens.json and DESIGN.md §3. */
+.t-display-xl { font-size: clamp(56px, 11vw, 152px); font-weight: var(--ds-weight-semibold); line-height: 0.95; letter-spacing: -0.045em; }
 .t-display { font-size: var(--ds-text-4xl); font-weight: var(--ds-weight-semibold); line-height: var(--ds-leading-tight); letter-spacing: var(--ds-tracking-display); }
 .t-h1 { font-size: var(--ds-text-3xl); font-weight: var(--ds-weight-semibold); line-height: var(--ds-leading-heading); letter-spacing: var(--ds-tracking-display); }
 .t-h2 { font-size: var(--ds-text-2xl); font-weight: var(--ds-weight-semibold); line-height: 1.25; letter-spacing: var(--ds-tracking-heading); }
@@ -159,3 +169,8 @@ dialog.sheet[open] { opacity: 1; transform: none; }
 
 /* Reduced-motion demo scope: a toggle on the motion page mirrors the OS setting. */
 [data-reduced-motion="true"] * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+
+/* Command palette dialog: drops in from 8px above, sits near the top. */
+dialog.palette { margin-top: 12vh; opacity: 0; transform: translateY(-8px); transition: opacity var(--ds-duration-fast) var(--ds-ease-out), transform var(--ds-duration-fast) var(--ds-ease-out), overlay var(--ds-duration-fast) allow-discrete, display var(--ds-duration-fast) allow-discrete; }
+dialog.palette[open] { opacity: 1; transform: none; }
+@starting-style { dialog.palette[open] { opacity: 0; transform: translateY(-8px); } }

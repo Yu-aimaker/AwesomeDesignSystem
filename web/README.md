@@ -11,6 +11,7 @@ pnpm dev          # copies tokens, starts Vite at http://localhost:5173
 pnpm build        # tsc --noEmit, vite build, writes dist/404.html
 pnpm preview      # serves dist/ under /Awesome-Design-Systems-Claude/
 pnpm screenshot   # Playwright: every route at 390 and 1280, light and dark -> .screenshots/
+node scripts/screenshot.mjs --check   # same routes, no PNGs, exit 1 on console errors or overflow (CI)
 pnpm typecheck
 ```
 
@@ -18,9 +19,13 @@ Node 22 and pnpm 10.
 
 ## How it is wired
 
-- `scripts/sync-tokens.mjs` copies `../AwesomeDS/tokens/{tokens.css,tailwind.css,tokens.json}`
-  into `src/ds/tokens/` before `dev` and `build`. The copy is gitignored; the
-  source of truth stays in `AwesomeDS/`.
+- `scripts/sync-tokens.mjs` copies `../AwesomeDS/tokens/*.{css,json}` into `src/ds/tokens/`
+  and `../AwesomeDS/data/*.json` into `src/ds/data/` before `dev` and `build`. Both copies
+  are gitignored; the source of truth stays in `AwesomeDS/`. `src/lib/data.ts` types them.
+- `src/ds/registry.tsx` (48 components) and `src/demos/registry.tsx` (35 motion demos) drive
+  the /components and /motion pages and the ⌘K search. Add an entry there, not a page.
+- Site knobs (`data-accent`, `data-radius`, `data-font`, `data-density` on `<html>`) live in
+  `src/lib/knobs.tsx` and `src/knobs.css`; `/palettes` can set any hex as a custom accent.
 - `src/styles.css` imports Tailwind v4, resets its default palette, then imports
   the token files. Only AwesomeDS roles exist as utilities (`bg-canvas`,
   `text-ink`, `border-hairline`, `rounded-md`, `shadow-2`, `ease-out-ds`,
@@ -30,8 +35,7 @@ Node 22 and pnpm 10.
 - `src/lib/knowledge.ts` loads `Knowledge/**/*.md` and `AwesomeDS/foundations/*.md`
   with `import.meta.glob` and parses the frontmatter (`title`, `category`,
   `type`, `sources[{url,title}]`, `tags[]`, `updated`).
-- `vite.config.ts` sets `base` to `/Awesome-Design-Systems-Claude/` for builds
-  and `/` for dev. The router reads `import.meta.env.BASE_URL`.
+- `vite.config.ts` uses `base` `/` (override with `SITE_BASE`). The router reads `import.meta.env.BASE_URL`.
 - `scripts/postbuild.mjs` copies `index.html` to `404.html` so deep links work
   on Vercel.
 
