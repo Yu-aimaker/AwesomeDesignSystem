@@ -1,13 +1,11 @@
 name: Deploy web to GitHub Pages
 
+# GitHub Pages is optional. The GITHUB_TOKEN cannot enable Pages on its own
+# ("Resource not accessible by integration"), so this workflow runs only when
+# started by hand after Pages is turned on in Settings -> Pages -> Source:
+# GitHub Actions. The primary deploy target is Vercel (see web/vercel.json).
+
 on:
-  push:
-    branches: [main]
-    paths:
-      - "web/**"
-      - "AwesomeDS/**"
-      - "Knowledge/**"
-      - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
 permissions:
@@ -39,8 +37,6 @@ jobs:
         run: pnpm build
         working-directory: web
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
