@@ -44,7 +44,10 @@ jobs:
           cache: pnpm
           cache-dependency-path: web/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
-      - run: pnpm exec tsc --noEmit -p .
+      - name: Sync tokens and data, then type-check
+        run: |
+          node scripts/sync-tokens.mjs
+          pnpm exec tsc --noEmit -p .
       - run: pnpm build
       - name: Install Chromium for the smoke test
         run: pnpm exec playwright install --with-deps chromium
