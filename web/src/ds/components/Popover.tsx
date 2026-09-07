@@ -5,11 +5,13 @@ export interface PopoverProps {
   trigger: (props: { onClick: () => void; "aria-expanded": boolean; "aria-controls": string }) => ReactNode;
   children: ReactNode;
   className?: string;
+  /** Which edge of the trigger the panel aligns to. */
+  align?: "start" | "end";
 }
 
 // Level 2: hairline plus the popover shadow. Opens below the trigger, moves 4px.
 // Closes on Escape and on click outside. Focus is not trapped (this is not a dialog).
-export function Popover({ trigger, children, className }: PopoverProps) {
+export function Popover({ trigger, children, className, align = "start" }: PopoverProps) {
   const [open, setOpen] = useState(false);
   const id = useId();
   const root = useRef<HTMLDivElement>(null);
@@ -36,7 +38,8 @@ export function Popover({ trigger, children, className }: PopoverProps) {
           id={id}
           role="dialog"
           className={cx(
-            "absolute top-full left-0 z-10 mt-2 min-w-56 rounded-lg border border-hairline bg-surface p-4 text-ink shadow-2",
+            "absolute top-full z-10 mt-2 min-w-56 rounded-lg border border-hairline bg-surface p-4 text-ink shadow-2",
+            align === "end" ? "right-0" : "left-0",
             "animate-[popover-in_var(--ds-duration-fast)_var(--ds-ease-out)]",
             className,
           )}

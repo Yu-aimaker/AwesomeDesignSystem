@@ -1,8 +1,16 @@
 name: Weekly design research
 
-# Opens one issue every Monday with the research checklist. The issue is the
-# entry point for the knowledge-curator skill (Plugin/awesome-ds/skills/knowledge-curator).
-# Run it with Claude Code: `/awesome-ds:knowledge-curator #<issue number>`.
+# Two independent ways to run the weekly research routine:
+#
+# 1. open-issue: always runs. Opens an issue every Monday with the research
+#    checklist. A human (or an interactive Claude Code session) picks it up
+#    with: `/awesome-ds:knowledge-curator #<issue number>`.
+# 2. research: only runs when the ANTHROPIC_API_KEY repository secret is set.
+#    Runs the knowledge-curator skill unattended via anthropics/claude-code-action
+#    and opens a PR directly, no issue or human trigger required. Skipped
+#    cleanly (not failed) when the secret is absent, so forks and repos that
+#    have not opted in are unaffected. See .github/weekly-research-template.md
+#    for how to enable it.
 
 on:
   schedule:
@@ -32,3 +40,36 @@ jobs:
               labels: ['research'],
             });
             core.info(`Opened #${data.number}`);
+
+  research:
+    runs-on: ubuntu-latest
+    # `if: ${{ secrets.ANTHROPIC_API_KEY != '' }}` is not valid at the job
+    # level (the secrets context is not available there before the job's own
+    # env/steps evaluate). Route the check through env instead: env values
+    # are computed first, and job-level `if:` can read them back as strings.
+    env:
+      HAS_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+    if: ${{ env.HAS_KEY == 'true' }}
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Run the knowledge-curator skill for this week: refresh rankings,
+            add entries for notable new releases, regenerate Reference, open
+            a PR
+          claude_args: |
+            --allowedTools "Read,Grep,Glob,WebFetch,WebSearch,Bash(node:*),Bash(git:*),Bash(gh:*)"

@@ -55,12 +55,17 @@ export function SourceList({ sources, title = "ソース" }: { sources: SourceLi
   );
 }
 
+/** Rationale folded by default: the page shows the rule, the repository holds the essay. */
 export function Why({ children }: { children: ReactNode }) {
   return (
-    <section aria-label="理由" className="mt-8 max-w-[65ch]">
-      <h3 className="t-h3 text-ink">なぜこうするのか</h3>
-      <div className="prose mt-4 text-ink">{children}</div>
-    </section>
+    <details className="group mt-8 max-w-[65ch] rounded-lg border border-hairline bg-canvas-soft open:bg-surface">
+      <summary className="t-label flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 text-ink [&::-webkit-details-marker]:hidden">
+        なぜこうするのか
+        <span aria-hidden className="t-caption text-ink-muted group-open:hidden">開く</span>
+        <span aria-hidden className="t-caption hidden text-ink-muted group-open:inline">閉じる</span>
+      </summary>
+      <div className="prose border-t border-hairline px-5 py-4 text-ink">{children}</div>
+    </details>
   );
 }
 

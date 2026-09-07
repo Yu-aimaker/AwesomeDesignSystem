@@ -1,4 +1,4 @@
-/* AwesomeDS tokens v0.1.0
+/* AwesomeDS tokens v0.2.0
    Source of truth: AwesomeDS/DESIGN.md. Import once at the app root.
    Light is the default. Dark applies via [data-theme="dark"] or the OS setting. */
 
@@ -37,6 +37,7 @@
   /* Typography */
   --ds-font-sans: "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
   --ds-font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ds-font-display: var(--ds-font-sans); /* headings; font-pairings.css may set a serif here */
   --ds-text-xs: 12px;
   --ds-text-sm: 14px;
   --ds-text-base: 16px;
@@ -99,12 +100,45 @@
   --ds-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
   --ds-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 
-  /* Component sizes */
+  /* Component sizes and density (comfortable default; see foundations/density.md) */
   --ds-control-sm: 32px;
   --ds-control-md: 40px;
   --ds-control-lg: 48px;
+  --ds-row: 44px;          /* table row, list item, menu row */
+  --ds-pad-inline: 16px;   /* horizontal padding of md controls and cells */
+  --ds-pad-block: 12px;    /* vertical padding of cells and list rows */
   --ds-focus-width: 2px;
   --ds-focus-offset: 2px;
+
+  /* Layers (see foundations/layers.md) */
+  --ds-z-base: 0;
+  --ds-z-raised: 10;
+  --ds-z-sticky: 20;
+  --ds-z-overlay: 30;
+  --ds-z-dropdown: 40;
+  --ds-z-dialog: 50;
+  --ds-z-toast: 60;
+  --ds-z-tooltip: 70;
+
+  /* Chart palette, light (see foundations/data-visualization.md) */
+  --ds-chart-1: #356ddc;
+  --ds-chart-2: #b65403;
+  --ds-chart-3: #057a6b;
+  --ds-chart-4: #ca2356;
+  --ds-chart-5: #7544a3;
+  --ds-chart-6: #0e5a1a;
+  --ds-chart-7: #ac8206;
+  --ds-chart-8: #7d8390;
+  --ds-chart-grid: #e5e5e5;
+}
+
+[data-density="compact"] {
+  --ds-control-sm: 28px;
+  --ds-control-md: 32px;
+  --ds-control-lg: 40px;
+  --ds-row: 36px;
+  --ds-pad-inline: 12px;
+  --ds-pad-block: 8px;
 }
 
 [data-theme="dark"] {
@@ -138,6 +172,15 @@
   --ds-shadow-color: 0 0 0;
   --ds-shadow-2: 0 0 0 1px var(--ds-hairline-strong);
   --ds-shadow-3: 0 0 0 1px var(--ds-hairline-strong), 0 24px 64px -16px rgb(0 0 0 / 0.6);
+  --ds-chart-1: #689cfe;
+  --ds-chart-2: #f67f2f;
+  --ds-chart-3: #59ceba;
+  --ds-chart-4: #ee5377;
+  --ds-chart-5: #d1a9ff;
+  --ds-chart-6: #8eeb92;
+  --ds-chart-7: #e4b750;
+  --ds-chart-8: #8c939f;
+  --ds-chart-grid: #262626;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -172,6 +215,15 @@
     --ds-shadow-color: 0 0 0;
     --ds-shadow-2: 0 0 0 1px var(--ds-hairline-strong);
     --ds-shadow-3: 0 0 0 1px var(--ds-hairline-strong), 0 24px 64px -16px rgb(0 0 0 / 0.6);
+    --ds-chart-1: #689cfe;
+    --ds-chart-2: #f67f2f;
+    --ds-chart-3: #59ceba;
+    --ds-chart-4: #ee5377;
+    --ds-chart-5: #d1a9ff;
+    --ds-chart-6: #8eeb92;
+    --ds-chart-7: #e4b750;
+    --ds-chart-8: #8c939f;
+    --ds-chart-grid: #262626;
   }
 }
 
@@ -185,6 +237,21 @@ html {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-feature-settings: "kern" 1;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--ds-font-display);
+}
+
+/* Photographs and video are dimmed in dark mode so white backgrounds do not glow.
+   Opt out with data-no-dim on logos, charts and screenshots. See foundations/dark-mode.md. */
+[data-theme="dark"] :is(img, video):not([data-no-dim]) {
+  filter: brightness(0.88);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) :is(img, video):not([data-no-dim]) {
+    filter: brightness(0.88);
+  }
 }
 
 :lang(ja) {

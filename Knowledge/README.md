@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 54
+件数: 63
 
 ## accessibility
 
@@ -22,6 +22,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [GSAP and ScrollTrigger](animation/gsap.md) | library | gsap, scrolltrigger, pin, scrub, webflow, free, scrolltelling | 2026-09-06 |
 | [Lottie and dotLottie](animation/lottie-and-dotlottie.md) | library | lottie, dotlottie, illustration, after-effects, bodymovin, wasm, thorvg | 2026-09-06 |
 | [Motion (motion/react)](animation/motion.md) | library | motion, framer-motion, spring, layout, animatepresence, usescroll, usemotionvalue | 2026-09-06 |
+| [Motion Primitives と Animata](animation/motion-primitives-and-animata.md) | library | motion-primitives, animata, motion, framer-motion, tailwindcss, copy-paste, shadcn-style | 2026-09-07 |
 | [Rive state machines](animation/rive.md) | product | rive, state-machine, inputs, data-binding, interactive, wasm, react | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
 
@@ -37,7 +38,8 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [assistant-ui](component-libraries/assistant-ui.md) | library | assistant-ui, chat, primitives, shadcn, registry, thread, composer, gallery | 2026-09-06 |
+| [AI Elements (Vercel)](component-libraries/vercel-ai-elements.md) | library | ai-elements, vercel, shadcn, ai-sdk, chat, registry, agent-skill | 2026-09-07 |
+| [assistant-ui](component-libraries/assistant-ui.md) | library | assistant-ui, chat, primitives, shadcn, registry, thread, composer, gallery | 2026-09-07 |
 | [Base UI (@base-ui/react)](component-libraries/base-ui.md) | library | base-ui, mui, unstyled, render-prop, shadcn, accessibility, headless | 2026-09-06 |
 | [Magic UI and Aceternity UI](component-libraries/magic-ui-and-aceternity.md) | library | magic-ui, aceternity, animation, marketing, shadcn-registry, motion, optional | 2026-09-06 |
 | [Radix Primitives and Radix Colors](component-libraries/radix-primitives-and-colors.md) | library | radix, primitives, accessibility, wai-aria, colors, 12-step-scale, aschild | 2026-09-06 |
@@ -48,6 +50,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
+| [2026 年の DESIGN.md エコシステム](design-md-collections/claude-design-and-design-md-ecosystem.md) | article | design-md, stitch, claude-design, ecosystem, frontmatter, agent-skills | 2026-09-07 |
 | [awesome-design-md-jp](design-md-collections/awesome-design-md-jp.md) | repo | design-md, japanese, typography, noto-sans-jp, yu-gothic, hiragino, collection | 2026-09-06 |
 | [Google Stitch DESIGN.md spec](design-md-collections/google-stitch-design-md.md) | guideline | design-md, stitch, specification, frontmatter, tokens, google-labs | 2026-09-06 |
 | [VoltAgent awesome-design-md](design-md-collections/voltagent-awesome-design-md.md) | repo | design-md, stitch, tokens, collection, voltagent, frontmatter | 2026-09-06 |
@@ -87,14 +90,25 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [WCAG 2.2 (UI に関わる達成基準)](platform-guidelines/wcag-2-2.md) | guideline | wcag, accessibility, contrast, focus, target-size, motion, apca | 2026-09-06 |
 | [デジタル庁デザインシステム (DADS)](platform-guidelines/digital-agency-japan-design-system.md) | design-system | japan, government, design-system, accessibility, tokens, noto-sans-jp, figma | 2026-09-06 |
 
+## research
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-09-07 |
+
 ## skills
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
 | [@neropursue X post (2089263766428950683)](skills/neropursue-x-post.md) | article | x-post, unretrievable, frontend-design, skills, reference | 2026-09-06 |
 | [Anthropic frontend-design skill](skills/anthropic-frontend-design-skill.md) | skill | skill, anthropic, frontend-design, typography, ai-tells, canvas-design, theme-factory | 2026-09-06 |
+| [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
+| [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
+| [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](skills/diagram-design.md) | skill | skill, diagram, svg, excalidraw, mermaid-alternative, editorial, design-tokens | 2026-09-07 |
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
+| [Superpowers (obra)](skills/superpowers.md) | skill | skill, superpowers, sdlc, subagent-driven-development, brainstorming, tdd, multi-harness | 2026-09-07 |
 | [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, dials, gsap, motion, landing-page, pre-flight, em-dash | 2026-09-06 |
+| [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
 
 ## tech-stack

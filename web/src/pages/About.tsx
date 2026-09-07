@@ -5,11 +5,12 @@ import { Table } from "../ds/components/Table";
 import { repoUrl } from "../lib/nav";
 
 const dirs = [
-  { dir: "AwesomeDS/", body: "デザインシステムの正本。DESIGN.md、tokens（CSS、Tailwind v4 テーマ、W3C DTCG JSON）、foundations（値の理由と出典）、components（部品の規約と出荷前チェックリスト）、CHANGELOG。" },
+  { dir: "AwesomeDS/", body: "デザインシステムの正本。DESIGN.md、tokens（CSS、Tailwind v4 テーマ、W3C DTCG JSON、アクセント / 角丸 / 書体の代替）、foundations（24 の観点の理由と出典）、components、CHANGELOG。" },
+  { dir: "AwesomeDS/data/", body: "実測データ。261 社のブランド配色、24 の選定パレット、34 書体と使用数、23 層のスタック、OSS ランキング。scripts/ が生成し、CI が検証、毎週月曜に自動更新。" },
   { dir: "Knowledge/", body: "参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の要約。カテゴリ別のフォルダに Markdown で置き、frontmatter に出典 URL を持ちます。" },
   { dir: "Reference/", body: "Knowledge が参照した外部リンクの一覧。scripts/build-reference.mjs が frontmatter から生成します。" },
   { dir: "Plugin/awesome-ds/", body: "Claude Code プラグイン。5 つのスキル、Cursor 用ルール、AwesomeDS の同期コピー、キャプチャと監査のスクリプト。" },
-  { dir: "web/", body: "このサイト。Vite、React、Tailwind v4。色、余白、角丸、書体、時間はすべて AwesomeDS/tokens から取ります。" },
+  { dir: "web/", body: "このサイト。Vite、React、Tailwind v4。48 部品と 35 デモはサイトの実装そのもの。全ルートを Playwright で描画し、エラーとはみ出しがないことを CI が確認します。" },
 ];
 
 const skills = [

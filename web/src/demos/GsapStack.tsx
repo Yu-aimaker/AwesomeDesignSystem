@@ -1,23 +1,27 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useReducedMotion } from "../lib/theme";
+import { cx } from "../ds/cx";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const cards = [
+const STEPS = [
   { title: "1. 調査", body: "Knowledge にソース付きで記録する。" },
   { title: "2. 抽出", body: "繰り返し現れるパターンだけを規則にする。" },
   { title: "3. 実装", body: "トークンに落とし、コンポーネントで検証する。" },
+  { title: "4. 検証", body: "スクリーンショットとコントラストを CI で確認する。" },
+  { title: "5. 公開", body: "変更は DESIGN.md から。コードは追従する。" },
 ];
 
 /**
- * Pinned three-card stack. The section pins at "top top" and each card slides
- * in from 24px below while the previous one settles back and dims. The
- * pin offset for the fixed top bar is handled by padding inside the pinned
- * element, so the trigger stays "top top". Nothing runs under reduced motion.
+ * Pinned card stack for the page-level section. The section pins at "top top"
+ * against the window and each card slides in from below while the previous one
+ * settles back and dims. Nothing runs under reduced motion.
  */
 export function GsapStack() {
   const root = useRef<HTMLDivElement>(null);
+  const cards = STEPS.slice(0, 3);
 
   useEffect(() => {
     const el = root.current;
@@ -28,14 +32,7 @@ export function GsapStack() {
       const items = gsap.utils.toArray<HTMLElement>("[data-card]");
       gsap.set(items.slice(1), { yPercent: 110, opacity: 0 });
       const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: el,
-          start: "top top",
-          end: `+=${items.length * 400}`,
-          pin: true,
-          scrub: 0.4,
-          anticipatePin: 1,
-        },
+        scrollTrigger: { trigger: el, start: "top top", end: `+=${items.length * 400}`, pin: true, scrub: 0.4, anticipatePin: 1 },
       });
       items.forEach((card, i) => {
         if (i === 0) return;
@@ -51,17 +48,85 @@ export function GsapStack() {
     <div ref={root} className="h-dvh w-full pt-16">
       <div className="relative mx-auto flex h-[calc(100dvh-64px)] max-w-lg items-center px-4">
         {cards.map((c, i) => (
-          <article
-            key={c.title}
-            data-card
-            className="absolute inset-x-4 flex h-64 flex-col justify-end rounded-lg border border-hairline bg-surface p-6 shadow-2"
-            style={{ zIndex: i + 1, top: `calc(50% - 128px + ${i * 12}px)` }}
-          >
+          <article key={c.title} data-card className="absolute inset-x-4 flex h-64 flex-col justify-end rounded-lg border border-hairline bg-surface p-6 shadow-2" style={{ zIndex: i + 1, top: `calc(50% - 128px + ${i * 12}px)` }}>
             <h3 className="t-h3 text-ink">{c.title}</h3>
             <p className="t-body-sm mt-2 text-ink-secondary">{c.body}</p>
           </article>
         ))}
       </div>
     </div>
+  );
+}
+
+export interface StickyStackProps {
+  count?: number; // 2..5
+  scrub?: number; // seconds of catch-up
+  dim?: number; // opacity of the settled card
+  shrink?: number; // scale of the settled card
+}
+
+/**
+ * The same stack inside its own scroll container (`scroller`), so the demo
+ * works inside a card. ScrollTrigger switches to transform-based pinning
+ * automatically for non-window scrollers.
+ */
+export function StickyStack({ count = 3, scrub = 0.4, dim = 0.5, shrink = 0.96 }: StickyStackProps) {
+  const reduced = useReducedMotion();
+  const scroller = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const cards = STEPS.slice(0, Math.max(2, Math.min(5, count)));
+
+  useEffect(() => {
+    const sc = scroller.current;
+    const el = stage.current;
+    if (!sc || !el || reduced) return;
+
+    const ctx = gsap.context(() => {
+      const items = gsap.utils.toArray<HTMLElement>("[data-card]", el);
+      gsap.set(items.slice(1), { yPercent: 110, opacity: 0 });
+      const tl = gsap.timeline({
+        scrollTrigger: { scroller: sc, trigger: el, start: "top top", end: `+=${items.length * 240}`, pin: true, scrub, anticipatePin: 1 },
+      });
+      items.forEach((card, i) => {
+        if (i === 0) return;
+        tl.to(items[i - 1], { scale: shrink, opacity: dim, duration: 1 }, i - 1);
+        tl.to(card, { yPercent: 0, opacity: 1, duration: 1 }, i - 1);
+      });
+    }, el);
+
+    return () => ctx.revert();
+  }, [cards.length, scrub, dim, shrink, reduced]);
+
+  return (
+    <div ref={scroller} className="h-80 w-full max-w-md overflow-y-auto rounded-lg border border-hairline bg-canvas-soft" tabIndex={0}>
+      {reduced ? (
+        <div className="flex flex-col gap-3 p-4">
+          {cards.map((c) => (
+            <Card key={c.title} card={c} />
+          ))}
+        </div>
+      ) : (
+        <>
+          <div ref={stage} className="relative h-80 w-full">
+            <div className="relative mx-auto h-full max-w-sm">
+              {cards.map((c, i) => (
+                <Card key={c.title} card={c} className="absolute inset-x-4" style={{ zIndex: i + 1, top: `calc(50% - 88px + ${i * 8}px)` }} />
+              ))}
+            </div>
+          </div>
+          <div style={{ height: cards.length * 240 }} />
+          <p className="t-caption px-4 pb-4 text-ink-muted">下へスクロール。{cards.length} 枚、scrub {scrub}s</p>
+        </>
+      )}
+    </div>
+  );
+}
+
+function Card({ card, className, style }: { card: (typeof STEPS)[number]; className?: string; style?: React.CSSProperties }) {
+  return (
+    <article data-card className={cx("flex h-44 flex-col justify-end rounded-lg border border-hairline bg-surface p-5 shadow-2", className)} style={style}>
+      <h3 className="t-h4 text-ink">{card.title}</h3>
+      <p className="t-body-sm mt-1 text-ink-secondary">{card.body}</p>
+    </article>
   );
 }

@@ -15,17 +15,24 @@ const outDir = resolve(webRoot, ".screenshots");
 mkdirSync(outDir, { recursive: true });
 
 const PORT = 4173;
-const BASE = "/Awesome-Design-Systems-Claude";
+const BASE = (process.env.SITE_BASE ?? "/").replace(/\/$/, "");
+// --check: no PNGs, exit 1 on any horizontal overflow or console error (used in CI).
+const CHECK = process.argv.includes("--check");
 const routes = [
   "/",
+  "/foundations",
   "/foundations/typography",
   "/foundations/color",
   "/foundations/spacing",
   "/foundations/radius",
   "/foundations/elevation",
   "/foundations/motion",
+  "/fonts",
+  "/palettes",
   "/components",
-  "/animation",
+  "/motion",
+  "/stack",
+  "/rankings",
   "/knowledge",
   "/sources",
   "/about",
@@ -82,6 +89,7 @@ try {
         const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         if (overflow > 0) problems.push(`${theme} ${width} ${route}: horizontal overflow ${overflow}px`);
         const name = `${route === "/" ? "home" : route.slice(1).replace(/\//g, "-")}-${width}-${theme}.png`;
+        if (CHECK) continue;
         await page.screenshot({ path: resolve(outDir, name), fullPage });
         console.log("saved", name);
       }
@@ -96,6 +104,7 @@ try {
 if (problems.length) {
   console.log("\nProblems:");
   for (const p of problems) console.log(" -", p);
+  process.exitCode = 1;
 } else {
   console.log("\nNo overflow or console errors.");
 }

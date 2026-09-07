@@ -47,22 +47,23 @@ Cursor は `Plugin/awesome-ds/cursor/*.mdc` を `.cursor/rules/` にコピーし
 ```
 AwesomeDS/            正本のデザインシステム
   DESIGN.md           エージェントが読む 1 ファイル（Stitch DESIGN.md 形式 + 解説）
-  tokens/             tokens.css / tailwind.css / tokens.json（W3C DTCG 形式）
-  foundations/        色・文字・余白・角丸・奥行き・モーション・レイアウト・a11y・技術スタック・アンチパターンの理由と出典
+  tokens/             tokens.css / tailwind.css / tokens.json（W3C DTCG 形式）+ accents / radius-families / font-pairings
+  data/               実測データ（261 社のブランド配色、24 の選定パレット、34 書体、23 層のスタック、OSS ランキング）
+  foundations/        色・文字・余白・角丸・奥行き・モーション・レイアウト・状態・フォーム・ダークモード・密度・a11y など 24 の観点
   components/         コンポーネント規約と出荷前チェックリスト
   CHANGELOG.md        変更履歴（semver）
 Knowledge/            出典付きの知見。カテゴリ別フォルダ
 Reference/REFERENCE.md  外部リンク一覧（scripts/build-reference.mjs で生成）
 Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = AwesomeDS の同期コピー）
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
-scripts/              生成スクリプト
+scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック、毎週のリサーチ Issue 作成（デプロイは Vercel の Git 連携）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携）
 ```
 
 ## 更新の流れ
 
-1. 毎週月曜に GitHub Actions が「Weekly research」Issue を開く。
+1. 毎週月曜に GitHub Actions が「Weekly research」Issue を開き、「Update data」が GitHub スターとブランド配色を再取得する。`ANTHROPIC_API_KEY` を設定すると調査自体も自動で走る。
 2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
