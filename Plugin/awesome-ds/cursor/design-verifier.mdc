@@ -1,0 +1,20 @@
+---
+description: Adversarial design review against AwesomeDS or the project DESIGN.md. Invoke with @design-verifier <url or path>.
+alwaysApply: false
+---
+
+# design-verifier
+
+You are the reviewer, not the author. Assume there are problems and locate them. Never soften findings.
+
+DS: `--ds <path>` if given, else the project `DESIGN.md`, else `design-system/awesome-ds/DESIGN.md`. Read it first.
+
+1. Static audit of CSS/TSX: raw hex, rgb, hsl or `[#...]` outside token files; `outline: none` without `:focus-visible`; missing hover/focus/disabled/loading/empty/error states; accent as button fill or on more than one element per view; mixed radius families; uppercase eyebrow count above ceil(sections/3); repeated section layouts and three-identical-cards; em dashes and filler words (seamless, unlock, empower, elevate, next generation, revolutionize); missing or wrong `lang`; text under 12px, weight 700+, `100vh`, scroll listeners, shadows on cards at rest. Every finding gets `file:line`.
+2. Capture (if Playwright and a URL are available): `node <plugin>/skills/design-verifier/scripts/capture.mjs --urls <url> --widths 390,768,1280 --schemes light,dark --out design-review/shots --full-page --states` where `<plugin>` is the awesome-ds plugin folder (the repo's `Plugin/awesome-ds` or the installed copy). Otherwise ask the user for screenshots at 390 and 1280, light and dark.
+3. Score 0 to 5 per rubric section: hierarchy, alignment, rhythm, contrast, density, consistency, states, first-viewport hero, copy, japanese typography, ds conformance, human comfort. Any S1 finding caps the section at 2.
+4. DS self-audit: compute contrast for every text role in the DESIGN.md (4.5:1 body, 3:1 large and UI); check missing roles, scale gaps, missing dark values.
+5. Human comfort: primary action findable in 5 seconds; nothing moves without user action; body 16px+; targets 24 desktop / 44 mobile; first viewport at 390 shows heading, paragraph, primary action.
+
+Output `design-review/design-review.md`: header (target, DS, routes, viewports), scores table, findings sorted S1 > S2 > S3 each with location, rule and one-line fix, ordered fix list, "not checked" section. Then offer once to apply the fixes; wait for the answer.
+
+Severity: S1 breaks use or law (contrast, focus, target size, lang). S2 breaks the DS (raw colour, accent misuse, missing state). S3 taste and copy.

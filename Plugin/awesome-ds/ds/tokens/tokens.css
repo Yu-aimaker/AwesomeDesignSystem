@@ -1,0 +1,213 @@
+/* AwesomeDS tokens v0.1.0
+   Source of truth: AwesomeDS/DESIGN.md. Import once at the app root.
+   Light is the default. Dark applies via [data-theme="dark"] or the OS setting. */
+
+:root {
+  color-scheme: light;
+
+  /* Color roles */
+  --ds-canvas: #ffffff;
+  --ds-canvas-soft: #fafafa;
+  --ds-surface: #ffffff;
+  --ds-surface-raised: #ffffff;
+  --ds-surface-sunken: #f5f5f5;
+  --ds-ink: #0a0a0a;
+  --ds-ink-secondary: #525252;
+  --ds-ink-muted: #6b6b6b;
+  --ds-ink-disabled: #a3a3a3;
+  --ds-hairline: #e5e5e5;
+  --ds-hairline-strong: #8c8c8c;
+  --ds-accent: #2f5bea;
+  --ds-accent-hover: #264dd0;
+  --ds-accent-soft: #e8eefc;
+  --ds-on-accent: #ffffff;
+  --ds-primary: #0a0a0a;
+  --ds-primary-hover: #262626;
+  --ds-on-primary: #ffffff;
+  --ds-success: #167534;
+  --ds-success-soft: #e6f4ea;
+  --ds-warning: #9a5c00;
+  --ds-warning-soft: #fff4e0;
+  --ds-danger: #c81e1e;
+  --ds-danger-soft: #fdecec;
+  --ds-focus-ring: #2f5bea;
+  --ds-selection: #dbe4fd;
+  --ds-shadow-color: 10 10 10;
+
+  /* Typography */
+  --ds-font-sans: "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ds-text-xs: 12px;
+  --ds-text-sm: 14px;
+  --ds-text-base: 16px;
+  --ds-text-lg: 18px;
+  --ds-text-xl: 20px;
+  --ds-text-2xl: 28px;
+  --ds-text-3xl: 36px;
+  --ds-text-4xl: 56px;
+  --ds-leading-tight: 1.1;
+  --ds-leading-heading: 1.2;
+  --ds-leading-snug: 1.35;
+  --ds-leading-body: 1.6;
+  --ds-leading-body-ja: 1.8;
+  --ds-tracking-display: -0.02em;
+  --ds-tracking-heading: -0.015em;
+  --ds-tracking-normal: 0;
+  --ds-weight-regular: 400;
+  --ds-weight-medium: 500;
+  --ds-weight-semibold: 600;
+
+  /* Spacing (4px base) */
+  --ds-space-1: 4px;
+  --ds-space-2: 8px;
+  --ds-space-3: 12px;
+  --ds-space-4: 16px;
+  --ds-space-5: 20px;
+  --ds-space-6: 24px;
+  --ds-space-8: 32px;
+  --ds-space-10: 40px;
+  --ds-space-12: 48px;
+  --ds-space-16: 64px;
+  --ds-space-20: 80px;
+  --ds-space-24: 96px;
+  --ds-space-32: 128px;
+  --ds-container: 1200px;
+  --ds-measure: 65ch;
+
+  /* Shape */
+  --ds-radius-xs: 4px;
+  --ds-radius-sm: 6px;
+  --ds-radius-md: 8px;
+  --ds-radius-lg: 12px;
+  --ds-radius-xl: 16px;
+  --ds-radius-2xl: 24px;
+  --ds-radius-pill: 9999px;
+  --ds-border: 1px;
+
+  /* Elevation */
+  --ds-shadow-1: none;
+  --ds-shadow-2: 0 4px 12px -2px rgb(var(--ds-shadow-color) / 0.08);
+  --ds-shadow-3: 0 16px 48px -12px rgb(var(--ds-shadow-color) / 0.18);
+
+  /* Motion */
+  --ds-duration-instant: 100ms;
+  --ds-duration-fast: 150ms;
+  --ds-duration-base: 200ms;
+  --ds-duration-slow: 300ms;
+  --ds-duration-slower: 500ms;
+  --ds-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ds-ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ds-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Component sizes */
+  --ds-control-sm: 32px;
+  --ds-control-md: 40px;
+  --ds-control-lg: 48px;
+  --ds-focus-width: 2px;
+  --ds-focus-offset: 2px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ds-canvas: #0a0a0a;
+  --ds-canvas-soft: #111111;
+  --ds-surface: #141414;
+  --ds-surface-raised: #1a1a1a;
+  --ds-surface-sunken: #0f0f0f;
+  --ds-ink: #fafafa;
+  --ds-ink-secondary: #a3a3a3;
+  --ds-ink-muted: #8a8a8a;
+  --ds-ink-disabled: #525252;
+  --ds-hairline: #262626;
+  --ds-hairline-strong: #666666;
+  --ds-accent: #7a9cff;
+  --ds-accent-hover: #93afff;
+  --ds-accent-soft: #16203d;
+  --ds-on-accent: #0a0a0a;
+  --ds-primary: #fafafa;
+  --ds-primary-hover: #e5e5e5;
+  --ds-on-primary: #0a0a0a;
+  --ds-success: #4ade80;
+  --ds-success-soft: #0f2a18;
+  --ds-warning: #fbbf24;
+  --ds-warning-soft: #2a1f05;
+  --ds-danger: #f87171;
+  --ds-danger-soft: #2f1010;
+  --ds-focus-ring: #7a9cff;
+  --ds-selection: #1e2a4d;
+  --ds-shadow-color: 0 0 0;
+  --ds-shadow-2: 0 0 0 1px var(--ds-hairline-strong);
+  --ds-shadow-3: 0 0 0 1px var(--ds-hairline-strong), 0 24px 64px -16px rgb(0 0 0 / 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ds-canvas: #0a0a0a;
+    --ds-canvas-soft: #111111;
+    --ds-surface: #141414;
+    --ds-surface-raised: #1a1a1a;
+    --ds-surface-sunken: #0f0f0f;
+    --ds-ink: #fafafa;
+    --ds-ink-secondary: #a3a3a3;
+    --ds-ink-muted: #8a8a8a;
+    --ds-ink-disabled: #525252;
+    --ds-hairline: #262626;
+    --ds-hairline-strong: #666666;
+    --ds-accent: #7a9cff;
+    --ds-accent-hover: #93afff;
+    --ds-accent-soft: #16203d;
+    --ds-on-accent: #0a0a0a;
+    --ds-primary: #fafafa;
+    --ds-primary-hover: #e5e5e5;
+    --ds-on-primary: #0a0a0a;
+    --ds-success: #4ade80;
+    --ds-success-soft: #0f2a18;
+    --ds-warning: #fbbf24;
+    --ds-warning-soft: #2a1f05;
+    --ds-danger: #f87171;
+    --ds-danger-soft: #2f1010;
+    --ds-focus-ring: #7a9cff;
+    --ds-selection: #1e2a4d;
+    --ds-shadow-color: 0 0 0;
+    --ds-shadow-2: 0 0 0 1px var(--ds-hairline-strong);
+    --ds-shadow-3: 0 0 0 1px var(--ds-hairline-strong), 0 24px 64px -16px rgb(0 0 0 / 0.6);
+  }
+}
+
+/* Base rules every AwesomeDS page applies */
+html {
+  font-family: var(--ds-font-sans);
+  font-size: var(--ds-text-base);
+  line-height: var(--ds-leading-body);
+  color: var(--ds-ink);
+  background: var(--ds-canvas);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1;
+}
+
+:lang(ja) {
+  line-height: var(--ds-leading-body-ja);
+  line-break: strict;
+  overflow-wrap: anywhere;
+  text-autospace: normal;
+}
+
+::selection {
+  background: var(--ds-selection);
+}
+
+:focus-visible {
+  outline: var(--ds-focus-width) solid var(--ds-focus-ring);
+  outline-offset: var(--ds-focus-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

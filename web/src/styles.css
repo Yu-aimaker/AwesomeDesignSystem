@@ -1,0 +1,161 @@
+/* Site stylesheet. Every value comes from AwesomeDS tokens (src/ds/tokens, copied
+   from AwesomeDS/tokens by scripts/sync-tokens.mjs). */
+@import "tailwindcss";
+/* src/ds/tokens is gitignored (it is a build-time copy), and automatic source
+   detection skipped the whole ds folder with it. Register sources explicitly. */
+@source "./ds/components";
+@source "./ds/cx.ts";
+@source "./demos";
+@source "./layout";
+@source "./pages";
+
+/* Drop Tailwind's default palette, radii, shadows and fonts so only
+   AwesomeDS roles are available as utilities. Spacing stays: Tailwind's
+   0.25rem unit equals the 4px base. */
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --ease-*: initial;
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+@import "./ds/tokens/tokens.css";
+@import "./ds/tokens/tailwind.css";
+
+/* Self-hosted fonts. Fontsource publishes the variable builds under the family
+   names "Geist Variable", "Noto Sans JP Variable" and "Geist Mono Variable", so
+   they are put in front of the token stack; the fallbacks stay as in tokens.css. */
+@import "@fontsource-variable/geist/index.css";
+@import "@fontsource-variable/geist-mono/index.css";
+@import "@fontsource-variable/noto-sans-jp/index.css";
+
+:root {
+  --ds-font-sans: "Geist Variable", "Noto Sans JP Variable", "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-mono: "Geist Mono Variable", "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --site-topbar: 64px;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--site-topbar) + var(--ds-space-4));
+  }
+  body {
+    min-height: 100dvh;
+    background: var(--ds-canvas);
+    color: var(--ds-ink);
+  }
+  /* Latin-only strings keep the tighter body leading. */
+  :lang(en) {
+    line-height: var(--ds-leading-body);
+    line-break: auto;
+    overflow-wrap: normal;
+  }
+  code, kbd, pre, samp {
+    font-family: var(--ds-font-mono);
+    font-size: 13px;
+  }
+  a {
+    color: var(--ds-accent);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--ds-accent) 40%, transparent);
+    text-underline-offset: 0.15em;
+    transition: color var(--ds-duration-instant) var(--ds-ease-out), text-decoration-color var(--ds-duration-instant) var(--ds-ease-out);
+  }
+  a:hover {
+    color: var(--ds-accent-hover);
+    text-decoration-color: currentColor;
+  }
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+  }
+  ::placeholder {
+    color: var(--ds-ink-muted);
+  }
+  dialog::backdrop {
+    background: rgb(var(--ds-shadow-color) / 0.4);
+  }
+  hr {
+    border-color: var(--ds-hairline);
+  }
+}
+
+/* Type roles. Keep these in step with tokens.json and DESIGN.md §3. */
+.t-display { font-size: var(--ds-text-4xl); font-weight: var(--ds-weight-semibold); line-height: var(--ds-leading-tight); letter-spacing: var(--ds-tracking-display); }
+.t-h1 { font-size: var(--ds-text-3xl); font-weight: var(--ds-weight-semibold); line-height: var(--ds-leading-heading); letter-spacing: var(--ds-tracking-display); }
+.t-h2 { font-size: var(--ds-text-2xl); font-weight: var(--ds-weight-semibold); line-height: 1.25; letter-spacing: var(--ds-tracking-heading); }
+.t-h3 { font-size: var(--ds-text-xl); font-weight: var(--ds-weight-semibold); line-height: var(--ds-leading-snug); letter-spacing: -0.01em; }
+.t-h4 { font-size: var(--ds-text-base); font-weight: var(--ds-weight-semibold); line-height: 1.5; letter-spacing: var(--ds-tracking-normal); }
+.t-body-lg { font-size: var(--ds-text-lg); font-weight: var(--ds-weight-regular); line-height: var(--ds-leading-body); }
+.t-body { font-size: var(--ds-text-base); font-weight: var(--ds-weight-regular); line-height: var(--ds-leading-body); }
+.t-body-sm { font-size: var(--ds-text-sm); font-weight: var(--ds-weight-regular); line-height: 1.55; }
+.t-caption { font-size: var(--ds-text-xs); font-weight: var(--ds-weight-regular); line-height: 1.5; letter-spacing: 0.01em; }
+.t-label { font-size: var(--ds-text-sm); font-weight: var(--ds-weight-medium); line-height: var(--ds-leading-heading); }
+.t-mono { font-family: var(--ds-font-mono); font-size: 13px; font-weight: var(--ds-weight-regular); line-height: var(--ds-leading-body); }
+
+/* Japanese headings: wider leading, palt allowed on headings only. */
+:lang(ja) .t-display, :lang(ja) .t-h1 { line-height: 1.4; font-feature-settings: "palt" 1; }
+:lang(ja) .t-h2, :lang(ja) .t-h3 { line-height: 1.5; font-feature-settings: "palt" 1; }
+:lang(ja) .t-h1:lang(en), :lang(ja) .t-h2:lang(en), :lang(ja) .t-h3:lang(en) { line-height: var(--ds-leading-heading); }
+
+/* Motion utilities bound to the duration tokens. */
+@utility duration-instant { transition-duration: var(--ds-duration-instant); }
+@utility duration-fast { transition-duration: var(--ds-duration-fast); }
+@utility duration-base { transition-duration: var(--ds-duration-base); }
+@utility duration-slow { transition-duration: var(--ds-duration-slow); }
+@utility duration-slower { transition-duration: var(--ds-duration-slower); }
+@utility measure { max-width: var(--ds-measure); }
+@utility tabular { font-variant-numeric: tabular-nums; }
+
+/* Prose for Markdown output. */
+.prose { max-width: var(--ds-measure); }
+.prose > * + * { margin-top: var(--ds-space-4); }
+.prose h1 { font-size: var(--ds-text-3xl); font-weight: var(--ds-weight-semibold); line-height: 1.4; letter-spacing: var(--ds-tracking-display); margin-top: var(--ds-space-12); }
+.prose h2 { font-size: var(--ds-text-2xl); font-weight: var(--ds-weight-semibold); line-height: 1.5; letter-spacing: var(--ds-tracking-heading); margin-top: var(--ds-space-12); padding-top: var(--ds-space-6); border-top: var(--ds-border) solid var(--ds-hairline); }
+.prose h3 { font-size: var(--ds-text-xl); font-weight: var(--ds-weight-semibold); line-height: 1.5; margin-top: var(--ds-space-8); }
+.prose h4 { font-size: var(--ds-text-base); font-weight: var(--ds-weight-semibold); line-height: 1.5; margin-top: var(--ds-space-6); }
+.prose > :first-child { margin-top: 0; }
+.prose p, .prose li { color: var(--ds-ink); }
+.prose ul, .prose ol { padding-left: var(--ds-space-6); }
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+.prose li + li { margin-top: var(--ds-space-2); }
+.prose blockquote { border-left: 2px solid var(--ds-hairline-strong); padding-left: var(--ds-space-4); color: var(--ds-ink-secondary); }
+.prose code { background: var(--ds-surface-sunken); border-radius: var(--ds-radius-xs); padding: 0 var(--ds-space-1); }
+.prose pre { background: var(--ds-canvas-soft); border: var(--ds-border) solid var(--ds-hairline); border-radius: var(--ds-radius-md); padding: var(--ds-space-4); overflow-x: auto; }
+.prose pre code { background: transparent; padding: 0; }
+.prose table { width: 100%; border-collapse: collapse; font-size: var(--ds-text-sm); font-variant-numeric: tabular-nums; display: block; overflow-x: auto; }
+.prose th, .prose td { text-align: left; padding: var(--ds-space-2) var(--ds-space-3); border-bottom: var(--ds-border) solid var(--ds-hairline); vertical-align: top; }
+.prose th { background: var(--ds-surface-sunken); font-weight: var(--ds-weight-medium); }
+.prose img { border-radius: var(--ds-radius-md); border: var(--ds-border) solid var(--ds-hairline); }
+.prose hr { margin: var(--ds-space-8) 0; }
+
+/* Code panes in preview blocks. */
+.code-pane { background: var(--ds-canvas-soft); overflow: auto; max-height: 480px; }
+.code-pane pre { padding: var(--ds-space-4); font-family: var(--ds-font-mono); font-size: 13px; line-height: var(--ds-leading-body); tab-size: 2; }
+
+/* Scroll-driven reading progress (CSS scroll timeline) with JS fallback. */
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.scroll-progress { transform-origin: 0 50%; transform: scaleX(0); }
+@supports (animation-timeline: scroll()) {
+  .scroll-progress[data-mode="css"] {
+    animation: grow-x linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+/* Sheet (mobile navigation) transitions. */
+dialog.sheet { opacity: 0; transform: translateX(-8px); transition: opacity var(--ds-duration-base) var(--ds-ease-out), transform var(--ds-duration-base) var(--ds-ease-out), overlay var(--ds-duration-base) allow-discrete, display var(--ds-duration-base) allow-discrete; }
+dialog.sheet[open] { opacity: 1; transform: none; }
+@starting-style { dialog.sheet[open] { opacity: 0; transform: translateX(-8px); } }
+
+/* Reduced-motion demo scope: a toggle on the motion page mirrors the OS setting. */
+[data-reduced-motion="true"] * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
