@@ -7,7 +7,7 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 - **Reference**: Knowledge が参照した外部リンクの一覧（自動生成）。
 - **Plugin**: AwesomeDS を適用する、ブランド専用 DS を作る、デザインを敵対検証する、デザイン思考で UX を改善する、の 4 スキル（+ ナレッジ更新スキル）を Claude Code プラグインとして配布。Cursor 用ルールも同梱。
 - **web**: AwesomeDS を体験できるサイト。サイト自身が AwesomeDS で作られています。
-  公開先: https://yu-aimaker.github.io/Awesome-Design-Systems-Claude/
+  Vercel でホストし、検索エンジンには載せません（noindex）。URL はリポジトリの About 欄を参照。
 
 ## 使い方
 
@@ -57,7 +57,7 @@ Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = Awes
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
 scripts/              生成スクリプト
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    Pages デプロイ、整合性チェック、毎週のリサーチ Issue 作成
+.github/workflows/    整合性チェック、毎週のリサーチ Issue 作成（デプロイは Vercel の Git 連携）
 ```
 
 ## 更新の流れ
