@@ -5,10 +5,15 @@ import { fileURLToPath } from "node:url";
 
 const repoRoot = fileURLToPath(new URL("..", import.meta.url));
 
+// Vercel serves the site at the domain root. GitHub Pages serves a project site
+// under the repository name. `vite preview` uses the same base as the build.
+// Set SITE_BASE to override either.
+const onVercel = process.env.VERCEL === "1";
+const pagesBase = "/Awesome-Design-Systems-Claude/";
+const productionBase = process.env.SITE_BASE ?? (onVercel ? "/" : pagesBase);
+
 export default defineConfig(({ command, isPreview }) => ({
-  // GitHub Pages project site lives under the repository name. `vite preview`
-  // serves the built output, so it uses the same base as the build.
-  base: command === "build" || isPreview ? "/Awesome-Design-Systems-Claude/" : "/",
+  base: command === "build" || isPreview ? productionBase : "/",
   plugins: [react(), tailwindcss()],
   server: {
     fs: { allow: [repoRoot] },
