@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Typefaces used by well-designed products. Metadata is curated in scripts/build-fonts.mjs; `usedBy` is measured: the brands in brands.json whose DESIGN.md declares the family. `loaded` marks fonts the site ships via fontsource; system and proprietary fonts render with the viewer's local copy or the fallback.",
-    "updated": "2026-09-07",
+    "updated": "2026-09-14",
     "sources": [
       "AwesomeDS/data/brands.json",
       "https://fonts.google.com",
