@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Color combination patterns. `brand` is measured (canvas / ink / accent of each brand in brands.json with WCAG contrast); `curated` is 24 accent-on-neutral patterns AwesomeDS endorses, generated in OKLCH with fixed lightness so every accent passes 4.5:1 as text on its canvas in light and dark mode.",
-    "updated": "2026-09-21",
+    "updated": "2026-09-28",
     "sources": [
       "AwesomeDS/data/brands.json",
       "https://www.w3.org/TR/WCAG22/#dfn-contrast-ratio",
