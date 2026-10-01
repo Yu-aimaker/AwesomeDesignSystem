@@ -9,7 +9,7 @@ every color, radius, spacing, font and duration comes from `AwesomeDS/tokens`.
 pnpm install
 pnpm dev          # copies tokens, starts Vite at http://localhost:5173
 pnpm build        # tsc --noEmit, vite build, writes dist/404.html
-pnpm preview      # serves dist/ under /Awesome-Design-Systems-Claude/
+pnpm preview      # serves dist/ at / (build with SITE_BASE=/path/ to test a sub-path)
 pnpm screenshot   # Playwright: every route at 390 and 1280, light and dark -> .screenshots/
 node scripts/screenshot.mjs --check   # same routes, no PNGs, exit 1 on console errors or overflow (CI)
 pnpm typecheck
@@ -45,11 +45,10 @@ Node 22 and pnpm 10.
 (`PLAYWRIGHT_BROWSERS_PATH`). Pass route paths to limit the run:
 `pnpm screenshot / /components`.
 
-## デプロイ先
+## デプロイ (Deploy)
 
-- **Vercel**: リポジトリを Vercel に接続し、Root Directory を `web` にします。`vercel.json` がビルド設定と SPA の書き換えを持ち、`VERCEL=1` のときは `base` が `/` になります。
-- 別のパスで配信するときは `SITE_BASE=/path/ pnpm build` を使います。
+- Vercel で配信します。Root Directory は `web` です。
+- `vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` ヘッダーを持ちます。
+- `base` の既定は `/` です。別のパスで配信するときだけ `SITE_BASE=/path/ pnpm build` を使います。
 
-## Deploy
-
-Vercel hosts the site (Root Directory `web`). See `vercel.json` for build settings, the SPA rewrite and the `X-Robots-Tag: noindex` header.
+Vercel hosts the site from Root Directory `web`; see `vercel.json` for build, rewrite and noindex settings.
