@@ -1,0 +1,24 @@
+name: Chore / docs
+description: ドキュメント・CI・小さな運用（エージェント外でも可）
+title: "[chore] "
+labels: ["chore"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+    validations:
+      required: true
+  - type: checkboxes
+    id: non_goals
+    attributes:
+      label: Non-goals
+      options:
+        - label: Archive / Vercel 本番破壊的変更 / 秘密を含まない
+          required: true
