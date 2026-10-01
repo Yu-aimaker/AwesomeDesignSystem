@@ -58,6 +58,7 @@ function MobileSheet({ open, onClose }: { open: boolean; onClose: () => void }) 
   }, [open]);
   return (
     <dialog
+      id="mobile-nav"
       ref={ref}
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
@@ -125,7 +126,7 @@ export function Shell() {
       </a>
       <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/90 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-1 px-4 sm:px-6">
-          <button type="button" onClick={() => setMenuOpen(true)} aria-label="メニューを開く" className={cx(iconButton, "-ml-2 lg:hidden")}>
+          <button type="button" onClick={() => setMenuOpen(true)} aria-label="メニューを開く" aria-expanded={menuOpen} aria-controls="mobile-nav"className={cx(iconButton, "-ml-2 lg:hidden")}>
             <Menu className="size-5" strokeWidth={1.75} aria-hidden />
           </button>
           <Link to="/" className="mr-3 flex items-baseline gap-2 text-ink no-underline">
@@ -149,7 +150,7 @@ export function Shell() {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-0.5">
-            <button type="button" onClick={() => setPaletteOpen(true)} aria-label="検索 (⌘K)" title="検索 (⌘K)" className={iconButton}>
+            <button type="button" onClick={() => setPaletteOpen(true)} aria-label="検索を開く" title="検索 (⌘K / Ctrl+K)" className={iconButton}>
               <Search className="size-5" strokeWidth={1.75} aria-hidden />
             </button>
             <KnobsButton />
