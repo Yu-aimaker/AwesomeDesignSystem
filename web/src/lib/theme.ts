@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
 export type ThemePreference = "light" | "dark" | "system";
 const KEY = "ds-theme";
@@ -19,10 +19,15 @@ function apply(pref: ThemePreference) {
   else root.setAttribute("data-theme", pref);
 }
 
-export function useTheme() {
-  const [theme, setThemeState] = useState<ThemePreference>(() =>
-    typeof window === "undefined" ? "system" : read(),
-  );
+interface ThemeContextValue {
+  theme: ThemePreference;
+  setTheme: (next: ThemePreference) => void;
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setThemeState] = useState<ThemePreference>(() => (typeof window === "undefined" ? "system" : read()));
 
   useEffect(() => {
     apply(theme);
@@ -38,7 +43,14 @@ export function useTheme() {
     }
   }, []);
 
-  return { theme, setTheme };
+  const value = useMemo(() => ({ theme, setTheme }), [theme, setTheme]);
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+}
+
+export function useTheme(): ThemeContextValue {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used inside ThemeProvider");
+  return ctx;
 }
 
 /** Resolved theme, following the OS when the preference is "system". */

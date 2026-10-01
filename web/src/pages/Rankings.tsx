@@ -87,8 +87,8 @@ export function Rankings() {
                       {r.name}
                     </a>
                     <Tag>{repoCategoryLabel[r.category] ?? r.category}</Tag>
-                    {r.inTopicTop && <Tag className="text-accent">topic top 20</Tag>}
-                    {r.archived && <Tag className="text-warning">archived</Tag>}
+                    {r.inTopicTop && <Tag>topic 上位 20</Tag>}
+                    {r.archived && <Tag className="text-warning">アーカイブ</Tag>}
                     {k && (
                       <Link to={k.to} className="t-caption">
                         解説

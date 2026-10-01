@@ -36,7 +36,7 @@ export interface SourceLink {
   note?: string;
 }
 
-export function SourceList({ sources, title = "ソース" }: { sources: SourceLink[]; title?: string }) {
+export function SourceList({ sources, title = "出典" }: { sources: SourceLink[]; title?: string }) {
   return (
     <section aria-label={title} className="mt-8 rounded-lg border border-hairline bg-canvas-soft p-6">
       <h3 className="t-h4 text-ink">{title}</h3>

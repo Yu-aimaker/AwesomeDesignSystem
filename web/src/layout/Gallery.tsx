@@ -47,7 +47,7 @@ export function FilterChip({ selected, onSelect, children, count }: { selected: 
 
 export function SearchBox({ value, onChange, placeholder = "検索", className }: { value: string; onChange: (v: string) => void; placeholder?: string; className?: string }) {
   return (
-    <label className={cx("relative ml-auto flex h-8 min-w-40 items-center", className)}>
+    <label className={cx("relative ml-auto flex h-8 min-w-0 w-full items-center sm:w-auto sm:min-w-40", className)}>
       <Search className="pointer-events-none absolute left-2.5 size-4 text-ink-muted" strokeWidth={1.75} aria-hidden />
       <span className="sr-only">{placeholder}</span>
       <input
