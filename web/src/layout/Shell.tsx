@@ -126,7 +126,7 @@ export function Shell() {
       </a>
       <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/90 backdrop-blur-sm">
         <div className="mx-auto flex h-16 max-w-[1280px] items-center gap-1 px-4 sm:px-6">
-          <button type="button" onClick={() => setMenuOpen(true)} aria-label="メニューを開く" aria-expanded={menuOpen} aria-controls="mobile-nav"className={cx(iconButton, "-ml-2 lg:hidden")}>
+          <button type="button" onClick={() => setMenuOpen(true)} aria-label="メニューを開く" aria-expanded={menuOpen} aria-controls="mobile-nav" className={cx(iconButton, "-ml-2 lg:hidden")}>
             <Menu className="size-5" strokeWidth={1.75} aria-hidden />
           </button>
           <Link to="/" className="mr-3 flex items-baseline gap-2 text-ink no-underline">
