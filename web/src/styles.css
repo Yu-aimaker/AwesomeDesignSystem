@@ -30,6 +30,9 @@
 
 @import "./ds/tokens/tokens.css";
 @import "./ds/tokens/tailwind.css";
+@import "./ds/tokens/accents.css";
+@import "./ds/tokens/radius-families.css";
+@import "./ds/tokens/font-pairings.css";
 
 /* Self-hosted fonts. Fontsource publishes the variable builds under the family
    names "Geist Variable", "Noto Sans JP Variable" and "Geist Mono Variable", so
