@@ -10,7 +10,7 @@ import { KnobsPanel } from "../layout/KnobsPanel";
 import { CodeBlock } from "../layout/Preview";
 import { useKnobs, accents } from "../lib/knobs";
 import { useTheme } from "../lib/theme";
-import { curatedPalettes } from "../lib/data";
+import { curatedPalettes, fonts, repos, stackLayers, brandCount } from "../lib/data";
 import { cx } from "../ds/cx";
 
 function FormSpecimen() {
@@ -152,7 +152,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/fonts",
     title: "フォント",
-    caption: "34 書体。使用数は 261 社から実測",
+    caption: `${fonts.length} 書体。使用数は ${brandCount} 社から実測`,
     visual: (
       <div className="grid h-full grid-cols-2 grid-rows-2 place-items-center p-5 text-ink" aria-hidden>
         <span className="text-4xl font-semibold" style={{ fontFamily: '"Geist Variable", sans-serif' }}>Ag</span>
@@ -165,7 +165,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/palettes",
     title: "パレット",
-    caption: "261 社の実測配色。クリックで試着",
+    caption: `${brandCount} 社の実測配色。クリックで試着`,
     visual: (
       <div className="grid h-full grid-cols-6 gap-1.5 p-5" aria-hidden>
         {curatedPalettes.slice(0, 12).map((p) => (
@@ -213,7 +213,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/stack",
     title: "スタック",
-    caption: "23 層。採用 1 つと代替の「いつ」",
+    caption: `${stackLayers.length} 層。採用 1 つと代替の「いつ」`,
     visual: (
       <div className="flex h-full flex-col justify-center gap-1.5 p-5" aria-hidden>
         {[92, 76, 60, 44, 30].map((w) => (
@@ -225,7 +225,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/rankings",
     title: "ランキング",
-    caption: "109 の OSS をスターで。毎週更新",
+    caption: `${repos.length} の OSS をスターで。毎週更新`,
     visual: (
       <div className="t-mono flex h-full flex-col justify-center gap-2 p-5" aria-hidden>
         {[["shadcn/ui", 95], ["motion", 70], ["three.js", 100]].map(([n, w]) => (
