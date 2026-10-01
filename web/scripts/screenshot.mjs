@@ -39,7 +39,7 @@ const routes = [
   "/about",
   "/missing-page",
 ];
-const only = process.argv.slice(2);
+const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
 const targets = only.length ? routes.filter((r) => only.includes(r)) : routes;
 
 const widths = [390, 1280];
@@ -107,5 +107,5 @@ if (problems.length) {
   for (const p of problems) console.log(" -", p);
   process.exitCode = 1;
 } else {
-  console.log("\nNo overflow or console errors.");
+  console.log(`\nNo overflow or console errors. (${targets.length} routes × ${widths.length} widths × ${themes.length} themes)`);
 }
