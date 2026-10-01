@@ -83,8 +83,7 @@ pnpm screenshot   # 全ルート × 390/1280 × ライト/ダーク（必要時�
 
 | 役割 | 担当 |
 |------|------|
-| 調査・SPEC・受け入れ・記録 | Jarvis |
-| 要件磨き・web FE・検証 | 箱 Claude |
+| 実行 | PR Watch＋箱Claude。JarvisはPMのみ。部屋名（Awesome DesignSystems）へのアサイン禁止 |
 | 方針・merge・破壊的変更 | Sir |
 
 ## 書き方
