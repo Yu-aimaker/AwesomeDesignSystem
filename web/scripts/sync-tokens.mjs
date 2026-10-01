@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Copies the AwesomeDS token files into web/src/ds/tokens and the data sets
 // (AwesomeDS/data/*.json) into web/src/ds/data so the site builds without
 // reaching outside the Vite root. Runs before `dev` and `build`.

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Builds are previewed with `vite preview`, then every route is captured at
 // 390 and 1280 px wide, in light and dark. PNGs land in web/.screenshots/.
 // Browsers come from /opt/pw-browsers (set PLAYWRIGHT_BROWSERS_PATH); do not
