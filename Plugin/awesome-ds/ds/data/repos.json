@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "GitHub star ranking of design and AI-frontend open source: a curated list (component libraries, headless, animation, icons, tokens, fonts, agent skills, AI UI, tools) plus the top 20 GitHub search results for topic:design-system. Stars, forks, language, topics and pushedAt come from the GitHub REST API. Entries with stars: null could not be fetched yet.",
-    "updated": "2026-09-28",
+    "updated": "2026-10-05",
     "sources": [
       "https://api.github.com/repos/{owner}/{name}",
       "https://api.github.com/search/repositories?q=topic:design-system&sort=stars"
@@ -42,8 +42,8 @@
       "name": "system-design-primer",
       "url": "https://github.com/donnemartin/system-design-primer",
       "description": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
-      "stars": 372223,
-      "forks": 58656,
+      "stars": 373197,
+      "forks": 58745,
       "language": "Python",
       "topics": [
         "design",
@@ -64,7 +64,7 @@
       "license": "NOASSERTION",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -72,8 +72,8 @@
       "name": "superpowers",
       "url": "https://github.com/obra/superpowers",
       "description": "An agentic skills framework & software development methodology that works.",
-      "stars": 292231,
-      "forks": 26155,
+      "stars": 295349,
+      "forks": 26388,
       "language": "Shell",
       "topics": [
         "ai",
@@ -89,62 +89,62 @@
       "license": "MIT",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "mattpocock",
       "name": "skills",
       "url": "https://github.com/mattpocock/skills",
       "description": "Skills for Real Engineers. Straight from my .agents directory.",
-      "stars": 270815,
-      "forks": 22809,
+      "stars": 276351,
+      "forks": 23171,
       "language": "Shell",
       "topics": [],
-      "pushedAt": "2026-09-24T14:07:55Z",
+      "pushedAt": "2026-10-04T13:44:59Z",
       "license": "MIT",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "anthropics",
       "name": "skills",
       "url": "https://github.com/anthropics/skills",
       "description": "Public repository for Agent Skills",
-      "stars": 178696,
-      "forks": 21140,
+      "stars": 179679,
+      "forks": 21250,
       "language": "Python",
       "topics": [
         "agent-skills"
       ],
-      "pushedAt": "2026-09-24T16:20:39Z",
+      "pushedAt": "2026-10-03T20:38:10Z",
       "license": null,
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "anthropics",
       "name": "claude-code",
       "url": "https://github.com/anthropics/claude-code",
       "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
-      "stars": 148381,
-      "forks": 24883,
+      "stars": 149443,
+      "forks": 25512,
       "language": "TypeScript",
       "topics": [],
-      "pushedAt": "2026-09-27T22:20:45Z",
+      "pushedAt": "2026-10-05T01:04:13Z",
       "license": null,
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vercel",
       "name": "next.js",
       "url": "https://github.com/vercel/next.js",
       "description": "The React Framework",
-      "stars": 142812,
-      "forks": 33318,
+      "stars": 143179,
+      "forks": 33922,
       "language": "JavaScript",
       "topics": [
         "blog",
@@ -162,19 +162,19 @@
         "universal",
         "vercel"
       ],
-      "pushedAt": "2026-09-28T04:10:59Z",
+      "pushedAt": "2026-10-05T05:39:42Z",
       "license": "MIT",
       "archived": false,
       "category": "framework",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "excalidraw",
       "name": "excalidraw",
       "url": "https://github.com/excalidraw/excalidraw",
       "description": "Virtual whiteboard for sketching hand-drawn like diagrams",
-      "stars": 133119,
-      "forks": 15500,
+      "stars": 133517,
+      "forks": 15572,
       "language": "TypeScript",
       "topics": [
         "canvas",
@@ -185,19 +185,19 @@
         "productivity",
         "whiteboard"
       ],
-      "pushedAt": "2026-09-27T20:53:18Z",
+      "pushedAt": "2026-10-01T15:08:43Z",
       "license": "MIT",
       "archived": false,
       "category": "design-tools",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "shadcn-ui",
       "name": "ui",
       "url": "https://github.com/shadcn-ui/ui",
       "description": "Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own.",
-      "stars": 124722,
-      "forks": 11610,
+      "stars": 125114,
+      "forks": 12180,
       "language": "TypeScript",
       "topics": [
         "base-ui",
@@ -214,19 +214,19 @@
         "ui",
         "vite"
       ],
-      "pushedAt": "2026-09-24T16:38:15Z",
+      "pushedAt": "2026-10-05T05:39:43Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "VoltAgent",
       "name": "awesome-design-md",
       "url": "https://github.com/VoltAgent/awesome-design-md",
       "description": "A collection of DESIGN.md files analysis by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
-      "stars": 118406,
-      "forks": 13240,
+      "stars": 119578,
+      "forks": 13342,
       "language": null,
       "topics": [
         "awesome-list",
@@ -244,7 +244,7 @@
       "license": "MIT",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -252,8 +252,8 @@
       "name": "three.js",
       "url": "https://github.com/mrdoob/three.js",
       "description": "JavaScript 3D Library.",
-      "stars": 116001,
-      "forks": 36579,
+      "stars": 116232,
+      "forks": 36610,
       "language": "JavaScript",
       "topics": [
         "3d",
@@ -269,19 +269,19 @@
         "webgpu",
         "webxr"
       ],
-      "pushedAt": "2026-09-28T02:21:34Z",
+      "pushedAt": "2026-10-05T05:46:44Z",
       "license": "MIT",
       "archived": false,
       "category": "3d",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "d3",
       "name": "d3",
       "url": "https://github.com/d3/d3",
       "description": "Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:",
-      "stars": 113774,
-      "forks": 22643,
+      "stars": 113805,
+      "forks": 22636,
       "language": "Shell",
       "topics": [
         "chart",
@@ -295,15 +295,15 @@
       "license": "ISC",
       "archived": false,
       "category": "dataviz",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "ant-design",
       "name": "ant-design",
       "url": "https://github.com/ant-design/ant-design",
       "description": "An enterprise-class UI design language and React UI library",
-      "stars": 99627,
-      "forks": 54706,
+      "stars": 99682,
+      "forks": 54688,
       "language": "TypeScript",
       "topics": [
         "ant-design",
@@ -314,19 +314,19 @@
         "ui-kit",
         "ui-library"
       ],
-      "pushedAt": "2026-09-28T04:00:59Z",
+      "pushedAt": "2026-10-05T02:53:49Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "mui",
       "name": "material-ui",
       "url": "https://github.com/mui/material-ui",
       "description": "Material UI: Comprehensive React component library that implements Google's Material Design. Free forever.",
-      "stars": 99103,
-      "forks": 32514,
+      "stars": 99129,
+      "forks": 32508,
       "language": "JavaScript",
       "topics": [
         "design-system",
@@ -335,11 +335,11 @@
         "react",
         "react-components"
       ],
-      "pushedAt": "2026-09-27T07:25:47Z",
+      "pushedAt": "2026-10-04T08:14:32Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -347,8 +347,8 @@
       "name": "tailwindcss",
       "url": "https://github.com/tailwindlabs/tailwindcss",
       "description": "A utility-first CSS framework for rapid UI development.",
-      "stars": 97718,
-      "forks": 6946,
+      "stars": 97773,
+      "forks": 7497,
       "language": "TypeScript",
       "topics": [
         "css",
@@ -363,15 +363,15 @@
       "license": "MIT",
       "archived": false,
       "category": "styling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "microsoft",
       "name": "playwright",
       "url": "https://github.com/microsoft/playwright",
       "description": "Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API. ",
-      "stars": 96783,
-      "forks": 6510,
+      "stars": 97099,
+      "forks": 6543,
       "language": "TypeScript",
       "topics": [
         "automation",
@@ -390,19 +390,48 @@
         "web",
         "webkit"
       ],
-      "pushedAt": "2026-09-28T01:43:01Z",
+      "pushedAt": "2026-10-03T06:57:47Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "tooling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "Leonxlnx",
+      "name": "taste-skill",
+      "url": "https://github.com/Leonxlnx/taste-skill",
+      "description": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop ",
+      "stars": 92648,
+      "forks": 6285,
+      "language": "JavaScript",
+      "topics": [
+        "agent",
+        "ai",
+        "claude",
+        "claude-code",
+        "codex",
+        "coding",
+        "design",
+        "frontend",
+        "lowcode",
+        "nocode",
+        "skill",
+        "skills",
+        "vibecoding"
+      ],
+      "pushedAt": "2026-09-26T09:01:50Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "agent-skills",
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "storybookjs",
       "name": "storybook",
       "url": "https://github.com/storybookjs/storybook",
       "description": "Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation",
-      "stars": 91163,
-      "forks": 10469,
+      "stars": 91199,
+      "forks": 10475,
       "language": "TypeScript",
       "topics": [
         "angular",
@@ -426,63 +455,34 @@
         "webpack",
         "workshop"
       ],
-      "pushedAt": "2026-09-27T02:32:36Z",
+      "pushedAt": "2026-10-05T02:13:19Z",
       "license": "MIT",
       "archived": false,
       "category": "design-tools",
-      "fetchedAt": "2026-09-28"
-    },
-    {
-      "owner": "Leonxlnx",
-      "name": "taste-skill",
-      "url": "https://github.com/Leonxlnx/taste-skill",
-      "description": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop ",
-      "stars": 90691,
-      "forks": 6174,
-      "language": "JavaScript",
-      "topics": [
-        "agent",
-        "ai",
-        "claude",
-        "claude-code",
-        "codex",
-        "coding",
-        "design",
-        "frontend",
-        "lowcode",
-        "nocode",
-        "skill",
-        "skills",
-        "vibecoding"
-      ],
-      "pushedAt": "2026-09-26T09:01:50Z",
-      "license": "MIT",
-      "archived": false,
-      "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "modelcontextprotocol",
       "name": "servers",
       "url": "https://github.com/modelcontextprotocol/servers",
       "description": "Model Context Protocol Servers",
-      "stars": 90637,
-      "forks": 11699,
+      "stars": 91010,
+      "forks": 11752,
       "language": "TypeScript",
       "topics": [],
-      "pushedAt": "2026-09-28T04:06:36Z",
+      "pushedAt": "2026-10-05T05:47:58Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vitejs",
       "name": "vite",
       "url": "https://github.com/vitejs/vite",
       "description": "Next generation frontend tooling. It's fast!",
-      "stars": 83053,
-      "forks": 8793,
+      "stars": 83152,
+      "forks": 8824,
       "language": "TypeScript",
       "topics": [
         "build-tool",
@@ -491,19 +491,19 @@
         "hmr",
         "vite"
       ],
-      "pushedAt": "2026-09-28T03:00:08Z",
+      "pushedAt": "2026-10-05T00:59:06Z",
       "license": "MIT",
       "archived": false,
       "category": "framework",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tonsky",
       "name": "FiraCode",
       "url": "https://github.com/tonsky/FiraCode",
       "description": "Free monospaced font with programming ligatures",
-      "stars": 82070,
-      "forks": 3188,
+      "stars": 82088,
+      "forks": 3189,
       "language": "Clojure",
       "topics": [
         "font",
@@ -514,15 +514,51 @@
       "license": "OFL-1.1",
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "tt-a1i",
+      "name": "archify",
+      "url": "https://github.com/tt-a1i/archify",
+      "description": "Turn any idea, plan, or codebase into a beautiful interactive diagram. An agent skill for Claude Code, Codex, and more.",
+      "stars": 77626,
+      "forks": 5218,
+      "language": "JavaScript",
+      "topics": [
+        "agent-skills",
+        "ai-agents",
+        "architecture-diagram",
+        "claude-code",
+        "claude-skills",
+        "codex",
+        "coding-agents",
+        "deepseek-harness",
+        "developer-tools",
+        "diagrams",
+        "diagrams-as-code",
+        "dsh-plugin",
+        "flowchart",
+        "llm",
+        "mermaid",
+        "opencode",
+        "sequence-diagram",
+        "software-architecture",
+        "system-design",
+        "visualization"
+      ],
+      "pushedAt": "2026-10-05T05:06:23Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "agent-skills",
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "juliangarnier",
       "name": "anime",
       "url": "https://github.com/juliangarnier/anime",
       "description": "JavaScript animation engine",
-      "stars": 73157,
-      "forks": 4944,
+      "stars": 73359,
+      "forks": 4957,
       "language": "JavaScript",
       "topics": [
         "animation",
@@ -537,51 +573,15 @@
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
-    },
-    {
-      "owner": "tt-a1i",
-      "name": "archify",
-      "url": "https://github.com/tt-a1i/archify",
-      "description": "Agent skill for beautiful, verifiable architecture, workflow, sequence, data-flow, and lifecycle diagrams—self-contained HTML with motion and crisp export.",
-      "stars": 72969,
-      "forks": 4931,
-      "language": "JavaScript",
-      "topics": [
-        "agent-skills",
-        "architecture-as-code",
-        "architecture-diagram",
-        "claude-skill",
-        "code-visualization",
-        "codex",
-        "coding-agents",
-        "data-flow-diagram",
-        "deepseek-harness",
-        "developer-tools",
-        "diagram-as-code",
-        "diagrams",
-        "diagrams-as-code",
-        "dsh-plugin",
-        "mermaid-alternative",
-        "opencode",
-        "sequence-diagram",
-        "software-architecture",
-        "system-design",
-        "text-to-diagram"
-      ],
-      "pushedAt": "2026-09-28T05:08:59Z",
-      "license": "MIT",
-      "archived": false,
-      "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "withastro",
       "name": "astro",
       "url": "https://github.com/withastro/astro",
       "description": "The web framework for content-driven websites. ⭐️ Star to support our work!",
-      "stars": 62866,
-      "forks": 3816,
+      "stars": 63058,
+      "forks": 3836,
       "language": "TypeScript",
       "topics": [
         "astro",
@@ -596,19 +596,19 @@
         "static-site-generator",
         "universal"
       ],
-      "pushedAt": "2026-09-28T03:05:40Z",
+      "pushedAt": "2026-10-05T04:24:38Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "framework",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "penpot",
       "name": "penpot",
       "url": "https://github.com/penpot/penpot",
       "description": "Penpot: The open-source design platform for Product teams that need scalable collaboration.",
-      "stars": 60455,
-      "forks": 4150,
+      "stars": 60709,
+      "forks": 4175,
       "language": "Clojure",
       "topics": [
         "clojure",
@@ -619,19 +619,19 @@
         "ux-design",
         "ux-experience"
       ],
-      "pushedAt": "2026-09-28T05:29:27Z",
+      "pushedAt": "2026-10-04T17:29:30Z",
       "license": "MPL-2.0",
       "archived": false,
       "category": "design-tools",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "pmndrs",
       "name": "zustand",
       "url": "https://github.com/pmndrs/zustand",
       "description": "🐻 Bear necessities for state management in React",
-      "stars": 58764,
-      "forks": 2191,
+      "stars": 58787,
+      "forks": 2196,
       "language": "TypeScript",
       "topics": [
         "hacktoberfest",
@@ -642,19 +642,19 @@
         "redux",
         "state-management"
       ],
-      "pushedAt": "2026-09-22T23:21:05Z",
+      "pushedAt": "2026-09-29T23:11:45Z",
       "license": "MIT",
       "archived": false,
       "category": "framework",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tldraw",
       "name": "tldraw",
       "url": "https://github.com/tldraw/tldraw",
       "description": "Build infinite canvas apps in React with the tldraw SDK. World's best, top-most agent recommended #1 five star SDK.",
-      "stars": 50611,
-      "forks": 3529,
+      "stars": 50755,
+      "forks": 3548,
       "language": "TypeScript",
       "topics": [
         "canvas",
@@ -670,18 +670,18 @@
         "sync",
         "whiteboard"
       ],
-      "pushedAt": "2026-09-27T19:37:07Z",
+      "pushedAt": "2026-10-04T12:31:44Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "design-tools",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "TanStack",
       "name": "query",
       "url": "https://github.com/TanStack/query",
       "description": "🤖 Powerful asynchronous state management, server-state utilities and data fetching for the web. TS/JS, React Query, Solid Query, Svelte Query and Vue Query.",
-      "stars": 50369,
+      "stars": 50396,
       "forks": 4249,
       "language": "TypeScript",
       "topics": [
@@ -702,19 +702,19 @@
         "update",
         "vue"
       ],
-      "pushedAt": "2026-09-28T04:14:52Z",
+      "pushedAt": "2026-10-05T03:44:51Z",
       "license": "MIT",
       "archived": false,
       "category": "framework",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "DavidHDev",
       "name": "react-bits",
       "url": "https://github.com/DavidHDev/react-bits",
       "description": "An open source collection of animated, interactive & fully customizable React components for building memorable websites.",
-      "stars": 48182,
-      "forks": 2352,
+      "stars": 48511,
+      "forks": 2376,
       "language": "JavaScript",
       "topics": [
         "3d",
@@ -734,19 +734,19 @@
         "ui-library",
         "web"
       ],
-      "pushedAt": "2026-09-27T20:48:21Z",
+      "pushedAt": "2026-10-03T09:08:29Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "animated-components",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "react-hook-form",
       "name": "react-hook-form",
       "url": "https://github.com/react-hook-form/react-hook-form",
       "description": "📋 React Hooks for form state management and validation (Web + React Native)",
-      "stars": 44864,
-      "forks": 2475,
+      "stars": 44871,
+      "forks": 2485,
       "language": "TypeScript",
       "topics": [
         "dx",
@@ -759,19 +759,19 @@
         "ux",
         "validation"
       ],
-      "pushedAt": "2026-09-27T09:19:50Z",
+      "pushedAt": "2026-10-04T09:53:40Z",
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "colinhacks",
       "name": "zod",
       "url": "https://github.com/colinhacks/zod",
       "description": "TypeScript-first schema validation with static type inference",
-      "stars": 44030,
-      "forks": 2207,
+      "stars": 44056,
+      "forks": 2224,
       "language": "TypeScript",
       "topics": [
         "runtime-validation",
@@ -780,19 +780,19 @@
         "type-inference",
         "typescript"
       ],
-      "pushedAt": "2026-09-24T02:29:02Z",
+      "pushedAt": "2026-10-02T18:40:41Z",
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "saadeghi",
       "name": "daisyui",
       "url": "https://github.com/saadeghi/daisyui",
       "description": "🌼 🌼 🌼 🌼 🌼  The most popular, free and open-source Tailwind CSS component library",
-      "stars": 42495,
-      "forks": 1695,
+      "stars": 42540,
+      "forks": 1702,
       "language": "JavaScript",
       "topics": [
         "component",
@@ -816,11 +816,11 @@
         "ui-library",
         "ui-pattern"
       ],
-      "pushedAt": "2026-09-25T21:49:23Z",
+      "pushedAt": "2026-09-30T02:05:20Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -828,8 +828,8 @@
       "name": "chakra-ui",
       "url": "https://github.com/chakra-ui/chakra-ui",
       "description": "Chakra UI is a component system for building SaaS products with speed ⚡️",
-      "stars": 40671,
-      "forks": 3646,
+      "stars": 40678,
+      "forks": 3647,
       "language": "TypeScript",
       "topics": [
         "a11y",
@@ -853,7 +853,7 @@
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -861,8 +861,8 @@
       "name": "CopilotKit",
       "url": "https://github.com/CopilotKit/CopilotKit",
       "description": "The Frontend Stack for Agents & Generative UI. React, Angular, Mobile, Slack, and more.  Makers of the AG-UI Protocol",
-      "stars": 37568,
-      "forks": 4664,
+      "stars": 37748,
+      "forks": 4699,
       "language": "TypeScript",
       "topics": [
         "agent",
@@ -886,19 +886,19 @@
         "ts",
         "typescript"
       ],
-      "pushedAt": "2026-09-28T04:38:21Z",
+      "pushedAt": "2026-10-05T05:40:24Z",
       "license": "MIT",
       "archived": false,
       "category": "ai-ui",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "motiondivision",
       "name": "motion",
       "url": "https://github.com/motiondivision/motion",
       "description": "A modern animation library for React and JavaScript",
-      "stars": 33759,
-      "forks": 1379,
+      "stars": 33833,
+      "forks": 1387,
       "language": "TypeScript",
       "topics": [
         "animation",
@@ -908,19 +908,19 @@
         "reactanimations",
         "spring"
       ],
-      "pushedAt": "2026-09-27T20:14:07Z",
+      "pushedAt": "2026-10-05T04:36:59Z",
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "pmndrs",
       "name": "react-three-fiber",
       "url": "https://github.com/pmndrs/react-three-fiber",
       "description": "🇨🇭 A React renderer for Three.js",
-      "stars": 32577,
-      "forks": 1993,
+      "stars": 32732,
+      "forks": 2005,
       "language": "TypeScript",
       "topics": [
         "3d",
@@ -930,34 +930,49 @@
         "renderer",
         "threejs"
       ],
-      "pushedAt": "2026-09-26T15:31:26Z",
+      "pushedAt": "2026-10-02T03:20:34Z",
       "license": "MIT",
       "archived": false,
       "category": "3d",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "airbnb",
       "name": "lottie-web",
       "url": "https://github.com/airbnb/lottie-web",
       "description": "Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/",
-      "stars": 32129,
-      "forks": 2939,
+      "stars": 32143,
+      "forks": 2940,
       "language": "JavaScript",
       "topics": [],
       "pushedAt": "2025-09-01T09:01:31Z",
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "vercel-labs",
+      "name": "agent-skills",
+      "url": "https://github.com/vercel-labs/agent-skills",
+      "description": "Vercel's official collection of agent skills",
+      "stars": 31937,
+      "forks": 2802,
+      "language": "JavaScript",
+      "topics": [],
+      "pushedAt": "2026-08-28T13:36:31Z",
+      "license": null,
+      "archived": false,
+      "category": "agent-skills",
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "mantinedev",
       "name": "mantine",
       "url": "https://github.com/mantinedev/mantine",
       "description": "A fully featured React components library",
-      "stars": 31776,
-      "forks": 2378,
+      "stars": 31796,
+      "forks": 2386,
       "language": "TypeScript",
       "topics": [
         "dark-mode",
@@ -967,34 +982,19 @@
         "typescript",
         "uikit"
       ],
-      "pushedAt": "2026-09-26T15:08:37Z",
+      "pushedAt": "2026-10-04T13:50:41Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
-    },
-    {
-      "owner": "vercel-labs",
-      "name": "agent-skills",
-      "url": "https://github.com/vercel-labs/agent-skills",
-      "description": "Vercel's official collection of agent skills",
-      "stars": 31634,
-      "forks": 2771,
-      "language": "JavaScript",
-      "topics": [],
-      "pushedAt": "2026-08-28T13:36:31Z",
-      "license": null,
-      "archived": false,
-      "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "heroui-inc",
       "name": "heroui",
       "url": "https://github.com/heroui-inc/heroui",
       "description": "🚀 Beautiful, fast and modern React UI library. (Previously NextUI)",
-      "stars": 30838,
-      "forks": 2235,
+      "stars": 30867,
+      "forks": 2236,
       "language": "TypeScript",
       "topics": [
         "component-library",
@@ -1002,19 +1002,19 @@
         "library",
         "reactjs"
       ],
-      "pushedAt": "2026-09-27T13:02:07Z",
+      "pushedAt": "2026-10-03T04:44:09Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "pmndrs",
       "name": "react-spring",
       "url": "https://github.com/pmndrs/react-spring",
       "description": "✌️ A spring physics based React animation library",
-      "stars": 29161,
-      "forks": 1218,
+      "stars": 29166,
+      "forks": 1219,
       "language": "TypeScript",
       "topics": [
         "animation-library",
@@ -1023,19 +1023,40 @@
         "spring-physics",
         "springs"
       ],
-      "pushedAt": "2026-09-28T00:38:44Z",
+      "pushedAt": "2026-10-05T02:03:42Z",
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "greensock",
+      "name": "GSAP",
+      "url": "https://github.com/greensock/GSAP",
+      "description": "GSAP (GreenSock Animation Platform), a JavaScript animation library for the modern web",
+      "stars": 28806,
+      "forks": 2233,
+      "language": "JavaScript",
+      "topics": [
+        "animation",
+        "gsap",
+        "javascript",
+        "javascript-library",
+        "scroll"
+      ],
+      "pushedAt": "2026-04-13T13:08:58Z",
+      "license": null,
+      "archived": false,
+      "category": "animation",
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tailwindlabs",
       "name": "headlessui",
       "url": "https://github.com/tailwindlabs/headlessui",
       "description": "Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.",
-      "stars": 28758,
-      "forks": 1205,
+      "stars": 28767,
+      "forks": 1208,
       "language": "TypeScript",
       "topics": [
         "a11y",
@@ -1051,36 +1072,15 @@
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
-    },
-    {
-      "owner": "greensock",
-      "name": "GSAP",
-      "url": "https://github.com/greensock/GSAP",
-      "description": "GSAP (GreenSock Animation Platform), a JavaScript animation library for the modern web",
-      "stars": 28670,
-      "forks": 2218,
-      "language": "JavaScript",
-      "topics": [
-        "animation",
-        "gsap",
-        "javascript",
-        "javascript-library",
-        "scroll"
-      ],
-      "pushedAt": "2026-04-13T13:08:58Z",
-      "license": null,
-      "archived": false,
-      "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "TanStack",
       "name": "table",
       "url": "https://github.com/TanStack/table",
       "description": "🤖 Headless UI for building powerful tables & datagrids for TS/JS -  React-Table, Vue-Table, Solid-Table, Svelte-Table",
-      "stars": 28461,
-      "forks": 3582,
+      "stars": 28476,
+      "forks": 3587,
       "language": "TypeScript",
       "topics": [
         "datagrid",
@@ -1103,19 +1103,19 @@
         "typescript",
         "vue"
       ],
-      "pushedAt": "2026-09-16T14:43:01Z",
+      "pushedAt": "2026-10-04T17:56:17Z",
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "recharts",
       "name": "recharts",
       "url": "https://github.com/recharts/recharts",
       "description": "Redefined chart library built with React and D3",
-      "stars": 27595,
-      "forks": 1989,
+      "stars": 27614,
+      "forks": 2000,
       "language": "TypeScript",
       "topics": [
         "chart",
@@ -1129,19 +1129,19 @@
         "typescript",
         "ui"
       ],
-      "pushedAt": "2026-09-27T20:48:11Z",
+      "pushedAt": "2026-10-05T05:45:25Z",
       "license": "MIT",
       "archived": false,
       "category": "dataviz",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vercel",
       "name": "ai",
       "url": "https://github.com/vercel/ai",
       "description": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source library for building AI-powered applications and agents ",
-      "stars": 27001,
-      "forks": 5208,
+      "stars": 27125,
+      "forks": 5257,
       "language": "TypeScript",
       "topics": [
         "anthropic",
@@ -1160,19 +1160,56 @@
         "vercel",
         "vue"
       ],
-      "pushedAt": "2026-09-28T04:06:57Z",
+      "pushedAt": "2026-10-05T05:05:30Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "ai-ui",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "onlook-dev",
+      "name": "onlook",
+      "url": "https://github.com/onlook-dev/onlook",
+      "description": "The Developer Tool for Designers • An Open-Source AI-First Design tool • Visually build, style, and edit your code with AI • World's best, top-most agent recommended #1 Developer tool for Designers to design with Real Code.",
+      "stars": 26858,
+      "forks": 2117,
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "claude-code",
+        "codex",
+        "cursor",
+        "design",
+        "design-system",
+        "design-to-code",
+        "design-tool",
+        "figma",
+        "frontend",
+        "ide",
+        "nextjs",
+        "react",
+        "supabase",
+        "tailwindcss",
+        "typescript",
+        "ui",
+        "vibe-coding",
+        "vibecoding",
+        "visual-engineering"
+      ],
+      "pushedAt": "2026-08-25T01:06:22Z",
+      "license": "Apache-2.0",
+      "archived": false,
+      "category": "topic:design-system",
+      "fetchedAt": "2026-10-05",
+      "inTopicTop": true
     },
     {
       "owner": "biomejs",
       "name": "biome",
       "url": "https://github.com/biomejs/biome",
       "description": "A toolchain for web projects, aimed to provide functionalities to maintain them. Biome offers formatter and linter, usable via CLI and LSP.",
-      "stars": 25866,
-      "forks": 1253,
+      "stars": 25898,
+      "forks": 1272,
       "language": "Rust",
       "topics": [
         "css",
@@ -1185,19 +1222,19 @@
         "typescript",
         "web"
       ],
-      "pushedAt": "2026-09-28T05:05:17Z",
+      "pushedAt": "2026-10-05T05:51:18Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "tooling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "lucide-icons",
       "name": "lucide",
       "url": "https://github.com/lucide-icons/lucide",
       "description": "Beautiful & consistent icon toolkit made by the community. Open-source project and a fork of Feather Icons.",
-      "stars": 24750,
-      "forks": 1598,
+      "stars": 24857,
+      "forks": 1616,
       "language": "TypeScript",
       "topics": [
         "feather-icons",
@@ -1211,18 +1248,18 @@
         "ui-design",
         "vue"
       ],
-      "pushedAt": "2026-09-27T14:36:57Z",
+      "pushedAt": "2026-10-04T14:38:46Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tailwindlabs",
       "name": "heroicons",
       "url": "https://github.com/tailwindlabs/heroicons",
       "description": "A set of free MIT-licensed high-quality SVG icons for UI development.",
-      "stars": 23830,
+      "stars": 23851,
       "forks": 1315,
       "language": "JavaScript",
       "topics": [],
@@ -1230,15 +1267,15 @@
       "license": "MIT",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "pedronauck",
       "name": "docz",
       "url": "https://github.com/pedronauck/docz",
       "description": "✍ It has never been so easy to document your things!",
-      "stars": 23568,
-      "forks": 1399,
+      "stars": 23571,
+      "forks": 1398,
       "language": "TypeScript",
       "topics": [
         "design-system",
@@ -1257,7 +1294,7 @@
       "license": "MIT",
       "archived": true,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1265,8 +1302,8 @@
       "name": "oxc",
       "url": "https://github.com/oxc-project/oxc",
       "description": "⚓ A collection of high-performance JavaScript tools.",
-      "stars": 22903,
-      "forks": 1326,
+      "stars": 22943,
+      "forks": 1345,
       "language": "Rust",
       "topics": [
         "compiler",
@@ -1277,19 +1314,19 @@
         "transpiler",
         "typescript"
       ],
-      "pushedAt": "2026-09-28T04:02:06Z",
+      "pushedAt": "2026-10-05T05:21:52Z",
       "license": "MIT",
       "archived": false,
       "category": "tooling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "magicuidesign",
       "name": "magicui",
       "url": "https://github.com/magicuidesign/magicui",
       "description": "UI Library for Design Engineers. Animated components and effects you can copy and paste into your apps. Free. Open Source.",
-      "stars": 22406,
-      "forks": 1139,
+      "stars": 22467,
+      "forks": 1143,
       "language": "MDX",
       "topics": [
         "components",
@@ -1304,36 +1341,15 @@
       "license": "MIT",
       "archived": false,
       "category": "animated-components",
-      "fetchedAt": "2026-09-28"
-    },
-    {
-      "owner": "aidenybai",
-      "name": "react-scan",
-      "url": "https://github.com/aidenybai/react-scan",
-      "description": "Scan and fix React performance issues",
-      "stars": 21858,
-      "forks": 391,
-      "language": "TypeScript",
-      "topics": [
-        "javascript",
-        "react",
-        "react-dom",
-        "react-scan",
-        "rendering"
-      ],
-      "pushedAt": "2026-08-16T09:23:35Z",
-      "license": "MIT",
-      "archived": false,
-      "category": "tooling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tabler",
       "name": "tabler-icons",
       "url": "https://github.com/tabler/tabler-icons",
       "description": "A set of over 6200 free MIT-licensed high-quality SVG icons for you to use in your web projects.",
-      "stars": 21799,
-      "forks": 1209,
+      "stars": 21900,
+      "forks": 1217,
       "language": "JavaScript",
       "topics": [
         "bootstrap-icons",
@@ -1351,19 +1367,40 @@
         "svg-icons",
         "tabler-icons"
       ],
-      "pushedAt": "2026-09-22T13:51:16Z",
+      "pushedAt": "2026-10-04T23:47:03Z",
       "license": "MIT",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "aidenybai",
+      "name": "react-scan",
+      "url": "https://github.com/aidenybai/react-scan",
+      "description": "Scan and fix React performance issues",
+      "stars": 21865,
+      "forks": 392,
+      "language": "TypeScript",
+      "topics": [
+        "javascript",
+        "react",
+        "react-dom",
+        "react-scan",
+        "rendering"
+      ],
+      "pushedAt": "2026-08-16T09:23:35Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "tooling",
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "airbnb",
       "name": "visx",
       "url": "https://github.com/airbnb/visx",
       "description": "🐯 visx | visualization components",
-      "stars": 21064,
-      "forks": 770,
+      "stars": 21075,
+      "forks": 772,
       "language": "TypeScript",
       "topics": [
         "chart",
@@ -1379,30 +1416,30 @@
       "license": "MIT",
       "archived": false,
       "category": "dataviz",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "google",
       "name": "fonts",
       "url": "https://github.com/google/fonts",
       "description": "Font files available from Google Fonts, and a public issue tracker for all things Google Fonts",
-      "stars": 20532,
-      "forks": 2921,
+      "stars": 20566,
+      "forks": 2923,
       "language": "HTML",
       "topics": [],
-      "pushedAt": "2026-09-28T01:10:30Z",
+      "pushedAt": "2026-10-05T01:11:24Z",
       "license": null,
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "rsms",
       "name": "inter",
       "url": "https://github.com/rsms/inter",
       "description": "The Inter font family",
-      "stars": 19921,
-      "forks": 485,
+      "stars": 19938,
+      "forks": 486,
       "language": "Python",
       "topics": [
         "design",
@@ -1413,15 +1450,15 @@
       "license": "OFL-1.1",
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "radix-ui",
       "name": "primitives",
       "url": "https://github.com/radix-ui/primitives",
       "description": "Radix Primitives is an open-source UI component library for building high-quality, accessible design systems and web apps. Maintained by @workos.",
-      "stars": 19340,
-      "forks": 1250,
+      "stars": 19360,
+      "forks": 1256,
       "language": "TypeScript",
       "topics": [
         "accessibility",
@@ -1438,15 +1475,15 @@
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "gztchan",
       "name": "awesome-design",
       "url": "https://github.com/gztchan/awesome-design",
       "description": "🌟 Curated design resources from all over the world.",
-      "stars": 17583,
-      "forks": 1236,
+      "stars": 17600,
+      "forks": 1237,
       "language": null,
       "topics": [
         "adobe",
@@ -1468,7 +1505,7 @@
       "license": null,
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1476,27 +1513,27 @@
       "name": "vitest",
       "url": "https://github.com/vitest-dev/vitest",
       "description": "Next generation testing framework powered by Vite.",
-      "stars": 17166,
-      "forks": 2038,
+      "stars": 17181,
+      "forks": 2066,
       "language": "TypeScript",
       "topics": [
         "test",
         "testing-tools",
         "vite"
       ],
-      "pushedAt": "2026-09-28T00:26:19Z",
+      "pushedAt": "2026-10-05T03:44:08Z",
       "license": "MIT",
       "archived": false,
       "category": "tooling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "GLips",
       "name": "Figma-Context-MCP",
       "url": "https://github.com/GLips/Figma-Context-MCP",
       "description": "MCP server to provide Figma layout information to AI coding agents like Cursor",
-      "stars": 15921,
-      "forks": 1262,
+      "stars": 15955,
+      "forks": 1264,
       "language": "TypeScript",
       "topics": [
         "ai",
@@ -1505,19 +1542,19 @@
         "mcp",
         "typescript"
       ],
-      "pushedAt": "2026-09-18T03:44:15Z",
+      "pushedAt": "2026-10-03T03:46:18Z",
       "license": "MIT",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "adobe",
       "name": "react-spectrum",
       "url": "https://github.com/adobe/react-spectrum",
       "description": "A collection of libraries and tools that help you build adaptive, accessible, and robust user experiences.",
-      "stars": 15894,
-      "forks": 1581,
+      "stars": 15914,
+      "forks": 1590,
       "language": "TypeScript",
       "topics": [
         "accessibility",
@@ -1527,19 +1564,19 @@
         "ui-components",
         "wai-aria"
       ],
-      "pushedAt": "2026-09-28T00:41:47Z",
+      "pushedAt": "2026-10-05T04:18:00Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "TanStack",
       "name": "router",
       "url": "https://github.com/TanStack/router",
       "description": "🤖 A client-first, server-capable, fully type-safe router and full-stack framework for the web (React and more).",
-      "stars": 15135,
-      "forks": 1871,
+      "stars": 15153,
+      "forks": 1882,
       "language": "TypeScript",
       "topics": [
         "framework",
@@ -1559,19 +1596,19 @@
         "typescript",
         "url"
       ],
-      "pushedAt": "2026-09-28T03:16:26Z",
+      "pushedAt": "2026-10-04T22:19:35Z",
       "license": "MIT",
       "archived": false,
       "category": "framework",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "plouc",
       "name": "nivo",
       "url": "https://github.com/plouc/nivo",
       "description": "nivo provides a rich set of dataviz components, built on top of the awesome d3 and React libraries",
-      "stars": 14102,
-      "forks": 1081,
+      "stars": 14107,
+      "forks": 1082,
       "language": "TypeScript",
       "topics": [
         "canvas",
@@ -1587,15 +1624,15 @@
       "license": "MIT",
       "archived": false,
       "category": "dataviz",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "formkit",
       "name": "auto-animate",
       "url": "https://github.com/formkit/auto-animate",
       "description": "A zero-config, drop-in animation utility that adds smooth transitions to your web app. You can use it with React, Vue, or any other JavaScript application.",
-      "stars": 13924,
-      "forks": 260,
+      "stars": 13926,
+      "forks": 261,
       "language": "TypeScript",
       "topics": [
         "animation",
@@ -1608,15 +1645,15 @@
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "stenciljs",
       "name": "core",
       "url": "https://github.com/stenciljs/core",
       "description": "A toolchain for building scalable, enterprise-ready component systems on top of TypeScript and Web Component standards. Stencil components can be distributed natively to React, Angular, Vue, (+ more) and traditional web applications from a single, framework-agnostic codebase.",
-      "stars": 13133,
-      "forks": 858,
+      "stars": 13136,
+      "forks": 861,
       "language": "TypeScript",
       "topics": [
         "custom-element",
@@ -1630,11 +1667,11 @@
         "typescript",
         "webcomponent"
       ],
-      "pushedAt": "2026-09-24T15:54:51Z",
+      "pushedAt": "2026-10-02T21:26:13Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1642,8 +1679,8 @@
       "name": "JetBrainsMono",
       "url": "https://github.com/JetBrains/JetBrainsMono",
       "description": "JetBrains Mono – the free and open-source typeface for developers",
-      "stars": 13048,
-      "forks": 376,
+      "stars": 13059,
+      "forks": 375,
       "language": "Shell",
       "topics": [
         "coding-font",
@@ -1657,15 +1694,15 @@
       "license": "OFL-1.1",
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "primer",
       "name": "css",
       "url": "https://github.com/primer/css",
       "description": "Primer is GitHub's design system. This is the CSS implementation",
-      "stars": 13020,
-      "forks": 1286,
+      "stars": 13028,
+      "forks": 1288,
       "language": "SCSS",
       "topics": [
         "css",
@@ -1679,11 +1716,11 @@
         "styleguide",
         "ui-components"
       ],
-      "pushedAt": "2026-09-28T05:35:03Z",
+      "pushedAt": "2026-10-05T05:34:36Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1691,8 +1728,8 @@
       "name": "sonner",
       "url": "https://github.com/emilkowalski/sonner",
       "description": "An opinionated toast component for React.",
-      "stars": 13016,
-      "forks": 463,
+      "stars": 13026,
+      "forks": 465,
       "language": "TypeScript",
       "topics": [
         "notifications",
@@ -1703,15 +1740,15 @@
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "dip",
       "name": "cmdk",
       "url": "https://github.com/dip/cmdk",
       "description": "Fast, unstyled command menu React component.",
-      "stars": 12991,
-      "forks": 380,
+      "stars": 13003,
+      "forks": 382,
       "language": "TypeScript",
       "topics": [
         "combobox",
@@ -1724,14 +1761,14 @@
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "theatre-js",
       "name": "theatre",
       "url": "https://github.com/theatre-js/theatre",
       "description": "Motion design editor for the web",
-      "stars": 12704,
+      "stars": 12725,
       "forks": 478,
       "language": "TypeScript",
       "topics": [
@@ -1746,15 +1783,15 @@
       "license": "Apache-2.0",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "assistant-ui",
       "name": "assistant-ui",
       "url": "https://github.com/assistant-ui/assistant-ui",
       "description": "Typescript/React Library for AI Chat 💬🚀",
-      "stars": 12331,
-      "forks": 1207,
+      "stars": 12406,
+      "forks": 1228,
       "language": "TypeScript",
       "topics": [
         "ai-chatbot",
@@ -1768,19 +1805,19 @@
         "ui-components",
         "vercel-ai-sdk"
       ],
-      "pushedAt": "2026-09-28T04:39:30Z",
+      "pushedAt": "2026-10-05T04:53:25Z",
       "license": "MIT",
       "archived": false,
       "category": "ai-ui",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "markmead",
       "name": "hyperui",
       "url": "https://github.com/markmead/hyperui",
       "description": "Free Tailwind CSS v4 components for your next project, designed to enhance your web development with the latest features and styles 🚀",
-      "stars": 12244,
-      "forks": 518,
+      "stars": 12252,
+      "forks": 521,
       "language": "Astro",
       "topics": [
         "accessibility",
@@ -1799,7 +1836,7 @@
       "license": "MIT",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1807,8 +1844,8 @@
       "name": "98.css",
       "url": "https://github.com/jdan/98.css",
       "description": "A design system for building faithful recreations of old UIs",
-      "stars": 11516,
-      "forks": 378,
+      "stars": 11512,
+      "forks": 380,
       "language": "CSS",
       "topics": [
         "css",
@@ -1820,7 +1857,7 @@
       "license": "MIT",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1828,8 +1865,8 @@
       "name": "material-web",
       "url": "https://github.com/material-components/material-web",
       "description": "Material Design Web Components",
-      "stars": 11282,
-      "forks": 1144,
+      "stars": 11314,
+      "forks": 1145,
       "language": "SCSS",
       "topics": [
         "component-",
@@ -1844,11 +1881,11 @@
         "web",
         "web-components"
       ],
-      "pushedAt": "2026-09-25T05:02:41Z",
+      "pushedAt": "2026-10-05T03:27:42Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1856,8 +1893,8 @@
       "name": "base-ui",
       "url": "https://github.com/mui/base-ui",
       "description": "Unstyled UI components for building accessible web apps and design systems. From the creators of Radix, Floating UI, and Material UI.",
-      "stars": 11007,
-      "forks": 558,
+      "stars": 11072,
+      "forks": 563,
       "language": "TypeScript",
       "topics": [
         "accessibility",
@@ -1869,11 +1906,11 @@
         "ui",
         "wai-aria"
       ],
-      "pushedAt": "2026-09-28T00:49:23Z",
+      "pushedAt": "2026-10-05T03:34:46Z",
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1881,7 +1918,7 @@
       "name": "react-native-ui-kitten",
       "url": "https://github.com/akveo/react-native-ui-kitten",
       "description": "React Native UI library built on the Eva Design System: 30+ themeable, accessible components for iOS, Android and web. TypeScript, React 19 / RN 0.81, Eva and Material themes with runtime light/dark switching, on-demand style compilation.",
-      "stars": 10666,
+      "stars": 10667,
       "forks": 962,
       "language": "TypeScript",
       "topics": [
@@ -1894,11 +1931,11 @@
         "ui-kit",
         "ui-library"
       ],
-      "pushedAt": "2026-09-27T19:54:36Z",
+      "pushedAt": "2026-10-04T18:24:31Z",
       "license": "MIT",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1906,7 +1943,7 @@
       "name": "shadcn-vue",
       "url": "https://github.com/unovue/shadcn-vue",
       "description": "Vue port of shadcn-ui",
-      "stars": 10634,
+      "stars": 10664,
       "forks": 680,
       "language": "TypeScript",
       "topics": [
@@ -1921,18 +1958,18 @@
         "vue",
         "vue-ui-kit"
       ],
-      "pushedAt": "2026-09-22T05:59:55Z",
+      "pushedAt": "2026-10-04T05:55:43Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vanilla-extract-css",
       "name": "vanilla-extract",
       "url": "https://github.com/vanilla-extract-css/vanilla-extract",
       "description": "Zero-runtime Stylesheets-in-TypeScript",
-      "stars": 10432,
+      "stars": 10435,
       "forks": 359,
       "language": "TypeScript",
       "topics": [],
@@ -1940,15 +1977,15 @@
       "license": "MIT",
       "archived": false,
       "category": "styling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "DouyinFE",
       "name": "semi-design",
       "url": "https://github.com/DouyinFE/semi-design",
       "description": "🚀A modern, comprehensive, flexible design system and React UI library, AI-friendly built-in.🎨Provide 3000+ Design Tokens, easy to build your design system. Make Semi Design to Any Design.🧑🏻‍💻 Design to Code in one click",
-      "stars": 10390,
-      "forks": 849,
+      "stars": 10403,
+      "forks": 851,
       "language": "TypeScript",
       "topics": [
         "ai-friendly",
@@ -1967,7 +2004,7 @@
       "license": "NOASSERTION",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -1975,8 +2012,8 @@
       "name": "drei",
       "url": "https://github.com/pmndrs/drei",
       "description": "🥉 useful helpers for react-three-fiber",
-      "stars": 9900,
-      "forks": 840,
+      "stars": 9915,
+      "forks": 842,
       "language": "JavaScript",
       "topics": [
         "helpers",
@@ -1985,19 +2022,19 @@
         "react-three-fiber",
         "threejs"
       ],
-      "pushedAt": "2026-09-27T11:33:33Z",
+      "pushedAt": "2026-09-30T16:14:30Z",
       "license": "MIT",
       "archived": false,
       "category": "3d",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "carbon-design-system",
       "name": "carbon",
       "url": "https://github.com/carbon-design-system/carbon",
       "description": "A design system built by IBM",
-      "stars": 9499,
-      "forks": 2282,
+      "stars": 9521,
+      "forks": 2287,
       "language": "JavaScript",
       "topics": [
         "design-system",
@@ -2006,20 +2043,38 @@
         "react",
         "scss"
       ],
-      "pushedAt": "2026-09-28T05:28:45Z",
+      "pushedAt": "2026-10-04T15:38:03Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
+    },
+    {
+      "owner": "ibelick",
+      "name": "ui-skills",
+      "url": "https://github.com/ibelick/ui-skills",
+      "description": "Skills for Design Engineers",
+      "stars": 9396,
+      "forks": 430,
+      "language": "TypeScript",
+      "topics": [
+        "skills",
+        "ui-skills"
+      ],
+      "pushedAt": "2026-10-04T16:53:09Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "agent-skills",
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "themesberg",
       "name": "flowbite",
       "url": "https://github.com/themesberg/flowbite",
       "description": "Open-source UI component library and front-end development framework based on Tailwind CSS",
-      "stars": 9365,
-      "forks": 864,
+      "stars": 9367,
+      "forks": 868,
       "language": "HTML",
       "topics": [
         "components",
@@ -2044,34 +2099,16 @@
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
-    },
-    {
-      "owner": "ibelick",
-      "name": "ui-skills",
-      "url": "https://github.com/ibelick/ui-skills",
-      "description": "Skills for Design Engineers",
-      "stars": 9187,
-      "forks": 415,
-      "language": "TypeScript",
-      "topics": [
-        "skills",
-        "ui-skills"
-      ],
-      "pushedAt": "2026-09-27T08:10:35Z",
-      "license": "MIT",
-      "archived": false,
-      "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
     },
     {
       "owner": "huntabyte",
       "name": "shadcn-svelte",
       "url": "https://github.com/huntabyte/shadcn-svelte",
       "description": "shadcn/ui, but for Svelte. ✨",
-      "stars": 9163,
-      "forks": 573,
+      "stars": 9177,
+      "forks": 574,
       "language": "TypeScript",
       "topics": [
         "bits-ui",
@@ -2085,19 +2122,19 @@
         "sveltekit",
         "tailwindcss"
       ],
-      "pushedAt": "2026-09-23T23:10:51Z",
+      "pushedAt": "2026-10-03T21:24:52Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "nuejs",
       "name": "nue",
       "url": "https://github.com/nuejs/nue",
       "description": "Fastest way to build modern websites",
-      "stars": 8820,
-      "forks": 257,
+      "stars": 8815,
+      "forks": 259,
       "language": "JavaScript",
       "topics": [
         "design",
@@ -2111,7 +2148,7 @@
       "license": "MIT",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -2119,8 +2156,8 @@
       "name": "themes",
       "url": "https://github.com/radix-ui/themes",
       "description": "Radix Themes is an open-source component library optimized for fast development, easy maintenance, and accessibility. Maintained by @workos.",
-      "stars": 8727,
-      "forks": 338,
+      "stars": 8743,
+      "forks": 341,
       "language": "TypeScript",
       "topics": [
         "accessibility",
@@ -2139,15 +2176,15 @@
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "emilkowalski",
       "name": "vaul",
       "url": "https://github.com/emilkowalski/vaul",
       "description": "A drawer component for React.",
-      "stars": 8626,
-      "forks": 371,
+      "stars": 8629,
+      "forks": 375,
       "language": "TypeScript",
       "topics": [
         "dialog",
@@ -2158,7 +2195,7 @@
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "grommet",
@@ -2177,44 +2214,11 @@
         "react",
         "ux-framework"
       ],
-      "pushedAt": "2026-09-25T22:10:01Z",
+      "pushedAt": "2026-10-02T20:32:42Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
-      "inTopicTop": true
-    },
-    {
-      "owner": "rebassjs",
-      "name": "rebass",
-      "url": "https://github.com/rebassjs/rebass",
-      "description": ":atom_symbol: React primitive UI components built with styled-system.",
-      "stars": 7895,
-      "forks": 628,
-      "language": "JavaScript",
-      "topics": [
-        "color",
-        "components",
-        "css",
-        "design-system",
-        "emotion",
-        "grid",
-        "javascript",
-        "layout",
-        "react",
-        "react-components",
-        "rebass",
-        "styled-components",
-        "styled-system",
-        "theme",
-        "typography",
-        "ui"
-      ],
-      "pushedAt": "2023-07-27T03:42:53Z",
-      "license": "MIT",
-      "archived": false,
-      "category": "topic:design-system",
-      "fetchedAt": "2026-09-28",
+      "fetchedAt": "2026-10-05",
       "inTopicTop": true
     },
     {
@@ -2222,7 +2226,7 @@
       "name": "homepage",
       "url": "https://github.com/phosphor-icons/homepage",
       "description": "The homepage of Phosphor Icons, a flexible icon family for everyone",
-      "stars": 7557,
+      "stars": 7594,
       "forks": 220,
       "language": "TypeScript",
       "topics": [
@@ -2236,15 +2240,15 @@
       "license": "MIT",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "nuxt",
       "name": "ui",
       "url": "https://github.com/nuxt/ui",
       "description": "The Intuitive Vue UI Library powered by Reka UI & Tailwind CSS.",
-      "stars": 6967,
-      "forks": 1124,
+      "stars": 6983,
+      "forks": 1127,
       "language": "TypeScript",
       "topics": [
         "components",
@@ -2255,19 +2259,19 @@
         "ui",
         "vue"
       ],
-      "pushedAt": "2026-09-28T00:26:55Z",
+      "pushedAt": "2026-10-05T00:24:21Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "joe-bell",
       "name": "cva",
       "url": "https://github.com/joe-bell/cva",
       "description": "Class Variance Authority",
-      "stars": 6902,
-      "forks": 139,
+      "stars": 6904,
+      "forks": 140,
       "language": "TypeScript",
       "topics": [
         "class-variance-authority",
@@ -2277,19 +2281,19 @@
         "cva",
         "variants"
       ],
-      "pushedAt": "2026-09-28T03:41:31Z",
+      "pushedAt": "2026-10-05T03:45:02Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "styling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "TanStack",
       "name": "form",
       "url": "https://github.com/TanStack/form",
       "description": "🤖 Headless, performant, and type-safe form state management for TS/JS, React, Vue, Angular, Solid, and Lit.",
-      "stars": 6699,
-      "forks": 690,
+      "stars": 6703,
+      "forks": 691,
       "language": "TypeScript",
       "topics": [
         "angular",
@@ -2305,19 +2309,19 @@
         "yup",
         "zod"
       ],
-      "pushedAt": "2026-09-27T07:33:44Z",
+      "pushedAt": "2026-10-01T18:13:52Z",
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "ibelick",
       "name": "motion-primitives",
       "url": "https://github.com/ibelick/motion-primitives",
       "description": "UI kit to make beautiful, animated interfaces, faster. Customizable. Open Source.",
-      "stars": 6402,
-      "forks": 265,
+      "stars": 6461,
+      "forks": 270,
       "language": "TypeScript",
       "topics": [
         "animate",
@@ -2330,19 +2334,19 @@
         "tailwindcss",
         "ui"
       ],
-      "pushedAt": "2026-09-16T09:23:09Z",
+      "pushedAt": "2026-09-28T13:32:11Z",
       "license": "MIT",
       "archived": false,
       "category": "animated-components",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "nolly-studio",
       "name": "cult-ui",
       "url": "https://github.com/nolly-studio/cult-ui",
-      "description": "Components crafted for Design Engineers. Styled using Tailwind CSS, fully compatible with Shadcn, and easy to integrate—just copy and paste. MIT 🤌",
-      "stars": 6198,
-      "forks": 335,
+      "description": "Animated components for design engineers. 150+ free shadcn/ui components, built with Tailwind CSS and Motion. MIT licensed.",
+      "stars": 6321,
+      "forks": 344,
       "language": "TypeScript",
       "topics": [
         "components",
@@ -2354,20 +2358,20 @@
         "tailwindcss",
         "typescript"
       ],
-      "pushedAt": "2026-09-23T05:31:07Z",
+      "pushedAt": "2026-10-01T06:53:46Z",
       "license": "MIT",
       "archived": false,
       "category": "animated-components",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "chakra-ui",
       "name": "panda",
       "url": "https://github.com/chakra-ui/panda",
       "description": "🐼 Universal, Type-Safe, CSS-in-JS Framework for Design Systems ⚡️",
-      "stars": 6195,
-      "forks": 319,
-      "language": "TypeScript",
+      "stars": 6209,
+      "forks": 321,
+      "language": "Rust",
       "topics": [
         "atomic-css",
         "compiler",
@@ -2384,18 +2388,18 @@
         "typescript",
         "utility-classes"
       ],
-      "pushedAt": "2026-09-27T16:12:26Z",
+      "pushedAt": "2026-10-05T01:56:37Z",
       "license": "MIT",
       "archived": false,
       "category": "styling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "fontsource",
       "name": "fontsource",
       "url": "https://github.com/fontsource/fontsource",
       "description": "Self-host Open Source fonts in neatly bundled NPM packages.",
-      "stars": 6147,
+      "stars": 6159,
       "forks": 196,
       "language": "TypeScript",
       "topics": [
@@ -2412,19 +2416,19 @@
         "sass",
         "typefaces"
       ],
-      "pushedAt": "2026-09-23T06:49:50Z",
+      "pushedAt": "2026-10-04T17:04:49Z",
       "license": "MIT",
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "chakra-ui",
       "name": "ark",
       "url": "https://github.com/chakra-ui/ark",
       "description": "Unstyled, accessible UI components for your design System. Works in React, Vue, Solid, and Svelte.",
-      "stars": 5398,
-      "forks": 218,
+      "stars": 5408,
+      "forks": 220,
       "language": "TypeScript",
       "topics": [
         "components",
@@ -2438,19 +2442,19 @@
         "unstyled",
         "vue"
       ],
-      "pushedAt": "2026-09-28T04:52:13Z",
+      "pushedAt": "2026-10-05T04:33:07Z",
       "license": "MIT",
       "archived": false,
       "category": "headless",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "observablehq",
       "name": "plot",
       "url": "https://github.com/observablehq/plot",
       "description": "A concise API for exploratory data visualization implementing a layered grammar of graphics",
-      "stars": 5390,
-      "forks": 245,
+      "stars": 5400,
+      "forks": 246,
       "language": "HTML",
       "topics": [
         "charts",
@@ -2463,15 +2467,15 @@
       "license": "ISC",
       "archived": false,
       "category": "dataviz",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "style-dictionary",
       "name": "style-dictionary",
       "url": "https://github.com/style-dictionary/style-dictionary",
       "description": "A build system for creating cross-platform styles.",
-      "stars": 4836,
-      "forks": 632,
+      "stars": 4850,
+      "forks": 634,
       "language": "JavaScript",
       "topics": [
         "build-system",
@@ -2484,18 +2488,18 @@
         "style-tokens",
         "styleguide"
       ],
-      "pushedAt": "2026-09-20T16:29:46Z",
+      "pushedAt": "2026-10-03T16:02:08Z",
       "license": "Apache-2.0",
       "archived": false,
       "category": "design-tokens",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "iconoir-icons",
       "name": "iconoir",
       "url": "https://github.com/iconoir-icons/iconoir",
       "description": "An open source icons library with 1600+ icons, supporting React, React Native, Flutter, Vue, Figma, and Framer.",
-      "stars": 4561,
+      "stars": 4569,
       "forks": 198,
       "language": "TypeScript",
       "topics": [
@@ -2512,14 +2516,14 @@
       "license": "MIT",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "notofonts",
       "name": "noto-cjk",
       "url": "https://github.com/notofonts/noto-cjk",
       "description": "Noto CJK fonts",
-      "stars": 4074,
+      "stars": 4085,
       "forks": 272,
       "language": "Python",
       "topics": [],
@@ -2527,15 +2531,15 @@
       "license": null,
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tremorlabs",
       "name": "tremor",
       "url": "https://github.com/tremorlabs/tremor",
       "description": "Copy & Paste React components to build modern web applications. ",
-      "stars": 3638,
-      "forks": 190,
+      "stars": 3647,
+      "forks": 192,
       "language": "TypeScript",
       "topics": [
         "components",
@@ -2550,15 +2554,15 @@
       "license": "Apache-2.0",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vercel",
       "name": "geist-font",
       "url": "https://github.com/vercel/geist-font",
       "description": null,
-      "stars": 3632,
-      "forks": 111,
+      "stars": 3635,
+      "forks": 113,
       "language": "HTML",
       "topics": [
         "font",
@@ -2568,14 +2572,14 @@
       "license": "OFL-1.1",
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "heroui-inc",
       "name": "tailwind-variants",
       "url": "https://github.com/heroui-inc/tailwind-variants",
       "description": "🦄 Tailwindcss first-class variant API",
-      "stars": 3308,
+      "stars": 3316,
       "forks": 89,
       "language": "TypeScript",
       "topics": [
@@ -2588,7 +2592,7 @@
       "license": "MIT",
       "archived": false,
       "category": "styling",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "pmndrs",
@@ -2608,19 +2612,19 @@
         "userinterface",
         "yoga"
       ],
-      "pushedAt": "2026-09-01T18:55:12Z",
+      "pushedAt": "2026-10-02T09:06:28Z",
       "license": "NOASSERTION",
       "archived": false,
       "category": "3d",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "codse",
       "name": "animata",
       "url": "https://github.com/codse/animata",
       "description": "Bring your site to life with easy to use animation & interaction code. Copy. Paste. Animate. ",
-      "stars": 2817,
-      "forks": 236,
+      "stars": 2815,
+      "forks": 237,
       "language": "TypeScript",
       "topics": [
         "animation",
@@ -2637,15 +2641,15 @@
       "license": "MIT",
       "archived": false,
       "category": "animated-components",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "radix-ui",
       "name": "icons",
       "url": "https://github.com/radix-ui/icons",
       "description": "A crisp set of 15×15 icons designed by the @workos team.",
-      "stars": 2685,
-      "forks": 136,
+      "stars": 2692,
+      "forks": 137,
       "language": "TypeScript",
       "topics": [
         "design",
@@ -2658,15 +2662,15 @@
       "license": "MIT",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vercel",
       "name": "ai-elements",
       "url": "https://github.com/vercel/ai-elements",
       "description": "AI Elements is a component library and custom registry built on top of shadcn/ui to help you build AI-native applications faster.",
-      "stars": 2466,
-      "forks": 287,
+      "stars": 2473,
+      "forks": 292,
       "language": "TypeScript",
       "topics": [
         "ai",
@@ -2678,29 +2682,29 @@
       "license": "NOASSERTION",
       "archived": false,
       "category": "ai-ui",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "chakra-ui",
       "name": "park-ui",
       "url": "https://github.com/chakra-ui/park-ui",
       "description": "Beautifully designed components built with Ark UI and Panda CSS that work with a variety of JS frameworks.",
-      "stars": 2368,
-      "forks": 106,
+      "stars": 2369,
+      "forks": 105,
       "language": "TypeScript",
       "topics": [],
       "pushedAt": "2026-04-10T23:05:11Z",
       "license": "MIT",
       "archived": false,
       "category": "component-library",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "eigilnikolajsen",
       "name": "commit-mono",
       "url": "https://github.com/eigilnikolajsen/commit-mono",
       "description": "Commit Mono is an anonymous and neutral programming typeface.",
-      "stars": 2144,
+      "stars": 2157,
       "forks": 30,
       "language": "JavaScript",
       "topics": [
@@ -2715,14 +2719,14 @@
       "license": "MIT",
       "archived": false,
       "category": "fonts",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "design-tokens",
       "name": "community-group",
       "url": "https://github.com/design-tokens/community-group",
       "description": "This is the official DTCG repository for the design tokens site and specification.",
-      "stars": 2133,
+      "stars": 2140,
       "forks": 99,
       "language": "HTML",
       "topics": [
@@ -2734,15 +2738,15 @@
       "license": "NOASSERTION",
       "archived": false,
       "category": "design-tokens",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "tokens-studio",
       "name": "figma-plugin",
       "url": "https://github.com/tokens-studio/figma-plugin",
       "description": "Official repository of the plugin 'Tokens Studio for Figma' (Figma Tokens)",
-      "stars": 1609,
-      "forks": 226,
+      "stars": 1617,
+      "forks": 225,
       "language": "TypeScript",
       "topics": [
         "design-tokens",
@@ -2750,79 +2754,79 @@
         "styles",
         "tokens"
       ],
-      "pushedAt": "2026-09-25T13:56:43Z",
+      "pushedAt": "2026-10-02T11:33:15Z",
       "license": "MIT",
       "archived": false,
       "category": "design-tokens",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "figma",
       "name": "code-connect",
       "url": "https://github.com/figma/code-connect",
       "description": "A tool for connecting your design system components in code with your design system in Figma",
-      "stars": 1587,
-      "forks": 125,
+      "stars": 1589,
+      "forks": 126,
       "language": "TypeScript",
       "topics": [],
       "pushedAt": "2026-09-23T12:56:42Z",
       "license": "MIT",
       "archived": false,
       "category": "design-tokens",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "hugeicons",
       "name": "hugeicons",
       "url": "https://github.com/hugeicons/hugeicons",
       "description": "Beautiful, consistent, pixel-perfect icons for every framework. 60,000+ icons (6,000+ free) for React, Vue, Svelte, Angular, React Native, Flutter and more.",
-      "stars": 1199,
-      "forks": 44,
+      "stars": 1202,
+      "forks": 45,
       "language": "Dart",
       "topics": [],
       "pushedAt": "2026-09-23T10:00:20Z",
       "license": "MIT",
       "archived": false,
       "category": "icons",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "kzhrknt",
       "name": "awesome-design-md-jp",
       "url": "https://github.com/kzhrknt/awesome-design-md-jp",
       "description": "日本語UIをAIエージェントに正しくつくらせるためのDESIGN.md集。Japanese DESIGN.md collection for AI agents — extending Google Stitch format with CJK typography.",
-      "stars": 981,
-      "forks": 74,
+      "stars": 985,
+      "forks": 75,
       "language": "HTML",
       "topics": [],
-      "pushedAt": "2026-09-28T00:34:26Z",
+      "pushedAt": "2026-10-05T00:31:43Z",
       "license": "MIT",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "rive-app",
       "name": "rive-wasm",
       "url": "https://github.com/rive-app/rive-wasm",
       "description": "Wasm/JS runtime for Rive",
-      "stars": 970,
-      "forks": 87,
+      "stars": 971,
+      "forks": 88,
       "language": "TypeScript",
       "topics": [],
-      "pushedAt": "2026-09-28T03:50:49Z",
+      "pushedAt": "2026-10-05T04:43:43Z",
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "LottieFiles",
       "name": "dotlottie-web",
       "url": "https://github.com/LottieFiles/dotlottie-web",
       "description": "High-performance Lottie & dotLottie web player powered by Rust + WASM, with React, Vue, Svelte, Solid & Web Components.",
-      "stars": 888,
-      "forks": 55,
+      "stars": 892,
+      "forks": 56,
       "language": "TypeScript",
       "topics": [
         "animation",
@@ -2850,14 +2854,14 @@
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "Wombosvideo",
       "name": "tw-animate-css",
       "url": "https://github.com/Wombosvideo/tw-animate-css",
       "description": "TailwindCSS v4.0 compatible replacement for `tailwindcss-animate`",
-      "stars": 807,
+      "stars": 806,
       "forks": 13,
       "language": "CSS",
       "topics": [
@@ -2870,14 +2874,14 @@
       "license": "MIT",
       "archived": false,
       "category": "animation",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     },
     {
       "owner": "vercel-labs",
       "name": "design-systems-to-agent-skills",
       "url": "https://github.com/vercel-labs/design-systems-to-agent-skills",
       "description": "A repository to transform design systems into agent skills using the agent skill specification",
-      "stars": 42,
+      "stars": 44,
       "forks": 5,
       "language": "Shell",
       "topics": [],
@@ -2885,7 +2889,7 @@
       "license": "MIT",
       "archived": false,
       "category": "agent-skills",
-      "fetchedAt": "2026-09-28"
+      "fetchedAt": "2026-10-05"
     }
   ]
 }

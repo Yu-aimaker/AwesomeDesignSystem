@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Measured brand design tokens (canvas / ink / accent, every named color, fonts, radii) extracted from two public DESIGN.md collections. Values are as published there; AwesomeDS only normalises names, derives the three roles and computes WCAG contrast. `inferred` lists roles that had no explicit token and were derived from neutrals.",
-    "updated": "2026-09-28",
+    "updated": "2026-10-05",
     "sources": [
       "https://github.com/voltagent/awesome-design-md",
       "https://github.com/kzhrknt/awesome-design-md-jp"
