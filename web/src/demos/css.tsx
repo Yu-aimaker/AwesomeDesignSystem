@@ -2,6 +2,8 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "../lib/theme";
 import { cx } from "../ds/cx";
 import { DURATION, DemoFrame, cssEase, useReplay } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 /* ------------------------------------------------------------------ */
 /* KeyframeSpinner                                                     */
@@ -16,10 +18,11 @@ export interface KeyframeSpinnerProps {
 
 /** A progress indicator is the one thing allowed to loop. Linear is correct here: constant rate is the message. */
 export function KeyframeSpinner({ seconds = 0.8, stroke = 2, style = "ring", paused = false }: KeyframeSpinnerProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const running = !reduced && !paused;
   return (
-    <div className="flex flex-col items-center gap-4" role="status" aria-label="読み込み中">
+    <div className="flex flex-col items-center gap-4" role="status" aria-label={msg.loading}>
       {style === "ring" ? (
         <span
           aria-hidden
@@ -51,7 +54,7 @@ export function KeyframeSpinner({ seconds = 0.8, stroke = 2, style = "ring", pau
           ))}
         </span>
       )}
-      <p className="t-caption text-ink-muted">{reduced ? "reduced motion: 静止" : `${seconds}s / 周、linear`}</p>
+      <p className="t-caption text-ink-muted">{reduced ? msg.reducedStill : msg.perLoopLinear(seconds)}</p>
       <style>{`
         @keyframes spin-ring { to { transform: rotate(360deg); } }
         @keyframes spin-dot { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
@@ -72,12 +75,13 @@ export interface CSSTransitionCompareProps {
 
 const CURVES = [
   { name: "ease-out (token)", value: "ease-out" },
-  { name: "ease (CSS 既定)", value: "ease" },
+  { name: "ease", value: "ease" },
   { name: "linear", value: "linear" },
 ];
 
 /** Three blocks, same duration, three curves. Replay to feel the difference. */
 export function CSSTransitionCompare({ duration = DURATION.base, distance = 160, property = "transform" }: CSSTransitionCompareProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const [end, setEnd] = useState(false);
@@ -99,7 +103,7 @@ export function CSSTransitionCompare({ duration = DURATION.base, distance = 160,
               : { opacity: end ? 1 : 0.1, transition: `opacity ${duration}ms ${cssEase(c.value)}` };
           return (
             <div key={c.value} className="flex items-center gap-3">
-              <span className="t-caption w-28 shrink-0 text-ink-secondary">{c.name}</span>
+              <span className="t-caption w-28 shrink-0 text-ink-secondary">{c.value === "ease" ? msg.easeDefault : c.name}</span>
               <div className="relative h-8 flex-1 rounded-md bg-surface-sunken">
                 <span aria-hidden className={cx("absolute top-1 left-1 block size-6 rounded-sm", c.value === "ease-out" ? "bg-accent" : "bg-ink")} style={style} />
               </div>
@@ -134,6 +138,7 @@ const CLIP_TO: Record<NonNullable<ClipPathRevealProps["direction"]>, string> = {
 
 /** CSS only: `clip-path` transitions from an empty inset to the full box. Reduced motion fades instead. */
 export function ClipPathReveal({ direction = "left", duration = DURATION.slow, easing = "ease-out" }: ClipPathRevealProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const [shown, setShown] = useState(false);
@@ -152,7 +157,7 @@ export function ClipPathReveal({ direction = "left", duration = DURATION.slow, e
     <DemoFrame onReplay={replay} note={`clip-path: ${CLIP_FROM[direction]} → ${CLIP_TO[direction]}`}>
       <div className="relative h-40 w-full overflow-hidden rounded-lg border border-hairline bg-surface-sunken">
         <div className="absolute inset-0 flex items-end bg-accent p-5" style={style}>
-          <p className="t-h3 text-on-accent">見せ方は 1 つ</p>
+          <p className="t-h3 text-on-accent">{msg.clipHeadline}</p>
         </div>
       </div>
     </DemoFrame>

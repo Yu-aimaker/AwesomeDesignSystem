@@ -1,0 +1,93 @@
+import type { Localized } from "../locales";
+
+const ja = {
+  levels: [
+    { level: "0", treatment: "なし", use: "ページ、セクション、テーブル、リストの行" },
+    { level: "1", treatment: "1px solid hairline", use: "カード、入力欄、インラインのパネル、コードブロック" },
+    { level: "2", treatment: "border + 0 4px 12px -2px rgb(10 10 10 / 0.08)", use: "ポップオーバー、ドロップダウン、ツールチップ、トースト" },
+    { level: "3", treatment: "border + 0 16px 48px -12px rgb(10 10 10 / 0.18)", use: "ダイアログ、シート、コマンドメニュー、ドラッグ中の要素" },
+  ],
+  title: "奥行き",
+  lead: "面は 1px の線で区切ります。影は浮いているものにだけ使い、段階は 3 つです。",
+  ruleTitle: "結論",
+  rule: "ページの上にあるものは境界線で区切り、ページから浮くものだけに影を付けます。影は黒ではなく文字色（ink）を薄くした色で、上から光が当たるように縦方向にだけずらします。ダーク背景では影が見えないので、面を段階的に明るくして高さを表します。",
+  levelsTitle: "3 段階",
+  levelsLead: "右上のテーマ切替でダークにすると、影の代わりに面の明るさが変わるのが分かります。",
+  colLevel: "段階",
+  colTreatment: "表現",
+  colUse: "使う場所",
+  borderVsShadowTitle: "境界線か影か",
+  borderVsShadowLead: "同じカードを 2 通りで組みました。左が AwesomeDS の既定です。",
+  invoiceTitle: "今月の請求",
+  invoiceBody: "3 件、合計 1,677,800 円",
+  viewDetails: "明細を見る",
+  borderNote: "境界線 1px。輪郭が 1 本の線で決まり、中身の文字だけが目に入ります。",
+  shadowNote: "避ける: 黒い影。ページの上にあるだけのカードが浮いて見え、背景が灰色に濁ります。",
+  tintTitle: "影の色",
+  tintLead: "影は ink を薄めた色です。純粋な黒を使うと、白い背景では灰色の縁取りに見えます。",
+  tintBad: "避ける: rgb(0 0 0 / 0.5), spread 0",
+  darkTitle: "ダークモードの高さ",
+  darkLead: "黒に近い背景では影のコントラストが出ません。面を 1 段ごとに少し明るくし、区切り線を強めます。",
+  why: [
+    "影は柔らかい縁を持つため、目がそれを解像するコストがかかります。1px の線は 1 本の輪郭で済みます。Nielsen Norman Group の「美的で最小限のデザイン」は、余分な要素が本来必要な要素と競合すると述べています。",
+    "計測した現場でも同じです。Linear は面の明るさの段階と細い線だけで奥行きを作り、Vercel のカードは細い線と弱い光沢で置かれ、Apple のマーケティングページの枠には影がありません。カードごとの重い影は、いまではテンプレート UI の印になっています。",
+    "3 段階にするのは、「ページの上」「ページより上」「すべての上」の 3 つを区別できれば足りるからです。Material 3 は 6 段階を定義しますが、利用者が見分けられる差は 3 つまでで、4 つ目の段階には控えめに見せられる視覚差が残っていません。",
+    "ダーク背景で面を明るくする方法は Material のダークテーマと Apple のダークモードが共に採用しています。Apple は「高い面ほど明るくなり、前景が前に出て見える」と説明しています。AwesomeDS は Material のようにオーバーレイをブランド色で着色しません。純粋なグレーの規則を守り、ブランドのアクセントと衝突させないためです。",
+  ],
+  sources: [
+    { title: "Material 3: Elevation", url: "https://m3.material.io/styles/elevation/overview", note: "ダークテーマでのトーナルな高さ表現" },
+    { title: "Apple HIG: Dark Mode", url: "https://developer.apple.com/design/human-interface-guidelines/dark-mode", note: "base と elevated の背景色" },
+    { title: "Josh W. Comeau: Designing Beautiful Shadows in CSS", url: "https://www.joshwcomeau.com/css/designing-shadows/", note: "色付きの影、光源の方向、描画コスト" },
+    { title: "NN/g: Aesthetic and Minimalist Design", url: "https://www.nngroup.com/articles/aesthetic-minimalist-design/", note: "余分な要素は必要な要素と競合する" },
+    { title: "NN/g: Common Region", url: "https://www.nngroup.com/articles/common-region/", note: "境界があればまとまりは伝わる" },
+    { title: "voltagent/awesome-design-md", url: "https://github.com/voltagent/awesome-design-md", note: "Linear、Vercel、Apple、Stripe の影の実測" },
+  ],
+};
+
+export type ElevationMessages = typeof ja;
+
+const en: ElevationMessages = {
+  levels: [
+    { level: "0", treatment: "None", use: "Pages, sections, tables, list rows" },
+    { level: "1", treatment: "1px solid hairline", use: "Cards, inputs, inline panels, code blocks" },
+    { level: "2", treatment: "border + 0 4px 12px -2px rgb(10 10 10 / 0.08)", use: "Popovers, dropdowns, tooltips, toasts" },
+    { level: "3", treatment: "border + 0 16px 48px -12px rgb(10 10 10 / 0.18)", use: "Dialogs, sheets, command menu, dragged items" },
+  ],
+  title: "Elevation",
+  lead: "Surfaces are separated by a 1px line. Shadows are only for things that float, in three levels.",
+  ruleTitle: "The rule",
+  rule: "Anything that sits on the page is separated by a border; only things that float above the page get a shadow. Shadows use a faded ink color, not black, and offset only vertically, as if lit from above. Shadows do not show on dark backgrounds, so there height is shown by surfaces that get lighter step by step.",
+  levelsTitle: "Three levels",
+  levelsLead: "Switch to dark with the theme toggle at the top right: surface lightness changes instead of shadows.",
+  colLevel: "Level",
+  colTreatment: "Treatment",
+  colUse: "Used for",
+  borderVsShadowTitle: "Border or shadow",
+  borderVsShadowLead: "The same card built two ways. The left one is the AwesomeDS default.",
+  invoiceTitle: "This month's invoices",
+  invoiceBody: "3 invoices, ¥1,677,800 total",
+  viewDetails: "View details",
+  borderNote: "1px border. One line defines the outline, so only the content draws the eye.",
+  shadowNote: "Avoid: black shadows. A card that only sits on the page looks lifted, and the background turns muddy gray.",
+  tintTitle: "Shadow color",
+  tintLead: "Shadows are faded ink. Pure black reads as a gray outline on a white background.",
+  tintBad: "Avoid: rgb(0 0 0 / 0.5), spread 0",
+  darkTitle: "Elevation in dark mode",
+  darkLead: "Shadows have no contrast on a near-black background. Each surface step is a little lighter, and dividers get stronger.",
+  why: [
+    "A shadow has a soft edge that the eye has to resolve. A 1px line is a single outline. Nielsen Norman Group's aesthetic and minimalist design heuristic says extra elements compete with the ones that matter.",
+    "The products we measured agree. Linear builds depth from surface lightness steps and thin lines only, Vercel's cards sit on a thin line with a faint sheen, and Apple's marketing frames have no shadow. A heavy shadow on every card is now a sign of template UI.",
+    "Three levels are enough to tell apart on the page, above the page, and above everything. Material 3 defines six, but users can tell at most three apart, and a fourth level has no subtle visual difference left.",
+    "Lighter surfaces on dark backgrounds are used by both Material's dark theme and Apple's Dark Mode. Apple explains that higher surfaces get lighter so the foreground comes forward. AwesomeDS does not tint overlays with the brand color as Material does, to keep neutrals pure gray and out of the way of the brand accent.",
+  ],
+  sources: [
+    { title: "Material 3: Elevation", url: "https://m3.material.io/styles/elevation/overview", note: "Tonal elevation in dark themes" },
+    { title: "Apple HIG: Dark Mode", url: "https://developer.apple.com/design/human-interface-guidelines/dark-mode", note: "Base and elevated background colors" },
+    { title: "Josh W. Comeau: Designing Beautiful Shadows in CSS", url: "https://www.joshwcomeau.com/css/designing-shadows/", note: "Tinted shadows, light direction, rendering cost" },
+    { title: "NN/g: Aesthetic and Minimalist Design", url: "https://www.nngroup.com/articles/aesthetic-minimalist-design/", note: "Extra elements compete with necessary ones" },
+    { title: "NN/g: Common Region", url: "https://www.nngroup.com/articles/common-region/", note: "A boundary is enough to show a group" },
+    { title: "voltagent/awesome-design-md", url: "https://github.com/voltagent/awesome-design-md", note: "Measured shadows of Linear, Vercel, Apple, Stripe" },
+  ],
+};
+
+export const elevationMessages: Localized<ElevationMessages> = { ja, en };

@@ -4,6 +4,8 @@ import { DotLottieReact, setWasmUrl } from "@lottiefiles/dotlottie-react";
 import wasmUrl from "/node_modules/@lottiefiles/dotlottie-web/dist/dotlottie-player.wasm?url";
 import { useReducedMotion } from "../lib/theme";
 import { colorToLottie, useReplay, useTokenColors, ReplayButton } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 // Bundle the renderer instead of loading it from a CDN.
 setWasmUrl(wasmUrl);
@@ -48,12 +50,13 @@ function buildSample(accent: number[], ink: number[]) {
 }
 
 export function LottieDemo() {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const colors = useTokenColors(["accent", "ink"]);
   const data = useMemo(() => buildSample(colorToLottie(colors.accent), colorToLottie(colors.ink)), [colors.accent, colors.ink]);
   return (
     <div className="w-full max-w-sm rounded-lg border border-hairline bg-canvas-soft p-4">
-      <DotLottieReact key={`${colors.accent}${colors.ink}`} data={data as unknown as Record<string, unknown>} loop autoplay={!reduced} className="h-32 w-full" aria-label="Lottie アニメーションの例" />
+      <DotLottieReact key={`${colors.accent}${colors.ink}`} data={data as unknown as Record<string, unknown>} loop autoplay={!reduced} className="h-32 w-full" aria-label={msg.lottieLabel} />
     </div>
   );
 }
@@ -99,6 +102,7 @@ function buildCheck(success: number[], hairline: number[], frames: number, strok
 
 /** Ring fills, then the check draws on via trim paths. Colors: success and hairline tokens. */
 export function LottieProgress({ frames = 60, stroke = 4, loop = false }: LottieProgressProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const colors = useTokenColors(["success", "hairline"]);
@@ -113,11 +117,11 @@ export function LottieProgress({ frames = 60, stroke = 4, loop = false }: Lottie
           autoplay={!reduced}
           segment={reduced ? [frames - 1, frames] : undefined}
           className="mx-auto h-32 w-32"
-          aria-label="完了のチェックマーク"
+          aria-label={msg.checkmarkLabel}
         />
       </div>
       <div className="flex items-center justify-between">
-        <p className="t-caption text-ink-muted">{reduced ? "reduced motion: 最終フレーム" : `${frames} フレーム = ${(frames / 60).toFixed(2)}s`}</p>
+        <p className="t-caption text-ink-muted">{reduced ? msg.reducedLastFrame : msg.framesNote(frames, (frames / 60).toFixed(2))}</p>
         <ReplayButton onClick={replay} />
       </div>
     </div>
@@ -171,16 +175,17 @@ function buildDots(ink: number[], dots: number, bounce: boolean) {
 
 /** Loading dots: the one allowed loop, in ink. Static under reduced motion. */
 export function LottieDots({ dots = 3, speed = 1, bounce = false }: LottieDotsProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const colors = useTokenColors(["ink"]);
   const n = Math.max(3, Math.min(5, dots));
   const data = useMemo(() => buildDots(colorToLottie(colors.ink), n, bounce), [colors.ink, n, bounce]);
   return (
     <div className="flex w-full max-w-sm flex-col gap-3">
-      <div className="rounded-lg border border-hairline bg-canvas-soft p-4" role="status" aria-label="読み込み中">
+      <div className="rounded-lg border border-hairline bg-canvas-soft p-4" role="status" aria-label={msg.loading}>
         <DotLottieReact key={`${colors.ink}-${n}-${bounce}`} data={data as unknown as Record<string, unknown>} loop={!reduced} autoplay={!reduced} speed={speed} className="mx-auto h-10 w-32" />
       </div>
-      <p className="t-caption text-ink-muted">{reduced ? "reduced motion: 静止" : `${n} 点、speed ${speed}`}</p>
+      <p className="t-caption text-ink-muted">{reduced ? msg.reducedStill : msg.dotsNote(n, speed)}</p>
     </div>
   );
 }

@@ -7,25 +7,27 @@ import { Badge } from "../../ds/components/Badge";
 import { Button } from "../../ds/components/Button";
 import { Input } from "../../ds/components/Input";
 import { cx } from "../../ds/cx";
+import { useT } from "../../i18n/context";
+import { colorMessages, type ColorMessages } from "../../i18n/messages/color";
 
 type Mode = "light" | "dark";
 
 const textRoles = ["ink", "ink-secondary", "ink-muted", "ink-disabled", "accent", "success", "warning", "danger"];
 const surfaceRoles = ["canvas", "canvas-soft", "surface", "surface-raised", "surface-sunken", "hairline", "hairline-strong", "accent-soft", "selection"];
 const statusRoles = [
-  { role: "success", soft: "success-soft", label: "成功", icon: CheckCircle2, text: "保存しました" },
-  { role: "warning", soft: "warning-soft", label: "注意", icon: TriangleAlert, text: "残り 3 日で期限が切れます" },
-  { role: "danger", soft: "danger-soft", label: "エラー", icon: CircleAlert, text: "接続できませんでした。再試行してください" },
-  { role: "accent", soft: "accent-soft", label: "情報", icon: Info, text: "新しいバージョンがあります" },
-];
+  { role: "success", soft: "success-soft", icon: CheckCircle2 },
+  { role: "warning", soft: "warning-soft", icon: TriangleAlert },
+  { role: "danger", soft: "danger-soft", icon: CircleAlert },
+  { role: "accent", soft: "accent-soft", icon: Info },
+] as const;
 
-const sources = [
-  { title: "WCAG 2.2 Understanding 1.4.3 Contrast (Minimum)", url: "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html", note: "本文 4.5:1、大きな文字 3:1" },
-  { title: "WCAG 2.2 Understanding 1.4.11 Non-text Contrast", url: "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", note: "UI 部品の境界 3:1" },
-  { title: "WCAG 2.2 Understanding 1.4.1 Use of Color", url: "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html", note: "色だけで意味を伝えない" },
-  { title: "Material Design 3: Color roles", url: "https://m3.material.io/styles/color/roles", note: "ロールで参照する考え方" },
-  { title: "Apple HIG: Color", url: "https://developer.apple.com/design/human-interface-guidelines/color", note: "システムカラーと状態色の扱い" },
-  { title: "Radix Colors", url: "https://www.radix-ui.com/colors", note: "ダークモードの明度設計" },
+const sources = (n: ColorMessages["sourceNotes"]) => [
+  { title: "WCAG 2.2 Understanding 1.4.3 Contrast (Minimum)", url: "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html", note: n.contrast },
+  { title: "WCAG 2.2 Understanding 1.4.11 Non-text Contrast", url: "https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html", note: n.nonText },
+  { title: "WCAG 2.2 Understanding 1.4.1 Use of Color", url: "https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html", note: n.useOfColor },
+  { title: "Material Design 3: Color roles", url: "https://m3.material.io/styles/color/roles", note: n.m3 },
+  { title: "Apple HIG: Color", url: "https://developer.apple.com/design/human-interface-guidelines/color", note: n.hig },
+  { title: "Radix Colors", url: "https://www.radix-ui.com/colors", note: n.radix },
 ];
 
 function Swatch({ mode, role, on }: { mode: Mode; role: string; on: string }) {
@@ -57,8 +59,9 @@ function Swatch({ mode, role, on }: { mode: Mode; role: string; on: string }) {
 }
 
 function ModeSwitch({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => void }) {
+  const t = useT(colorMessages);
   return (
-    <div role="radiogroup" aria-label="表示モード" className="inline-flex rounded-md bg-surface-sunken p-0.5">
+    <div role="radiogroup" aria-label={t.modeGroup} className="inline-flex rounded-md bg-surface-sunken p-0.5">
       {(["light", "dark"] as Mode[]).map((m) => (
         <button
           key={m}
@@ -67,7 +70,7 @@ function ModeSwitch({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => voi
           onClick={() => onChange(m)}
           className={cx("t-label h-8 rounded-sm px-3 transition-colors duration-instant ease-out-ds", mode === m ? "bg-surface text-ink shadow-2" : "text-ink-secondary hover:text-ink")}
         >
-          {m === "light" ? "ライト" : "ダーク"}
+          {m === "light" ? t.light : t.dark}
         </button>
       ))}
     </div>
@@ -76,15 +79,16 @@ function ModeSwitch({ mode, onChange }: { mode: Mode; onChange: (m: Mode) => voi
 
 export function Color() {
   const [mode, setMode] = useState<Mode>("light");
+  const t = useT(colorMessages);
   return (
     <div>
-      <PageHeader title="色" lead="色は色相ではなくロールで指定します。コンポーネントから hex を直接参照することはありません。" />
+      <PageHeader title={t.title} lead={t.lead} />
 
-      <Section id="roles" title="ロールとコントラスト比" lead="各ロールの値と、canvas に対する WCAG コントラスト比をコード上で計算して表示しています。">
+      <Section id="roles" title={t.rolesTitle} lead={t.rolesLead}>
         <ModeSwitch mode={mode} onChange={setMode} />
         <div className="mt-6 rounded-lg border p-4 sm:p-6" style={{ background: colorValue(mode, "canvas"), borderColor: colorValue(mode, "hairline") }}>
           <h3 className="t-h4" style={{ color: colorValue(mode, "ink") }}>
-            テキスト、アイコン
+            {t.textIcons}
           </h3>
           <ul className="mt-3 grid gap-2 md:grid-cols-2">
             {textRoles.map((r) => (
@@ -92,7 +96,7 @@ export function Color() {
             ))}
           </ul>
           <h3 className="t-h4 mt-8" style={{ color: colorValue(mode, "ink") }}>
-            面と境界
+            {t.surfacesBorders}
           </h3>
           <ul className="mt-3 grid gap-2 md:grid-cols-2">
             {surfaceRoles.map((r) => (
@@ -100,32 +104,32 @@ export function Color() {
             ))}
           </ul>
           <p className="t-caption mt-4" style={{ color: colorValue(mode, "ink-muted") }}>
-            面と境界の比は参考値です。基準は文字 4.5:1、大きな文字と UI 部品の境界 3:1（WCAG 1.4.3、1.4.11）。ink-disabled と hairline は意図的に基準未満です。無効状態と装飾線には基準が適用されません。
+            {t.rolesNote}
           </p>
         </div>
       </Section>
 
-      <Section id="accent" title="アクセントの使いどころ" lead="アクセントはリンク、フォーカスリング、選択状態の 3 つだけ。ボタンの塗りには使いません。">
+      <Section id="accent" title={t.accentTitle} lead={t.accentLead}>
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-lg border border-hairline bg-surface p-6">
-            <p className="t-label text-ink">リンク</p>
+            <p className="t-label text-ink">{t.link}</p>
             <p className="t-body mt-3 text-ink">
-              詳しくは <a href="#why">理由のセクション</a> を読んでください。文中でアクセントが出るのはここだけです。
+              {t.linkBefore}<a href="#why">{t.linkText}</a>{t.linkAfter}
             </p>
           </div>
           <div className="rounded-lg border border-hairline bg-surface p-6">
-            <p className="t-label text-ink">フォーカスリング</p>
+            <p className="t-label text-ink">{t.focusRing}</p>
             <div className="mt-3 flex flex-col gap-3">
-              <Input label="名前" placeholder="Tab で移動してみてください" />
+              <Input label={t.nameLabel} placeholder={t.namePlaceholder} />
               <Button variant="secondary" className="w-fit" style={{ outline: "2px solid var(--ds-focus-ring)", outlineOffset: 2 }}>
-                フォーカス中の見え方
+                {t.focusedButton}
               </Button>
             </div>
           </div>
           <div className="rounded-lg border border-hairline bg-surface p-6">
-            <p className="t-label text-ink">選択中の項目</p>
+            <p className="t-label text-ink">{t.selected}</p>
             <ul className="mt-3 flex flex-col gap-1">
-              {["受信箱", "送信済み", "下書き"].map((label, i) => (
+              {t.mailboxes.map((label, i) => (
                 <li
                   key={label}
                   aria-current={i === 1 ? "true" : undefined}
@@ -139,25 +143,25 @@ export function Color() {
         </div>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <div className="rounded-lg border border-hairline bg-surface p-6">
-            <p className="t-label text-ink">主要アクション: ink on canvas</p>
+            <p className="t-label text-ink">{t.primaryTitle}</p>
             <div className="mt-3 flex gap-2">
-              <Button>保存</Button>
-              <Button variant="secondary">キャンセル</Button>
+              <Button>{t.save}</Button>
+              <Button variant="secondary">{t.cancel}</Button>
             </div>
-            <p className="t-caption mt-3 text-ink-secondary">黒いボタンは画面のどこにあっても主要な操作だと分かります。アクセントは温存されます。</p>
+            <p className="t-caption mt-3 text-ink-secondary">{t.primaryCaption}</p>
           </div>
           <div className="rounded-lg border border-hairline bg-surface p-6">
-            <p className="t-label text-ink">避ける例: アクセント塗りのボタン</p>
+            <p className="t-label text-ink">{t.avoidTitle}</p>
             <div className="mt-3 flex gap-2">
-              <span className="inline-flex h-10 items-center rounded-md bg-accent px-4 text-sm font-medium text-on-accent">保存</span>
-              <span className="inline-flex h-10 items-center rounded-md border border-accent px-4 text-sm font-medium text-accent">キャンセル</span>
+              <span className="inline-flex h-10 items-center rounded-md bg-accent px-4 text-sm font-medium text-on-accent">{t.save}</span>
+              <span className="inline-flex h-10 items-center rounded-md border border-accent px-4 text-sm font-medium text-accent">{t.cancel}</span>
             </div>
-            <p className="t-caption mt-3 text-ink-secondary">リンクとボタンが同じ色になり、どれが押せてどれが移動なのか区別できなくなります。</p>
+            <p className="t-caption mt-3 text-ink-secondary">{t.avoidCaption}</p>
           </div>
         </div>
       </Section>
 
-      <Section id="status" title="状態色" lead="成功、注意、エラー、情報。色に必ずアイコンかラベルを添えます。色だけが意味を持つ場面は作りません。">
+      <Section id="status" title={t.statusTitle} lead={t.statusLead}>
         <ul className="grid gap-3 md:grid-cols-2">
           {statusRoles.map((s) => {
             const Icon = s.icon;
@@ -166,38 +170,40 @@ export function Color() {
                 <Icon className={cx("mt-0.5 size-5 shrink-0", `text-${s.role}`)} strokeWidth={1.75} aria-hidden />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2">
-                    <p className="t-label text-ink">{s.label}</p>
+                    <p className="t-label text-ink">{t.status[s.role].label}</p>
                     <Badge tone={s.role as "success" | "warning" | "danger" | "accent"}>{s.role}</Badge>
                   </div>
-                  <p className="t-body-sm mt-1 text-ink-secondary">{s.text}</p>
+                  <p className="t-body-sm mt-1 text-ink-secondary">{t.status[s.role].text}</p>
                 </div>
               </li>
             );
           })}
         </ul>
         <p className="t-body-sm mt-4 max-w-[65ch] text-ink-secondary">
-          light の状態色は白背景で {formatRatio(contrastRatio(colorValue("light", "success"), colorValue("light", "canvas")))}（success）、
-          {formatRatio(contrastRatio(colorValue("light", "warning"), colorValue("light", "canvas")))}（warning）、
-          {formatRatio(contrastRatio(colorValue("light", "danger"), colorValue("light", "canvas")))}（danger）です。文字色として使えます。
+          {t.statusContrast(
+            formatRatio(contrastRatio(colorValue("light", "success"), colorValue("light", "canvas"))),
+            formatRatio(contrastRatio(colorValue("light", "warning"), colorValue("light", "canvas"))),
+            formatRatio(contrastRatio(colorValue("light", "danger"), colorValue("light", "canvas"))),
+          )}
         </p>
       </Section>
 
-      <Section id="why" title="なぜこの選択か">
+      <Section id="why" title={t.whyTitle}>
         <Why>
+          <p>{t.why1}</p>
+          <p>{t.why2}</p>
           <p>
-            ニュートラルは青みも暖色もない純粋なグレーです。ブランドカラーがどんな色相でも、下地の色と喧嘩しません。ink-secondary は白地で 7.8:1、ink-muted は 5.3:1 なので、補助的な文字でも本文基準を満たします。
+            {t.why3(
+              colorValue("dark", "canvas"),
+              colorValue("dark", "surface"),
+              colorValue("dark", "surface-raised"),
+              colorValue("light", "accent"),
+              colorValue("dark", "accent"),
+            )}
           </p>
-          <p>
-            アクセントを 1 色に絞り、しかも「リンク、フォーカス、選択」にだけ使うのは、アクセントが現れたときに意味を持たせるためです。主要ボタンまで青にすると、押せるものと移動するものの区別が色でつかなくなります。
-          </p>
-          <p>
-            ダークモードは色相を反転せず、明度だけを反転します。面は上に重なるほど明るくなります（{colorValue("dark", "canvas")}、{colorValue("dark", "surface")}、{colorValue("dark", "surface-raised")}）。アクセントは暗い背景でのコントラストを保つために明るくしています（{colorValue("light", "accent")} から {colorValue("dark", "accent")}）。
-          </p>
-          <p>
-            状態色にアイコンかラベルを添えるのは WCAG 1.4.1 の要求です。色覚特性によっては success と danger の区別がつきません。
-          </p>
+          <p>{t.why4}</p>
         </Why>
-        <SourceList sources={sources} />
+        <SourceList sources={sources(t.sourceNotes)} />
       </Section>
     </div>
   );

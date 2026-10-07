@@ -4,6 +4,8 @@ import { Edges } from "@react-three/drei";
 import type { Mesh } from "three";
 import { useReducedMotion } from "../lib/theme";
 import { useInViewport, useTokenColors } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 export interface IcosahedronSceneProps {
   speed?: number; // radians per second around y
@@ -34,6 +36,7 @@ function Solid({ ink, accent, spin, speed, detail, wireframe }: { ink: string; a
  * the accent knob and theme apply.
  */
 export function IcosahedronScene({ speed = 0.4, detail = 0, wireframe = false }: IcosahedronSceneProps) {
+  const msg = useT(demosMessages);
   const wrapper = useRef<HTMLDivElement>(null);
   const visible = useInViewport(wrapper);
   const reduced = useReducedMotion();
@@ -42,7 +45,7 @@ export function IcosahedronScene({ speed = 0.4, detail = 0, wireframe = false }:
 
   return (
     <div ref={wrapper} className="h-64 w-full rounded-lg border border-hairline bg-canvas-soft">
-      <Canvas frameloop={spin ? "always" : "demand"} dpr={[1, 2]} camera={{ position: [0, 0, 4.5], fov: 45 }} gl={{ alpha: true, antialias: true }} aria-label="回転する多面体" role="img">
+      <Canvas frameloop={spin ? "always" : "demand"} dpr={[1, 2]} camera={{ position: [0, 0, 4.5], fov: 45 }} gl={{ alpha: true, antialias: true }} aria-label={msg.polyhedronLabel} role="img">
         <ambientLight intensity={1.2} />
         <directionalLight position={[3, 4, 5]} intensity={1.6} />
         <Solid ink={colors.ink} accent={colors.accent} spin={spin} speed={speed} detail={detail} wireframe={wireframe} />

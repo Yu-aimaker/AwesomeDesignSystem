@@ -3,6 +3,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import type { Mesh } from "three";
 import { useReducedMotion } from "../lib/theme";
 import { useInViewport, useTokenColors } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 export interface WireframeTorusProps {
   tilt?: number; // 0..1 how far the pointer tilts the mesh
@@ -36,6 +38,7 @@ function Torus({ color, tilt, damping, segments, spin, animate }: { color: strin
  * No tilt under reduced motion; the loop stops off-screen.
  */
 export function WireframeTorus({ tilt = 0.6, damping = 6, segments = 16, spin = false }: WireframeTorusProps) {
+  const msg = useT(demosMessages);
   const wrapper = useRef<HTMLDivElement>(null);
   const visible = useInViewport(wrapper);
   const reduced = useReducedMotion();
@@ -43,7 +46,7 @@ export function WireframeTorus({ tilt = 0.6, damping = 6, segments = 16, spin = 
   const animate = visible && !reduced;
   return (
     <div ref={wrapper} className="h-64 w-full rounded-lg border border-hairline bg-canvas-soft">
-      <Canvas frameloop={animate ? "always" : "demand"} dpr={[1, 2]} camera={{ position: [0, 0, 4.2], fov: 45 }} gl={{ alpha: true, antialias: true }} aria-label="ワイヤーフレームのトーラス" role="img">
+      <Canvas frameloop={animate ? "always" : "demand"} dpr={[1, 2]} camera={{ position: [0, 0, 4.2], fov: 45 }} gl={{ alpha: true, antialias: true }} aria-label={msg.torusLabel} role="img">
         <Torus color={colors.ink} tilt={tilt} damping={damping} segments={segments} spin={spin} animate={animate} />
       </Canvas>
     </div>

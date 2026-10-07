@@ -1,6 +1,8 @@
 import { useId, useState, type KeyboardEvent } from "react";
 import { Star } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface RatingProps {
   value: number;
@@ -18,7 +20,9 @@ const sizes = { sm: "size-4", md: "size-6" };
 // A radio group of stars with roving focus: arrows move the value, Home/End jump.
 // Filled stars are ink, empty stars hairline-strong; the text next to it reads
 // the value, so the rating is never color or shape alone. readOnly renders an img.
-export function Rating({ value, onChange, max = 5, label = "評価", readOnly = false, disabled = false, size = "md", className }: RatingProps) {
+export function Rating({ value, onChange, max = 5, label: labelProp, readOnly = false, disabled = false, size = "md", className }: RatingProps) {
+  const m = useT(dsMessages);
+  const label = labelProp ?? m.rating;
   const [hover, setHover] = useState<number | null>(null);
   const id = useId();
   const shown = hover ?? value;

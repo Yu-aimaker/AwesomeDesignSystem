@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { Link } from "../i18n/router";
-import { useLocale } from "../i18n/context";
+import { useLocale, useT } from "../i18n/context";
+import { sourcesMessages } from "../i18n/messages/sources";
+import { langFor } from "../i18n/messages/knowledge";
 import { ArrowRight, ChevronDown, ExternalLink, Globe } from "lucide-react";
 import { PageHeader } from "../layout/Page";
 import { FlagshipArt } from "../layout/FlagshipPoster";
@@ -20,6 +22,8 @@ const levelTone: Record<AbsorptionLevel, BadgeTone> = {
 function DesignSystemCard({ system }: { system: DesignSystemRef }) {
   const { level, knowledge, takeaway } = system.absorption;
   const { locale } = useLocale();
+  const t = useT(sourcesMessages);
+  const name = locale === "ja" ? (system.nameJa ?? system.name) : system.name;
   return (
     <article className="group relative flex min-w-0 max-w-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent">
       <div className="relative aspect-[1200/630] w-full max-w-full overflow-hidden bg-canvas-soft">
@@ -32,18 +36,18 @@ function DesignSystemCard({ system }: { system: DesignSystemRef }) {
           <h3 className="t-h4 min-w-0" style={{ overflowWrap: "anywhere" }}>
             {/* Stretched link: the whole card opens the source; the Knowledge link below sits above it. */}
             <a href={system.url} target="_blank" rel="noreferrer" className="text-ink no-underline outline-none after:absolute after:inset-0 after:content-['']">
-              {system.nameJa ?? system.name}
+              {name}
             </a>
           </h3>
           <ExternalLink className="mt-0.5 size-4 shrink-0 text-ink-muted transition-colors group-hover:text-ink" strokeWidth={1.75} aria-hidden />
         </div>
         <p className="t-body-sm line-clamp-2 min-w-0 text-ink-secondary" style={{ overflowWrap: "anywhere" }}>
-          {system.descriptionJa}
+          {locale === "ja" ? system.descriptionJa : system.description}
         </p>
         <div className="mt-1 flex min-w-0 flex-col gap-1.5 border-t border-hairline pt-3">
           <span className="flex items-center gap-2">
             <Badge tone={levelTone[level]}>{absorptionLabel(level, locale)}</Badge>
-            <span className="t-caption text-ink-muted">AwesomeDS での扱い</span>
+            <span className="t-caption text-ink-muted">{t.treatment}</span>
           </span>
           <p className="t-body-sm min-w-0 text-ink" style={{ overflowWrap: "anywhere" }}>
             {takeaway[locale]}
@@ -57,9 +61,9 @@ function DesignSystemCard({ system }: { system: DesignSystemRef }) {
           <Link
             to={`/knowledge/${knowledge}`}
             className="t-caption relative z-10 inline-flex shrink-0 items-center gap-1 font-medium"
-            aria-label={`${system.nameJa ?? system.name} の採用・不採用の記録`}
+            aria-label={t.recordLabel(name)}
           >
-            記録を読む
+            {t.readRecord}
             <ArrowRight className="size-3.5" strokeWidth={1.75} aria-hidden />
           </Link>
         </div>
@@ -70,19 +74,20 @@ function DesignSystemCard({ system }: { system: DesignSystemRef }) {
 
 function OgpNote() {
   const stats = ogpStats();
+  const { locale } = useLocale();
+  const t = useT(sourcesMessages);
   const missing = flagshipSystems.filter((s) => s.ogp.status === "missing");
   return (
     <p className="t-caption mt-3 max-w-[75ch] text-ink-muted" style={{ overflowWrap: "anywhere" }}>
-      {stats.ok}/{stats.total} 件が公式 og:image（取得 2026-10-07）。
-      {missing.length > 0
-        ? ` 幾何マーク: ${missing.map((s) => s.nameJa ?? s.name).join("、")}。`
-        : ""}
+      {t.ogpOk(stats.ok, stats.total)}
+      {missing.length > 0 ? t.ogpMissing(missing.map((s) => (locale === "ja" ? (s.nameJa ?? s.name) : s.name))) : ""}
     </p>
   );
 }
 
 function FlagshipGallery() {
   const { locale } = useLocale();
+  const t = useT(sourcesMessages);
   const grouped = useMemo(() => {
     const map = new Map<DesignSystemRef["category"], DesignSystemRef[]>();
     for (const s of flagshipSystems) {
@@ -101,24 +106,18 @@ function FlagshipGallery() {
     <section aria-labelledby="flagship" className="mb-16">
       <div className="mb-6">
         <h2 id="flagship" className="t-h2 text-ink">
-          注目のデザインシステム
+          {t.flagship}
         </h2>
         <p className="t-body mt-2 max-w-[65ch] text-ink-secondary">
-          AwesomeDS が値と規則の出典にしたデザインシステムとガイドライン。各カードに、何を採ったかと採用の度合いを載せています。
+          {t.flagshipLead}
         </p>
         <dl className="t-caption mt-3 flex max-w-[75ch] flex-wrap gap-x-4 gap-y-1 text-ink-secondary">
-          <div className="flex gap-1">
-            <dt className="font-medium text-ink">採用</dt>
-            <dd>値や規則をそのまま使う</dd>
-          </div>
-          <div className="flex gap-1">
-            <dt className="font-medium text-ink">翻案</dt>
-            <dd>考え方を取り、値は変える</dd>
-          </div>
-          <div className="flex gap-1">
-            <dt className="font-medium text-ink">参照のみ</dt>
-            <dd>指名されたときに公式を使う</dd>
-          </div>
+          {t.levels.map(([term, def]) => (
+            <div key={term} className="flex gap-1">
+              <dt className="font-medium text-ink">{term}</dt>
+              <dd>{def}</dd>
+            </div>
+          ))}
         </dl>
         <OgpNote />
       </div>
@@ -138,6 +137,8 @@ function FlagshipGallery() {
 
 export function Sources() {
   const [q, setQ] = useState("");
+  const t = useT(sourcesMessages);
+  const { locale } = useLocale();
   const [openAll, setOpenAll] = useState(false);
   const all = useMemo(() => groupSourcesByDomain(entries), []);
   const total = all.reduce((n, g) => n + g.sources.length, 0);
@@ -148,7 +149,7 @@ export function Sources() {
     return all
       .map((g) => ({
         ...g,
-        sources: g.sources.filter((s) => [g.domain, s.title, s.url, ...s.citedBy.map((e) => e.title)].some((t) => t.toLowerCase().includes(needle))),
+        sources: g.sources.filter((s) => [g.domain, s.title, s.url, ...s.citedBy.map((e) => e.title)].some((v) => v.toLowerCase().includes(needle))),
       }))
       .filter((g) => g.sources.length > 0);
   }, [q, all]);
@@ -158,32 +159,32 @@ export function Sources() {
   return (
     <div>
       <PageHeader
-        title="出典・ガイドライン"
-        lead={`デザインシステムの公式ガイドラインと、ナレッジ・AwesomeDS 解説が参照する外部リンクの一覧です。${total} 件、${all.length} ドメイン。`}
+        title={t.title}
+        lead={t.lead(total, all.length)}
       />
 
       <FlagshipGallery />
 
       <section aria-labelledby="all-sources">
         <h2 id="all-sources" className="t-h2 mb-6 text-ink">
-          全出典リンク
+          {t.allSources}
         </h2>
 
         {all.length === 0 ? (
-          <EmptyState title="出典はまだありません" description="frontmatter の sources に URL が書かれると、ここに集計されます。" />
+          <EmptyState title={t.emptyTitle} description={t.emptyBody} />
         ) : (
           <>
             <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div className="w-full max-w-md">
-                <Input label="検索" placeholder="ドメイン、タイトル、URL、引用元" value={q} onChange={(e) => setQ(e.target.value)} type="search" />
+                <Input label={t.search} placeholder={t.searchPlaceholder} value={q} onChange={(e) => setQ(e.target.value)} type="search" />
               </div>
               <Button variant="secondary" size="sm" onClick={() => setOpenAll((v) => !v)}>
-                {openAll ? "すべて閉じる" : "すべて開く"}
+                {openAll ? t.closeAll : t.openAll}
               </Button>
             </div>
 
             {groups.length === 0 ? (
-              <EmptyState title="一致する出典がありません" description="別の語で検索してください。" />
+              <EmptyState title={t.noMatchTitle} description={t.noMatchBody} />
             ) : (
               <ul className="divide-y divide-hairline border-y border-hairline">
                 {groups.map((g) => (
@@ -207,9 +208,9 @@ export function Sources() {
                               {s.url}
                             </span>
                             <span className="t-caption flex flex-wrap gap-x-2 text-ink-secondary">
-                              引用:
+                              {t.citedBy}
                               {s.citedBy.map((e) => (
-                                <Link key={e.id} to={`/knowledge/${e.category}/${e.slug}`}>
+                                <Link key={e.id} to={`/knowledge/${e.category}/${e.slug}`} lang={langFor(e.title, locale)}>
                                   {e.title}
                                 </Link>
                               ))}

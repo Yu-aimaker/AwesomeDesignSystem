@@ -5,11 +5,14 @@ import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
 import { repoUrl } from "../lib/nav";
+import { useT } from "../i18n/context";
+import { componentsMessages } from "../i18n/messages/components";
 
 // Entries that need the full row: tables, navigation, anything with a wide layout.
 const wide = new Set(["table", "data-table", "nav-bar", "stepper", "timeline", "media-card", "calendar", "command-menu", "breadcrumb", "pagination", "file-upload", "tabs", "accordion"]);
 
 export function Components() {
+  const t = useT(componentsMessages);
   const [group, setGroup] = useState<ComponentGroup | "all">("all");
   const [q, setQ] = useState("");
 
@@ -25,23 +28,23 @@ export function Components() {
 
   return (
     <div>
-      <GalleryHeader title="コンポーネント" lead="props を触る。コードはその状態のまま出る。実装も読める。" stat={components.length} statLabel="部品" />
+      <GalleryHeader title={t.title} lead={t.lead} stat={components.length} statLabel={t.statLabel} />
 
       <FilterBar>
         <FilterChip selected={group === "all"} onSelect={() => setGroup("all")} count={components.length}>
-          すべて
+          {t.all}
         </FilterChip>
         {groups.map((g) => (
           <FilterChip key={g.id} selected={group === g.id} onSelect={() => setGroup(g.id)} count={components.filter((c) => c.group === g.id).length}>
             {g.label}
           </FilterChip>
         ))}
-        <SearchBox value={q} onChange={setQ} placeholder="部品を検索" />
+        <SearchBox value={q} onChange={setQ} placeholder={t.searchPlaceholder} />
       </FilterBar>
 
       {shown === 0 ? (
         <div className="mt-12">
-          <EmptyState title="見つかりません" description="別の語で検索するか、絞り込みを外してください。" />
+          <EmptyState title={t.notFoundTitle} description={t.notFoundBody} />
         </div>
       ) : (
         sections.map(({ group: g, items }) => (
@@ -83,11 +86,11 @@ export function Components() {
       )}
 
       <DataNote>
-        全部品はこのサイトの実装そのもの。ソースは{" "}
+        {t.noteBefore}{" "}
         <a href={`${repoUrl}/tree/main/web/src/ds/components`} target="_blank" rel="noreferrer">
           web/src/ds/components
         </a>
-        。規則は AwesomeDS/components/checklist.md。
+        {t.noteAfter}
       </DataNote>
     </div>
   );

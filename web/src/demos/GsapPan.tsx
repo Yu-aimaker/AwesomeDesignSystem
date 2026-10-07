@@ -2,6 +2,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "../lib/theme";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +19,7 @@ export interface HorizontalPanProps {
  * are a plain horizontal row the visitor scrolls by hand.
  */
 export function HorizontalPan({ panels = 4, scrub = 0.4, snap = false }: HorizontalPanProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const scroller = useRef<HTMLDivElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -75,16 +78,17 @@ export function HorizontalPan({ panels = 4, scrub = 0.4, snap = false }: Horizon
         </div>
       </div>
       <div style={{ height: n * 200 }} />
-      <p className="t-caption px-4 pb-4 text-ink-muted">下へスクロールすると横に流れる。{n} 枚{snap ? "、スナップあり" : ""}</p>
+      <p className="t-caption px-4 pb-4 text-ink-muted">{msg.panHint(n, snap)}</p>
     </div>
   );
 }
 
 function Panel({ i }: { i: number }) {
+  const msg = useT(demosMessages);
   return (
     <article className="flex h-48 w-64 shrink-0 flex-col justify-end rounded-lg border border-hairline bg-surface p-5 shadow-2">
       <span className="t-display tabular text-ink-muted">{String(i).padStart(2, "0")}</span>
-      <p className="t-label mt-2 text-ink">パネル {i}</p>
+      <p className="t-label mt-2 text-ink">{msg.panel(i)}</p>
     </article>
   );
 }

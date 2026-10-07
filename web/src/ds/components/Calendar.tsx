@@ -1,6 +1,9 @@
 import { useId, useMemo, useState, type KeyboardEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cx } from "../cx";
+import { useLocale, useT } from "../../i18n/context";
+import { localeMeta } from "../../i18n/locales";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface CalendarProps {
   value?: Date | null;
@@ -36,7 +39,11 @@ function addMonths(d: Date, n: number) {
 // A month grid (role="grid") with roving focus: arrows move a day, PageUp/Down a
 // month, Home/End to the week's ends. Labels come from Intl for the given locale,
 // so ja-JP reads 2026年9月 and 日 月 火. Today gets an ink ring, the selection an ink fill.
-export function Calendar({ value, onChange, defaultMonth, min, max, locale = "ja-JP", weekStartsOn = 0, className }: CalendarProps) {
+export function Calendar({ value, onChange, defaultMonth, min, max, locale: localeProp, weekStartsOn = 0, className }: CalendarProps) {
+  const m = useT(dsMessages);
+  const site = useLocale().locale;
+  // Without a `locale` prop, follow the site language.
+  const locale = localeProp ?? localeMeta[site].tag;
   const id = useId();
   const today = startOfDay(new Date());
   const [month, setMonth] = useState<Date>(() => addMonths(defaultMonth ?? value ?? today, 0));
@@ -96,7 +103,7 @@ export function Calendar({ value, onChange, defaultMonth, min, max, locale = "ja
       <div className="flex items-center justify-between">
         <button
           type="button"
-          aria-label="前の月"
+          aria-label={m.previousMonth}
           onClick={() => setMonth(addMonths(month, -1))}
           className="flex size-8 items-center justify-center rounded-md text-ink-secondary transition-colors duration-instant hover:bg-surface-sunken hover:text-ink"
         >
@@ -107,7 +114,7 @@ export function Calendar({ value, onChange, defaultMonth, min, max, locale = "ja
         </p>
         <button
           type="button"
-          aria-label="次の月"
+          aria-label={m.nextMonth}
           onClick={() => setMonth(addMonths(month, 1))}
           className="flex size-8 items-center justify-center rounded-md text-ink-secondary transition-colors duration-instant hover:bg-surface-sunken hover:text-ink"
         >

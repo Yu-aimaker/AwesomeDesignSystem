@@ -3,6 +3,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import type { Group, Points } from "three";
 import { useReducedMotion } from "../lib/theme";
 import { useInViewport, useTokenColors } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 export interface ParticleFieldProps {
   count?: number; // 200..2000
@@ -59,6 +61,7 @@ function Field({ color, count, drift, parallax, size, animate }: { color: string
  * Pauses off-screen and under reduced motion (a single frame is drawn).
  */
 export function ParticleField({ count = 800, drift = 0.5, parallax = 0.5, size = 0.035 }: ParticleFieldProps) {
+  const msg = useT(demosMessages);
   const wrapper = useRef<HTMLDivElement>(null);
   const visible = useInViewport(wrapper);
   const reduced = useReducedMotion();
@@ -66,7 +69,7 @@ export function ParticleField({ count = 800, drift = 0.5, parallax = 0.5, size =
   const animate = visible && !reduced;
   return (
     <div ref={wrapper} className="h-64 w-full rounded-lg border border-hairline bg-canvas-soft">
-      <Canvas frameloop={animate ? "always" : "demand"} dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 50 }} gl={{ alpha: true, antialias: true }} aria-label="漂う粒子" role="img">
+      <Canvas frameloop={animate ? "always" : "demand"} dpr={[1, 2]} camera={{ position: [0, 0, 5], fov: 50 }} gl={{ alpha: true, antialias: true }} aria-label={msg.particlesLabel} role="img">
         <Field color={colors.accent} count={count} drift={drift} parallax={parallax} size={size} animate={animate} />
       </Canvas>
     </div>

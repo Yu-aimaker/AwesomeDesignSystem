@@ -5,6 +5,8 @@ import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { motionGalleryMessages } from "../i18n/messages/motionGallery";
 
 type Group = DemoEntry["group"] | "all";
 type Lib = DemoEntry["library"] | "all";
@@ -18,6 +20,7 @@ const libTone: Record<DemoEntry["library"], string> = {
 };
 
 export function MotionGallery() {
+  const t = useT(motionGalleryMessages);
   const [group, setGroup] = useState<Group>("all");
   const [lib, setLib] = useState<Lib>("all");
   const [q, setQ] = useState("");
@@ -37,13 +40,13 @@ export function MotionGallery() {
 
   return (
     <div>
-      <GalleryHeader title="モーション" lead="duration と easing を動かして、目で決める。重いものは押すまで読み込まない。" stat={demos.length} statLabel="デモ">
-        {reduced && <p className="t-caption mt-3 text-ink-secondary">OS の「視差効果を減らす」が有効です。デモは移動を省き、フェードだけを残します。</p>}
+      <GalleryHeader title={t.title} lead={t.lead} stat={demos.length} statLabel={t.statLabel}>
+        {reduced && <p className="t-caption mt-3 text-ink-secondary">{t.reducedNote}</p>}
       </GalleryHeader>
 
       <FilterBar>
         <FilterChip selected={group === "all"} onSelect={() => setGroup("all")} count={demos.length}>
-          すべて
+          {t.all}
         </FilterChip>
         {demoGroups.map((g) => (
           <FilterChip key={g.id} selected={group === g.id} onSelect={() => setGroup(g.id)} count={demos.filter((d) => d.group === g.id).length}>
@@ -51,10 +54,10 @@ export function MotionGallery() {
           </FilterChip>
         ))}
         <span aria-hidden className="mx-1 hidden h-5 w-px bg-hairline sm:block" />
-        <div role="radiogroup" aria-label="ライブラリ" className="flex flex-wrap gap-1">
+        <div role="radiogroup" aria-label={t.library} className="flex flex-wrap gap-1">
           {(["all", ...libraries.map((l) => l.id)] as Lib[]).map((id) => {
             const on = lib === id;
-            const label = id === "all" ? "全ライブラリ" : libraries.find((l) => l.id === id)?.label;
+            const label = id === "all" ? t.allLibraries : libraries.find((l) => l.id === id)?.label;
             return (
               <button
                 key={id}
@@ -69,12 +72,12 @@ export function MotionGallery() {
             );
           })}
         </div>
-        <SearchBox value={q} onChange={setQ} placeholder="デモを検索" />
+        <SearchBox value={q} onChange={setQ} placeholder={t.searchPlaceholder} />
       </FilterBar>
 
       {shown === 0 ? (
         <div className="mt-12">
-          <EmptyState title="見つかりません" description="ライブラリの絞り込みを外すか、別の語で検索してください。" />
+          <EmptyState title={t.notFoundTitle} description={t.notFoundBody} />
         </div>
       ) : (
         sections.map(({ group: g, items }) => (
@@ -99,7 +102,7 @@ export function MotionGallery() {
                         <span className="flex flex-wrap items-center gap-1.5">
                           <Tag className={libTone[d.library]}>{libraries.find((l) => l.id === d.library)?.label}</Tag>
                           {d.heavy && <Tag>lazy</Tag>}
-                          {d.avoid && <span className="t-caption text-ink-muted">避ける: {d.avoid}</span>}
+                          {d.avoid && <span className="t-caption text-ink-muted">{t.avoid(d.avoid)}</span>}
                         </span>
                       }
                     >
@@ -114,7 +117,7 @@ export function MotionGallery() {
       )}
 
       <DataNote>
-        既定は 200ms、ease-out、移動 4〜8px。無限ループはローディングだけ。すべて prefers-reduced-motion を尊重します。詳細は AwesomeDS/foundations/motion.md。
+        {t.dataNote}
       </DataNote>
     </div>
   );

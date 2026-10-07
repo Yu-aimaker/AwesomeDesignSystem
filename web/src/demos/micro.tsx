@@ -6,6 +6,8 @@ import { cx } from "../ds/cx";
 import { Button } from "../ds/components/Button";
 import { Skeleton } from "../ds/components/Skeleton";
 import { DURATION, SPRING, cssEase, motionEase, sec } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 /* ------------------------------------------------------------------ */
 /* ButtonPress                                                         */
@@ -19,6 +21,7 @@ export interface ButtonPressProps {
 
 /** Press feedback: scale to 0.98 and back. Compared against a button that only changes color. */
 export function ButtonPress({ scale = 0.98, duration = DURATION.instant, compare = true }: ButtonPressProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   return (
     <div className="flex flex-wrap items-center justify-center gap-8">
@@ -29,14 +32,14 @@ export function ButtonPress({ scale = 0.98, duration = DURATION.instant, compare
           transition={{ duration: sec(duration), ease: motionEase("ease-out") }}
           className="t-label inline-flex h-10 items-center rounded-md bg-primary px-4 text-on-primary"
         >
-          保存
+          {msg.save}
         </motion.button>
-        <span className="t-caption tabular text-ink-muted">scale {reduced ? "なし (reduced)" : scale.toFixed(2)}</span>
+        <span className="t-caption tabular text-ink-muted">scale {reduced ? msg.noScale : scale.toFixed(2)}</span>
       </div>
       {compare && (
         <div className="flex flex-col items-center gap-2">
-          <Button>保存</Button>
-          <span className="t-caption text-ink-muted">色だけ</span>
+          <Button>{msg.save}</Button>
+          <span className="t-caption text-ink-muted">{msg.colorOnly}</span>
         </div>
       )}
     </div>
@@ -55,6 +58,7 @@ export interface CheckboxDrawProps {
 
 /** The check mark is a path drawn with `pathLength`, 150ms ease-out. */
 export function CheckboxDraw({ duration = DURATION.fast, easing = "ease-out", size = 24 }: CheckboxDrawProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [checked, setChecked] = useState(true);
   return (
@@ -81,7 +85,7 @@ export function CheckboxDraw({ duration = DURATION.fast, easing = "ease-out", si
           </svg>
         </motion.span>
       </span>
-      <span className="t-body text-ink">利用規約に同意する</span>
+      <span className="t-body text-ink">{msg.agreeTerms}</span>
     </label>
   );
 }
@@ -142,6 +146,7 @@ export interface LikeBurstProps {
 
 /** One-shot particles on click. They fly out once, fade, and unmount; nothing loops. */
 export function LikeBurst({ particles = 8, distance = 28, duration = DURATION.slow }: LikeBurstProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [liked, setLiked] = useState(false);
   const [bursts, setBursts] = useState<number[]>([]);
@@ -159,7 +164,7 @@ export function LikeBurst({ particles = 8, distance = 28, duration = DURATION.sl
       <button
         type="button"
         aria-pressed={liked}
-        aria-label="いいね"
+        aria-label={msg.like}
         onClick={onClick}
         className="relative inline-flex size-12 items-center justify-center rounded-full border border-hairline bg-surface text-ink hover:bg-surface-sunken"
       >
@@ -183,7 +188,7 @@ export function LikeBurst({ particles = 8, distance = 28, duration = DURATION.sl
           </span>
         ))}
       </button>
-      <span className="t-caption text-ink-muted">{reduced ? "reduced motion: 色だけ" : `${particles} 粒 × ${distance}px、${duration}ms`}</span>
+      <span className="t-caption text-ink-muted">{reduced ? msg.reducedColorOnly : msg.burstNote(particles, distance, duration)}</span>
     </div>
   );
 }
@@ -200,6 +205,7 @@ export interface CopyConfirmProps {
 
 /** Icon swap on click. The check is held, then the copy icon returns. */
 export function CopyConfirm({ duration = DURATION.fast, hold = 1500, style = "scale" }: CopyConfirmProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [copied, setCopied] = useState(false);
   useEffect(() => {
@@ -217,7 +223,7 @@ export function CopyConfirm({ duration = DURATION.fast, hold = 1500, style = "sc
       <code className="t-mono text-ink">pnpm add motion</code>
       <button
         type="button"
-        aria-label={copied ? "コピーしました" : "コピー"}
+        aria-label={copied ? msg.copied : msg.copy}
         onClick={() => setCopied(true)}
         className="relative inline-flex size-8 items-center justify-center rounded-sm text-ink-secondary hover:bg-surface-sunken hover:text-ink"
       >
@@ -249,6 +255,7 @@ export interface SkeletonToContentProps {
 
 /** Skeleton and content are stacked; the content fades in over the skeleton. */
 export function SkeletonToContent({ duration = DURATION.base, travel = 4, loadTime = 1200 }: SkeletonToContentProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(true);
@@ -267,7 +274,7 @@ export function SkeletonToContent({ duration = DURATION.base, travel = 4, loadTi
       <div className="relative">
         <AnimatePresence initial={false}>
           {loading && (
-            <motion.div key="skeleton" exit={{ opacity: 0 }} transition={{ duration: sec(duration * 0.65), ease: motionEase("ease-in") }} className="absolute inset-0 rounded-lg border border-hairline bg-surface p-5" aria-busy="true" aria-label="読み込み中">
+            <motion.div key="skeleton" exit={{ opacity: 0 }} transition={{ duration: sec(duration * 0.65), ease: motionEase("ease-in") }} className="absolute inset-0 rounded-lg border border-hairline bg-surface p-5" aria-busy="true" aria-label={msg.loading}>
               <div className="flex items-center gap-3">
                 <Skeleton className="size-10 rounded-full" />
                 <div className="flex-1">
@@ -292,15 +299,15 @@ export function SkeletonToContent({ duration = DURATION.base, travel = 4, loadTi
               <Info className="size-5" strokeWidth={1.75} aria-hidden />
             </span>
             <div>
-              <p className="t-label text-ink">ノート 12 件を同期しました</p>
-              <p className="t-caption text-ink-muted">3 秒前</p>
+              <p className="t-label text-ink">{msg.syncedNotes}</p>
+              <p className="t-caption text-ink-muted">{msg.secondsAgo}</p>
             </div>
           </div>
-          <p className="t-body-sm mt-4 text-ink-secondary">読み込みの骸骨は本物と同じ骨格にすると、切り替えで位置がずれない。</p>
+          <p className="t-body-sm mt-4 text-ink-secondary">{msg.skeletonTip}</p>
         </motion.div>
       </div>
       <Button size="sm" variant="secondary" onClick={reload} disabled={loading} className="self-start">
-        再読み込み
+        {msg.reload}
       </Button>
     </div>
   );
@@ -319,6 +326,7 @@ export interface ToastEnterProps {
 
 /** Enter 200ms ease-out from 8px below; exit ~130ms ease-in, opacity only. */
 export function ToastEnter({ enter = DURATION.base, exit = 130, travel = 8, autoDismiss = 2500 }: ToastEnterProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [items, setItems] = useState<number[]>([]);
   const push = () => {
@@ -329,7 +337,7 @@ export function ToastEnter({ enter = DURATION.base, exit = 130, travel = 8, auto
   return (
     <div className="relative flex h-56 w-full max-w-md flex-col items-start justify-start rounded-lg border border-dashed border-hairline-strong p-4">
       <Button size="sm" variant="secondary" onClick={push}>
-        トーストを出す
+        {msg.showToast}
       </Button>
       <div aria-live="polite" className="pointer-events-none absolute right-3 bottom-3 flex w-64 flex-col gap-2">
         <AnimatePresence initial={false}>
@@ -344,13 +352,13 @@ export function ToastEnter({ enter = DURATION.base, exit = 130, travel = 8, auto
               className="pointer-events-auto flex items-start gap-2 rounded-lg border border-hairline bg-surface p-3 shadow-2"
             >
               <Check className="mt-0.5 size-4 shrink-0 text-success" strokeWidth={1.75} aria-hidden />
-              <p className="t-body-sm text-ink">保存しました</p>
+              <p className="t-body-sm text-ink">{msg.saved}</p>
             </motion.div>
           ))}
         </AnimatePresence>
       </div>
       <p className="t-caption absolute bottom-3 left-4 text-ink-muted">
-        入 {enter}ms / 出 {exit}ms
+        {msg.enterExit(enter, exit)}
       </p>
     </div>
   );
@@ -370,6 +378,7 @@ export interface TooltipEnterProps {
 
 /** Tooltip travels 4px toward its anchor. Hover or focus the button; pin it to inspect. */
 export function TooltipEnter({ travel = 4, duration = DURATION.instant, easing = "ease-out", placement = "top", pinned = false }: TooltipEnterProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [hover, setHover] = useState(false);
   const open = pinned || hover;
@@ -382,7 +391,7 @@ export function TooltipEnter({ travel = 4, duration = DURATION.instant, easing =
   return (
     <span className="relative inline-flex" onPointerEnter={() => setHover(true)} onPointerLeave={() => setHover(false)} onFocus={() => setHover(true)} onBlur={() => setHover(false)}>
       <Button variant="secondary" aria-describedby="tooltip-enter-demo">
-        <Info strokeWidth={1.75} aria-hidden /> 詳細
+        <Info strokeWidth={1.75} aria-hidden /> {msg.details}
       </Button>
       <span
         role="tooltip"
@@ -390,7 +399,7 @@ export function TooltipEnter({ travel = 4, duration = DURATION.instant, easing =
         className={cx("pointer-events-none absolute left-1/2 z-10 whitespace-nowrap rounded-sm border border-hairline bg-surface px-2 py-1 text-xs text-ink shadow-2", placement === "top" ? "bottom-full mb-2" : "top-full mt-2")}
         style={style}
       >
-        {travel}px 移動して現れる
+        {msg.appearsAfter(travel)}
       </span>
     </span>
   );

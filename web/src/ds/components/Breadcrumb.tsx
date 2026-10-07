@@ -1,6 +1,8 @@
 import { Fragment } from "react";
 import { ChevronRight, Ellipsis } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface BreadcrumbItem {
   label: string;
@@ -17,10 +19,11 @@ export interface BreadcrumbProps {
 // 14px, ink-secondary links, a 16px chevron between, the current page in ink
 // with aria-current. Long trails keep the first and the last two items.
 export function Breadcrumb({ items, maxItems, className }: BreadcrumbProps) {
+  const m = useT(dsMessages);
   const collapse = maxItems !== undefined && items.length > maxItems && maxItems >= 3;
   const shown: Array<BreadcrumbItem | "ellipsis"> = collapse ? [items[0], "ellipsis", ...items.slice(items.length - (maxItems - 1))] : items;
   return (
-    <nav aria-label="パンくず" className={cx("text-sm", className)}>
+    <nav aria-label={m.breadcrumb} className={cx("text-sm", className)}>
       <ol className="flex flex-wrap items-center gap-1">
         {shown.map((item, i) => {
           const last = i === shown.length - 1;

@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import type { Locale } from "../i18n/locales";
+import { demosMessages } from "../i18n/messages/demos";
 import type { Control, PlaygroundState } from "../layout/Playground";
 import { DURATION, EASING_OPTIONS, SPRING, bool, cssDuration, cssEase, motionEaseCode, num, springCode, str, tweenCode } from "./shared";
 import { MarqueeStrip, NumberTicker, SplitTextReveal, TextScramble, Typewriter, UnderlineDraw } from "./text";
@@ -14,9 +16,9 @@ export interface DemoEntry {
   name: string;
   group: "text" | "micro" | "layout" | "scroll" | "3d" | "lottie" | "css";
   library: "css" | "motion" | "gsap" | "three" | "lottie";
-  /** Japanese, at most 12 words: when to use it. */
+  /** At most 12 words: when to use it. Text lives in i18n/messages/demos.ts. */
   caption: string;
-  /** Japanese, at most 12 words: when not to. */
+  /** At most 12 words: when not to. */
   avoid?: string;
   controls?: Control[];
   initial: PlaygroundState;
@@ -31,15 +33,18 @@ export interface DemoEntry {
   heavy?: boolean;
 }
 
-export const demoGroups: Array<{ id: DemoEntry["group"]; label: string }> = [
-  { id: "text", label: "テキスト" },
-  { id: "micro", label: "マイクロ" },
-  { id: "layout", label: "レイアウト" },
-  { id: "scroll", label: "スクロール" },
-  { id: "3d", label: "3D" },
-  { id: "lottie", label: "Lottie" },
-  { id: "css", label: "CSS" },
-];
+/** Registry entry before its text is attached; caption and avoid come from the catalog. */
+type DemoSource = Omit<DemoEntry, "caption" | "avoid">;
+
+const groupOrder: DemoEntry["group"][] = ["text", "micro", "layout", "scroll", "3d", "lottie", "css"];
+
+export function getDemoGroups(locale: Locale): Array<{ id: DemoEntry["group"]; label: string }> {
+  const t = demosMessages[locale];
+  return groupOrder.map((id) => ({ id, label: t.groups[id] }));
+}
+
+/** Japanese groups, kept for callers that have no locale. Prefer getDemoGroups(locale). */
+export const demoGroups = getDemoGroups("ja");
 
 export const libraries: Array<{ id: DemoEntry["library"]; label: string; url: string }> = [
   { id: "css", label: "CSS", url: "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations" },
@@ -90,14 +95,12 @@ const LINKS = {
 /* Demos                                                                */
 /* ------------------------------------------------------------------ */
 
-const text: DemoEntry[] = [
+const text: DemoSource[] = [
   {
     id: "split-text-reveal",
     name: "SplitTextReveal",
     group: "text",
     library: "motion",
-    caption: "見出しの初回表示に。単語単位で 30ms ずつ。",
-    avoid: "本文や長文には使わない。",
     controls: [{ type: "select", key: "mode", label: "単位", options: ["words", "chars"] }, { type: "range", key: "stagger", label: "stagger", min: 0, max: 120, step: 5, unit: "ms" }, durationControl(), travelControl(), easingControl()],
     initial: { mode: "words", stagger: 30, duration: DURATION.base, travel: 8, easing: "ease-out" },
     render: (s) => <SplitTextReveal mode={str(s, "mode", "words") as "words" | "chars"} stagger={num(s, "stagger", 30)} duration={num(s, "duration", DURATION.base)} travel={num(s, "travel", 8)} easing={str(s, "easing", "ease-out")} />,
@@ -116,8 +119,6 @@ const text: DemoEntry[] = [
     name: "Typewriter",
     group: "text",
     library: "css",
-    caption: "AI の応答など、生成中を示すときに。",
-    avoid: "読ませたい文章には使わない。待たせる。",
     controls: [{ type: "range", key: "speed", label: "1 文字", min: 10, max: 200, step: 10, unit: "ms" }, { type: "toggle", key: "cursor", label: "カーソル" }],
     initial: { speed: 40, cursor: true },
     render: (s) => <Typewriter speed={num(s, "speed", 40)} cursor={bool(s, "cursor", true)} />,
@@ -135,8 +136,6 @@ useEffect(() => {
     name: "NumberTicker",
     group: "text",
     library: "motion",
-    caption: "KPI やカウントの初回表示に。tabular-nums で幅を固定。",
-    avoid: "頻繁に更新される値には使わない。",
     controls: [{ type: "range", key: "target", label: "値", min: 10, max: 99999, step: 10 }, durationControl("duration", 3000), easingControl(), { type: "range", key: "decimals", label: "小数", min: 0, max: 2, step: 1 }],
     initial: { target: 12480, duration: 800, easing: "ease-out", decimals: 0 },
     render: (s) => <NumberTicker target={num(s, "target", 12480)} duration={num(s, "duration", 800)} easing={str(s, "easing", "ease-out")} decimals={num(s, "decimals", 0)} />,
@@ -156,8 +155,6 @@ useEffect(() => {
     name: "TextScramble",
     group: "text",
     library: "css",
-    caption: "ブランド名の演出、1 か所だけ。",
-    avoid: "ナビや UI ラベルには使わない。",
     controls: [durationControl("duration", 2000), { type: "select", key: "charset", label: "文字", options: ["symbols", "katakana", "digits"] }],
     initial: { duration: 600, charset: "symbols" },
     render: (s) => <TextScramble duration={num(s, "duration", 600)} charset={str(s, "charset", "symbols") as "symbols" | "katakana" | "digits"} />,
@@ -172,8 +169,6 @@ el.textContent = out;`,
     name: "MarqueeStrip",
     group: "text",
     library: "css",
-    caption: "ロゴ帯に。1 ページに 1 つ、必ず止められる。",
-    avoid: "テキスト情報を流さない。読めない。",
     controls: [{ type: "range", key: "seconds", label: "1 周", min: 6, max: 60, step: 2, unit: "s" }, { type: "select", key: "direction", label: "方向", options: ["left", "right"] }, { type: "toggle", key: "pauseOnHover", label: "ホバーで停止" }, { type: "range", key: "gap", label: "gap", min: 16, max: 96, step: 8, unit: "px" }],
     initial: { seconds: 24, direction: "left", pauseOnHover: true, gap: 48 },
     render: (s) => <MarqueeStrip seconds={num(s, "seconds", 24)} direction={str(s, "direction", "left") as "left" | "right"} pauseOnHover={bool(s, "pauseOnHover", true)} gap={num(s, "gap", 48)} />,
@@ -189,8 +184,6 @@ ${bool(s, "pauseOnHover", true) ? ".strip:hover .track { animation-play-state: p
     name: "GradientlessHighlight",
     group: "text",
     library: "css",
-    caption: "リンクや強調に。線が 1 本伸びるだけ。",
-    avoid: "グラデーションや色替えの強調は使わない。",
     controls: [{ type: "select", key: "trigger", label: "きっかけ", options: ["hover", "mount"] }, durationControl(), easingControl(), { type: "range", key: "thickness", label: "太さ", min: 1, max: 4, step: 1, unit: "px" }, { type: "select", key: "origin", label: "起点", options: ["left", "center"] }],
     initial: { trigger: "hover", duration: DURATION.base, easing: "ease-out", thickness: 2, origin: "left" },
     render: (s) => <UnderlineDraw trigger={str(s, "trigger", "hover") as "hover" | "mount"} duration={num(s, "duration", DURATION.base)} easing={str(s, "easing", "ease-out")} thickness={num(s, "thickness", 2)} origin={str(s, "origin", "left") as "left" | "center"} />,
@@ -203,14 +196,12 @@ ${bool(s, "pauseOnHover", true) ? ".strip:hover .track { animation-play-state: p
   },
 ];
 
-const micro: DemoEntry[] = [
+const micro: DemoSource[] = [
   {
     id: "button-press",
     name: "ButtonPress",
     group: "micro",
     library: "motion",
-    caption: "押した手応え。0.98 まで、100ms。",
-    avoid: "0.9 以下はおもちゃに見える。",
     controls: [{ type: "range", key: "scale", label: "scale", min: 0.8, max: 1, step: 0.01 }, durationControl("duration", 400), { type: "toggle", key: "compare", label: "比較を表示" }],
     initial: { scale: 0.98, duration: DURATION.instant, compare: true },
     render: (s) => <ButtonPress scale={num(s, "scale", 0.98)} duration={num(s, "duration", DURATION.instant)} compare={bool(s, "compare", true)} />,
@@ -222,8 +213,6 @@ const micro: DemoEntry[] = [
     name: "CheckboxDraw",
     group: "micro",
     library: "motion",
-    caption: "チェックは線を描く。150ms。",
-    avoid: "バウンスや拡大は入れない。",
     controls: [durationControl("duration", 600), easingControl(), { type: "range", key: "size", label: "size", min: 16, max: 40, step: 2, unit: "px" }],
     initial: { duration: DURATION.fast, easing: "ease-out", size: 24 },
     render: (s) => <CheckboxDraw duration={num(s, "duration", DURATION.fast)} easing={str(s, "easing", "ease-out")} size={num(s, "size", 24)} />,
@@ -237,8 +226,6 @@ const micro: DemoEntry[] = [
     name: "SwitchSpring",
     group: "micro",
     library: "motion",
-    caption: "つまみは spring 400/30 か 150ms ease-out。",
-    avoid: "damping 20 未満のバウンスは製品 UI に入れない。",
     controls: [stiffnessControl, dampingControl, durationControl("duration (右)", 600), easingControl("easing", "easing (右)")],
     initial: { stiffness: SPRING.snappy.stiffness, damping: SPRING.snappy.damping, duration: DURATION.fast, easing: "ease-out" },
     render: (s) => <SwitchSpring stiffness={num(s, "stiffness", SPRING.snappy.stiffness)} damping={num(s, "damping", SPRING.snappy.damping)} duration={num(s, "duration", DURATION.fast)} easing={str(s, "easing", "ease-out")} />,
@@ -253,8 +240,6 @@ const micro: DemoEntry[] = [
     name: "LikeBurst",
     group: "micro",
     library: "motion",
-    caption: "いいねなど、1 回きりの祝福に。",
-    avoid: "毎回の操作や保存ボタンには使わない。",
     controls: [{ type: "range", key: "particles", label: "粒", min: 4, max: 16, step: 1 }, { type: "range", key: "distance", label: "距離", min: 12, max: 64, step: 2, unit: "px" }, durationControl("duration", 1000)],
     initial: { particles: 8, distance: 28, duration: DURATION.slow },
     render: (s) => <LikeBurst particles={num(s, "particles", 8)} distance={num(s, "distance", 28)} duration={num(s, "duration", DURATION.slow)} />,
@@ -271,8 +256,6 @@ const micro: DemoEntry[] = [
     name: "CopyConfirm",
     group: "micro",
     library: "motion",
-    caption: "コピー完了はアイコンの入れ替えで伝える。",
-    avoid: "トーストを出すほどではない。",
     controls: [{ type: "select", key: "style", label: "入れ替え", options: ["scale", "crossfade", "slide"] }, durationControl("duration", 600), { type: "range", key: "hold", label: "保持", min: 500, max: 4000, step: 100, unit: "ms" }],
     initial: { style: "scale", duration: DURATION.fast, hold: 1500 },
     render: (s) => <CopyConfirm style={str(s, "style", "scale") as "scale" | "crossfade" | "slide"} duration={num(s, "duration", DURATION.fast)} hold={num(s, "hold", 1500)} />,
@@ -293,8 +276,6 @@ const micro: DemoEntry[] = [
     name: "SkeletonToContent",
     group: "micro",
     library: "motion",
-    caption: "骸骨と本物を重ねて opacity で切り替える。",
-    avoid: "高さが変わる骸骨は作らない。",
     controls: [durationControl("duration", 600), travelControl(16), { type: "range", key: "loadTime", label: "読み込み", min: 300, max: 3000, step: 100, unit: "ms" }],
     initial: { duration: DURATION.base, travel: 4, loadTime: 1200 },
     render: (s) => <SkeletonToContent duration={num(s, "duration", DURATION.base)} travel={num(s, "travel", 4)} loadTime={num(s, "loadTime", 1200)} />,
@@ -309,8 +290,6 @@ const micro: DemoEntry[] = [
     name: "ToastEnter",
     group: "micro",
     library: "motion",
-    caption: "入りは 200ms 8px、出は 130ms opacity だけ。",
-    avoid: "出を入りより長くしない。",
     controls: [durationControl("enter", 600, "enter"), durationControl("exit", 600, "exit"), travelControl(32), { type: "range", key: "autoDismiss", label: "自動で消す", min: 1000, max: 6000, step: 500, unit: "ms" }],
     initial: { enter: DURATION.base, exit: 130, travel: 8, autoDismiss: 2500 },
     render: (s) => <ToastEnter enter={num(s, "enter", DURATION.base)} exit={num(s, "exit", 130)} travel={num(s, "travel", 8)} autoDismiss={num(s, "autoDismiss", 2500)} />,
@@ -330,8 +309,6 @@ const micro: DemoEntry[] = [
     name: "TooltipEnter",
     group: "micro",
     library: "css",
-    caption: "ツールチップは 4px だけ寄ってくる。100ms。",
-    avoid: "24px 以上は飛んでくる。",
     controls: [travelControl(24), durationControl("duration", 400), easingControl(), { type: "select", key: "placement", label: "位置", options: ["top", "bottom"] }, { type: "toggle", key: "pinned", label: "固定表示" }],
     initial: { travel: 4, duration: DURATION.instant, easing: "ease-out", placement: "top", pinned: false },
     render: (s) => <TooltipEnter travel={num(s, "travel", 4)} duration={num(s, "duration", DURATION.instant)} easing={str(s, "easing", "ease-out")} placement={str(s, "placement", "top") as "top" | "bottom"} pinned={bool(s, "pinned", false)} />,
@@ -343,14 +320,12 @@ const micro: DemoEntry[] = [
   },
 ];
 
-const layoutDemos: DemoEntry[] = [
+const layoutDemos: DemoSource[] = [
   {
     id: "shared-layout-tabs",
     name: "SharedLayoutTabs",
     group: "layout",
     library: "motion",
-    caption: "タブの下線は 1 つの要素を layoutId で動かす。",
-    avoid: "各タブに別々の下線を置かない。",
     controls: [{ type: "select", key: "indicator", label: "indicator", options: ["underline", "pill"] }, ...springOrTween],
     initial: { indicator: "underline", mode: "spring", stiffness: SPRING.gentle.stiffness, damping: SPRING.gentle.damping, duration: DURATION.fast, easing: "ease-out" },
     render: (s) => <SharedLayoutTabs indicator={str(s, "indicator", "underline") as "underline" | "pill"} mode={str(s, "mode", "spring") as "spring" | "tween"} stiffness={num(s, "stiffness", SPRING.gentle.stiffness)} damping={num(s, "damping", SPRING.gentle.damping)} duration={num(s, "duration", DURATION.fast)} easing={str(s, "easing", "ease-out")} />,
@@ -362,8 +337,6 @@ const layoutDemos: DemoEntry[] = [
     name: "AccordionHeight",
     group: "layout",
     library: "motion",
-    caption: "開閉は height: auto を Motion に測らせる。",
-    avoid: "max-height の固定値で誤魔化さない。",
     controls: [durationControl("duration", 800), easingControl(), { type: "toggle", key: "multiple", label: "複数開く" }, { type: "toggle", key: "fadeContent", label: "中身をフェード" }],
     initial: { duration: DURATION.base, easing: "ease-out", multiple: false, fadeContent: true },
     render: (s) => <AccordionHeight duration={num(s, "duration", DURATION.base)} easing={str(s, "easing", "ease-out")} multiple={bool(s, "multiple", false)} fadeContent={bool(s, "fadeContent", true)} />,
@@ -380,8 +353,6 @@ const layoutDemos: DemoEntry[] = [
     name: "ReorderList",
     group: "layout",
     library: "motion",
-    caption: "並べ替えは spring 170/26。他の項目が滑る。",
-    avoid: "ドラッグ中の拡大は 1.02 まで。",
     controls: [stiffnessControl, dampingControl, { type: "range", key: "dragScale", label: "drag scale", min: 1, max: 1.1, step: 0.01 }, { type: "select", key: "axis", label: "axis", options: ["y", "x"] }],
     initial: { stiffness: SPRING.gentle.stiffness, damping: SPRING.gentle.damping, dragScale: 1.02, axis: "y" },
     render: (s) => <ReorderList stiffness={num(s, "stiffness", SPRING.gentle.stiffness)} damping={num(s, "damping", SPRING.gentle.damping)} dragScale={num(s, "dragScale", 1.02)} axis={str(s, "axis", "y") as "x" | "y"} />,
@@ -397,8 +368,6 @@ const layoutDemos: DemoEntry[] = [
     name: "CardExpand",
     group: "layout",
     library: "motion",
-    caption: "カードがそのまま詳細になる。layoutId を共有。",
-    avoid: "全画面モーダルには使わない。距離が長い。",
     controls: [{ type: "toggle", key: "backdrop", label: "backdrop" }, ...springOrTween],
     initial: { backdrop: true, mode: "spring", stiffness: SPRING.gentle.stiffness, damping: SPRING.gentle.damping, duration: DURATION.slow, easing: "ease-out" },
     render: (s) => <CardExpand backdrop={bool(s, "backdrop", true)} mode={str(s, "mode", "spring") as "spring" | "tween"} stiffness={num(s, "stiffness", SPRING.gentle.stiffness)} damping={num(s, "damping", SPRING.gentle.damping)} duration={num(s, "duration", DURATION.slow)} easing={str(s, "easing", "ease-out")} />,
@@ -417,8 +386,6 @@ const layoutDemos: DemoEntry[] = [
     name: "ListAddRemove",
     group: "layout",
     library: "motion",
-    caption: "追加は 200ms 8px、削除は 150ms opacity のみ。",
-    avoid: "削除で要素を飛ばさない。",
     controls: [durationControl("enter", 600, "enter"), durationControl("exit", 600, "exit"), travelControl(32), { type: "toggle", key: "exitTravel", label: "出も移動" }],
     initial: { enter: DURATION.base, exit: DURATION.fast, travel: 8, exitTravel: false },
     render: (s) => <ListAddRemove enter={num(s, "enter", DURATION.base)} exit={num(s, "exit", DURATION.fast)} travel={num(s, "travel", 8)} exitTravel={bool(s, "exitTravel", false)} />,
@@ -437,8 +404,6 @@ const layoutDemos: DemoEntry[] = [
     name: "StaggerGrid",
     group: "layout",
     library: "motion",
-    caption: "タイルは 30ms 間隔、最後が 200ms 以内に始まる。",
-    avoid: "9 枚を超えるなら stagger を切る。",
     controls: [{ type: "range", key: "count", label: "枚数", min: 3, max: 12, step: 1 }, { type: "range", key: "stagger", label: "stagger", min: 0, max: 120, step: 5, unit: "ms" }, durationControl(), travelControl(), easingControl(), { type: "toggle", key: "once", label: "1 回だけ" }],
     initial: { count: 6, stagger: 30, duration: DURATION.base, travel: 8, easing: "ease-out", once: true },
     render: (s) => <StaggerGrid count={num(s, "count", 6)} stagger={num(s, "stagger", 30)} duration={num(s, "duration", DURATION.base)} travel={num(s, "travel", 8)} easing={str(s, "easing", "ease-out")} once={bool(s, "once", true)} />,
@@ -455,8 +420,6 @@ const layoutDemos: DemoEntry[] = [
     name: "ThemeCrossfade",
     group: "layout",
     library: "motion",
-    caption: "テーマ切替は 2 枚重ねて opacity だけ動かす。",
-    avoid: "全要素の color を transition しない。途中が濁る。",
     controls: [{ type: "select", key: "mode", label: "方式", options: ["crossfade", "colors", "none"] }, durationControl("duration", 1000), easingControl()],
     initial: { mode: "crossfade", duration: DURATION.base, easing: "ease-out" },
     render: (s) => <ThemeCrossfade mode={str(s, "mode", "crossfade") as "crossfade" | "colors" | "none"} duration={num(s, "duration", DURATION.base)} easing={str(s, "easing", "ease-out")} />,
@@ -473,14 +436,12 @@ const layoutDemos: DemoEntry[] = [
   },
 ];
 
-const scroll: DemoEntry[] = [
+const scroll: DemoSource[] = [
   {
     id: "scroll-progress-bar",
     name: "ScrollProgressBar",
     group: "scroll",
     library: "motion",
-    caption: "読了バー。scaleX を motion value で直接書く。",
-    avoid: "scroll イベントを React state に入れない。",
     controls: [{ type: "toggle", key: "smooth", label: "spring で滑らか" }, stiffnessControl, dampingControl, { type: "range", key: "thickness", label: "太さ", min: 1, max: 6, step: 1, unit: "px" }, { type: "select", key: "position", label: "位置", options: ["top", "bottom"] }],
     initial: { smooth: false, stiffness: SPRING.snappy.stiffness, damping: SPRING.snappy.damping, thickness: 2, position: "top" },
     render: (s) => <ScrollProgressBar smooth={bool(s, "smooth", false)} stiffness={num(s, "stiffness", SPRING.snappy.stiffness)} damping={num(s, "damping", SPRING.snappy.damping)} thickness={num(s, "thickness", 2)} position={str(s, "position", "top") as "top" | "bottom"} />,
@@ -495,8 +456,6 @@ ${bool(s, "smooth", false) ? `const scaleX = useSpring(scrollYProgress, { ${spri
     name: "StickyStack",
     group: "scroll",
     library: "gsap",
-    caption: "手順の説明など、ピン留めして 1 枚ずつ見せる。",
-    avoid: "情報ページには使わない。読む速度を奪う。",
     controls: [{ type: "range", key: "count", label: "枚数", min: 2, max: 5, step: 1 }, { type: "range", key: "scrub", label: "scrub", min: 0, max: 2, step: 0.1, unit: "s" }, { type: "range", key: "dim", label: "奥の opacity", min: 0.2, max: 1, step: 0.1 }, { type: "range", key: "shrink", label: "奥の scale", min: 0.8, max: 1, step: 0.01 }],
     initial: { count: 3, scrub: 0.4, dim: 0.5, shrink: 0.96 },
     render: (s) => <LazyStickyStack count={num(s, "count", 3)} scrub={num(s, "scrub", 0.4)} dim={num(s, "dim", 0.5)} shrink={num(s, "shrink", 0.96)} />,
@@ -518,8 +477,6 @@ return () => ctx.revert();`,
     name: "HorizontalPan",
     group: "scroll",
     library: "gsap",
-    caption: "縦スクロールで横に流す。ギャラリーや年表に。",
-    avoid: "本文の途中に置かない。",
     controls: [{ type: "range", key: "panels", label: "パネル", min: 3, max: 6, step: 1 }, { type: "range", key: "scrub", label: "scrub", min: 0, max: 2, step: 0.1, unit: "s" }, { type: "toggle", key: "snap", label: "スナップ" }],
     initial: { panels: 4, scrub: 0.4, snap: false },
     render: (s) => <LazyHorizontalPan panels={num(s, "panels", 4)} scrub={num(s, "scrub", 0.4)} snap={bool(s, "snap", false)} />,
@@ -536,8 +493,6 @@ return () => ctx.revert();`,
     name: "Parallax",
     group: "scroll",
     library: "motion",
-    caption: "背景の図形を少し遅らせる。useTransform で。",
-    avoid: "テキストに視差を付けない。",
     controls: [{ type: "range", key: "depth", label: "depth", min: 0, max: 1, step: 0.1 }, { type: "range", key: "layers", label: "層", min: 1, max: 5, step: 1 }, { type: "toggle", key: "smooth", label: "spring で滑らか" }],
     initial: { depth: 0.6, layers: 3, smooth: false },
     render: (s) => <Parallax depth={num(s, "depth", 0.6)} layers={num(s, "layers", 3)} smooth={bool(s, "smooth", false)} />,
@@ -553,8 +508,6 @@ const y = useTransform(progress, [0, 1], [0, -160 * (1 - ${num(s, "depth", 0.6)}
     name: "RevealOnScroll",
     group: "scroll",
     library: "motion",
-    caption: "画面に入ったら 8px 浮かせる。1 回だけ。",
-    avoid: "スクロールのたびに繰り返さない。",
     controls: [travelControl(32), durationControl("duration", 800), { type: "range", key: "amount", label: "見えた割合", min: 0, max: 1, step: 0.1 }, { type: "toggle", key: "once", label: "1 回だけ" }, easingControl()],
     initial: { travel: 8, duration: DURATION.base, amount: 0.4, once: true, easing: "ease-out" },
     render: (s) => <RevealOnScroll travel={num(s, "travel", 8)} duration={num(s, "duration", DURATION.base)} amount={num(s, "amount", 0.4)} once={bool(s, "once", true)} easing={str(s, "easing", "ease-out")} />,
@@ -569,8 +522,6 @@ const y = useTransform(progress, [0, 1], [0, -160 * (1 - ${num(s, "depth", 0.6)}
     name: "ScrollDrivenCSS",
     group: "scroll",
     library: "css",
-    caption: "対応環境なら CSS だけ。JS はフレームごとに動かない。",
-    avoid: "Safari の非対応を想定してフォールバックを用意する。",
     controls: [{ type: "select", key: "variant", label: "timeline", options: ["scroll", "view"] }, travelControl(32), { type: "range", key: "rangeEnd", label: "entry の終わり", min: 25, max: 100, step: 25, unit: "%" }],
     initial: { variant: "scroll", travel: 8, rangeEnd: 100 },
     render: (s) => <ScrollDrivenCSS variant={str(s, "variant", "scroll") as "scroll" | "view"} travel={num(s, "travel", 8)} rangeEnd={num(s, "rangeEnd", 100)} />,
@@ -587,14 +538,12 @@ const y = useTransform(progress, [0, 1], [0, -160 * (1 - ${num(s, "depth", 0.6)}
   },
 ];
 
-const three: DemoEntry[] = [
+const three: DemoSource[] = [
   {
     id: "icosahedron-scene",
     name: "IcosahedronScene",
     group: "3d",
     library: "three",
-    caption: "製品が 3D のときだけ。色はトークンから。",
-    avoid: "文章ページの背景にしない。",
     controls: [{ type: "range", key: "speed", label: "回転", min: 0, max: 2, step: 0.1, unit: " rad/s" }, { type: "range", key: "detail", label: "分割", min: 0, max: 2, step: 1 }, { type: "toggle", key: "wireframe", label: "wireframe" }],
     initial: { speed: 0.4, detail: 0, wireframe: false },
     render: (s) => <LazyIcosahedron speed={num(s, "speed", 0.4)} detail={num(s, "detail", 0)} wireframe={bool(s, "wireframe", false)} />,
@@ -613,8 +562,6 @@ const three: DemoEntry[] = [
     name: "ParticleField",
     group: "3d",
     library: "three",
-    caption: "ヒーローの奥行きに。ゆっくり漂い、ポインタに寄る。",
-    avoid: "テキストの上に置かない。読めない。",
     controls: [{ type: "range", key: "count", label: "粒", min: 200, max: 2000, step: 100 }, { type: "range", key: "drift", label: "漂い", min: 0, max: 1, step: 0.1 }, { type: "range", key: "parallax", label: "視差", min: 0, max: 1, step: 0.1 }, { type: "range", key: "size", label: "size", min: 0.01, max: 0.1, step: 0.005 }],
     initial: { count: 800, drift: 0.5, parallax: 0.5, size: 0.035 },
     render: (s) => <LazyParticleField count={num(s, "count", 800)} drift={num(s, "drift", 0.5)} parallax={num(s, "parallax", 0.5)} size={num(s, "size", 0.035)} />,
@@ -631,8 +578,6 @@ const three: DemoEntry[] = [
     name: "WireframeTorus",
     group: "3d",
     library: "three",
-    caption: "マウスに傾く線画。ink 1 色で。",
-    avoid: "reduced motion では傾けない。",
     controls: [{ type: "range", key: "tilt", label: "傾き", min: 0, max: 1, step: 0.1 }, { type: "range", key: "damping", label: "追従", min: 1, max: 20, step: 1 }, { type: "range", key: "segments", label: "分割", min: 8, max: 48, step: 4 }, { type: "toggle", key: "spin", label: "自転" }],
     initial: { tilt: 0.6, damping: 6, segments: 16, spin: false },
     render: (s) => <LazyWireframeTorus tilt={num(s, "tilt", 0.6)} damping={num(s, "damping", 6)} segments={num(s, "segments", 16)} spin={bool(s, "spin", false)} />,
@@ -648,14 +593,12 @@ const three: DemoEntry[] = [
   },
 ];
 
-const lottie: DemoEntry[] = [
+const lottie: DemoSource[] = [
   {
     id: "lottie-progress",
     name: "LottieProgress",
     group: "lottie",
     library: "lottie",
-    caption: "完了の演出。リングが満ち、チェックが描かれる。",
-    avoid: "ループさせない。完了は 1 回。",
     controls: [{ type: "range", key: "frames", label: "長さ", min: 30, max: 180, step: 6, unit: " f" }, { type: "range", key: "stroke", label: "線", min: 2, max: 8, step: 1, unit: "px" }, { type: "toggle", key: "loop", label: "loop" }],
     initial: { frames: 60, stroke: 4, loop: false },
     render: (s) => <LazyLottieProgress frames={num(s, "frames", 60)} stroke={num(s, "stroke", 4)} loop={bool(s, "loop", false)} />,
@@ -670,8 +613,6 @@ const lottie: DemoEntry[] = [
     name: "LottieDots",
     group: "lottie",
     library: "lottie",
-    caption: "読み込み中の点。ループが許される唯一の用途。",
-    avoid: "3 秒を超える待ちには進捗バーを。",
     controls: [{ type: "range", key: "dots", label: "点", min: 3, max: 5, step: 1 }, { type: "range", key: "speed", label: "speed", min: 0.25, max: 3, step: 0.25, unit: "×" }, { type: "toggle", key: "bounce", label: "4px 上下" }],
     initial: { dots: 3, speed: 1, bounce: false },
     render: (s) => <LazyLottieDots dots={num(s, "dots", 3)} speed={num(s, "speed", 1)} bounce={bool(s, "bounce", false)} />,
@@ -682,14 +623,12 @@ const lottie: DemoEntry[] = [
   },
 ];
 
-const css: DemoEntry[] = [
+const css: DemoSource[] = [
   {
     id: "keyframe-spinner",
     name: "KeyframeSpinner",
     group: "css",
     library: "css",
-    caption: "スピナーは linear。等速が意味。",
-    avoid: "スピナー以外に linear を使わない。",
     controls: [{ type: "range", key: "seconds", label: "1 周", min: 0.4, max: 3, step: 0.1, unit: "s" }, { type: "range", key: "stroke", label: "線", min: 1, max: 4, step: 1, unit: "px" }, { type: "select", key: "style", label: "形", options: ["ring", "dots"] }, { type: "toggle", key: "paused", label: "停止" }],
     initial: { seconds: 0.8, stroke: 2, style: "ring", paused: false },
     render: (s) => <KeyframeSpinner seconds={num(s, "seconds", 0.8)} stroke={num(s, "stroke", 2)} style={str(s, "style", "ring") as "ring" | "dots"} paused={bool(s, "paused", false)} />,
@@ -710,8 +649,6 @@ const css: DemoEntry[] = [
     name: "CSSTransitionCompare",
     group: "css",
     library: "css",
-    caption: "同じ 200ms で ease-out、ease、linear を並べる。",
-    avoid: "ease は選んでいない印。linear は機械的。",
     controls: [durationControl("duration", 1500), { type: "range", key: "distance", label: "距離", min: 40, max: 240, step: 10, unit: "px" }, { type: "select", key: "property", label: "property", options: ["transform", "opacity"] }],
     initial: { duration: DURATION.base, distance: 160, property: "transform" },
     render: (s) => <CSSTransitionCompare duration={num(s, "duration", DURATION.base)} distance={num(s, "distance", 160)} property={str(s, "property", "transform") as "transform" | "opacity"} />,
@@ -726,8 +663,6 @@ const css: DemoEntry[] = [
     name: "ClipPathReveal",
     group: "css",
     library: "css",
-    caption: "画像やヒーローの 1 回きりの登場に。CSS だけ。",
-    avoid: "リスト項目ごとには使わない。",
     controls: [{ type: "select", key: "direction", label: "方向", options: ["left", "top", "circle"] }, durationControl("duration", 1500), easingControl()],
     initial: { direction: "left", duration: DURATION.slow, easing: "ease-out" },
     render: (s) => <ClipPathReveal direction={str(s, "direction", "left") as "left" | "top" | "circle"} duration={num(s, "duration", DURATION.slow)} easing={str(s, "easing", "ease-out")} />,
@@ -743,7 +678,21 @@ const css: DemoEntry[] = [
   },
 ];
 
-export const demos: DemoEntry[] = [...text, ...micro, ...layoutDemos, ...scroll, ...three, ...lottie, ...css];
+const sources: DemoSource[] = [...text, ...micro, ...layoutDemos, ...scroll, ...three, ...lottie, ...css];
+
+/** Every demo with caption, avoid and control labels in the given locale. */
+export function getDemos(locale: Locale): DemoEntry[] {
+  const t = demosMessages[locale];
+  return sources.map((d) => ({
+    ...d,
+    caption: t.entries[d.id]?.caption ?? "",
+    avoid: t.entries[d.id]?.avoid,
+    controls: d.controls?.map((c) => ({ ...c, label: t.controls[c.label] ?? c.label })),
+  }));
+}
+
+/** Japanese demos, kept for callers that have no locale. Prefer getDemos(locale). */
+export const demos: DemoEntry[] = getDemos("ja");
 
 // Unused-import guard for helpers referenced only in some snippets.
 void motionEaseCode;

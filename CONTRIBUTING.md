@@ -56,6 +56,8 @@ pnpm screenshot   # 全ルートを 390 / 1280 幅、ライト / ダークで撮
 
 CI と同じ確認だけをしたいときは `node scripts/screenshot.mjs --check` を使います（PNG を書かず、コンソールエラーか横はみ出しがあれば exit 1）。
 
+画面の文言は `web/src/i18n/messages/` のカタログに日本語と英語の両方を書きます。仕組みと言語の足し方は `docs/i18n.md`。
+
 サイト内の色、余白、角丸、フォント、時間はすべて `AwesomeDS/tokens` から来ている必要があります。生の hex を書かないでください。ノブ（アクセント / 角丸 / 書体）は `accents.css`、`radius-families.css`、`font-pairings.css` を読みます。
 
 ## 検証コマンド（リポジトリ直下）

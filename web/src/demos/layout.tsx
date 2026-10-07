@@ -6,6 +6,8 @@ import { colorRoles, colorValue } from "../lib/tokens";
 import { cx } from "../ds/cx";
 import { Button } from "../ds/components/Button";
 import { DURATION, SPRING, cssEase, motionEase, sec, useReplay, ReplayButton } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 type Tween = { duration: number; ease: ReturnType<typeof motionEase> };
 type Spring = { type: "spring"; stiffness: number; damping: number };
@@ -32,17 +34,16 @@ export interface SharedLayoutTabsProps extends SpringOrTweenProps {
   indicator?: "underline" | "pill";
 }
 
-const TABS = ["概要", "仕様", "履歴", "設定"];
-
 /** The indicator is one element with `layoutId`; Motion moves it between tabs. */
 export function SharedLayoutTabs({ indicator = "underline", ...rest }: SharedLayoutTabsProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [active, setActive] = useState(0);
   const transition = useTransition(rest, reduced);
   return (
     <LayoutGroup id="shared-layout-tabs">
       <div role="tablist" className={cx("flex", indicator === "underline" ? "gap-1 border-b border-hairline" : "gap-1 rounded-md bg-surface-sunken p-1")}>
-        {TABS.map((t, i) => {
+        {msg.tabs.map((t, i) => {
           const selected = i === active;
           return (
             <button
@@ -78,21 +79,16 @@ export interface AccordionHeightProps {
   fadeContent?: boolean;
 }
 
-const FAQ = [
-  { q: "なぜ 200ms なのか", a: "0.1 秒以下は瞬間、1 秒以下は流れを保つ。200ms は反応と落ち着きの間にある。" },
-  { q: "なぜ ease-out なのか", a: "最初に速く動いて静かに止まる。応答が即座に見え、終わりが穏やかになる。" },
-  { q: "なぜ 8px までなのか", a: "方向を示すには十分で、飛んでくる物体には見えない。" },
-];
-
 /** `height: "auto"` is measured by Motion, so the panel opens to its content. */
 export function AccordionHeight({ duration = DURATION.base, easing = "ease-out", multiple = false, fadeContent = true }: AccordionHeightProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [open, setOpen] = useState<number[]>([0]);
   const toggle = (i: number) => setOpen((o) => (o.includes(i) ? o.filter((x) => x !== i) : multiple ? [...o, i] : [i]));
   const transition = reduced ? { duration: 0 } : { duration: sec(duration), ease: motionEase(easing) };
   return (
     <div className="w-full max-w-md divide-y divide-hairline rounded-lg border border-hairline bg-surface">
-      {FAQ.map((item, i) => {
+      {msg.faq.map((item, i) => {
         const isOpen = open.includes(i);
         return (
           <div key={item.q}>
@@ -129,8 +125,10 @@ export interface ReorderListProps {
 
 /** Drag to reorder. The other items move into place with a spring (170/26). */
 export function ReorderList({ stiffness = SPRING.gentle.stiffness, damping = SPRING.gentle.damping, dragScale = 1.02, axis = "y" }: ReorderListProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
-  const [items, setItems] = useState(["設計レビュー", "トークン更新", "リリースノート", "QA チェック"]);
+  // Order is kept as indices so the labels can follow the locale.
+  const [items, setItems] = useState([0, 1, 2, 3]);
   return (
     <Reorder.Group axis={axis} values={items} onReorder={setItems} className={cx("flex w-full gap-2", axis === "y" ? "max-w-sm flex-col" : "max-w-xl flex-row")}>
       {items.map((item) => (
@@ -142,7 +140,7 @@ export function ReorderList({ stiffness = SPRING.gentle.stiffness, damping = SPR
           className={cx("flex h-11 cursor-grab items-center gap-3 rounded-md border border-hairline bg-surface px-3 text-sm text-ink select-none active:cursor-grabbing", axis === "x" && "flex-1 justify-center")}
         >
           <GripVertical className="size-4 text-ink-muted" strokeWidth={1.75} aria-hidden />
-          {item}
+          {msg.reorderItems[item]}
         </Reorder.Item>
       ))}
     </Reorder.Group>
@@ -157,23 +155,21 @@ export interface CardExpandProps extends SpringOrTweenProps {
   backdrop?: boolean;
 }
 
-const CARDS = [
-  { id: "a", title: "色", body: "1 アクセント。テキストは ink、面は canvas。" },
-  { id: "b", title: "余白", body: "4px 基準。セクション間は 96〜128px。" },
-  { id: "c", title: "動き", body: "200ms、ease-out、4〜8px。" },
-];
+const CARD_IDS = ["a", "b", "c"] as const;
 
 /** Card and modal share a `layoutId`; the card grows into the dialog inside this pane. */
 export function CardExpand({ backdrop = true, ...rest }: CardExpandProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [selected, setSelected] = useState<string | null>(null);
   const transition = useTransition(rest, reduced);
-  const card = CARDS.find((c) => c.id === selected);
+  const cards = CARD_IDS.map((id, i) => ({ id, ...msg.expandCards[i] }));
+  const card = cards.find((c) => c.id === selected);
   return (
     <LayoutGroup id="card-expand">
       <div className="relative h-72 w-full max-w-lg">
         <div className="grid grid-cols-3 gap-3">
-          {CARDS.map((c) => (
+          {cards.map((c) => (
             <motion.button
               key={c.id}
               type="button"
@@ -220,7 +216,7 @@ export function CardExpand({ backdrop = true, ...rest }: CardExpandProps) {
                   <motion.h4 layoutId={reduced ? undefined : `title-${card.id}`} className="t-h3 text-ink">
                     {card.title}
                   </motion.h4>
-                  <button type="button" aria-label="閉じる" onClick={() => setSelected(null)} className="-m-1 rounded-sm p-1 text-ink-muted hover:text-ink">
+                  <button type="button" aria-label={msg.close} onClick={() => setSelected(null)} className="-m-1 rounded-sm p-1 text-ink-muted hover:text-ink">
                     <X className="size-4" strokeWidth={1.75} aria-hidden />
                   </button>
                 </div>
@@ -249,6 +245,7 @@ export interface ListAddRemoveProps {
 
 /** Enter 200ms ease-out from 8px below; exit 150ms ease-in, opacity only. Siblings close the gap with `layout`. */
 export function ListAddRemove({ enter = DURATION.base, exit = DURATION.fast, travel = 8, exitTravel = false }: ListAddRemoveProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [items, setItems] = useState([1, 2, 3]);
   const [next, setNext] = useState(4);
@@ -263,7 +260,7 @@ export function ListAddRemove({ enter = DURATION.base, exit = DURATION.fast, tra
             setNext((n) => n + 1);
           }}
         >
-          <Plus strokeWidth={1.75} aria-hidden /> 追加
+          <Plus strokeWidth={1.75} aria-hidden /> {msg.add}
         </Button>
       </div>
       <ul className="flex flex-col gap-2">
@@ -277,8 +274,8 @@ export function ListAddRemove({ enter = DURATION.base, exit = DURATION.fast, tra
               exit={{ opacity: 0, y: exitTravel && !reduced ? -travel / 2 : 0, transition: { duration: sec(exit), ease: motionEase("ease-in") } }}
               className="flex h-11 items-center justify-between rounded-md border border-hairline bg-surface px-3 text-sm text-ink"
             >
-              項目 {id}
-              <button type="button" aria-label={`項目 ${id} を削除`} onClick={() => setItems((l) => l.filter((x) => x !== id))} className="-mr-1 rounded-sm p-1 text-ink-muted hover:text-ink">
+              {msg.item(id)}
+              <button type="button" aria-label={msg.removeItem(id)} onClick={() => setItems((l) => l.filter((x) => x !== id))} className="-mr-1 rounded-sm p-1 text-ink-muted hover:text-ink">
                 <X className="size-4" strokeWidth={1.75} aria-hidden />
               </button>
             </motion.li>
@@ -304,6 +301,7 @@ export interface StaggerGridProps {
 
 /** Tiles fade up as the grid scrolls into view, 30ms apart. Replay remounts the grid. */
 export function StaggerGrid({ count = 6, stagger = 30, duration = DURATION.base, travel = 8, once = true, easing = "ease-out" }: StaggerGridProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const last = (count - 1) * stagger;
@@ -328,7 +326,7 @@ export function StaggerGrid({ count = 6, stagger = 30, duration = DURATION.base,
         ))}
       </motion.ul>
       <div className="flex items-center justify-between">
-        <p className={cx("t-caption", last > 200 ? "text-warning" : "text-ink-muted")}>最後の開始 {last}ms{last > 200 ? "（200ms を超えている）" : ""}</p>
+        <p className={cx("t-caption", last > 200 ? "text-warning" : "text-ink-muted")}>{msg.lastStart(last)}{last > 200 ? msg.over200 : ""}</p>
         <ReplayButton onClick={replay} />
       </div>
     </div>
@@ -352,19 +350,20 @@ function themeVars(mode: "light" | "dark"): CSSProperties {
 }
 
 function MiniUI() {
+  const msg = useT(demosMessages);
   return (
     <div className="flex h-full flex-col gap-3 p-5" style={{ background: "var(--ds-canvas)", color: "var(--ds-ink)" }}>
       <div className="rounded-lg border p-4" style={{ background: "var(--ds-surface)", borderColor: "var(--ds-hairline)" }}>
-        <p className="t-label">週次レポート</p>
+        <p className="t-label">{msg.weeklyReport}</p>
         <p className="t-caption mt-1" style={{ color: "var(--ds-ink-secondary)" }}>
-          3 件の更新
+          {msg.updates3}
         </p>
         <span className="t-caption mt-3 inline-block rounded-sm px-2 py-0.5" style={{ background: "var(--ds-accent-soft)", color: "var(--ds-accent)" }}>
-          公開済み
+          {msg.published}
         </span>
       </div>
       <span className="t-label inline-flex h-9 w-max items-center rounded-md px-4" style={{ background: "var(--ds-primary)", color: "var(--ds-on-primary)" }}>
-        送信
+        {msg.send}
       </span>
     </div>
   );
@@ -376,6 +375,7 @@ function MiniUI() {
  * is how most sites do it and why text looks muddy mid-way.
  */
 export function ThemeCrossfade({ duration = DURATION.base, mode = "crossfade", easing = "ease-out" }: ThemeCrossfadeProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [dark, setDark] = useState(false);
   const ms = reduced && mode !== "crossfade" ? 0 : duration;
@@ -402,10 +402,10 @@ export function ThemeCrossfade({ duration = DURATION.base, mode = "crossfade", e
         )}
       </div>
       <div className="flex items-center justify-between">
-        <p className="t-caption text-ink-muted">{mode === "crossfade" ? "2 枚重ねて opacity だけ" : mode === "colors" ? "各色を transition" : "切り替えのみ"}</p>
+        <p className="t-caption text-ink-muted">{mode === "crossfade" ? msg.themeCrossfade : mode === "colors" ? msg.themeColors : msg.themeNone}</p>
         <Button size="sm" variant="secondary" onClick={() => setDark((d) => !d)} aria-pressed={dark}>
           {dark ? <Sun strokeWidth={1.75} aria-hidden /> : <Moon strokeWidth={1.75} aria-hidden />}
-          {dark ? "ライトへ" : "ダークへ"}
+          {dark ? msg.toLight : msg.toDark}
         </Button>
       </div>
     </div>

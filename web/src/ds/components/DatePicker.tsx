@@ -2,6 +2,9 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { CalendarDays, X } from "lucide-react";
 import { Calendar } from "./Calendar";
 import { cx } from "../cx";
+import { useLocale, useT } from "../../i18n/context";
+import { localeMeta } from "../../i18n/locales";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface DatePickerProps {
   value: Date | null;
@@ -20,7 +23,11 @@ export interface DatePickerProps {
 // An input-shaped button that opens the Calendar in a level 2 popover. The value
 // is formatted with Intl (2026年9月7日 for ja-JP). Escape and click-outside close,
 // focus returns to the button, and a clear button empties the field.
-export function DatePicker({ value, onChange, label, helper, error, placeholder = "日付を選択", min, max, locale = "ja-JP", disabled = false, className }: DatePickerProps) {
+export function DatePicker({ value, onChange, label, helper, error, placeholder: placeholderProp, min, max, locale: localeProp, disabled = false, className }: DatePickerProps) {
+  const m = useT(dsMessages);
+  const site = useLocale().locale;
+  const locale = localeProp ?? localeMeta[site].tag;
+  const placeholder = placeholderProp ?? m.selectDate;
   const id = useId();
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -78,7 +85,7 @@ export function DatePicker({ value, onChange, label, helper, error, placeholder 
         {value && !disabled && (
           <button
             type="button"
-            aria-label="日付をクリア"
+            aria-label={m.clearDate}
             onClick={() => {
               onChange(null);
               button.current?.focus();

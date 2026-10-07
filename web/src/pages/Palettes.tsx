@@ -7,11 +7,11 @@ import { useKnobs } from "../lib/knobs";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { palettesMessages } from "../i18n/messages/palettes";
 
 type Region = "all" | "global" | "jp";
 type Temp = "all" | "warm" | "cool" | "neutral";
-
-const tempLabel: Record<Exclude<Temp, "all">, string> = { warm: "暖色", cool: "寒色", neutral: "無彩色" };
 
 /** Brand accent adjusted to pass 4.5:1 on white and on near-black, so the whole site can wear it. */
 function wearable(p: BrandPalette) {
@@ -22,6 +22,8 @@ function wearable(p: BrandPalette) {
 
 export function Palettes() {
   const { knobs, setCustomAccent, set } = useKnobs();
+  const m = useT(palettesMessages);
+  const tempLabel: Record<Exclude<Temp, "all">, string> = m.temp;
   const [region, setRegion] = useState<Region>("all");
   const [temp, setTemp] = useState<Temp>("all");
   const [darkFirst, setDarkFirst] = useState(false);
@@ -49,14 +51,14 @@ export function Palettes() {
 
   return (
     <div>
-      <GalleryHeader title="パレット" lead="白地、黒文字、アクセント 1 色。クリックすると、このサイト全体がその色を着ます。" stat={brandPalettes.length + curatedPalettes.length} statLabel="配色" />
+      <GalleryHeader title={m.title} lead={m.lead} stat={brandPalettes.length + curatedPalettes.length} statLabel={m.statLabel} />
 
       {/* Live roles */}
-      <section aria-label="いまの 3 色" className="grid grid-cols-3 overflow-hidden rounded-lg border border-hairline">
+      <section aria-label={m.currentRoles} className="grid grid-cols-3 overflow-hidden rounded-lg border border-hairline">
         {[
-          ["canvas", "bg-canvas text-ink", "地"],
-          ["ink", "bg-primary text-on-primary", "文字"],
-          ["accent", "bg-accent text-on-accent", activeLabel ?? "アクセント"],
+          ["canvas", "bg-canvas text-ink", m.canvas],
+          ["ink", "bg-primary text-on-primary", m.ink],
+          ["accent", "bg-accent text-on-accent", activeLabel ?? m.accent],
         ].map(([id, cls, label]) => (
           <div key={id} className={cx("flex h-40 flex-col justify-between p-5 sm:h-52", cls, id !== "accent" && "border-r border-hairline")}>
             <span className="t-mono opacity-70">{id}</span>
@@ -67,9 +69,9 @@ export function Palettes() {
 
       <section className="mt-16" aria-labelledby="curated">
         <SectionTitle id="curated" count={curatedPalettes.length}>
-          選定
+          {m.curatedTitle}
         </SectionTitle>
-        <p className="t-body-sm mt-2 text-ink-secondary">OKLCH で明度を固定。どの色相でも文字として 4.5:1 を満たす。ライトとダークの 2 値を持つ。</p>
+        <p className="t-body-sm mt-2 text-ink-secondary">{m.curatedLead}</p>
         <ul className="mt-6 grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(200px, 100%), 1fr))" }}>
           {curatedPalettes.map((p) => {
             const on = isOn(p.name, p.id === "awesomeds-blue" ? "blue" : p.id === "ink" ? "ink" : undefined);
@@ -104,11 +106,15 @@ export function Palettes() {
                     </span>
                   </div>
                   <div className="flex items-center justify-between gap-2 bg-surface px-4 py-3">
-                    <span className="t-h4 truncate text-ink">{p.name}</span>
+                    <span className="t-h4 truncate text-ink" lang="ja">
+                      {p.name}
+                    </span>
                     {on && <Check className="size-4 shrink-0 text-ink" strokeWidth={2} aria-hidden />}
                   </div>
                 </button>
-                <p className="t-caption mt-1.5 px-1 text-ink-muted">{p.use}</p>
+                <p className="t-caption mt-1.5 px-1 text-ink-muted" lang="ja">
+                  {p.use}
+                </p>
               </li>
             );
           })}
@@ -117,13 +123,13 @@ export function Palettes() {
 
       <section className="mt-16" aria-labelledby="brands">
         <SectionTitle id="brands" count={list.length}>
-          ブランド
+          {m.brandsTitle}
         </SectionTitle>
-        <p className="t-body-sm mt-2 text-ink-secondary">{brandCount} 社の DESIGN.md から地、文字、アクセントを抽出。数字は白地でのアクセントのコントラスト。</p>
+        <p className="t-body-sm mt-2 text-ink-secondary">{m.brandsLead(brandCount)}</p>
         <FilterBar className="mt-4">
           {(["all", "global", "jp"] as Region[]).map((r) => (
             <FilterChip key={r} selected={region === r} onSelect={() => setRegion(r)} count={r === "all" ? brandPalettes.length : brandPalettes.filter((p) => p.region === r).length}>
-              {r === "all" ? "すべて" : r === "jp" ? "日本" : "海外"}
+              {r === "all" ? m.all : r === "jp" ? m.japan : m.global}
             </FilterChip>
           ))}
           <span aria-hidden className="mx-1 hidden h-5 w-px bg-hairline sm:block" />
@@ -135,7 +141,7 @@ export function Palettes() {
               onClick={() => setTemp(t)}
               className={cx("t-caption h-8 rounded-full px-3 transition-colors duration-instant", temp === t ? "bg-surface-sunken text-ink" : "text-ink-secondary hover:text-ink")}
             >
-              {t === "all" ? "全色相" : tempLabel[t]}
+              {t === "all" ? m.allHues : tempLabel[t]}
             </button>
           ))}
           <button
@@ -144,14 +150,14 @@ export function Palettes() {
             onClick={() => setDarkFirst((v) => !v)}
             className={cx("t-caption h-8 rounded-full px-3 transition-colors duration-instant", darkFirst ? "bg-surface-sunken text-ink" : "text-ink-secondary hover:text-ink")}
           >
-            ダーク基調
+            {m.darkFirst}
           </button>
-          <SearchBox value={q} onChange={setQ} placeholder="ブランド、hex" />
+          <SearchBox value={q} onChange={setQ} placeholder={m.searchPlaceholder} />
         </FilterBar>
 
         {list.length === 0 ? (
           <div className="mt-10">
-            <EmptyState title="見つかりません" description="絞り込みを外すか、別の語で検索してください。" />
+            <EmptyState title={m.notFoundTitle} description={m.notFoundBody} />
           </div>
         ) : (
           <ul className="mt-6 grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(150px, 100%), 1fr))" }}>
@@ -164,7 +170,7 @@ export function Palettes() {
                     type="button"
                     onClick={() => applyBrand(p)}
                     aria-pressed={on}
-                    aria-label={`${p.name} のアクセント ${p.accent} を試す`}
+                    aria-label={m.tryAccent(p.name, p.accent)}
                     title={`${p.name} · ${p.accent}`}
                     className={cx("flex aspect-[4/5] w-full flex-col justify-between overflow-hidden rounded-lg border text-left transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2", on ? "border-ink ring-2 ring-accent ring-offset-2 ring-offset-canvas" : "border-hairline")}
                     style={{ background: p.canvas, color: p.ink }}
@@ -175,7 +181,7 @@ export function Palettes() {
                     </div>
                     <div className="flex items-end justify-between gap-2 p-3">
                       <span className="t-mono opacity-70">{p.accent}</span>
-                      <span className={cx("t-caption tabular", c < 4.5 && "underline decoration-dotted")} title={c < 4.5 ? "文字色としては不足。試着時は暗くします" : undefined}>
+                      <span className={cx("t-caption tabular", c < 4.5 && "underline decoration-dotted")} title={c < 4.5 ? m.lowContrast : undefined}>
                         {c.toFixed(1)}
                       </span>
                     </div>
@@ -192,7 +198,7 @@ export function Palettes() {
       </section>
 
       <DataNote updated={palettesMeta.updated}>
-        出典は voltagent/awesome-design-md と kzhrknt/awesome-design-md-jp の DESIGN.md。色は各社の権利物で、参照と学習のために掲載しています。選定 24 色は MIT。
+        {m.dataNote}
       </DataNote>
     </div>
   );

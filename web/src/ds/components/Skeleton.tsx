@@ -1,4 +1,6 @@
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface SkeletonProps {
   className?: string;
@@ -11,8 +13,9 @@ export function Skeleton({ className }: SkeletonProps) {
 }
 
 export function SkeletonCard() {
+  const m = useT(dsMessages);
   return (
-    <div className="rounded-lg border border-hairline bg-surface p-6" aria-busy="true" aria-label="読み込み中">
+    <div className="rounded-lg border border-hairline bg-surface p-6" aria-busy="true" aria-label={m.loading}>
       <Skeleton className="h-5 w-2/5" />
       <Skeleton className="mt-3 h-4 w-full" />
       <Skeleton className="mt-2 h-4 w-4/5" />

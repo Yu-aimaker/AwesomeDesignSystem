@@ -1,5 +1,7 @@
 import { ArrowDownRight, ArrowUpRight, Minus } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export type DeltaTone = "up" | "down" | "neutral";
 
@@ -14,10 +16,10 @@ export interface StatTileProps {
   className?: string;
 }
 
-const deltaTone: Record<DeltaTone, { cls: string; Icon: typeof Minus; word: string }> = {
-  up: { cls: "text-success", Icon: ArrowUpRight, word: "増加" },
-  down: { cls: "text-danger", Icon: ArrowDownRight, word: "減少" },
-  neutral: { cls: "text-ink-secondary", Icon: Minus, word: "変化なし" },
+const deltaTone: Record<DeltaTone, { cls: string; Icon: typeof Minus; word: "increase" | "decrease" | "noChange" }> = {
+  up: { cls: "text-success", Icon: ArrowUpRight, word: "increase" },
+  down: { cls: "text-danger", Icon: ArrowDownRight, word: "decrease" },
+  neutral: { cls: "text-ink-secondary", Icon: Minus, word: "noChange" },
 };
 
 // Builds a polyline path in a 100x32 box. Flat series draw a centered line.
@@ -39,6 +41,7 @@ function sparkPath(points: number[]): string {
 // status color with an arrow and text so it never relies on color alone. The
 // sparkline is one 2px line in ink-secondary with no axes: it shows shape, not values.
 export function StatTile({ label, value, unit, delta, sparkline, className }: StatTileProps) {
+  const m = useT(dsMessages);
   const d = delta ? deltaTone[delta.tone] : null;
   return (
     <div className={cx("flex flex-col gap-3 rounded-lg border border-hairline bg-surface p-5 text-ink", className)}>
@@ -60,7 +63,7 @@ export function StatTile({ label, value, unit, delta, sparkline, className }: St
           <span className={cx("inline-flex items-center gap-0.5 font-medium", d.cls)}>
             <d.Icon aria-hidden strokeWidth={1.75} className="size-3.5" />
             {delta.value}
-            <span className="sr-only">{d.word}</span>
+            <span className="sr-only">{m[d.word]}</span>
           </span>
           {delta.hint && <span className="text-ink-muted">{delta.hint}</span>}
         </p>

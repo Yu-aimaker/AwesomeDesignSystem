@@ -1,5 +1,7 @@
 import { useId } from "react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface ProgressProps {
   /** 0 to 100. Omit for an indeterminate bar. */
@@ -18,6 +20,7 @@ const fills = { neutral: "bg-primary", success: "bg-success", danger: "bg-danger
 // indeterminate bar slides a 40% segment; it is a progress indicator, the one
 // thing allowed to loop. Reduced motion collapses the loop to a still bar.
 export function Progress({ value, label, showValue = false, size = "sm", tone = "neutral", className }: ProgressProps) {
+  const m = useT(dsMessages);
   const id = useId();
   const indeterminate = value === undefined;
   const clamped = indeterminate ? 0 : Math.min(100, Math.max(0, value));
@@ -39,7 +42,7 @@ export function Progress({ value, label, showValue = false, size = "sm", tone = 
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={indeterminate ? undefined : Math.round(clamped)}
-        aria-valuetext={indeterminate ? "読み込み中" : `${Math.round(clamped)}%`}
+        aria-valuetext={indeterminate ? m.loading : `${Math.round(clamped)}%`}
         className={cx("relative w-full overflow-hidden rounded-full bg-surface-sunken", size === "sm" ? "h-1.5" : "h-2.5")}
       >
         <div

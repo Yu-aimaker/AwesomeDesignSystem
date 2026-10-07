@@ -14,36 +14,40 @@ import { curatedPalettes, fonts, repos, stackLayers, brandCount } from "../lib/d
 import { cx } from "../ds/cx";
 import { flagshipSystems } from "../lib/design-systems";
 import { FlagshipArt } from "../layout/FlagshipPoster";
+import { useLocale, useT } from "../i18n/context";
+import { homeMessages, type HomeMessages } from "../i18n/messages/home";
 
 function FormSpecimen() {
   const [notify, setNotify] = useState(true);
   const toast = useToast();
+  const t = useT(homeMessages);
   return (
     <form
       className="flex h-full flex-col gap-4 p-6"
       onSubmit={(e) => {
         e.preventDefault();
-        toast.push({ title: "保存しました", tone: "success" });
+        toast.push({ title: t.saved, tone: "success" });
       }}
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="t-h4 text-ink">請求先</p>
-          <p className="t-caption text-ink-secondary">毎月 1 日に送ります</p>
+          <p className="t-h4 text-ink">{t.billing}</p>
+          <p className="t-caption text-ink-secondary">{t.billingNote}</p>
         </div>
-        <Badge tone="success">有効</Badge>
+        <Badge tone="success">{t.active}</Badge>
       </div>
-      <Input label="送付先" type="email" placeholder="billing@example.co.jp" />
-      <Switch label="支払い完了時に通知" checked={notify} onChange={setNotify} />
+      <Input label={t.sendTo} type="email" placeholder="billing@example.co.jp" />
+      <Switch label={t.notifyOnPaid} checked={notify} onChange={setNotify} />
       <div className="mt-auto flex flex-wrap gap-2">
-        <Button type="submit">保存</Button>
-        <Button variant="secondary">キャンセル</Button>
+        <Button type="submit">{t.save}</Button>
+        <Button variant="secondary">{t.cancel}</Button>
       </div>
     </form>
   );
 }
 
 function TypeSpecimen() {
+  const t = useT(homeMessages);
   return (
     <div className="flex h-full flex-col justify-between p-6">
       <div className="flex items-baseline justify-between">
@@ -54,7 +58,7 @@ function TypeSpecimen() {
         <p className="t-display-xl text-ink" style={{ fontSize: "clamp(72px, 9vw, 120px)" }}>
           Aa あ
         </p>
-        <p className="t-body mt-2 text-ink-secondary">読みやすさは、字面より行間と幅で決まります。</p>
+        <p className="t-body mt-2 text-ink-secondary">{t.typeSample}</p>
       </div>
     </div>
   );
@@ -83,6 +87,7 @@ function PaletteSpecimen() {
 
 function MotionSpecimen() {
   const [done, setDone] = useState(false);
+  const t = useT(homeMessages);
   return (
     <div className="flex h-full flex-col items-start justify-between gap-4 p-6">
       <span className="t-caption text-ink-muted">200ms · ease-out · 4px</span>
@@ -100,18 +105,14 @@ function MotionSpecimen() {
         <span className={cx("grid size-5 place-items-center transition-transform duration-base ease-out-ds", done ? "scale-100" : "scale-0")}>
           <Check className="size-5" strokeWidth={2.5} aria-hidden />
         </span>
-        <span className={cx("transition-[margin] duration-base ease-out-ds", done ? "" : "-ml-7")}>{done ? "送信しました" : "送信"}</span>
+        <span className={cx("transition-[margin] duration-base ease-out-ds", done ? "" : "-ml-7")}>{done ? t.sent : t.send}</span>
       </button>
     </div>
   );
 }
 
 function StatsSpecimen() {
-  const rows = [
-    ["月間アクティブ", "12,480", "+4.2%", true],
-    ["解約率", "1.8%", "-0.3pt", true],
-    ["平均応答", "184ms", "+12ms", false],
-  ] as const;
+  const rows = useT(homeMessages).stats;
   return (
     <ul className="grid h-full grid-rows-3 divide-y divide-hairline">
       {rows.map(([k, v, d, good]) => (
@@ -129,32 +130,33 @@ function StatsSpecimen() {
 
 function DarkSpecimen() {
   const { setTheme } = useTheme();
+  const t = useT(homeMessages);
   return (
     <button
       type="button"
       onClick={() => setTheme("dark")}
-      aria-label="ダークモードにする"
+      aria-label={t.switchDark}
       className="h-full w-full cursor-pointer border-0 bg-canvas p-6 text-left text-ink"
       data-theme="dark"
       style={{ colorScheme: "dark" }}
     >
       <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface p-4">
         <div className="flex items-center justify-between">
-          <span className="t-label">通知</span>
+          <span className="t-label">{t.notifications}</span>
           <Bell className="size-4 text-ink-muted" strokeWidth={1.75} aria-hidden />
         </div>
-        <p className="t-body-sm text-ink-secondary">面は暗いほど下、明るいほど上。影は使いません。</p>
-        <span className="t-caption text-accent">ダークモードを見る</span>
+        <p className="t-body-sm text-ink-secondary">{t.darkNote}</p>
+        <span className="t-caption text-accent">{t.seeDark}</span>
       </div>
     </button>
   );
 }
 
-const galleries: Array<{ to: string; title: string; caption: string; visual: React.ReactNode }> = [
+const galleries = (t: HomeMessages): Array<{ to: string; title: string; caption: string; visual: React.ReactNode }> => [
   {
     to: "/fonts",
-    title: "フォント",
-    caption: `${fonts.length} 書体。使用数は ${brandCount} 社から実測`,
+    title: t.fonts,
+    caption: t.fontsCaption(fonts.length, brandCount),
     visual: (
       <div className="grid h-full grid-cols-2 grid-rows-2 place-items-center p-5 text-ink" aria-hidden>
         <span className="text-4xl font-semibold" style={{ fontFamily: '"Geist Variable", sans-serif' }}>Ag</span>
@@ -166,8 +168,8 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   },
   {
     to: "/palettes",
-    title: "パレット",
-    caption: `${brandCount} 社の実測配色。クリックで試着`,
+    title: t.palettes,
+    caption: t.palettesCaption(brandCount),
     visual: (
       <div className="grid h-full grid-cols-6 gap-1.5 p-5" aria-hidden>
         {curatedPalettes.slice(0, 12).map((p) => (
@@ -178,13 +180,13 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   },
   {
     to: "/components",
-    title: "コンポーネント",
-    caption: "48 の部品。props を触って確かめる",
+    title: t.components,
+    caption: t.componentsCaption,
     visual: (
       <div className="flex h-full flex-col justify-center gap-3 p-5" aria-hidden>
         <div className="flex gap-2">
-          <span className="h-8 rounded-md bg-primary px-3 text-sm leading-8 text-on-primary">保存</span>
-          <span className="h-8 rounded-md border border-hairline-strong px-3 text-sm leading-8 text-ink">戻る</span>
+          <span className="h-8 rounded-md bg-primary px-3 text-sm leading-8 text-on-primary">{t.save}</span>
+          <span className="h-8 rounded-md border border-hairline-strong px-3 text-sm leading-8 text-ink">{t.back}</span>
         </div>
         <span className="h-8 rounded-md border border-hairline-strong bg-surface" />
         <div className="flex gap-2">
@@ -197,8 +199,8 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   },
   {
     to: "/motion",
-    title: "モーション",
-    caption: "35 デモ。Motion、GSAP、three.js、Lottie",
+    title: t.motion,
+    caption: t.motionCaption,
     visual: (
       <div className="flex h-full items-center justify-center gap-3 p-5" aria-hidden>
         {[0, 1, 2].map((i) => (
@@ -214,8 +216,8 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   },
   {
     to: "/stack",
-    title: "スタック",
-    caption: `${stackLayers.length} 層。採用 1 つと代替の「いつ」`,
+    title: t.stack,
+    caption: t.stackCaption(stackLayers.length),
     visual: (
       <div className="flex h-full flex-col justify-center gap-1.5 p-5" aria-hidden>
         {[92, 76, 60, 44, 30].map((w) => (
@@ -226,8 +228,8 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   },
   {
     to: "/rankings",
-    title: "ランキング",
-    caption: `${repos.length} の OSS をスターで。毎週更新`,
+    title: t.rankings,
+    caption: t.rankingsCaption(repos.length),
     visual: (
       <div className="t-mono flex h-full flex-col justify-center gap-2 p-5" aria-hidden>
         {[["shadcn/ui", 95], ["motion", 70], ["three.js", 100]].map(([n, w]) => (
@@ -244,6 +246,8 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
 const cell = "overflow-hidden rounded-lg border border-hairline bg-surface";
 
 export function Home() {
+  const t = useT(homeMessages);
+  const { locale } = useLocale();
   return (
     <div className="flex flex-col gap-24 lg:gap-32">
       <section aria-labelledby="hero" className="flex flex-col gap-10">
@@ -251,17 +255,17 @@ export function Home() {
           <h1 id="hero" className="t-display-xl text-ink">
             AwesomeDS
           </h1>
-          <p className="t-body-lg mt-4 max-w-[48ch] text-ink-secondary">白地、黒文字、アクセント 1 色。AI が書く UI の既定値。</p>
+          <p className="t-body-lg mt-4 max-w-[48ch] text-ink-secondary">{t.lead}</p>
         </div>
         <div className="rounded-lg border border-hairline bg-canvas-soft p-5 sm:p-6">
-          <p className="t-label mb-4 text-ink">触って変える。サイト全体が追従します。</p>
+          <p className="t-label mb-4 text-ink">{t.knobsHint}</p>
           <KnobsPanel layout="bar" />
         </div>
       </section>
 
       <section aria-labelledby="specimens" className="flex flex-col gap-6">
         <h2 id="specimens" className="t-h2 text-ink">
-          実物
+          {t.specimens}
         </h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:grid-rows-[minmax(280px,auto)_minmax(200px,auto)]">
           <div className={cx(cell, "md:col-span-3")}>
@@ -287,10 +291,10 @@ export function Home() {
 
       <section aria-labelledby="galleries" className="flex flex-col gap-6">
         <h2 id="galleries" className="t-h2 text-ink">
-          ギャラリー
+          {t.galleries}
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {galleries.map((g) => (
+          {galleries(t).map((g) => (
             <Link
               key={g.to}
               to={g.to}
@@ -315,15 +319,15 @@ export function Home() {
         <div className="flex items-end justify-between gap-4">
           <div>
             <h2 id="guidelines" className="t-h2 text-ink">
-              ガイドライン
+              {t.guidelines}
             </h2>
-            <p className="t-body mt-2 max-w-[48ch] text-ink-secondary">AwesomeDS が値と規則を取り込んだ出典。何を採ったかは「すべて見る」の各カードに。</p>
+            <p className="t-body mt-2 max-w-[48ch] text-ink-secondary">{t.guidelinesLead}</p>
           </div>
           <Link
             to="/sources"
             className="t-label hidden shrink-0 items-center gap-1 text-ink-secondary no-underline hover:text-ink sm:inline-flex"
           >
-            すべて見る
+            {t.seeAll}
             <ArrowRight className="size-4" strokeWidth={1.75} aria-hidden />
           </Link>
         </div>
@@ -340,7 +344,7 @@ export function Home() {
                 <FlagshipArt system={s} variant="thumb" />
               </span>
               <span className="min-w-0">
-                <span className="t-label block truncate text-ink">{s.nameJa ?? s.name}</span>
+                <span className="t-label block truncate text-ink">{locale === "ja" ? (s.nameJa ?? s.name) : s.name}</span>
                 <span className="t-caption block truncate text-ink-muted">{s.domain}</span>
               </span>
               <ExternalLink className="ml-auto size-4 shrink-0 text-ink-muted transition-colors group-hover:text-ink" strokeWidth={1.75} aria-hidden />
@@ -351,7 +355,7 @@ export function Home() {
           to="/sources"
           className="t-label inline-flex items-center gap-1 text-ink-secondary no-underline hover:text-ink sm:hidden"
         >
-          すべて見る
+          {t.seeAll}
           <ArrowRight className="size-4" strokeWidth={1.75} aria-hidden />
         </Link>
       </section>
@@ -359,14 +363,14 @@ export function Home() {
       <section aria-labelledby="install" className="grid gap-6 lg:grid-cols-2">
         <div className="min-w-0">
           <h2 id="install" className="t-h2 text-ink">
-            使う
+            {t.use}
           </h2>
-          <p className="t-body mt-3 text-ink-secondary">Claude Code に入れると、UI を書くたびにこの規則が参照されます。</p>
+          <p className="t-body mt-3 text-ink-secondary">{t.useLead}</p>
           <CodeBlock className="mt-4" code={"/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude\n/plugin install awesome-ds@awesome-design-systems"} />
         </div>
         <div className="min-w-0">
-          <p className="t-h4 text-ink lg:mt-12">プラグインなしで</p>
-          <p className="t-body mt-3 text-ink-secondary">DESIGN.md を置いて、トークンを読み込むだけ。</p>
+          <p className="t-h4 text-ink lg:mt-12">{t.noPlugin}</p>
+          <p className="t-body mt-3 text-ink-secondary">{t.noPluginLead}</p>
           <CodeBlock className="mt-4" code={'@import "tailwindcss";\n@import "./AwesomeDS/tokens/tokens.css";\n@import "./AwesomeDS/tokens/tailwind.css";'} />
         </div>
       </section>

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "../lib/theme";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 export interface ScrollDrivenCSSProps {
   variant?: "scroll" | "view";
@@ -24,6 +26,7 @@ function useScrollTimelineSupport(): boolean {
  * and to static cards.
  */
 export function ScrollDrivenCSS({ variant = "scroll", travel = 8, rangeEnd = 100 }: ScrollDrivenCSSProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const supported = useScrollTimelineSupport();
   const scroller = useRef<HTMLDivElement>(null);
@@ -60,7 +63,7 @@ export function ScrollDrivenCSS({ variant = "scroll", travel = 8, rangeEnd = 100
         {variant === "scroll"
           ? Array.from({ length: 10 }, (_, i) => (
               <p key={i} className="t-body-sm mb-3 text-ink-secondary">
-                段落 {i + 1}。このボックスをスクロールすると上のバーが伸びます。メインスレッドの JavaScript は動いていません。
+                {msg.paragraphTimeline(i + 1)}
               </p>
             ))
           : Array.from({ length: 8 }, (_, i) => (
@@ -69,12 +72,12 @@ export function ScrollDrivenCSS({ variant = "scroll", travel = 8, rangeEnd = 100
                 className={cx("mb-3 flex h-20 items-center rounded-lg border border-hairline bg-canvas-soft px-4 text-sm text-ink", viewAnimated && "sd-view")}
                 style={viewAnimated ? ({ animationRange: `entry 0% entry ${rangeEnd}%`, ["--sd-travel" as string]: `${travel}px` } as CSSProperties) : undefined}
               >
-                カード {i + 1}
+                {msg.card(i + 1)}
               </div>
             ))}
       </div>
       <p className="t-caption border-t border-hairline px-4 py-2 text-ink-muted">
-        {reduced && variant === "view" ? "reduced motion: 静止" : supported ? `この環境: animation-timeline: ${variant}()` : "この環境: JavaScript フォールバック"}
+        {reduced && variant === "view" ? msg.reducedStill : supported ? msg.envTimeline(variant) : msg.envFallback}
       </p>
       <style>{`
         @keyframes sd-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }

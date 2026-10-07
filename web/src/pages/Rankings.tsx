@@ -8,7 +8,9 @@ import { Alert } from "../ds/components/Alert";
 import { EmptyState } from "../ds/components/EmptyState";
 import { repoUrl } from "../lib/nav";
 import { cx } from "../ds/cx";
-import { useLocale } from "../i18n/context";
+import { useLocale, useT } from "../i18n/context";
+import { localeMeta } from "../i18n/locales";
+import { rankingsMessages } from "../i18n/messages/rankings";
 
 /** Knowledge entries that cite a repository, by lower-cased github url. */
 const knowledgeByRepo = (() => {
@@ -26,6 +28,7 @@ const withStars = (r: RepoEntry) => r.stars !== null;
 
 export function Rankings() {
   const { locale } = useLocale();
+  const t = useT(rankingsMessages);
   const [cat, setCat] = useState<string>("all");
   const [q, setQ] = useState("");
 
@@ -48,29 +51,29 @@ export function Rankings() {
 
   return (
     <div>
-      <GalleryHeader title="ランキング" lead="デザインと AI フロントエンドの OSS を GitHub スターで。毎週月曜に自動更新。" stat={repos.length} statLabel="リポジトリ" />
+      <GalleryHeader title={t.title} lead={t.lead} stat={repos.length} statLabel={t.statLabel} />
 
       {pending && (
-        <Alert tone="neutral" title="スター数は最初の自動取得を待っています" className="mb-6">
-          GitHub Actions の「Update data」が毎週月曜 00:30 UTC に取得します。手動実行もできます。それまでは選定リストとして表示します。
+        <Alert tone="neutral" title={t.pendingTitle} className="mb-6">
+          {t.pendingBody}
         </Alert>
       )}
 
       <FilterBar>
         <FilterChip selected={cat === "all"} onSelect={() => setCat("all")} count={repos.length}>
-          すべて
+          {t.all}
         </FilterChip>
         {categories.map(([id, n]) => (
           <FilterChip key={id} selected={cat === id} onSelect={() => setCat(id)} count={n}>
             {repoCategoryLabel[id]?.[locale] ?? id}
           </FilterChip>
         ))}
-        <SearchBox value={q} onChange={setQ} placeholder="リポジトリ、topic" />
+        <SearchBox value={q} onChange={setQ} placeholder={t.searchPlaceholder} />
       </FilterBar>
 
       {list.length === 0 ? (
         <div className="mt-12">
-          <EmptyState title="見つかりません" description="別の語で検索するか、分類を外してください。" />
+          <EmptyState title={t.notFoundTitle} description={t.notFoundBody} />
         </div>
       ) : (
         <ol className="mt-8 overflow-hidden rounded-lg border border-hairline bg-surface">
@@ -89,18 +92,18 @@ export function Rankings() {
                       {r.name}
                     </a>
                     <Tag>{repoCategoryLabel[r.category]?.[locale] ?? r.category}</Tag>
-                    {r.inTopicTop && <Tag>topic 上位 20</Tag>}
-                    {r.archived && <Tag className="text-warning">アーカイブ</Tag>}
+                    {r.inTopicTop && <Tag>{t.topicTop}</Tag>}
+                    {r.archived && <Tag className="text-warning">{t.archived}</Tag>}
                     {k && (
                       <Link to={k.to} className="t-caption">
-                        解説
+                        {t.notes}
                       </Link>
                     )}
                   </div>
                   {r.description && <p className="t-caption mt-0.5 truncate text-ink-secondary">{r.description}</p>}
                   <p className="t-caption mt-0.5 text-ink-muted sm:hidden">
                     {r.language ?? ""}
-                    {days !== null ? ` · ${days} 日前に更新` : ""}
+                    {days !== null ? t.updatedDaysAgo(days) : ""}
                   </p>
                 </div>
                 <div className="hidden min-w-0 items-center gap-2 sm:flex">
@@ -109,7 +112,7 @@ export function Rankings() {
                   </span>
                   <span className="t-caption hidden w-16 truncate text-ink-muted lg:inline">{r.language ?? ""}</span>
                 </div>
-                <span className="t-mono tabular flex items-center justify-end gap-1 text-ink" title={r.stars !== null ? `${r.stars.toLocaleString()} stars` : r.note ?? "未取得"}>
+                <span className="t-mono tabular flex items-center justify-end gap-1 text-ink" title={r.stars !== null ? t.stars(r.stars.toLocaleString(localeMeta[locale].tag)) : r.note ?? t.notFetched}>
                   <Star className="size-3.5 text-ink-muted" strokeWidth={1.75} aria-hidden />
                   {r.stars !== null ? compact(r.stars) : "–"}
                 </span>
@@ -120,11 +123,11 @@ export function Rankings() {
       )}
 
       <DataNote updated={reposMeta.updated}>
-        選定リスト + GitHub 検索 topic:design-system の上位 20。取得は{" "}
+        {t.noteBefore}{" "}
         <a href={`${repoUrl}/blob/main/scripts/fetch-repos.mjs`} target="_blank" rel="noreferrer">
           scripts/fetch-repos.mjs
         </a>
-        。{fetchedCount > 0 ? `${fetchedCount} 件取得済み。` : ""}
+        {t.noteAfter(fetchedCount)}
       </DataNote>
     </div>
   );

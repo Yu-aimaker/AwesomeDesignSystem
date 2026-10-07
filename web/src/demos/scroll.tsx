@@ -3,6 +3,8 @@ import { motion, useScroll, useSpring, useTransform, type MotionValue } from "mo
 import { useReducedMotion } from "../lib/theme";
 import { cx } from "../ds/cx";
 import { DURATION, SPRING, motionEase, sec } from "./shared";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 /*
  * Scroll demos that live inside their own scroll container so the page itself
@@ -11,11 +13,12 @@ import { DURATION, SPRING, motionEase, sec } from "./shared";
  */
 
 function Paragraphs({ n = 10 }: { n?: number }) {
+  const msg = useT(demosMessages);
   return (
     <>
       {Array.from({ length: n }, (_, i) => (
         <p key={i} className="t-body-sm mb-3 text-ink-secondary">
-          段落 {i + 1}。この箱の中だけをスクロールします。ページは動きません。
+          {msg.paragraphInBox(i + 1)}
         </p>
       ))}
     </>
@@ -76,6 +79,7 @@ function Layer({ progress, speed, index, total }: { progress: MotionValue<number
 
 /** Layers move at different rates as the box scrolls. Under reduced motion they stay put. */
 export function Parallax({ depth = 0.6, layers = 3, smooth = false }: ParallaxProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const container = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ container });
@@ -93,11 +97,11 @@ export function Parallax({ depth = 0.6, layers = 3, smooth = false }: ParallaxPr
       <div ref={container} className="relative h-64 overflow-y-auto p-4" tabIndex={0}>
         <div className="h-24" />
         <div className="rounded-lg border border-hairline bg-surface p-4">
-          <p className="t-label text-ink">前景のカード</p>
-          <p className="t-body-sm mt-1 text-ink-secondary">背景の図形は depth {depth} でゆっくり動く。</p>
+          <p className="t-label text-ink">{msg.foregroundCard}</p>
+          <p className="t-body-sm mt-1 text-ink-secondary">{msg.parallaxBody(depth)}</p>
         </div>
         <div className="h-64" />
-        <p className="t-caption text-ink-muted">{reduced ? "reduced motion: 図形は静止" : "scrollYProgress → useTransform → y"}</p>
+        <p className="t-caption text-ink-muted">{reduced ? msg.reducedShapesStill : "scrollYProgress → useTransform → y"}</p>
         <div className="h-24" />
       </div>
     </div>
@@ -118,11 +122,12 @@ export interface RevealOnScrollProps {
 
 /** Cards fade up 8px when 40% of them enters the box. `viewport.root` scopes the observer. */
 export function RevealOnScroll({ travel = 8, duration = DURATION.base, amount = 0.4, once = true, easing = "ease-out" }: RevealOnScrollProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const container = useRef<HTMLDivElement>(null);
   return (
     <div ref={container} className="h-64 w-full max-w-md overflow-y-auto rounded-lg border border-hairline bg-surface p-4" tabIndex={0}>
-      <p className="t-caption mb-3 text-ink-muted">下へスクロール</p>
+      <p className="t-caption mb-3 text-ink-muted">{msg.scrollDown}</p>
       {Array.from({ length: 6 }, (_, i) => (
         <motion.div
           key={i}
@@ -132,7 +137,7 @@ export function RevealOnScroll({ travel = 8, duration = DURATION.base, amount = 
           transition={{ duration: sec(duration), ease: motionEase(easing) }}
           className="mb-3 flex h-20 items-center rounded-lg border border-hairline bg-canvas-soft px-4 text-sm text-ink"
         >
-          カード {i + 1}
+          {msg.card(i + 1)}
         </motion.div>
       ))}
     </div>

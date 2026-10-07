@@ -4,6 +4,9 @@ import { Pause, Play } from "lucide-react";
 import { useReducedMotion } from "../lib/theme";
 import { cx } from "../ds/cx";
 import { DURATION, DemoFrame, cssEase, motionEase, sec, useReplay } from "./shared";
+import { useLocale, useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
+import { localeMeta } from "../i18n/locales";
 
 const PHRASE = "Motion is feedback, not decoration.";
 
@@ -21,12 +24,13 @@ export interface SplitTextRevealProps {
 
 /** Words or characters fade up 8px, staggered. Once, on mount or replay. */
 export function SplitTextReveal({ mode = "words", stagger = 30, duration = DURATION.base, travel = 8, easing = "ease-out" }: SplitTextRevealProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const units = mode === "words" ? PHRASE.split(" ") : Array.from(PHRASE);
   const ease = motionEase(easing);
   return (
-    <DemoFrame onReplay={replay} note={`${units.length} 個 × ${stagger}ms、最後は ${((units.length - 1) * stagger) | 0}ms 後に開始`}>
+    <DemoFrame onReplay={replay} note={msg.splitNote(units.length, stagger, ((units.length - 1) * stagger) | 0)}>
       <motion.p
         key={key}
         aria-label={PHRASE}
@@ -64,7 +68,9 @@ export interface TypewriterProps {
 }
 
 /** Characters appear one at a time. The cursor is solid while typing and disappears after. */
-export function Typewriter({ speed = 40, cursor = true, text = "設計は、決めたことを守る仕組みです。" }: TypewriterProps) {
+export function Typewriter({ speed = 40, cursor = true, text: textProp }: TypewriterProps) {
+  const msg = useT(demosMessages);
+  const text = textProp ?? msg.typewriterText;
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const [count, setCount] = useState(reduced ? text.length : 0);
@@ -88,7 +94,7 @@ export function Typewriter({ speed = 40, cursor = true, text = "設計は、決�
 
   const done = count >= text.length;
   return (
-    <DemoFrame onReplay={replay} note={`${speed}ms / 文字、全体 ${text.length * speed}ms`}>
+    <DemoFrame onReplay={replay} note={msg.typewriterNote(speed, text.length * speed)}>
       <p className="t-h3 min-h-[1.5em] text-ink" aria-label={text}>
         <span aria-hidden>{text.slice(0, count)}</span>
         {cursor && !done && !reduced && <span aria-hidden className="ml-px inline-block h-[1em] w-[2px] translate-y-[0.15em] bg-ink" />}
@@ -110,10 +116,11 @@ export interface NumberTickerProps {
 
 /** Counts from 0 to the target, writing to the DOM directly. Tabular figures keep the width stable. */
 export function NumberTicker({ target = 12480, duration = 800, easing = "ease-out", decimals = 0 }: NumberTickerProps) {
+  const { locale } = useLocale();
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const ref = useRef<HTMLSpanElement>(null);
-  const fmt = useMemo(() => new Intl.NumberFormat("ja-JP", { minimumFractionDigits: decimals, maximumFractionDigits: decimals }), [decimals]);
+  const fmt = useMemo(() => new Intl.NumberFormat(localeMeta[locale].tag, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }), [decimals, locale]);
 
   useEffect(() => {
     const el = ref.current;
@@ -159,6 +166,7 @@ const CHARSETS: Record<NonNullable<TextScrambleProps["charset"]>, string> = {
 
 /** Characters resolve left to right; a rAF loop writes straight to the DOM. */
 export function TextScramble({ duration = 600, charset = "symbols", text = "AwesomeDS" }: TextScrambleProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const ref = useRef<HTMLSpanElement>(null);
@@ -188,7 +196,7 @@ export function TextScramble({ duration = 600, charset = "symbols", text = "Awes
   }, [key, duration, charset, text, reduced]);
 
   return (
-    <DemoFrame onReplay={replay} note="装飾。見出し 1 か所まで">
+    <DemoFrame onReplay={replay} note={msg.scrambleNote}>
       <p className="t-display text-ink" aria-label={text}>
         <span ref={ref} aria-hidden className="font-mono">
           {text}
@@ -213,6 +221,7 @@ const LOGOS = ["Stripe", "Linear", "Vercel", "Figma", "Notion", "Shopify", "GitH
 
 /** Continuous linear loop. The one allowed infinite animation, and it must be pausable. */
 export function MarqueeStrip({ seconds = 24, direction = "left", pauseOnHover = true, gap = 48 }: MarqueeStripProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const [paused, setPaused] = useState(false);
   const running = !reduced && !paused;
@@ -249,7 +258,7 @@ export function MarqueeStrip({ seconds = 24, direction = "left", pauseOnHover = 
         <style>{`@keyframes marquee-x { to { transform: translateX(-50%); } }`}</style>
       </div>
       <div className="flex items-center justify-between">
-        <p className="t-caption text-ink-muted">{reduced ? "reduced motion: 静止" : `${seconds}s / 周、linear`}</p>
+        <p className="t-caption text-ink-muted">{reduced ? msg.reducedStill : msg.perLoopLinear(seconds)}</p>
         <button
           type="button"
           onClick={() => setPaused((p) => !p)}
@@ -258,7 +267,7 @@ export function MarqueeStrip({ seconds = 24, direction = "left", pauseOnHover = 
           className="t-label inline-flex h-8 items-center gap-1.5 rounded-md border border-hairline-strong bg-surface px-3 text-ink disabled:opacity-50"
         >
           {paused ? <Play className="size-3.5" strokeWidth={1.75} aria-hidden /> : <Pause className="size-3.5" strokeWidth={1.75} aria-hidden />}
-          {paused ? "再開" : "一時停止"}
+          {paused ? msg.resume : msg.pause}
         </button>
       </div>
     </div>
@@ -279,6 +288,7 @@ export interface UnderlineDrawProps {
 
 /** An ink underline scales in from 0. No gradient, no color change: one line drawn on. */
 export function UnderlineDraw({ duration = DURATION.base, easing = "ease-out", thickness = 2, origin = "left", trigger = "hover" }: UnderlineDrawProps) {
+  const msg = useT(demosMessages);
   const reduced = useReducedMotion();
   const { key, replay } = useReplay();
   const [shown, setShown] = useState(trigger === "mount" ? false : true);
@@ -297,9 +307,9 @@ export function UnderlineDraw({ duration = DURATION.base, easing = "ease-out", t
   };
 
   return (
-    <DemoFrame onReplay={trigger === "mount" ? replay : undefined} note={trigger === "hover" ? "ホバーで線が伸びる" : "表示時に線が伸びる"}>
+    <DemoFrame onReplay={trigger === "mount" ? replay : undefined} note={trigger === "hover" ? msg.underlineHover : msg.underlineMount}>
       <p className="t-h2 text-ink">
-        {["設計", "規則", "実装"].map((w, i) => (
+        {msg.underlineWords.map((w, i) => (
           <span key={w} className={cx("group relative mr-[0.6em] inline-block", i === 1 && trigger === "hover" ? "cursor-pointer" : "")}>
             {w}
             <span
