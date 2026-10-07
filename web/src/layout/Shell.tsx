@@ -175,6 +175,7 @@ export function Shell() {
         <div className="t-caption mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-2 px-4 py-6 text-ink-muted sm:px-6">
           <span>AwesomeDS. このサイト自体が AwesomeDS で作られています。</span>
           <span className="flex gap-4">
+            <Link to="/sources">ガイドライン</Link>
             <Link to="/about">このサイトについて</Link>
             <a href={repoUrl} target="_blank" rel="noreferrer">
               GitHub
