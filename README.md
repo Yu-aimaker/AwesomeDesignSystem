@@ -1,4 +1,4 @@
-# Awesome Design Systems for Claude
+# Awesome Design Systems
 
 AI コーディングエージェント（Claude Code, Cursor）でフロントエンドを作るときの、デザインの正本とプラグインです。
 
