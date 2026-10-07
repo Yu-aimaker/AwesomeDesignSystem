@@ -1,12 +1,3 @@
-export interface FlagshipPosterColors {
-  /** Solid OGP surface. Never #000 / #fff; those invert under color-scheme: dark. */
-  bg: string;
-  fg: string;
-  accent: string;
-  /** Flip to canvas/ink in dark theme so monochrome brand cards stay readable. */
-  invertInDark?: boolean;
-}
-
 export type OgpStatus = "ok" | "missing";
 
 export interface FlagshipOgp {
@@ -16,7 +7,7 @@ export interface FlagshipOgp {
   image?: string;
   /** Absolute URL of the origin og:image or twitter:image. */
   sourceUrl?: string;
-  /** Why this card uses a geometric fallback. */
+  /** Where the image comes from, or why the card uses the AwesomeDS poster. */
   note?: string;
 }
 
@@ -41,7 +32,6 @@ export interface DesignSystemRef {
   domain: string;
   image: string;
   brandColor: string;
-  poster: FlagshipPosterColors;
   ogp: FlagshipOgp;
   absorption: FlagshipAbsorption;
   category: "platform" | "component-library" | "company" | "government" | "cookbook";
@@ -50,8 +40,10 @@ export interface DesignSystemRef {
 /**
  * Curated flagship design-system / guideline / cookbook references.
  * Card artwork prefers a committed copy of the origin og:image / twitter:image.
- * Geometric posters are fallback only when the live page has no usable OGP.
- * Fetched 2026-10-07. Refresh: `node scripts/fetch-flagship-ogp.mjs`.
+ * The AwesomeDS poster (FlagshipPoster) is the fallback when no official page
+ * has a usable share image (missing, or only a small logo).
+ * Fetched 2026-10-07, weak cards re-picked 2026-10-08.
+ * Refresh: `node scripts/fetch-flagship-ogp.mjs [--write <id>...]`.
  */
 export const flagshipSystems: DesignSystemRef[] = [
   {
@@ -64,7 +56,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "developer.apple.com",
     image: "/ogp/apple-hig.jpg",
     brandColor: "#1d1d1f",
-    poster: { bg: "#1d1d1f", fg: "#f5f5f7", accent: "#86868b", invertInDark: true },
     ogp: {
       status: "ok",
       image: "/ogp/apple-hig.jpg",
@@ -84,7 +75,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "m3.material.io",
     image: "/ogp/material-design.jpg",
     brandColor: "#1a73e8",
-    poster: { bg: "#f8f9fa", fg: "#1f1f1f", accent: "#1a73e8" },
     ogp: {
       status: "ok",
       image: "/ogp/material-design.jpg",
@@ -103,7 +93,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "vercel.com",
     image: "/ogp/vercel-design.jpg",
     brandColor: "#0a0a0a",
-    poster: { bg: "#0a0a0a", fg: "#fafafa", accent: "#a3a3a3", invertInDark: true },
     ogp: {
       status: "ok",
       image: "/ogp/vercel-design.jpg",
@@ -122,7 +111,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "ui.shadcn.com",
     image: "/ogp/shadcn-ui.jpg",
     brandColor: "#09090b",
-    poster: { bg: "#09090b", fg: "#fafafa", accent: "#71717a", invertInDark: true },
     ogp: {
       status: "ok",
       image: "/ogp/shadcn-ui.jpg",
@@ -141,7 +129,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "goodpatch.com",
     image: "/ogp/goodpatch.jpg",
     brandColor: "#c81e1e",
-    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#c81e1e" },
     ogp: {
       status: "ok",
       image: "/ogp/goodpatch.jpg",
@@ -160,12 +147,11 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "design.duolingo.com",
     image: "/ogp/duolingo.jpg",
     brandColor: "#58cc02",
-    poster: { bg: "#f3fce9", fg: "#0a0a0a", accent: "#2f9e00" },
     ogp: {
       status: "ok",
       image: "/ogp/duolingo.jpg",
-      sourceUrl: "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/size/w1200/2024/09/BlogLogo.png",
-      note: "design.duolingo.com は Ghost ブログになっており、og:image はブログロゴ。",
+      sourceUrl: "https://www.duolingo.com/images/facebook/duo-08523a2.jpg",
+      note: "design.duolingo.com の og:image はブログロゴのため、duolingo.com 公式の og:image を使用。",
     },
     absorption: { level: "adapted", knowledge: "design-systems/duolingo", takeaway: "失敗に優しい文言と、状態を色だけで伝えない設計。3D ボタンと bounce は採らない。" },
     category: "company",
@@ -180,7 +166,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "design.digital.go.jp",
     image: "/ogp/digital-agency-jp.jpg",
     brandColor: "#0017c1",
-    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#0017c1" },
     ogp: {
       status: "ok",
       image: "/ogp/digital-agency-jp.jpg",
@@ -199,7 +184,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "fluent2.microsoft.design",
     image: "/ogp/fluent.jpg",
     brandColor: "#0f6cbd",
-    poster: { bg: "#f5f5f5", fg: "#0a0a0a", accent: "#0f6cbd" },
     ogp: {
       status: "ok",
       image: "/ogp/fluent.jpg",
@@ -218,7 +202,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "carbondesignsystem.com",
     image: "/ogp/carbon.jpg",
     brandColor: "#0f62fe",
-    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#0f62fe" },
     ogp: {
       status: "ok",
       image: "/ogp/carbon.jpg",
@@ -237,12 +220,11 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "polaris.shopify.com",
     image: "/ogp/polaris.jpg",
     brandColor: "#008060",
-    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#008060" },
     ogp: {
       status: "ok",
       image: "/ogp/polaris.jpg",
-      sourceUrl: "https://shopify.dev/images/social-share-24de3afa0326f705b84a0a98714acc192611e5a21ade3b7c8f2bd12ba7d1457f.jpg",
-      note: "リダイレクト先 shopify.dev のサイト共通 og:image。Polaris 専用カードではない。",
+      sourceUrl: "https://repository-images.githubusercontent.com/88897663/f0237e80-5410-11eb-9a07-3c17a2591a19",
+      note: "polaris.shopify.com は shopify.dev 共通カードのため、Shopify/polaris-react リポジトリ（アーカイブ済み）の公式ソーシャル画像を使用。",
     },
     absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "罫線 1px とフォーカス 2px の使い分け、primitive と semantic の分離。" },
     category: "component-library",
@@ -255,12 +237,13 @@ export const flagshipSystems: DesignSystemRef[] = [
     descriptionJa: "github.com で使われる GitHub のデザインシステム。ドキュメントは primer.style。",
     url: "https://primer.style/",
     domain: "primer.style",
-    image: "",
+    image: "/ogp/primer.jpg",
     brandColor: "#1f2328",
-    poster: { bg: "#f6f8fa", fg: "#1f2328", accent: "#0969da" },
     ogp: {
-      status: "missing",
-      note: "primer.style の HTML に og:image / twitter:image がない（クライアント描画）。",
+      status: "ok",
+      image: "/ogp/primer.jpg",
+      sourceUrl: "https://github.com/primer/brand/assets/19292210/8562a9a5-a1e4-4722-9ec7-47ebccd5901e",
+      note: "primer.style トップは meta をクライアント描画するため、/product/getting-started/ の og:image を使用。",
     },
     absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "行間トークンと、トーストより残るバナーを選ぶ通知方針（feedback.md）。" },
     category: "component-library",
@@ -275,7 +258,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "atlassian.design",
     image: "/ogp/atlassian.jpg",
     brandColor: "#1868db",
-    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#1868db" },
     ogp: {
       status: "ok",
       image: "/ogp/atlassian.jpg",
@@ -294,7 +276,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "stripe.com",
     image: "/ogp/stripe.jpg",
     brandColor: "#533afd",
-    poster: { bg: "#0a2540", fg: "#fafafa", accent: "#533afd" },
     ogp: {
       status: "ok",
       image: "/ogp/stripe.jpg",
@@ -313,7 +294,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "linear.app",
     image: "/ogp/linear.jpg",
     brandColor: "#5e6ad2",
-    poster: { bg: "#0a0a0a", fg: "#fafafa", accent: "#5e6ad2", invertInDark: true },
     ogp: {
       status: "ok",
       image: "/ogp/linear.jpg",
@@ -332,7 +312,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "smarthr.design",
     image: "/ogp/smarthr.jpg",
     brandColor: "#00c4cc",
-    poster: { bg: "#f8f7f6", fg: "#23221e", accent: "#0077c7" },
     ogp: {
       status: "ok",
       image: "/ogp/smarthr.jpg",
@@ -351,7 +330,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "spectrum.adobe.com",
     image: "/ogp/spectrum.jpg",
     brandColor: "#1473e6",
-    poster: { bg: "#0a0a0a", fg: "#fafafa", accent: "#1473e6" },
     ogp: {
       status: "ok",
       image: "/ogp/spectrum.jpg",
@@ -370,12 +348,11 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "ant.design",
     image: "/ogp/antd.jpg",
     brandColor: "#1677ff",
-    poster: { bg: "#0a0a0a", fg: "#fafafa", accent: "#1677ff" },
     ogp: {
       status: "ok",
       image: "/ogp/antd.jpg",
-      sourceUrl: "https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png",
-      note: "公式 og:image は 200x200 ロゴ。1200x630 にパディングして掲載。",
+      sourceUrl: "https://repository-images.githubusercontent.com/34526884/8e0a5095-5d82-425c-a54f-a0cb51743a12",
+      note: "ant.design の og:image は 200x200 ロゴのため、ant-design/ant-design リポジトリの公式ソーシャル画像を使用。",
     },
     absorption: { level: "reference", knowledge: "component-libraries/ant-design", takeaway: "大きなライブラリを npm のまま使う別系統の例。部品とトークンは混ぜない。" },
     category: "component-library",
@@ -390,7 +367,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "base-ui.com",
     image: "/ogp/base-ui.jpg",
     brandColor: "#0a0a0a",
-    poster: { bg: "#0a0a0a", fg: "#fafafa", accent: "#71717a", invertInDark: true },
     ogp: {
       status: "ok",
       image: "/ogp/base-ui.jpg",
@@ -409,7 +385,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "radix-ui.com",
     image: "/ogp/radix.jpg",
     brandColor: "#11181c",
-    poster: { bg: "#f8fafc", fg: "#0a0a0a", accent: "#3e63dd" },
     ogp: {
       status: "ok",
       image: "/ogp/radix.jpg",
@@ -429,7 +404,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "design-system.service.gov.uk",
     image: "/ogp/govuk.jpg",
     brandColor: "#1d70b8",
-    poster: { bg: "#1d70b8", fg: "#fafafa", accent: "#1d70b8" },
     ogp: {
       status: "ok",
       image: "/ogp/govuk.jpg",
@@ -446,14 +420,11 @@ export const flagshipSystems: DesignSystemRef[] = [
     descriptionJa: "米国連邦政府サイト向け。パブリックドメインの部品と視覚スタイルガイド。",
     url: "https://designsystem.digital.gov/",
     domain: "designsystem.digital.gov",
-    image: "/ogp/uswds.jpg",
+    image: "",
     brandColor: "#005ea2",
-    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#005ea2" },
     ogp: {
-      status: "ok",
-      image: "/ogp/uswds.jpg",
-      sourceUrl: "https://designsystem.digital.gov/img/uswds-logo/lg-black.png",
-      note: "公式 og:image は 200x200 ロゴ。1200x630 にパディングして掲載。",
+      status: "missing",
+      note: "公式 og:image は全ページ 200x200 ロゴ。GitHub 側も自動生成カードのみのため AwesomeDS ポスターを表示。",
     },
     absorption: { level: "reference", knowledge: "platform-guidelines/uswds", takeaway: "Public Sans をフォント一覧に掲載。指名されたら公式パッケージを使う。" },
     category: "government",
@@ -468,7 +439,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "design.gitlab.com",
     image: "/ogp/gitlab-pajamas.jpg",
     brandColor: "#6b4fbb",
-    poster: { bg: "#6b4fbb", fg: "#fafafa", accent: "#fc6d26" },
     ogp: {
       status: "ok",
       image: "/ogp/gitlab-pajamas.jpg",
@@ -487,7 +457,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "nordhealth.design",
     image: "/ogp/nordhealth.jpg",
     brandColor: "#1860f0",
-    poster: { bg: "#f4f7fb", fg: "#0a0a0a", accent: "#1860f0" },
     ogp: {
       status: "ok",
       image: "/ogp/nordhealth.jpg",
@@ -507,10 +476,9 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "inclusive-components.design",
     image: "",
     brandColor: "#111111",
-    poster: { bg: "#f4efe6", fg: "#0a0a0a", accent: "#0b5fff" },
     ogp: {
       status: "missing",
-      note: "og:title はあるが og:image / twitter:image がない（twitter:card は summary）。",
+      note: "og:image / twitter:image がない（twitter:card は summary）。代わりの公式画像もないため AwesomeDS ポスターを表示。",
     },
     absorption: { level: "adopted", knowledge: "accessibility/inclusive-components", takeaway: "セマンティック HTML が先、ARIA は後。ラベルは常時表示、Escape で閉じる。" },
     category: "cookbook",
@@ -525,7 +493,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "lawsofux.com",
     image: "/ogp/laws-of-ux.jpg",
     brandColor: "#1a1a1a",
-    poster: { bg: "#1a1a1a", fg: "#f5f0e6", accent: "#c4a35a" },
     ogp: {
       status: "ok",
       image: "/ogp/laws-of-ux.jpg",
@@ -544,7 +511,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "refactoringui.com",
     image: "/ogp/refactoring-ui.jpg",
     brandColor: "#38bdf8",
-    poster: { bg: "#0b1220", fg: "#fafafa", accent: "#38bdf8" },
     ogp: {
       status: "ok",
       image: "/ogp/refactoring-ui.jpg",
@@ -564,7 +530,6 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "nngroup.com",
     image: "/ogp/nielsen.jpg",
     brandColor: "#ffc20e",
-    poster: { bg: "#1b1464", fg: "#fafafa", accent: "#ffc20e" },
     ogp: {
       status: "ok",
       image: "/ogp/nielsen.jpg",
