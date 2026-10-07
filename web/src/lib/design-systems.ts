@@ -1,3 +1,12 @@
+export interface FlagshipPosterColors {
+  /** Solid OGP surface. Never #000 / #fff — those invert under color-scheme: dark. */
+  bg: string;
+  fg: string;
+  accent: string;
+  /** Flip to canvas/ink in dark theme so monochrome brand cards stay readable. */
+  invertInDark?: boolean;
+}
+
 export interface DesignSystemRef {
   id: string;
   name: string;
@@ -8,6 +17,7 @@ export interface DesignSystemRef {
   domain: string;
   image: string;
   brandColor: string;
+  poster: FlagshipPosterColors;
   category: "platform" | "component-library" | "company" | "government";
 }
 
@@ -26,6 +36,7 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "developer.apple.com",
     image: "/ogp/apple-hig.svg",
     brandColor: "#1d1d1f",
+    poster: { bg: "#1d1d1f", fg: "#f5f5f7", accent: "#86868b", invertInDark: true },
     category: "platform",
   },
   {
@@ -38,6 +49,7 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "m3.material.io",
     image: "/ogp/material-design.svg",
     brandColor: "#1a73e8",
+    poster: { bg: "#f8f9fa", fg: "#1f1f1f", accent: "#1a73e8" },
     category: "platform",
   },
   {
@@ -49,7 +61,8 @@ export const flagshipSystems: DesignSystemRef[] = [
     url: "https://vercel.com/geist/introduction",
     domain: "vercel.com",
     image: "/ogp/vercel-design.svg",
-    brandColor: "#000000",
+    brandColor: "#0a0a0a",
+    poster: { bg: "#0a0a0a", fg: "#fafafa", accent: "#a3a3a3", invertInDark: true },
     category: "company",
   },
   {
@@ -62,6 +75,7 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "ui.shadcn.com",
     image: "/ogp/shadcn-ui.svg",
     brandColor: "#09090b",
+    poster: { bg: "#09090b", fg: "#fafafa", accent: "#71717a", invertInDark: true },
     category: "component-library",
   },
   {
@@ -73,7 +87,8 @@ export const flagshipSystems: DesignSystemRef[] = [
     url: "https://goodpatch.com/",
     domain: "goodpatch.com",
     image: "/ogp/goodpatch.svg",
-    brandColor: "#ff1744",
+    brandColor: "#c81e1e",
+    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#c81e1e" },
     category: "company",
   },
   {
@@ -86,6 +101,7 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "design.duolingo.com",
     image: "/ogp/duolingo.svg",
     brandColor: "#58cc02",
+    poster: { bg: "#f3fce9", fg: "#0a0a0a", accent: "#2f9e00" },
     category: "company",
   },
   {
@@ -98,6 +114,7 @@ export const flagshipSystems: DesignSystemRef[] = [
     domain: "design.digital.go.jp",
     image: "/ogp/digital-agency-jp.svg",
     brandColor: "#0017c1",
+    poster: { bg: "#fafafa", fg: "#0a0a0a", accent: "#0017c1" },
     category: "government",
   },
 ];

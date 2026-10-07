@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router";
 import { ChevronDown, ExternalLink, Globe } from "lucide-react";
 import { PageHeader } from "../layout/Page";
+import { FlagshipPoster } from "../layout/FlagshipPoster";
 import { Input } from "../ds/components/Input";
 import { Button } from "../ds/components/Button";
 import { EmptyState } from "../ds/components/EmptyState";
@@ -9,38 +10,31 @@ import { entries, groupSourcesByDomain } from "../lib/knowledge";
 import { flagshipSystems, categoryLabel, type DesignSystemRef } from "../lib/design-systems";
 
 function DesignSystemCard({ system }: { system: DesignSystemRef }) {
-  const [imgError, setImgError] = useState(false);
   return (
     <a
       href={system.url}
       target="_blank"
       rel="noreferrer"
-      className="group flex flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+      className="group flex min-w-0 max-w-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
     >
-      <div className="relative aspect-[1200/630] w-full overflow-hidden bg-canvas-soft">
-        {imgError ? (
-          <div className="flex h-full items-center justify-center" style={{ backgroundColor: system.brandColor }}>
-            <span className="t-h2 text-white opacity-80">{system.nameJa ?? system.name}</span>
-          </div>
-        ) : (
-          <img
-            src={system.image}
-            alt=""
-            loading="lazy"
-            onError={() => setImgError(true)}
-            className="h-full w-full object-cover transition-transform duration-base ease-out-ds group-hover:scale-[1.02]"
-          />
-        )}
+      <div className="relative aspect-[1200/630] w-full max-w-full overflow-hidden bg-canvas-soft">
+        <div className="absolute inset-0 origin-center transition-transform duration-base ease-out-ds group-hover:scale-[1.02]">
+          <FlagshipPoster system={system} />
+        </div>
       </div>
-      <div className="flex min-h-0 flex-1 flex-col gap-2 p-4 sm:p-5">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="t-h4 text-ink">{system.nameJa ?? system.name}</h3>
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-2 p-4 sm:p-5">
+        <div className="flex min-w-0 items-start justify-between gap-2">
+          <h3 className="t-h4 min-w-0 text-ink" style={{ overflowWrap: "anywhere" }}>
+            {system.nameJa ?? system.name}
+          </h3>
           <ExternalLink className="mt-0.5 size-4 shrink-0 text-ink-muted transition-colors group-hover:text-ink" strokeWidth={1.75} aria-hidden />
         </div>
-        <p className="t-body-sm line-clamp-2 text-ink-secondary">{system.descriptionJa}</p>
-        <span className="t-caption mt-auto flex items-center gap-1.5 text-ink-muted">
-          <Globe className="size-3.5" strokeWidth={1.75} aria-hidden />
-          {system.domain}
+        <p className="t-body-sm line-clamp-3 min-w-0 text-ink-secondary" style={{ overflowWrap: "anywhere" }}>
+          {system.descriptionJa}
+        </p>
+        <span className="t-caption mt-auto flex min-w-0 items-center gap-1.5 text-ink-muted">
+          <Globe className="size-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
+          <span className="min-w-0 truncate">{system.domain}</span>
         </span>
       </div>
     </a>
@@ -75,7 +69,7 @@ function FlagshipGallery() {
       {grouped.map((g) => (
         <div key={g.category} className="mb-8">
           <h3 className="t-label mb-4 text-ink-muted">{g.label}</h3>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {g.items.map((s) => (
               <DesignSystemCard key={s.id} system={s} />
             ))}

@@ -1,12 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#58cc02"/>
-  <circle cx="600" cy="220" r="80" fill="#fff"/>
-  <circle cx="575" cy="205" r="16" fill="#1cb0f6"/>
-  <circle cx="625" cy="205" r="16" fill="#1cb0f6"/>
-  <circle cx="575" cy="205" r="7" fill="#1a1a1a"/>
-  <circle cx="625" cy="205" r="7" fill="#1a1a1a"/>
-  <ellipse cx="600" cy="250" rx="20" ry="10" fill="#ffc800"/>
-  <text x="600" y="400" text-anchor="middle" font-family="'Nunito',system-ui,sans-serif" font-size="52" font-weight="800" fill="#fff">Duolingo</text>
-  <text x="600" y="450" text-anchor="middle" font-family="'Nunito',system-ui,sans-serif" font-size="24" font-weight="600" fill="rgba(255,255,255,0.85)">Design Guidelines &amp; Brand</text>
-  <text x="600" y="490" text-anchor="middle" font-family="'Nunito',system-ui,sans-serif" font-size="20" fill="rgba(255,255,255,0.7)">Playful · Accessible · Motivating</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" color-scheme="light only" overflow="hidden">
+  <rect width="1200" height="630" fill="#f3fce9"/>
+  <circle cx="600" cy="315" r="128" fill="#2f9e00"/>
+  <ellipse cx="600" cy="328" rx="78" ry="86" fill="#f3fce9"/>
+  <circle cx="572" cy="312" r="18" fill="#1a7f37"/>
+  <circle cx="628" cy="312" r="18" fill="#1a7f37"/>
+  <circle cx="575" cy="314" r="8" fill="#0a0a0a"/>
+  <circle cx="631" cy="314" r="8" fill="#0a0a0a"/>
+  <ellipse cx="600" cy="358" rx="18" ry="10" fill="#c47b00"/>
 </svg>

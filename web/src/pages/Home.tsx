@@ -13,6 +13,7 @@ import { useTheme } from "../lib/theme";
 import { curatedPalettes, fonts, repos, stackLayers, brandCount } from "../lib/data";
 import { cx } from "../ds/cx";
 import { flagshipSystems } from "../lib/design-systems";
+import { FlagshipPoster } from "../layout/FlagshipPoster";
 
 function FormSpecimen() {
   const [notify, setNotify] = useState(true);
@@ -333,10 +334,10 @@ export function Home() {
               href={s.url}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-3 rounded-lg border border-hairline bg-surface p-3 text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2"
+              className="group flex min-w-0 items-center gap-3 rounded-lg border border-hairline bg-surface p-3 text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
             >
-              <span className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-md" style={{ backgroundColor: s.brandColor }}>
-                <span className="text-sm font-semibold text-white">{(s.nameJa ?? s.name).slice(0, 2)}</span>
+              <span className="relative size-10 shrink-0 overflow-hidden rounded-md border border-hairline">
+                <FlagshipPoster system={s} variant="thumb" />
               </span>
               <span className="min-w-0">
                 <span className="t-label block truncate text-ink">{s.nameJa ?? s.name}</span>
