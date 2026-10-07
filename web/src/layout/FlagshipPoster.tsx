@@ -1,13 +1,40 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { cx } from "../ds/cx";
 import type { DesignSystemRef } from "../lib/design-systems";
 import { useResolvedTheme } from "../lib/theme";
 
 /**
- * Brand mark for flagship DS cards. Text lives in the HTML card, not in the
- * artwork: SVG <text> cannot load site fonts, and #000/#fff invert under
- * `color-scheme: dark` (the Vercel black-on-black failure).
+ * Artwork for flagship DS cards. Prefers the committed og:image copy.
+ * Geometric marks are fallback only. Text lives in the HTML card, not in SVG:
+ * SVG <text> cannot load site fonts, and #000/#fff invert under color-scheme: dark.
  */
+export function FlagshipArt({
+  system,
+  variant = "ogp",
+  className,
+}: {
+  system: DesignSystemRef;
+  variant?: "ogp" | "thumb";
+  className?: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const src = system.ogp.status === "ok" ? system.ogp.image : undefined;
+  if (src && !failed) {
+    return (
+      <div className={cx("relative isolate size-full overflow-hidden bg-canvas-soft", className)} aria-hidden>
+        <img
+          src={src}
+          alt=""
+          decoding="async"
+          className="size-full max-w-full object-cover"
+          onError={() => setFailed(true)}
+        />
+      </div>
+    );
+  }
+  return <FlagshipPoster system={system} variant={variant} className={className} />;
+}
+
 export function FlagshipPoster({
   system,
   variant = "ogp",
@@ -97,6 +124,22 @@ function mark(id: string, c: { bg: string; fg: string; accent: string }): ReactN
           <rect x="602" y="140" width="16" height="350" fill={c.accent} opacity="0.28" />
           <rect x="650" y="288" width="220" height="6" fill={c.accent} opacity="0.45" />
           <rect x="650" y="318" width="140" height="6" fill={c.accent} opacity="0.28" />
+        </g>
+      );
+    case "primer":
+      return (
+        <g fill="none" stroke={c.fg} strokeWidth="14">
+          <rect x="430" y="175" width="160" height="160" rx="16" />
+          <rect x="560" y="255" width="160" height="160" rx="16" />
+          <rect x="490" y="335" width="160" height="120" rx="16" fill={c.accent} stroke="none" />
+        </g>
+      );
+    case "inclusive-components":
+      return (
+        <g fill="none" stroke={c.fg} strokeWidth="12">
+          <circle cx="600" cy="315" r="140" />
+          <circle cx="600" cy="270" r="28" fill={c.accent} stroke="none" />
+          <path d="M520 400c20-70 140-70 160 0" />
         </g>
       );
     default:

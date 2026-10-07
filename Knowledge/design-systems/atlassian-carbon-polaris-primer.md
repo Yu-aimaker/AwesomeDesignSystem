@@ -3,6 +3,14 @@ title: "Atlassian, Carbon, Polaris, Primer (比較)"
 category: design-systems
 type: design-system
 sources:
+  - url: https://atlassian.design/
+    title: "Atlassian Design"
+  - url: https://carbondesignsystem.com/
+    title: "Home | Carbon Design System"
+  - url: https://polaris.shopify.com/
+    title: "Polaris (redirects to Shopify.dev)"
+  - url: https://primer.style/
+    title: "Primer"
   - url: https://github.com/primer/primitives
     title: "primer/primitives: Color, spacing, and typography primitives in json"
   - url: https://raw.githubusercontent.com/primer/primitives/HEAD/src/tokens/base/typography/typography.json5
@@ -22,7 +30,7 @@ sources:
   - url: https://github.com/atlassian/atlassian-frontend-mirror
     title: "atlassian/atlassian-frontend-mirror (Atlassian Design System packages)"
 tags: [atlassian, carbon, polaris, primer, tokens, type-scale, radius, density, enterprise]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Atlassian, Carbon, Polaris, Primer (比較)
@@ -81,4 +89,8 @@ Carbon タイプスケール (px): 12, 14, 16, 18, 20, 24, 28, 32, 36, 42, 48, 5
 - https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/font.ts : 取得済み。Inter スタック、ウェイト 450 / 550 / 650 / 700。
 - https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/border.ts : 取得済み。radius と width トークン。
 - https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/size.ts : 取得済み。size スケール px 値。
-- https://github.com/atlassian/atlassian-frontend-mirror : リポジトリ存在のみ確認。`design-system/tokens` 配下の値は取得不可。atlassian.design、carbondesignsystem.com、polaris.shopify.com、primer.style はネットワーク制限で取得不可。
+- https://atlassian.design/ (取得日 2026-10-07): og:title「Atlassian Design」、og:image 2400x1260。
+- https://carbondesignsystem.com/ (取得日 2026-10-07): og:title「Home | Carbon Design System」、og:image 1200x630。
+- https://polaris.shopify.com/ (取得日 2026-10-07): shopify.dev/docs/api/polaris へリダイレクト。og:image は Shopify サイト共通 JPEG。
+- https://primer.style/ (取得日 2026-10-07): title「Primer」。HTML に og:image / twitter:image なし。
+- https://github.com/atlassian/atlassian-frontend-mirror : リポジトリ存在のみ確認。`design-system/tokens` 配下の値は取得不可。

@@ -3,6 +3,8 @@ title: "Duolingo Design"
 category: design-systems
 type: design-system
 sources:
+  - url: https://design.duolingo.com/
+    title: "Articles about Design (Duolingo Design)"
   - url: https://raw.githubusercontent.com/kwakseongjae/oh-my-design/HEAD/design-md/duolingo/DESIGN.md
     title: "oh-my-design: duolingo/DESIGN.md (design.duolingo.com/identity/color と www.duolingo.com を照合した二次資料)"
   - url: https://raw.githubusercontent.com/nexu-io/open-design/main/design-systems/duolingo/DESIGN.md
@@ -14,7 +16,7 @@ sources:
   - url: https://www.figma.com/community/file/1460744749282136015
     title: "Duolingo Design System (Figma Community)"
 tags: [duolingo, gamification, feather-green, motion, character, playful, 3d-button]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Duolingo Design
@@ -67,6 +69,7 @@ Duolingo のデザインは Feather Green `#58CC02` を筆頭に動物の名前�
 
 ## 出典
 
+- https://design.duolingo.com/ (取得日 2026-10-07): og:title「Articles about Design」、og:image は Ghost の BlogLogo.png。サイトはブログになっている。
 - https://raw.githubusercontent.com/kwakseongjae/oh-my-design/HEAD/design-md/duolingo/DESIGN.md : 取得済み。色、書体、3D lip、radius、motion、原則。`design.duolingo.com/identity/color` と live サイトを Tier 1 として照合したと記載。
 - https://raw.githubusercontent.com/nexu-io/open-design/main/design-systems/duolingo/DESIGN.md : 取得済み。`#58cc02`、4px bottom-shadow、Feather Bold + Mona Sans、180ms / 320ms。
 - https://web.archive.org/web/20260310155248/https://design.duolingo.com/ : 指定されたアーカイブ。本環境から web.archive.org は取得不可。

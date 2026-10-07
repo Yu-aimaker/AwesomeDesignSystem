@@ -3,6 +3,8 @@ title: "Radix Primitives and Radix Colors"
 category: component-libraries
 type: library
 sources:
+  - url: https://www.radix-ui.com/primitives
+    title: "Radix Primitives"
   - url: https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/introduction.mdx
     title: "Radix Primitives: Introduction (source of radix-ui.com, which is proxy blocked)"
   - url: https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/accessibility.mdx
@@ -16,7 +18,7 @@ sources:
   - url: https://registry.npmjs.org/radix-ui/latest
     title: "npm: radix-ui (unified package) latest"
 tags: [radix, primitives, accessibility, wai-aria, colors, 12-step-scale, aschild]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Radix Primitives and Radix Colors
@@ -67,6 +69,7 @@ gray（light）の 12 値。
 
 ## 出典
 
+- https://www.radix-ui.com/primitives (取得日 2026-10-07): og:title「Radix Primitives」、og:image 3025x1700 PNG。トップ radix-ui.com には twitter:image のみで og:image なし。
 - https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/introduction.mdx : 動機と 6 特徴、`npm install radix-ui`。取得済み。
 - https://raw.githubusercontent.com/radix-ui/website/main/data/primitives/docs/overview/accessibility.mdx : WAI-ARIA、フォーカス管理、Label。取得済み。
 - https://raw.githubusercontent.com/radix-ui/website/main/data/colors/docs/palette-composition/understanding-the-scale.mdx : 12 段の用途、APCA 保証、暗い文字が必要なスケール。取得済み。

@@ -12,7 +12,7 @@ sources:
   - url: https://vercel.com/geist/colors
     title: "Geist Design System - Colors (Vercel)"
 tags: [vercel, geist, design-system, monochrome, gray-scale, mono, gradient]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Vercel Geist Design System
@@ -80,5 +80,5 @@ Geist は Vercel のデザインシステムで、同名の書体 (Geist Sans / 
 
 - https://github.com/voltagent/awesome-design-md/blob/main/design-md/vercel/DESIGN.md : クローン済み実測トークン。ローカルコピーを読了。
 - https://github.com/vercel/geist-font : Geist Sans / Mono / Pixel の説明、OFL 1.1、制作クレジット、`npm i geist`。取得済み。
-- https://vercel.com/geist/introduction : Geist デザインシステムの紹介。vercel.com はネットワーク制限で取得不可。
+- https://vercel.com/geist/introduction (取得日 2026-10-07): og:title「Geist」、og:image は Vercel Blob 上の geist-og.jpg (1200x628)。本文トークンはクローン DESIGN.md を一次資料とした。
 - https://vercel.com/geist/colors : 色スケール。取得不可のため、1 から 10 段の意味づけは本エントリに含めていない。

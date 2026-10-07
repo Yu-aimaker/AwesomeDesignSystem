@@ -3,6 +3,8 @@ title: "Apple Human Interface Guidelines"
 category: platform-guidelines
 type: guideline
 sources:
+  - url: https://developer.apple.com/design/human-interface-guidelines
+    title: "Human Interface Guidelines | Apple Developer Documentation"
   - url: https://developer.apple.com/design/human-interface-guidelines/typography
     title: "Typography | Apple Developer Documentation"
   - url: https://developer.apple.com/design/human-interface-guidelines/accessibility
@@ -16,7 +18,7 @@ sources:
   - url: https://developer.apple.com/videos/play/wwdc2025/219/
     title: "Meet Liquid Glass - WWDC25"
 tags: [apple, hig, ios, typography, dynamic-type, liquid-glass, motion, accessibility]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Apple Human Interface Guidelines
@@ -88,6 +90,7 @@ iOS / iPadOS Dynamic Type、Large (既定) の値。
 
 ## 出典
 
+- https://developer.apple.com/design/human-interface-guidelines (取得日 2026-10-07): og:title「Human Interface Guidelines | Apple Developer Documentation」、og:image は Developer Documentation 共通 JPEG。
 - https://developer.apple.com/design/human-interface-guidelines/typography : Dynamic Type 表、最小サイズ、ウェイト指針 (JSON エンドポイントから取得)。
 - https://developer.apple.com/design/human-interface-guidelines/accessibility : 44x44 pt、コントラスト、Reduce Motion、Dynamic Type 200%。
 - https://developer.apple.com/design/human-interface-guidelines/materials : Liquid Glass の regular / clear、コンテンツレイヤー禁止、Material 4 段階、vibrancy。

@@ -3,6 +3,8 @@ title: "デジタル庁デザインシステム (DADS)"
 category: platform-guidelines
 type: design-system
 sources:
+  - url: https://design.digital.go.jp/
+    title: "デジタル庁デザインシステムβ版"
   - url: https://github.com/digital-go-jp/design-tokens
     title: "digital-go-jp/design-tokens: デジタル庁デザインシステム（Figma）のデザイントークン"
   - url: https://raw.githubusercontent.com/digital-go-jp/design-tokens/develop/README.md
@@ -14,7 +16,7 @@ sources:
   - url: https://www.figma.com/community/file/1255349027535859598
     title: "デジタル庁 デザインシステム (Figma Community)"
 tags: [japan, government, design-system, accessibility, tokens, noto-sans-jp, figma]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # デジタル庁デザインシステム (DADS)
@@ -93,4 +95,4 @@ warning-orange-1 orange-600 #fb5b01 / warning-orange-2 orange-800 #c74700
 - https://github.com/digital-go-jp/design-system-example-components : React 18 + Tailwind 3 実装、MIT、Storybook。
 - https://github.com/digital-go-jp/design-system-example-components-html : プレーン HTML/CSS/JS 実装、MIT。
 - https://www.figma.com/community/file/1255349027535859598 : Figma ファイル (README 内リンクで確認、figma.com はアクセス不可)。
-- design.digital.go.jp (トップ、/dads/foundations/typography/、/dads/foundations/color/) はネットワーク制限で取得不可。色と要件の数値はクローン済み `awesome-design-md-jp/design-md/digital-go/DESIGN.md` から引用。
+- https://design.digital.go.jp/ (取得日 2026-10-07): og:title「デジタル庁デザインシステムβ版」、og:image `https://design.digital.go.jp/dads/images/ogp_default.png` (1200x630)。本文トークンは GitHub とクローン DESIGN.md を一次資料とした。

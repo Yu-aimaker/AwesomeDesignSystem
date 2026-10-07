@@ -2,12 +2,12 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router";
 import { ChevronDown, ExternalLink, Globe } from "lucide-react";
 import { PageHeader } from "../layout/Page";
-import { FlagshipPoster } from "../layout/FlagshipPoster";
+import { FlagshipArt } from "../layout/FlagshipPoster";
 import { Input } from "../ds/components/Input";
 import { Button } from "../ds/components/Button";
 import { EmptyState } from "../ds/components/EmptyState";
 import { entries, groupSourcesByDomain } from "../lib/knowledge";
-import { flagshipSystems, categoryLabel, type DesignSystemRef } from "../lib/design-systems";
+import { flagshipSystems, categoryLabel, ogpStats, type DesignSystemRef } from "../lib/design-systems";
 
 function DesignSystemCard({ system }: { system: DesignSystemRef }) {
   return (
@@ -19,7 +19,7 @@ function DesignSystemCard({ system }: { system: DesignSystemRef }) {
     >
       <div className="relative aspect-[1200/630] w-full max-w-full overflow-hidden bg-canvas-soft">
         <div className="absolute inset-0 origin-center transition-transform duration-base ease-out-ds group-hover:scale-[1.02]">
-          <FlagshipPoster system={system} />
+          <FlagshipArt system={system} />
         </div>
       </div>
       <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-2 p-4 sm:p-5">
@@ -38,6 +38,19 @@ function DesignSystemCard({ system }: { system: DesignSystemRef }) {
         </span>
       </div>
     </a>
+  );
+}
+
+function OgpNote() {
+  const stats = ogpStats();
+  const missing = flagshipSystems.filter((s) => s.ogp.status === "missing");
+  return (
+    <p className="t-caption mt-3 max-w-[75ch] text-ink-muted" style={{ overflowWrap: "anywhere" }}>
+      {stats.ok}/{stats.total} 件が公式 og:image（取得 2026-10-07）。
+      {missing.length > 0
+        ? ` 幾何マーク: ${missing.map((s) => s.nameJa ?? s.name).join("、")}。`
+        : ""}
+    </p>
   );
 }
 
@@ -63,8 +76,9 @@ function FlagshipGallery() {
           注目のデザインシステム
         </h2>
         <p className="t-body mt-2 max-w-[65ch] text-ink-secondary">
-          世界をリードするデザインシステムとガイドライン。各カードから公式サイトへ直接アクセスできます。
+          世界をリードするデザインシステムとガイドライン。カード画像は各公式ページの og:image / twitter:image です。
         </p>
+        <OgpNote />
       </div>
       {grouped.map((g) => (
         <div key={g.category} className="mb-8">
