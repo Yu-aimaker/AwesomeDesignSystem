@@ -11,6 +11,8 @@ export function KnowledgeEntry() {
   const { category = "", slug = "" } = useParams();
   const entry = findEntry(category, slug);
   if (!entry) return <NotFound />;
+  // The page header already shows the title; drop the Markdown's own leading H1 so there is one h1.
+  const body = entry.body.replace(/^\s*#\s+.+\n/, "");
 
   return (
     <article>
@@ -34,9 +36,10 @@ export function KnowledgeEntry() {
         )}
       </header>
       {entry.sources.length > 0 && <SourceList sources={entry.sources} title="この記事の出典" />}
-      <div className="prose t-body mt-12 text-ink">
+      {/* AwesomeDS foundations are written in English: lang="en" keeps words whole in table cells (ja uses overflow-wrap: anywhere). */}
+      <div className="prose t-body mt-12 text-ink" lang={entry.origin === "awesomeds" ? "en" : undefined}>
         <Markdown remarkPlugins={[remarkGfm]} components={{ a: ({ href, children }) => <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{children}</a> }}>
-          {entry.body}
+          {body}
         </Markdown>
       </div>
       <p className="t-caption mt-12 text-ink-muted">
