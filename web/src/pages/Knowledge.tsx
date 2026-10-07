@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { PageHeader } from "../layout/Page";
 import { Input } from "../ds/components/Input";
 import { Badge } from "../ds/components/Badge";
@@ -20,8 +20,11 @@ const typeLabel: Record<string, string> = {
 
 export function Knowledge() {
   const [q, setQ] = useState("");
-  const [category, setCategory] = useState<string | null>(null);
   const categories = useMemo(() => groupByCategory(entries), []);
+  // `?category=awesomeds` preselects a filter (linked from /foundations).
+  const [params] = useSearchParams();
+  const initial = params.get("category");
+  const [category, setCategory] = useState<string | null>(categories.some((c) => c.category === initial) ? initial : null);
 
   const filtered = useMemo(() => {
     const needle = q.trim().toLowerCase();

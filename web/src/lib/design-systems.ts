@@ -20,6 +20,17 @@ export interface FlagshipOgp {
   note?: string;
 }
 
+/** How much of a source AwesomeDS takes in. See docs/audits/sta-53-core-quality.md. */
+export type AbsorptionLevel = "adopted" | "adapted" | "reference";
+
+export interface FlagshipAbsorption {
+  level: AbsorptionLevel;
+  /** Knowledge entry id (`category/slug`) that records adopted / adapted / rejected points. */
+  knowledge: string;
+  /** One sentence: what AwesomeDS took from this source. */
+  takeaway: string;
+}
+
 export interface DesignSystemRef {
   id: string;
   name: string;
@@ -32,6 +43,7 @@ export interface DesignSystemRef {
   brandColor: string;
   poster: FlagshipPosterColors;
   ogp: FlagshipOgp;
+  absorption: FlagshipAbsorption;
   category: "platform" | "component-library" | "company" | "government" | "cookbook";
 }
 
@@ -59,6 +71,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://developer.apple.com/tutorials/developer-og.jpg",
       note: "HIG ページの og:image は Developer Documentation 共通カード。",
     },
+    absorption: { level: "adopted", knowledge: "platform-guidelines/apple-hig", takeaway: "44px のタッチターゲット、色だけで伝えない、モーションは止められるフィードバックに限る。" },
     category: "platform",
   },
   {
@@ -77,6 +90,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/material-design.jpg",
       sourceUrl: "https://m3.material.io/static/assets/m3-social.jpg",
     },
+    absorption: { level: "adopted", knowledge: "platform-guidelines/material-3", takeaway: "時間の刻み 100 から 500ms と、ダークでは影でなく面の明度で奥行きを出す規則。" },
     category: "platform",
   },
   {
@@ -95,6 +109,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/vercel-design.jpg",
       sourceUrl: "https://k2mkucxia43oc7fa.public.blob.vercel-storage.com/front/design/geist-og.jpg",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/vercel-geist", takeaway: "Geist 書体、4px 基準の余白、黒に近い ink を主ボタンにする構図。" },
     category: "company",
   },
   {
@@ -113,6 +128,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/shadcn-ui.jpg",
       sourceUrl: "https://ui.shadcn.com/og?title=The%20Foundation%20for%20your%20Design%20System&description=Composable%2C%20accessible%20components%20with%20thoughtful%20defaults.%20Build%20your%20own%20component%20library%20with%20code%20you%20can%20customize%2C%20extend%2C%20and%20make%20your%20own.",
     },
+    absorption: { level: "adopted", knowledge: "component-libraries/shadcn-ui", takeaway: "既定のコンポーネント層。primary を無彩色にし、背景と文字のトークンを対で定義する。" },
     category: "component-library",
   },
   {
@@ -131,6 +147,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/goodpatch.jpg",
       sourceUrl: "https://goodpatch.com/ogp.png",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/goodpatch", takeaway: "和文本文の行間 1.8 と、palt を見出しだけに使う規則。" },
     category: "company",
   },
   {
@@ -150,6 +167,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://storage.ghost.io/c/7a/33/7a33d0f4-927d-4fe8-a6bf-96131b5e76d4/content/images/size/w1200/2024/09/BlogLogo.png",
       note: "design.duolingo.com は Ghost ブログになっており、og:image はブログロゴ。",
     },
+    absorption: { level: "adapted", knowledge: "design-systems/duolingo", takeaway: "失敗に優しい文言と、状態を色だけで伝えない設計。3D ボタンと bounce は採らない。" },
     category: "company",
   },
   {
@@ -168,6 +186,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/digital-agency-jp.jpg",
       sourceUrl: "https://design.digital.go.jp/dads/images/ogp_default.png",
     },
+    absorption: { level: "adopted", knowledge: "platform-guidelines/digital-agency-japan-design-system", takeaway: "primitive から semantic へのトークン階層、44px ターゲット、全角入力を受け付けるフォーム。" },
     category: "government",
   },
   {
@@ -186,6 +205,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/fluent.jpg",
       sourceUrl: "https://fluent2websitecdn.azureedge.net/cdn/fluent-logo-metadata.Cwa-_8F7.png",
     },
+    absorption: { level: "reference", knowledge: "platform-guidelines/fluent-2", takeaway: "Brief が Fluent を指名したら公式パッケージを使う。値は取り込まない。" },
     category: "platform",
   },
   {
@@ -204,6 +224,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/carbon.jpg",
       sourceUrl: "https://www.carbondesignsystem.com/ogimage.png",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "12 / 14 / 16 の文字サイズの合意と 2 段の密度。通知の種類と時限消去の禁止を feedback.md に取り込んだ。" },
     category: "component-library",
   },
   {
@@ -223,6 +244,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://shopify.dev/images/social-share-24de3afa0326f705b84a0a98714acc192611e5a21ade3b7c8f2bd12ba7d1457f.jpg",
       note: "リダイレクト先 shopify.dev のサイト共通 og:image。Polaris 専用カードではない。",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "罫線 1px とフォーカス 2px の使い分け、primitive と semantic の分離。" },
     category: "component-library",
   },
   {
@@ -240,6 +262,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       status: "missing",
       note: "primer.style の HTML に og:image / twitter:image がない（クライアント描画）。",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "行間トークンと、トーストより残るバナーを選ぶ通知方針（feedback.md）。" },
     category: "component-library",
   },
   {
@@ -258,6 +281,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/atlassian.jpg",
       sourceUrl: "https://atlassian.design/assets/df6dcb86d48a/static/0b4e62efc0d2c7d917e11f3860855c05/meta.png",
     },
+    absorption: { level: "adapted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "重大な警告とエラーを自動で消さない規則と、警告とエラーの書き分け（feedback.md）。" },
     category: "company",
   },
   {
@@ -276,6 +300,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/stripe.jpg",
       sourceUrl: "https://b.stripecdn.com/mkt-ssr-statics/assets/_next/static/media/stripe.37119086.jpg",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/stripe", takeaway: "数値の tabular-nums、ink で色を付けた影、1 バンドに CTA は 1 つ。" },
     category: "company",
   },
   {
@@ -294,6 +319,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/linear.jpg",
       sourceUrl: "https://linear.app/api/og/main?title=Linear&v=4",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/linear", takeaway: "罫線で構造を作り、影は浮くものだけ。アクセントは少なく使う。" },
     category: "company",
   },
   {
@@ -312,6 +338,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/smarthr.jpg",
       sourceUrl: "https://smarthr.design/images/ogp.png",
     },
+    absorption: { level: "adopted", knowledge: "design-systems/smarthr-design-system", takeaway: "ブランド色を UI の primary にしない判断と、2px のフォーカス枠。" },
     category: "company",
   },
   {
@@ -330,6 +357,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/spectrum.jpg",
       sourceUrl: "https://spectrum.adobe.com/media_1270372ba73a31b64cb998d3c4a0a3d44e565196f.png",
     },
+    absorption: { level: "reference", knowledge: "platform-guidelines/adobe-spectrum", takeaway: "振る舞いをプリミティブに任せる分担は同じ。Adobe のビジュアルは取り込まない。" },
     category: "component-library",
   },
   {
@@ -349,6 +377,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png",
       note: "公式 og:image は 200x200 ロゴ。1200x630 にパディングして掲載。",
     },
+    absorption: { level: "reference", knowledge: "component-libraries/ant-design", takeaway: "大きなライブラリを npm のまま使う別系統の例。部品とトークンは混ぜない。" },
     category: "component-library",
   },
   {
@@ -367,6 +396,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/base-ui.jpg",
       sourceUrl: "https://base-ui.com/opengraph-image-j8qpfc.png?b1b9e0366e512854",
     },
+    absorption: { level: "adopted", knowledge: "component-libraries/base-ui", takeaway: "shadcn の代替プリミティブ。状態は data-* 属性で書き、ルートに isolation: isolate。" },
     category: "component-library",
   },
   {
@@ -386,6 +416,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://www.radix-ui.com/primitives/opengraph-image.png?opengraph-image.0rn7txzeny89p.png",
       note: "トップ radix-ui.com には twitter:image がなく、Primitives ページの og:image を使用。",
     },
+    absorption: { level: "adopted", knowledge: "component-libraries/radix-primitives-and-colors", takeaway: "既定のプリミティブ。hover は 1 段濃く、押下はさらに 1 段の状態規則。" },
     category: "component-library",
   },
   {
@@ -404,6 +435,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/govuk.jpg",
       sourceUrl: "https://design-system.service.gov.uk/assets/images/govuk-opengraph-image.png",
     },
+    absorption: { level: "adapted", knowledge: "platform-guidelines/govuk-design-system", takeaway: "バナーは 1 ページに 1 つ、検証エラーはバナーでなくエラーサマリー（feedback.md）。" },
     category: "government",
   },
   {
@@ -423,6 +455,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://designsystem.digital.gov/img/uswds-logo/lg-black.png",
       note: "公式 og:image は 200x200 ロゴ。1200x630 にパディングして掲載。",
     },
+    absorption: { level: "reference", knowledge: "platform-guidelines/uswds", takeaway: "Public Sans をフォント一覧に掲載。指名されたら公式パッケージを使う。" },
     category: "government",
   },
   {
@@ -441,6 +474,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/gitlab-pajamas.jpg",
       sourceUrl: "https://design.gitlab.com/img/social/link-preview.png",
     },
+    absorption: { level: "reference", knowledge: "design-systems/gitlab-pajamas", takeaway: "実装の正本をコードに置き、Figma は参照に留める考え方。" },
     category: "company",
   },
   {
@@ -460,6 +494,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl:
         "https://nordhealth.design/_og/s/c_Banner,title_Nord+Design+System,description_~RGVzaWduLCBidWlsZCwgYW5kIHNoaXAgY29oZXJlbnQgZXhwZXJpZW5jZXMgd2l0aCBOb3JkaGVhbHRoJ3MgTm9yZCBEZXNpZ24gU3lzdGVtLg,rev_2.png",
     },
+    absorption: { level: "reference", knowledge: "design-systems/nord-design-system", takeaway: "ヘルスケア向けのブランドシステム。Web Components の選択肢として記録。" },
     category: "company",
   },
   {
@@ -477,6 +512,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       status: "missing",
       note: "og:title はあるが og:image / twitter:image がない（twitter:card は summary）。",
     },
+    absorption: { level: "adopted", knowledge: "accessibility/inclusive-components", takeaway: "セマンティック HTML が先、ARIA は後。ラベルは常時表示、Escape で閉じる。" },
     category: "cookbook",
   },
   {
@@ -495,6 +531,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/laws-of-ux.jpg",
       sourceUrl: "https://lawsofux.com/home/social.en.png",
     },
+    absorption: { level: "adopted", knowledge: "design-thinking/laws-of-ux", takeaway: "Fitts、Hick、Proximity をターゲットサイズ、1 画面 1 主要操作、余白の群化に対応させた。" },
     category: "cookbook",
   },
   {
@@ -514,6 +551,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://refactoringui.com/img/homepage/og-image.png",
       note: "og:image は無く twitter:image を使用。",
     },
+    absorption: { level: "adopted", knowledge: "design-thinking/refactoring-ui", takeaway: "副次要素を弱めて階層を作り、グレースケールで組んでから色を足す。" },
     category: "cookbook",
   },
   {
@@ -532,6 +570,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/nielsen.jpg",
       sourceUrl: "https://media.nngroup.com/media/articles/opengraph_images/Updated10HeuristicSocialCard-36.png",
     },
+    absorption: { level: "adopted", knowledge: "design-thinking/nielsen-heuristics", takeaway: "10 項目をレビュー観点（components/checklist.md）に使う。" },
     category: "cookbook",
   },
 ];
@@ -543,6 +582,16 @@ const categoryLabelMap: Record<DesignSystemRef["category"], string> = {
   government: "行政・公共",
   cookbook: "ガイドライン・クックブック",
 };
+
+const absorptionLabelMap: Record<AbsorptionLevel, string> = {
+  adopted: "採用",
+  adapted: "翻案",
+  reference: "参照のみ",
+};
+
+export function absorptionLabel(level: AbsorptionLevel): string {
+  return absorptionLabelMap[level];
+}
 
 export function categoryLabel(category: DesignSystemRef["category"]): string {
   return categoryLabelMap[category];
