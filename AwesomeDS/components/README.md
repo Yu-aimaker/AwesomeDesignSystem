@@ -148,10 +148,13 @@ center numbers; use hover-only row actions on touch; wrap header labels.
 Sonner via shadcn. Anatomy: `--ds-surface`, hairline, `--ds-radius-lg`, `--ds-shadow-2`,
 padding 12 16, 14 px text, status icon 16 px in `success`/`warning`/`danger`, optional single
 action button (ghost), close button. Position bottom right (bottom center on mobile), max 3
-visible, 5 s default, persistent for errors that need action. `aria-live="polite"`.
+visible, 5 s default for toasts without an action. Errors, warnings and toasts with an
+action (Undo) stay until dismissed (WCAG 2.2.1). `aria-live="polite"`.
 
 Do: toasts for background results ("Exported 24 rows"); offer Undo for destructive actions.
-Do not: toast form validation errors (inline instead); stack more than three; auto-dismiss errors.
+Do not: toast a result that is already visible on screen; toast form validation errors
+(inline instead); stack more than three; auto-dismiss errors or actions. Choosing between
+inline, banner, toast and dialog: [`foundations/feedback.md`](../foundations/feedback.md).
 
 ## Badge
 

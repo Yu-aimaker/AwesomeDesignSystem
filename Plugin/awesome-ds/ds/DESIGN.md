@@ -1,5 +1,5 @@
 ---
-version: 0.2.0
+version: 0.3.0
 name: AwesomeDS
 description: >
   A neutral, content-first design system for web products. Near-white canvas,
@@ -368,6 +368,10 @@ Rules and specs: [`components/README.md`](components/README.md).
   placeholder as label.
 - Buttons: 40px default height, 32px small, 48px large. Label fits on one line.
   One primary button per view.
+- Feedback: no message when the result is visible; inline for a field, error summary
+  for a form, one banner for the page, toast only for off-screen results, dialog only
+  when the user must decide. Errors and toasts with an action never auto-dismiss.
+  Full rules: [`foundations/feedback.md`](foundations/feedback.md).
 
 ## 9. Do and do not
 

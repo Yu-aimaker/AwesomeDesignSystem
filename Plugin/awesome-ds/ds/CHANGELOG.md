@@ -3,6 +3,19 @@
 All notable changes to AwesomeDS are recorded here. The format follows Keep a Changelog
 and the project follows Semantic Versioning 2.0.0.
 
+## [0.3.0] - 2026-10-08
+
+### Added
+- `foundations/feedback.md`: one rule set for choosing no message, inline, error summary, banner,
+  toast, dialog or callout. Sources: Carbon notification pattern, Atlassian flag, GOV.UK
+  notification banner, Primer notification messaging and toast accessibility, WCAG 2.2.1 and 4.1.3.
+- DESIGN.md 8. Components: a Feedback rule that points at the new file.
+
+### Changed
+- `components/README.md` Toast: only toasts without an action auto-dismiss (5 s). Errors, warnings
+  and toasts with Undo stay until dismissed. Do not toast a result that is already on screen.
+- DESIGN.md front matter and token file headers to 0.3.0. No token values changed.
+
 ## [0.2.0] - 2026-09-07
 
 ### Added
