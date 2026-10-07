@@ -64,7 +64,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Claude / Anthropic](design-systems/claude-and-anthropic.md) | product | anthropic, claude, warm-neutrals, serif, cream, coral, editorial | 2026-09-06 |
 | [Duolingo Design](design-systems/duolingo.md) | design-system | duolingo, gamification, feather-green, motion, character, playful, 3d-button | 2026-10-07 |
 | [GitLab Pajamas Design System](design-systems/gitlab-pajamas.md) | design-system | gitlab, pajamas, design-system, storybook, figma, gitlab-ui | 2026-10-07 |
-| [Goodpatch](design-systems/goodpatch.md) | product | goodpatch, japan, design-company, yu-gothic, galano-grotesque, pill-cta, line-height | 2026-09-06 |
+| [Goodpatch](design-systems/goodpatch.md) | product | goodpatch, japan, design-company, yu-gothic, galano-grotesque, pill-cta, line-height | 2026-10-07 |
 | [Linear](design-systems/linear.md) | product | linear, dark-mode, saas, inter, monochrome, hairline, density | 2026-10-07 |
 | [Nord Design System](design-systems/nord-design-system.md) | design-system | nord, nordhealth, design-system, web-components, healthcare | 2026-10-07 |
 | [Nothing Technology](design-systems/nothing-technology.md) | product | nothing, ndot, dot-matrix, monochrome, red-accent, transparency, restraint | 2026-09-06 |
