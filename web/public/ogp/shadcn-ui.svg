@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#09090b"/>
+  <g transform="translate(540,180)">
+    <rect x="0" y="0" width="120" height="44" rx="8" fill="none" stroke="#a1a1aa" stroke-width="2"/>
+    <rect x="0" y="56" width="120" height="44" rx="8" fill="#fafafa"/>
+    <rect x="-60" y="112" width="240" height="44" rx="8" fill="none" stroke="#27272a" stroke-width="2" stroke-dasharray="6 4"/>
+  </g>
+  <text x="600" y="430" text-anchor="middle" font-family="'Geist','Inter',system-ui,sans-serif" font-size="48" font-weight="700" fill="#fafafa">shadcn/ui</text>
+  <text x="600" y="480" text-anchor="middle" font-family="'Geist','Inter',system-ui,sans-serif" font-size="24" fill="#71717a">Beautifully designed components</text>
+  <text x="600" y="520" text-anchor="middle" font-family="'Geist','Inter',system-ui,sans-serif" font-size="20" fill="#52525b">Radix UI + Tailwind CSS</text>
+</svg>

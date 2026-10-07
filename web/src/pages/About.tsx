@@ -100,7 +100,7 @@ export function About() {
             </a>
           </li>
           <li>
-            <Link to="/knowledge">ナレッジ</Link>、<Link to="/sources">出典</Link>
+            <Link to="/knowledge">ナレッジ</Link>、<Link to="/sources">ガイドライン・出典</Link>
           </li>
         </ul>
       </Section>

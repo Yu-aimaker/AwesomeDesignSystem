@@ -28,6 +28,7 @@ export const topNav: NavItem[] = [
   { label: "スタック", to: "/stack", hint: "2026 年の技術スタック" },
   { label: "ランキング", to: "/rankings", hint: "人気 OSS" },
   { label: "ナレッジ", to: "/knowledge", hint: "出典付きの知見" },
+  { label: "ガイドライン", to: "/sources", hint: "デザインシステム公式ガイドと出典" },
 ];
 
 /** Mobile sheet and command palette. */
@@ -49,7 +50,7 @@ export const sidebar: NavGroup[] = [
     label: "根拠",
     items: [
       { label: "ナレッジ", to: "/knowledge" },
-      { label: "出典", to: "/sources" },
+      { label: "ガイドライン・出典", to: "/sources" },
     ],
   },
 ];

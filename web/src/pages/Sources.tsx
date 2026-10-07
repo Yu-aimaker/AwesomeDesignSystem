@@ -1,11 +1,90 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink, Globe } from "lucide-react";
 import { PageHeader } from "../layout/Page";
 import { Input } from "../ds/components/Input";
 import { Button } from "../ds/components/Button";
 import { EmptyState } from "../ds/components/EmptyState";
 import { entries, groupSourcesByDomain } from "../lib/knowledge";
+import { flagshipSystems, categoryLabel, type DesignSystemRef } from "../lib/design-systems";
+
+function DesignSystemCard({ system }: { system: DesignSystemRef }) {
+  const [imgError, setImgError] = useState(false);
+  return (
+    <a
+      href={system.url}
+      target="_blank"
+      rel="noreferrer"
+      className="group flex flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2 focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none"
+    >
+      <div className="relative aspect-[1200/630] w-full overflow-hidden bg-canvas-soft">
+        {imgError ? (
+          <div className="flex h-full items-center justify-center" style={{ backgroundColor: system.brandColor }}>
+            <span className="t-h2 text-white opacity-80">{system.nameJa ?? system.name}</span>
+          </div>
+        ) : (
+          <img
+            src={system.image}
+            alt=""
+            loading="lazy"
+            onError={() => setImgError(true)}
+            className="h-full w-full object-cover transition-transform duration-base ease-out-ds group-hover:scale-[1.02]"
+          />
+        )}
+      </div>
+      <div className="flex min-h-0 flex-1 flex-col gap-2 p-4 sm:p-5">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="t-h4 text-ink">{system.nameJa ?? system.name}</h3>
+          <ExternalLink className="mt-0.5 size-4 shrink-0 text-ink-muted transition-colors group-hover:text-ink" strokeWidth={1.75} aria-hidden />
+        </div>
+        <p className="t-body-sm line-clamp-2 text-ink-secondary">{system.descriptionJa}</p>
+        <span className="t-caption mt-auto flex items-center gap-1.5 text-ink-muted">
+          <Globe className="size-3.5" strokeWidth={1.75} aria-hidden />
+          {system.domain}
+        </span>
+      </div>
+    </a>
+  );
+}
+
+function FlagshipGallery() {
+  const grouped = useMemo(() => {
+    const map = new Map<DesignSystemRef["category"], DesignSystemRef[]>();
+    for (const s of flagshipSystems) {
+      const arr = map.get(s.category) ?? [];
+      arr.push(s);
+      map.set(s.category, arr);
+    }
+    return [...map.entries()].map(([cat, items]) => ({
+      category: cat,
+      label: categoryLabel(cat),
+      items,
+    }));
+  }, []);
+
+  return (
+    <section aria-labelledby="flagship" className="mb-16">
+      <div className="mb-6">
+        <h2 id="flagship" className="t-h2 text-ink">
+          注目のデザインシステム
+        </h2>
+        <p className="t-body mt-2 max-w-[65ch] text-ink-secondary">
+          世界をリードするデザインシステムとガイドライン。各カードから公式サイトへ直接アクセスできます。
+        </p>
+      </div>
+      {grouped.map((g) => (
+        <div key={g.category} className="mb-8">
+          <h3 className="t-label mb-4 text-ink-muted">{g.label}</h3>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {g.items.map((s) => (
+              <DesignSystemCard key={s.id} system={s} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
 
 export function Sources() {
   const [q, setQ] = useState("");
@@ -29,65 +108,73 @@ export function Sources() {
   return (
     <div>
       <PageHeader
-        title="出典"
-        lead={`ナレッジと AwesomeDS 解説が参照している外部リンクの一覧です。${total} 件、${all.length} ドメイン。リポジトリの Reference/REFERENCE.md と同じ内容を、ドメインごとにまとめています。`}
+        title="出典・ガイドライン"
+        lead={`デザインシステムの公式ガイドラインと、ナレッジ・AwesomeDS 解説が参照する外部リンクの一覧です。${total} 件、${all.length} ドメイン。`}
       />
 
-      {all.length === 0 ? (
-        <EmptyState title="出典はまだありません" description="frontmatter の sources に URL が書かれると、ここに集計されます。" />
-      ) : (
-        <>
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div className="w-full max-w-md">
-              <Input label="検索" placeholder="ドメイン、タイトル、URL、引用元" value={q} onChange={(e) => setQ(e.target.value)} type="search" />
-            </div>
-            <Button variant="secondary" size="sm" onClick={() => setOpenAll((v) => !v)}>
-              {openAll ? "すべて閉じる" : "すべて開く"}
-            </Button>
-          </div>
+      <FlagshipGallery />
 
-          {groups.length === 0 ? (
-            <EmptyState title="一致する出典がありません" description="別の語で検索してください。" />
-          ) : (
-            <ul className="divide-y divide-hairline border-y border-hairline">
-              {groups.map((g) => (
-                <li key={g.domain}>
-                  <details className="group" open={openAll || searching}>
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-ink hover:bg-canvas-soft sm:-mx-3 sm:rounded-md sm:px-3">
-                      <span className="flex min-w-0 items-baseline gap-3">
-                        <span className="t-body truncate font-medium">{g.domain}</span>
-                        <span className="t-caption tabular text-ink-muted">{g.sources.length}</span>
-                      </span>
-                      <ChevronDown className="size-4 shrink-0 text-ink-muted transition-transform duration-fast ease-out-ds group-open:rotate-180" strokeWidth={1.75} aria-hidden />
-                    </summary>
-                    <ul className="mb-4 flex flex-col gap-4 pl-0 sm:pl-4">
-                      {g.sources.map((s) => (
-                        <li key={s.url} className="flex flex-col gap-1">
-                          <a href={s.url} target="_blank" rel="noreferrer" className="t-body-sm inline-flex items-start gap-1" style={{ overflowWrap: "anywhere" }}>
-                            {s.title}
-                            <ExternalLink className="mt-1 size-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
-                          </a>
-                          <span className="t-caption text-ink-muted" style={{ overflowWrap: "anywhere" }}>
-                            {s.url}
-                          </span>
-                          <span className="t-caption flex flex-wrap gap-x-2 text-ink-secondary">
-                            引用:
-                            {s.citedBy.map((e) => (
-                              <Link key={e.id} to={`/knowledge/${e.category}/${e.slug}`}>
-                                {e.title}
-                              </Link>
-                            ))}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                </li>
-              ))}
-            </ul>
-          )}
-        </>
-      )}
+      <section aria-labelledby="all-sources">
+        <h2 id="all-sources" className="t-h2 mb-6 text-ink">
+          全出典リンク
+        </h2>
+
+        {all.length === 0 ? (
+          <EmptyState title="出典はまだありません" description="frontmatter の sources に URL が書かれると、ここに集計されます。" />
+        ) : (
+          <>
+            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div className="w-full max-w-md">
+                <Input label="検索" placeholder="ドメイン、タイトル、URL、引用元" value={q} onChange={(e) => setQ(e.target.value)} type="search" />
+              </div>
+              <Button variant="secondary" size="sm" onClick={() => setOpenAll((v) => !v)}>
+                {openAll ? "すべて閉じる" : "すべて開く"}
+              </Button>
+            </div>
+
+            {groups.length === 0 ? (
+              <EmptyState title="一致する出典がありません" description="別の語で検索してください。" />
+            ) : (
+              <ul className="divide-y divide-hairline border-y border-hairline">
+                {groups.map((g) => (
+                  <li key={g.domain}>
+                    <details className="group" open={openAll || searching}>
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-ink hover:bg-canvas-soft sm:-mx-3 sm:rounded-md sm:px-3">
+                        <span className="flex min-w-0 items-baseline gap-3">
+                          <span className="t-body truncate font-medium">{g.domain}</span>
+                          <span className="t-caption tabular text-ink-muted">{g.sources.length}</span>
+                        </span>
+                        <ChevronDown className="size-4 shrink-0 text-ink-muted transition-transform duration-fast ease-out-ds group-open:rotate-180" strokeWidth={1.75} aria-hidden />
+                      </summary>
+                      <ul className="mb-4 flex flex-col gap-4 pl-0 sm:pl-4">
+                        {g.sources.map((s) => (
+                          <li key={s.url} className="flex flex-col gap-1">
+                            <a href={s.url} target="_blank" rel="noreferrer" className="t-body-sm inline-flex items-start gap-1" style={{ overflowWrap: "anywhere" }}>
+                              {s.title}
+                              <ExternalLink className="mt-1 size-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
+                            </a>
+                            <span className="t-caption text-ink-muted" style={{ overflowWrap: "anywhere" }}>
+                              {s.url}
+                            </span>
+                            <span className="t-caption flex flex-wrap gap-x-2 text-ink-secondary">
+                              引用:
+                              {s.citedBy.map((e) => (
+                                <Link key={e.id} to={`/knowledge/${e.category}/${e.slug}`}>
+                                  {e.title}
+                                </Link>
+                              ))}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
+        )}
+      </section>
     </div>
   );
 }

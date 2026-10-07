@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { ArrowRight, Bell, Check } from "lucide-react";
+import { ArrowRight, Bell, Check, ExternalLink } from "lucide-react";
 import { Button } from "../ds/components/Button";
 import { Input } from "../ds/components/Input";
 import { Switch } from "../ds/components/Switch";
@@ -12,6 +12,7 @@ import { useKnobs, accents } from "../lib/knobs";
 import { useTheme } from "../lib/theme";
 import { curatedPalettes, fonts, repos, stackLayers, brandCount } from "../lib/data";
 import { cx } from "../ds/cx";
+import { flagshipSystems } from "../lib/design-systems";
 
 function FormSpecimen() {
   const [notify, setNotify] = useState(true);
@@ -307,6 +308,51 @@ export function Home() {
             </Link>
           ))}
         </div>
+      </section>
+
+      <section aria-labelledby="guidelines" className="flex flex-col gap-6">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <h2 id="guidelines" className="t-h2 text-ink">
+              ガイドライン
+            </h2>
+            <p className="t-body mt-2 max-w-[48ch] text-ink-secondary">世界をリードするデザインシステムへの入口。</p>
+          </div>
+          <Link
+            to="/sources"
+            className="t-label hidden shrink-0 items-center gap-1 text-ink-secondary no-underline hover:text-ink sm:inline-flex"
+          >
+            すべて見る
+            <ArrowRight className="size-4" strokeWidth={1.75} aria-hidden />
+          </Link>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {flagshipSystems.slice(0, 4).map((s) => (
+            <a
+              key={s.id}
+              href={s.url}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center gap-3 rounded-lg border border-hairline bg-surface p-3 text-ink no-underline transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2"
+            >
+              <span className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-md" style={{ backgroundColor: s.brandColor }}>
+                <span className="text-sm font-semibold text-white">{(s.nameJa ?? s.name).slice(0, 2)}</span>
+              </span>
+              <span className="min-w-0">
+                <span className="t-label block truncate text-ink">{s.nameJa ?? s.name}</span>
+                <span className="t-caption block truncate text-ink-muted">{s.domain}</span>
+              </span>
+              <ExternalLink className="ml-auto size-4 shrink-0 text-ink-muted transition-colors group-hover:text-ink" strokeWidth={1.75} aria-hidden />
+            </a>
+          ))}
+        </div>
+        <Link
+          to="/sources"
+          className="t-label inline-flex items-center gap-1 text-ink-secondary no-underline hover:text-ink sm:hidden"
+        >
+          すべて見る
+          <ArrowRight className="size-4" strokeWidth={1.75} aria-hidden />
+        </Link>
       </section>
 
       <section aria-labelledby="install" className="grid gap-6 lg:grid-cols-2">

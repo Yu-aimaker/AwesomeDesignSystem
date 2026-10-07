@@ -25,6 +25,7 @@ export function Switch({ label, checked, onChange, disabled, id }: SwitchProps) 
         className={cx(
           "relative h-6 w-10 shrink-0 rounded-full border transition-colors duration-fast ease-out-ds",
           "disabled:cursor-not-allowed disabled:opacity-50",
+          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:outline-none",
           checked ? "border-primary bg-primary" : "border-hairline-strong bg-surface-sunken",
         )}
       >
