@@ -1,4 +1,5 @@
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
+import { Link } from "../i18n/router";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowLeft } from "lucide-react";
@@ -6,8 +7,10 @@ import { SourceList } from "../layout/Page";
 import { Badge } from "../ds/components/Badge";
 import { findEntry } from "../lib/knowledge";
 import { NotFound } from "./NotFound";
+import { useLocale } from "../i18n/context";
 
 export function KnowledgeEntry() {
+  const { locale } = useLocale();
   const { category = "", slug = "" } = useParams();
   const entry = findEntry(category, slug);
   if (!entry) return <NotFound />;
@@ -19,7 +22,7 @@ export function KnowledgeEntry() {
       </Link>
       <header className="mt-6 max-w-[65ch]">
         <p className="t-caption text-ink-muted">
-          {entry.categoryLabel}
+          {entry.categoryLabel[locale]}
           {entry.updated && <> ・ 更新 {entry.updated}</>}
         </p>
         <h1 className="t-h1 mt-2 text-ink">{entry.title}</h1>

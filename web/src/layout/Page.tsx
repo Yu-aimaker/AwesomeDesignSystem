@@ -1,6 +1,8 @@
 import type { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { shellMessages } from "../i18n/messages/shell";
 
 export function PageHeader({ title, lead, children }: { title: string; lead?: ReactNode; children?: ReactNode }) {
   return (
@@ -36,7 +38,9 @@ export interface SourceLink {
   note?: string;
 }
 
-export function SourceList({ sources, title = "出典" }: { sources: SourceLink[]; title?: string }) {
+export function SourceList({ sources, title: titleProp }: { sources: SourceLink[]; title?: string }) {
+  const t = useT(shellMessages);
+  const title = titleProp ?? t.sources;
   return (
     <section aria-label={title} className="mt-8 rounded-lg border border-hairline bg-canvas-soft p-6">
       <h3 className="t-h4 text-ink">{title}</h3>
@@ -57,12 +61,13 @@ export function SourceList({ sources, title = "出典" }: { sources: SourceLink[
 
 /** Rationale folded by default: the page shows the rule, the repository holds the essay. */
 export function Why({ children }: { children: ReactNode }) {
+  const t = useT(shellMessages);
   return (
     <details className="group mt-8 max-w-[65ch] rounded-lg border border-hairline bg-canvas-soft open:bg-surface">
       <summary className="t-label flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-3 text-ink [&::-webkit-details-marker]:hidden">
-        なぜこうするのか
-        <span aria-hidden className="t-caption text-ink-muted group-open:hidden">開く</span>
-        <span aria-hidden className="t-caption hidden text-ink-muted group-open:inline">閉じる</span>
+        {t.why}
+        <span aria-hidden className="t-caption text-ink-muted group-open:hidden">{t.open}</span>
+        <span aria-hidden className="t-caption hidden text-ink-muted group-open:inline">{t.closeDetails}</span>
       </summary>
       <div className="prose border-t border-hairline px-5 py-4 text-ink">{children}</div>
     </details>

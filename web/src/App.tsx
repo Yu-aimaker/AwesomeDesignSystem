@@ -1,5 +1,9 @@
 import { lazy, Suspense, type ComponentType } from "react";
-import { Navigate, Route, Routes } from "react-router";
+import { Route, Routes } from "react-router";
+import { Navigate } from "./i18n/router";
+import { useT } from "./i18n/context";
+import { shellMessages } from "./i18n/messages/shell";
+import { localeMeta, locales } from "./i18n/locales";
 import { Shell } from "./layout/Shell";
 import { ErrorBoundary } from "./layout/ErrorBoundary";
 import { Home } from "./pages/Home";
@@ -19,8 +23,9 @@ function page<T extends Record<string, ComponentType>>(loader: () => Promise<T>,
 }
 
 function RouteFallback() {
+  const t = useT(shellMessages);
   return (
-    <div aria-busy="true" aria-label="読み込み中" className="flex flex-col gap-4">
+    <div aria-busy="true" aria-label={t.loading} className="flex flex-col gap-4">
       <Skeleton className="h-12 w-64 max-w-full" />
       <Skeleton className="h-5 w-full max-w-[48ch]" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -39,31 +44,46 @@ function RouteFallback() {
   );
 }
 
+// One route table, mounted once per locale: `/sources` and `/en/sources`
+// render the same page; the page reads the locale from the URL.
+function pageRoutes() {
+  return (
+    <>
+      <Route index element={<Home />} />
+      <Route path="foundations" element={page(() => import("./pages/FoundationsIndex"), "FoundationsIndex")} />
+      <Route path="foundations/typography" element={page(() => import("./pages/foundations/Typography"), "Typography")} />
+      <Route path="foundations/color" element={page(() => import("./pages/foundations/Color"), "Color")} />
+      <Route path="foundations/spacing" element={page(() => import("./pages/foundations/Spacing"), "Spacing")} />
+      <Route path="foundations/radius" element={page(() => import("./pages/foundations/Radius"), "Radius")} />
+      <Route path="foundations/elevation" element={page(() => import("./pages/foundations/Elevation"), "Elevation")} />
+      <Route path="foundations/motion" element={page(() => import("./pages/foundations/Motion"), "Motion")} />
+      <Route path="fonts" element={page(() => import("./pages/Fonts"), "Fonts")} />
+      <Route path="palettes" element={page(() => import("./pages/Palettes"), "Palettes")} />
+      <Route path="components" element={page(() => import("./pages/Components"), "Components")} />
+      <Route path="motion" element={page(() => import("./pages/Motion"), "MotionGallery")} />
+      <Route path="animation" element={<Navigate to="/motion" replace />} />
+      <Route path="stack" element={page(() => import("./pages/Stack"), "Stack")} />
+      <Route path="rankings" element={page(() => import("./pages/Rankings"), "Rankings")} />
+      <Route path="knowledge" element={page(() => import("./pages/Knowledge"), "Knowledge")} />
+      <Route path="knowledge/:category/:slug" element={page(() => import("./pages/KnowledgeEntry"), "KnowledgeEntry")} />
+      <Route path="sources" element={page(() => import("./pages/Sources"), "Sources")} />
+      <Route path="about" element={page(() => import("./pages/About"), "About")} />
+      <Route path="*" element={page(() => import("./pages/NotFound"), "NotFound")} />
+    </>
+  );
+}
+
 export function App() {
   return (
     <Routes>
-      <Route element={<Shell />}>
-        <Route index element={<Home />} />
-        <Route path="foundations" element={page(() => import("./pages/FoundationsIndex"), "FoundationsIndex")} />
-        <Route path="foundations/typography" element={page(() => import("./pages/foundations/Typography"), "Typography")} />
-        <Route path="foundations/color" element={page(() => import("./pages/foundations/Color"), "Color")} />
-        <Route path="foundations/spacing" element={page(() => import("./pages/foundations/Spacing"), "Spacing")} />
-        <Route path="foundations/radius" element={page(() => import("./pages/foundations/Radius"), "Radius")} />
-        <Route path="foundations/elevation" element={page(() => import("./pages/foundations/Elevation"), "Elevation")} />
-        <Route path="foundations/motion" element={page(() => import("./pages/foundations/Motion"), "Motion")} />
-        <Route path="fonts" element={page(() => import("./pages/Fonts"), "Fonts")} />
-        <Route path="palettes" element={page(() => import("./pages/Palettes"), "Palettes")} />
-        <Route path="components" element={page(() => import("./pages/Components"), "Components")} />
-        <Route path="motion" element={page(() => import("./pages/Motion"), "MotionGallery")} />
-        <Route path="animation" element={<Navigate to="/motion" replace />} />
-        <Route path="stack" element={page(() => import("./pages/Stack"), "Stack")} />
-        <Route path="rankings" element={page(() => import("./pages/Rankings"), "Rankings")} />
-        <Route path="knowledge" element={page(() => import("./pages/Knowledge"), "Knowledge")} />
-        <Route path="knowledge/:category/:slug" element={page(() => import("./pages/KnowledgeEntry"), "KnowledgeEntry")} />
-        <Route path="sources" element={page(() => import("./pages/Sources"), "Sources")} />
-        <Route path="about" element={page(() => import("./pages/About"), "About")} />
-        <Route path="*" element={page(() => import("./pages/NotFound"), "NotFound")} />
-      </Route>
+      <Route element={<Shell />}>{pageRoutes()}</Route>
+      {locales
+        .filter((l) => localeMeta[l].prefix)
+        .map((l) => (
+          <Route key={l} path={localeMeta[l].prefix} element={<Shell />}>
+            {pageRoutes()}
+          </Route>
+        ))}
     </Routes>
   );
 }

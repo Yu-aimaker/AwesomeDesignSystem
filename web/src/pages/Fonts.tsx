@@ -6,6 +6,7 @@ import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle
 import { Badge } from "../ds/components/Badge";
 import { EmptyState } from "../ds/components/EmptyState";
 import { cx } from "../ds/cx";
+import { useLocale } from "../i18n/context";
 
 type Cat = FontCategory | "all";
 type Sort = "usage" | "name";
@@ -40,6 +41,7 @@ const sample = {
 };
 
 export function Fonts() {
+  const { locale } = useLocale();
   const [cat, setCat] = useState<Cat>("all");
   const [sort, setSort] = useState<Sort>("usage");
   const [q, setQ] = useState("");
@@ -138,7 +140,7 @@ export function Fonts() {
           </FilterChip>
           {(Object.keys(fontCategoryLabel) as FontCategory[]).map((c) => (
             <FilterChip key={c} selected={cat === c} onSelect={() => setCat(c)} count={fonts.filter((f) => f.category === c).length}>
-              {fontCategoryLabel[c]}
+              {fontCategoryLabel[c][locale]}
             </FilterChip>
           ))}
           <span aria-hidden className="mx-1 hidden h-5 w-px bg-hairline sm:block" />
@@ -181,7 +183,7 @@ export function Fonts() {
                     <div className="flex h-36 items-end justify-between gap-3 overflow-hidden border-b border-hairline p-5">
                       <Specimen font={f} />
                       <span className="t-caption text-right text-ink-muted">
-                        {fontCategoryLabel[f.category]}
+                        {fontCategoryLabel[f.category][locale]}
                         <br />
                         {f.loaded ? (loaded ? "" : "読み込み中") : f.license === "system" ? "端末の書体" : "代替表示"}
                       </span>

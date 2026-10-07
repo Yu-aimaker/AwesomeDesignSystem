@@ -1,3 +1,4 @@
+import type { Localized } from "../i18n/locales";
 // Typed access to the data sets synced from AwesomeDS/data (see scripts/sync-tokens.mjs).
 import fontsJson from "../ds/data/fonts.json";
 import palettesJson from "../ds/data/palettes.json";
@@ -95,31 +96,31 @@ export const repos = asArray<RepoEntry>(reposJson.repos);
 /** brands.json is 450 kB; the site only needs its size. */
 export const brandCount = (palettesJson.meta as { counts?: { brand?: number } }).counts?.brand ?? brandPalettes.length;
 
-export const repoCategoryLabel: Record<string, string> = {
-  "component-library": "コンポーネント",
-  headless: "ヘッドレス",
-  animation: "アニメーション",
-  "animated-components": "動く部品集",
-  "3d": "3D",
-  icons: "アイコン",
-  dataviz: "データ可視化",
-  styling: "スタイリング",
-  "design-tokens": "デザイントークン",
-  fonts: "フォント",
-  "agent-skills": "エージェント用スキル",
-  "ai-ui": "AI UI",
-  "design-tools": "デザインツール",
-  framework: "フレームワーク",
-  tooling: "ツール",
-  "topic:design-system": "topic:design-system",
+export const repoCategoryLabel: Record<string, Localized<string>> = {
+  "component-library": { ja: "コンポーネント", en: "Components" },
+  headless: { ja: "ヘッドレス", en: "Headless" },
+  animation: { ja: "アニメーション", en: "Animation" },
+  "animated-components": { ja: "動く部品集", en: "Animated components" },
+  "3d": { ja: "3D", en: "3D" },
+  icons: { ja: "アイコン", en: "Icons" },
+  dataviz: { ja: "データ可視化", en: "Data viz" },
+  styling: { ja: "スタイリング", en: "Styling" },
+  "design-tokens": { ja: "デザイントークン", en: "Design tokens" },
+  fonts: { ja: "フォント", en: "Fonts" },
+  "agent-skills": { ja: "エージェント用スキル", en: "Agent skills" },
+  "ai-ui": { ja: "AI UI", en: "AI UI" },
+  "design-tools": { ja: "デザインツール", en: "Design tools" },
+  framework: { ja: "フレームワーク", en: "Frameworks" },
+  tooling: { ja: "ツール", en: "Tooling" },
+  "topic:design-system": { ja: "topic:design-system", en: "topic:design-system" },
 };
 
-export const fontCategoryLabel: Record<FontCategory, string> = {
-  sans: "サンセリフ",
-  serif: "セリフ",
-  mono: "等幅",
-  "jp-sans": "日本語 ゴシック",
-  "jp-serif": "日本語 明朝",
+export const fontCategoryLabel: Record<FontCategory, Localized<string>> = {
+  sans: { ja: "サンセリフ", en: "Sans serif" },
+  serif: { ja: "セリフ", en: "Serif" },
+  mono: { ja: "等幅", en: "Monospace" },
+  "jp-sans": { ja: "日本語 ゴシック", en: "Japanese gothic" },
+  "jp-serif": { ja: "日本語 明朝", en: "Japanese mincho" },
 };
 
 /** Formats 12480 as "12.5k". */

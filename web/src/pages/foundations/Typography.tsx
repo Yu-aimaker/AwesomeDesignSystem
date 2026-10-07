@@ -1,5 +1,6 @@
 import { PageHeader, Section, SourceList, Spec, Why } from "../../layout/Page";
 import { typeRoles, tokens } from "../../lib/tokens";
+import { useLocale } from "../../i18n/context";
 
 const jaSample = "文字の大きさと太さで階層をつくる。色や飾りは後。";
 const enSample = "Hierarchy comes from size and weight, not from color.";
@@ -17,6 +18,7 @@ const sources = [
 ];
 
 export function Typography() {
+  const { locale } = useLocale();
   return (
     <div>
       <PageHeader title="文字" lead="Geist と Noto Sans JP、8 段階のサイズ、3 つの太さ。階層は文字だけで作ります。" />
@@ -35,7 +37,7 @@ export function Typography() {
                     ["tracking", r.tracking],
                   ]}
                 />
-                <p className="t-caption mt-2 text-ink-secondary">{r.use}</p>
+                <p className="t-caption mt-2 text-ink-secondary">{r.use[locale]}</p>
               </div>
               <div className="min-w-0 overflow-hidden">
                 <p

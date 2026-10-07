@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "../i18n/router";
 import { ArrowRight } from "lucide-react";
 import { Wall } from "../layout/Playground";
 import { tokens } from "../lib/tokens";

@@ -1,11 +1,13 @@
 import { useMemo, useState } from "react";
-import { Link, useSearchParams } from "react-router";
+import { useSearchParams } from "react-router";
+import { Link } from "../i18n/router";
 import { PageHeader } from "../layout/Page";
 import { Input } from "../ds/components/Input";
 import { Badge } from "../ds/components/Badge";
 import { EmptyState } from "../ds/components/EmptyState";
 import { AWESOMEDS_CATEGORY, entries, groupByCategory } from "../lib/knowledge";
 import { cx } from "../ds/cx";
+import { useLocale } from "../i18n/context";
 
 const typeLabel: Record<string, string> = {
   repo: "リポジトリ",
@@ -19,6 +21,7 @@ const typeLabel: Record<string, string> = {
 };
 
 export function Knowledge() {
+  const { locale } = useLocale();
   const [q, setQ] = useState("");
   const categories = useMemo(() => groupByCategory(entries), []);
   // `?category=awesomeds` preselects a filter (linked from /foundations).
@@ -31,7 +34,7 @@ export function Knowledge() {
     return entries.filter((e) => {
       if (category && e.category !== category) return false;
       if (!needle) return true;
-      return [e.title, e.body, e.tags.join(" "), e.categoryLabel].some((s) => s.toLowerCase().includes(needle));
+      return [e.title, e.body, e.tags.join(" "), e.categoryLabel[locale]].some((s) => s.toLowerCase().includes(needle));
     });
   }, [q, category]);
 
@@ -72,7 +75,7 @@ export function Knowledge() {
                 category === c.category ? "border-ink bg-primary text-on-primary" : "border-hairline-strong text-ink-secondary hover:text-ink",
               )}
             >
-              {c.label} <span className="tabular opacity-70">{c.entries.length}</span>
+              {c.label[locale]} <span className="tabular opacity-70">{c.entries.length}</span>
             </button>
           ))}
         </div>
@@ -87,7 +90,7 @@ export function Knowledge() {
           {groups.map((g) => (
             <section key={g.category} aria-labelledby={`cat-${g.category}`}>
               <h2 id={`cat-${g.category}`} className="t-h3 flex items-baseline gap-2 text-ink">
-                {g.label}
+                {g.label[locale]}
                 <span className="t-caption tabular text-ink-muted">{g.entries.length}</span>
               </h2>
               {g.category === AWESOMEDS_CATEGORY && (

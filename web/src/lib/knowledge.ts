@@ -1,3 +1,4 @@
+import type { Localized } from "../i18n/locales";
 import { parseFrontmatter, type Frontmatter } from "./frontmatter";
 
 export interface Source {
@@ -9,7 +10,7 @@ export interface Entry {
   /** Stable id: `${category}/${slug}` */
   id: string;
   category: string;
-  categoryLabel: string;
+  categoryLabel: Localized<string>;
   slug: string;
   title: string;
   type: string;
@@ -37,30 +38,30 @@ const foundationFiles = import.meta.glob("../../../AwesomeDS/foundations/*.md", 
 }) as Record<string, string>;
 
 export const AWESOMEDS_CATEGORY = "awesomeds";
-export const AWESOMEDS_LABEL = "AwesomeDS 解説";
+export const AWESOMEDS_LABEL: Localized<string> = { ja: "AwesomeDS 解説", en: "AwesomeDS notes" };
 
-const categoryLabels: Record<string, string> = {
+const categoryLabels: Record<string, Localized<string>> = {
   [AWESOMEDS_CATEGORY]: AWESOMEDS_LABEL,
-  typography: "タイポグラフィ",
-  color: "カラー",
-  spacing: "スペーシング",
-  layout: "レイアウト",
-  radius: "角丸",
-  elevation: "エレベーション",
-  motion: "モーション",
-  animation: "アニメーション",
-  components: "コンポーネント",
-  accessibility: "アクセシビリティ",
-  "design-systems": "デザインシステム",
-  "component-libraries": "コンポーネントライブラリ",
-  "design-md-collections": "DESIGN.md コレクション",
-  "platform-guidelines": "プラットフォームガイドライン",
-  skills: "スキル",
-  tools: "ツール",
-  research: "リサーチ",
-  japanese: "日本語組版",
-  ux: "UX",
-  brand: "ブランド",
+  typography: { ja: "タイポグラフィ", en: "Typography" },
+  color: { ja: "カラー", en: "Color" },
+  spacing: { ja: "スペーシング", en: "Spacing" },
+  layout: { ja: "レイアウト", en: "Layout" },
+  radius: { ja: "角丸", en: "Radius" },
+  elevation: { ja: "エレベーション", en: "Elevation" },
+  motion: { ja: "モーション", en: "Motion" },
+  animation: { ja: "アニメーション", en: "Animation" },
+  components: { ja: "コンポーネント", en: "Components" },
+  accessibility: { ja: "アクセシビリティ", en: "Accessibility" },
+  "design-systems": { ja: "デザインシステム", en: "Design systems" },
+  "component-libraries": { ja: "コンポーネントライブラリ", en: "Component libraries" },
+  "design-md-collections": { ja: "DESIGN.md コレクション", en: "DESIGN.md collections" },
+  "platform-guidelines": { ja: "プラットフォームガイドライン", en: "Platform guidelines" },
+  skills: { ja: "スキル", en: "Skills" },
+  tools: { ja: "ツール", en: "Tools" },
+  research: { ja: "リサーチ", en: "Research" },
+  japanese: { ja: "日本語組版", en: "Japanese typesetting" },
+  ux: { ja: "UX", en: "UX" },
+  brand: { ja: "ブランド", en: "Brand" },
 };
 
 export function slugify(input: string): string {
@@ -71,8 +72,8 @@ export function slugify(input: string): string {
     .replace(/^-+|-+$/g, "") || "entry";
 }
 
-export function labelFor(category: string): string {
-  return categoryLabels[category] ?? category;
+export function labelFor(category: string): Localized<string> {
+  return categoryLabels[category] ?? { ja: category, en: category };
 }
 
 function asString(v: unknown, fallback = ""): string {
@@ -171,7 +172,7 @@ export const entries: Entry[] = collect();
 
 export interface CategoryGroup {
   category: string;
-  label: string;
+  label: Localized<string>;
   entries: Entry[];
 }
 
@@ -191,7 +192,7 @@ export function groupByCategory(list: Entry[]): CategoryGroup[] {
   return groups.sort((a, b) => {
     if (a.category === AWESOMEDS_CATEGORY) return -1;
     if (b.category === AWESOMEDS_CATEGORY) return 1;
-    return a.label.localeCompare(b.label, "ja");
+    return a.label.ja.localeCompare(b.label.ja, "ja");
   });
 }
 

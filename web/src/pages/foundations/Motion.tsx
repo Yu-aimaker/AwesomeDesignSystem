@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "../../i18n/router";
 import { MotionConfig } from "motion/react";
 import { PageHeader, Section, SourceList, Why } from "../../layout/Page";
 import { CodeBlock } from "../../layout/Preview";

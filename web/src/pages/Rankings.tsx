@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "../i18n/router";
 import { Star } from "lucide-react";
 import { repos, reposMeta, repoCategoryLabel, compact, daysSince, type RepoEntry } from "../lib/data";
 import { entries } from "../lib/knowledge";
@@ -8,6 +8,7 @@ import { Alert } from "../ds/components/Alert";
 import { EmptyState } from "../ds/components/EmptyState";
 import { repoUrl } from "../lib/nav";
 import { cx } from "../ds/cx";
+import { useLocale } from "../i18n/context";
 
 /** Knowledge entries that cite a repository, by lower-cased github url. */
 const knowledgeByRepo = (() => {
@@ -24,6 +25,7 @@ const knowledgeByRepo = (() => {
 const withStars = (r: RepoEntry) => r.stars !== null;
 
 export function Rankings() {
+  const { locale } = useLocale();
   const [cat, setCat] = useState<string>("all");
   const [q, setQ] = useState("");
 
@@ -60,7 +62,7 @@ export function Rankings() {
         </FilterChip>
         {categories.map(([id, n]) => (
           <FilterChip key={id} selected={cat === id} onSelect={() => setCat(id)} count={n}>
-            {repoCategoryLabel[id] ?? id}
+            {repoCategoryLabel[id]?.[locale] ?? id}
           </FilterChip>
         ))}
         <SearchBox value={q} onChange={setQ} placeholder="リポジトリ、topic" />
@@ -86,7 +88,7 @@ export function Rankings() {
                       <span className="text-ink-muted">{r.owner}/</span>
                       {r.name}
                     </a>
-                    <Tag>{repoCategoryLabel[r.category] ?? r.category}</Tag>
+                    <Tag>{repoCategoryLabel[r.category]?.[locale] ?? r.category}</Tag>
                     {r.inTopicTop && <Tag>topic 上位 20</Tag>}
                     {r.archived && <Tag className="text-warning">アーカイブ</Tag>}
                     {k && (

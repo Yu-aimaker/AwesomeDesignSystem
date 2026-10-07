@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link } from "../i18n/router";
 import { ArrowRight, Bell, Check, ExternalLink } from "lucide-react";
 import { Button } from "../ds/components/Button";
 import { Input } from "../ds/components/Input";

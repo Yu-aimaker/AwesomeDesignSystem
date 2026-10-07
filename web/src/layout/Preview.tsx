@@ -1,6 +1,8 @@
 import { useId, useState, type ReactNode } from "react";
 import { Check, Copy } from "lucide-react";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { shellMessages } from "../i18n/messages/shell";
 
 export interface PreviewProps {
   id?: string;
@@ -17,6 +19,7 @@ export interface PreviewProps {
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
+  const t = useT(shellMessages);
   return (
     <button
       type="button"
@@ -32,19 +35,20 @@ function CopyButton({ text }: { text: string }) {
       className="t-caption inline-flex h-7 items-center gap-1 rounded-sm px-2 text-ink-secondary transition-colors duration-instant hover:bg-surface-sunken hover:text-ink"
     >
       {copied ? <Check className="size-3.5" strokeWidth={1.75} aria-hidden /> : <Copy className="size-3.5" strokeWidth={1.75} aria-hidden />}
-      {copied ? "コピーしました" : "コピー"}
+      {copied ? t.copied : t.copy}
     </button>
   );
 }
 
-// Preview pane with a "プレビュー / コード" tab. The code tab shows the real
+// Preview pane with a "Preview / Code" tab. The code tab shows the real
 // component source, imported with Vite's ?raw so it can never drift.
-export function Preview({ id, title, rule, code, codeLabel = "コード", children, className, notes }: PreviewProps) {
+export function Preview({ id, title, rule, code, codeLabel, children, className, notes }: PreviewProps) {
   const [tab, setTab] = useState<"preview" | "code" | "notes">("preview");
+  const m = useT(shellMessages);
   const base = useId();
-  const tabs: Array<{ key: "preview" | "code" | "notes"; label: string }> = [{ key: "preview", label: "プレビュー" }];
-  if (code) tabs.push({ key: "code", label: codeLabel });
-  if (notes) tabs.push({ key: "notes", label: "メモ" });
+  const tabs: Array<{ key: "preview" | "code" | "notes"; label: string }> = [{ key: "preview", label: m.preview }];
+  if (code) tabs.push({ key: "code", label: codeLabel ?? m.code });
+  if (notes) tabs.push({ key: "notes", label: m.notes });
 
   return (
     <article id={id} className="scroll-mt-20 rounded-lg border border-hairline bg-surface">
@@ -54,7 +58,7 @@ export function Preview({ id, title, rule, code, codeLabel = "コード", childr
           {rule && <p className="t-body-sm mt-1 text-ink-secondary">{rule}</p>}
         </div>
         {tabs.length > 1 && (
-          <div role="tablist" aria-label={`${title} の表示`} className="flex shrink-0 gap-1 rounded-md bg-surface-sunken p-0.5">
+          <div role="tablist" aria-label={m.viewOf(title)} className="flex shrink-0 gap-1 rounded-md bg-surface-sunken p-0.5">
             {tabs.map((t) => (
               <button
                 key={t.key}

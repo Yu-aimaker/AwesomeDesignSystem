@@ -6,31 +6,31 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
  * index.html applies the saved values before first paint.
  */
 export const accents = [
-  { id: "blue", label: "ブルー" },
-  { id: "violet", label: "バイオレット" },
-  { id: "emerald", label: "エメラルド" },
-  { id: "rose", label: "ローズ" },
-  { id: "amber", label: "アンバー" },
-  { id: "cyan", label: "シアン" },
-  { id: "orange", label: "オレンジ" },
-  { id: "ink", label: "インク" },
+  { id: "blue", label: { ja: "ブルー", en: "Blue" } },
+  { id: "violet", label: { ja: "バイオレット", en: "Violet" } },
+  { id: "emerald", label: { ja: "エメラルド", en: "Emerald" } },
+  { id: "rose", label: { ja: "ローズ", en: "Rose" } },
+  { id: "amber", label: { ja: "アンバー", en: "Amber" } },
+  { id: "cyan", label: { ja: "シアン", en: "Cyan" } },
+  { id: "orange", label: { ja: "オレンジ", en: "Orange" } },
+  { id: "ink", label: { ja: "インク", en: "Ink" } },
 ] as const;
 export const radii = [
-  { id: "sharp", label: "シャープ", px: "0 / 2 / 4" },
-  { id: "soft", label: "ソフト", px: "8 / 12 / 16" },
-  { id: "round", label: "ラウンド", px: "12 / 16 / 20" },
-  { id: "pill", label: "ピル", px: "9999 / 16 / 20" },
+  { id: "sharp", label: { ja: "シャープ", en: "Sharp" }, px: "0 / 2 / 4" },
+  { id: "soft", label: { ja: "ソフト", en: "Soft" }, px: "8 / 12 / 16" },
+  { id: "round", label: { ja: "ラウンド", en: "Round" }, px: "12 / 16 / 20" },
+  { id: "pill", label: { ja: "ピル", en: "Pill" }, px: "9999 / 16 / 20" },
 ] as const;
 export const fonts = [
-  { id: "geist", label: "Geist", sample: "Geist + Noto Sans JP" },
-  { id: "inter", label: "Inter", sample: "Inter + Noto Sans JP" },
-  { id: "plex", label: "IBM Plex", sample: "IBM Plex Sans + Noto Sans JP" },
-  { id: "manrope", label: "Manrope", sample: "Manrope + Noto Sans JP" },
-  { id: "source-serif", label: "Serif 見出し", sample: "Source Serif 4 の見出し" },
+  { id: "geist", label: { ja: "Geist", en: "Geist" }, sample: { ja: "Geist + Noto Sans JP", en: "Geist + Noto Sans JP" } },
+  { id: "inter", label: { ja: "Inter", en: "Inter" }, sample: { ja: "Inter + Noto Sans JP", en: "Inter + Noto Sans JP" } },
+  { id: "plex", label: { ja: "IBM Plex", en: "IBM Plex" }, sample: { ja: "IBM Plex Sans + Noto Sans JP", en: "IBM Plex Sans + Noto Sans JP" } },
+  { id: "manrope", label: { ja: "Manrope", en: "Manrope" }, sample: { ja: "Manrope + Noto Sans JP", en: "Manrope + Noto Sans JP" } },
+  { id: "source-serif", label: { ja: "Serif 見出し", en: "Serif headings" }, sample: { ja: "Source Serif 4 の見出し", en: "Source Serif 4 headings" } },
 ] as const;
 export const densities = [
-  { id: "comfortable", label: "標準", note: "40px の操作部品" },
-  { id: "compact", label: "コンパクト", note: "32px の操作部品" },
+  { id: "comfortable", label: { ja: "標準", en: "Comfortable" }, note: { ja: "40px の操作部品", en: "40px controls" } },
+  { id: "compact", label: { ja: "コンパクト", en: "Compact" }, note: { ja: "32px の操作部品", en: "32px controls" } },
 ] as const;
 
 export type AccentId = (typeof accents)[number]["id"] | "custom";

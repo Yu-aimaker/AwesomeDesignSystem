@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router";
+import { Link } from "../i18n/router";
+import { useLocale } from "../i18n/context";
 import { ArrowRight, ChevronDown, ExternalLink, Globe } from "lucide-react";
 import { PageHeader } from "../layout/Page";
 import { FlagshipArt } from "../layout/FlagshipPoster";
@@ -18,6 +19,7 @@ const levelTone: Record<AbsorptionLevel, BadgeTone> = {
 
 function DesignSystemCard({ system }: { system: DesignSystemRef }) {
   const { level, knowledge, takeaway } = system.absorption;
+  const { locale } = useLocale();
   return (
     <article className="group relative flex min-w-0 max-w-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink transition-[transform,box-shadow] duration-fast ease-out-ds hover:-translate-y-0.5 hover:shadow-2 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent">
       <div className="relative aspect-[1200/630] w-full max-w-full overflow-hidden bg-canvas-soft">
@@ -40,11 +42,11 @@ function DesignSystemCard({ system }: { system: DesignSystemRef }) {
         </p>
         <div className="mt-1 flex min-w-0 flex-col gap-1.5 border-t border-hairline pt-3">
           <span className="flex items-center gap-2">
-            <Badge tone={levelTone[level]}>{absorptionLabel(level)}</Badge>
+            <Badge tone={levelTone[level]}>{absorptionLabel(level, locale)}</Badge>
             <span className="t-caption text-ink-muted">AwesomeDS での扱い</span>
           </span>
           <p className="t-body-sm min-w-0 text-ink" style={{ overflowWrap: "anywhere" }}>
-            {takeaway}
+            {takeaway[locale]}
           </p>
         </div>
         <div className="mt-auto flex min-w-0 items-center justify-between gap-3 pt-1">
@@ -80,6 +82,7 @@ function OgpNote() {
 }
 
 function FlagshipGallery() {
+  const { locale } = useLocale();
   const grouped = useMemo(() => {
     const map = new Map<DesignSystemRef["category"], DesignSystemRef[]>();
     for (const s of flagshipSystems) {
@@ -89,10 +92,10 @@ function FlagshipGallery() {
     }
     return [...map.entries()].map(([cat, items]) => ({
       category: cat,
-      label: categoryLabel(cat),
+      label: categoryLabel(cat, locale),
       items,
     }));
-  }, []);
+  }, [locale]);
 
   return (
     <section aria-labelledby="flagship" className="mb-16">

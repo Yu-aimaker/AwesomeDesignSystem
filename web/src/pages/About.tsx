@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link } from "../i18n/router";
 import { PageHeader, Section } from "../layout/Page";
 import { CodeBlock } from "../layout/Preview";
 import { Table } from "../ds/components/Table";

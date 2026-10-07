@@ -1,56 +1,64 @@
+import type { Localized } from "../i18n/locales";
+
 export interface NavItem {
-  label: string;
+  label: Localized<string>;
   to: string;
   /** One line shown in the command palette. */
-  hint?: string;
+  hint?: Localized<string>;
 }
 export interface NavGroup {
-  label: string;
+  label: Localized<string>;
   items: NavItem[];
 }
 
 export const foundations: NavItem[] = [
-  { label: "文字", to: "/foundations/typography", hint: "Geist + Noto Sans JP、8 段階" },
-  { label: "色", to: "/foundations/color", hint: "白地、黒文字、アクセント 1 色" },
-  { label: "余白とレイアウト", to: "/foundations/spacing", hint: "4px 単位、4 つの距離" },
-  { label: "角丸", to: "/foundations/radius", hint: "8 / 12 / 16 / ピル" },
-  { label: "奥行き", to: "/foundations/elevation", hint: "線が先、影は浮くものだけ" },
-  { label: "モーション", to: "/foundations/motion", hint: "200ms、ease-out、4〜8px" },
+  { label: { ja: "文字", en: "Typography" }, to: "/foundations/typography", hint: { ja: "Geist + Noto Sans JP、8 段階", en: "Geist + Noto Sans JP, 8 steps" } },
+  { label: { ja: "色", en: "Color" }, to: "/foundations/color", hint: { ja: "白地、黒文字、アクセント 1 色", en: "White canvas, black ink, one accent" } },
+  { label: { ja: "余白とレイアウト", en: "Spacing and layout" }, to: "/foundations/spacing", hint: { ja: "4px 単位、4 つの距離", en: "4px unit, four distances" } },
+  { label: { ja: "角丸", en: "Radius" }, to: "/foundations/radius", hint: { ja: "8 / 12 / 16 / ピル", en: "8 / 12 / 16 / pill" } },
+  { label: { ja: "奥行き", en: "Elevation" }, to: "/foundations/elevation", hint: { ja: "線が先、影は浮くものだけ", en: "Borders first, shadows only for floating layers" } },
+  { label: { ja: "モーション", en: "Motion" }, to: "/foundations/motion", hint: { ja: "200ms、ease-out、4〜8px", en: "200ms, ease-out, 4 to 8px" } },
 ];
 
 /** Top bar. Short nouns only. */
 export const topNav: NavItem[] = [
-  { label: "基盤", to: "/foundations", hint: "デザインシステムの観点一覧" },
-  { label: "フォント", to: "/fonts", hint: "一流企業のフォント見本" },
-  { label: "パレット", to: "/palettes", hint: "配色パターン" },
-  { label: "コンポーネント", to: "/components", hint: "触れる部品" },
-  { label: "モーション", to: "/motion", hint: "アニメーションのギャラリー" },
-  { label: "スタック", to: "/stack", hint: "2026 年の技術スタック" },
-  { label: "ランキング", to: "/rankings", hint: "人気 OSS" },
-  { label: "ナレッジ", to: "/knowledge", hint: "出典付きの知見" },
-  { label: "ガイドライン", to: "/sources", hint: "デザインシステム公式ガイドと出典" },
+  { label: { ja: "基盤", en: "Foundations" }, to: "/foundations", hint: { ja: "デザインシステムの観点一覧", en: "Every perspective of the system" } },
+  { label: { ja: "フォント", en: "Fonts" }, to: "/fonts", hint: { ja: "一流企業のフォント見本", en: "Typefaces used by leading products" } },
+  { label: { ja: "パレット", en: "Palettes" }, to: "/palettes", hint: { ja: "配色パターン", en: "Color patterns" } },
+  { label: { ja: "コンポーネント", en: "Components" }, to: "/components", hint: { ja: "触れる部品", en: "Live, interactive parts" } },
+  { label: { ja: "モーション", en: "Motion" }, to: "/motion", hint: { ja: "アニメーションのギャラリー", en: "Animation gallery" } },
+  { label: { ja: "スタック", en: "Stack" }, to: "/stack", hint: { ja: "2026 年の技術スタック", en: "The 2026 tech stack" } },
+  { label: { ja: "ランキング", en: "Rankings" }, to: "/rankings", hint: { ja: "人気 OSS", en: "Popular open source" } },
+  { label: { ja: "ナレッジ", en: "Knowledge" }, to: "/knowledge", hint: { ja: "出典付きの知見", en: "Notes with sources" } },
+  { label: { ja: "ガイドライン", en: "Guidelines" }, to: "/sources", hint: { ja: "デザインシステム公式ガイドと出典", en: "Official design system guides and sources" } },
 ];
 
 /** Mobile sheet and command palette. */
 export const sidebar: NavGroup[] = [
-  { label: "はじめに", items: [{ label: "ホーム", to: "/" }, { label: "このサイトについて", to: "/about" }] },
-  { label: "基盤", items: [{ label: "一覧", to: "/foundations" }, ...foundations] },
   {
-    label: "ギャラリー",
+    label: { ja: "はじめに", en: "Start" },
     items: [
-      { label: "フォント", to: "/fonts" },
-      { label: "パレット", to: "/palettes" },
-      { label: "コンポーネント", to: "/components" },
-      { label: "モーション", to: "/motion" },
-      { label: "スタック", to: "/stack" },
-      { label: "ランキング", to: "/rankings" },
+      { label: { ja: "ホーム", en: "Home" }, to: "/" },
+      { label: { ja: "このサイトについて", en: "About this site" }, to: "/about" },
+    ],
+  },
+  { label: { ja: "基盤", en: "Foundations" }, items: [{ label: { ja: "一覧", en: "Overview" }, to: "/foundations" }, ...foundations] },
+  {
+    label: { ja: "ギャラリー", en: "Gallery" },
+    items: [
+      { label: { ja: "フォント", en: "Fonts" }, to: "/fonts" },
+      { label: { ja: "パレット", en: "Palettes" }, to: "/palettes" },
+      { label: { ja: "コンポーネント", en: "Components" }, to: "/components" },
+      { label: { ja: "モーション", en: "Motion" }, to: "/motion" },
+      { label: { ja: "スタック", en: "Stack" }, to: "/stack" },
+      { label: { ja: "ランキング", en: "Rankings" }, to: "/rankings" },
     ],
   },
   {
-    label: "根拠",
+    label: { ja: "根拠", en: "Evidence" },
     items: [
-      { label: "ナレッジ", to: "/knowledge" },
-      { label: "ガイドライン・出典", to: "/sources" },
+      { label: { ja: "ナレッジ", en: "Knowledge" }, to: "/knowledge" },
+      { label: { ja: "ガイドライン・出典", en: "Guidelines and sources" }, to: "/sources" },
     ],
   },
 ];
