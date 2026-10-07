@@ -63,6 +63,7 @@ the icon and the border.
 | Banner | `role="region"` and `aria-labelledby` pointing at its heading |
 | Banner after a redirect that confirms success | Heading "完了しました", removed on the next page |
 | Toast | Inside one `aria-live="polite"` region (`role="status"`); `role="alert"` only for a blocking error |
+| Toast while a native modal `<dialog>` is open | Render it inside the dialog. The dialog sits in the top layer, so a toast in `<body>` is hidden and inert whatever its z-index (layers.md) |
 | Toast with an action | Reachable by keyboard without moving focus to it on arrival; Escape closes |
 | Dialog | Focus trap, Escape closes, focus returns to the trigger (accessibility.md) |
 
