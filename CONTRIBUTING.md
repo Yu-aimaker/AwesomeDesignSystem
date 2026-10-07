@@ -43,17 +43,38 @@ node scripts/build-reference.mjs
 
 ## web
 
+Node 22 と pnpm 10 を使います。コマンドは必ず `web/` で実行します。
+
 ```
 cd web
 pnpm install
 pnpm dev
+pnpm typecheck
 pnpm build
-node scripts/screenshot.mjs   # 全ルートを 390 / 1280 幅、ライト / ダークで撮影
+pnpm screenshot   # 全ルートを 390 / 1280 幅、ライト / ダークで撮影
 ```
 
-サイト内の色、余白、角丸、フォント、時間はすべて `AwesomeDS/tokens` から来ている必要があります。生の hex を書かないでください。
+CI と同じ確認だけをしたいときは `node scripts/screenshot.mjs --check` を使います（PNG を書かず、コンソールエラーか横はみ出しがあれば exit 1）。
+
+サイト内の色、余白、角丸、フォント、時間はすべて `AwesomeDS/tokens` から来ている必要があります。生の hex を書かないでください。ノブ（アクセント / 角丸 / 書体）は `accents.css`、`radius-families.css`、`font-pairings.css` を読みます。
+
+## 検証コマンド（リポジトリ直下）
+
+```
+node scripts/build-reference.mjs          # Knowledge/README.md と Reference/REFERENCE.md を再生成
+node scripts/validate-knowledge.mjs       # Knowledge の frontmatter と見出し
+node scripts/validate-data.mjs            # AwesomeDS/data/*.json
+bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピーが AwesomeDS と一致するか
+```
+
+- リンク確認: `node scripts/check-links.mjs` で `*.md` の相対リンク切れを探せます（CI には未導入）。
 
 ## PR
 
 - 1 PR 1 テーマ。
-- CI（`.github/workflows/check.yml`）が Reference の再生成、プラグインの同期、web のビルドを確認します。
+- CI（`.github/workflows/check.yml`）が次を確認します。
+  - Reference と Knowledge 索引が最新か（`build-reference.mjs` 後に差分なし）
+  - `validate-knowledge.mjs`
+  - プラグインの同期（`check-sync.sh`）
+  - `validate-data.mjs`
+  - web の typecheck、build、`screenshot.mjs --check`

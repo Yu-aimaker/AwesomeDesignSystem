@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // Builds are previewed with `vite preview`, then every route is captured at
 // 390 and 1280 px wide, in light and dark. PNGs land in web/.screenshots/.
 // Browsers come from /opt/pw-browsers (set PLAYWRIGHT_BROWSERS_PATH); do not
@@ -38,7 +39,7 @@ const routes = [
   "/about",
   "/missing-page",
 ];
-const only = process.argv.slice(2);
+const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
 const targets = only.length ? routes.filter((r) => only.includes(r)) : routes;
 
 const widths = [390, 1280];
@@ -106,5 +107,5 @@ if (problems.length) {
   for (const p of problems) console.log(" -", p);
   process.exitCode = 1;
 } else {
-  console.log("\nNo overflow or console errors.");
+  console.log(`\nNo overflow or console errors. (${targets.length} routes × ${widths.length} widths × ${themes.length} themes)`);
 }

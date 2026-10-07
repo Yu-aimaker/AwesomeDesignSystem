@@ -6,14 +6,14 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
  * index.html applies the saved values before first paint.
  */
 export const accents = [
-  { id: "blue", label: "ブルー", hex: "#2f5bea" },
-  { id: "violet", label: "バイオレット", hex: "#855dd7" },
-  { id: "emerald", label: "エメラルド", hex: "#008738" },
-  { id: "rose", label: "ローズ", hex: "#cd406d" },
-  { id: "amber", label: "アンバー", hex: "#ac6200" },
-  { id: "cyan", label: "シアン", hex: "#007ea8" },
-  { id: "orange", label: "オレンジ", hex: "#be551c" },
-  { id: "ink", label: "インク", hex: "#0a0a0a" },
+  { id: "blue", label: "ブルー" },
+  { id: "violet", label: "バイオレット" },
+  { id: "emerald", label: "エメラルド" },
+  { id: "rose", label: "ローズ" },
+  { id: "amber", label: "アンバー" },
+  { id: "cyan", label: "シアン" },
+  { id: "orange", label: "オレンジ" },
+  { id: "ink", label: "インク" },
 ] as const;
 export const radii = [
   { id: "sharp", label: "シャープ", px: "0 / 2 / 4" },

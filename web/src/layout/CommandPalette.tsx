@@ -78,9 +78,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
 
   const go = (item: Item) => {
     onClose();
-    const [path, hash] = item.to.split("#");
-    navigate(path);
-    if (hash) requestAnimationFrame(() => document.getElementById(hash)?.scrollIntoView({ block: "start" }));
+    navigate(item.to);
   };
 
   return (

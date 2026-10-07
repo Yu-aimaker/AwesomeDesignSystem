@@ -33,7 +33,7 @@ export function KnowledgeEntry() {
           </ul>
         )}
       </header>
-      {entry.sources.length > 0 && <SourceList sources={entry.sources} title="この記事のソース" />}
+      {entry.sources.length > 0 && <SourceList sources={entry.sources} title="この記事の出典" />}
       <div className="prose t-body mt-12 text-ink">
         <Markdown remarkPlugins={[remarkGfm]} components={{ a: ({ href, children }) => <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{children}</a> }}>
           {entry.body}

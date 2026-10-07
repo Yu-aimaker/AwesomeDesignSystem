@@ -26,11 +26,11 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
                 aria-label={a.label}
                 title={a.label}
                 onClick={() => set("accent", a.id)}
+                data-accent-chip={a.id}
                 className={cx(
                   "flex size-8 items-center justify-center rounded-full border transition-transform duration-fast ease-out-ds hover:scale-105 active:scale-95",
                   on ? "border-ink" : "border-hairline",
                 )}
-                style={{ background: a.id === "ink" ? "var(--ds-ink)" : a.hex }}
               >
                 {on && <Check className="size-4" strokeWidth={2.5} aria-hidden style={{ color: "var(--ds-canvas)" }} />}
               </button>

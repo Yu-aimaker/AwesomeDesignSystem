@@ -1,71 +1,60 @@
 /* Site knobs: live overrides of AwesomeDS tokens through data attributes on <html>.
-   The attribute contract is documented in web/SITE-DESIGN.md. Every accent value
-   below was computed in OKLCH and checked to reach at least 4.5:1 as text on the
-   canvas of its mode (see scripts in AwesomeDS/tokens once 0.2.0 lands). */
+   Accents, radius families and font pairings come from AwesomeDS/tokens (imported
+   in styles.css). This file only covers site-specific wiring: custom accents from
+   /palettes, Fontsource variable family names, density, and knob swatches. */
 
-/* ---------- Accent ---------- */
-[data-accent="violet"] { --ds-accent: #855dd7; --ds-accent-hover: #734ac3; --ds-accent-soft: #efebff; --ds-focus-ring: #855dd7; --ds-selection: #e6ddff; }
-[data-accent="emerald"] { --ds-accent: #008738; --ds-accent-hover: #007526; --ds-accent-soft: #e0f5e6; --ds-focus-ring: #008738; --ds-selection: #d3f0dc; }
-[data-accent="rose"] { --ds-accent: #cd406d; --ds-accent-hover: #b82a5c; --ds-accent-soft: #ffe7ec; --ds-focus-ring: #cd406d; --ds-selection: #ffd9e2; }
-[data-accent="amber"] { --ds-accent: #ac6200; --ds-accent-hover: #995000; --ds-accent-soft: #fcecd9; --ds-focus-ring: #ac6200; --ds-selection: #f9e2c4; }
-[data-accent="cyan"] { --ds-accent: #007ea8; --ds-accent-hover: #006b95; --ds-accent-soft: #d9f4fb; --ds-focus-ring: #007ea8; --ds-selection: #c6ecf7; }
-[data-accent="orange"] { --ds-accent: #be551c; --ds-accent-hover: #aa4300; --ds-accent-soft: #ffe9de; --ds-focus-ring: #be551c; --ds-selection: #ffdccb; }
-[data-accent="ink"] { --ds-accent: var(--ds-ink); --ds-accent-hover: var(--ds-ink-secondary); --ds-accent-soft: var(--ds-surface-sunken); --ds-focus-ring: var(--ds-ink); --ds-selection: var(--ds-hairline); }
+@import "./ds/tokens/accent-chips.css";
 
-[data-accent="violet"][data-theme="dark"] { --ds-accent: #a48ee0; --ds-accent-hover: #b6a3ea; --ds-accent-soft: #231c37; --ds-focus-ring: #a48ee0; --ds-selection: #2f2650; }
-[data-accent="emerald"][data-theme="dark"] { --ds-accent: #4fb87a; --ds-accent-hover: #63c78b; --ds-accent-soft: #092917; --ds-focus-ring: #4fb87a; --ds-selection: #103a21; }
-[data-accent="rose"][data-theme="dark"] { --ds-accent: #e07d97; --ds-accent-hover: #ea92a8; --ds-accent-soft: #35161e; --ds-focus-ring: #e07d97; --ds-selection: #4a1f2a; }
-[data-accent="amber"][data-theme="dark"] { --ds-accent: #d3923a; --ds-accent-hover: #e0a24d; --ds-accent-soft: #311d03; --ds-focus-ring: #d3923a; --ds-selection: #452905; }
-[data-accent="cyan"][data-theme="dark"] { --ds-accent: #2fb3d1; --ds-accent-hover: #4cc2dd; --ds-accent-soft: #002730; --ds-focus-ring: #2fb3d1; --ds-selection: #073845; }
-[data-accent="orange"][data-theme="dark"] { --ds-accent: #dc8a5e; --ds-accent-hover: #e69a72; --ds-accent-soft: #35190c; --ds-focus-ring: #dc8a5e; --ds-selection: #4a2412; }
-
-@media (prefers-color-scheme: dark) {
-  [data-accent="violet"]:not([data-theme="light"]) { --ds-accent: #a48ee0; --ds-accent-hover: #b6a3ea; --ds-accent-soft: #231c37; --ds-focus-ring: #a48ee0; --ds-selection: #2f2650; }
-  [data-accent="emerald"]:not([data-theme="light"]) { --ds-accent: #4fb87a; --ds-accent-hover: #63c78b; --ds-accent-soft: #092917; --ds-focus-ring: #4fb87a; --ds-selection: #103a21; }
-  [data-accent="rose"]:not([data-theme="light"]) { --ds-accent: #e07d97; --ds-accent-hover: #ea92a8; --ds-accent-soft: #35161e; --ds-focus-ring: #e07d97; --ds-selection: #4a1f2a; }
-  [data-accent="amber"]:not([data-theme="light"]) { --ds-accent: #d3923a; --ds-accent-hover: #e0a24d; --ds-accent-soft: #311d03; --ds-focus-ring: #d3923a; --ds-selection: #452905; }
-  [data-accent="cyan"]:not([data-theme="light"]) { --ds-accent: #2fb3d1; --ds-accent-hover: #4cc2dd; --ds-accent-soft: #002730; --ds-focus-ring: #2fb3d1; --ds-selection: #073845; }
-  [data-accent="orange"]:not([data-theme="light"]) { --ds-accent: #dc8a5e; --ds-accent-hover: #e69a72; --ds-accent-soft: #35190c; --ds-focus-ring: #dc8a5e; --ds-selection: #4a2412; }
-}
-
-/* Custom accent applied from /palettes. The hexes live in inline style on <html>; hover, soft and
-   selection are derived with color-mix so any brand color works without a table. */
+/* Custom accent applied from /palettes. Hex lives on <html> as --ds-custom-accent-*;
+   hover / soft / selection mix toward ink and canvas so they follow the theme. */
 [data-accent="custom"] {
-  --ds-accent: var(--ds-custom-accent-light, #2f5bea);
-  --ds-accent-hover: color-mix(in oklch, var(--ds-accent), black 14%);
-  --ds-accent-soft: color-mix(in oklch, var(--ds-accent) 12%, white);
+  --ds-accent: var(--ds-custom-accent-light);
+  --ds-accent-hover: color-mix(in oklch, var(--ds-accent), var(--ds-ink) 14%);
+  --ds-accent-soft: color-mix(in oklch, var(--ds-accent) 12%, var(--ds-canvas));
   --ds-focus-ring: var(--ds-accent);
-  --ds-selection: color-mix(in oklch, var(--ds-accent) 22%, white);
+  --ds-selection: color-mix(in oklch, var(--ds-accent) 22%, var(--ds-canvas));
 }
 [data-accent="custom"][data-theme="dark"] {
-  --ds-accent: var(--ds-custom-accent-dark, #7a9cff);
-  --ds-accent-hover: color-mix(in oklch, var(--ds-accent), white 12%);
-  --ds-accent-soft: color-mix(in oklch, var(--ds-accent) 18%, #0a0a0a);
-  --ds-selection: color-mix(in oklch, var(--ds-accent) 30%, #0a0a0a);
+  --ds-accent: var(--ds-custom-accent-dark);
+  --ds-accent-hover: color-mix(in oklch, var(--ds-accent), var(--ds-ink) 14%);
+  --ds-accent-soft: color-mix(in oklch, var(--ds-accent) 18%, var(--ds-canvas));
+  --ds-selection: color-mix(in oklch, var(--ds-accent) 30%, var(--ds-canvas));
 }
 @media (prefers-color-scheme: dark) {
   [data-accent="custom"]:not([data-theme="light"]) {
-    --ds-accent: var(--ds-custom-accent-dark, #7a9cff);
-    --ds-accent-hover: color-mix(in oklch, var(--ds-accent), white 12%);
-    --ds-accent-soft: color-mix(in oklch, var(--ds-accent) 18%, #0a0a0a);
-    --ds-selection: color-mix(in oklch, var(--ds-accent) 30%, #0a0a0a);
+    --ds-accent: var(--ds-custom-accent-dark);
+    --ds-accent-hover: color-mix(in oklch, var(--ds-accent), var(--ds-ink) 14%);
+    --ds-accent-soft: color-mix(in oklch, var(--ds-accent) 18%, var(--ds-canvas));
+    --ds-selection: color-mix(in oklch, var(--ds-accent) 30%, var(--ds-canvas));
   }
 }
 
-/* ---------- Radius family ---------- */
-[data-radius="sharp"] { --ds-radius-xs: 0px; --ds-radius-sm: 2px; --ds-radius-md: 2px; --ds-radius-lg: 4px; --ds-radius-xl: 4px; --ds-radius-2xl: 6px; --ds-radius-pill: 4px; }
-[data-radius="round"] { --ds-radius-xs: 6px; --ds-radius-sm: 10px; --ds-radius-md: 12px; --ds-radius-lg: 16px; --ds-radius-xl: 20px; --ds-radius-2xl: 28px; }
-[data-radius="pill"] { --ds-radius-xs: 6px; --ds-radius-sm: 9999px; --ds-radius-md: 9999px; --ds-radius-lg: 16px; --ds-radius-xl: 20px; --ds-radius-2xl: 28px; }
-
-/* ---------- Font pairing ---------- */
-[data-font="inter"] { --ds-font-sans: "Inter Variable", "Noto Sans JP Variable", "Inter", system-ui, "Hiragino Sans", sans-serif; }
-[data-font="plex"] { --ds-font-sans: "IBM Plex Sans", "Noto Sans JP Variable", system-ui, "Hiragino Sans", sans-serif; }
-[data-font="manrope"] { --ds-font-sans: "Manrope Variable", "Noto Sans JP Variable", "Manrope", system-ui, "Hiragino Sans", sans-serif; }
-[data-font="source-serif"] { --ds-font-display: "Source Serif 4 Variable", "Noto Serif JP", "Source Serif 4", Georgia, serif; }
+/* Fontsource variable family names. font-pairings.css names the static faces. */
+[data-font="geist"] {
+  --ds-font-sans: "Geist Variable", "Noto Sans JP Variable", "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+  --ds-font-mono: "Geist Mono Variable", "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+[data-font="inter"] {
+  --ds-font-sans: "Inter Variable", "Noto Sans JP Variable", "Inter", system-ui, "Hiragino Sans", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+}
+[data-font="plex"] {
+  --ds-font-sans: "IBM Plex Sans", "Noto Sans JP Variable", system-ui, "Hiragino Sans", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+}
+[data-font="manrope"] {
+  --ds-font-sans: "Manrope Variable", "Noto Sans JP Variable", "Manrope", system-ui, "Hiragino Sans", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+}
+[data-font="source-serif"] {
+  --ds-font-sans: "Geist Variable", "Noto Sans JP Variable", "Geist", "Noto Sans JP", system-ui, "Hiragino Sans", sans-serif;
+  --ds-font-display: "Source Serif 4 Variable", "Noto Serif JP", "Source Serif 4", Georgia, serif;
+}
 :root { --ds-font-display: var(--ds-font-sans); }
 .t-display, .t-display-xl, .t-h1, .t-h2 { font-family: var(--ds-font-display); }
 
-/* ---------- Density ---------- */
+/* Density */
 [data-density="compact"] { --ds-control-sm: 28px; --ds-control-md: 32px; --ds-control-lg: 40px; --ds-row: 36px; }
 [data-density="compact"] .h-8 { height: var(--ds-control-sm); }
 [data-density="compact"] .h-10 { height: var(--ds-control-md); }

@@ -9,6 +9,8 @@ import { useToast } from "../ds/components/Toast";
 import { KnobsPanel } from "../layout/KnobsPanel";
 import { CodeBlock } from "../layout/Preview";
 import { useKnobs, accents } from "../lib/knobs";
+import { useTheme } from "../lib/theme";
+import { curatedPalettes, fonts, repos, stackLayers, brandCount } from "../lib/data";
 import { cx } from "../ds/cx";
 
 function FormSpecimen() {
@@ -124,8 +126,16 @@ function StatsSpecimen() {
 }
 
 function DarkSpecimen() {
+  const { setTheme } = useTheme();
   return (
-    <div data-theme="dark" className="h-full bg-canvas p-6 text-ink" style={{ colorScheme: "dark" }}>
+    <button
+      type="button"
+      onClick={() => setTheme("dark")}
+      aria-label="ダークモードにする"
+      className="h-full w-full cursor-pointer border-0 bg-canvas p-6 text-left text-ink"
+      data-theme="dark"
+      style={{ colorScheme: "dark" }}
+    >
       <div className="flex h-full flex-col justify-between rounded-lg border border-hairline bg-surface p-4">
         <div className="flex items-center justify-between">
           <span className="t-label">通知</span>
@@ -134,7 +144,7 @@ function DarkSpecimen() {
         <p className="t-body-sm text-ink-secondary">面は暗いほど下、明るいほど上。影は使いません。</p>
         <span className="t-caption text-accent">ダークモードを見る</span>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -142,7 +152,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/fonts",
     title: "フォント",
-    caption: "34 書体。使用数は 261 社から実測",
+    caption: `${fonts.length} 書体。使用数は ${brandCount} 社から実測`,
     visual: (
       <div className="grid h-full grid-cols-2 grid-rows-2 place-items-center p-5 text-ink" aria-hidden>
         <span className="text-4xl font-semibold" style={{ fontFamily: '"Geist Variable", sans-serif' }}>Ag</span>
@@ -155,11 +165,11 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/palettes",
     title: "パレット",
-    caption: "261 社の実測配色。クリックで試着",
+    caption: `${brandCount} 社の実測配色。クリックで試着`,
     visual: (
       <div className="grid h-full grid-cols-6 gap-1.5 p-5" aria-hidden>
-        {["#5e6ad2", "#0070f3", "#635bff", "#096fc8", "#1a7f37", "#c81e1e", "#0a0a0a", "#ff7669", "#f5a623", "#2f5bea", "#00a8e1", "#e11d48"].map((c) => (
-          <span key={c} className="aspect-square rounded-sm" style={{ background: c }} />
+        {curatedPalettes.slice(0, 12).map((p) => (
+          <span key={p.id} className="aspect-square rounded-sm" style={{ background: p.accent }} />
         ))}
       </div>
     ),
@@ -203,7 +213,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/stack",
     title: "スタック",
-    caption: "23 層。採用 1 つと代替の「いつ」",
+    caption: `${stackLayers.length} 層。採用 1 つと代替の「いつ」`,
     visual: (
       <div className="flex h-full flex-col justify-center gap-1.5 p-5" aria-hidden>
         {[92, 76, 60, 44, 30].map((w) => (
@@ -215,7 +225,7 @@ const galleries: Array<{ to: string; title: string; caption: string; visual: Rea
   {
     to: "/rankings",
     title: "ランキング",
-    caption: "109 の OSS をスターで。毎週更新",
+    caption: `${repos.length} の OSS をスターで。毎週更新`,
     visual: (
       <div className="t-mono flex h-full flex-col justify-center gap-2 p-5" aria-hidden>
         {[["shadcn/ui", 95], ["motion", 70], ["three.js", 100]].map(([n, w]) => (

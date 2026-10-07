@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import { brandPalettes, curatedPalettes, palettesMeta, brandCount, type BrandPalette, type CuratedPalette } from "../lib/data";
 import { contrast, ensureContrast, onColor } from "../lib/color";
+import { colorValue } from "../lib/tokens";
 import { useKnobs } from "../lib/knobs";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
@@ -14,8 +15,8 @@ const tempLabel: Record<Exclude<Temp, "all">, string> = { warm: "暖色", cool: 
 
 /** Brand accent adjusted to pass 4.5:1 on white and on near-black, so the whole site can wear it. */
 function wearable(p: BrandPalette) {
-  const light = ensureContrast(p.accent, "#ffffff");
-  const dark = ensureContrast(p.accent, "#0a0a0a");
+  const light = ensureContrast(p.accent, colorValue("light", "canvas"));
+  const dark = ensureContrast(p.accent, colorValue("dark", "canvas"));
   return { light: light.hex, dark: dark.hex, adjusted: light.adjusted || dark.adjusted };
 }
 
@@ -180,7 +181,7 @@ export function Palettes() {
                     </div>
                     <div className="h-8 w-full" style={{ background: p.accent }}>
                       <span className="sr-only">accent</span>
-                      <span className="block h-full w-full" style={{ color: onColor(p.accent) }} />
+                      <span className="block h-full w-full" style={{ color: onColor(p.accent, colorValue("light", "ink"), colorValue("light", "canvas")) }} />
                     </div>
                   </button>
                 </li>
