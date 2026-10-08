@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
-import { demoGroups, demos, libraries, type DemoEntry } from "../demos/registry";
+import { getDemoGroups, getDemos, libraries, type DemoEntry } from "../demos/registry";
 import { Playground } from "../layout/Playground";
 import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
 import { cx } from "../ds/cx";
-import { useT } from "../i18n/context";
+import { useLocale, useT } from "../i18n/context";
 import { motionGalleryMessages } from "../i18n/messages/motionGallery";
 
 type Group = DemoEntry["group"] | "all";
@@ -21,6 +21,9 @@ const libTone: Record<DemoEntry["library"], string> = {
 
 export function MotionGallery() {
   const t = useT(motionGalleryMessages);
+  const { locale } = useLocale();
+  const demos = useMemo(() => getDemos(locale), [locale]);
+  const demoGroups = useMemo(() => getDemoGroups(locale), [locale]);
   const [group, setGroup] = useState<Group>("all");
   const [lib, setLib] = useState<Lib>("all");
   const [q, setQ] = useState("");
@@ -35,7 +38,7 @@ export function MotionGallery() {
         items: demos.filter((d) => d.group === g.id && (lib === "all" || d.library === lib) && (!needle || `${d.name} ${d.caption} ${d.library}`.toLowerCase().includes(needle))),
       }))
       .filter((s) => s.items.length > 0);
-  }, [group, lib, q]);
+  }, [group, lib, q, demos, demoGroups]);
   const shown = sections.reduce((n, s) => n + s.items.length, 0);
 
   return (

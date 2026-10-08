@@ -174,7 +174,7 @@ export const flagshipSystems: DesignSystemRef[] = [
   },
   {
     id: "digital-agency-jp",
-    name: "デジタル庁デザインシステム",
+    name: "Digital Agency Design System (Japan)",
     nameJa: "デジタル庁デザインシステム",
     description: "Japan Digital Agency's design system for government services. Built for accessibility and inclusivity at national scale.",
     descriptionJa: "「誰一人取り残されない」を掲げる日本政府のデザインシステム。行政サービスのアクセシビリティ基準。",

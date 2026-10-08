@@ -1,5 +1,5 @@
 import { Link as RRLink, useLocation } from "react-router";
-import { useLocale, useT } from "../i18n/context";
+import { useLocale } from "../i18n/context";
 import { localeMeta, localizePath, locales } from "../i18n/locales";
 import { shellMessages } from "../i18n/messages/shell";
 import { cx } from "../ds/cx";
@@ -11,21 +11,22 @@ import { cx } from "../ds/cx";
  */
 export function LanguageSwitch({ variant = "compact", className }: { variant?: "compact" | "full" | "inline"; className?: string }) {
   const { locale, path } = useLocale();
-  const t = useT(shellMessages);
   const { search, hash } = useLocation();
   const others = locales.filter((l) => l !== locale);
   return (
     <>
       {others.map((l) => {
         const meta = localeMeta[l];
+        // Label in the target language, so it matches lang= on the link (screen readers switch voice).
+        const label = shellMessages[l].switchTo(meta.autonym);
         return (
           <RRLink
             key={l}
             to={`${localizePath(path, l)}${search}${hash}`}
             hrefLang={meta.tag}
             lang={meta.tag}
-            aria-label={t.switchTo(meta.autonym)}
-            title={t.switchTo(meta.autonym)}
+            aria-label={label}
+            title={label}
             className={cx(
               variant === "inline"
                 ? undefined

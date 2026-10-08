@@ -15,7 +15,7 @@ const ja = {
   themeLabel: (current: string, next: string) => `テーマ: ${current}。次は${next}`,
   themeTitle: (current: string) => `テーマ: ${current}`,
   language: "言語",
-  switchTo: (autonym: string) => `${autonym} で表示`,
+  switchTo: (autonym: string) => `${autonym}で表示`,
   footerNote: "AwesomeDS. このサイト自体が AwesomeDS で作られています。",
   footerGuidelines: "ガイドライン",
   footerAbout: "このサイトについて",

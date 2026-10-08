@@ -56,7 +56,7 @@ function TypeSpecimen() {
       </div>
       <div>
         <p className="t-display-xl text-ink" style={{ fontSize: "clamp(72px, 9vw, 120px)" }}>
-          Aa あ
+          Aa <span lang="ja">あ</span>
         </p>
         <p className="t-body mt-2 text-ink-secondary">{t.typeSample}</p>
       </div>

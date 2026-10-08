@@ -19,7 +19,7 @@ const tiles: Array<{ to: string; title: Localized<string>; caption: Localized<st
         <span className="t-display text-ink" style={{ fontSize: 64 }}>
           Aa
         </span>
-        <span className="t-display text-ink" style={{ fontSize: 64 }}>
+        <span lang="ja" className="t-display text-ink" style={{ fontSize: 64 }}>
           あ
         </span>
       </div>

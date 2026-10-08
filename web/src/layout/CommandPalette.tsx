@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "../i18n/router";
 import { useLocale, useT } from "../i18n/context";
 import { shellMessages, type ShellMessages } from "../i18n/messages/shell";
+import type { Locale } from "../i18n/locales";
 import { ArrowRight, Search } from "lucide-react";
 import { sidebar } from "../lib/nav";
 import { cx } from "../ds/cx";
@@ -18,17 +19,17 @@ interface Item {
 // until they exist, and a failing import only removes those entries.
 const loaders = import.meta.glob(["../ds/registry.tsx", "../demos/registry.tsx", "../ds/data/fonts.json", "../ds/data/palettes.json"]);
 
-async function loadExtra(t: ShellMessages): Promise<Item[]> {
+async function loadExtra(t: ShellMessages, locale: Locale): Promise<Item[]> {
   const out: Item[] = [];
   for (const [path, load] of Object.entries(loaders)) {
     try {
       const mod = (await load()) as Record<string, unknown>;
-      if (path.endsWith("ds/registry.tsx") && Array.isArray(mod.components)) {
-        for (const c of mod.components as Array<{ id: string; name: string; caption?: string }>) {
+      if (path.endsWith("ds/registry.tsx") && typeof mod.componentsFor === "function") {
+        for (const c of (mod.componentsFor as (l: Locale) => Array<{ id: string; name: string; caption?: string }>)(locale)) {
           out.push({ id: `c-${c.id}`, label: c.name, hint: c.caption, group: t.groupComponents, to: `/components#${c.id}` });
         }
-      } else if (path.endsWith("demos/registry.tsx") && Array.isArray(mod.demos)) {
-        for (const d of mod.demos as Array<{ id: string; name: string; caption?: string }>) {
+      } else if (path.endsWith("demos/registry.tsx") && typeof mod.getDemos === "function") {
+        for (const d of (mod.getDemos as (l: Locale) => Array<{ id: string; name: string; caption?: string }>)(locale)) {
           out.push({ id: `m-${d.id}`, label: d.name, hint: d.caption, group: t.groupMotion, to: `/motion#${d.id}` });
         }
       } else if (path.endsWith("fonts.json")) {
@@ -50,7 +51,8 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   const inputRef = useRef<HTMLInputElement>(null);
   const [q, setQ] = useState("");
   const [active, setActive] = useState(0);
-  const [extra, setExtra] = useState<Item[]>([]);
+  // Registry entries are cached per locale; switching language reloads them in that language.
+  const [extra, setExtra] = useState<{ locale: Locale; items: Item[] } | null>(null);
   const navigate = useNavigate();
   const t = useT(shellMessages);
   const { locale } = useLocale();
@@ -63,10 +65,10 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       setQ("");
       setActive(0);
       requestAnimationFrame(() => inputRef.current?.focus());
-      if (extra.length === 0) void loadExtra(t).then(setExtra);
+      if (extra?.locale !== locale) void loadExtra(t, locale).then((items) => setExtra({ locale, items }));
     }
     if (!open && el.open) el.close();
-  }, [open, extra.length, t]);
+  }, [open, extra?.locale, locale, t]);
 
   const base: Item[] = useMemo(
     () => sidebar.flatMap((g) => g.items.map((i) => ({ id: `n-${i.to}`, label: i.label[locale], hint: i.hint?.[locale], group: g.label[locale], to: i.to }))),
@@ -74,11 +76,11 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
   );
 
   const items = useMemo(() => {
-    const all = [...base, ...extra];
+    const all = [...base, ...(extra?.locale === locale ? extra.items : [])];
     const needle = q.trim().toLowerCase();
     const list = needle ? all.filter((i) => `${i.label} ${i.hint ?? ""} ${i.group}`.toLowerCase().includes(needle)) : all;
     return list.slice(0, 40);
-  }, [q, base, extra]);
+  }, [q, base, extra, locale]);
 
   const go = (item: Item) => {
     onClose();

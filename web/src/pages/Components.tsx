@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
-import { components, componentsByGroup, groups, type ComponentGroup } from "../ds/registry";
+import { componentsByGroup, componentsFor, groupsFor, type ComponentGroup } from "../ds/registry";
 import { Playground } from "../layout/Playground";
 import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
 import { repoUrl } from "../lib/nav";
-import { useT } from "../i18n/context";
+import { useLocale, useT } from "../i18n/context";
 import { componentsMessages } from "../i18n/messages/components";
 
 // Entries that need the full row: tables, navigation, anything with a wide layout.
@@ -13,16 +13,19 @@ const wide = new Set(["table", "data-table", "nav-bar", "stepper", "timeline", "
 
 export function Components() {
   const t = useT(componentsMessages);
+  const { locale } = useLocale();
+  const components = useMemo(() => componentsFor(locale), [locale]);
+  const groups = useMemo(() => groupsFor(locale), [locale]);
   const [group, setGroup] = useState<ComponentGroup | "all">("all");
   const [q, setQ] = useState("");
 
   const sections = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return componentsByGroup()
+    return componentsByGroup(locale)
       .filter((s) => group === "all" || s.group.id === group)
       .map((s) => ({ ...s, items: s.items.filter((c) => !needle || `${c.name} ${c.caption} ${c.id}`.toLowerCase().includes(needle)) }))
       .filter((s) => s.items.length > 0);
-  }, [group, q]);
+  }, [group, q, locale]);
 
   const shown = sections.reduce((n, s) => n + s.items.length, 0);
 
@@ -57,6 +60,8 @@ export function Components() {
                 <div key={c.id} className={wide.has(c.id) ? "xl:col-span-2" : undefined}>
                   <ErrorBoundary compact>
                     <Playground
+                      // Remount on language change: some select values are translated (e.g. Calendar weekday labels).
+                      key={`${c.id}-${locale}`}
                       id={c.id}
                       title={c.name}
                       caption={c.caption}
