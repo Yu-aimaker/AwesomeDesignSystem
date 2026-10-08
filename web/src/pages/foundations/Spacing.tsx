@@ -188,7 +188,7 @@ export function Spacing() {
         sources={[
           { title: "WCAG 2.2: 2.5.8 Target Size (Minimum)", url: "https://www.w3.org/TR/WCAG22/#target-size-minimum", note: t.sourceNotes.wcag },
           { title: "Apple HIG: Layout", url: "https://developer.apple.com/design/human-interface-guidelines/layout", note: t.sourceNotes.hig },
-          { title: "Material 3: Layout", url: "https://m3.material.io/foundations/layout/understanding-layout/overview", note: t.sourceNotes.m3 },
+          { title: "Material 3: Structure (touch targets)", url: "https://m3.material.io/foundations/designing/structure", note: t.sourceNotes.m3 },
           { title: "NN/g: Proximity Principle in Visual Design", url: "https://www.nngroup.com/articles/gestalt-proximity/", note: t.sourceNotes.proximity },
           { title: "NN/g: Fitts's Law", url: "https://www.nngroup.com/articles/fitts-law/", note: t.sourceNotes.fitts },
           { title: "Tailwind CSS v4: Theme variables", url: "https://tailwindcss.com/docs/theme", note: t.sourceNotes.tailwind },

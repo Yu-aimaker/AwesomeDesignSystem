@@ -17,7 +17,11 @@ export function KnowledgeEntry() {
   const entry = findEntry(category, slug);
   if (!entry) return <NotFound />;
   // Knowledge/ bodies are written in Japanese; AwesomeDS/foundations bodies are English.
-  const bodyLang = locale !== "ja" && entry.origin === "knowledge" ? "ja" : undefined;
+  // lang="en" on English bodies also keeps words whole in table cells (ja uses overflow-wrap: anywhere).
+  const showJaNote = locale !== "ja" && entry.origin === "knowledge";
+  const bodyLang = entry.origin === "awesomeds" ? "en" : showJaNote ? "ja" : undefined;
+  // The page header already shows the title; drop the Markdown's own leading H1 so there is one h1.
+  const body = entry.body.replace(/^\s*#\s+.+\n/, "");
 
   return (
     <article>
@@ -43,10 +47,10 @@ export function KnowledgeEntry() {
         )}
       </header>
       {entry.sources.length > 0 && <SourceList sources={entry.sources} title={t.entrySources} />}
-      {bodyLang && <p className="t-body-sm mt-12 max-w-[65ch] rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-ink-secondary">{t.bodyLanguageNote}</p>}
-      <div className={bodyLang ? "prose t-body mt-6 text-ink" : "prose t-body mt-12 text-ink"} lang={bodyLang}>
+      {showJaNote && <p className="t-body-sm mt-12 max-w-[65ch] rounded-md border border-hairline bg-canvas-soft px-4 py-3 text-ink-secondary">{t.bodyLanguageNote}</p>}
+      <div className={showJaNote ? "prose t-body mt-6 text-ink" : "prose t-body mt-12 text-ink"} lang={bodyLang}>
         <Markdown remarkPlugins={[remarkGfm]} components={{ a: ({ href, children }) => <a href={href} target={href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer">{children}</a> }}>
-          {entry.body}
+          {body}
         </Markdown>
       </div>
       <p className="t-caption mt-12 text-ink-muted">
