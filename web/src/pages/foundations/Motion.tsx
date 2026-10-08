@@ -10,6 +10,8 @@ import { SpringDragDemo } from "../../demos/MotionDemos";
 import { durations, easings, tokens } from "../../lib/tokens";
 import { useT } from "../../i18n/context";
 import { foundationMotionMessages, type RichPart } from "../../i18n/messages/foundationMotion";
+import { motionPatternsMessages } from "../../i18n/messages/motionPatterns";
+import { MotionModeNote, MotionPatterns } from "./MotionPatterns";
 
 /** Renders catalog text that contains inline code spans. */
 function Rich({ parts }: { parts: RichPart[] }) {
@@ -114,6 +116,7 @@ function EasingDemo() {
 export function Motion() {
   const [reduced, setReduced] = useState(false);
   const t = useT(foundationMotionMessages);
+  const tp = useT(motionPatternsMessages);
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
       <div data-reduced-motion={reduced ? "true" : undefined}>
@@ -155,6 +158,13 @@ export function Motion() {
 
         <Section id="reduced" title={t.reducedTitle} lead={t.reducedLead}>
           <Switch label={t.reducedSwitch} checked={reduced} onChange={setReduced} />
+          <div className="mt-4 max-w-[65ch]">
+            <MotionModeNote forced={reduced} />
+          </div>
+        </Section>
+
+        <Section id="patterns" title={tp.title} lead={tp.lead}>
+          <MotionPatterns />
         </Section>
 
         <Section id="hover" title={t.hoverTitle} lead={t.hoverLead}>
