@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Hosting contract for the assets-only Worker. Exit 1 when any of these drift:
-// no Worker script (no `main`), SPA fallback, noindex in dist/_headers,
+// no Worker script (no `main`), SPA fallback, noindex and HSTS in dist/_headers,
 // dist under the Workers Free file count and per-file size, og-image 1200x630.
 // Removing not_found_handling must fail this script.
 import { readdirSync, readFileSync, statSync } from "node:fs";
@@ -86,6 +86,10 @@ if (headers && !/^\/\*\s*$/m.test(headers)) {
 if (headers && !/X-Robots-Tag:\s*noindex,\s*nofollow/i.test(headers)) {
   problems.push('dist/_headers must set "X-Robots-Tag: noindex, nofollow"');
 }
+// Vercel sends this HSTS today; keep it identical so the cutover changes no header.
+if (headers && !/Strict-Transport-Security:\s*max-age=63072000\s*$/im.test(headers)) {
+  problems.push('dist/_headers must set "Strict-Transport-Security: max-age=63072000" (same as Vercel)');
+}
 let assetsIgnore = "";
 try {
   assetsIgnore = readFileSync(join(dist, ".assetsignore"), "utf8");
@@ -140,5 +144,5 @@ if (problems.length) {
   process.exit(1);
 }
 console.log(
-  `cf-assets ok: ${files.length} files, no main, not_found_handling=single-page-application, noindex, og-image 1200x630`,
+  `cf-assets ok: ${files.length} files, no main, not_found_handling=single-page-application, noindex, HSTS, og-image 1200x630`,
 );
