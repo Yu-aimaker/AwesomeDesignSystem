@@ -49,10 +49,14 @@ jobs:
       - name: Discover candidates
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: node scripts/discover-candidates.mjs --report discover.json
+        run: |
+          mkdir -p .growth
+          node scripts/discover-candidates.mjs --report .growth/discover.json
 
       - name: Probe flagship share images
-        run: node scripts/probe-ogp.mjs --out ogp-probe.json
+        run: |
+          mkdir -p .growth
+          node scripts/probe-ogp.mjs --out .growth/ogp-probe.json
 
       - name: Validate data
         run: node scripts/validate-data.mjs
@@ -61,28 +65,30 @@ jobs:
         run: bash Plugin/awesome-ds/scripts/sync-ds.sh
 
       - name: Diff guard
-        run: node scripts/diff-guard.mjs --git origin/main --out guard.json || true
+        run: |
+          mkdir -p .growth
+          node scripts/diff-guard.mjs --git origin/main --out .growth/guard.json || true
 
       - name: Write the report
         run: |
           node --input-type=module << 'EOF'
           import { readFileSync, writeFileSync } from "node:fs";
           import { renderReport } from "./scripts/lib/growth.mjs";
-          const guard = JSON.parse(readFileSync("guard.json", "utf8"));
+          const guard = JSON.parse(readFileSync(".growth/guard.json", "utf8"));
           let excluded = {};
           let fresh = [];
           try {
-            const discovered = JSON.parse(readFileSync("discover.json", "utf8"));
+            const discovered = JSON.parse(readFileSync(".growth/discover.json", "utf8"));
             excluded = discovered.excluded ?? {};
             fresh = discovered.fresh ?? [];
           } catch { /* discover may have been skipped */ }
           const date = new Date().toISOString().slice(0, 10);
-          writeFileSync("report.md", renderReport({ date, guard, excluded, newCandidates: fresh }));
+          writeFileSync(".growth/report.md", renderReport({ date, guard, excluded, newCandidates: fresh }));
           EOF
 
       - name: Decide
         id: plan
-        run: node scripts/weekly-growth-decide.mjs --guard guard.json --dry-run "${{ inputs.dry_run }}"
+        run: node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --dry-run "${{ inputs.dry_run }}"
 
       - name: Step summary
         if: always()
@@ -93,7 +99,7 @@ jobs:
             echo "- action: ${{ steps.plan.outputs.action }}"
             echo "- dry_run: ${{ inputs.dry_run }}"
             echo ""
-            cat report.md 2>/dev/null || true
+            cat .growth/report.md 2>/dev/null || true
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Pack the run
@@ -102,10 +108,10 @@ jobs:
           tar -czf growth-payload.tgz \
             AwesomeDS/data \
             Plugin/awesome-ds/ds/data \
-            guard.json \
-            discover.json \
-            ogp-probe.json \
-            report.md
+            .growth/guard.json \
+            .growth/discover.json \
+            .growth/ogp-probe.json \
+            .growth/report.md
       - name: Upload the run
         if: always()
         uses: actions/upload-artifact@v4
@@ -147,7 +153,7 @@ jobs:
           git fetch origin bot/weekly-growth || true
           if git rev-parse --verify origin/bot/weekly-growth >/dev/null 2>&1; then
             authors=$(git log --format='%ae' origin/main..origin/bot/weekly-growth | paste -sd, -)
-            node scripts/weekly-growth-decide.mjs --guard guard.json --dry-run false --authors "$authors"
+            node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --dry-run false --authors "$authors"
           fi
 
       - name: Commit data onto bot/weekly-growth
@@ -160,7 +166,7 @@ jobs:
           mkdir -p /tmp/growth-data
           cp -a AwesomeDS/data /tmp/growth-data/data
           cp -a Plugin/awesome-ds/ds/data /tmp/growth-data/plugin-data
-          cp report.md /tmp/growth-data/report.md
+          cp .growth/report.md /tmp/growth-data/report.md
           node scripts/reset-bot-branch.mjs --branch "$branch" --from origin/main
           rm -rf AwesomeDS/data Plugin/awesome-ds/ds/data
           cp -a /tmp/growth-data/data AwesomeDS/data

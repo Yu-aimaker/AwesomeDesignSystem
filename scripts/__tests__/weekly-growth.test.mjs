@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
@@ -288,6 +288,40 @@ test("workflows must not push main or call billed agents", () => {
   assert.ok(bad.includes("ANTHROPIC_API_KEY"));
   assert.ok(bad.includes("claude-code-action"));
   assert.deepEqual(foreignAuthors([BOT_EMAIL, "human@example.com"]), ["human@example.com"]);
+});
+
+test("collect report files under .growth/ do not fail the diff guard", () => {
+  const ignore = readFileSync(join(repoRoot, ".gitignore"), "utf8");
+  const yml = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  assert.match(ignore, /(^|\n)\.growth\/(\n|$)/);
+  for (const name of ["discover.json", "ogp-probe.json", "guard.json", "report.md"]) {
+    assert.match(yml, new RegExp(`\\.growth/${name.replace(".", "\\.")}`));
+  }
+
+  const cwd = mkdtempSync(join(tmpdir(), "ads-growth-scratch-"));
+  try {
+    git(cwd, ["init", "-b", "main"]);
+    const data = pack(repos(60), brands(50));
+    mkdirSync(join(cwd, "AwesomeDS/data/sources"), { recursive: true });
+    writeFileSync(join(cwd, "AwesomeDS/data/repos.json"), JSON.stringify(data.repos));
+    writeFileSync(join(cwd, "AwesomeDS/data/brands.json"), JSON.stringify(data.brands));
+    writeFileSync(join(cwd, "AwesomeDS/data/candidates.json"), JSON.stringify(data.candidates));
+    writeFileSync(join(cwd, "AwesomeDS/data/sources/curated-repos.json"), JSON.stringify(data.curated));
+    writeFileSync(join(cwd, ".gitignore"), ".growth/\n");
+    git(cwd, ["add", "."]);
+    git(cwd, ["commit", "-m", "base"]);
+    mkdirSync(join(cwd, ".growth"));
+    writeFileSync(join(cwd, ".growth/discover.json"), "{}");
+    writeFileSync(join(cwd, ".growth/ogp-probe.json"), "{}");
+    writeFileSync(join(cwd, ".growth/guard.json"), "{}");
+    const output = execFileSync(process.execPath, [join(repoRoot, "scripts/diff-guard.mjs"), "--git", "HEAD"], {
+      cwd,
+      encoding: "utf8",
+    });
+    assert.match(output, /"ok": true/);
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
 });
 
 test("an untracked file outside data fails the diff guard", () => {
