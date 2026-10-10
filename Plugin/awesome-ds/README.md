@@ -2,7 +2,7 @@
 
 AwesomeDS design system plus five skills for AI coding agents. Japanese instructions work in every skill.
 
-Install: `/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude` then `/plugin install awesome-ds@awesome-design-systems`. Local: `claude --plugin-dir ./Plugin/awesome-ds`.
+Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin install awesome-ds@awesome-design-systems`. Local: `claude --plugin-dir ./Plugin/awesome-ds`.
 
 | Skill | What it does |
 |---|---|

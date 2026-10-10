@@ -1,4 +1,4 @@
-# CLAUDE.md — Awesome-Design-Systems-Claude
+# CLAUDE.md — AwesomeDesignSystem
 
 このファイルは Claude Code（箱 / CI）向けの作業前提です。人間向けの詳細は `README.md` と `CONTRIBUTING.md` を優先してください。
 
@@ -6,7 +6,7 @@
 
 AI コーディングエージェント向けの **汎用デザインシステム AwesomeDS** と、体験サイト `web/`、Claude Code プラグイン `Plugin/awesome-ds/` の本線（Champion）です。
 
-- 本番サイト: https://awesome-design-systems-claude.vercel.app （noindex）
+- 本番サイト: https://awesomeds.yumaker.studio （noindex）
 - オーナー判断（Sir）以外で Archive / 可視性変更 / 他リポ削除はしない
 
 ## 必守ロック（毎 run）

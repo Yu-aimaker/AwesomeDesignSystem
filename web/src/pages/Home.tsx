@@ -366,7 +366,7 @@ export function Home() {
             {t.use}
           </h2>
           <p className="t-body mt-3 text-ink-secondary">{t.useLead}</p>
-          <CodeBlock className="mt-4" code={"/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude\n/plugin install awesome-ds@awesome-design-systems"} />
+          <CodeBlock className="mt-4" code={"/plugin marketplace add Yu-aimaker/AwesomeDesignSystem\n/plugin install awesome-ds@awesome-design-systems"} />
         </div>
         <div className="min-w-0">
           <p className="t-h4 text-ink lg:mt-12">{t.noPlugin}</p>

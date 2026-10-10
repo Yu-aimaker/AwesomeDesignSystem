@@ -7,7 +7,7 @@ AwesomeDS を Claude Code（と Cursor）で使うためのプラグインです
 ## インストール（Claude Code）
 
 ```
-/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude
+/plugin marketplace add Yu-aimaker/AwesomeDesignSystem
 /plugin install awesome-ds@awesome-design-systems
 ```
 
@@ -16,8 +16,8 @@ AwesomeDS を Claude Code（と Cursor）で使うためのプラグインです
 ## ローカルで試す
 
 ```
-git clone https://github.com/Yu-aimaker/Awesome-Design-Systems-Claude
-cd Awesome-Design-Systems-Claude
+git clone https://github.com/Yu-aimaker/AwesomeDesignSystem
+cd AwesomeDesignSystem
 claude --plugin-dir ./Plugin/awesome-ds
 ```
 

@@ -31,7 +31,7 @@ export function About() {
         <div className="flex flex-col gap-8">
           <div>
             <h3 className="t-h4 text-ink">Claude Code</h3>
-            <CodeBlock className="mt-3 max-w-[65ch]" code={"/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude\n/plugin install awesome-ds@awesome-design-systems"} />
+            <CodeBlock className="mt-3 max-w-[65ch]" code={"/plugin marketplace add Yu-aimaker/AwesomeDesignSystem\n/plugin install awesome-ds@awesome-design-systems"} />
             <p className="t-body-sm mt-3 max-w-[65ch] text-ink-secondary">
               {t.localBefore}
               <code>claude --plugin-dir ./Plugin/awesome-ds</code>

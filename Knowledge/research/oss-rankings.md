@@ -3,7 +3,7 @@ title: "OSS ランキング (/rankings) の設計"
 category: research
 type: guideline
 sources:
-  - url: https://github.com/Yu-aimaker/Awesome-Design-Systems-Claude
+  - url: https://github.com/Yu-aimaker/AwesomeDesignSystem
     title: "このリポジトリ本体 (scripts/fetch-repos.mjs と .github/workflows/update-data.yml)"
   - url: https://github.com/tt-a1i/archify
     title: "tt-a1i/archify (本タスクで観測した高スター数の実例、51,537 stars)"

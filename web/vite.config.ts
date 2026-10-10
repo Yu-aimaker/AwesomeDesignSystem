@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const repoRoot = fileURLToPath(new URL("..", import.meta.url));
 
 // Vercel serves the site at the domain root, so "/" is the default. Set
-// SITE_BASE (for example "/Awesome-Design-Systems-Claude/") to build for a
+// SITE_BASE (for example "/AwesomeDesignSystem/") to build for a
 // host that serves the site under a path. `vite preview` uses the build base.
 const productionBase = process.env.SITE_BASE ?? "/";
 
