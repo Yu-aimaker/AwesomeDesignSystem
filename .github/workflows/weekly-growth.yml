@@ -1,0 +1,299 @@
+name: Weekly growth
+
+# Manual only. dry_run defaults to true, so a dispatch does not open a pull request.
+# A schedule is intentionally absent until the dry-run and one real run have been reviewed.
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "true のとき PR を作らない"
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-growth
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      action: ${{ steps.plan.outputs.action }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Fetch origin/main for the guard
+        run: git fetch origin main
+
+      - name: Fetch GitHub star ranking
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/fetch-repos.mjs
+
+      - name: Extract brand tokens
+        env:
+          DESIGN_MD_CACHE: ${{ runner.temp }}/design-md
+        run: node scripts/extract-brands.mjs
+
+      - name: Build palettes and fonts
+        run: |
+          node scripts/build-palettes.mjs
+          node scripts/build-fonts.mjs
+
+      - name: Discover candidates
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/discover-candidates.mjs --report discover.json
+
+      - name: Probe flagship share images
+        run: node scripts/probe-ogp.mjs --out ogp-probe.json
+
+      - name: Validate data
+        run: node scripts/validate-data.mjs
+
+      - name: Sync the plugin copy
+        run: bash Plugin/awesome-ds/scripts/sync-ds.sh
+
+      - name: Diff guard
+        run: node scripts/diff-guard.mjs --git origin/main --out guard.json || true
+
+      - name: Write the report
+        run: |
+          node --input-type=module << 'EOF'
+          import { readFileSync, writeFileSync } from "node:fs";
+          import { renderReport } from "./scripts/lib/growth.mjs";
+          const guard = JSON.parse(readFileSync("guard.json", "utf8"));
+          let excluded = {};
+          let fresh = [];
+          try {
+            const discovered = JSON.parse(readFileSync("discover.json", "utf8"));
+            excluded = discovered.excluded ?? {};
+            fresh = discovered.fresh ?? [];
+          } catch { /* discover may have been skipped */ }
+          const date = new Date().toISOString().slice(0, 10);
+          writeFileSync("report.md", renderReport({ date, guard, excluded, newCandidates: fresh }));
+          EOF
+
+      - name: Decide
+        id: plan
+        run: node scripts/weekly-growth-decide.mjs --guard guard.json --dry-run "${{ inputs.dry_run }}"
+
+      - name: Step summary
+        if: always()
+        run: |
+          {
+            echo "## 週次更新"
+            echo ""
+            echo "- action: ${{ steps.plan.outputs.action }}"
+            echo "- dry_run: ${{ inputs.dry_run }}"
+            echo ""
+            cat report.md 2>/dev/null || true
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Pack the run
+        if: always()
+        run: |
+          tar -czf growth-payload.tgz \
+            AwesomeDS/data \
+            Plugin/awesome-ds/ds/data \
+            guard.json \
+            discover.json \
+            ogp-probe.json \
+            report.md
+      - name: Upload the run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-growth
+          path: growth-payload.tgz
+
+  propose:
+    needs: collect
+    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'propose'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      actions: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/download-artifact@v4
+        with:
+          name: weekly-growth
+          path: growth-artifact
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Unpack the run
+        run: tar -xzf growth-artifact/growth-payload.tgz
+
+      - name: Refuse a branch that a person has edited
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch origin main
+          git fetch origin bot/weekly-growth || true
+          if git rev-parse --verify origin/bot/weekly-growth >/dev/null 2>&1; then
+            authors=$(git log --format='%ae' origin/main..origin/bot/weekly-growth | paste -sd, -)
+            node scripts/weekly-growth-decide.mjs --guard guard.json --dry-run false --authors "$authors"
+          fi
+
+      - name: Commit data onto bot/weekly-growth
+        run: |
+          branch=bot/weekly-growth
+          case "$branch" in
+            bot/*) ;;
+            *) echo "refusing to publish $branch"; exit 1 ;;
+          esac
+          mkdir -p /tmp/growth-data
+          cp -a AwesomeDS/data /tmp/growth-data/data
+          cp -a Plugin/awesome-ds/ds/data /tmp/growth-data/plugin-data
+          cp report.md /tmp/growth-data/report.md
+          git checkout -f -B "$branch" origin/main
+          rm -rf AwesomeDS/data Plugin/awesome-ds/ds/data
+          cp -a /tmp/growth-data/data AwesomeDS/data
+          mkdir -p Plugin/awesome-ds/ds
+          cp -a /tmp/growth-data/plugin-data Plugin/awesome-ds/ds/data
+          git add AwesomeDS/data Plugin/awesome-ds/ds/data
+          if git diff --cached --quiet; then
+            echo "Nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          date=$(date -u +%F)
+          git commit -m "data: 週次更新 ${date}"
+          if git rev-parse --verify origin/bot/weekly-growth >/dev/null 2>&1; then
+            expected=$(git rev-parse origin/bot/weekly-growth)
+            git push --force-with-lease="refs/heads/${branch}:${expected}" origin "HEAD:${branch}"
+          else
+            git push origin "HEAD:${branch}"
+          fi
+
+      - name: Open or update the single pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          date=$(date -u +%F)
+          title="data: 週次更新 ${date}"
+          gh label create bot:weekly-growth --repo "$GITHUB_REPOSITORY" --color 2f5bea --description "週次データ更新" --force
+          number=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --state open --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh pr edit "$number" --repo "$GITHUB_REPOSITORY" --title "$title" --body-file /tmp/growth-data/report.md
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --title "$title" --body-file /tmp/growth-data/report.md --label bot:weekly-growth
+          fi
+          gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref bot/weekly-growth
+
+  close-stale-pr:
+    needs: collect
+    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'noop'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Close an open bot pull request when nothing meaningful changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          number=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --state open --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh pr close "$number" --repo "$GITHUB_REPOSITORY" --comment "日付と集計以外の差分がないため閉じます。"
+          fi
+
+  close-failure-issue:
+    needs: [collect, propose]
+    if: always() && needs.collect.result == 'success' && (needs.propose.result == 'success' || needs.propose.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "bot:weekly-growth-failure",
+              per_page: 10,
+            });
+            for (const issue of issues.data) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: "次の実行が成功したので閉じます。",
+              });
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: "closed",
+                state_reason: "completed",
+              });
+            }
+
+  notify:
+    needs: [collect, propose]
+    if: always() && (needs.collect.result == 'failure' || needs.propose.result == 'failure')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const label = "bot:weekly-growth-failure";
+            try {
+              await github.rest.issues.createLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                name: label,
+                color: "b42318",
+                description: "週次更新の失敗",
+              });
+            } catch (error) {
+              if (error.status !== 422) throw error;
+            }
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: label,
+              per_page: 1,
+            });
+            const body = [
+              "週次更新が失敗しました。main は変更していません。",
+              "",
+              `- collect: ${{ needs.collect.result }}`,
+              `- propose: ${{ needs.propose.result }}`,
+              `- run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+            ].join("\n");
+            if (existing.data.length) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.data[0].number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: "週次更新が失敗しました",
+                body,
+                labels: [label],
+              });
+            }

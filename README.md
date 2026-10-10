@@ -105,13 +105,13 @@ Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = Awes
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
 scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、手動の週次データ更新（デプロイは Vercel の Git 連携）
 ```
 
 ## 更新の流れ
 
-1. 毎週月曜に GitHub Actions が「Weekly research」Issue を開き、「Update data」が GitHub スターとブランド配色を再取得する。`ANTHROPIC_API_KEY` を設定すると調査自体も自動で走る。
-2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。
+1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）を手動で実行する。既定は dry-run で、PR は作らない。`dry_run=false` のときだけ `bot/weekly-growth` にデータ差分の PR を 1 本出す。main へは push しない。スケジュールはまだ付けていない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。
+2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。Actions では AI API を使わない。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
 

@@ -4,25 +4,25 @@ category: research
 type: guideline
 sources:
   - url: https://github.com/Yu-aimaker/AwesomeDesignSystem
-    title: "このリポジトリ本体 (scripts/fetch-repos.mjs と .github/workflows/update-data.yml)"
+    title: "このリポジトリ本体 (scripts/fetch-repos.mjs と .github/workflows/weekly-growth.yml)"
   - url: https://github.com/tt-a1i/archify
     title: "tt-a1i/archify (本タスクで観測した高スター数の実例、51,537 stars)"
   - url: https://github.com/obra/superpowers
     title: "obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)"
 tags: [rankings, github-stars, oss, data-pipeline, caveats, github-api]
-updated: 2026-09-07
+updated: 2026-10-11
 ---
 
 # OSS ランキング (/rankings) の設計
 
 ## 概要
 
-本リポジトリの `AwesomeDS/data/repos.json` は、デザイン / AI フロントエンド関連 OSS の GitHub スター数ランキングを保持するデータファイルで、`scripts/fetch-repos.mjs`（別ワークストリームが実装、本エントリ執筆時点でリポジトリに存在することを確認済み）が GitHub REST API から生成する。`web/SITE-DESIGN.md` の `/rankings`（「人気のデザイン / AI 関連 OSS ランキング。スター数のバー。毎週自動更新」）はこのデータを表示する画面で、原則 5「壊れない: 外部 API はビルド時に読まず、コミット済み JSON だけを表示する」に従い、サイトのビルドやページ表示は GitHub API を直接叩かず、`.github/workflows/update-data.yml` が週次でコミットし直したスナップショットだけを読む設計になっている。
+本リポジトリの `AwesomeDS/data/repos.json` は、デザイン / AI フロントエンド関連 OSS の GitHub スター数ランキングを保持するデータファイルで、`scripts/fetch-repos.mjs` が GitHub REST API から生成する。選定リストは `AwesomeDS/data/sources/curated-repos.json` にあり、`topic:design-system` の検索結果は `stars:>500`、直近 90 日に push があるもの、`AwesomeDS/data/sources/blocklist.json` に無いものに限る。`web/SITE-DESIGN.md` の `/rankings` はこのデータを表示する画面で、原則 5「壊れない: 外部 API はビルド時に読まず、コミット済み JSON だけを表示する」に従い、サイトのビルドやページ表示は GitHub API を直接叩かない。更新は `.github/workflows/weekly-growth.yml` が `bot/weekly-growth` への PR でのみ行い、main へは push しない。
 
 ## 要点
 
-- 更新の仕組み: `.github/workflows/update-data.yml` が毎週月曜 00:30 UTC（`cron: "30 0 * * 1"`）と手動実行（`workflow_dispatch`）で `node scripts/fetch-repos.mjs` → `node scripts/extract-brands.mjs` → `node scripts/build-palettes.mjs` → `node scripts/validate-data.mjs` → `Plugin/awesome-ds/scripts/sync-ds.sh` の順に実行し、差分があれば `github-actions[bot]` としてコミット・push する。
-- データ取得の 2 系統: (1) `CURATED` という owner/repo とカテゴリの対応表（`scripts/fetch-repos.mjs` にハードコード、`/repos/{owner}/{name}` を個別取得）、(2) `topic:design-system` で `sort=stars&order=desc` を使った GitHub 検索 API の上位 20 件（`per_page=20`）。両方を 1 つの `repos[]` 配列にマージし、`stars` の降順で並べる。
+- 更新の仕組み: `.github/workflows/weekly-growth.yml` は `workflow_dispatch` のみ（スケジュールなし、`dry_run` 既定 true）。`node scripts/fetch-repos.mjs` → `node scripts/extract-brands.mjs` → `node scripts/build-palettes.mjs` → `node scripts/build-fonts.mjs` → `node scripts/discover-candidates.mjs` → `node scripts/validate-data.mjs` → `Plugin/awesome-ds/scripts/sync-ds.sh` → `node scripts/diff-guard.mjs` の順に実行する。意味のある差分があり、かつ dry-run でないときだけ `bot/weekly-growth` に 1 コミットして PR を作る。main への push はしない。
+- データ取得の 2 系統: (1) `AwesomeDS/data/sources/curated-repos.json` の owner/repo とカテゴリ（`/repos/{owner}/{name}` を個別取得）、(2) `topic:design-system stars:>500 pushed:>{90日前}` の GitHub 検索 API 上位 20 件から blocklist を除いたもの。両方を 1 つの `repos[]` 配列にマージし、`stars` の降順で並べる。
 - カテゴリ一覧（`CURATED` のキーで確認できる区分）: `component-library`、`headless`、`animation`、`animated-components`、`3d`、`icons`、`dataviz`、`styling`、`design-tokens`、`fonts`、`agent-skills`、`ai-ui`、`design-tools`、`framework`、`tooling`、および検索由来の `topic:design-system`。Knowledge のカテゴリ（component-libraries、animation、skills など）とは名前も粒度も一致しない、独立した分類であることに注意。
 - レート制限対策: `GITHUB_TOKEN` があれば 60/時間から 5,000/時間に上がる（スクリプト冒頭のコメント）。403/429 かつ `x-ratelimit-remaining: 0` を検知すると `x-ratelimit-reset` まで最大 15 分（`MAX_WAIT_MS`）待って再試行し、それを超えるとエラーで打ち切る。5xx と 429 は最大 3 回まで指数的に間隔を空けて再試行する。
 - 失敗時のフォールバック: 1 リポジトリの取得に失敗しても全体を止めず、`meta.fetchErrors` に記録した上で「前回ファイルの値を維持」または「`stars: null`、`note: "fetch failed: ..."`」で埋める。`repos.length` が `CURATED` のキー数より少ない（内部エラー）場合のみファイルを書き込まずに終了する（`missing` 件数は `meta.counts.missing` に記録）。
@@ -43,10 +43,10 @@ node scripts/fetch-repos.mjs --seed <file.json>
 
 | 項目 | 値 |
 |---|---|
-| 更新スケジュール | 毎週月曜 00:30 UTC（`update-data.yml`）+ 手動実行 |
+| 更新スケジュール | 手動の `weekly-growth.yml` のみ。定期実行は未設定 |
 | トークンなしのレート制限 | 60 リクエスト/時間 |
 | トークンありのレート制限 | 5,000 リクエスト/時間 |
-| topic 検索の対象 | `topic:design-system`、`sort=stars`、上位 20 件 |
+| topic 検索の対象 | `topic:design-system stars:>500`、直近 90 日、blocklist 除外、上位 20 件 |
 | 待機上限 | 15 分（`MAX_WAIT_MS`）を超える reset 待ちはエラーで打ち切り |
 | 失敗時の挙動 | 前回値を維持、または `stars: null` + `fetchErrors` に記録、部分書き込みはしない |
 
@@ -71,6 +71,6 @@ node scripts/fetch-repos.mjs --seed <file.json>
 
 ## 出典
 
-- このリポジトリの `scripts/fetch-repos.mjs`（`CURATED` の内容、レート制限処理、出力形式）と `.github/workflows/update-data.yml`（スケジュールとジョブ構成）。2026-09-07 にファイルを直接読んで確認した。
+- このリポジトリの `scripts/fetch-repos.mjs`、`AwesomeDS/data/sources/curated-repos.json`、`.github/workflows/weekly-growth.yml`。2026-10-11 にファイルを直接読んで確認した。2026-09-07 の計測値は下の表のまま残している。
 - https://github.com/tt-a1i/archify : スター数の実例。GitHub 検索 API で 2026-09-07 に確認。
 - https://github.com/obra/superpowers : スター数の実例。GitHub 検索 API で 2026-09-07 に確認。

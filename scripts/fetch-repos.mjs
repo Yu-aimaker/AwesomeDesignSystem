@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Refreshes AwesomeDS/data/repos.json: GitHub star ranking of design / AI-frontend open source.
-//   - a curated list of repositories (below) with a category each
-//   - plus the top 20 results of the GitHub search API for topic:design-system sorted by stars
+//   - a curated list in AwesomeDS/data/sources/curated-repos.json
+//   - plus the top 20 results of topic:design-system stars:>500 pushed within 90 days
+//     (AwesomeDS/data/sources/blocklist.json is excluded from the topic slice)
 // Run: node scripts/fetch-repos.mjs [--seed <file.json>] [--no-fetch]
 //   GITHUB_TOKEN / GH_TOKEN  raise the rate limit from 60/h to 5000/h.
 //   --seed <file>            merge an array of GitHub API repository objects as if fetched (offline bootstrap).
@@ -11,7 +12,8 @@
 // receives a partial list.
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { filterTopicRepos, topicQuery } from "./lib/growth.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(root, "AwesomeDS/data/repos.json");
@@ -19,62 +21,18 @@ const args = process.argv.slice(2);
 const seedPath = args.includes("--seed") ? args[args.indexOf("--seed") + 1] : null;
 const NO_FETCH = args.includes("--no-fetch");
 const TOKEN = process.env.GITHUB_TOKEN || process.env.GH_TOKEN || "";
-const TOPIC_QUERY = "topic:design-system";
+const TOPIC_QUERY = topicQuery();
 const TOPIC_TOP = 20;
 const MAX_WAIT_MS = 15 * 60 * 1000;
 
-// owner/name -> category. Categories are the site's facets.
-export const CURATED = {
-  // component libraries
-  "shadcn-ui/ui": "component-library", "radix-ui/themes": "component-library", "mantinedev/mantine": "component-library",
-  "chakra-ui/chakra-ui": "component-library", "mui/material-ui": "component-library", "ant-design/ant-design": "component-library",
-  "cschroeter/park-ui": "component-library", "saadeghi/daisyui": "component-library", "themesberg/flowbite": "component-library",
-  "heroui-inc/heroui": "component-library", "tremorlabs/tremor": "component-library", "nuxt/ui": "component-library",
-  "huntabyte/shadcn-svelte": "component-library", "unovue/shadcn-vue": "component-library", "primer/css": "component-library",
-  "carbon-design-system/carbon": "component-library", "material-components/material-web": "component-library",
-  // headless
-  "radix-ui/primitives": "headless", "mui/base-ui": "headless", "adobe/react-spectrum": "headless", "chakra-ui/ark": "headless",
-  "tailwindlabs/headlessui": "headless", "dip/cmdk": "headless", "emilkowalski/sonner": "headless", "emilkowalski/vaul": "headless",
-  "TanStack/table": "headless", "TanStack/form": "headless", "react-hook-form/react-hook-form": "headless", "colinhacks/zod": "headless",
-  // animation
-  "motiondivision/motion": "animation", "greensock/GSAP": "animation", "juliangarnier/anime": "animation", "airbnb/lottie-web": "animation",
-  "LottieFiles/dotlottie-web": "animation", "rive-app/rive-wasm": "animation", "theatre-js/theatre": "animation",
-  "formkit/auto-animate": "animation", "pmndrs/react-spring": "animation", "Wombosvideo/tw-animate-css": "animation",
-  // animated component collections
-  "magicuidesign/magicui": "animated-components", "DavidHDev/react-bits": "animated-components", "ibelick/motion-primitives": "animated-components",
-  "codse/animata": "animated-components", "nolly-studio/cult-ui": "animated-components",
-  // 3d
-  "mrdoob/three.js": "3d", "pmndrs/react-three-fiber": "3d", "pmndrs/drei": "3d", "pmndrs/uikit": "3d",
-  // icons
-  "lucide-icons/lucide": "icons", "phosphor-icons/homepage": "icons", "tabler/tabler-icons": "icons", "hugeicons/hugeicons": "icons",
-  "radix-ui/icons": "icons", "tailwindlabs/heroicons": "icons", "iconoir-icons/iconoir": "icons",
-  // data viz
-  "recharts/recharts": "dataviz", "airbnb/visx": "dataviz", "plouc/nivo": "dataviz", "observablehq/plot": "dataviz", "d3/d3": "dataviz",
-  // styling
-  "tailwindlabs/tailwindcss": "styling", "chakra-ui/panda": "styling", "vanilla-extract-css/vanilla-extract": "styling",
-  "joe-bell/cva": "styling", "heroui-inc/tailwind-variants": "styling",
-  // design tokens
-  "style-dictionary/style-dictionary": "design-tokens", "tokens-studio/figma-plugin": "design-tokens", "design-tokens/community-group": "design-tokens",
-  "figma/code-connect": "design-tokens",
-  // fonts
-  "vercel/geist-font": "fonts", "rsms/inter": "fonts", "notofonts/noto-cjk": "fonts", "JetBrains/JetBrainsMono": "fonts",
-  "tonsky/FiraCode": "fonts", "eigilnikolajsen/commit-mono": "fonts", "google/fonts": "fonts", "fontsource/fontsource": "fonts",
-  // design-md and skills for agents
-  "voltagent/awesome-design-md": "agent-skills", "kzhrknt/awesome-design-md-jp": "agent-skills", "Leonxlnx/taste-skill": "agent-skills",
-  "ibelick/ui-skills": "agent-skills", "anthropics/skills": "agent-skills", "anthropics/claude-code": "agent-skills",
-  "mattpocock/skills": "agent-skills", "obra/superpowers": "agent-skills", "vercel-labs/agent-skills": "agent-skills",
-  "vercel-labs/design-systems-to-agent-skills": "agent-skills", "tt-a1i/archify": "agent-skills",
-  "GLips/Figma-Context-MCP": "agent-skills", "modelcontextprotocol/servers": "agent-skills",
-  // AI UI
-  "assistant-ui/assistant-ui": "ai-ui", "vercel/ai-elements": "ai-ui", "CopilotKit/CopilotKit": "ai-ui", "vercel/ai": "ai-ui",
-  // design tools
-  "excalidraw/excalidraw": "design-tools", "tldraw/tldraw": "design-tools", "penpot/penpot": "design-tools", "storybookjs/storybook": "design-tools",
-  // framework and tooling used by the stack map
-  "vercel/next.js": "framework", "vitejs/vite": "framework", "withastro/astro": "framework", "TanStack/router": "framework",
-  "TanStack/query": "framework", "pmndrs/zustand": "framework", "biomejs/biome": "tooling", "oxc-project/oxc": "tooling",
-  "microsoft/playwright": "tooling", "vitest-dev/vitest": "tooling", "aidenybai/react-scan": "tooling",
-};
+// Curated owner/name -> category. Edit AwesomeDS/data/sources/curated-repos.json.
+function loadCurated() {
+  return JSON.parse(readFileSync(join(root, "AwesomeDS/data/sources/curated-repos.json"), "utf8"));
+}
 
+async function main() {
+const CURATED = loadCurated();
+const BLOCKLIST = JSON.parse(readFileSync(join(root, "AwesomeDS/data/sources/blocklist.json"), "utf8")).repos ?? [];
 const lower = (s) => s.toLowerCase();
 const existing = existsSync(OUT) ? JSON.parse(readFileSync(OUT, "utf8")) : { repos: [] };
 const previous = new Map((existing.repos || []).map((r) => [lower(`${r.owner}/${r.name}`), r]));
@@ -165,21 +123,23 @@ let topicNames = [];
 if (!NO_FETCH && !stopAll) {
   try {
     const res = await gh(`/search/repositories?q=${encodeURIComponent(TOPIC_QUERY)}&sort=stars&order=desc&per_page=${TOPIC_TOP}`);
-    for (const api of res.items || []) {
+    const topicItems = filterTopicRepos(res.items || [], BLOCKLIST);
+    for (const api of topicItems) {
       const key = lower(api.full_name);
       topicNames.push(key);
       if (!result.has(key)) result.set(key, toEntry(api, "topic:design-system"));
       else result.get(key).topics = api.topics ?? result.get(key).topics;
     }
-    fetched += (res.items || []).length;
+    fetched += topicItems.length;
   } catch (e) {
     fetchErrors.push(`search ${TOPIC_QUERY}: ${e.message}`);
   }
 }
+const blocked = new Set(BLOCKLIST.map((name) => name.toLowerCase()));
 if (topicNames.length === 0) {
   // fall back to seed entries marked as topic results, then to the previous file's topic entries
-  for (const [key, api] of seeded) if (api._topic && !result.has(key)) { result.set(key, toEntry(api, "topic:design-system")); topicNames.push(key); }
-  if (topicNames.length === 0) for (const [key, r] of previous) if (r.category === "topic:design-system" && !result.has(key)) { result.set(key, r); topicNames.push(key); kept++; }
+  for (const [key, api] of seeded) if (api._topic && !result.has(key) && !blocked.has(key)) { result.set(key, toEntry(api, "topic:design-system")); topicNames.push(key); }
+  if (topicNames.length === 0) for (const [key, r] of previous) if (r.category === "topic:design-system" && !result.has(key) && !blocked.has(key)) { result.set(key, r); topicNames.push(key); kept++; }
 }
 for (const key of topicNames) {
   const r = result.get(key);
@@ -209,3 +169,13 @@ mkdirSync(dirname(OUT), { recursive: true });
 writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 console.log(`fetch-repos: wrote ${repos.length} repos (${fetched} fetched, ${kept} kept, ${missing} without stars, ${fetchErrors.length} errors) -> ${OUT}`);
 if (fetchErrors.length) console.log("fetch-repos: errors:\n  " + fetchErrors.slice(0, 20).join("\n  ") + (fetchErrors.length > 20 ? `\n  ...${fetchErrors.length - 20} more` : ""));
+
+}
+
+const isDirect = process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isDirect) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

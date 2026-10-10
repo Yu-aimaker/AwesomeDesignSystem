@@ -1,6 +1,7 @@
 name: Check
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches: [main]
@@ -23,6 +24,19 @@ jobs:
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
       - name: Data files are valid
         run: node scripts/validate-data.mjs
+      - name: Weekly growth unit tests
+        run: node --test scripts/__tests__/weekly-growth.test.mjs
+      - name: Internal links
+        run: node scripts/check-links.mjs
+      - name: Flagship share images
+        run: node scripts/check-ogp-images.mjs
+      - name: Workflows do not push main or call billed agents
+        run: node scripts/check-workflows.mjs
+      - name: Bot data diff guard
+        if: github.head_ref == 'bot/weekly-growth' || github.ref == 'refs/heads/bot/weekly-growth'
+        run: |
+          git fetch origin ${{ github.base_ref }}
+          node scripts/diff-guard.mjs --git origin/${{ github.base_ref }}
       - name: Plugin manifests are valid JSON
         run: |
           node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json','utf8'))"
@@ -30,6 +44,7 @@ jobs:
 
   web:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: web
@@ -49,6 +64,11 @@ jobs:
           node scripts/sync-tokens.mjs
           pnpm exec tsc --noEmit -p .
       - run: pnpm build
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-ms-playwright-${{ hashFiles('web/pnpm-lock.yaml') }}
       - name: Install Chromium for the smoke test
         run: pnpm exec playwright install --with-deps chromium
       - name: Every route renders without console errors or horizontal overflow

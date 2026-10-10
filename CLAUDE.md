@@ -46,7 +46,7 @@ Reference/     自動生成リンク一覧（手編集しない）
 Plugin/awesome-ds/  skills ×5 + cursor rules + ds 同期コピー
 web/           Vite + React 19 + Tailwind 4 体験サイト
 scripts/       validate / build-reference / 週次データ
-.github/workflows/  check, update-data, weekly-research
+.github/workflows/  check, weekly-growth（手動・dry-run 既定。main へは push しない）
 ```
 
 スキル: `awesome-ds` / `ds-creator` / `design-verifier` / `design-thinking` / `knowledge-curator`
