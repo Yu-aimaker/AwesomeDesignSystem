@@ -168,3 +168,4 @@ Yellow, lime and light orange brands usually need a darker "text accent" variant
 - https://www.nngroup.com/articles/dark-mode-users-issues/ : dark mode is popular but not essential; test both.
 - https://refactoringui.com/previews/building-your-color-palette : role-based palettes with few hues.
 - https://github.com/Leonxlnx/taste-skill : "no pure black", "Inter + slate + purple" and warm-paper palette listed as AI tells.
+- https://linear.app/now/how-we-redesigned-the-linear-ui : Linear limited how much chrome color enters its theme calculation to reach a "more neutral and timeless appearance" (opened 2026-10-08).

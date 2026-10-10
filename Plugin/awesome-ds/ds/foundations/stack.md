@@ -97,3 +97,5 @@ each part, and a table of when to deviate.
 - https://biomejs.dev/ : Biome formatter and linter.
 - https://github.com/digital-go-jp/design-system-example-components-react : Digital Agency React components.
 - https://github.com/Leonxlnx/taste-skill : official-package rule, RSC isolation, dependency verification.
+- https://carbondesignsystem.com/getting-started/developing/overview : Carbon ships its own packages for developers (opened 2026-10-08).
+- https://shopify.dev/docs/api/polaris : Polaris is Shopify's UI framework, now documented on shopify.dev (opened 2026-10-08).

@@ -56,6 +56,14 @@ Options
 
 File naming: `<route-slug>__<width>__<scheme>[__full|__focus|__hover|__reduced].png`. `manifest.json` lists every file with url, width, scheme, state, and the page title.
 
+## Image check
+
+`capture.mjs` scrolls each page to trigger lazy images, waits for them to settle, then fails the capture if any `<img>` is not `complete && naturalWidth > 0` or any image request answers 4xx/5xx or fails. Output line per broken image: `BROKEN IMAGE <name> <src>`. Manifest entries carry `broken_images`. The exit code is 1 when any capture has a broken image.
+
+On pages with `section[aria-labelledby=flagship]` (the site's /sources) it also prints `flagship images: N/M real, K fallback, B broken`. A card without an `<img>` is a fallback poster; a failed image that the app swaps for a poster still counts as broken through the request check.
+
+Share metadata is checked by `static-audit.mjs` on the source HTML (`og:image`, `twitter:card`). The site's own gate is `web/scripts/screenshot.mjs --check`, which also verifies the served HTML and the 1200x630 image file.
+
 ## Reading the screenshots
 
 - Open the 390 light shots first. If the primary action is not in the first viewport there, the hero fails.

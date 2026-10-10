@@ -116,3 +116,5 @@ gray would break the true-gray rule and fight brand accents.
 - https://www.nngroup.com/articles/flat-design/ : why some signifier (border, hover) must remain.
 - https://github.com/voltagent/awesome-design-md : Linear surface ladder, Vercel stacked hairline shadows, Apple single product shadow, Stripe tinted shadows.
 - https://github.com/Leonxlnx/taste-skill : "tint shadows to the background hue; no pure-black drop shadows", glass approximations.
+- https://atlassian.design/foundations/elevation : Atlassian pairs surfaces with shadows only for the top two levels (raised, overlay), and leans on lighter surfaces in dark theme (opened 2026-10-08).
+- https://stripe.com/ : the stylesheet linked from the page defines its shadow tokens with a navy tint, `rgba(0,55,112,.06)` to `rgba(0,55,112,.1)` (opened 2026-10-08).
