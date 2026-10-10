@@ -10,9 +10,11 @@
   },
   "workers_dev": true,
   "preview_urls": true,
-  // wrangler preview（Workers Builds の非本番コマンド）は空でもこのブロックが要る。
-  // assets と compatibility_date はトップレベルに置く。routes は入れない。
+  // 空でもこのブロックが要る（wrangler preview）。assets と compatibility_date はトップレベル。routes は入れない。
+  // Workers Builds の非本番コマンドは `pnpm exec wrangler versions upload` にする。
+  // `wrangler preview` は assets-only でも no-op worker を付け、無いパスが 404 になる。
   // https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file
+  // https://developers.cloudflare.com/workers/ci-cd/builds/configuration/#preview-command
   "previews": {}
   // PR-B（切替）で追加:
   // "routes": [{ "pattern": "awesomeds.yumaker.studio/*", "zone_name": "yumaker.studio" }]
