@@ -16,7 +16,7 @@
   <a href="CONTRIBUTING.md">Contributing</a> (Japanese)
 </p>
 
-# Awesome Design Systems for Claude
+# Awesome Design Systems
 
 The source of truth for design, plus a plugin, for building front ends with AI coding agents (Claude Code, Cursor). At the center is **AwesomeDS**, a neutral, general-purpose design system.
 
@@ -39,7 +39,7 @@ Pick one that fits your goal.
 ### A. Install the plugin in Claude Code (recommended)
 
 ```
-/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude
+/plugin marketplace add Yu-aimaker/AwesomeDesignSystem
 /plugin install awesome-ds@awesome-design-systems
 ```
 

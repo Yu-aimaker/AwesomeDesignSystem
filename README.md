@@ -39,7 +39,7 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 ### A. Claude Code にプラグインを入れる（推奨）
 
 ```
-/plugin marketplace add Yu-aimaker/Awesome-Design-Systems-Claude
+/plugin marketplace add Yu-aimaker/AwesomeDesignSystem
 /plugin install awesome-ds@awesome-design-systems
 ```
 
