@@ -96,6 +96,16 @@ for (const file of files) {
   });
 }
 
+// Share metadata: an .html file with <head> needs og:image and twitter:card
+for (const file of files) {
+  if (extname(file) !== ".html") continue;
+  const src = readFileSync(file, "utf8");
+  if (!/<head\b/i.test(src)) continue;
+  const headLine = src.slice(0, src.search(/<head\b/i)).split("\n").length;
+  if (!/<meta\b[^>]*(property|name)=["']og:image["']/i.test(src)) add(2, "missing-og-image", file, headLine, "<head> without og:image", 'Add <meta property="og:image" content="https://.../ogp.png"> (absolute URL, 1200x630)');
+  if (!/<meta\b[^>]*name=["']twitter:card["']/i.test(src)) add(2, "missing-twitter-card", file, headLine, "<head> without twitter:card", 'Add <meta name="twitter:card" content="summary_large_image">');
+}
+
 // Eyebrow budget: ceil(sections / 3), minimum 1
 if (counts.sections > 0) {
   const budget = Math.max(1, Math.ceil(counts.sections / 3));

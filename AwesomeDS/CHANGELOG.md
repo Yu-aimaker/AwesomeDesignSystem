@@ -3,6 +3,30 @@
 All notable changes to AwesomeDS are recorded here. The format follows Keep a Changelog
 and the project follows Semantic Versioning 2.0.0.
 
+## [0.4.0] - 2026-10-08
+
+### Added
+- `components/README.md` Maturity: alpha / beta / stable / deprecated, what each promises, how a
+  component moves between levels. References: Primer component status, Atlassian release phases,
+  Carbon. The site shows the level on every component in /components (34 stable, 14 beta).
+- `components/README.md` Dialog and Toast: menus, popovers and toasts opened from a dialog are
+  portalled into that dialog; with a native modal `<dialog>`, toasts render inside it.
+- `foundations/feedback.md`: the same native `<dialog>` rule for toasts.
+
+### Changed
+- `foundations/imagery.md`, `internationalization.md`, `layers.md`, `density.md` expanded from about
+  45 lines to 158 to 222: good and bad examples, edge cases, review checklists, verified sources.
+  Corrected reasons that did not match their sources (Material 3 and Carbon density steps, the Apple
+  HIG page for 44 pt, AVIF size claim); removed a dead Material 3 Imagery link.
+- Sources in `typography.md`, `radius.md`, `spacing.md`, `elevation.md`, `dark-mode.md`, `color.md`
+  and `stack.md` now cite Primer, Carbon, Polaris, Atlassian, Stripe and Linear primary sources for
+  rules that came from them. No values changed.
+- DESIGN.md front matter and token file headers to 0.4.0. No token values changed.
+
+### Known gap
+- `density.md` documents a `(pointer: coarse)` fallback from compact to comfortable that
+  `tokens.css` does not implement yet. Tracked for a separate token change.
+
 ## [0.3.0] - 2026-10-08
 
 ### Added

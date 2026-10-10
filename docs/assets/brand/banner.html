@@ -1,0 +1,89 @@
+<!doctype html>
+<!-- Source for banner-light.png / banner-dark.png. Render: bash docs/assets/brand/render.sh
+     Values mirror AwesomeDS/tokens/tokens.css (canvas, ink, hairline, accent, radius, Geist + Noto Sans JP). -->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=block" rel="stylesheet">
+<style>
+  :root {
+    --canvas: #ffffff; --canvas-soft: #fafafa; --ink: #0a0a0a; --ink-2: #525252; --muted: #6b6b6b;
+    --hairline: #e5e5e5; --hairline-strong: #8c8c8c; --accent: #2f5bea; --dot: #ececec;
+    --tile: #0a0a0a; --tile-ink: #ffffff;
+  }
+  :root[data-theme="dark"] {
+    --canvas: #0a0a0a; --canvas-soft: #111111; --ink: #fafafa; --ink-2: #b4b4b4; --muted: #8f8f8f;
+    --hairline: #262626; --hairline-strong: #5c5c5c; --accent: #7a9cff; --dot: #1c1c1c;
+    --tile: #fafafa; --tile-ink: #0a0a0a;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1280px; height: 400px; overflow: hidden; }
+  body {
+    background: var(--canvas);
+    background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+    background-size: 24px 24px; background-position: 12px 12px;
+    color: var(--ink); font-family: "Geist", "Noto Sans JP", sans-serif;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 64px;
+    border: 1px solid var(--hairline); border-radius: 16px;
+  }
+  .lockup { display: flex; flex-direction: column; gap: 24px; }
+  .row { display: flex; align-items: center; gap: 20px; }
+  .mark { width: 80px; height: 80px; }
+  h1 { font-size: 72px; font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
+  .sub { font-family: "Noto Sans JP", sans-serif; font-size: 22px; color: var(--ink-2); line-height: 1.6; }
+  .tags { display: flex; gap: 8px; }
+  .tag { font-family: "Geist Mono", monospace; font-size: 14px; color: var(--ink-2);
+         border: 1px solid var(--hairline); border-radius: 8px; padding: 6px 12px; background: var(--canvas); }
+  .panel { width: 400px; border: 1px solid var(--hairline); border-radius: 12px; background: var(--canvas);
+           padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+  .label { font-family: "Geist Mono", monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .sw { height: 48px; border-radius: 8px; border: 1px solid var(--hairline); }
+  .names { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 6px; }
+  .space { display: flex; align-items: flex-end; gap: 8px; height: 32px; }
+  .space i { display: block; height: 8px; background: var(--ink); border-radius: 2px; }
+  .space i.a { background: var(--accent); }
+  .radii { display: flex; gap: 12px; }
+  .radii div { width: 48px; height: 32px; border: 1.5px solid var(--ink); }
+  .type { display: flex; align-items: baseline; justify-content: space-between; }
+  .type b { font-size: 36px; font-weight: 600; letter-spacing: -0.02em; }
+  .btn { font-size: 14px; font-weight: 500; background: var(--tile); color: var(--tile-ink); border-radius: 8px; padding: 8px 14px; }
+  .link { font-size: 14px; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+</style>
+</head>
+<body>
+  <div class="lockup">
+    <div class="row">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="var(--tile)"/>
+        <rect x="12" y="18" width="8" height="3" fill="#2f5bea"/>
+        <path d="M9 24 14 8h4l5 16h-3.6L16 12.6 12.6 24Z" fill="var(--tile-ink)"/>
+      </svg>
+      <h1>AwesomeDS</h1>
+    </div>
+    <p class="sub">AI コーディングエージェントのための汎用デザインシステム</p>
+    <div class="tags">
+      <span class="tag">DESIGN.md</span><span class="tag">tokens</span><span class="tag">Claude Code plugin</span><span class="tag">Cursor rules</span>
+    </div>
+  </div>
+  <div class="panel">
+    <div>
+      <div class="swatches">
+        <div class="sw" style="background:var(--canvas)"></div>
+        <div class="sw" style="background:var(--ink)"></div>
+        <div class="sw" style="background:var(--hairline)"></div>
+        <div class="sw" style="background:var(--accent)"></div>
+      </div>
+      <div class="names label"><span>canvas</span><span>ink</span><span>hairline</span><span>accent</span></div>
+    </div>
+    <div>
+      <div class="space"><i style="width:4px"></i><i style="width:8px"></i><i style="width:12px"></i><i style="width:16px"></i><i style="width:24px"></i><i class="a" style="width:32px"></i><i style="width:48px"></i><i style="width:64px"></i></div>
+      <div class="label" style="margin-top:6px">space 4 8 12 16 24 32 48 64</div>
+    </div>
+    <div class="type">
+      <b>Aa あ</b>
+      <div class="row" style="gap:12px"><span class="link">リンク</span><span class="btn">保存する</span></div>
+    </div>
+  </div>
+</body>
+</html>

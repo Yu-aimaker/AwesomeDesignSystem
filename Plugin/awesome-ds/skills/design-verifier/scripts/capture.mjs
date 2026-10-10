@@ -3,6 +3,10 @@
 // node capture.mjs --urls a,b [--urls-file f] [--widths 390,768,1280] [--schemes light,dark]
 //                  [--out design-review/shots] [--full-page] [--states] [--wait networkidle]
 //                  [--delay 300] [--scale 1] [--theme-attr data-theme|class] [--dismiss "css"] [--timeout 30000]
+// Image check: after load the page is scrolled (lazy images), then every <img> must be complete with
+// naturalWidth > 0, and image requests must not answer 4xx/5xx. Broken images are printed with src and
+// stored in manifest entries as `broken_images`. On /sources, flagship cards (section[aria-labelledby=flagship] article)
+// are counted as real raster / fallback poster / broken. Any broken image makes the process exit 1.
 // Browser: CHROMIUM_PATH (executablePath) > PLAYWRIGHT_BROWSERS_PATH (resolved by Playwright) > default cache.
 // Missing browser: npx playwright install chromium
 
@@ -117,10 +121,29 @@ for (const url of urls) {
       const base = `${slug(url)}__${width}__${scheme}`;
       const entry = { url, width, scheme, files: {}, title: "", errors: [] };
       page.on("pageerror", (e) => entry.errors.push(String(e.message || e)));
+      const imageErrors = [];
+      page.on("response", (res) => { if (res.request().resourceType() === "image" && res.status() >= 400) imageErrors.push(`${res.status()} ${res.url()}`); });
+      page.on("requestfailed", (req) => { if (req.resourceType() === "image") imageErrors.push(`failed ${req.url()}`); });
       try {
         await page.goto(url, { waitUntil, timeout });
         if (typeof dismiss === "string") { try { await page.click(dismiss, { timeout: 2000 }); } catch { /* not present */ } }
+        await page.evaluate(async () => {
+          const step = Math.max(200, Math.floor(window.innerHeight * 0.8));
+          for (let y = 0; y < document.documentElement.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 60)); }
+          window.scrollTo(0, 0);
+        });
+        await page.waitForFunction(() => [...document.images].every((i) => !i.currentSrc || i.complete), null, { timeout: 5000 }).catch(() => {});
         await page.waitForTimeout(delay);
+        const imgs = await page.evaluate(() => {
+          const broken = [...document.images].filter((i) => i.currentSrc && !(i.complete && i.naturalWidth > 0)).map((i) => i.currentSrc);
+          const cards = [...document.querySelectorAll("section[aria-labelledby=flagship] article")];
+          let real = 0, fallback = 0;
+          for (const c of cards) { const im = c.querySelector("img"); if (!im) fallback++; else if (im.complete && im.naturalWidth > 0) real++; }
+          return { broken, total: cards.length, real, fallback };
+        });
+        entry.broken_images = [...new Set([...imgs.broken, ...imageErrors])];
+        for (const src of entry.broken_images) { entry.errors.push(`broken image ${src}`); console.error(`BROKEN IMAGE ${base} ${src}`); }
+        if (imgs.total) console.log(`${new URL(url).pathname} flagship images: ${imgs.real}/${imgs.total} real, ${imgs.fallback} fallback, ${entry.broken_images.length} broken`);
         entry.title = await page.title();
         entry.files.viewport = await shot(page, `${base}.png`);
         if (fullPage) entry.files.full = await shot(page, `${base}__full.png`, { fullPage: true });
@@ -157,4 +180,6 @@ await browser.close();
 writeFileSync(resolve(out, "manifest.json"), JSON.stringify({ generated: new Date().toISOString(), out, entries: manifest }, null, 2));
 const failed = manifest.filter((m) => m.errors.length).length;
 console.log(`\n${manifest.length} captures, ${failed} with errors. Manifest: ${resolve(out, "manifest.json")}`);
-process.exit(failed && failed === manifest.length ? 1 : 0);
+const brokenCount = manifest.filter((m) => m.broken_images?.length).length;
+if (brokenCount) console.error(`${brokenCount} captures with broken images`);
+process.exit((failed && failed === manifest.length) || brokenCount ? 1 : 0);

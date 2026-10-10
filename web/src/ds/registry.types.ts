@@ -3,12 +3,20 @@ import type { Control, PlaygroundState } from "../layout/Playground";
 
 export type ComponentGroup = "actions" | "inputs" | "selection" | "navigation" | "overlay" | "feedback" | "data" | "layout" | "typography";
 
+/**
+ * Component maturity, defined in AwesomeDS/components/README.md ("Maturity").
+ * alpha: API may change. beta: usable, spec or a11y review incomplete.
+ * stable: API frozen, spec and review done. deprecated: replacement named.
+ */
+export type ComponentMaturity = "alpha" | "beta" | "stable" | "deprecated";
+
 export interface ComponentEntry {
   /** kebab-case, used in the URL hash. */
   id: string;
   /** e.g. "Button" */
   name: string;
   group: ComponentGroup;
+  maturity: ComponentMaturity;
   /** At most 12 words, in the locale the entry was built for: the single rule to remember. */
   caption: string;
   controls?: Control[];

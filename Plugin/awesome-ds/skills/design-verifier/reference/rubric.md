@@ -32,7 +32,7 @@ Findings: text under 12px (S1); body under 16px on a consumer page (S1); a data 
 
 ## 6. Consistency
 What to look at: one radius family (controls 8, cards 12, dialogs 16, badges pill), one icon family and stroke, one accent used identically, one button height per size, one shadow model. Compare across routes, not only within one page.
-Findings: two radius families on one page (S2); two icon families (S2); accent used as a button fill (S2); a raw colour that differs slightly from the token (S2); different button heights for the same size (S3).
+Findings: two radius families on one page (S2); two icon families (S2); accent used as a button fill (S2); a raw colour that differs slightly from the token (S2); different button heights for the same size (S3).; broken image (not `complete` or `naturalWidth` 0, or image request 4xx/5xx, from capture.mjs) (S1); `<head>` without `og:image` or `twitter:card` (S2, static audit)
 
 ## 7. States
 What to look at: from code and from the screenshots taken with `--states` (focus on first button, hover on first link): hover, focus-visible, active, disabled, loading for every interactive element; loading, empty, error for every data view.
