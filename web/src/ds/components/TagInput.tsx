@@ -1,6 +1,8 @@
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { X } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface TagInputProps {
   value: string[];
@@ -18,7 +20,9 @@ export interface TagInputProps {
 // The input frame holds pills. Enter or comma commits, Backspace on an empty
 // field removes the last tag, each pill has its own remove button. Duplicates
 // are ignored (case-insensitive). Focus ring belongs to the inner input.
-export function TagInput({ value, onChange, label, placeholder = "追加して Enter", helper, error, max, disabled = false, className }: TagInputProps) {
+export function TagInput({ value, onChange, label, placeholder: placeholderProp, helper, error, max, disabled = false, className }: TagInputProps) {
+  const m = useT(dsMessages);
+  const placeholder = placeholderProp ?? m.tagPlaceholder;
   const [draft, setDraft] = useState("");
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
@@ -74,7 +78,7 @@ export function TagInput({ value, onChange, label, placeholder = "追加して E
             {tag}
             <button
               type="button"
-              aria-label={`${tag} を削除`}
+              aria-label={m.remove(tag)}
               disabled={disabled}
               onClick={(e) => {
                 e.stopPropagation();

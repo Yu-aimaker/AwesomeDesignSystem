@@ -1,60 +1,67 @@
 import { useMemo, useState } from "react";
-import { components, componentsByGroup, groups, type ComponentGroup, type ComponentMaturity } from "../ds/registry";
+import { componentsByGroup, componentsFor, groupsFor, type ComponentGroup, type ComponentMaturity } from "../ds/registry";
 import { Badge, type BadgeTone } from "../ds/components/Badge";
 import { Playground } from "../layout/Playground";
 import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
 import { EmptyState } from "../ds/components/EmptyState";
 import { repoUrl } from "../lib/nav";
+import { useLocale, useT } from "../i18n/context";
+import { componentsMessages } from "../i18n/messages/components";
 
 // Entries that need the full row: tables, navigation, anything with a wide layout.
 const wide = new Set(["table", "data-table", "nav-bar", "stepper", "timeline", "media-card", "calendar", "command-menu", "breadcrumb", "pagination", "file-upload", "tabs", "accordion"]);
 
 // Maturity is shown as text plus tone, never tone alone. Definitions: AwesomeDS/components/README.md "Maturity".
-const maturityMeta: Record<ComponentMaturity, { label: string; tone: BadgeTone; note: string }> = {
-  stable: { label: "安定", tone: "success", note: "API 固定。仕様とアクセシビリティ確認が済み、トークンのみで描く。" },
-  beta: { label: "ベータ", tone: "neutral", note: "使える。仕様の文書化か確認が途中で、軽微な API 変更がありうる。" },
-  alpha: { label: "アルファ", tone: "warning", note: "試作。API は予告なく変わる。本番では使わない。" },
-  deprecated: { label: "非推奨", tone: "danger", note: "置き換え先あり。新規に使わない。" },
+// Labels and notes are localized in i18n/messages/components.ts.
+const maturityTone: Record<ComponentMaturity, BadgeTone> = {
+  stable: "success",
+  beta: "neutral",
+  alpha: "warning",
+  deprecated: "danger",
 };
 const maturityOrder: ComponentMaturity[] = ["stable", "beta", "alpha", "deprecated"];
 
 export function Components() {
+  const t = useT(componentsMessages);
+  const { locale } = useLocale();
+  const components = useMemo(() => componentsFor(locale), [locale]);
+  const groups = useMemo(() => groupsFor(locale), [locale]);
   const [group, setGroup] = useState<ComponentGroup | "all">("all");
   const [q, setQ] = useState("");
 
   const sections = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return componentsByGroup()
+    return componentsByGroup(locale)
       .filter((s) => group === "all" || s.group.id === group)
       .map((s) => ({ ...s, items: s.items.filter((c) => !needle || `${c.name} ${c.caption} ${c.id}`.toLowerCase().includes(needle)) }))
       .filter((s) => s.items.length > 0);
-  }, [group, q]);
+  }, [group, q, locale]);
 
   const shown = sections.reduce((n, s) => n + s.items.length, 0);
 
   return (
     <div>
-      <GalleryHeader title="コンポーネント" lead="props を触る。コードはその状態のまま出る。実装も読める。" stat={components.length} statLabel="部品" />
+      <GalleryHeader title={t.title} lead={t.lead} stat={components.length} statLabel={t.statLabel} />
 
       <FilterBar>
         <FilterChip selected={group === "all"} onSelect={() => setGroup("all")} count={components.length}>
-          すべて
+          {t.all}
         </FilterChip>
         {groups.map((g) => (
           <FilterChip key={g.id} selected={group === g.id} onSelect={() => setGroup(g.id)} count={components.filter((c) => c.group === g.id).length}>
             {g.label}
           </FilterChip>
         ))}
-        <SearchBox value={q} onChange={setQ} placeholder="部品を検索" />
+        <SearchBox value={q} onChange={setQ} placeholder={t.searchPlaceholder} />
       </FilterBar>
 
-      <section aria-label="成熟度の凡例" className="mt-6">
+      <section aria-label={t.maturityLegend} className="mt-6">
         <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
           {maturityOrder.map((m) => (
             <li key={m} className="t-caption flex items-start gap-2 text-ink-secondary sm:max-w-[34ch]">
-              <Badge tone={maturityMeta[m].tone}>{maturityMeta[m].label}</Badge>
-              <span>{maturityMeta[m].note}</span>
+              <Badge tone={maturityTone[m]}>{t.maturity[m].label}</Badge>
+              <span>{t.maturity[m].note}</span>
             </li>
           ))}
         </ul>
@@ -62,7 +69,7 @@ export function Components() {
 
       {shown === 0 ? (
         <div className="mt-12">
-          <EmptyState title="見つかりません" description="別の語で検索するか、絞り込みを外してください。" />
+          <EmptyState title={t.notFoundTitle} description={t.notFoundBody} />
         </div>
       ) : (
         sections.map(({ group: g, items }) => (
@@ -75,11 +82,13 @@ export function Components() {
                 <div key={c.id} className={wide.has(c.id) ? "xl:col-span-2" : undefined}>
                   <ErrorBoundary compact>
                     <Playground
+                      // Remount on language change: some select values are translated (e.g. Calendar weekday labels).
+                      key={`${c.id}-${locale}`}
                       id={c.id}
                       title={c.name}
                       caption={
                         <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                          <Badge tone={maturityMeta[c.maturity].tone}>{maturityMeta[c.maturity].label}</Badge>
+                          <Badge tone={maturityTone[c.maturity]}>{t.maturity[c.maturity].label}</Badge>
                           <span>{c.caption}</span>
                         </span>
                       }
@@ -109,11 +118,11 @@ export function Components() {
       )}
 
       <DataNote>
-        全部品はこのサイトの実装そのもの。ソースは{" "}
+        {t.noteBefore}{" "}
         <a href={`${repoUrl}/tree/main/web/src/ds/components`} target="_blank" rel="noreferrer">
           web/src/ds/components
         </a>
-        。規則は AwesomeDS/components/checklist.md。
+        {t.noteAfter}
       </DataNote>
     </div>
   );

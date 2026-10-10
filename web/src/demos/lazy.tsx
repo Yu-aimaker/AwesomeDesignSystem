@@ -5,6 +5,8 @@ import type { WireframeTorusProps } from "./ThreeTorus";
 import type { LottieProgressProps, LottieDotsProps } from "./LottieDemo";
 import type { StickyStackProps } from "./GsapStack";
 import type { HorizontalPanProps } from "./GsapPan";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 /*
  * Lazy wrappers for the heavy libraries (three, gsap, lottie). Only type
@@ -13,7 +15,8 @@ import type { HorizontalPanProps } from "./GsapPan";
  */
 
 function Fallback({ className = "h-64" }: { className?: string }) {
-  return <div aria-busy="true" aria-label="読み込み中" className={`w-full max-w-md animate-pulse rounded-lg bg-surface-sunken ${className}`} />;
+  const msg = useT(demosMessages);
+  return <div aria-busy="true" aria-label={msg.loading} className={`w-full max-w-md animate-pulse rounded-lg bg-surface-sunken ${className}`} />;
 }
 
 function withSuspense<P extends object>(Lazy: LazyExoticComponent<ComponentType<P>>, fallbackClass?: string) {

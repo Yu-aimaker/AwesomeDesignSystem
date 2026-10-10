@@ -2,6 +2,8 @@ import { type ReactNode } from "react";
 import { Search } from "lucide-react";
 import { Chip } from "../ds/components/Chip";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { shellMessages } from "../i18n/messages/shell";
 
 /**
  * Shared chrome for the gallery pages (fonts, palettes, components, motion,
@@ -45,7 +47,9 @@ export function FilterChip({ selected, onSelect, children, count }: { selected: 
   );
 }
 
-export function SearchBox({ value, onChange, placeholder = "検索", className }: { value: string; onChange: (v: string) => void; placeholder?: string; className?: string }) {
+export function SearchBox({ value, onChange, placeholder: placeholderProp, className }: { value: string; onChange: (v: string) => void; placeholder?: string; className?: string }) {
+  const t = useT(shellMessages);
+  const placeholder = placeholderProp ?? t.searchShort;
   return (
     <label className={cx("relative ml-auto flex h-8 min-w-0 w-full items-center sm:w-auto sm:min-w-40", className)}>
       <Search className="pointer-events-none absolute left-2.5 size-4 text-ink-muted" strokeWidth={1.75} aria-hidden />
@@ -77,10 +81,11 @@ export function SectionTitle({ id, children, count }: { id: string; children: Re
 
 /** One-line note about where the data comes from. */
 export function DataNote({ updated, children }: { updated?: string; children: ReactNode }) {
+  const t = useT(shellMessages);
   return (
     <p className="t-caption mt-10 text-ink-muted">
       {children}
-      {updated && <> 更新 {updated}。</>}
+      {updated && <> {t.updated(updated)}</>}
     </p>
   );
 }

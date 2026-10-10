@@ -1,6 +1,8 @@
 import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface ComboboxOption {
   value: string;
@@ -24,7 +26,10 @@ export interface ComboboxProps {
 // A filterable listbox (APG combobox, list autocomplete). Typing filters; Down
 // and Up move the active option (aria-activedescendant), Enter picks, Escape
 // closes and restores the label. Use this over Select when the list needs search.
-export function Combobox({ options, value, onChange, label, placeholder = "検索して選択", helper, emptyText = "一致する項目がありません", disabled = false, className }: ComboboxProps) {
+export function Combobox({ options, value, onChange, label, placeholder: placeholderProp, helper, emptyText: emptyTextProp, disabled = false, className }: ComboboxProps) {
+  const m = useT(dsMessages);
+  const placeholder = placeholderProp ?? m.comboboxPlaceholder;
+  const emptyText = emptyTextProp ?? m.noMatches;
   const id = useId();
   const selected = options.find((o) => o.value === value) ?? null;
   const [open, setOpen] = useState(false);

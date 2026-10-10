@@ -1,6 +1,8 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { Check, X } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface ChipProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onSelect"> {
   selected?: boolean;
@@ -18,6 +20,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
   { selected = false, onSelectedChange, onRemove, icon, size = "sm", className, children, disabled, onClick, ...rest },
   ref,
 ) {
+  const m = useT(dsMessages);
   const h = size === "sm" ? "h-8 px-3 text-sm" : "h-10 px-4 text-sm";
   return (
     <span className={cx("inline-flex items-stretch rounded-full", className)}>
@@ -48,7 +51,7 @@ export const Chip = forwardRef<HTMLButtonElement, ChipProps>(function Chip(
       {onRemove && (
         <button
           type="button"
-          aria-label={`${typeof children === "string" ? children : "フィルタ"} を外す`}
+          aria-label={m.removeChip(typeof children === "string" ? children : m.filter)}
           disabled={disabled}
           onClick={onRemove}
           className={cx(

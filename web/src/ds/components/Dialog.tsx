@@ -1,6 +1,8 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { X } from "lucide-react";
 import { Button } from "./Button";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface DialogProps {
   open: boolean;
@@ -15,6 +17,7 @@ export interface DialogProps {
 // background and a top-layer backdrop for free. Enter 300ms ease-out, exit
 // 150ms ease-in (exit is faster than enter).
 export function Dialog({ open, onClose, title, description, children, footer }: DialogProps) {
+  const m = useT(dsMessages);
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -55,7 +58,7 @@ export function Dialog({ open, onClose, title, description, children, footer }: 
               </p>
             )}
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose} aria-label="閉じる" className="-mt-1 -mr-2 px-2">
+          <Button variant="ghost" size="sm" onClick={onClose} aria-label={m.close} className="-mt-1 -mr-2 px-2">
             <X strokeWidth={1.75} />
           </Button>
         </div>

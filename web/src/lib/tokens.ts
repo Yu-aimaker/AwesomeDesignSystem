@@ -1,3 +1,4 @@
+import type { Localized } from "../i18n/locales";
 // Typed view over AwesomeDS/tokens/tokens.json (copied by scripts/sync-tokens.mjs).
 import raw from "../ds/tokens/tokens.json";
 
@@ -43,7 +44,7 @@ export interface TypeRole {
   lineHeight: number;
   tracking: string;
   family: "sans" | "mono";
-  use: string;
+  use: Localized<string>;
 }
 
 const s = tokens.font.size;
@@ -52,17 +53,17 @@ const lh = tokens.font.lineHeight;
 const ls = tokens.font.letterSpacing;
 
 export const typeRoles: TypeRole[] = [
-  { name: "display", size: s["4xl"].$value, weight: w.semibold.$value, lineHeight: lh.tight.$value, tracking: ls.display.$value, family: "sans", use: "ランディングの見出し 1 か所だけ" },
-  { name: "h1", size: s["3xl"].$value, weight: w.semibold.$value, lineHeight: lh.heading.$value, tracking: ls.display.$value, family: "sans", use: "ページタイトル。1 ページに 1 つ" },
-  { name: "h2", size: s["2xl"].$value, weight: w.semibold.$value, lineHeight: 1.25, tracking: ls.heading.$value, family: "sans", use: "セクション見出し" },
-  { name: "h3", size: s.xl.$value, weight: w.semibold.$value, lineHeight: lh.snug.$value, tracking: "-0.01em", family: "sans", use: "カードやサブセクションの見出し" },
-  { name: "h4", size: s.base.$value, weight: w.semibold.$value, lineHeight: 1.5, tracking: ls.normal.$value, family: "sans", use: "リスト内の小見出し" },
-  { name: "body-lg", size: s.lg.$value, weight: w.regular.$value, lineHeight: lh.body.$value, tracking: ls.normal.$value, family: "sans", use: "リード文" },
-  { name: "body", size: s.base.$value, weight: w.regular.$value, lineHeight: lh.body.$value, tracking: ls.normal.$value, family: "sans", use: "本文の既定" },
-  { name: "body-sm", size: s.sm.$value, weight: w.regular.$value, lineHeight: 1.55, tracking: ls.normal.$value, family: "sans", use: "UI 内の説明、テーブルのセル" },
-  { name: "caption", size: s.xs.$value, weight: w.regular.$value, lineHeight: 1.5, tracking: "0.01em", family: "sans", use: "タイムスタンプ、注記。これより小さくしない" },
-  { name: "label", size: s.sm.$value, weight: w.medium.$value, lineHeight: lh.heading.$value, tracking: ls.normal.$value, family: "sans", use: "ボタン、フォームラベル、タブ" },
-  { name: "mono", size: "13px", weight: w.regular.$value, lineHeight: lh.body.$value, tracking: ls.normal.$value, family: "mono", use: "コード、トークン名、ID" },
+  { name: "display", size: s["4xl"].$value, weight: w.semibold.$value, lineHeight: lh.tight.$value, tracking: ls.display.$value, family: "sans", use: { ja: "ランディングの見出し 1 か所だけ", en: "The one landing headline" } },
+  { name: "h1", size: s["3xl"].$value, weight: w.semibold.$value, lineHeight: lh.heading.$value, tracking: ls.display.$value, family: "sans", use: { ja: "ページタイトル。1 ページに 1 つ", en: "Page title, one per page" } },
+  { name: "h2", size: s["2xl"].$value, weight: w.semibold.$value, lineHeight: 1.25, tracking: ls.heading.$value, family: "sans", use: { ja: "セクション見出し", en: "Section heading" } },
+  { name: "h3", size: s.xl.$value, weight: w.semibold.$value, lineHeight: lh.snug.$value, tracking: "-0.01em", family: "sans", use: { ja: "カードやサブセクションの見出し", en: "Card and subsection heading" } },
+  { name: "h4", size: s.base.$value, weight: w.semibold.$value, lineHeight: 1.5, tracking: ls.normal.$value, family: "sans", use: { ja: "リスト内の小見出し", en: "Small heading inside lists" } },
+  { name: "body-lg", size: s.lg.$value, weight: w.regular.$value, lineHeight: lh.body.$value, tracking: ls.normal.$value, family: "sans", use: { ja: "リード文", en: "Lead paragraph" } },
+  { name: "body", size: s.base.$value, weight: w.regular.$value, lineHeight: lh.body.$value, tracking: ls.normal.$value, family: "sans", use: { ja: "本文の既定", en: "Default body text" } },
+  { name: "body-sm", size: s.sm.$value, weight: w.regular.$value, lineHeight: 1.55, tracking: ls.normal.$value, family: "sans", use: { ja: "UI 内の説明、テーブルのセル", en: "UI descriptions, table cells" } },
+  { name: "caption", size: s.xs.$value, weight: w.regular.$value, lineHeight: 1.5, tracking: "0.01em", family: "sans", use: { ja: "タイムスタンプ、注記。これより小さくしない", en: "Timestamps and notes. Never smaller" } },
+  { name: "label", size: s.sm.$value, weight: w.medium.$value, lineHeight: lh.heading.$value, tracking: ls.normal.$value, family: "sans", use: { ja: "ボタン、フォームラベル、タブ", en: "Buttons, form labels, tabs" } },
+  { name: "mono", size: "13px", weight: w.regular.$value, lineHeight: lh.body.$value, tracking: ls.normal.$value, family: "mono", use: { ja: "コード、トークン名、ID", en: "Code, token names, IDs" } },
 ];
 
 export const spaceScale = Object.entries(tokens.space)

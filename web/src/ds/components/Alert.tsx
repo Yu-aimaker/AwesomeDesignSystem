@@ -1,6 +1,8 @@
 import { type ReactNode } from "react";
 import { CheckCircle2, CircleAlert, Info, TriangleAlert, X } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export type AlertTone = "neutral" | "info" | "success" | "warning" | "danger";
 
@@ -25,6 +27,7 @@ const tones: Record<AlertTone, { box: string; icon: string; Icon: typeof Info }>
 };
 
 export function Alert({ tone = "neutral", title, children, action, onDismiss, className }: AlertProps) {
+  const m = useT(dsMessages);
   const t = tones[tone];
   return (
     <div role={tone === "danger" ? "alert" : "status"} className={cx("flex items-start gap-3 rounded-lg border p-4 text-ink", t.box, className)}>
@@ -38,7 +41,7 @@ export function Alert({ tone = "neutral", title, children, action, onDismiss, cl
         <button
           type="button"
           onClick={onDismiss}
-          aria-label="閉じる"
+          aria-label={m.close}
           className="-m-1 rounded-sm p-1 text-ink-muted transition-colors duration-instant hover:bg-surface-sunken hover:text-ink"
         >
           <X className="size-4" strokeWidth={1.75} />

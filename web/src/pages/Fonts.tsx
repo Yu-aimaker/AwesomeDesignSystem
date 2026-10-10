@@ -6,6 +6,8 @@ import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle
 import { Badge } from "../ds/components/Badge";
 import { EmptyState } from "../ds/components/EmptyState";
 import { cx } from "../ds/cx";
+import { useLocale, useT } from "../i18n/context";
+import { fontsMessages } from "../i18n/messages/fonts";
 
 type Cat = FontCategory | "all";
 type Sort = "usage" | "name";
@@ -17,8 +19,6 @@ const fallback: Record<FontCategory, string> = {
   "jp-sans": '"Hiragino Sans", "Yu Gothic", sans-serif',
   "jp-serif": '"Hiragino Mincho ProN", "Yu Mincho", serif',
 };
-
-const licenseLabel = { OFL: "OFL", system: "OS 同梱", proprietary: "有償" } as const;
 
 function family(f: FontEntry): string {
   return f.cssFamily ? `"${f.cssFamily}", ${fallback[f.category]}` : fallback[f.category];
@@ -40,6 +40,9 @@ const sample = {
 };
 
 export function Fonts() {
+  const { locale } = useLocale();
+  const t = useT(fontsMessages);
+  const licenseLabel = t.license;
   const [cat, setCat] = useState<Cat>("all");
   const [sort, setSort] = useState<Sort>("usage");
   const [q, setQ] = useState("");
@@ -67,40 +70,40 @@ export function Fonts() {
   const max = top[0]?.usedByCount ?? 1;
   const brandsScanned = (fontsMeta as { counts?: { brandsScanned?: number } }).counts?.brandsScanned ?? 0;
 
-  if (!trying) return <EmptyState title="フォントデータがありません" description="scripts/build-fonts.mjs を実行してください。" />;
+  if (!trying) return <EmptyState title={t.emptyTitle} description={t.emptyBody} />;
 
   return (
     <div>
-      <GalleryHeader title="フォント" lead="一流企業が使う書体を、その書体で。使用数は各社の DESIGN.md から実測。" stat={fonts.length} statLabel="書体" />
+      <GalleryHeader title={t.title} lead={t.lead} stat={fonts.length} statLabel={t.statLabel} />
 
       {/* Try-on stage: the selected font at display size, paired with Noto Sans JP. */}
-      <section aria-label="試着" className="overflow-hidden rounded-lg border border-hairline bg-surface">
+      <section aria-label={t.tryOn} className="overflow-hidden rounded-lg border border-hairline bg-surface">
         <div className="grid gap-6 p-6 sm:p-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-end">
           <div className="min-w-0">
             <p className="t-caption text-ink-muted">
               {trying.name}
               {!isJp(trying) && jp ? ` + ${jp.name}` : ""}
-              {trying.loaded ? "" : trying.license === "system" ? " · 端末にあれば表示" : " · 非公開書体、代替で表示"}
+              {trying.loaded ? "" : trying.license === "system" ? t.ifInstalled : t.privateFallback}
             </p>
-            <p className="mt-4 text-ink" style={{ fontFamily: family(trying), fontSize: "clamp(48px, 9vw, 128px)", lineHeight: 0.95, fontWeight: 600, letterSpacing: trying.category === "mono" ? 0 : "-0.035em" }}>
+            <p lang={isJp(trying) ? "ja" : undefined} className="mt-4 text-ink" style={{ fontFamily: family(trying), fontSize: "clamp(48px, 9vw, 128px)", lineHeight: 0.95, fontWeight: 600, letterSpacing: trying.category === "mono" ? 0 : "-0.035em" }}>
               {trying.category === "mono" ? sample.mono : isJp(trying) ? "美しい余白" : "Aa Design"}
             </p>
           </div>
           <div className="min-w-0 border-t border-hairline pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-            <p className="text-ink" style={{ fontFamily: family(trying), fontSize: 22, lineHeight: 1.4 }}>
+            <p lang={isJp(trying) ? "ja" : "en"} className="text-ink" style={{ fontFamily: family(trying), fontSize: 22, lineHeight: 1.4 }}>
               {isJp(trying) ? sample.jp : sample.en}
             </p>
-            <p className="mt-3 text-ink-secondary" style={{ fontFamily: isJp(trying) ? family(trying) : jp ? `${family(trying)}, ${family(jp)}` : family(trying), fontSize: 16, lineHeight: 1.7 }}>
+            <p lang={isJp(trying) ? "en" : "ja"} className="mt-3 text-ink-secondary" style={{ fontFamily: isJp(trying) ? family(trying) : jp ? `${family(trying)}, ${family(jp)}` : family(trying), fontSize: 16, lineHeight: 1.7 }}>
               {isJp(trying) ? sample.en : sample.jp}
             </p>
             <dl className="t-caption mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-ink-secondary">
-              <dt className="text-ink-muted">設計</dt>
+              <dt className="text-ink-muted">{t.designer}</dt>
               <dd>{trying.designer}</dd>
-              <dt className="text-ink-muted">配布</dt>
+              <dt className="text-ink-muted">{t.distribution}</dt>
               <dd>
                 {trying.foundry} · {trying.year} · {licenseLabel[trying.license]}
               </dd>
-              <dt className="text-ink-muted">組み合わせ</dt>
+              <dt className="text-ink-muted">{t.pairs}</dt>
               <dd>{trying.pairs.map((p) => fonts.find((f) => f.id === p)?.name ?? p).join(" / ")}</dd>
             </dl>
           </div>
@@ -110,8 +113,8 @@ export function Fonts() {
       {/* Measured usage across the brands data set. */}
       {top.length > 0 && (
         <section className="mt-16" aria-labelledby="usage">
-          <SectionTitle id="usage">使われている書体</SectionTitle>
-          <p className="t-body-sm mt-2 text-ink-secondary">{brandsScanned} 社の DESIGN.md に宣言された書体を数えました。</p>
+          <SectionTitle id="usage">{t.usageTitle}</SectionTitle>
+          <p className="t-body-sm mt-2 text-ink-secondary">{t.usageLead(brandsScanned)}</p>
           <ol className="mt-6 grid gap-2">
             {top.map((f) => (
               <li key={f.id} className="grid grid-cols-[minmax(0,10rem)_1fr_auto] items-center gap-3 sm:grid-cols-[minmax(0,14rem)_1fr_auto]">
@@ -130,19 +133,19 @@ export function Fonts() {
 
       <section className="mt-16" aria-labelledby="wall">
         <SectionTitle id="wall" count={list.length}>
-          すべての書体
+          {t.allTitle}
         </SectionTitle>
         <FilterBar className="mt-4">
           <FilterChip selected={cat === "all"} onSelect={() => setCat("all")} count={fonts.length}>
-            すべて
+            {t.all}
           </FilterChip>
           {(Object.keys(fontCategoryLabel) as FontCategory[]).map((c) => (
             <FilterChip key={c} selected={cat === c} onSelect={() => setCat(c)} count={fonts.filter((f) => f.category === c).length}>
-              {fontCategoryLabel[c]}
+              {fontCategoryLabel[c][locale]}
             </FilterChip>
           ))}
           <span aria-hidden className="mx-1 hidden h-5 w-px bg-hairline sm:block" />
-          <div role="radiogroup" aria-label="並び順" className="flex gap-1">
+          <div role="radiogroup" aria-label={t.sortOrder} className="flex gap-1">
             {(["usage", "name"] as Sort[]).map((s) => (
               <button
                 key={s}
@@ -152,16 +155,16 @@ export function Fonts() {
                 onClick={() => setSort(s)}
                 className={cx("t-caption h-8 rounded-full px-3 transition-colors duration-instant", sort === s ? "bg-surface-sunken text-ink" : "text-ink-secondary hover:text-ink")}
               >
-                {s === "usage" ? "使用数" : "名前"}
+                {s === "usage" ? t.sortUsage : t.sortName}
               </button>
             ))}
           </div>
-          <SearchBox value={q} onChange={setQ} placeholder="書体、企業名" />
+          <SearchBox value={q} onChange={setQ} placeholder={t.searchPlaceholder} />
         </FilterBar>
 
         {list.length === 0 ? (
           <div className="mt-10">
-            <EmptyState title="見つかりません" description="別の語で検索するか、分類を外してください。" />
+            <EmptyState title={t.notFoundTitle} description={t.notFoundBody} />
           </div>
         ) : (
           <ul className="mt-6 grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(280px, 100%), 1fr))" }}>
@@ -181,9 +184,9 @@ export function Fonts() {
                     <div className="flex h-36 items-end justify-between gap-3 overflow-hidden border-b border-hairline p-5">
                       <Specimen font={f} />
                       <span className="t-caption text-right text-ink-muted">
-                        {fontCategoryLabel[f.category]}
+                        {fontCategoryLabel[f.category][locale]}
                         <br />
-                        {f.loaded ? (loaded ? "" : "読み込み中") : f.license === "system" ? "端末の書体" : "代替表示"}
+                        {f.loaded ? (loaded ? "" : t.loading) : f.license === "system" ? t.systemFont : t.fallbackShown}
                       </span>
                     </div>
                     <div className="flex flex-1 flex-col gap-2 p-5">
@@ -196,21 +199,23 @@ export function Fonts() {
                         </div>
                         <Badge tone={f.license === "OFL" ? "success" : f.license === "system" ? "neutral" : "warning"}>{licenseLabel[f.license]}</Badge>
                       </div>
-                      <p className="t-body-sm text-ink-secondary">{f.note}</p>
+                      <p className="t-body-sm text-ink-secondary" lang="ja">
+                        {f.note}
+                      </p>
                       <p className="t-caption mt-auto text-ink-muted">
                         {f.usedByCount > 0 ? (
                           <>
-                            <span className="tabular text-ink">{f.usedByCount} 社</span> · {f.usedBy.slice(0, 4).map((u) => u.name).join(", ")}
-                            {f.usedByCount > 4 ? " ほか" : ""}
+                            <span className="tabular text-ink">{t.companies(f.usedByCount)}</span> · {f.usedBy.slice(0, 4).map((u) => u.name).join(", ")}
+                            {f.usedByCount > 4 ? t.andMore : ""}
                           </>
                         ) : (
-                          "実測なし。選定で掲載"
+                          t.noUsage
                         )}
                       </p>
                     </div>
                   </button>
                   <a href={f.url} target="_blank" rel="noreferrer" className="t-caption mt-1.5 inline-flex items-center gap-1 px-1">
-                    配布元 <ExternalLink className="size-3" strokeWidth={1.75} aria-hidden />
+                    {t.source} <ExternalLink className="size-3" strokeWidth={1.75} aria-hidden />
                   </a>
                 </li>
               );
@@ -220,7 +225,7 @@ export function Fonts() {
       </section>
 
       <DataNote updated={fontsMeta.updated}>
-        使用数は AwesomeDS/data/brands.json（voltagent/awesome-design-md と kzhrknt/awesome-design-md-jp から抽出）に基づく実測。書体の版権は各配布元に。
+        {t.dataNote}
       </DataNote>
     </div>
   );

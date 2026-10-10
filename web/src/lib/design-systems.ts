@@ -1,3 +1,5 @@
+import type { Locale, Localized } from "../i18n/locales";
+
 export type OgpStatus = "ok" | "missing";
 
 export interface FlagshipOgp {
@@ -19,7 +21,7 @@ export interface FlagshipAbsorption {
   /** Knowledge entry id (`category/slug`) that records adopted / adapted / rejected points. */
   knowledge: string;
   /** One sentence: what AwesomeDS took from this source. */
-  takeaway: string;
+  takeaway: Localized<string>;
 }
 
 export interface DesignSystemRef {
@@ -62,7 +64,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://developer.apple.com/tutorials/developer-og.jpg",
       note: "HIG ページの og:image は Developer Documentation 共通カード。",
     },
-    absorption: { level: "adopted", knowledge: "platform-guidelines/apple-hig", takeaway: "44px のタッチターゲット、色だけで伝えない、モーションは止められるフィードバックに限る。" },
+    absorption: { level: "adopted", knowledge: "platform-guidelines/apple-hig", takeaway: { ja: "44px のタッチターゲット、色だけで伝えない、モーションは止められるフィードバックに限る。", en: "44px touch targets, never color alone, motion only as feedback the user can turn off." } },
     category: "platform",
   },
   {
@@ -80,7 +82,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/material-design.jpg",
       sourceUrl: "https://m3.material.io/static/assets/m3-social.jpg",
     },
-    absorption: { level: "adopted", knowledge: "platform-guidelines/material-3", takeaway: "時間の刻み 100 から 500ms と、ダークでは影でなく面の明度で奥行きを出す規則。" },
+    absorption: { level: "adopted", knowledge: "platform-guidelines/material-3", takeaway: { ja: "時間の刻み 100 から 500ms と、ダークでは影でなく面の明度で奥行きを出す規則。", en: "Duration steps from 100 to 500ms, and elevation by surface lightness instead of shadow in dark mode." } },
     category: "platform",
   },
   {
@@ -98,7 +100,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/vercel-design.jpg",
       sourceUrl: "https://k2mkucxia43oc7fa.public.blob.vercel-storage.com/front/design/geist-og.jpg",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/vercel-geist", takeaway: "Geist 書体、4px 基準の余白、黒に近い ink を主ボタンにする構図。" },
+    absorption: { level: "adopted", knowledge: "design-systems/vercel-geist", takeaway: { ja: "Geist 書体、4px 基準の余白、黒に近い ink を主ボタンにする構図。", en: "Geist, 4px spacing, and near-black ink as the primary button." } },
     category: "company",
   },
   {
@@ -116,7 +118,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/shadcn-ui.jpg",
       sourceUrl: "https://ui.shadcn.com/og?title=The%20Foundation%20for%20your%20Design%20System&description=Composable%2C%20accessible%20components%20with%20thoughtful%20defaults.%20Build%20your%20own%20component%20library%20with%20code%20you%20can%20customize%2C%20extend%2C%20and%20make%20your%20own.",
     },
-    absorption: { level: "adopted", knowledge: "component-libraries/shadcn-ui", takeaway: "既定のコンポーネント層。primary を無彩色にし、背景と文字のトークンを対で定義する。" },
+    absorption: { level: "adopted", knowledge: "component-libraries/shadcn-ui", takeaway: { ja: "既定のコンポーネント層。primary を無彩色にし、背景と文字のトークンを対で定義する。", en: "The default component layer. A neutral primary and tokens defined as background/foreground pairs." } },
     category: "component-library",
   },
   {
@@ -134,7 +136,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/goodpatch.jpg",
       sourceUrl: "https://goodpatch.com/ogp.png",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/goodpatch", takeaway: "和文本文の行間 1.8 と、palt を見出しだけに使う規則。" },
+    absorption: { level: "adopted", knowledge: "design-systems/goodpatch", takeaway: { ja: "和文本文の行間 1.8 と、palt を見出しだけに使う規則。", en: "Japanese body line height of 1.8, and palt on headings only." } },
     category: "company",
   },
   {
@@ -153,12 +155,12 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://www.duolingo.com/images/facebook/duo-08523a2.jpg",
       note: "design.duolingo.com の og:image はブログロゴのため、duolingo.com 公式の og:image を使用。",
     },
-    absorption: { level: "adapted", knowledge: "design-systems/duolingo", takeaway: "失敗に優しい文言と、状態を色だけで伝えない設計。3D ボタンと bounce は採らない。" },
+    absorption: { level: "adapted", knowledge: "design-systems/duolingo", takeaway: { ja: "失敗に優しい文言と、状態を色だけで伝えない設計。3D ボタンと bounce は採らない。", en: "Kind error copy and state never shown by color alone. Not the 3D buttons or bounce." } },
     category: "company",
   },
   {
     id: "digital-agency-jp",
-    name: "デジタル庁デザインシステム",
+    name: "Digital Agency Design System (Japan)",
     nameJa: "デジタル庁デザインシステム",
     description: "Japan Digital Agency's design system for government services. Built for accessibility and inclusivity at national scale.",
     descriptionJa: "「誰一人取り残されない」を掲げる日本政府のデザインシステム。行政サービスのアクセシビリティ基準。",
@@ -171,7 +173,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/digital-agency-jp.jpg",
       sourceUrl: "https://design.digital.go.jp/dads/images/ogp_default.png",
     },
-    absorption: { level: "adopted", knowledge: "platform-guidelines/digital-agency-japan-design-system", takeaway: "primitive から semantic へのトークン階層、44px ターゲット、全角入力を受け付けるフォーム。" },
+    absorption: { level: "adopted", knowledge: "platform-guidelines/digital-agency-japan-design-system", takeaway: { ja: "primitive から semantic へのトークン階層、44px ターゲット、全角入力を受け付けるフォーム。", en: "Primitive to semantic token tiers, 44px targets, and forms that accept full-width input." } },
     category: "government",
   },
   {
@@ -189,7 +191,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/fluent.jpg",
       sourceUrl: "https://fluent2websitecdn.azureedge.net/cdn/fluent-logo-metadata.Cwa-_8F7.png",
     },
-    absorption: { level: "reference", knowledge: "platform-guidelines/fluent-2", takeaway: "Brief が Fluent を指名したら公式パッケージを使う。値は取り込まない。" },
+    absorption: { level: "reference", knowledge: "platform-guidelines/fluent-2", takeaway: { ja: "Brief が Fluent を指名したら公式パッケージを使う。値は取り込まない。", en: "Use the official packages when a brief names Fluent. No values imported." } },
     category: "platform",
   },
   {
@@ -207,7 +209,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/carbon.jpg",
       sourceUrl: "https://www.carbondesignsystem.com/ogimage.png",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "12 / 14 / 16 の文字サイズの合意と 2 段の密度。通知の種類と時限消去の禁止を feedback.md に取り込んだ。" },
+    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: { ja: "12 / 14 / 16 の文字サイズの合意と 2 段の密度。通知の種類と時限消去の禁止を feedback.md に取り込んだ。", en: "The 12 / 14 / 16 type consensus and two densities. Notification types and the ban on timed critical messages went into feedback.md." } },
     category: "component-library",
   },
   {
@@ -226,7 +228,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://repository-images.githubusercontent.com/88897663/f0237e80-5410-11eb-9a07-3c17a2591a19",
       note: "polaris.shopify.com は shopify.dev 共通カードのため、Shopify/polaris-react リポジトリ（アーカイブ済み）の公式ソーシャル画像を使用。",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "罫線 1px とフォーカス 2px の使い分け、primitive と semantic の分離。" },
+    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: { ja: "罫線 1px とフォーカス 2px の使い分け、primitive と semantic の分離。", en: "1px borders versus 2px focus, and the primitive / semantic split." } },
     category: "component-library",
   },
   {
@@ -245,7 +247,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://github.com/primer/brand/assets/19292210/8562a9a5-a1e4-4722-9ec7-47ebccd5901e",
       note: "primer.style トップは meta をクライアント描画するため、/product/getting-started/ の og:image を使用。",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "行間トークンと、トーストより残るバナーを選ぶ通知方針（feedback.md）。" },
+    absorption: { level: "adopted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: { ja: "行間トークンと、トーストより残るバナーを選ぶ通知方針（feedback.md）。", en: "Line-height tokens, and preferring persistent banners over toasts (feedback.md)." } },
     category: "component-library",
   },
   {
@@ -263,7 +265,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/atlassian.jpg",
       sourceUrl: "https://atlassian.design/assets/df6dcb86d48a/static/0b4e62efc0d2c7d917e11f3860855c05/meta.png",
     },
-    absorption: { level: "adapted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: "重大な警告とエラーを自動で消さない規則と、警告とエラーの書き分け（feedback.md）。" },
+    absorption: { level: "adapted", knowledge: "design-systems/atlassian-carbon-polaris-primer", takeaway: { ja: "重大な警告とエラーを自動で消さない規則と、警告とエラーの書き分け（feedback.md）。", en: "Never auto-dismiss critical warnings or errors, and how warnings differ from errors (feedback.md)." } },
     category: "company",
   },
   {
@@ -281,7 +283,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/stripe.jpg",
       sourceUrl: "https://b.stripecdn.com/mkt-ssr-statics/assets/_next/static/media/stripe.37119086.jpg",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/stripe", takeaway: "数値の tabular-nums、ink で色を付けた影、1 バンドに CTA は 1 つ。" },
+    absorption: { level: "adopted", knowledge: "design-systems/stripe", takeaway: { ja: "数値の tabular-nums、ink で色を付けた影、1 バンドに CTA は 1 つ。", en: "tabular-nums for figures, ink-tinted shadows, one CTA per band." } },
     category: "company",
   },
   {
@@ -299,7 +301,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/linear.jpg",
       sourceUrl: "https://linear.app/api/og/main?title=Linear&v=4",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/linear", takeaway: "罫線で構造を作り、影は浮くものだけ。アクセントは少なく使う。" },
+    absorption: { level: "adopted", knowledge: "design-systems/linear", takeaway: { ja: "罫線で構造を作り、影は浮くものだけ。アクセントは少なく使う。", en: "Structure from borders, shadows only for floating layers, the accent used sparingly." } },
     category: "company",
   },
   {
@@ -317,7 +319,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/smarthr.jpg",
       sourceUrl: "https://smarthr.design/images/ogp.png",
     },
-    absorption: { level: "adopted", knowledge: "design-systems/smarthr-design-system", takeaway: "ブランド色を UI の primary にしない判断と、2px のフォーカス枠。" },
+    absorption: { level: "adopted", knowledge: "design-systems/smarthr-design-system", takeaway: { ja: "ブランド色を UI の primary にしない判断と、2px のフォーカス枠。", en: "The brand color is not the UI primary, and a 2px focus ring." } },
     category: "company",
   },
   {
@@ -335,7 +337,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/spectrum.jpg",
       sourceUrl: "https://spectrum.adobe.com/media_1270372ba73a31b64cb998d3c4a0a3d44e565196f.png",
     },
-    absorption: { level: "reference", knowledge: "platform-guidelines/adobe-spectrum", takeaway: "振る舞いをプリミティブに任せる分担は同じ。Adobe のビジュアルは取り込まない。" },
+    absorption: { level: "reference", knowledge: "platform-guidelines/adobe-spectrum", takeaway: { ja: "振る舞いをプリミティブに任せる分担は同じ。Adobe のビジュアルは取り込まない。", en: "Same split of behavior into primitives. Adobe's visuals are not imported." } },
     category: "component-library",
   },
   {
@@ -354,7 +356,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://repository-images.githubusercontent.com/34526884/8e0a5095-5d82-425c-a54f-a0cb51743a12",
       note: "ant.design の og:image は 200x200 ロゴのため、ant-design/ant-design リポジトリの公式ソーシャル画像を使用。",
     },
-    absorption: { level: "reference", knowledge: "component-libraries/ant-design", takeaway: "大きなライブラリを npm のまま使う別系統の例。部品とトークンは混ぜない。" },
+    absorption: { level: "reference", knowledge: "component-libraries/ant-design", takeaway: { ja: "大きなライブラリを npm のまま使う別系統の例。部品とトークンは混ぜない。", en: "A separate lineage that ships as one big npm library. Its parts and tokens are not mixed in." } },
     category: "component-library",
   },
   {
@@ -372,7 +374,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/base-ui.jpg",
       sourceUrl: "https://base-ui.com/opengraph-image-j8qpfc.png?b1b9e0366e512854",
     },
-    absorption: { level: "adopted", knowledge: "component-libraries/base-ui", takeaway: "shadcn の代替プリミティブ。状態は data-* 属性で書き、ルートに isolation: isolate。" },
+    absorption: { level: "adopted", knowledge: "component-libraries/base-ui", takeaway: { ja: "shadcn の代替プリミティブ。状態は data-* 属性で書き、ルートに isolation: isolate。", en: "The alternative primitive under shadcn. States in data-* attributes, isolation: isolate at the root." } },
     category: "component-library",
   },
   {
@@ -391,7 +393,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://www.radix-ui.com/primitives/opengraph-image.png?opengraph-image.0rn7txzeny89p.png",
       note: "トップ radix-ui.com には twitter:image がなく、Primitives ページの og:image を使用。",
     },
-    absorption: { level: "adopted", knowledge: "component-libraries/radix-primitives-and-colors", takeaway: "既定のプリミティブ。hover は 1 段濃く、押下はさらに 1 段の状態規則。" },
+    absorption: { level: "adopted", knowledge: "component-libraries/radix-primitives-and-colors", takeaway: { ja: "既定のプリミティブ。hover は 1 段濃く、押下はさらに 1 段の状態規則。", en: "The default primitive. Hover one step darker, pressed one more." } },
     category: "component-library",
   },
   {
@@ -409,7 +411,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/govuk.jpg",
       sourceUrl: "https://design-system.service.gov.uk/assets/images/govuk-opengraph-image.png",
     },
-    absorption: { level: "adapted", knowledge: "platform-guidelines/govuk-design-system", takeaway: "バナーは 1 ページに 1 つ、検証エラーはバナーでなくエラーサマリー（feedback.md）。" },
+    absorption: { level: "adapted", knowledge: "platform-guidelines/govuk-design-system", takeaway: { ja: "バナーは 1 ページに 1 つ、検証エラーはバナーでなくエラーサマリー（feedback.md）。", en: "One banner per page, and validation errors in an error summary instead of a banner (feedback.md)." } },
     category: "government",
   },
   {
@@ -426,7 +428,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       status: "missing",
       note: "公式 og:image は全ページ 200x200 ロゴ。GitHub 側も自動生成カードのみのため AwesomeDS ポスターを表示。",
     },
-    absorption: { level: "reference", knowledge: "platform-guidelines/uswds", takeaway: "Public Sans をフォント一覧に掲載。指名されたら公式パッケージを使う。" },
+    absorption: { level: "reference", knowledge: "platform-guidelines/uswds", takeaway: { ja: "Public Sans をフォント一覧に掲載。指名されたら公式パッケージを使う。", en: "Public Sans is listed in Fonts. Use the official packages when named." } },
     category: "government",
   },
   {
@@ -444,7 +446,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/gitlab-pajamas.jpg",
       sourceUrl: "https://design.gitlab.com/img/social/link-preview.png",
     },
-    absorption: { level: "reference", knowledge: "design-systems/gitlab-pajamas", takeaway: "実装の正本をコードに置き、Figma は参照に留める考え方。" },
+    absorption: { level: "reference", knowledge: "design-systems/gitlab-pajamas", takeaway: { ja: "実装の正本をコードに置き、Figma は参照に留める考え方。", en: "Code is the source of truth; Figma is a reference." } },
     category: "company",
   },
   {
@@ -463,7 +465,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl:
         "https://nordhealth.design/_og/s/c_Banner,title_Nord+Design+System,description_~RGVzaWduLCBidWlsZCwgYW5kIHNoaXAgY29oZXJlbnQgZXhwZXJpZW5jZXMgd2l0aCBOb3JkaGVhbHRoJ3MgTm9yZCBEZXNpZ24gU3lzdGVtLg,rev_2.png",
     },
-    absorption: { level: "reference", knowledge: "design-systems/nord-design-system", takeaway: "ヘルスケア向けのブランドシステム。Web Components の選択肢として記録。" },
+    absorption: { level: "reference", knowledge: "design-systems/nord-design-system", takeaway: { ja: "ヘルスケア向けのブランドシステム。Web Components の選択肢として記録。", en: "A healthcare brand system, recorded as the Web Components option." } },
     category: "company",
   },
   {
@@ -480,7 +482,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       status: "missing",
       note: "og:image / twitter:image がない（twitter:card は summary）。代わりの公式画像もないため AwesomeDS ポスターを表示。",
     },
-    absorption: { level: "adopted", knowledge: "accessibility/inclusive-components", takeaway: "セマンティック HTML が先、ARIA は後。ラベルは常時表示、Escape で閉じる。" },
+    absorption: { level: "adopted", knowledge: "accessibility/inclusive-components", takeaway: { ja: "セマンティック HTML が先、ARIA は後。ラベルは常時表示、Escape で閉じる。", en: "Semantic HTML first, ARIA second. Labels always visible, Escape closes." } },
     category: "cookbook",
   },
   {
@@ -498,7 +500,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/laws-of-ux.jpg",
       sourceUrl: "https://lawsofux.com/home/social.en.png",
     },
-    absorption: { level: "adopted", knowledge: "design-thinking/laws-of-ux", takeaway: "Fitts、Hick、Proximity をターゲットサイズ、1 画面 1 主要操作、余白の群化に対応させた。" },
+    absorption: { level: "adopted", knowledge: "design-thinking/laws-of-ux", takeaway: { ja: "Fitts、Hick、Proximity をターゲットサイズ、1 画面 1 主要操作、余白の群化に対応させた。", en: "Fitts, Hick and Proximity mapped to target size, one primary action per screen, and grouping by space." } },
     category: "cookbook",
   },
   {
@@ -517,7 +519,7 @@ export const flagshipSystems: DesignSystemRef[] = [
       sourceUrl: "https://refactoringui.com/img/homepage/og-image.png",
       note: "og:image は無く twitter:image を使用。",
     },
-    absorption: { level: "adopted", knowledge: "design-thinking/refactoring-ui", takeaway: "副次要素を弱めて階層を作り、グレースケールで組んでから色を足す。" },
+    absorption: { level: "adopted", knowledge: "design-thinking/refactoring-ui", takeaway: { ja: "副次要素を弱めて階層を作り、グレースケールで組んでから色を足す。", en: "Hierarchy by de-emphasizing secondary elements; build in grayscale, add color last." } },
     category: "cookbook",
   },
   {
@@ -535,31 +537,31 @@ export const flagshipSystems: DesignSystemRef[] = [
       image: "/ogp/nielsen.jpg",
       sourceUrl: "https://media.nngroup.com/media/articles/opengraph_images/Updated10HeuristicSocialCard-36.png",
     },
-    absorption: { level: "adopted", knowledge: "design-thinking/nielsen-heuristics", takeaway: "10 項目をレビュー観点（components/checklist.md）に使う。" },
+    absorption: { level: "adopted", knowledge: "design-thinking/nielsen-heuristics", takeaway: { ja: "10 項目をレビュー観点（components/checklist.md）に使う。", en: "The ten heuristics are the review checklist (components/checklist.md)." } },
     category: "cookbook",
   },
 ];
 
-const categoryLabelMap: Record<DesignSystemRef["category"], string> = {
-  platform: "プラットフォーム",
-  "component-library": "コンポーネントライブラリ",
-  company: "企業・プロダクト",
-  government: "行政・公共",
-  cookbook: "ガイドライン・クックブック",
+const categoryLabelMap: Record<DesignSystemRef["category"], Localized<string>> = {
+  platform: { ja: "プラットフォーム", en: "Platforms" },
+  "component-library": { ja: "コンポーネントライブラリ", en: "Component libraries" },
+  company: { ja: "企業・プロダクト", en: "Companies and products" },
+  government: { ja: "行政・公共", en: "Government and public sector" },
+  cookbook: { ja: "ガイドライン・クックブック", en: "Guidelines and cookbooks" },
 };
 
-const absorptionLabelMap: Record<AbsorptionLevel, string> = {
-  adopted: "採用",
-  adapted: "翻案",
-  reference: "参照のみ",
+const absorptionLabelMap: Record<AbsorptionLevel, Localized<string>> = {
+  adopted: { ja: "採用", en: "Adopted" },
+  adapted: { ja: "翻案", en: "Adapted" },
+  reference: { ja: "参照のみ", en: "Reference only" },
 };
 
-export function absorptionLabel(level: AbsorptionLevel): string {
-  return absorptionLabelMap[level];
+export function absorptionLabel(level: AbsorptionLevel, locale: Locale): string {
+  return absorptionLabelMap[level][locale];
 }
 
-export function categoryLabel(category: DesignSystemRef["category"]): string {
-  return categoryLabelMap[category];
+export function categoryLabel(category: DesignSystemRef["category"], locale: Locale): string {
+  return categoryLabelMap[category][locale];
 }
 
 export function ogpStats(list: DesignSystemRef[] = flagshipSystems) {

@@ -2,6 +2,8 @@ import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent, type R
 import { Search } from "lucide-react";
 import { Kbd } from "./Kbd";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface CommandItem {
   id: string;
@@ -46,7 +48,10 @@ export function useCommandMenu(initial = false): [boolean, (v: boolean) => void]
 // level 3 elevation, max width 640, anchored at 20% from the top. Arrows move the
 // active item across groups, Enter runs it, Escape closes. Every command here must
 // also exist in the visible UI; this is an accelerator, not the only route.
-export function CommandMenu({ open, onClose, groups, placeholder = "コマンドやページを検索", emptyText = "一致する結果がありません" }: CommandMenuProps) {
+export function CommandMenu({ open, onClose, groups, placeholder: placeholderProp, emptyText: emptyTextProp }: CommandMenuProps) {
+  const m = useT(dsMessages);
+  const placeholder = placeholderProp ?? m.commandPlaceholder;
+  const emptyText = emptyTextProp ?? m.noResults;
   const ref = useRef<HTMLDialogElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -118,7 +123,7 @@ export function CommandMenu({ open, onClose, groups, placeholder = "コマンド
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
-      aria-label="コマンドメニュー"
+      aria-label={m.commandMenu}
       className={cx(
         "fixed top-[20vh] mx-auto w-[calc(100%-32px)] max-w-2xl overflow-hidden rounded-xl border border-hairline bg-surface p-0 text-ink shadow-3",
         "opacity-0 translate-y-2 scale-[0.98]",
@@ -147,7 +152,7 @@ export function CommandMenu({ open, onClose, groups, placeholder = "コマンド
         />
         <Kbd>Esc</Kbd>
       </div>
-      <div ref={listRef} id={`${id}-list`} role="listbox" aria-label="結果" className="max-h-[min(60vh,360px)] overflow-y-auto p-2">
+      <div ref={listRef} id={`${id}-list`} role="listbox" aria-label={m.results} className="max-h-[min(60vh,360px)] overflow-y-auto p-2">
         {flat.length === 0 && <p className="t-body-sm px-3 py-8 text-center text-ink-muted">{emptyText}</p>}
         {filtered.map((g) => (
           <div key={g.heading} role="group" aria-label={g.heading} className="mb-1 last:mb-0">
@@ -183,10 +188,10 @@ export function CommandMenu({ open, onClose, groups, placeholder = "コマンド
       </div>
       <footer className="flex items-center gap-4 border-t border-hairline bg-canvas-soft px-4 py-2 text-ink-muted">
         <span className="t-caption inline-flex items-center gap-1.5">
-          <Kbd keys={["↑", "↓"]} /> 移動
+          <Kbd keys={["↑", "↓"]} /> {m.move}
         </span>
         <span className="t-caption inline-flex items-center gap-1.5">
-          <Kbd>↵</Kbd> 実行
+          <Kbd>↵</Kbd> {m.run}
         </span>
       </footer>
     </dialog>

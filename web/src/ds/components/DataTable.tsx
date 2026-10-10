@@ -2,6 +2,8 @@ import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from "rea
 import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import type { Column } from "./Table";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface DataColumn<T> extends Column<T> {
   sortable?: boolean;
@@ -60,6 +62,7 @@ function SelectBox({ checked, indeterminate = false, label, onChange }: { checke
 // checkbox column with select-all, a selected row in --ds-selection, and an empty
 // state inside the body so the header stays as context.
 export function DataTable<T>({ columns, rows, rowKey, caption, selectable = false, selected, onSelectionChange, stickyHeader = true, maxHeight, emptyState, defaultSort, className }: DataTableProps<T>) {
+  const m = useT(dsMessages);
   const id = useId();
   const [sort, setSort] = useState<{ key: string; dir: "asc" | "desc" } | null>(defaultSort ?? null);
   const [internal, setInternal] = useState<string[]>([]);
@@ -108,7 +111,7 @@ export function DataTable<T>({ columns, rows, rowKey, caption, selectable = fals
                 <SelectBox
                   checked={allSelected}
                   indeterminate={someSelected}
-                  label={allSelected ? "すべて解除" : "すべて選択"}
+                  label={allSelected ? m.deselectAll : m.selectAll}
                   onChange={(next) => setSel(next ? Array.from(new Set([...sel, ...allKeys])) : sel.filter((k) => !allKeys.includes(k)))}
                 />
               </th>
@@ -148,7 +151,7 @@ export function DataTable<T>({ columns, rows, rowKey, caption, selectable = fals
           {sorted.length === 0 && (
             <tr>
               <td colSpan={colCount} className="px-3 py-10 text-center">
-                {emptyState ?? <span className="t-body-sm text-ink-muted">表示できる行がありません</span>}
+                {emptyState ?? <span className="t-body-sm text-ink-muted">{m.noRows}</span>}
               </td>
             </tr>
           )}
@@ -163,7 +166,7 @@ export function DataTable<T>({ columns, rows, rowKey, caption, selectable = fals
               >
                 {selectable && (
                   <td className="h-12 w-11 px-3">
-                    <SelectBox checked={isSel} label={`${key} を選択`} onChange={(next) => setSel(next ? [...sel, key] : sel.filter((k) => k !== key))} />
+                    <SelectBox checked={isSel} label={m.selectRow(String(key))} onChange={(next) => setSel(next ? [...sel, key] : sel.filter((k) => k !== key))} />
                   </td>
                 )}
                 {columns.map((c) => (

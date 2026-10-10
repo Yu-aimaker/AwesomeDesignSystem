@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface NavBarLink {
   label: string;
@@ -16,10 +18,11 @@ export interface NavBarProps {
 // 64px bar, hairline below, brand left, links center-left, actions right.
 // Links never wrap: on narrow screens the parent swaps this for a menu.
 export function NavBar({ brand, links, actions }: NavBarProps) {
+  const m = useT(dsMessages);
   return (
     <header className="flex h-16 items-center gap-6 border-b border-hairline bg-canvas px-4">
       <div className="t-label shrink-0 text-ink">{brand}</div>
-      <nav aria-label="メイン" className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
+      <nav aria-label={m.mainNav} className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto">
         {links.map((l) => (
           <a
             key={l.href}

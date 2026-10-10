@@ -1,6 +1,8 @@
 import { useId, useRef, useState, type ChangeEvent, type DragEvent } from "react";
 import { CircleAlert, File, Upload, X } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface UploadItem {
   id: string;
@@ -34,6 +36,7 @@ export function formatBytes(bytes: number): string {
 // all work. Drag-over strengthens the border; the list below shows name, size and
 // a remove button. Nothing is uploaded here; the caller receives the list.
 export function FileUpload({ value, onChange, label, accept, multiple = true, maxSizeMB, disabled = false, className }: FileUploadProps) {
+  const m = useT(dsMessages);
   const id = useId();
   const [over, setOver] = useState(false);
   const input = useRef<HTMLInputElement>(null);
@@ -46,7 +49,7 @@ export function FileUpload({ value, onChange, label, accept, multiple = true, ma
       name: f.name,
       size: f.size,
       status: f.size > limit ? "error" : "ready",
-      error: f.size > limit ? `${maxSizeMB} MB を超えています` : undefined,
+      error: f.size > limit ? m.overLimit(maxSizeMB ?? 0) : undefined,
     }));
     const merged = multiple ? [...value, ...next.filter((n) => !value.some((v) => v.id === n.id))] : next.slice(0, 1);
     onChange(merged);
@@ -91,9 +94,9 @@ export function FileUpload({ value, onChange, label, accept, multiple = true, ma
         </span>
         <span className={cx("t-label", disabled ? "text-ink-disabled" : "text-ink")}>{label}</span>
         <span className="t-caption text-ink-muted">
-          ドラッグ、またはクリックして選択
+          {m.dropOrClick}
           {accept && <> · {accept.replace(/,/g, ", ")}</>}
-          {maxSizeMB !== undefined && <> · {maxSizeMB} MB まで</>}
+          {maxSizeMB !== undefined && <> · {m.upTo(maxSizeMB)}</>}
         </span>
       </label>
 
@@ -110,7 +113,7 @@ export function FileUpload({ value, onChange, label, accept, multiple = true, ma
               </span>
               <button
                 type="button"
-                aria-label={`${item.name} を削除`}
+                aria-label={m.remove(item.name)}
                 disabled={disabled}
                 onClick={() => onChange(value.filter((v) => v.id !== item.id))}
                 className="-m-1 rounded-sm p-1 text-ink-muted transition-colors duration-instant hover:bg-surface-sunken hover:text-ink disabled:cursor-not-allowed"

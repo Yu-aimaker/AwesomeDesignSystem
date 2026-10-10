@@ -1,6 +1,8 @@
 import { Check, RotateCcw } from "lucide-react";
 import { accents, densities, fonts, radii, useKnobs } from "../lib/knobs";
 import { cx } from "../ds/cx";
+import { useLocale, useT } from "../i18n/context";
+import { shellMessages } from "../i18n/messages/shell";
 
 /**
  * The live controls for accent, radius, font pairing and density.
@@ -9,12 +11,14 @@ import { cx } from "../ds/cx";
  */
 export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "stack"; className?: string }) {
   const { knobs, set, reset, isDefault } = useKnobs();
+  const t = useT(shellMessages);
+  const { locale } = useLocale();
   const group = "flex flex-col gap-2";
   return (
     <div className={cx(layout === "bar" ? "flex flex-wrap items-start gap-x-8 gap-y-6" : "flex flex-col gap-5", className)}>
       <div className={group}>
-        <span className="t-caption text-ink-muted">アクセント</span>
-        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="アクセント">
+        <span className="t-caption text-ink-muted">{t.accent}</span>
+        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t.accent}>
           {accents.map((a) => {
             const on = knobs.accent === a.id;
             return (
@@ -23,8 +27,8 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
                 type="button"
                 role="radio"
                 aria-checked={on}
-                aria-label={a.label}
-                title={a.label}
+                aria-label={a.label[locale]}
+                title={a.label[locale]}
                 onClick={() => set("accent", a.id)}
                 data-accent-chip={a.id}
                 className={cx(
@@ -49,12 +53,12 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
             </span>
           )}
         </div>
-        {knobs.accent === "custom" && knobs.custom && <span className="t-caption text-ink-secondary">{knobs.custom.label} のアクセント</span>}
+        {knobs.accent === "custom" && knobs.custom && <span className="t-caption text-ink-secondary">{t.customAccent(knobs.custom.label)}</span>}
       </div>
 
       <div className={group}>
-        <span className="t-caption text-ink-muted">角丸</span>
-        <div className="inline-flex rounded-md border border-hairline-strong bg-surface p-0.5" role="radiogroup" aria-label="角丸">
+        <span className="t-caption text-ink-muted">{t.radius}</span>
+        <div className="inline-flex rounded-md border border-hairline-strong bg-surface p-0.5" role="radiogroup" aria-label={t.radius}>
           {radii.map((r) => {
             const on = knobs.radius === r.id;
             return (
@@ -67,7 +71,7 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
                 onClick={() => set("radius", r.id)}
                 className={cx("t-label h-7 rounded-sm px-3 transition-colors duration-instant", on ? "bg-primary text-on-primary" : "text-ink-secondary hover:text-ink")}
               >
-                {r.label}
+                {r.label[locale]}
               </button>
             );
           })}
@@ -75,8 +79,8 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
       </div>
 
       <div className={group}>
-        <span className="t-caption text-ink-muted">書体</span>
-        <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="書体">
+        <span className="t-caption text-ink-muted">{t.font}</span>
+        <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label={t.font}>
           {fonts.map((f) => {
             const on = knobs.font === f.id;
             return (
@@ -85,14 +89,14 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
                 type="button"
                 role="radio"
                 aria-checked={on}
-                title={f.sample}
+                title={f.sample[locale]}
                 onClick={() => set("font", f.id)}
                 className={cx(
                   "h-8 rounded-full border px-3 text-sm transition-colors duration-instant",
                   on ? "border-ink bg-primary text-on-primary" : "border-hairline-strong text-ink-secondary hover:text-ink",
                 )}
               >
-                {f.label}
+                {f.label[locale]}
               </button>
             );
           })}
@@ -100,8 +104,8 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
       </div>
 
       <div className={group}>
-        <span className="t-caption text-ink-muted">密度</span>
-        <div className="inline-flex rounded-md border border-hairline-strong bg-surface p-0.5" role="radiogroup" aria-label="密度">
+        <span className="t-caption text-ink-muted">{t.density}</span>
+        <div className="inline-flex rounded-md border border-hairline-strong bg-surface p-0.5" role="radiogroup" aria-label={t.density}>
           {densities.map((d) => {
             const on = knobs.density === d.id;
             return (
@@ -110,11 +114,11 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
                 type="button"
                 role="radio"
                 aria-checked={on}
-                title={d.note}
+                title={d.note[locale]}
                 onClick={() => set("density", d.id)}
                 className={cx("t-label h-7 rounded-sm px-3 transition-colors duration-instant", on ? "bg-primary text-on-primary" : "text-ink-secondary hover:text-ink")}
               >
-                {d.label}
+                {d.label[locale]}
               </button>
             );
           })}
@@ -129,7 +133,7 @@ export function KnobsPanel({ layout = "stack", className }: { layout?: "bar" | "
           className="t-caption inline-flex h-8 items-center gap-1 rounded-md px-2 whitespace-nowrap text-ink-secondary transition-colors duration-instant hover:bg-surface-sunken hover:text-ink disabled:opacity-40"
         >
           <RotateCcw className="size-3.5" strokeWidth={1.75} aria-hidden />
-          既定に戻す
+          {t.resetKnobs}
         </button>
       </div>
     </div>

@@ -1,5 +1,7 @@
 import { Check } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface Step {
   label: string;
@@ -20,6 +22,7 @@ export interface StepperProps {
 // check, the current step has an ink ring and aria-current="step", upcoming steps
 // are hairline. The connector is a 1px line that turns ink once the step is done.
 export function Stepper({ steps, current, orientation = "horizontal", onStepClick, className }: StepperProps) {
+  const m = useT(dsMessages);
   const vertical = orientation === "vertical";
   return (
     <ol className={cx("flex", vertical ? "flex-col" : "w-full items-start", className)}>
@@ -54,7 +57,7 @@ export function Stepper({ steps, current, orientation = "horizontal", onStepClic
               <>
                 <span className="flex flex-col items-center">
                   {clickable ? (
-                    <button type="button" onClick={() => onStepClick(i)} aria-label={`${step.label} に戻る`} className="rounded-full">
+                    <button type="button" onClick={() => onStepClick(i)} aria-label={m.backTo(step.label)} className="rounded-full">
                       {dot}
                     </button>
                   ) : (
@@ -68,7 +71,7 @@ export function Stepper({ steps, current, orientation = "horizontal", onStepClic
               <>
                 <span className="flex w-full items-center gap-2">
                   {clickable ? (
-                    <button type="button" onClick={() => onStepClick(i)} aria-label={`${step.label} に戻る`} className="rounded-full">
+                    <button type="button" onClick={() => onStepClick(i)} aria-label={m.backTo(step.label)} className="rounded-full">
                       {dot}
                     </button>
                   ) : (

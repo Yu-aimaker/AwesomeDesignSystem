@@ -2,6 +2,8 @@ import { useEffect, useRef, type ReactNode } from "react";
 import { X } from "lucide-react";
 import { Button } from "./Button";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface SheetProps {
   open: boolean;
@@ -18,6 +20,7 @@ export interface SheetProps {
 // ease-out in, 150ms ease-in out. Right: 480px wide, full height, radius on the
 // inner edge only. Bottom: full width with a 16px top radius (mobile default).
 export function Sheet({ open, onClose, title, description, side = "right", children, footer }: SheetProps) {
+  const m = useT(dsMessages);
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -61,7 +64,7 @@ export function Sheet({ open, onClose, title, description, side = "right", child
             </p>
           )}
         </div>
-        <Button variant="ghost" size="sm" onClick={onClose} aria-label="閉じる" className="-mt-1 -mr-2 px-2">
+        <Button variant="ghost" size="sm" onClick={onClose} aria-label={m.close} className="-mt-1 -mr-2 px-2">
           <X strokeWidth={1.75} />
         </Button>
       </header>

@@ -4,6 +4,8 @@ import type { PlaygroundState } from "../layout/Playground";
 import { tokens } from "../lib/tokens";
 import { useResolvedTheme } from "../lib/theme";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { demosMessages } from "../i18n/messages/demos";
 
 /* ------------------------------------------------------------------ */
 /* Motion tokens as numbers                                            */
@@ -105,7 +107,8 @@ export function useReplay(): { key: number; replay: () => void } {
   return { key, replay: () => setKey((k) => k + 1) };
 }
 
-export function ReplayButton({ onClick, label = "再生", className }: { onClick: () => void; label?: string; className?: string }) {
+export function ReplayButton({ onClick, label, className }: { onClick: () => void; label?: string; className?: string }) {
+  const msg = useT(demosMessages);
   return (
     <button
       type="button"
@@ -116,7 +119,7 @@ export function ReplayButton({ onClick, label = "再生", className }: { onClick
       )}
     >
       <RotateCcw className="size-3.5" strokeWidth={1.75} aria-hidden />
-      {label}
+      {label ?? msg.replay}
     </button>
   );
 }

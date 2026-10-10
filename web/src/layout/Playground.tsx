@@ -1,6 +1,8 @@
 import { useId, useMemo, useState, type ReactNode } from "react";
 import { Check, Copy, RotateCcw } from "lucide-react";
 import { cx } from "../ds/cx";
+import { useT } from "../i18n/context";
+import { shellMessages } from "../i18n/messages/shell";
 
 /**
  * Playground: a live demo on the left, controls on the right, generated code below.
@@ -54,6 +56,7 @@ export interface PlaygroundProps<S extends PlaygroundState> {
 
 function CopyButton({ text }: { text: string }) {
   const [copied, setCopied] = useState(false);
+  const t = useT(shellMessages);
   return (
     <button
       type="button"
@@ -69,16 +72,17 @@ function CopyButton({ text }: { text: string }) {
       className="t-caption inline-flex h-7 items-center gap-1 rounded-sm px-2 text-ink-secondary transition-colors duration-instant hover:bg-surface-sunken hover:text-ink"
     >
       {copied ? <Check className="size-3.5" strokeWidth={1.75} aria-hidden /> : <Copy className="size-3.5" strokeWidth={1.75} aria-hidden />}
-      {copied ? "コピーしました" : "コピー"}
+      {copied ? t.copied : t.copy}
     </button>
   );
 }
 
 type Tab = "demo" | "code" | "source";
-const tabLabel: Record<Tab, string> = { demo: "実物", code: "コード", source: "実装" };
 
 export function Playground<S extends PlaygroundState>({ id, title, caption, controls = [], initial, code, children, paneClassName, links, source, footer, className }: PlaygroundProps<S>) {
   const [state, setState] = useState<S>(initial);
+  const m = useT(shellMessages);
+  const tabLabel: Record<Tab, string> = m.tabs;
   const [tab, setTab] = useState<Tab>("demo");
   const tabs: Tab[] = ["demo", ...(code ? (["code"] as Tab[]) : []), ...(source ? (["source"] as Tab[]) : [])];
   const base = useId();
@@ -94,7 +98,7 @@ export function Playground<S extends PlaygroundState>({ id, title, caption, cont
           {caption && <p className="t-body-sm mt-0.5 text-ink-secondary">{caption}</p>}
         </div>
         {tabs.length > 1 && (
-          <div role="tablist" aria-label={`${title} の表示`} className="flex shrink-0 gap-1 rounded-md bg-surface-sunken p-0.5">
+          <div role="tablist" aria-label={m.viewOf(title)} className="flex shrink-0 gap-1 rounded-md bg-surface-sunken p-0.5">
             {tabs.map((t) => (
               <button
                 key={t}
@@ -130,7 +134,7 @@ export function Playground<S extends PlaygroundState>({ id, title, caption, cont
         </div>
 
         {controls.length > 0 && (
-          <aside aria-label="コントロール" className="flex flex-col gap-4 border-t border-hairline bg-canvas-soft p-5 lg:border-t-0 lg:border-l">
+          <aside aria-label={m.controls} className="flex flex-col gap-4 border-t border-hairline bg-canvas-soft p-5 lg:border-t-0 lg:border-l">
             {controls.map((c) => {
               const cid = `${base}-${c.key}`;
               const v = state[c.key];
@@ -208,7 +212,7 @@ export function Playground<S extends PlaygroundState>({ id, title, caption, cont
                 className="t-caption mt-auto inline-flex items-center gap-1 self-start text-ink-secondary hover:text-ink"
               >
                 <RotateCcw className="size-3.5" strokeWidth={1.75} aria-hidden />
-                初期値に戻す
+                {m.resetControls}
               </button>
             )}
           </aside>
@@ -244,15 +248,16 @@ export function Specimen({ caption, children, className, id }: { caption?: React
 }
 
 /** Two panes side by side: what to do and what to avoid. */
-export function Compare({ good, bad, goodLabel = "採用", badLabel = "避ける", className }: { good: ReactNode; bad: ReactNode; goodLabel?: string; badLabel?: string; className?: string }) {
+export function Compare({ good, bad, goodLabel, badLabel, className }: { good: ReactNode; bad: ReactNode; goodLabel?: string; badLabel?: string; className?: string }) {
+  const t = useT(shellMessages);
   return (
     <div className={cx("grid gap-4 md:grid-cols-2", className)}>
       <div className="rounded-lg border border-hairline bg-surface p-6">
-        <p className="t-label mb-4 text-ink">{goodLabel}</p>
+        <p className="t-label mb-4 text-ink">{goodLabel ?? t.good}</p>
         {good}
       </div>
       <div className="rounded-lg border border-dashed border-hairline-strong bg-canvas-soft p-6">
-        <p className="t-label mb-4 text-ink-muted">{badLabel}</p>
+        <p className="t-label mb-4 text-ink-muted">{badLabel ?? t.bad}</p>
         {bad}
       </div>
     </div>

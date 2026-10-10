@@ -1,5 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export interface PaginationProps {
   page: number;
@@ -34,6 +36,7 @@ export function pageItems(page: number, total: number, siblings: number): Array<
 // Buttons at control size, the current page filled with ink and marked with
 // aria-current. Prev and next are icon buttons with labels; they disable at the ends.
 export function Pagination({ page, total, onChange, siblings = 1, size = "md", className }: PaginationProps) {
+  const m = useT(dsMessages);
   const h = size === "sm" ? "h-8 min-w-8 px-2 text-sm" : "h-10 min-w-10 px-3 text-sm";
   const base = cx(
     "inline-flex items-center justify-center rounded-md border font-medium leading-none tabular",
@@ -43,10 +46,10 @@ export function Pagination({ page, total, onChange, siblings = 1, size = "md", c
   const idle = "border-transparent text-ink-secondary hover:bg-surface-sunken hover:text-ink";
   const current = "border-primary bg-primary text-on-primary";
   return (
-    <nav aria-label="ページ" className={className}>
+    <nav aria-label={m.pagination} className={className}>
       <ul className="flex items-center gap-1">
         <li>
-          <button type="button" aria-label="前のページ" disabled={page <= 1} onClick={() => onChange(page - 1)} className={cx(base, idle)}>
+          <button type="button" aria-label={m.previousPage} disabled={page <= 1} onClick={() => onChange(page - 1)} className={cx(base, idle)}>
             <ChevronLeft className="size-4" strokeWidth={1.75} aria-hidden />
           </button>
         </li>
@@ -60,7 +63,7 @@ export function Pagination({ page, total, onChange, siblings = 1, size = "md", c
               <button
                 type="button"
                 aria-current={item === page ? "page" : undefined}
-                aria-label={`${item} ページ`}
+                aria-label={m.pageN(item)}
                 onClick={() => onChange(item)}
                 className={cx(base, item === page ? current : idle)}
               >
@@ -70,7 +73,7 @@ export function Pagination({ page, total, onChange, siblings = 1, size = "md", c
           ),
         )}
         <li>
-          <button type="button" aria-label="次のページ" disabled={page >= total} onClick={() => onChange(page + 1)} className={cx(base, idle)}>
+          <button type="button" aria-label={m.nextPage} disabled={page >= total} onClick={() => onChange(page + 1)} className={cx(base, idle)}>
             <ChevronRight className="size-4" strokeWidth={1.75} aria-hidden />
           </button>
         </li>

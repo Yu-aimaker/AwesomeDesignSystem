@@ -1,5 +1,7 @@
 import { useCallback, useId, useRef, type KeyboardEvent, type PointerEvent } from "react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export type SliderValue = number | [number, number];
 
@@ -32,6 +34,7 @@ function snap(v: number, min: number, step: number) {
 // full keyboard set: arrows step, PageUp/Down step x10, Home/End jump. The track is
 // a 4px hairline with an ink fill; pointer capture makes drags stick to the thumb.
 export function Slider<V extends SliderValue>({ value, onChange, min = 0, max = 100, step = 1, label, showValue = false, formatValue, disabled = false, className }: SliderProps<V>) {
+  const m = useT(dsMessages);
   const id = useId();
   const track = useRef<HTMLDivElement>(null);
   const isRange = Array.isArray(value);
@@ -125,7 +128,7 @@ export function Slider<V extends SliderValue>({ value, onChange, min = 0, max = 
             type="button"
             role="slider"
             aria-labelledby={`${id}-label`}
-            aria-label={isRange ? (i === 0 ? "最小" : "最大") : undefined}
+            aria-label={isRange ? (i === 0 ? m.min : m.max) : undefined}
             aria-valuemin={isRange && i === 1 ? values[0] : min}
             aria-valuemax={isRange && i === 0 ? values[1] : max}
             aria-valuenow={v}

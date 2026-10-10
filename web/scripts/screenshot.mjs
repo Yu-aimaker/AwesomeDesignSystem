@@ -54,6 +54,17 @@ const routes = [
   "/sources",
   "/about",
   "/missing-page",
+  // English (STA-51). Same pages under the /en prefix.
+  "/en",
+  "/en/foundations",
+  "/en/foundations/typography",
+  "/en/foundations/motion",
+  "/en/components",
+  "/en/motion",
+  "/en/knowledge",
+  "/en/knowledge/awesomeds/feedback",
+  "/en/sources",
+  "/en/about",
 ];
 const only = process.argv.slice(2).filter((a) => !a.startsWith("-"));
 const targets = only.length ? routes.filter((r) => only.includes(r)) : routes;
@@ -160,6 +171,7 @@ function startPreview() {
 }
 
 const server = await startPreview();
+// CHROMIUM_PATH lets a machine without /opt/pw-browsers use an installed Chrome.
 const browser = await chromium.launch(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {});
 const problems = [];
 let flagshipReported = false;
@@ -205,6 +217,9 @@ try {
         }
         const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
         if (overflow > 0) problems.push(`${theme} ${width} ${route}: horizontal overflow ${overflow}px`);
+        const lang = await page.evaluate(() => document.documentElement.lang);
+        const wantLang = route === "/en" || route.startsWith("/en/") ? "en" : "ja";
+        if (lang !== wantLang) problems.push(`${theme} ${width} ${route}: <html lang="${lang}">, expected "${wantLang}"`);
         const name = `${route === "/" ? "home" : route.slice(1).replace(/\//g, "-")}-${width}-${theme}.png`;
         if (CHECK) continue;
         await page.screenshot({ path: resolve(outDir, name), fullPage });

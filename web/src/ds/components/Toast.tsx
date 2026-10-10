@@ -1,6 +1,8 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import { CheckCircle2, CircleAlert, Info, X } from "lucide-react";
 import { cx } from "../cx";
+import { useT } from "../../i18n/context";
+import { dsMessages } from "../../i18n/messages/dsComponents";
 
 export type ToastTone = "neutral" | "success" | "danger";
 export interface ToastItem {
@@ -28,6 +30,7 @@ const tones: Record<ToastTone, string> = { neutral: "text-ink-secondary", succes
 // Toasts live in a polite live region, dismiss after 5 seconds, and use level 2
 // elevation. They enter from 8px below with ease-out and leave with opacity only.
 export function ToastProvider({ children }: { children: ReactNode }) {
+  const m = useT(dsMessages);
   const [items, setItems] = useState<ToastItem[]>([]);
 
   const dismiss = useCallback((id: number) => setItems((list) => list.filter((t) => t.id !== id)), []);
@@ -63,7 +66,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 <p className="t-label text-ink">{t.title}</p>
                 {t.description && <p className="t-caption mt-1 text-ink-secondary">{t.description}</p>}
               </div>
-              <button type="button" onClick={() => dismiss(t.id)} aria-label="閉じる" className="-m-1 rounded-sm p-1 text-ink-muted hover:text-ink">
+              <button type="button" onClick={() => dismiss(t.id)} aria-label={m.close} className="-m-1 rounded-sm p-1 text-ink-muted hover:text-ink">
                 <X className="size-4" strokeWidth={1.75} />
               </button>
             </div>

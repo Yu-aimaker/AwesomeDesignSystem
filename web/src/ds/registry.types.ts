@@ -17,7 +17,7 @@ export interface ComponentEntry {
   name: string;
   group: ComponentGroup;
   maturity: ComponentMaturity;
-  /** Japanese, at most 12 words: the single rule to remember. */
+  /** At most 12 words, in the locale the entry was built for: the single rule to remember. */
   caption: string;
   controls?: Control[];
   initial: PlaygroundState;
