@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 272  /  ドメイン数: 45
+リンク数: 311  /  ドメイン数: 67
 
 ## animaapp.com
 
@@ -16,6 +16,23 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [animations.dev: Web Animations course by Emil Kowalski (proxy blocked, link recorded)](https://animations.dev/)  
   引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
 
+## ant.design
+
+- [Ant Design - The world's second most popular React UI framework](https://ant.design/)  
+  引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
+- [Ant Design Introduction](https://ant.design/docs/spec/introduce)  
+  引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
+
+## atlassian.design
+
+- [Atlassian Design](https://atlassian.design/)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+
+## base-ui.com
+
+- [Unstyled UI components for accessible design systems · Base UI](https://base-ui.com/)  
+  引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+
 ## blog.duolingo.com
 
 - [Duologues: design conversations - Duolingo Blog](https://blog.duolingo.com/duologues-design-conversations/)  
@@ -25,6 +42,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Linear design: The SaaS design trend that's boring and bettering UI - LogRocket Blog](https://blog.logrocket.com/ux-design/linear-design/)  
   引用: [Linear](../Knowledge/design-systems/linear.md)
+
+## carbondesignsystem.com
+
+- [Home | Carbon Design System](https://carbondesignsystem.com/)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 
 ## claude.com
 
@@ -41,10 +63,37 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [DataCamp: What Is Claude Design? (third-party, found via web search, page itself not fetchable from this session)](https://www.datacamp.com/blog/claude-design)  
   引用: [Claude Design (Anthropic)](../Knowledge/skills/anthropic-claude-design.md)
 
+## design-system.service.gov.uk
+
+- [GOV.UK Design System](https://design-system.service.gov.uk/)  
+  引用: [GOV.UK Design System](../Knowledge/platform-guidelines/govuk-design-system.md)
+
+## design.digital.go.jp
+
+- [デジタル庁デザインシステムβ版](https://design.digital.go.jp/)  
+  引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
+
+## design.duolingo.com
+
+- [Articles about Design (Duolingo Design)](https://design.duolingo.com/)  
+  引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+
+## design.gitlab.com
+
+- [Pajamas Design System](https://design.gitlab.com/)  
+  引用: [GitLab Pajamas Design System](../Knowledge/design-systems/gitlab-pajamas.md)
+
 ## designmd.run
 
 - [Inside Stripe's Design System: A Token-Level Breakdown | DESIGN.md](https://www.designmd.run/blog/stripe-design-system-breakdown)  
   引用: [Stripe](../Knowledge/design-systems/stripe.md)
+
+## designsystem.digital.gov
+
+- [USWDS: The United States Web Design System](https://designsystem.digital.gov/)  
+  引用: [U.S. Web Design System (USWDS)](../Knowledge/platform-guidelines/uswds.md)
+- [USWDS 3.0 Migration Guide](https://designsystem.digital.gov/documentation/migration)  
+  引用: [U.S. Web Design System (USWDS)](../Knowledge/platform-guidelines/uswds.md)
 
 ## developer.android.com
 
@@ -53,6 +102,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## developer.apple.com
 
+- [Human Interface Guidelines | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines)  
+  引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
 - [Accessibility | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/accessibility)  
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
 - [Color | Apple Developer Documentation](https://developer.apple.com/design/human-interface-guidelines/color)  
@@ -82,6 +133,13 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [デジタル庁デザインシステム (DADS)](../Knowledge/platform-guidelines/digital-agency-japan-design-system.md)
 - [Duolingo Design System (Figma Community)](https://www.figma.com/community/file/1460744749282136015)  
   引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+- [Pajamas UI Kit (Figma)](https://www.figma.com/file/qEddyqCrI7kPSBjGmwkZzQ/Pajamas-UI-Kit)  
+  引用: [GitLab Pajamas Design System](../Knowledge/design-systems/gitlab-pajamas.md)
+
+## fluent2.microsoft.design
+
+- [Fluent 2 Design System](https://fluent2.microsoft.design/)  
+  引用: [Fluent 2 Design System](../Knowledge/platform-guidelines/fluent-2.md)
 
 ## fonts.google.com
 
@@ -93,6 +151,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [NDot in use - Fonts In Use](https://fontsinuse.com/typefaces/233367/ndot)  
   引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
 
+## frontend.design-system.service.gov.uk
+
+- [Install GOV.UK Frontend with npm](https://frontend.design-system.service.gov.uk/installing-with-npm/)  
+  引用: [GOV.UK Design System](../Knowledge/platform-guidelines/govuk-design-system.md)
+
 ## getdesign.md
 
 - [getdesign.md: Vercel DESIGN.md (preview and download page)](https://getdesign.md/vercel/design-md)  
@@ -102,8 +165,14 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [18F/methods (heuristic-evaluation, cognitive-walkthrough, design-studio を含む手法集)](https://github.com/18F/methods)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md), [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
+- [adobe/react-spectrum: React Spectrum, React Aria, React Stately](https://github.com/adobe/react-spectrum)  
+  引用: [Adobe Spectrum](../Knowledge/platform-guidelines/adobe-spectrum.md)
 - [airbnb/lottie-web: Render After Effects animations natively on Web](https://github.com/airbnb/lottie-web)  
   引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
+- [alphagov/govuk-frontend](https://github.com/alphagov/govuk-frontend)  
+  引用: [GOV.UK Design System](../Knowledge/platform-guidelines/govuk-design-system.md)
+- [ant-design/ant-design](https://github.com/ant-design/ant-design)  
+  引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
 - [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  
@@ -162,6 +231,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [mattpocock/skills: Skills For Real Engineers](https://github.com/mattpocock/skills)  
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
+- [microsoft/fluentui: Fluent UI web (React v9, v8, Web Components)](https://github.com/microsoft/fluentui)  
+  引用: [Fluent 2 Design System](../Knowledge/platform-guidelines/fluent-2.md)
 - [modularscale/modularscale-sass: Modular scale calculator built into your Sass](https://github.com/modularscale/modularscale-sass)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [motiondivision/motion: An open source animation library for JavaScript, React and Vue](https://github.com/motiondivision/motion)  
@@ -190,6 +261,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
 - [tt-a1i/archify (本タスクで観測した高スター数の実例、51,537 stars)](https://github.com/tt-a1i/archify)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Archify (tt-a1i)](../Knowledge/skills/archify.md)
+- [uswds/uswds: United States Web Design System](https://github.com/uswds/uswds)  
+  引用: [U.S. Web Design System (USWDS)](../Knowledge/platform-guidelines/uswds.md)
 - [vercel-labs/agent-skills (the `npx skills add` CLI taste-skill installs through)](https://github.com/vercel-labs/agent-skills)  
   引用: [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md), [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel-labs/skills: the `npx skills` CLI](https://github.com/vercel-labs/skills)  
@@ -227,6 +300,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [awesome-design-md-jp: template/DESIGN.md (日本語向けテンプレート)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/template/DESIGN.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 
+## gitlab.com
+
+- [GitLab: design.gitlab.com (Pajamas source)](https://gitlab.com/gitlab-org/gitlab-services/design.gitlab.com)  
+  引用: [GitLab Pajamas Design System](../Knowledge/design-systems/gitlab-pajamas.md)
+
 ## goodpatch.com
 
 - [良いデザインシステムとは？その基本と構造をグッドパッチが解説 | Goodpatch Blog](https://goodpatch.com/blog/2026-04-cz-ds-01)  
@@ -260,8 +338,15 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## linear.app
 
+- [Linear – The system for product development](https://linear.app/)  
+  引用: [Linear](../Knowledge/design-systems/linear.md)
 - [How we redesigned the Linear UI (part II) - Linear](https://linear.app/now/how-we-redesigned-the-linear-ui)  
   引用: [Linear](../Knowledge/design-systems/linear.md)
+
+## m3.material.io
+
+- [Material Design](https://m3.material.io/)  
+  引用: [Material Design 3](../Knowledge/platform-guidelines/material-3.md)
 
 ## magicui.design
 
@@ -286,6 +371,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [10 Usability Heuristics for User Interface Design - Nielsen Norman Group](https://www.nngroup.com/articles/ten-usability-heuristics/)  
   引用: [Nielsen の 10 ユーザビリティヒューリスティクス](../Knowledge/design-thinking/nielsen-heuristics.md)
 
+## nordhealth.design
+
+- [Nord Design System](https://nordhealth.design/)  
+  引用: [Nord Design System](../Knowledge/design-systems/nord-design-system.md)
+
 ## nothing.community
 
 - [ndot57: the Nothing Typeface - Nothing Community](https://nothing.community/d/104-ndot57-the-nothing-typeface)  
@@ -301,10 +391,20 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Nothing's design boss explains the big change behind Phone (3) - PhoneArena](https://www.phonearena.com/news/nothing-design-boss-explains-the-big-change-behind-phone-3_id171637)  
   引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
 
+## polaris.shopify.com
+
+- [Polaris (redirects to Shopify.dev)](https://polaris.shopify.com/)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+
 ## practicaltypography.com
 
 - [Line length | Butterick's Practical Typography](https://practicaltypography.com/line-length.html)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
+
+## primer.style
+
+- [Primer](https://primer.style/)  
+  引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 
 ## pub.towardsai.net
 
@@ -315,6 +415,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Understanding the scale - Radix Colors](https://www.radix-ui.com/colors/docs/palette-composition/understanding-the-scale)  
   引用: [Radix Colors (12 ステップスケール)](../Knowledge/color/radix-colors.md)
+- [Radix Primitives](https://www.radix-ui.com/primitives)  
+  引用: [Radix Primitives and Radix Colors](../Knowledge/component-libraries/radix-primitives-and-colors.md)
 
 ## raw.githubusercontent.com
 
@@ -591,6 +693,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI の要点ノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
   引用: [Refactoring UI](../Knowledge/design-thinking/refactoring-ui.md), [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 
+## react-spectrum.adobe.com
+
+- [React Spectrum Libraries](https://react-spectrum.adobe.com/)  
+  引用: [Adobe Spectrum](../Knowledge/platform-guidelines/adobe-spectrum.md)
+
+## react.fluentui.dev
+
+- [Fluent UI React v9 documentation](https://react.fluentui.dev/)  
+  引用: [Fluent 2 Design System](../Knowledge/platform-guidelines/fluent-2.md)
+
 ## reactbits.dev
 
 - [React Bits (site, proxy blocked, link recorded)](https://reactbits.dev/)  
@@ -603,18 +715,30 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## registry.npmjs.org
 
+- [npm: @adobe/react-spectrum latest](https://registry.npmjs.org/@adobe/react-spectrum/latest)  
+  引用: [Adobe Spectrum](../Knowledge/platform-guidelines/adobe-spectrum.md)
 - [npm: @base-ui/react latest](https://registry.npmjs.org/@base-ui/react/latest)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+- [npm: @fluentui/react-components latest](https://registry.npmjs.org/@fluentui/react-components/latest)  
+  引用: [Fluent 2 Design System](../Knowledge/platform-guidelines/fluent-2.md)
 - [npm: @fontsource-variable/noto-sans-jp latest](https://registry.npmjs.org/@fontsource-variable/noto-sans-jp/latest)  
   引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
 - [npm: @lottiefiles/dotlottie-react latest](https://registry.npmjs.org/@lottiefiles/dotlottie-react/latest)  
   引用: [Lottie and dotLottie](../Knowledge/animation/lottie-and-dotlottie.md)
+- [npm: @nordhealth/components latest](https://registry.npmjs.org/@nordhealth/components/latest)  
+  引用: [Nord Design System](../Knowledge/design-systems/nord-design-system.md)
 - [npm: @react-three/fiber latest](https://registry.npmjs.org/@react-three/fiber/latest)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
+- [npm: @uswds/uswds latest](https://registry.npmjs.org/@uswds/uswds/latest)  
+  引用: [U.S. Web Design System (USWDS)](../Knowledge/platform-guidelines/uswds.md)
 - [npm: aceternity-ui (CLI) latest](https://registry.npmjs.org/aceternity-ui/latest)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+- [npm: antd latest](https://registry.npmjs.org/antd/latest)  
+  引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
 - [npm: geist (Vercel font package) latest](https://registry.npmjs.org/geist/latest)  
   引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
+- [npm: govuk-frontend latest](https://registry.npmjs.org/govuk-frontend/latest)  
+  引用: [GOV.UK Design System](../Knowledge/platform-guidelines/govuk-design-system.md)
 - [npm: gsap latest](https://registry.npmjs.org/gsap/latest)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
 - [npm: motion latest](https://registry.npmjs.org/motion/latest)  
@@ -647,12 +771,27 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Stripe Design System for React - Indigo #533afd, Sohne, and 21 components](https://www.shadcn.io/design/stripe)  
   引用: [Stripe](../Knowledge/design-systems/stripe.md)
 
+## smarthr.design
+
+- [SmartHR Design System](https://smarthr.design/)  
+  引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
+
+## spectrum.adobe.com
+
+- [Start with Spectrum](https://spectrum.adobe.com/)  
+  引用: [Adobe Spectrum](../Knowledge/platform-guidelines/adobe-spectrum.md)
+
 ## stitch.withgoogle.com
 
 - [Stitch docs: DESIGN.md overview (proxy blocked, link recorded)](https://stitch.withgoogle.com/docs/design-md/overview/)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
 - [Stitch docs: DESIGN.md specification (proxy blocked, link recorded)](https://stitch.withgoogle.com/docs/design-md/specification/)  
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
+
+## stripe.com
+
+- [Stripe | Financial Infrastructure to Grow Your Revenue](https://stripe.com/)  
+  引用: [Stripe](../Knowledge/design-systems/stripe.md)
 
 ## stripe.design
 
@@ -663,6 +802,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Aceternity UI (site, proxy blocked, link recorded)](https://ui.aceternity.com/)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+
+## ui.shadcn.com
+
+- [shadcn/ui - The Foundation for your Design System](https://ui.shadcn.com/)  
+  引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
 
 ## vercel.com
 

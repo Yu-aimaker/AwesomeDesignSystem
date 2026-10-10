@@ -14,7 +14,7 @@ sources:
   - url: https://goodpatch.com/blog/design-process-knowledge
     title: "大集合！Goodpatch流 実践デザインナレッジまとめ | Goodpatch Blog"
 tags: [goodpatch, japan, design-company, yu-gothic, galano-grotesque, pill-cta, line-height]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Goodpatch
@@ -74,7 +74,7 @@ Goodpatch (グッドパッチ) は東京のデザインカンパニーで、UI/U
 ## 出典
 
 - https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/goodpatch/DESIGN.md : クローン済み実測 DESIGN.md。ローカルコピーを読了。全ての数値はここから。
-- https://goodpatch.com/en : 検索結果で確認 (Prove the Power of Design)。サイトはアクセス不可。
+- https://goodpatch.com/ (取得日 2026-10-07): og:title「Goodpatch | Prove the Power of Design」、og:image `https://goodpatch.com/ogp.png`。
 - https://goodpatch.com/blog/ux-engineer-design-system : 検索結果で確認 (デザイン原則 = Shared Language)。アクセス不可。
 - https://goodpatch.com/blog/2026-04-cz-ds-01 : 検索結果で確認 (良いデザインシステムの定義)。アクセス不可。
 - https://goodpatch.com/blog/design-process-knowledge : 検索結果で確認。アクセス不可。

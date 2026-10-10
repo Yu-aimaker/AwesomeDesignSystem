@@ -3,6 +3,8 @@ title: "SmartHR Design System"
 category: design-systems
 type: design-system
 sources:
+  - url: https://smarthr.design/
+    title: "SmartHR Design System"
   - url: https://github.com/kufu/smarthr-ui
     title: "kufu/smarthr-ui: React components for creating SmartHR applications"
   - url: https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts
@@ -16,7 +18,7 @@ sources:
   - url: https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/smarthr/DESIGN.md
     title: "awesome-design-md-jp: smarthr/DESIGN.md"
 tags: [smarthr, japan, saas, design-system, accessibility, yu-gothic, warm-gray, tokens]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # SmartHR Design System
@@ -85,4 +87,4 @@ SmartHR Design System は人事労務 SaaS SmartHR のデザインシステム�
 - https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createLeading.ts : 取得済み。行間トークン。
 - https://github.com/kufu/smarthr-design-system : 取得済み。Astro + React + Tailwind で構築されたドキュメントサイトのソース。
 - https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/smarthr/DESIGN.md : クローン済み。書体、コンポーネント、余白の整理。
-- https://smarthr.design/ (トップ、/products/design-tokens/color/、/accessibility/) はネットワーク制限で取得不可。
+- https://smarthr.design/ (取得日 2026-10-07): og:title「SmartHR Design System」、og:image `https://smarthr.design/images/ogp.png` (1200x630)。色トークン本文は smarthr-ui ソースを一次資料とした。

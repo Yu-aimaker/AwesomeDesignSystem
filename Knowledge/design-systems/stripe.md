@@ -3,6 +3,8 @@ title: "Stripe"
 category: design-systems
 type: product
 sources:
+  - url: https://stripe.com/
+    title: "Stripe | Financial Infrastructure to Grow Your Revenue"
   - url: https://github.com/voltagent/awesome-design-md/blob/main/design-md/stripe/DESIGN.md
     title: "awesome-design-md: stripe/DESIGN.md (実測、Stripi-Inspired)"
   - url: https://www.shadcn.io/design/stripe
@@ -12,7 +14,7 @@ sources:
   - url: https://stripe.design/
     title: "Stripe Design Language Study"
 tags: [stripe, fintech, sohne, gradient, tabular-nums, indigo, navy]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Stripe
@@ -75,4 +77,5 @@ Stripe のマーケティングサイトは、深い navy の ink `#0d253d`、in
 - https://www.shadcn.io/design/stripe : 検索結果で確認 (sohne-var 300-400、#533afd、4-6px radius、8px grid)。サイト自体はアクセス不可。
 - https://www.designmd.run/blog/stripe-design-system-breakdown : 検索結果で確認。アクセス不可。
 - https://stripe.design/ : 検索結果で確認。アクセス不可。
-- stripe.com/blog はネットワーク制限で取得不可。Stripe 公式のデザイン記事は本エントリに含めていない。
+- https://stripe.com/ (取得日 2026-10-07): og:title「Stripe | Financial Infrastructure to Grow Your Revenue」、og:image は Stripe CDN JPEG。
+- stripe.com/blog の個別記事は本エントリに含めていない。

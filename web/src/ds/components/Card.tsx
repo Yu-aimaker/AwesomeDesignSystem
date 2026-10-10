@@ -78,15 +78,21 @@ export const MediaCard = forwardRef<HTMLAnchorElement, MediaCardProps>(function 
   const body = (
     <>
       {media}
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex min-w-0 flex-1 flex-col p-5">
         {eyebrow && <p className="t-caption text-ink-muted">{eyebrow}</p>}
-        <h3 className={cx("t-h4 text-ink", eyebrow && "mt-1")}>{title}</h3>
-        {description && <p className="t-body-sm mt-1 text-ink-secondary">{description}</p>}
+        <h3 className={cx("t-h4 min-w-0 text-ink", eyebrow && "mt-1")} style={{ overflowWrap: "anywhere" }}>
+          {title}
+        </h3>
+        {description && (
+          <p className="t-body-sm mt-1 min-w-0 text-ink-secondary" style={{ overflowWrap: "anywhere" }}>
+            {description}
+          </p>
+        )}
       </div>
-      {footer && <div className="flex items-center justify-between gap-3 px-5 pb-5 text-ink-secondary">{footer}</div>}
+      {footer && <div className="flex min-w-0 items-center justify-between gap-3 px-5 pb-5 text-ink-secondary">{footer}</div>}
     </>
   );
-  const frame = "flex flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink";
+  const frame = "flex min-w-0 max-w-full flex-col overflow-hidden rounded-lg border border-hairline bg-surface text-ink";
   if (href) {
     return (
       <a
@@ -96,6 +102,7 @@ export const MediaCard = forwardRef<HTMLAnchorElement, MediaCardProps>(function 
           frame,
           "no-underline transition-[box-shadow,border-color,transform] duration-fast ease-out-ds",
           "hover:border-hairline-strong hover:shadow-2 active:translate-y-px",
+          "focus-visible:ring-2 focus-visible:ring-accent focus-visible:outline-none",
           className,
         )}
         {...rest}

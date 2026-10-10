@@ -3,6 +3,8 @@ title: "shadcn/ui"
 category: component-libraries
 type: library
 sources:
+  - url: https://ui.shadcn.com/
+    title: "shadcn/ui - The Foundation for your Design System"
   - url: https://github.com/shadcn-ui/ui
     title: "shadcn-ui/ui (source of ui.shadcn.com docs; the site itself is proxy blocked)"
   - url: https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/index.mdx
@@ -24,7 +26,7 @@ sources:
   - url: https://registry.npmjs.org/shadcn/latest
     title: "npm: shadcn (CLI) latest"
 tags: [shadcn, radix, base-ui, tailwind-v4, css-variables, registry, new-york, oklch]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # shadcn/ui
@@ -99,7 +101,8 @@ shadcn/ui はコンポーネントライブラリではなく「コンポーネ�
 
 ## 出典
 
-- https://github.com/shadcn-ui/ui : ドキュメントのソース。`apps/v4/content/docs/(root)/` と `changelog/` のファイル一覧を取得済み。ui.shadcn.com 本体はプロキシで取得不可。
+- https://ui.shadcn.com/ (取得日 2026-10-07): og:title「shadcn/ui - The Foundation for your Design System」、動的 og:image (`/og?title=...`)。
+- https://github.com/shadcn-ui/ui : ドキュメントのソース。`apps/v4/content/docs/(root)/` と `changelog/` のファイル一覧を取得済み。
 - https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/index.mdx : 5 原則。取得済み。
 - https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/theming.mdx : CSS 変数一覧と oklch 値、base color 一覧。取得済み。
 - https://raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/content/docs/(root)/cli.mdx : コマンドとフラグ。取得済み。

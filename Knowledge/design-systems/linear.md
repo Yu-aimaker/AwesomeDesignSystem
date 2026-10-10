@@ -3,6 +3,8 @@ title: "Linear"
 category: design-systems
 type: product
 sources:
+  - url: https://linear.app/
+    title: "Linear – The system for product development"
   - url: https://github.com/voltagent/awesome-design-md/blob/main/design-md/linear.app/DESIGN.md
     title: "awesome-design-md: linear.app/DESIGN.md (実測)"
   - url: https://linear.app/now/how-we-redesigned-the-linear-ui
@@ -12,7 +14,7 @@ sources:
   - url: https://raw.githubusercontent.com/marcus/marcus-skills/main/skills/linear-design-patterns/references/linear-design-system.md
     title: "marcus-skills: linear-design-system.md (二次資料)"
 tags: [linear, dark-mode, saas, inter, monochrome, hairline, density]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Linear
@@ -76,4 +78,5 @@ Linear はソフトウェア開発チーム向けの課題管理ツールで、�
 - https://linear.app/now/how-we-redesigned-the-linear-ui : 2024 年の UI 再設計記事。linear.app はアクセス不可、検索結果で URL と要約を確認。
 - https://blog.logrocket.com/ux-design/linear-design/ : Linear 風デザインの解説。アクセス不可、検索結果の要約 (Inter Display、1–10% lightness、border lines vs shadows) を引用。
 - https://raw.githubusercontent.com/marcus/marcus-skills/main/skills/linear-design-patterns/references/linear-design-system.md : 二次資料。取得済み。原典 URL の列挙のみで、直接引用の対応は不明。
-- https://linear.app/method は取得不可 (ネットワーク制限)。
+- https://linear.app/ (取得日 2026-10-07): og:title「Linear – The system for product development」、og:image は `/api/og/main?title=Linear&v=4` (1200x630)。
+- https://linear.app/method の本文は本エントリに含めていない。

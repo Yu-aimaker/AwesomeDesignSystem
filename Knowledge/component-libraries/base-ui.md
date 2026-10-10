@@ -3,6 +3,8 @@ title: "Base UI (@base-ui/react)"
 category: component-libraries
 type: library
 sources:
+  - url: https://base-ui.com/
+    title: "Unstyled UI components for accessible design systems · Base UI"
   - url: https://github.com/mui/base-ui
     title: "mui/base-ui: unstyled UI components for building accessible web apps"
   - url: https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx
@@ -16,7 +18,7 @@ sources:
   - url: https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/content/docs/(getting-started)/base-ui.mdx
     title: "assistant-ui docs: Radix UI and Base UI"
 tags: [base-ui, mui, unstyled, render-prop, shadcn, accessibility, headless]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Base UI (@base-ui/react)
@@ -67,6 +69,7 @@ Radix との対応。
 
 ## 出典
 
+- https://base-ui.com/ (取得日 2026-10-07): og:title「Unstyled UI components for accessible design systems · Base UI」、og:image 1200x630。
 - https://github.com/mui/base-ui : README（保守者、位置づけ、MIT、10.8k stars）。取得済み。
 - https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/overview/quick-start/page.mdx : インストール、isolation、スタイリング、Popover 例、iOS 26 の注記。取得済み。base-ui.com 本体はプロキシで取得不可。
 - https://raw.githubusercontent.com/mui/base-ui/master/docs/src/app/(docs)/react/handbook/composition/page.mdx : render prop の要素形と関数形、入れ子。取得済み。

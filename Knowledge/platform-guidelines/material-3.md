@@ -3,6 +3,8 @@ title: "Material Design 3"
 category: platform-guidelines
 type: guideline
 sources:
+  - url: https://m3.material.io/
+    title: "Material Design"
   - url: https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-sys-motion.scss
     title: "material-web tokens: md-sys-motion (v0.192)"
   - url: https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-sys-typescale.scss
@@ -16,7 +18,7 @@ sources:
   - url: https://developer.android.com/develop/ui/compose/designsystems/material3
     title: "Material Design 3 in Compose | Android Developers"
 tags: [material, google, tokens, tonal-palette, type-scale, shape, motion, elevation]
-updated: 2026-09-06
+updated: 2026-10-07
 ---
 
 # Material Design 3
@@ -120,4 +122,5 @@ corner-none 0px / extra-small 4px / small 8px / medium 12px / large 16px / extra
 - https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-sys-color.scss : ロールとトーンの対応。
 - https://raw.githubusercontent.com/material-components/material-web/main/tokens/versions/v0_192/_md-ref-palette.scss : 13 トーンと baseline hex。
 - https://developer.android.com/develop/ui/compose/designsystems/material3 : Compose 実装 (検索結果で確認、未取得)。
-- m3.material.io はネットワーク制限でアクセス不可。上記の GitHub トークンを代替の一次資料とした。
+- https://m3.material.io/ (取得日 2026-10-07): og:title「Material Design」、og:image `https://m3.material.io/static/assets/m3-social.jpg`。
+- m3.material.io の本文トークンは GitHub の material-web を一次資料とした。
