@@ -72,6 +72,12 @@ if (config.assets?.not_found_handling !== "single-page-application") {
 if (config.assets?.directory !== "./dist") {
   problems.push(`assets.directory must be "./dist" (got ${JSON.stringify(config.assets?.directory ?? null)})`);
 }
+if (config.previews == null || typeof config.previews !== "object" || Array.isArray(config.previews)) {
+  problems.push("wrangler.jsonc must set previews to an object (wrangler preview requires it; empty is fine)");
+}
+if (config.routes != null || config.previews?.routes != null) {
+  problems.push("wrangler.jsonc must not set routes (cutover is a later PR)");
+}
 
 const dist = join(webRoot, "dist");
 let headers = "";
@@ -144,5 +150,5 @@ if (problems.length) {
   process.exit(1);
 }
 console.log(
-  `cf-assets ok: ${files.length} files, no main, not_found_handling=single-page-application, noindex, HSTS, og-image 1200x630`,
+  `cf-assets ok: ${files.length} files, no main, previews={}, not_found_handling=single-page-application, noindex, HSTS, og-image 1200x630`,
 );

@@ -9,7 +9,11 @@
     "html_handling": "auto-trailing-slash"
   },
   "workers_dev": true,
-  "preview_urls": true
+  "preview_urls": true,
+  // wrangler preview（Workers Builds の非本番コマンド）は空でもこのブロックが要る。
+  // assets と compatibility_date はトップレベルに置く。routes は入れない。
+  // https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file
+  "previews": {}
   // PR-B（切替）で追加:
   // "routes": [{ "pattern": "awesomeds.yumaker.studio/*", "zone_name": "yumaker.studio" }]
 }
