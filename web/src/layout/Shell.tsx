@@ -147,7 +147,7 @@ export function Shell() {
           </button>
           <Link to="/" className="mr-3 flex items-baseline gap-2 text-ink no-underline">
             <span className="t-label">AwesomeDS</span>
-            <span className="t-caption hidden text-ink-muted sm:inline">v0.2</span>
+            <span className="t-caption hidden text-ink-muted sm:inline">v0.4</span>
           </Link>
           <nav aria-label="メイン" className="hidden min-w-0 flex-1 items-center gap-0.5 xl:flex">
             {topNav.map((item) => (

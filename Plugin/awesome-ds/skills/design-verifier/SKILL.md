@@ -25,7 +25,7 @@ Run all five steps. Do not stop after the static audit because "it already found
 
 ### (a) Static audit
 
-1. Run `node ${CLAUDE_PLUGIN_ROOT}/skills/design-verifier/scripts/static-audit.mjs <src-dir-or-file> [--json]`. It reports, with `file:line`: raw hex/rgb/hsl outside token files, Tailwind arbitrary colours, `outline: none` without `:focus-visible`, gradients, blur and glow, `100vh` and `h-screen`, scroll listeners, font sizes below 12px, weights 700+, em dashes, filler words, placeholder names, missing or wrong `lang`, `Inter`, slate and purple defaults, eyebrow count, shadow on cards.
+1. Run `node ${CLAUDE_PLUGIN_ROOT}/skills/design-verifier/scripts/static-audit.mjs <src-dir-or-file> [--json]`. It reports, with `file:line`: raw hex/rgb/hsl outside token files, Tailwind arbitrary colours, `outline: none` without `:focus-visible`, gradients, blur and glow, `100vh` and `h-screen`, scroll listeners, font sizes below 12px, weights 700+, em dashes, filler words, placeholder names, missing or wrong `lang`, `Inter`, slate and purple defaults, eyebrow count, shadow on cards, and an `.html` file with `<head>` but no `og:image` or `twitter:card` (S2).
 2. Add what the script cannot see by reading the component files: missing states (hover, focus-visible, active, disabled, loading, empty, error), accent used on more than one element per view or as a button fill, radius mixing across element types, layout repetition (two consecutive sections with the same family, three identical cards), one primary button per view, label-above-input, icon-only buttons without `aria-label`.
 3. Record every item as a finding (section "Findings" format below). Do not deduplicate across files; a repeated mistake is worth counting.
 
@@ -38,6 +38,7 @@ Run all five steps. Do not stop after the static audit because "it already found
      --out design-review/shots --full-page
    ```
    Static files: pass `file:///abs/path/index.html`. If Playwright is missing, follow the playbook's install steps (`npx playwright install chromium`) and retry once. If it still fails, record "capture skipped: <reason>" in the report and continue with (a), (c), (d).
+   The capture also checks images: after load it scrolls the page, then every `<img>` must be `complete` with `naturalWidth > 0` and no image request may answer 4xx/5xx. Each broken image is printed with its `src` (exit 1). On a page with `section[aria-labelledby=flagship]` it prints `flagship images: N/M real, K fallback, B broken`. Record every broken image as an S1 finding under Consistency.
 2. View every screenshot with the Read tool. For each, write two or three observations against the rubric before moving to the next one. Look at the 390 shots first; mobile hides nothing.
 3. Score each rubric section 0 to 5 using the anchors in rubric.md. A section with any severity-1 finding cannot score above 2.
 

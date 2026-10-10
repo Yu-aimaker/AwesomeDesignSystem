@@ -118,3 +118,5 @@ maximum, and none under reduced motion.
 - https://github.com/GoogleChrome/modern-web-guidance/blob/main/skills/modern-web-guidance/guides/visual-design/dark-mode.md : `color-scheme: light dark` and `light-dark()` guidance.
 - https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl : OKLCH lightness is perceptual, which is what makes the lightening recipe portable.
 - https://www.w3.org/TR/WCAG22/ : 1.4.3 and 1.4.11, applied to both modes.
+- https://atlassian.design/foundations/elevation : "the higher the elevation, the lighter the surface looks" in dark theme; shadows are harder to see there (opened 2026-10-08).
+- https://linear.app/now/how-we-redesigned-the-linear-ui : Linear generates its light and dark themes in LCH, whose lightness is perceptually uniform, and uses it for elevated surfaces (opened 2026-10-08).

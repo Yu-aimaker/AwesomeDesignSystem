@@ -59,7 +59,7 @@ choice and gives the exact CSS.
 | 4xl | 56 | display | 3.5 |
 
 - 16 px body: the common floor for readable web text; smaller body sizes read slower.
-- 14 px for UI chrome: matches Vercel and Linear measured label sizes; still above 12.
+- 14 px for UI chrome: matches Vercel and Linear measured label sizes (and Primer, Carbon, Polaris UI text); still above 12.
 - 12 px is the minimum. Nothing in AwesomeDS goes below it.
 - Gaps widen as size grows (2, 2, 2, 8, 8, 20) so every step is visibly different.
 - Eight sizes is enough. Material 3 uses fifteen roles; the extra granularity produces
@@ -153,3 +153,8 @@ Chrome fallback tooling article.
 - https://developer.mozilla.org/en-US/docs/Web/CSS/font-variant-numeric : `tabular-nums`.
 - https://design.digital.go.jp/dads/foundations/typography/ : Noto Sans JP and 1.5 minimum leading.
 - https://github.com/Leonxlnx/taste-skill : Inter and default-serif listed as AI tells.
+- https://raw.githubusercontent.com/primer/primitives/HEAD/src/tokens/base/typography/typography.json5 : Primer sets 14px as "Default body text size for UI" and ships line-height tokens 1.25, 1.375, 1.5, 1.625, 1.75 (fetched 2026-10-08).
+- https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/styles.ts : Carbon `bodyShort01` is 14px (scale02) at line height 1.28572 (fetched 2026-10-08).
+- https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/size.ts : Polaris size token `350` is 14px (fetched 2026-10-08).
+- https://atlassian.design/foundations/typography : Atlassian publishes text styles as typography tokens, with Body M as the default size inside components (opened 2026-10-08).
+- https://stripe.com/ : the stylesheet linked from the page defines `.tabular-nums` as `font-feature-settings: "tnum"` (opened 2026-10-08).

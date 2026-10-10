@@ -1,5 +1,5 @@
 ---
-version: 0.3.0
+version: 0.4.0
 name: AwesomeDS
 description: >
   A neutral, content-first design system for web products. Near-white canvas,

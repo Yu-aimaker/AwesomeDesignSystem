@@ -70,9 +70,9 @@ function OgpNote() {
   const missing = flagshipSystems.filter((s) => s.ogp.status === "missing");
   return (
     <p className="t-caption mt-3 max-w-[75ch] text-ink-muted" style={{ overflowWrap: "anywhere" }}>
-      {stats.ok}/{stats.total} 件が公式 og:image（取得 2026-10-07）。
+      {stats.ok}/{stats.total} 件が公式の共有画像（og:image、2026-10-08 確認）。
       {missing.length > 0
-        ? ` 幾何マーク: ${missing.map((s) => s.nameJa ?? s.name).join("、")}。`
+        ? ` 公式の共有画像がないため AwesomeDS のポスター: ${missing.map((s) => s.nameJa ?? s.name).join("、")}。`
         : ""}
     </p>
   );

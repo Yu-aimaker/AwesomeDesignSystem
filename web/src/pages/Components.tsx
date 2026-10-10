@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { components, componentsByGroup, groups, type ComponentGroup } from "../ds/registry";
+import { components, componentsByGroup, groups, type ComponentGroup, type ComponentMaturity } from "../ds/registry";
+import { Badge, type BadgeTone } from "../ds/components/Badge";
 import { Playground } from "../layout/Playground";
 import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
@@ -8,6 +9,15 @@ import { repoUrl } from "../lib/nav";
 
 // Entries that need the full row: tables, navigation, anything with a wide layout.
 const wide = new Set(["table", "data-table", "nav-bar", "stepper", "timeline", "media-card", "calendar", "command-menu", "breadcrumb", "pagination", "file-upload", "tabs", "accordion"]);
+
+// Maturity is shown as text plus tone, never tone alone. Definitions: AwesomeDS/components/README.md "Maturity".
+const maturityMeta: Record<ComponentMaturity, { label: string; tone: BadgeTone; note: string }> = {
+  stable: { label: "安定", tone: "success", note: "API 固定。仕様とアクセシビリティ確認が済み、トークンのみで描く。" },
+  beta: { label: "ベータ", tone: "neutral", note: "使える。仕様の文書化か確認が途中で、軽微な API 変更がありうる。" },
+  alpha: { label: "アルファ", tone: "warning", note: "試作。API は予告なく変わる。本番では使わない。" },
+  deprecated: { label: "非推奨", tone: "danger", note: "置き換え先あり。新規に使わない。" },
+};
+const maturityOrder: ComponentMaturity[] = ["stable", "beta", "alpha", "deprecated"];
 
 export function Components() {
   const [group, setGroup] = useState<ComponentGroup | "all">("all");
@@ -39,6 +49,17 @@ export function Components() {
         <SearchBox value={q} onChange={setQ} placeholder="部品を検索" />
       </FilterBar>
 
+      <section aria-label="成熟度の凡例" className="mt-6">
+        <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
+          {maturityOrder.map((m) => (
+            <li key={m} className="t-caption flex items-start gap-2 text-ink-secondary sm:max-w-[34ch]">
+              <Badge tone={maturityMeta[m].tone}>{maturityMeta[m].label}</Badge>
+              <span>{maturityMeta[m].note}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {shown === 0 ? (
         <div className="mt-12">
           <EmptyState title="見つかりません" description="別の語で検索するか、絞り込みを外してください。" />
@@ -56,13 +77,18 @@ export function Components() {
                     <Playground
                       id={c.id}
                       title={c.name}
-                      caption={c.caption}
+                      caption={
+                        <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                          <Badge tone={maturityMeta[c.maturity].tone}>{maturityMeta[c.maturity].label}</Badge>
+                          <span>{c.caption}</span>
+                        </span>
+                      }
                       controls={c.controls}
                       initial={c.initial}
                       code={c.code}
                       source={c.source}
                       footer={
-                        <span className="flex flex-wrap gap-1.5">
+                        <span className="flex flex-wrap items-center gap-1.5">
                           {c.states?.map((s) => <Tag key={s}>{s}</Tag>)}
                           {c.tokens?.slice(0, 4).map((t) => (
                             <Tag key={t} className="text-accent">

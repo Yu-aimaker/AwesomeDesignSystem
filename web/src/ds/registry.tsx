@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import type { PlaygroundState } from "../layout/Playground";
 import type { ComponentEntry, ComponentGroup } from "./registry.types";
-export type { ComponentEntry, ComponentGroup } from "./registry.types";
+export type { ComponentEntry, ComponentGroup, ComponentMaturity } from "./registry.types";
 
 import { Accordion } from "./components/Accordion";
 import { Alert, type AlertTone } from "./components/Alert";
@@ -561,6 +561,7 @@ export const components: ComponentEntry[] = [
     id: "button",
     name: "Button",
     group: "actions",
+    maturity: "stable",
     caption: "1 画面に primary は 1 つ。アクセントは塗らない。",
     controls: [
       { type: "select", key: "variant", label: "variant", options: ["primary", "secondary", "ghost", "danger"] },
@@ -586,6 +587,7 @@ export const components: ComponentEntry[] = [
     id: "dropdown-menu",
     name: "DropdownMenu",
     group: "actions",
+    maturity: "stable",
     caption: "クリックで開く。破壊的な項目は最後に danger で置く。",
     controls: [
       { type: "select", key: "align", label: "align", options: ["start", "end"] },
@@ -605,6 +607,7 @@ export const components: ComponentEntry[] = [
     id: "input",
     name: "Input",
     group: "inputs",
+    maturity: "stable",
     caption: "ラベルは上、補足は下。プレースホルダをラベルにしない。",
     controls: [
       { type: "toggle", key: "helper", label: "helper" },
@@ -626,6 +629,7 @@ export const components: ComponentEntry[] = [
     id: "textarea",
     name: "Textarea",
     group: "inputs",
+    maturity: "stable",
     caption: "最小 3 行。内容に合わせて伸び、縦だけリサイズする。",
     controls: [
       { type: "toggle", key: "autosize", label: "autosize" },
@@ -658,6 +662,7 @@ export const components: ComponentEntry[] = [
     id: "select",
     name: "Select",
     group: "inputs",
+    maturity: "stable",
     caption: "ネイティブ select を使う。検索が要るなら Combobox。",
     controls: [
       { type: "toggle", key: "helper", label: "helper" },
@@ -682,6 +687,7 @@ export const components: ComponentEntry[] = [
     id: "combobox",
     name: "Combobox",
     group: "inputs",
+    maturity: "beta",
     caption: "入力で絞り込み、矢印で選ぶ。長いリストに使う。",
     controls: [
       { type: "toggle", key: "helper", label: "helper" },
@@ -698,6 +704,7 @@ export const components: ComponentEntry[] = [
     id: "tag-input",
     name: "TagInput",
     group: "inputs",
+    maturity: "beta",
     caption: "Enter で追加、Backspace で削除。重複は無視する。",
     controls: [
       { type: "range", key: "max", label: "max (0 = なし)", min: 0, max: 8 },
@@ -714,6 +721,7 @@ export const components: ComponentEntry[] = [
     id: "slider",
     name: "Slider",
     group: "inputs",
+    maturity: "beta",
     caption: "つまみはボタン。矢印で刻み、Home/End で端へ。",
     controls: [
       { type: "toggle", key: "range", label: "range" },
@@ -735,6 +743,7 @@ export const components: ComponentEntry[] = [
     id: "file-upload",
     name: "FileUpload",
     group: "inputs",
+    maturity: "beta",
     caption: "ドロップ領域は label。クリック、キーボード、ドロップで動く。",
     controls: [
       { type: "toggle", key: "list", label: "一覧あり" },
@@ -752,6 +761,7 @@ export const components: ComponentEntry[] = [
     id: "date-picker",
     name: "DatePicker",
     group: "inputs",
+    maturity: "beta",
     caption: "表示は Intl に任せる。Escape で閉じ、フォーカスを戻す。",
     controls: [
       { type: "toggle", key: "preset", label: "初期値あり" },
@@ -769,6 +779,7 @@ export const components: ComponentEntry[] = [
     id: "rating",
     name: "Rating",
     group: "inputs",
+    maturity: "beta",
     caption: "星はラジオ。値をテキストでも添え、色だけにしない。",
     controls: [
       { type: "range", key: "max", label: "max", min: 3, max: 10 },
@@ -789,6 +800,7 @@ export const components: ComponentEntry[] = [
     id: "checkbox",
     name: "Checkbox",
     group: "selection",
+    maturity: "stable",
     caption: "複数から 0 個以上。ラベル全体がクリック領域。",
     controls: [
       { type: "toggle", key: "description", label: "description" },
@@ -810,6 +822,7 @@ export const components: ComponentEntry[] = [
     id: "radio",
     name: "Radio",
     group: "selection",
+    maturity: "stable",
     caption: "2〜5 個から 1 つ。全部見せたいときに使う。",
     controls: [{ type: "toggle", key: "disabled", label: "disabled" }],
     initial: { disabled: false },
@@ -828,6 +841,7 @@ export const components: ComponentEntry[] = [
     id: "switch",
     name: "Switch",
     group: "selection",
+    maturity: "stable",
     caption: "即時に反映される設定だけ。保存ボタンのある画面では使わない。",
     controls: [{ type: "toggle", key: "disabled", label: "disabled" }],
     initial: { disabled: false },
@@ -841,6 +855,7 @@ export const components: ComponentEntry[] = [
     id: "segmented-control",
     name: "SegmentedControl",
     group: "selection",
+    maturity: "beta",
     caption: "2〜5 個の短い選択で表示を即切替。矢印で移動。",
     controls: [
       { type: "select", key: "size", label: "size", options: ["sm", "md"] },
@@ -859,6 +874,7 @@ export const components: ComponentEntry[] = [
     id: "toggle-group",
     name: "ToggleGroup",
     group: "selection",
+    maturity: "beta",
     caption: "ツールバー向き。single は全部オフにもできる。",
     controls: [
       { type: "select", key: "type", label: "type", options: ["single", "multiple"] },
@@ -879,6 +895,7 @@ export const components: ComponentEntry[] = [
     id: "chip",
     name: "Chip",
     group: "selection",
+    maturity: "stable",
     caption: "押せるならチップ、読むだけならバッジ。選択にチェックを添える。",
     controls: [
       { type: "select", key: "size", label: "size", options: ["sm", "md"] },
@@ -896,6 +913,7 @@ export const components: ComponentEntry[] = [
     id: "calendar",
     name: "Calendar",
     group: "selection",
+    maturity: "beta",
     caption: "月グリッドは role=grid。矢印で日、PageUp/Down で月を移動。",
     controls: [
       { type: "select", key: "weekStartsOn", label: "週の始まり", options: ["日", "月"] },
@@ -914,6 +932,7 @@ export const components: ComponentEntry[] = [
     id: "tabs",
     name: "Tabs",
     group: "navigation",
+    maturity: "stable",
     caption: "3〜7 個、同じ種類の内容。手順には Stepper。",
     controls: [{ type: "range", key: "count", label: "タブ数", min: 2, max: 6 }],
     initial: { count: 3 },
@@ -938,6 +957,7 @@ export const components: ComponentEntry[] = [
     id: "breadcrumb",
     name: "Breadcrumb",
     group: "navigation",
+    maturity: "stable",
     caption: "14px、区切りは 16px のシェブロン。現在地に aria-current。",
     controls: [
       { type: "range", key: "depth", label: "階層", min: 2, max: 6 },
@@ -959,6 +979,7 @@ export const components: ComponentEntry[] = [
     id: "pagination",
     name: "Pagination",
     group: "navigation",
+    maturity: "stable",
     caption: "現在ページはインクで塗り、端では前後を無効にする。",
     controls: [
       { type: "range", key: "total", label: "総ページ", min: 1, max: 40 },
@@ -976,6 +997,7 @@ export const components: ComponentEntry[] = [
     id: "stepper",
     name: "Stepper",
     group: "navigation",
+    maturity: "stable",
     caption: "順番のある手順に。完了はチェック、現在はリング。",
     controls: [
       { type: "select", key: "orientation", label: "orientation", options: ["horizontal", "vertical"] },
@@ -993,6 +1015,7 @@ export const components: ComponentEntry[] = [
     id: "nav-bar",
     name: "NavBar",
     group: "navigation",
+    maturity: "stable",
     caption: "64px、下にヘアライン。リンクは折り返さない。",
     controls: [
       { type: "range", key: "links", label: "リンク数", min: 2, max: 5 },
@@ -1019,6 +1042,7 @@ export const components: ComponentEntry[] = [
     id: "dialog",
     name: "Dialog",
     group: "overlay",
+    maturity: "stable",
     caption: "応答が必要なときだけ。ネイティブ dialog に任せる。",
     controls: [
       { type: "toggle", key: "description", label: "description" },
@@ -1035,6 +1059,7 @@ export const components: ComponentEntry[] = [
     id: "sheet",
     name: "Sheet",
     group: "overlay",
+    maturity: "stable",
     caption: "背面を参照する編集に。8px だけ動かし、画面外からは出さない。",
     controls: [
       { type: "select", key: "side", label: "side", options: ["right", "bottom"] },
@@ -1051,6 +1076,7 @@ export const components: ComponentEntry[] = [
     id: "command-menu",
     name: "CommandMenu",
     group: "overlay",
+    maturity: "stable",
     caption: "⌘K は近道。すべてのコマンドは見える UI にもある。",
     controls: [{ type: "range", key: "groups", label: "グループ数", min: 1, max: 3 }],
     initial: { groups: 3 },
@@ -1064,6 +1090,7 @@ export const components: ComponentEntry[] = [
     id: "popover",
     name: "Popover",
     group: "overlay",
+    maturity: "stable",
     caption: "レベル 2。Escape と外側クリックで閉じ、フォーカスは閉じ込めない。",
     initial: {},
     render: () => (
@@ -1092,6 +1119,7 @@ export const components: ComponentEntry[] = [
     id: "tooltip",
     name: "Tooltip",
     group: "overlay",
+    maturity: "stable",
     caption: "ホバーとフォーカスで出る 1 行。必須情報は入れない。",
     controls: [{ type: "select", key: "label", label: "label", options: ["コピー", "共有リンクを作成", "⌘C でもコピーできます"] }],
     initial: { label: "コピー" },
@@ -1113,6 +1141,7 @@ export const components: ComponentEntry[] = [
     id: "toast",
     name: "Toast",
     group: "feedback",
+    maturity: "stable",
     caption: "裏で終わった結果に。フォームのエラーは行内で見せる。",
     controls: [
       { type: "select", key: "tone", label: "tone", options: ["neutral", "success", "danger"] },
@@ -1133,6 +1162,7 @@ export const components: ComponentEntry[] = [
     id: "alert",
     name: "Alert",
     group: "feedback",
+    maturity: "stable",
     caption: "行内バナー。アイコンと見出しを必ず添え、色だけにしない。",
     controls: [
       { type: "select", key: "tone", label: "tone", options: ["neutral", "info", "success", "warning", "danger"] },
@@ -1151,6 +1181,7 @@ export const components: ComponentEntry[] = [
     id: "progress",
     name: "Progress",
     group: "feedback",
+    maturity: "stable",
     caption: "ループが許されるのは進行表示だけ。値があれば数字も出す。",
     controls: [
       { type: "toggle", key: "indeterminate", label: "不定" },
@@ -1174,6 +1205,7 @@ export const components: ComponentEntry[] = [
     id: "spinner",
     name: "Spinner",
     group: "feedback",
+    maturity: "stable",
     caption: "ボタン内などの行内だけ。ページの読み込みは Skeleton。",
     controls: [{ type: "select", key: "size", label: "size", options: ["sm", "md"] }],
     initial: { size: "sm" },
@@ -1194,6 +1226,7 @@ export const components: ComponentEntry[] = [
     id: "skeleton",
     name: "Skeleton",
     group: "feedback",
+    maturity: "stable",
     caption: "最終レイアウトの形で。400ms 未満なら何も出さない。",
     controls: [{ type: "select", key: "shape", label: "shape", options: ["card", "lines", "avatar"] }],
     initial: { shape: "card" },
@@ -1227,6 +1260,7 @@ export const components: ComponentEntry[] = [
     id: "empty-state",
     name: "EmptyState",
     group: "feedback",
+    maturity: "stable",
     caption: "何が表れるか、どう追加するかを 1 文で。",
     controls: [
       { type: "toggle", key: "description", label: "description" },
@@ -1246,6 +1280,7 @@ export const components: ComponentEntry[] = [
     id: "error-state",
     name: "ErrorState",
     group: "feedback",
+    maturity: "stable",
     caption: "原因と次の一手を平易に。再試行ボタンを添える。",
     controls: [
       { type: "toggle", key: "description", label: "description" },
@@ -1267,6 +1302,7 @@ export const components: ComponentEntry[] = [
     id: "table",
     name: "Table",
     group: "data",
+    maturity: "stable",
     caption: "数字は右揃えの等幅。セルは折り返さず横にスクロール。",
     controls: [{ type: "range", key: "rows", label: "行数", min: 1, max: 6 }],
     initial: { rows: 4 },
@@ -1293,6 +1329,7 @@ export const components: ComponentEntry[] = [
     id: "data-table",
     name: "DataTable",
     group: "data",
+    maturity: "beta",
     caption: "探す、比べる、選ぶ、操作する。空状態はヘッダーの下に。",
     controls: [
       { type: "range", key: "rows", label: "行数", min: 1, max: 6 },
@@ -1311,6 +1348,7 @@ export const components: ComponentEntry[] = [
     id: "stat-tile",
     name: "StatTile",
     group: "data",
+    maturity: "beta",
     caption: "1 タイル 1 つの数字。増減は矢印と文字で、色だけにしない。",
     controls: [
       { type: "select", key: "delta", label: "delta", options: ["up", "down", "neutral", "none"] },
@@ -1340,6 +1378,7 @@ export const components: ComponentEntry[] = [
     id: "badge",
     name: "Badge",
     group: "data",
+    maturity: "stable",
     caption: "読むだけ。ホバーしない。16 文字以内、色と文字を対で。",
     controls: [{ type: "select", key: "tone", label: "tone", options: ["neutral", "accent", "success", "warning", "danger"] }],
     initial: { tone: "success" },
@@ -1358,6 +1397,7 @@ export const components: ComponentEntry[] = [
     id: "avatar",
     name: "Avatar",
     group: "data",
+    maturity: "stable",
     caption: "24 / 32 / 40。画像がなければ頭文字、1 行に 1 サイズ。",
     controls: [
       { type: "select", key: "size", label: "size", options: ["sm", "md", "lg"] },
@@ -1378,6 +1418,7 @@ export const components: ComponentEntry[] = [
     id: "avatar-group",
     name: "AvatarGroup",
     group: "data",
+    maturity: "stable",
     caption: "8px 重ね、2px のキャンバスリング。4 人まで、残りは +N。",
     controls: [
       { type: "range", key: "count", label: "人数", min: 1, max: 7 },
@@ -1394,6 +1435,7 @@ export const components: ComponentEntry[] = [
     id: "timeline",
     name: "Timeline",
     group: "data",
+    maturity: "beta",
     caption: "1px のレール、8px の点。状態は見出しの文字でも伝える。",
     controls: [
       { type: "range", key: "count", label: "件数", min: 2, max: 5 },
@@ -1424,6 +1466,7 @@ export const components: ComponentEntry[] = [
     id: "card",
     name: "Card",
     group: "layout",
+    maturity: "stable",
     caption: "ヘアライン 1px、角丸 12、余白 24。静止時に影なし。",
     controls: [
       { type: "select", key: "elevation", label: "elevation", options: ["1", "2"] },
@@ -1450,6 +1493,7 @@ export const components: ComponentEntry[] = [
     id: "media-card",
     name: "MediaCard",
     group: "layout",
+    maturity: "beta",
     caption: "カード全体が 1 つのリンク。ホバーで 1 段浮く。",
     controls: [
       { type: "toggle", key: "link", label: "リンクにする" },
@@ -1486,6 +1530,7 @@ export const components: ComponentEntry[] = [
     id: "accordion",
     name: "Accordion",
     group: "layout",
+    maturity: "beta",
     caption: "見出しはボタン。高さは grid-rows で 200ms ease-out。",
     controls: [
       { type: "select", key: "type", label: "type", options: ["single", "multiple"] },
@@ -1516,6 +1561,7 @@ export const components: ComponentEntry[] = [
     id: "divider",
     name: "Divider",
     group: "layout",
+    maturity: "stable",
     caption: "1px のヘアライン。ラベルはキャプション、ink-muted。",
     controls: [
       { type: "select", key: "label", label: "label", options: ["なし", "または", "2026 年 9 月"] },
@@ -1546,6 +1592,7 @@ export const components: ComponentEntry[] = [
     id: "link",
     name: "Link",
     group: "typography",
+    maturity: "stable",
     caption: "アクセントの仕事はリンク。行内では下線を残す。",
     controls: [
       { type: "select", key: "variant", label: "variant", options: ["inline", "standalone", "muted"] },
@@ -1579,6 +1626,7 @@ export const components: ComponentEntry[] = [
     id: "kbd",
     name: "Kbd",
     group: "typography",
+    maturity: "stable",
     caption: "等幅 12px のキーキャップ。組み合わせはキーごとに分ける。",
     controls: [{ type: "select", key: "combo", label: "keys", options: ["⌘ K", "Ctrl Shift P", "Esc", "↑ ↓ ↵"] }],
     initial: { combo: "⌘ K" },
