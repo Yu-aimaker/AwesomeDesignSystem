@@ -5,7 +5,7 @@
   "chakra-ui/chakra-ui": "component-library",
   "mui/material-ui": "component-library",
   "ant-design/ant-design": "component-library",
-  "cschroeter/park-ui": "component-library",
+  "chakra-ui/park-ui": "component-library",
   "saadeghi/daisyui": "component-library",
   "themesberg/flowbite": "component-library",
   "heroui-inc/heroui": "component-library",

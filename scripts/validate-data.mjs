@@ -127,6 +127,14 @@ else {
     const curated = JSON.parse(readFileSync(curatedPath, "utf8"));
     const blocklist = JSON.parse(readFileSync(blockPath, "utf8"));
     for (const p of sourceProblems(curated, blocklist)) bad("sources", p);
+    // The weekly diff guard fails when a curated key is absent from the ranking
+    // (for example after a GitHub repo transfer). Catch it here, before a run.
+    if (repos?.repos) {
+      const ranked = new Set(repos.repos.map((r) => `${r.owner}/${r.name}`.toLowerCase()));
+      for (const key of Object.keys(curated)) {
+        if (!ranked.has(key.toLowerCase())) bad("sources", `curated key ${key} is not in repos.json (renamed or transferred repo?)`);
+      }
+    }
   } catch (e) {
     bad("sources", e.message);
   }
