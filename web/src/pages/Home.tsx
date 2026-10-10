@@ -317,7 +317,7 @@ export function Home() {
             <h2 id="guidelines" className="t-h2 text-ink">
               ガイドライン
             </h2>
-            <p className="t-body mt-2 max-w-[48ch] text-ink-secondary">世界をリードするデザインシステムへの入口。</p>
+            <p className="t-body mt-2 max-w-[48ch] text-ink-secondary">AwesomeDS が値と規則を取り込んだ出典。何を採ったかは「すべて見る」の各カードに。</p>
           </div>
           <Link
             to="/sources"

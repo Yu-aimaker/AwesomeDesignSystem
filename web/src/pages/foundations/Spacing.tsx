@@ -234,7 +234,7 @@ export function Spacing() {
         sources={[
           { title: "WCAG 2.2: 2.5.8 Target Size (Minimum)", url: "https://www.w3.org/TR/WCAG22/#target-size-minimum", note: "24px の最小サイズ" },
           { title: "Apple HIG: Layout", url: "https://developer.apple.com/design/human-interface-guidelines/layout", note: "8、16、32 の刻み、44pt の目標" },
-          { title: "Material 3: Layout", url: "https://m3.material.io/foundations/layout/understanding-layout/overview", note: "48dp のタッチ目標" },
+          { title: "Material 3: Structure (touch targets)", url: "https://m3.material.io/foundations/designing/structure", note: "48dp のタッチ目標" },
           { title: "NN/g: Proximity Principle in Visual Design", url: "https://www.nngroup.com/articles/gestalt-proximity/", note: "距離は関係として読まれる" },
           { title: "NN/g: Fitts's Law", url: "https://www.nngroup.com/articles/fitts-law/", note: "目標の大きさと到達時間" },
           { title: "Tailwind CSS v4: Theme variables", url: "https://tailwindcss.com/docs/theme", note: "4px 単位の spacing" },

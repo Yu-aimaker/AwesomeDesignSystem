@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Wall } from "../layout/Playground";
 import { tokens } from "../lib/tokens";
 import { cx } from "../ds/cx";
+import { AWESOMEDS_CATEGORY } from "../lib/knowledge";
 
 /** Visual index of every design-system perspective AwesomeDS defines. */
 const tiles: Array<{ to: string; title: string; caption: string; visual: React.ReactNode; wide?: boolean }> = [
@@ -88,11 +89,12 @@ const tiles: Array<{ to: string; title: string; caption: string; visual: React.R
   },
 ];
 
-/** Perspectives documented in AwesomeDS/foundations but without a site page yet. */
+/** Perspectives documented in AwesomeDS/foundations; rendered by the Knowledge reader at /knowledge/awesomeds/<slug>. */
 const more = [
   ["ダークモード", "dark-mode", "明度だけを反転する"],
   ["状態", "states", "hover / focus / disabled / loading / empty"],
   ["フォーム", "forms", "ラベルは上、エラーは下"],
+  ["フィードバック", "feedback", "見えている結果に通知は要らない。エラーは消さない"],
   ["ナビゲーション", "navigation", "深さは 2 段まで"],
   ["密度", "density", "標準 40px、コンパクト 32px"],
   ["データ可視化", "data-visualization", "8 色、識別できる差"],
@@ -105,8 +107,6 @@ const more = [
   ["アイコン", "iconography", "Lucide、1.75、16 / 20 / 24"],
   ["アンチパターン", "anti-patterns", "AI 生成の印を避ける"],
 ] as const;
-
-const repo = "https://github.com/Yu-aimaker/Awesome-Design-Systems-Claude/blob/main/AwesomeDS/foundations";
 
 export function FoundationsIndex() {
   return (
@@ -143,26 +143,27 @@ export function FoundationsIndex() {
         <h2 id="more-title" className="t-h2 text-ink">
           ほかの観点
         </h2>
-        <p className="t-body-sm mt-2 text-ink-secondary">仕様と理由は GitHub の foundations に。1 行は覚えるべき規則。</p>
+        <p className="t-body-sm mt-2 text-ink-secondary">仕様と理由は各解説に。1 行は覚えるべき規則。</p>
         <ul className="mt-6 grid gap-px overflow-hidden rounded-lg border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-3">
           {more.map(([label, slug, rule]) => (
             <li key={slug} className="bg-surface">
-              <a
-                href={`${repo}/${slug}.md`}
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                to={`/knowledge/${AWESOMEDS_CATEGORY}/${slug}`}
                 className="flex h-full flex-col gap-1 px-5 py-4 text-ink no-underline transition-colors duration-instant hover:bg-canvas-soft"
               >
                 <span className="t-h4">{label}</span>
                 <span className="t-caption text-ink-secondary">{rule}</span>
-              </a>
+              </Link>
             </li>
           ))}
           <li className="bg-canvas-soft">
-            <a href={repo} target="_blank" rel="noreferrer" className="flex h-full items-center justify-between gap-2 px-5 py-4 text-ink no-underline transition-colors duration-instant hover:bg-surface-sunken">
-              <span className="t-h4">すべての観点を GitHub で</span>
+            <Link
+              to={`/knowledge?category=${AWESOMEDS_CATEGORY}`}
+              className="flex h-full items-center justify-between gap-2 px-5 py-4 text-ink no-underline transition-colors duration-instant hover:bg-surface-sunken"
+            >
+              <span className="t-h4">すべての解説を読む</span>
               <ArrowRight className="size-4 shrink-0 text-ink-muted" strokeWidth={1.75} aria-hidden />
-            </a>
+            </Link>
           </li>
         </ul>
         <p className="t-caption mt-3 text-ink-muted">

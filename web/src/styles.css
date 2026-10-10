@@ -147,6 +147,11 @@
 .prose pre code { background: transparent; padding: 0; }
 .prose table { width: 100%; border-collapse: collapse; font-size: var(--ds-text-sm); font-variant-numeric: tabular-nums; display: block; overflow-x: auto; }
 .prose th, .prose td { text-align: left; padding: var(--ds-space-2) var(--ds-space-3); border-bottom: var(--ds-border) solid var(--ds-hairline); vertical-align: top; }
+/* Narrow screens: cells keep a readable width and the table scrolls inside its own box (responsive.md, Tables). */
+.prose th, .prose td { min-width: 7rem; }
+.prose th:first-child, .prose td:first-child { min-width: 6rem; }
+/* Bare URLs and long identifiers may break anywhere so they never widen the page. */
+.prose a, .prose code { overflow-wrap: anywhere; }
 .prose th { background: var(--ds-surface-sunken); font-weight: var(--ds-weight-medium); }
 .prose img { border-radius: var(--ds-radius-md); border: var(--ds-border) solid var(--ds-hairline); }
 .prose hr { margin: var(--ds-space-8) 0; }
