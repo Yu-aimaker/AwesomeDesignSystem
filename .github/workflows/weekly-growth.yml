@@ -115,7 +115,8 @@ jobs:
 
   propose:
     needs: collect
-    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'propose'
+    # Only a run dispatched from main may publish; other refs stay dry-run in effect.
+    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'propose' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write

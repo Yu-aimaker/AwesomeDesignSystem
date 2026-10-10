@@ -34,9 +34,12 @@ jobs:
         run: node scripts/check-workflows.mjs
       - name: Bot data diff guard
         if: github.head_ref == 'bot/weekly-growth' || github.ref == 'refs/heads/bot/weekly-growth'
+        env:
+          # workflow_dispatch (the bot re-runs Check on its branch) has no base_ref.
+          BASE_REF: ${{ github.base_ref || 'main' }}
         run: |
-          git fetch origin ${{ github.base_ref }}
-          node scripts/diff-guard.mjs --git origin/${{ github.base_ref }}
+          git fetch origin "$BASE_REF"
+          node scripts/diff-guard.mjs --git "origin/$BASE_REF"
       - name: Plugin manifests are valid JSON
         run: |
           node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json','utf8'))"
