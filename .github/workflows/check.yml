@@ -33,6 +33,10 @@ jobs:
     defaults:
       run:
         working-directory: web
+    env:
+      # screenshot.mjs defaults this to /opt/pw-browsers. CI installs into the
+      # cached directory so the smoke test uses the same Chromium.
+      PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/ms-playwright
     steps:
       - uses: actions/checkout@v5
       - uses: pnpm/action-setup@v4
@@ -49,7 +53,24 @@ jobs:
           node scripts/sync-tokens.mjs
           pnpm exec tsc --noEmit -p .
       - run: pnpm build
+      - name: Playwright version
+        id: playwright-version
+        run: echo "version=$(node -p "require('playwright/package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Cache Playwright Chromium
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-chromium
+      # Browser download is the step that has hung for ~20 minutes. Skip it
+      # when the cache already has this Playwright version. OS packages are
+      # not part of that cache, so install-deps still runs on a hit.
       - name: Install Chromium for the smoke test
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        timeout-minutes: 10
         run: pnpm exec playwright install --with-deps chromium
+      - name: Install Chromium system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
       - name: Every route renders without console errors or horizontal overflow
         run: node scripts/screenshot.mjs --check
