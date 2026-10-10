@@ -78,6 +78,31 @@ if (config.previews == null || typeof config.previews !== "object" || Array.isAr
 if (config.routes != null || config.previews?.routes != null) {
   problems.push("wrangler.jsonc must not set routes (cutover is a later PR)");
 }
+if (config.assets?.binding != null) {
+  problems.push("wrangler.jsonc must not set assets.binding (that would make production a user Worker)");
+}
+
+let previewConfig = {};
+try {
+  previewConfig = JSON.parse(stripJsonc(readFileSync(join(webRoot, "wrangler.preview.jsonc"), "utf8")));
+} catch (error) {
+  problems.push(`wrangler.preview.jsonc is not valid JSONC: ${error.message}`);
+}
+if (previewConfig.name !== "awesomeds") {
+  problems.push(`wrangler.preview.jsonc name must be "awesomeds" (got ${JSON.stringify(previewConfig.name ?? null)})`);
+}
+if (previewConfig.main !== "scripts/preview-spa-fallback.js") {
+  problems.push("wrangler.preview.jsonc must set main to scripts/preview-spa-fallback.js");
+}
+if (previewConfig.assets?.binding !== "ASSETS") {
+  problems.push("wrangler.preview.jsonc must bind assets as ASSETS");
+}
+if (previewConfig.assets?.not_found_handling !== "single-page-application") {
+  problems.push("wrangler.preview.jsonc must keep not_found_handling single-page-application");
+}
+if (previewConfig.routes != null) {
+  problems.push("wrangler.preview.jsonc must not set routes");
+}
 
 const dist = join(webRoot, "dist");
 let headers = "";

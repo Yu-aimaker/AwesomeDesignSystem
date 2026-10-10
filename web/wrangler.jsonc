@@ -11,8 +11,7 @@
   "workers_dev": true,
   "preview_urls": true,
   // 空でもこのブロックが要る（wrangler preview）。assets と compatibility_date はトップレベル。routes は入れない。
-  // Workers Builds の非本番コマンドは `node scripts/cf-preview.mjs`。
-  // 素の wrangler preview は no-op worker を付け、無いパスが 404 になる。
+  // 非本番コマンドは `pnpm exec wrangler preview --config wrangler.preview.jsonc`。
   // https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file
   "previews": {}
   // PR-B（切替）で追加:
