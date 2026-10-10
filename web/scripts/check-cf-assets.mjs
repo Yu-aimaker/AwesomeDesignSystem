@@ -1,17 +1,54 @@
 #!/usr/bin/env node
 // Hosting contract for the assets-only Worker. Exit 1 when any of these drift:
-// no Worker script (no `main`), SPA fallback, noindex and HSTS in dist/_headers,
+// no Worker script (no `main`), the production Worker Route (pattern + zone_name,
+// not custom_domain), SPA fallback, noindex and HSTS in dist/_headers,
 // dist under the Workers Free file count and per-file size, og-image 1200x630.
-// Removing not_found_handling must fail this script.
+// Removing not_found_handling or the route must fail this script.
+export const PRODUCTION_ROUTE = {
+  pattern: "awesomeds.yumaker.studio/*",
+  zone_name: "yumaker.studio",
+};
+
+export function checkProductionRoutes(config) {
+  const problems = [];
+  if (config?.custom_domain != null) {
+    problems.push("wrangler.jsonc must not set custom_domain (production host is a Worker Route)");
+  }
+  const routes = config?.routes;
+  if (!Array.isArray(routes) || routes.length !== 1) {
+    problems.push(
+      `wrangler.jsonc routes must be one Worker Route (got ${JSON.stringify(routes ?? null)})`,
+    );
+    return problems;
+  }
+  const route = routes[0];
+  if (route?.pattern !== PRODUCTION_ROUTE.pattern) {
+    problems.push(
+      `routes[0].pattern must be ${JSON.stringify(PRODUCTION_ROUTE.pattern)} (got ${JSON.stringify(route?.pattern ?? null)})`,
+    );
+  }
+  if (route?.zone_name !== PRODUCTION_ROUTE.zone_name) {
+    problems.push(
+      `routes[0].zone_name must be ${JSON.stringify(PRODUCTION_ROUTE.zone_name)} (got ${JSON.stringify(route?.zone_name ?? null)})`,
+    );
+  }
+  if (route?.zone_id != null) {
+    problems.push("routes[0] must set zone_name, not zone_id");
+  }
+  if (route?.custom_domain != null) {
+    problems.push("routes[0] must not set custom_domain");
+  }
+  return problems;
+}
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const webRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const MAX_FILES = 20_000;
 const MAX_BYTES = 25 * 1024 * 1024;
 
-function stripJsonc(text) {
+export function stripJsonc(text) {
   let out = "";
   let i = 0;
   let quote = null;
@@ -52,6 +89,7 @@ function stripJsonc(text) {
   return out.replace(/,(\s*[}\]])/g, "$1");
 }
 
+function runCheck() {
 const problems = [];
 
 let config = {};
@@ -75,8 +113,9 @@ if (config.assets?.directory !== "./dist") {
 if (config.previews == null || typeof config.previews !== "object" || Array.isArray(config.previews)) {
   problems.push("wrangler.jsonc must set previews to an object (wrangler preview requires it; empty is fine)");
 }
-if (config.routes != null || config.previews?.routes != null) {
-  problems.push("wrangler.jsonc must not set routes (cutover is a later PR)");
+problems.push(...checkProductionRoutes(config));
+if (config.previews?.routes != null) {
+  problems.push("wrangler.jsonc previews.routes must not be set");
 }
 if (config.assets?.binding != null) {
   problems.push("wrangler.jsonc must not set assets.binding (that would make production a user Worker)");
@@ -175,5 +214,10 @@ if (problems.length) {
   process.exit(1);
 }
 console.log(
-  `cf-assets ok: ${files.length} files, no main, previews={}, not_found_handling=single-page-application, noindex, HSTS, og-image 1200x630`,
+  `cf-assets ok: ${files.length} files, no main, route ${PRODUCTION_ROUTE.pattern} zone ${PRODUCTION_ROUTE.zone_name}, previews={}, not_found_handling=single-page-application, noindex, HSTS, og-image 1200x630`,
 );
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  runCheck();
+}

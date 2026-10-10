@@ -83,4 +83,4 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピ
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
   - `hosting-smoke.test.mjs` と `preview-headers.test.mjs`（URL へのリクエストはしない）
-  - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.mjs` と `wrangler deploy --dry-run`）、`screenshot.mjs --check`
+  - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.test.mjs`、`check-cf-assets.mjs`、`wrangler deploy --dry-run`）、`screenshot.mjs --check`

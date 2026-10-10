@@ -1,6 +1,6 @@
 # Vercel から Cloudflare への切替
 
-AwesomeDS（https://awesomeds.yumaker.studio）を Cloudflare Workers Static Assets（Free）へ切り替える手順の正本です。移行計画（2026-10-11）の §5 を、各段の確認コマンドまで含めてここに固定します。前の段の確認が通ってから次へ進む。
+AwesomeDS（https://awesomeds.yumaker.studio）を Cloudflare Workers Static Assets（Free）へ切り替える手順の正本です。本番は 2026-10-11 08:14 JST に切替済みです。下の手順は実施時の段取りで、結果は「実施記録」にあります。移行計画（2026-10-11）の §5 を、各段の確認コマンドまで含めてここに固定します。前の段の確認が通ってから次へ進む。
 
 戻しは [cloudflare-rollback.md](cloudflare-rollback.md)。本番の 5xx、白画面、アセット 404、ルートの不一致、証明書エラー、転送の誤り、または Sir / Jarvis の指示なら、切替を続けず戻しに入る。
 
@@ -65,7 +65,7 @@ cd web && pnpm build && node ../scripts/check-cf-assets.mjs && pnpm exec wrangle
 git grep -n '"routes"' -- web/wrangler.jsonc || echo 'no-routes'
 ```
 
-期待: Node が v22。build と資産検査と dry-run が成功。`wrangler.jsonc` に `routes` が無い。`not_found_handling` を外すと `check-cf-assets.mjs` が exit 1 になる（検査を戻してから次へ）。
+期待（この段を実施した時点）: Node が v22。build と資産検査と dry-run が成功。`wrangler.jsonc` に `routes` が無い。`not_found_handling` を外すと `check-cf-assets.mjs` が exit 1 になる（検査を戻してから次へ）。切替後の `routes` は実施記録のとおり後から入れた。今の `check-cf-assets.mjs` は Worker Route が 1 件あることを要求する。
 
 ## S3. Workers Builds を接続する
 
@@ -280,11 +280,24 @@ curl -sI "https://awesome-design-system.yumaker.studio/"
 
 期待: 本番は 200、`server: cloudflare`。3 転送は S7 のルールと同じステータスで `https://awesomeds.yumaker.studio` へ。linear-grok-relay の vercel.app は触っていないこと（設定画面を開いて変えていない）。
 
-## S10. ドキュメントの片付け（別 PR）
+## S10. ドキュメントの片付け
 
-README、`web/README.md`、`CLAUDE.md` のホスティング記述を Cloudflare に更新する。`vercel.json` は戻し期間が終わるまで残す。マージ前 CI の基準から「Vercel」を外すのは、その PR で行う。
+README、`README.en.md`、`web/README.md`、`CLAUDE.md` のホスティング記述を Cloudflare Workers に更新する。`vercel.json` は戻し期間が終わるまで残す。
+
+この更新は Worker Route を `wrangler.jsonc` に入れる変更と同じブランチ（`feat/sta-92-cf-workers`）で行う。
 
 確認: その PR の CI が緑。Linear を Done にするのは Sir の指示があるときだけ。Jarvis へは完了を 1 本で報告する。
+
+## 実施記録（2026-10-11）
+
+- 時刻: 2026-10-11 08:14 JST に本番ホストを Worker `awesomeds` へ切替済み。
+- 停止: 0 秒。既存 CNAME の値は変えず、Worker Route で受けた。
+- 方式: ダッシュボードで Worker Route `awesomeds.yumaker.studio/*`（zone `yumaker.studio`）を作成した。`custom_domain` は使っていない。`web/wrangler.jsonc` の `routes` は同じ pattern と zone を後から入れる。マージ後の `wrangler deploy` がこの Route を消さない、ずれないようにするため。
+- 転送: Cloudflare Single Redirect。apex（`yumaker.studio`）/ www / `awesome-design-system.yumaker.studio` は 301 で `https://awesomeds.yumaker.studio` へ（パスとクエリを保持）。ルール投入は 2026-10-11 08:11 JST（ruleset `1e453e5fd0fc4f879fd9e295189180b9`、rule `6485ea84044e4d129dca1314ff7f9845`）。
+- 本番 URL: https://awesomeds.yumaker.studio
+- workers.dev: https://awesomeds.yumaker.workers.dev
+- プレビュー: Workers Builds が PR に Preview URL をコメントする。
+- Vercel プロジェクト `awesome-design-systems-claude` は戻し用に残置する（削除しない。pause は S9 の確認のあとだけ）。
 
 ## 関連
 

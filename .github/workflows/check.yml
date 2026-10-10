@@ -51,6 +51,8 @@ jobs:
           node scripts/sync-tokens.mjs
           pnpm exec tsc --noEmit -p .
       - run: pnpm build
+      - name: Production Worker Route pattern and zone
+        run: node --test scripts/check-cf-assets.test.mjs
       - name: Cloudflare assets stay within the Free limits
         run: node scripts/check-cf-assets.mjs
       - name: Wrangler can package the assets-only Worker

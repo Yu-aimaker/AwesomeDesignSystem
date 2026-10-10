@@ -10,10 +10,10 @@
   },
   "workers_dev": true,
   "preview_urls": true,
-  // 空でもこのブロックが要る（wrangler preview）。assets と compatibility_date はトップレベル。routes は入れない。
+  // 空でもこのブロックが要る（wrangler preview）。assets と compatibility_date はトップレベル。
   // 非本番コマンドは `pnpm exec wrangler preview --config wrangler.preview.jsonc`。
   // https://developers.cloudflare.com/workers/previews/configuration/#wrangler-configuration-file
-  "previews": {}
-  // PR-B（切替）で追加:
-  // "routes": [{ "pattern": "awesomeds.yumaker.studio/*", "zone_name": "yumaker.studio" }]
+  "previews": {},
+  // Worker Route。custom_domain にはしない。マージ後の wrangler deploy がダッシュボードの Route を消さないようにする。
+  "routes": [{ "pattern": "awesomeds.yumaker.studio/*", "zone_name": "yumaker.studio" }]
 }
