@@ -76,6 +76,8 @@ Linear の移行票に発動時刻、原因、curl の証跡を書き、Jarvis �
 
 ## 関連
 
+切替手順（pause は切替確認のあと）: [cloudflare-cutover.md](cloudflare-cutover.md)
+
 ヘッダとステータスの再確認（本番 URL とプレビュー URL）:
 
 ```bash
