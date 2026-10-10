@@ -32,12 +32,18 @@ const head = {
   candidates: read("AwesomeDS/data/candidates.json", { candidates: [] }),
   curated: read("AwesomeDS/data/sources/curated-repos.json", {}),
 };
-let changedPaths = [];
-try {
-  changedPaths = execFileSync("git", ["diff", "--name-only", ref], { encoding: "utf8" }).split("\n").filter(Boolean);
-} catch {
-  changedPaths = [];
+function gitLines(args) {
+  try {
+    return execFileSync("git", args, { encoding: "utf8" }).split("\n").filter(Boolean);
+  } catch {
+    return [];
+  }
 }
+
+const changedPaths = [...new Set([
+  ...gitLines(["diff", "--name-only", ref]),
+  ...gitLines(["ls-files", "--others", "--exclude-standard"]),
+])];
 const fileBytes = {};
 for (const path of changedPaths) {
   if (existsSync(path) && statSync(path).isFile()) fileBytes[path] = statSync(path).size;

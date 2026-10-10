@@ -1,5 +1,10 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import {
   BOT_EMAIL,
   checkOgpFile,
@@ -13,6 +18,16 @@ import {
   topicQuery,
   workflowFindings,
 } from "../lib/growth.mjs";
+
+const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
+
+function git(cwd, args) {
+  return execFileSync("git", ["-c", "user.email=test@example.com", "-c", "user.name=test", ...args], {
+    cwd,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+}
 
 function repos(n, stars = 1000) {
   return Array.from({ length: n }, (_, i) => ({
@@ -273,4 +288,135 @@ test("workflows must not push main or call billed agents", () => {
   assert.ok(bad.includes("ANTHROPIC_API_KEY"));
   assert.ok(bad.includes("claude-code-action"));
   assert.deepEqual(foreignAuthors([BOT_EMAIL, "human@example.com"]), ["human@example.com"]);
+});
+
+test("an untracked file outside data fails the diff guard", () => {
+  const cwd = mkdtempSync(join(tmpdir(), "ads-guard-"));
+  try {
+    git(cwd, ["init", "-b", "main"]);
+    const data = pack(repos(60), brands(50));
+    mkdirSync(join(cwd, "AwesomeDS/data/sources"), { recursive: true });
+    writeFileSync(join(cwd, "AwesomeDS/data/repos.json"), JSON.stringify(data.repos));
+    writeFileSync(join(cwd, "AwesomeDS/data/brands.json"), JSON.stringify(data.brands));
+    writeFileSync(join(cwd, "AwesomeDS/data/candidates.json"), JSON.stringify(data.candidates));
+    writeFileSync(join(cwd, "AwesomeDS/data/sources/curated-repos.json"), JSON.stringify(data.curated));
+    git(cwd, ["add", "."]);
+    git(cwd, ["commit", "-m", "base"]);
+    writeFileSync(join(cwd, "SECRET.md"), "not data");
+    let output = "";
+    let code = 0;
+    try {
+      output = execFileSync(process.execPath, [join(repoRoot, "scripts/diff-guard.mjs"), "--git", "HEAD"], {
+        cwd,
+        encoding: "utf8",
+      });
+    } catch (error) {
+      code = error.status ?? 1;
+      output = `${error.stdout ?? ""}${error.stderr ?? ""}`;
+    }
+    assert.equal(code, 1);
+    assert.match(output, /SECRET\.md/);
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test("push to main is judged from workflow on, permissions, and the git push destination", () => {
+  const comment = workflowFindings(`
+# git push origin HEAD:main
+name: Note
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  n:
+    steps:
+      - run: |
+          # git push origin HEAD:main
+          echo ok
+`);
+  assert.deepEqual(comment, []);
+
+  const explicit = workflowFindings(`
+on: workflow_dispatch
+jobs:
+  p:
+    permissions:
+      contents: write
+    steps:
+      - run: git push origin HEAD:refs/heads/main
+`);
+  assert.ok(explicit.includes("push-main"));
+
+  const bare = workflowFindings(`
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  ship:
+    steps:
+      - run: git push
+`);
+  assert.ok(bare.includes("push-main"));
+
+  const checkOnly = workflowFindings(`
+on:
+  push:
+    branches: [main]
+jobs:
+  repo:
+    steps:
+      - run: node scripts/validate-data.mjs
+`);
+  assert.deepEqual(checkOnly, []);
+
+  const bot = workflowFindings(`
+on:
+  workflow_dispatch:
+jobs:
+  propose:
+    permissions:
+      contents: write
+    steps:
+      - run: git push origin "HEAD:bot/weekly-growth"
+`);
+  assert.deepEqual(bot, []);
+});
+
+test("the next run recreates the bot branch from main after main moves", async () => {
+  const { recreateBotBranch } = await import("../lib/bot-branch.mjs");
+  const cwd = mkdtempSync(join(tmpdir(), "ads-bot-"));
+  try {
+    git(cwd, ["init", "-b", "main"]);
+    writeFileSync(join(cwd, "human.txt"), "base");
+    git(cwd, ["add", "."]);
+    git(cwd, ["commit", "-m", "base"]);
+    git(cwd, ["branch", "bot/weekly-growth"]);
+    git(cwd, ["checkout", "bot/weekly-growth"]);
+    writeFileSync(join(cwd, "bot-only.txt"), "old data");
+    git(cwd, ["add", "."]);
+    git(cwd, ["commit", "-m", "bot data"]);
+    const oldBot = git(cwd, ["rev-parse", "HEAD"]).trim();
+    git(cwd, ["checkout", "main"]);
+    writeFileSync(join(cwd, "human.txt"), "advanced");
+    git(cwd, ["add", "."]);
+    git(cwd, ["commit", "-m", "human"]);
+    const mainTip = git(cwd, ["rev-parse", "HEAD"]).trim();
+
+    recreateBotBranch({ cwd, branch: "bot/weekly-growth", mainRef: "main" });
+    writeFileSync(join(cwd, "data.txt"), "fresh");
+    git(cwd, ["add", "data.txt"]);
+    git(cwd, ["commit", "-m", "data: weekly"]);
+
+    const parents = git(cwd, ["rev-parse", "HEAD^@"]).trim().split(/\s+/).filter(Boolean);
+    assert.deepEqual(parents, [mainTip]);
+    assert.equal(git(cwd, ["show", "HEAD:human.txt"]).trim(), "advanced");
+    assert.throws(() => git(cwd, ["merge-base", "--is-ancestor", oldBot, "HEAD"]));
+    assert.throws(() => git(cwd, ["cat-file", "-e", "HEAD:bot-only.txt"]));
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
 });

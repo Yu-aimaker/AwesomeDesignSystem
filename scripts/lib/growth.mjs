@@ -295,9 +295,291 @@ export function checkOgpFile({ name, referenced, exists, width, height, bytes })
   return problems;
 }
 
+function yamlLines(text) {
+  return String(text).replace(/\r\n/g, "\n").split("\n");
+}
+
+function indentOf(line) {
+  return line.match(/^\s*/)[0].length;
+}
+
+function unquote(value) {
+  const t = value.trim();
+  if ((t.startsWith('"') && t.endsWith('"')) || (t.startsWith("'") && t.endsWith("'"))) return t.slice(1, -1);
+  return t;
+}
+
+function onPushTargetsMain(lines) {
+  let inOn = false;
+  let onIndent = 0;
+  let inPush = false;
+  let pushIndent = 0;
+  let inBranches = false;
+  let branchesIndent = 0;
+  for (const line of lines) {
+    if (!line.trim() || /^\s*#/.test(line)) continue;
+    const indent = indentOf(line);
+    const trimmed = line.trim();
+    if (!inOn) {
+      if (indent === 0 && trimmed.startsWith("on:")) inOn = true;
+      continue;
+    }
+    if (indent <= onIndent) {
+      inOn = false;
+      inPush = false;
+      continue;
+    }
+    if (!inPush) {
+      if (trimmed.startsWith("push:")) {
+        inPush = true;
+        pushIndent = indent;
+      }
+      continue;
+    }
+    if (indent <= pushIndent) {
+      inPush = false;
+      inBranches = false;
+      continue;
+    }
+    if (!inBranches) {
+      const match = trimmed.match(/^branches:\s*(.*)$/);
+      if (!match) continue;
+      const rest = match[1].trim();
+      if (!rest) {
+        inBranches = true;
+        branchesIndent = indent;
+        continue;
+      }
+      const items = rest.startsWith("[")
+        ? rest.slice(1, rest.indexOf("]") === -1 ? undefined : rest.indexOf("]")).split(",")
+        : [rest];
+      if (items.some((item) => ["main", "*", "**"].includes(unquote(item)))) return true;
+      continue;
+    }
+    if (indent <= branchesIndent) {
+      inBranches = false;
+      continue;
+    }
+    if (["main", "*", "**"].includes(unquote(trimmed.replace(/^-+\s*/, "")))) return true;
+  }
+  return false;
+}
+
+function permissionsBlocks(lines) {
+  const blocks = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim() || /^\s*#/.test(line)) continue;
+    const match = line.match(/^(\s*)permissions:\s*(.*)$/);
+    if (!match) continue;
+    const indent = match[1].length;
+    const rest = match[2].trim();
+    let contents = null;
+    if (rest === "write-all") contents = "write";
+    else if (rest.startsWith("{")) {
+      const found = rest.match(/contents:\s*['"]?(write|read)/);
+      if (found) contents = found[1];
+    } else if (!rest) {
+      for (let j = i + 1; j < lines.length; j++) {
+        const next = lines[j];
+        if (!next.trim() || /^\s*#/.test(next)) continue;
+        if (indentOf(next) <= indent) break;
+        const found = next.trim().match(/^contents:\s*['"]?(write|read)/);
+        if (found) contents = found[1];
+      }
+    }
+    blocks.push({ indent, line: i, contents });
+  }
+  return blocks;
+}
+
+function runScripts(lines) {
+  const runs = [];
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (/^\s*#/.test(line)) continue;
+    const match = line.match(/^(\s*)-\s*run:\s*(.*)$/) || line.match(/^(\s*)run:\s*(.*)$/);
+    if (!match) continue;
+    const indent = match[1].length;
+    const rest = match[2].trim();
+    if (rest === "|" || rest === "|-" || rest === ">" || rest === ">-") {
+      const buf = [];
+      let j = i + 1;
+      for (; j < lines.length; j++) {
+        const next = lines[j];
+        if (!next.trim()) {
+          buf.push("");
+          continue;
+        }
+        if (indentOf(next) <= indent) break;
+        buf.push(next.trim());
+      }
+      runs.push({ indent, line: i, script: buf.join("\n") });
+      i = j - 1;
+      continue;
+    }
+    runs.push({ indent, line: i, script: unquote(rest) });
+  }
+  return runs;
+}
+
+function jobRange(lines, runLine) {
+  let jobsLine = -1;
+  let jobsIndent = 0;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^\s*#/.test(lines[i])) continue;
+    if (/^jobs:\s*$/.test(lines[i].trim())) {
+      jobsLine = i;
+      jobsIndent = indentOf(lines[i]);
+      break;
+    }
+  }
+  if (jobsLine === -1 || runLine < jobsLine) return { start: -1, end: lines.length, indent: -1 };
+  let start = -1;
+  let indent = -1;
+  let end = lines.length;
+  for (let i = jobsLine + 1; i < lines.length; i++) {
+    const line = lines[i];
+    if (!line.trim() || /^\s*#/.test(line)) continue;
+    const indentNow = indentOf(line);
+    if (indentNow <= jobsIndent) {
+      if (start !== -1 && i > runLine) end = i;
+      break;
+    }
+    if (indentNow === jobsIndent + 2 && /^[A-Za-z0-9_-]+:\s*$/.test(line.trim())) {
+      if (i <= runLine) {
+        start = i;
+        indent = indentNow;
+      } else if (start !== -1) {
+        end = i;
+        break;
+      }
+    }
+  }
+  return { start, end, indent };
+}
+
+function contentsWrite(lines, run, blocks) {
+  const job = jobRange(lines, run.line);
+  const local = blocks.filter((block) => block.line > job.start && block.line < job.end && block.line < run.line && block.indent < run.indent);
+  if (local.length) return local[local.length - 1].contents === "write";
+  const inherited = blocks.filter((block) => (job.start === -1 || block.line < job.start) && block.indent < run.indent);
+  return inherited.length > 0 && inherited[inherited.length - 1].contents === "write";
+}
+
+function shellCommands(script) {
+  const joined = script.replace(/\\\n/g, " ");
+  const commands = [];
+  for (const line of joined.split("\n")) {
+    let out = "";
+    let quote = null;
+    for (const char of line) {
+      if (quote) {
+        out += char;
+        if (char === quote) quote = null;
+        continue;
+      }
+      if (char === "'" || char === '"') {
+        quote = char;
+        out += char;
+        continue;
+      }
+      if (char === "#") break;
+      out += char;
+    }
+    for (const part of out.split(/&&|\|\||;/)) {
+      const command = part.trim();
+      if (command) commands.push(command);
+    }
+  }
+  return commands;
+}
+
+function tokenize(command) {
+  const tokens = [];
+  let current = "";
+  let quote = null;
+  for (const char of command) {
+    if (quote) {
+      if (char === quote) quote = null;
+      else current += char;
+      continue;
+    }
+    if (char === "'" || char === '"') {
+      quote = char;
+      continue;
+    }
+    if (/\s/.test(char)) {
+      if (current) tokens.push(current);
+      current = "";
+      continue;
+    }
+    current += char;
+  }
+  if (current) tokens.push(current);
+  return tokens;
+}
+
+const PUSH_OPTIONS_WITH_VALUE = new Set([
+  "-u", "--set-upstream", "-o", "--push-option", "--force-with-lease", "--repo", "--receive-pack", "--exec",
+]);
+
+function pushDestinations(command) {
+  const tokens = tokenize(command);
+  if (tokens[0] !== "git" || tokens[1] !== "push") return null;
+  const positionals = [];
+  for (let i = 2; i < tokens.length; i++) {
+    const token = tokens[i];
+    if (token === "--") {
+      positionals.push(...tokens.slice(i + 1));
+      break;
+    }
+    if (token.startsWith("-")) {
+      if (!token.includes("=") && PUSH_OPTIONS_WITH_VALUE.has(token)) i++;
+      continue;
+    }
+    positionals.push(token);
+  }
+  if (positionals.length === 0) return [];
+  const first = positionals[0];
+  const remote = !first.includes(":") && (first === "origin" || first.includes("://") || first.startsWith("git@"));
+  const specs = remote || (positionals.length > 1 && !first.includes(":")) ? positionals.slice(1) : positionals;
+  return specs.map((spec) => {
+    const body = spec.replace(/^\+/, "");
+    if (body.startsWith(":")) return body.slice(1);
+    const colon = body.indexOf(":");
+    return colon === -1 ? body : body.slice(colon + 1);
+  });
+}
+
+function destinationIsMain(dest) {
+  return dest.replace(/^refs\/heads\//, "") === "main";
+}
+
+function scriptPushesMain(script, allowImplicit) {
+  for (const command of shellCommands(script)) {
+    const dests = pushDestinations(command);
+    if (!dests) continue;
+    if (dests.some(destinationIsMain)) return true;
+    const pinnedBot = dests.length > 0 && dests.every((dest) => dest.startsWith("bot/") || dest.startsWith("refs/heads/bot/"));
+    if (pinnedBot) continue;
+    const implicit = dests.length === 0 || dests.some((dest) => dest === "HEAD" || dest.includes("$"));
+    if (implicit && allowImplicit) return true;
+  }
+  return false;
+}
+
 export function workflowFindings(text) {
   const findings = [];
-  if (/git push[^\n]*\bmain\b/.test(text) || /HEAD:\s*main\b/.test(text)) findings.push("push-main");
+  const lines = yamlLines(text);
+  const onMain = onPushTargetsMain(lines);
+  const blocks = permissionsBlocks(lines);
+  for (const run of runScripts(lines)) {
+    if (scriptPushesMain(run.script, onMain && contentsWrite(lines, run, blocks))) {
+      findings.push("push-main");
+      break;
+    }
+  }
   if (text.includes("ANTHROPIC_API_KEY")) findings.push("ANTHROPIC_API_KEY");
   if (text.includes("claude-code-action")) findings.push("claude-code-action");
   return findings;

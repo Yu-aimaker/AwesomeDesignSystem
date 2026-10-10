@@ -161,7 +161,7 @@ jobs:
           cp -a AwesomeDS/data /tmp/growth-data/data
           cp -a Plugin/awesome-ds/ds/data /tmp/growth-data/plugin-data
           cp report.md /tmp/growth-data/report.md
-          git checkout -f -B "$branch" origin/main
+          node scripts/reset-bot-branch.mjs --branch "$branch" --from origin/main
           rm -rf AwesomeDS/data Plugin/awesome-ds/ds/data
           cp -a /tmp/growth-data/data AwesomeDS/data
           mkdir -p Plugin/awesome-ds/ds
