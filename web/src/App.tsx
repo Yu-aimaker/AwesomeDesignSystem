@@ -25,7 +25,8 @@ function page<T extends Record<string, ComponentType>>(loader: () => Promise<T>,
 function RouteFallback() {
   const t = useT(shellMessages);
   return (
-    <div aria-busy="true" aria-label={t.loading} className="flex flex-col gap-4">
+    // One viewport tall, so the footer stays below the fold while a route loads and does not jump (CLS).
+    <div aria-busy="true" aria-label={t.loading} className="flex min-h-[calc(100dvh-var(--site-topbar))] flex-col gap-4">
       <Skeleton className="h-12 w-64 max-w-full" />
       <Skeleton className="h-5 w-full max-w-[48ch]" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
