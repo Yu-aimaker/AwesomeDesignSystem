@@ -79,4 +79,4 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピ
   - `validate-knowledge.mjs`
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
-  - web の typecheck、build、`screenshot.mjs --check`
+  - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.mjs` と `wrangler deploy --dry-run`）、`screenshot.mjs --check`

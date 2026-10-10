@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "awesomeds",
+  "compatibility_date": "2026-10-01",
+  // main なし = アセットだけの Worker。スクリプト課金・10万/日の枠を使わない
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  },
+  "workers_dev": true,
+  "preview_urls": true
+  // PR-B（切替）で追加:
+  // "routes": [{ "pattern": "awesomeds.yumaker.studio/*", "zone_name": "yumaker.studio" }]
+}

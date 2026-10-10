@@ -28,7 +28,7 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
 | [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 5 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
-| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Vercel ホスト、noindex。URL はリポジトリの About 欄 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
+| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Vercel と Cloudflare を並行配信中、noindex。URL はリポジトリの About 欄 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -105,7 +105,7 @@ Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = Awes
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
 scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携。Cloudflare Workers Static Assets は並行準備中）
 ```
 
 ## 更新の流れ

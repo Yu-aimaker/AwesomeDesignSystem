@@ -49,6 +49,12 @@ jobs:
           node scripts/sync-tokens.mjs
           pnpm exec tsc --noEmit -p .
       - run: pnpm build
+      - name: Cloudflare assets stay within the Free limits
+        run: node scripts/check-cf-assets.mjs
+      - name: Wrangler can package the assets-only Worker
+        env:
+          WRANGLER_SEND_METRICS: "false"
+        run: pnpm exec wrangler deploy --dry-run
       - name: Install Chromium for the smoke test
         run: pnpm exec playwright install --with-deps chromium
       - name: Every route renders without console errors or horizontal overflow

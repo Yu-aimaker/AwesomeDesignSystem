@@ -47,8 +47,10 @@ Node 22 and pnpm 10.
 
 ## デプロイ (Deploy)
 
-- Vercel で配信します。Root Directory は `web` です。
-- `vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` ヘッダーを持ちます。
+Vercel と Cloudflare を並行で配信する準備中です。本番ホストの切替は別の変更です。
+
+- Vercel: Root Directory は `web`。`vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` を持ちます。
+- Cloudflare: `wrangler.jsonc` はアセットだけです（`main` なし、ルートなし）。`public/_headers` が noindex と HSTS を付け、`/assets/*` は長期キャッシュです。`.assetsignore` は `.nojekyll` をアップロードから外します。
 - `base` の既定は `/` です。別のパスで配信するときだけ `SITE_BASE=/path/ pnpm build` を使います。
 
-Vercel hosts the site from Root Directory `web`; see `vercel.json` for build, rewrite and noindex settings.
+Vercel and Cloudflare are both wired for now. Production cutover is a later change. `vercel.json` still configures Vercel. `wrangler.jsonc` is assets only (no Worker script, no routes). `public/_headers` sets noindex and HSTS.
