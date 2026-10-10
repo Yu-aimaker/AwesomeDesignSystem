@@ -198,7 +198,7 @@ export function Sources() {
                       <ul className="mb-4 flex flex-col gap-4 pl-0 sm:pl-4">
                         {g.sources.map((s) => (
                           <li key={s.url} className="flex flex-col gap-1">
-                            <a href={s.url} target="_blank" rel="noreferrer" className="t-body-sm inline-flex items-start gap-1" style={{ overflowWrap: "anywhere" }}>
+                            <a href={s.url} target="_blank" rel="noreferrer" lang={langFor(s.title, locale)} className="t-body-sm inline-flex items-start gap-1" style={{ overflowWrap: "anywhere" }}>
                               {s.title}
                               <ExternalLink className="mt-1 size-3.5 shrink-0" strokeWidth={1.75} aria-hidden />
                             </a>

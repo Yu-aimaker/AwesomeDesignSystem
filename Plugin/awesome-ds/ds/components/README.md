@@ -13,6 +13,32 @@ Common rules for every component:
 - Text: `--ds-text-sm` (14) for labels and controls, `--ds-text-base` (16) for content.
 - Every interactive component has hover, focus-visible, active, disabled and loading states.
 
+## Maturity
+
+Every component carries one maturity level. The site shows it on `/components` (安定 / ベータ / アルファ / 非推奨) as a text label, never color alone. The level is `maturity` in `web/src/ds/registry.tsx`.
+
+| Level | Promise | What is done |
+|---|---|---|
+| alpha | Experiment. API and look can change without notice. Do not use in production. | Renders from `--ds-*` tokens. Nothing else is promised. |
+| beta | Usable. A minor release may change props; the change is listed in `CHANGELOG`. | Tokens only, all states in the Common rules, keyboard operable. Spec or review still incomplete (no entry in this file, or a11y checks not finished). |
+| stable | Props are frozen. A breaking change needs a major version and a migration note. | Spec in this file, every item of `checklist.md` passes, keyboard and screen reader behaviour checked, tokens only (no raw hex), demo on `/components`. |
+| deprecated | Will be removed. Do not use in new work. | The replacement is named in this file and in `CHANGELOG`; the component stays for at least one minor version before removal. |
+
+Moving between levels:
+
+- alpha to beta: the API has survived use in one real screen and every state exists.
+- beta to stable: the spec is written here and `checklist.md` passes, with the check recorded in the PR.
+- any level to deprecated: the PR names the replacement and adds a `CHANGELOG` line.
+- A stable component never goes back to beta; a regression is a bug fix.
+
+The same four-step idea is published by other systems. AwesomeDS borrows the intent, not their names:
+
+- Primer labels components Experimental, Ready and Deprecated; Ready means breaking changes bump the major version and come with a migration path (https://primer.style/product/getting-started/component-status/).
+- Atlassian uses Early Access, Beta and General Availability, plus Intent to Deprecate and Deprecated; nothing at General Availability is removed without an announced deprecation period (https://atlassian.design/release-phases).
+- Carbon marks pages Stable, publishes accessibility test tags per component, and sends experimental components to Carbon Labs, separate from stable assets (https://carbondesignsystem.com/components/overview/accessibility-status/, https://carbondesignsystem.com/getting-started/contributing/overview).
+
+Current spread: 34 stable, 14 beta, 0 alpha, 0 deprecated. Beta components are those without a spec in this file yet (Combobox, TagInput, Slider, FileUpload, DatePicker, Calendar, Rating, SegmentedControl, ToggleGroup, DataTable, StatTile, Timeline, MediaCard, Accordion).
+
 ## Button
 
 Anatomy: container, optional leading icon (20 px), label (one line), optional trailing icon,
@@ -105,7 +131,9 @@ Sheet slides 8 px, not from off-screen. Reduced motion: opacity only.
 
 Do: use a modal only when the user must respond (NN/g modal guidance). Prefer a sheet for
 edit forms that reference the page behind. Do not: stack dialogs; put more than one primary
-button in the footer; open a dialog on page load.
+button in the footer; open a dialog on page load. Menus, popovers and toasts opened from a
+dialog are portalled into that dialog, not into `<body>`, or they render under it
+([`foundations/layers.md`](../foundations/layers.md)).
 
 ## Popover, Dropdown Menu, Tooltip
 
@@ -155,6 +183,8 @@ Do: toasts for background results ("Exported 24 rows"); offer Undo for destructi
 Do not: toast a result that is already visible on screen; toast form validation errors
 (inline instead); stack more than three; auto-dismiss errors or actions. Choosing between
 inline, banner, toast and dialog: [`foundations/feedback.md`](../foundations/feedback.md).
+With a native modal `<dialog>` open, render the toast inside the dialog (top layer; see
+[`foundations/layers.md`](../foundations/layers.md)).
 
 ## Badge
 
@@ -229,3 +259,7 @@ complement, never replace). Do not: make the command menu the only route to a fe
 - https://www.nngroup.com/articles/flexibility-efficiency-heuristic/ : accelerators for experts.
 - https://www.nngroup.com/articles/bottom-sheet/ : bottom sheets on mobile.
 - https://developers.apple.com/design/human-interface-guidelines/foundations/accessibility : 44 pt targets.
+- https://primer.style/product/getting-started/component-status/ : Primer component status (Experimental, Ready, Deprecated) and what Ready promises (opened 2026-10-08).
+- https://atlassian.design/release-phases : Atlassian release phases and deprecation phases (opened 2026-10-08).
+- https://carbondesignsystem.com/components/overview/accessibility-status/ : Carbon accessibility tags per stable component (opened 2026-10-08).
+- https://carbondesignsystem.com/getting-started/contributing/overview : Carbon Labs for experimental components (opened 2026-10-08).

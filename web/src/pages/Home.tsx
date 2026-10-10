@@ -206,7 +206,7 @@ const galleries = (t: HomeMessages): Array<{ to: string; title: string; caption:
         {[0, 1, 2].map((i) => (
           <span
             key={i}
-            className="size-10 rounded-lg bg-ink motion-safe:animate-[home-bob_1.8s_var(--ds-ease-in-out-ds)_infinite]"
+            className="size-10 rounded-lg bg-ink motion-safe:animate-[home-bob_1.8s_var(--ds-ease-in-out)_infinite]"
             style={{ animationDelay: `${i * 160}ms`, opacity: 1 - i * 0.3 }}
           />
         ))}

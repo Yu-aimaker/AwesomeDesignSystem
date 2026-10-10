@@ -134,3 +134,5 @@ Fitts's Law is the reason: larger and closer targets are hit faster with fewer e
 - https://tailwindcss.com/docs/theme : Tailwind v4 theme variables (spacing and breakpoints).
 - https://refactoringui.com/ : spacing system guidance ("start with too much white space").
 - https://github.com/voltagent/awesome-design-md : measured containers of Linear, Vercel, Notion, Stripe.
+- https://atlassian.design/foundations/spacing : Atlassian space tokens are multiples of an 8px base unit, down to `space.050` = 4px (opened 2026-10-08).
+- https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/size.ts : Polaris size scale steps in 4px (`100` = 4px) (fetched 2026-10-08).

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="AwesomeDS">
+  <style>
+    .tile { fill: #0a0a0a; }
+    .ink { fill: #ffffff; }
+    .acc { fill: #2f5bea; }
+    @media (prefers-color-scheme: dark) {
+      .tile { fill: #fafafa; }
+      .ink { fill: #0a0a0a; }
+    }
+  </style>
+  <rect class="tile" width="32" height="32" rx="8"/>
+  <rect class="acc" x="12" y="18" width="8" height="3"/>
+  <path class="ink" d="M9 24 14 8h4l5 16h-3.6L16 12.6 12.6 24Z"/>
+</svg>

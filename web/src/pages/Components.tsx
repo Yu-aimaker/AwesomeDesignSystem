@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { componentsByGroup, componentsFor, groupsFor, type ComponentGroup } from "../ds/registry";
+import { componentsByGroup, componentsFor, groupsFor, type ComponentGroup, type ComponentMaturity } from "../ds/registry";
+import { Badge, type BadgeTone } from "../ds/components/Badge";
 import { Playground } from "../layout/Playground";
 import { ErrorBoundary } from "../layout/ErrorBoundary";
 import { DataNote, FilterBar, FilterChip, GalleryHeader, SearchBox, SectionTitle, Tag } from "../layout/Gallery";
@@ -10,6 +11,16 @@ import { componentsMessages } from "../i18n/messages/components";
 
 // Entries that need the full row: tables, navigation, anything with a wide layout.
 const wide = new Set(["table", "data-table", "nav-bar", "stepper", "timeline", "media-card", "calendar", "command-menu", "breadcrumb", "pagination", "file-upload", "tabs", "accordion"]);
+
+// Maturity is shown as text plus tone, never tone alone. Definitions: AwesomeDS/components/README.md "Maturity".
+// Labels and notes are localized in i18n/messages/components.ts.
+const maturityTone: Record<ComponentMaturity, BadgeTone> = {
+  stable: "success",
+  beta: "neutral",
+  alpha: "warning",
+  deprecated: "danger",
+};
+const maturityOrder: ComponentMaturity[] = ["stable", "beta", "alpha", "deprecated"];
 
 export function Components() {
   const t = useT(componentsMessages);
@@ -45,6 +56,17 @@ export function Components() {
         <SearchBox value={q} onChange={setQ} placeholder={t.searchPlaceholder} />
       </FilterBar>
 
+      <section aria-label={t.maturityLegend} className="mt-6">
+        <ul className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-6">
+          {maturityOrder.map((m) => (
+            <li key={m} className="t-caption flex items-start gap-2 text-ink-secondary sm:max-w-[34ch]">
+              <Badge tone={maturityTone[m]}>{t.maturity[m].label}</Badge>
+              <span>{t.maturity[m].note}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
       {shown === 0 ? (
         <div className="mt-12">
           <EmptyState title={t.notFoundTitle} description={t.notFoundBody} />
@@ -64,13 +86,18 @@ export function Components() {
                       key={`${c.id}-${locale}`}
                       id={c.id}
                       title={c.name}
-                      caption={c.caption}
+                      caption={
+                        <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                          <Badge tone={maturityTone[c.maturity]}>{t.maturity[c.maturity].label}</Badge>
+                          <span>{c.caption}</span>
+                        </span>
+                      }
                       controls={c.controls}
                       initial={c.initial}
                       code={c.code}
                       source={c.source}
                       footer={
-                        <span className="flex flex-wrap gap-1.5">
+                        <span className="flex flex-wrap items-center gap-1.5">
                           {c.states?.map((s) => <Tag key={s}>{s}</Tag>)}
                           {c.tokens?.slice(0, 4).map((t) => (
                             <Tag key={t} className="text-accent">

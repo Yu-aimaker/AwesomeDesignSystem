@@ -4,7 +4,7 @@ import {
 } from "lucide-react";
 import type { PlaygroundState } from "../layout/Playground";
 import type { ComponentEntry, ComponentGroup } from "./registry.types";
-export type { ComponentEntry, ComponentGroup } from "./registry.types";
+export type { ComponentEntry, ComponentGroup, ComponentMaturity } from "./registry.types";
 import { defaultLocale, localeMeta, type Locale } from "../i18n/locales";
 import { registryMessages, type RegistryMessages } from "../i18n/messages/registry";
 
@@ -567,6 +567,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "button",
       name: "Button",
       group: "actions",
+      maturity: "stable",
       caption: t.caption.button,
       controls: [
         { type: "select", key: "variant", label: "variant", options: ["primary", "secondary", "ghost", "danger"] },
@@ -592,6 +593,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "dropdown-menu",
       name: "DropdownMenu",
       group: "actions",
+      maturity: "stable",
       caption: t.caption.dropdownMenu,
       controls: [
         { type: "select", key: "align", label: "align", options: ["start", "end"] },
@@ -611,6 +613,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "input",
       name: "Input",
       group: "inputs",
+      maturity: "stable",
       caption: t.caption.input,
       controls: [
         { type: "toggle", key: "helper", label: "helper" },
@@ -632,6 +635,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "textarea",
       name: "Textarea",
       group: "inputs",
+      maturity: "stable",
       caption: t.caption.textarea,
       controls: [
         { type: "toggle", key: "autosize", label: "autosize" },
@@ -664,6 +668,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "select",
       name: "Select",
       group: "inputs",
+      maturity: "stable",
       caption: t.caption.select,
       controls: [
         { type: "toggle", key: "helper", label: "helper" },
@@ -688,6 +693,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "combobox",
       name: "Combobox",
       group: "inputs",
+      maturity: "beta",
       caption: t.caption.combobox,
       controls: [
         { type: "toggle", key: "helper", label: "helper" },
@@ -704,6 +710,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "tag-input",
       name: "TagInput",
       group: "inputs",
+      maturity: "beta",
       caption: t.caption.tagInput,
       controls: [
         { type: "range", key: "max", label: t.maxNone, min: 0, max: 8 },
@@ -720,6 +727,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "slider",
       name: "Slider",
       group: "inputs",
+      maturity: "beta",
       caption: t.caption.slider,
       controls: [
         { type: "toggle", key: "range", label: "range" },
@@ -741,6 +749,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "file-upload",
       name: "FileUpload",
       group: "inputs",
+      maturity: "beta",
       caption: t.caption.fileUpload,
       controls: [
         { type: "toggle", key: "list", label: t.withList },
@@ -758,6 +767,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "date-picker",
       name: "DatePicker",
       group: "inputs",
+      maturity: "beta",
       caption: t.caption.datePicker,
       controls: [
         { type: "toggle", key: "preset", label: t.withInitial },
@@ -775,6 +785,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "rating",
       name: "Rating",
       group: "inputs",
+      maturity: "beta",
       caption: t.caption.rating,
       controls: [
         { type: "range", key: "max", label: "max", min: 3, max: 10 },
@@ -795,6 +806,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "checkbox",
       name: "Checkbox",
       group: "selection",
+      maturity: "stable",
       caption: t.caption.checkbox,
       controls: [
         { type: "toggle", key: "description", label: "description" },
@@ -816,6 +828,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "radio",
       name: "Radio",
       group: "selection",
+      maturity: "stable",
       caption: t.caption.radio,
       controls: [{ type: "toggle", key: "disabled", label: "disabled" }],
       initial: { disabled: false },
@@ -834,6 +847,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "switch",
       name: "Switch",
       group: "selection",
+      maturity: "stable",
       caption: t.caption.switch,
       controls: [{ type: "toggle", key: "disabled", label: "disabled" }],
       initial: { disabled: false },
@@ -847,6 +861,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "segmented-control",
       name: "SegmentedControl",
       group: "selection",
+      maturity: "beta",
       caption: t.caption.segmented,
       controls: [
         { type: "select", key: "size", label: "size", options: ["sm", "md"] },
@@ -865,6 +880,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "toggle-group",
       name: "ToggleGroup",
       group: "selection",
+      maturity: "beta",
       caption: t.caption.toggleGroup,
       controls: [
         { type: "select", key: "type", label: "type", options: ["single", "multiple"] },
@@ -885,6 +901,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "chip",
       name: "Chip",
       group: "selection",
+      maturity: "stable",
       caption: t.caption.chip,
       controls: [
         { type: "select", key: "size", label: "size", options: ["sm", "md"] },
@@ -902,6 +919,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "calendar",
       name: "Calendar",
       group: "selection",
+      maturity: "beta",
       caption: t.caption.calendar,
       controls: [
         { type: "select", key: "weekStartsOn", label: t.weekStart, options: [t.sun, t.mon] },
@@ -920,6 +938,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "tabs",
       name: "Tabs",
       group: "navigation",
+      maturity: "stable",
       caption: t.caption.tabs,
       controls: [{ type: "range", key: "count", label: t.tabCount, min: 2, max: 6 }],
       initial: { count: 3 },
@@ -944,6 +963,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "breadcrumb",
       name: "Breadcrumb",
       group: "navigation",
+      maturity: "stable",
       caption: t.caption.breadcrumb,
       controls: [
         { type: "range", key: "depth", label: t.depth, min: 2, max: 6 },
@@ -965,6 +985,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "pagination",
       name: "Pagination",
       group: "navigation",
+      maturity: "stable",
       caption: t.caption.pagination,
       controls: [
         { type: "range", key: "total", label: t.totalPages, min: 1, max: 40 },
@@ -982,6 +1003,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "stepper",
       name: "Stepper",
       group: "navigation",
+      maturity: "stable",
       caption: t.caption.stepper,
       controls: [
         { type: "select", key: "orientation", label: "orientation", options: ["horizontal", "vertical"] },
@@ -999,6 +1021,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "nav-bar",
       name: "NavBar",
       group: "navigation",
+      maturity: "stable",
       caption: t.caption.navBar,
       controls: [
         { type: "range", key: "links", label: t.linkCount, min: 2, max: 5 },
@@ -1025,6 +1048,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "dialog",
       name: "Dialog",
       group: "overlay",
+      maturity: "stable",
       caption: t.caption.dialog,
       controls: [
         { type: "toggle", key: "description", label: "description" },
@@ -1041,6 +1065,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "sheet",
       name: "Sheet",
       group: "overlay",
+      maturity: "stable",
       caption: t.caption.sheet,
       controls: [
         { type: "select", key: "side", label: "side", options: ["right", "bottom"] },
@@ -1057,6 +1082,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "command-menu",
       name: "CommandMenu",
       group: "overlay",
+      maturity: "stable",
       caption: t.caption.commandMenu,
       controls: [{ type: "range", key: "groups", label: t.groupCount, min: 1, max: 3 }],
       initial: { groups: 3 },
@@ -1070,6 +1096,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "popover",
       name: "Popover",
       group: "overlay",
+      maturity: "stable",
       caption: t.caption.popover,
       initial: {},
       render: () => (
@@ -1098,6 +1125,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "tooltip",
       name: "Tooltip",
       group: "overlay",
+      maturity: "stable",
       caption: t.caption.tooltip,
       controls: [{ type: "select", key: "label", label: "label", options: [t.copy, t.createShareLink, t.copyShortcut] }],
       initial: { label: t.copy },
@@ -1119,6 +1147,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "toast",
       name: "Toast",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.toast,
       controls: [
         { type: "select", key: "tone", label: "tone", options: ["neutral", "success", "danger"] },
@@ -1139,6 +1168,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "alert",
       name: "Alert",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.alert,
       controls: [
         { type: "select", key: "tone", label: "tone", options: ["neutral", "info", "success", "warning", "danger"] },
@@ -1157,6 +1187,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "progress",
       name: "Progress",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.progress,
       controls: [
         { type: "toggle", key: "indeterminate", label: t.indeterminate },
@@ -1180,6 +1211,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "spinner",
       name: "Spinner",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.spinner,
       controls: [{ type: "select", key: "size", label: "size", options: ["sm", "md"] }],
       initial: { size: "sm" },
@@ -1200,6 +1232,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "skeleton",
       name: "Skeleton",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.skeleton,
       controls: [{ type: "select", key: "shape", label: "shape", options: ["card", "lines", "avatar"] }],
       initial: { shape: "card" },
@@ -1233,6 +1266,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "empty-state",
       name: "EmptyState",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.emptyState,
       controls: [
         { type: "toggle", key: "description", label: "description" },
@@ -1252,6 +1286,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "error-state",
       name: "ErrorState",
       group: "feedback",
+      maturity: "stable",
       caption: t.caption.errorState,
       controls: [
         { type: "toggle", key: "description", label: "description" },
@@ -1273,6 +1308,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "table",
       name: "Table",
       group: "data",
+      maturity: "stable",
       caption: t.caption.table,
       controls: [{ type: "range", key: "rows", label: t.rows, min: 1, max: 6 }],
       initial: { rows: 4 },
@@ -1299,6 +1335,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "data-table",
       name: "DataTable",
       group: "data",
+      maturity: "beta",
       caption: t.caption.dataTable,
       controls: [
         { type: "range", key: "rows", label: t.rows, min: 1, max: 6 },
@@ -1317,6 +1354,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "stat-tile",
       name: "StatTile",
       group: "data",
+      maturity: "beta",
       caption: t.caption.statTile,
       controls: [
         { type: "select", key: "delta", label: "delta", options: ["up", "down", "neutral", "none"] },
@@ -1346,6 +1384,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "badge",
       name: "Badge",
       group: "data",
+      maturity: "stable",
       caption: t.caption.badge,
       controls: [{ type: "select", key: "tone", label: "tone", options: ["neutral", "accent", "success", "warning", "danger"] }],
       initial: { tone: "success" },
@@ -1364,6 +1403,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "avatar",
       name: "Avatar",
       group: "data",
+      maturity: "stable",
       caption: t.caption.avatar,
       controls: [
         { type: "select", key: "size", label: "size", options: ["sm", "md", "lg"] },
@@ -1384,6 +1424,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "avatar-group",
       name: "AvatarGroup",
       group: "data",
+      maturity: "stable",
       caption: t.caption.avatarGroup,
       controls: [
         { type: "range", key: "count", label: t.people, min: 1, max: 7 },
@@ -1400,6 +1441,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "timeline",
       name: "Timeline",
       group: "data",
+      maturity: "beta",
       caption: t.caption.timeline,
       controls: [
         { type: "range", key: "count", label: t.items, min: 2, max: 5 },
@@ -1430,6 +1472,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "card",
       name: "Card",
       group: "layout",
+      maturity: "stable",
       caption: t.caption.card,
       controls: [
         { type: "select", key: "elevation", label: "elevation", options: ["1", "2"] },
@@ -1456,6 +1499,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "media-card",
       name: "MediaCard",
       group: "layout",
+      maturity: "beta",
       caption: t.caption.mediaCard,
       controls: [
         { type: "toggle", key: "link", label: t.asLink },
@@ -1492,6 +1536,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "accordion",
       name: "Accordion",
       group: "layout",
+      maturity: "beta",
       caption: t.caption.accordion,
       controls: [
         { type: "select", key: "type", label: "type", options: ["single", "multiple"] },
@@ -1522,6 +1567,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "divider",
       name: "Divider",
       group: "layout",
+      maturity: "stable",
       caption: t.caption.divider,
       controls: [
         { type: "select", key: "label", label: "label", options: [t.none, t.or, t.sep2026] },
@@ -1552,6 +1598,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "link",
       name: "Link",
       group: "typography",
+      maturity: "stable",
       caption: t.caption.link,
       controls: [
         { type: "select", key: "variant", label: "variant", options: ["inline", "standalone", "muted"] },
@@ -1585,6 +1632,7 @@ function build(t: RegistryMessages, locale: Locale) {
       id: "kbd",
       name: "Kbd",
       group: "typography",
+      maturity: "stable",
       caption: t.caption.kbd,
       controls: [{ type: "select", key: "combo", label: "keys", options: ["⌘ K", "Ctrl Shift P", "Esc", "↑ ↓ ↵"] }],
       initial: { combo: "⌘ K" },

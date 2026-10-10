@@ -120,3 +120,4 @@ When the formula gives a value under 4, use 4 or 0. Below 4 px the arc is not vi
 - https://www.nngroup.com/articles/gestalt-similarity/ : shared traits read as shared role.
 - https://github.com/Leonxlnx/taste-skill : shape consistency lock.
 - https://ui.shadcn.com/docs/changelog/2026-07-base-ui-default : shadcn component base (radius variable convention lives in its themes).
+- https://raw.githubusercontent.com/Shopify/polaris/main/polaris-tokens/src/themes/base/border.ts : Polaris `border-width-025` is 1px and `border-width-050` is 2px, and `border-radius-full` is 9999px (fetched 2026-10-08).
