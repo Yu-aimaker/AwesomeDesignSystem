@@ -8,7 +8,7 @@ From your project root:
 
 ```bash
 mkdir -p .cursor/rules
-PLUGIN=path/to/Awesome-Design-Systems-Claude/Plugin/awesome-ds
+PLUGIN=path/to/AwesomeDesignSystem/Plugin/awesome-ds
 cp "$PLUGIN"/cursor/*.mdc .cursor/rules/
 # Copy the design system so the rules can point at a local file
 mkdir -p design-system/awesome-ds && cp -R "$PLUGIN"/ds/. design-system/awesome-ds/

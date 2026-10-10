@@ -1,4 +1,4 @@
-# CLAUDE.md — Awesome-Design-Systems-Claude
+# CLAUDE.md — AwesomeDesignSystem
 
 このファイルは Claude Code（箱 / CI）向けの作業前提です。人間向けの詳細は `README.md` と `CONTRIBUTING.md` を優先してください。
 

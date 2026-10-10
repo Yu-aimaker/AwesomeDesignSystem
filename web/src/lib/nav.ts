@@ -63,4 +63,4 @@ export const sidebar: NavGroup[] = [
   },
 ];
 
-export const repoUrl = "https://github.com/Yu-aimaker/Awesome-Design-Systems-Claude";
+export const repoUrl = "https://github.com/Yu-aimaker/AwesomeDesignSystem";

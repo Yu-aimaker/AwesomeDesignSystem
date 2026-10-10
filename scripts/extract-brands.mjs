@@ -31,7 +31,7 @@ const SOURCES = [
 ];
 
 const DEFAULT_CACHE =
-  "/tmp/claude-0/-home-user-Awesome-Design-Systems-Claude/aa1f8280-35dd-50a3-a5b5-6b4487ca321d/scratchpad";
+  "/tmp/claude-0/-home-user-AwesomeDesignSystem/aa1f8280-35dd-50a3-a5b5-6b4487ca321d/scratchpad";
 const cache =
   process.env.DESIGN_MD_CACHE || (existsSync(DEFAULT_CACHE) ? DEFAULT_CACHE : join(tmpdir(), "awesomeds-design-md"));
 
