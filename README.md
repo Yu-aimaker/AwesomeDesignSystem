@@ -103,7 +103,8 @@ Knowledge/            出典付きの知見。カテゴリ別フォルダ
 Reference/REFERENCE.md  外部リンク一覧（scripts/build-reference.mjs で生成）
 Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = AwesomeDS の同期コピー）
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
-scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*）
+scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*, hosting-smoke）
+docs/ops/cloudflare-rollback.md  Cloudflare から Vercel へ戻す手順（DNS の値と確認コマンド）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
 .github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携。Cloudflare Workers Static Assets は並行準備中）
 ```

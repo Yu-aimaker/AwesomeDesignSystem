@@ -19,6 +19,8 @@ jobs:
           git diff --exit-code -- Reference/REFERENCE.md Knowledge/README.md
       - name: Knowledge entries pass validation
         run: node scripts/validate-knowledge.mjs
+      - name: Hosting smoke checks pass without network
+        run: node --test scripts/hosting-smoke.test.mjs
       - name: Plugin DS copy is in sync with AwesomeDS
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
       - name: Data files are valid
