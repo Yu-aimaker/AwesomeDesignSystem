@@ -1,8 +1,8 @@
 {
   "name": "awesome-ds",
   "displayName": "AwesomeDS",
-  "description": "AwesomeDS design system for AI coding agents: apply the DS to any web UI, create a brand-specific DS by interview, review designs adversarially with screenshots, run UX design-thinking, and curate the design knowledge base.",
-  "version": "0.1.0",
+  "description": "AwesomeDS design system for AI coding agents: apply the DS to any web UI, create a brand-specific DS by interview, review designs adversarially with screenshots, run UX design-thinking, write a one-page HTML report, and curate the design knowledge base.",
+  "version": "0.1.1",
   "author": { "name": "Yu-aimaker" },
   "homepage": "https://github.com/Yu-aimaker/AwesomeDesignSystem",
   "repository": "https://github.com/Yu-aimaker/AwesomeDesignSystem",

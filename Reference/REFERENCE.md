@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 311  /  ドメイン数: 67
+リンク数: 314  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -22,6 +22,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
 - [Ant Design Introduction](https://ant.design/docs/spec/introduce)  
   引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
+
+## anthropic.com
+
+- [Claude can now create and edit files](https://www.anthropic.com/news/create-files)  
+  引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 
 ## atlassian.design
 
@@ -174,7 +179,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [ant-design/ant-design](https://github.com/ant-design/ant-design)  
   引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
-  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md), [HTMLレポート](../Knowledge/skills/html-report.md)
 - [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [assistant-ui apps/registry (the component registry app behind r.assistant-ui.com)](https://github.com/assistant-ui/assistant-ui/tree/main/apps/registry)  
@@ -430,8 +435,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Laws of UX](../Knowledge/design-thinking/laws-of-ux.md)
 - [plugins/frontend-design/skills/frontend-design/SKILL.md (anthropics/claude-code)](https://raw.githubusercontent.com/anthropics/claude-code/main/plugins/frontend-design/skills/frontend-design/SKILL.md)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+- [anthropics/skills README](https://raw.githubusercontent.com/anthropics/skills/main/README.md)  
+  引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 - [skills/frontend-design/SKILL.md (anthropics/skills)](https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+- [web-artifacts-builder SKILL.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md)  
+  引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 - [assistant-ui apps/docs/components/pages/design/design-gallery.tsx](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/components/pages/design/design-gallery.tsx)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [assistant-ui apps/docs/components/pages/design/registry-meta.ts (the /design component kit sections)](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/components/pages/design/registry-meta.ts)  
