@@ -23,6 +23,10 @@ jobs:
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
       - name: Data files are valid
         run: node scripts/validate-data.mjs
+      - name: Markdown links resolve
+        run: |
+          node --test scripts/check-links.test.mjs
+          node scripts/check-links.mjs
       - name: Plugin manifests are valid JSON
         run: |
           node -e "JSON.parse(require('fs').readFileSync('.claude-plugin/marketplace.json','utf8'))"

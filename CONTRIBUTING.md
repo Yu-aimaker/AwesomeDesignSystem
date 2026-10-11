@@ -69,7 +69,7 @@ node scripts/validate-data.mjs            # AwesomeDS/data/*.json
 bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピーが AwesomeDS と一致するか
 ```
 
-- リンク確認: `node scripts/check-links.mjs` で `*.md` の相対リンク切れを探せます（CI には未導入）。
+- リンク確認: `node scripts/check-links.mjs`。相対リンクはファイルの有無で落とします。https は `scripts/external-link-allowlist.txt` に載った URL だけを、失敗時は再試行して確認します。それ以外の外部リンクは取得しません。
 
 ## PR
 
@@ -79,4 +79,5 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピ
   - `validate-knowledge.mjs`
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
+  - `check-links.mjs`（相対リンクと、許容リストの外部リンク）
   - web の typecheck、build、`screenshot.mjs --check`
