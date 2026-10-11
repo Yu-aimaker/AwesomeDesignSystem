@@ -24,6 +24,7 @@ If you installed the plugin through the Claude Code marketplace, the plugin fold
 | `design-verifier.mdc` | Mention `@design-verifier` in chat | Adversarial review procedure and report format |
 | `ds-creator.mdc` | Mention `@ds-creator` | One-question-per-turn brand DS interview and outputs |
 | `design-thinking.mdc` | Mention `@design-thinking` | Personas, stories, journey map, page flow, recommendations |
+| `slides.mdc` | Mention `@slides` | 16:9 HTML deck. Points at `skills/slides/SKILL.md` |
 
 Adjust the `design-system/awesome-ds/` path inside `awesome-ds.mdc` if you copied the DS somewhere else. If your project has its own `DESIGN.md`, the rule tells the agent to prefer it.
 
