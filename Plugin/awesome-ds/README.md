@@ -12,6 +12,8 @@ Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin 
 | `design-thinking` | Personas, user stories, journey map, Mermaid page flow, screenshot walk-through, prioritised recommendations. |
 | `knowledge-curator` | Add Knowledge entries, update Reference/REFERENCE.md, propose AwesomeDS changes with CHANGELOG. Weekly routine. User-invoked only. |
 
+Why each Claude Code surface is used, or left unused: [SURFACES.md](SURFACES.md).
+
 `ds/` is a synced copy of the repo's `AwesomeDS/` (`scripts/sync-ds.sh`; CI runs `scripts/check-sync.sh`). Do not edit `ds/` by hand.
 
 Scripts (Node 18+, no dependencies except Playwright for capture):
