@@ -2,9 +2,9 @@
 
 AwesomeDS を最新のベストプラクティスに保つための定期チェックです。Claude Code で `/awesome-ds:knowledge-curator` を起動し、この Issue 番号を渡してください。確認対象の一覧は `Plugin/awesome-ds/skills/knowledge-curator/reference/watchlist.md` にもまとまっています。
 
-### 自動実行について
+### 実行について
 
-リポジトリの Secrets に `ANTHROPIC_API_KEY` を設定すると、この Issue を開くジョブとは別に `.github/workflows/weekly-research.yml` の `research` ジョブが同じスケジュールで自動的に動きます。`anthropics/claude-code-action@v1` が knowledge-curator スキルの週次ルーティンをそのまま実行し、ランキングの更新（`node scripts/fetch-repos.mjs`）、新規/更新エントリの追加、`Reference/REFERENCE.md` の再生成までを行い、最後に PR を開きます。人がこの Issue を見て手動で起動する必要はなくなりますが、Issue 自体は変更のログとして毎週引き続き開かれます。`ANTHROPIC_API_KEY` が未設定の場合、`research` ジョブは失敗せずスキップされます（設定は任意です）。
+この Issue はチェックリストです。調査は Claude Code で `/awesome-ds:knowledge-curator` を起動して行います。従量課金の無人調査ジョブは動かしていません。API キーを足して自動実行に戻さないでください。
 
 ### 確認する更新
 - [ ] shadcn/ui, Radix, Base UI のリリースノート

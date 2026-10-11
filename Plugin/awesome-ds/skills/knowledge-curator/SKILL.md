@@ -89,7 +89,7 @@ Run on a schedule or when asked. Do all of it; do not stop after the first inter
 6. Produce one PR proposal (section 3) bundling all DS changes for the week, with one CHANGELOG entry listing each change and its source entry.
 7. Print a digest: `| source | version or date | change | effect on AwesomeDS | entry |`, then the PR proposal path or link. Nothing else.
 
-Note: `.github/workflows/weekly-research.yml` can also run this routine automatically in a `research` job gated on `ANTHROPIC_API_KEY` being set as a repository secret; a manual run through this skill works the same way regardless of whether that job is configured.
+Note: run this routine in an interactive session. The usage-billed unattended research job is off. Do not add a repository secret or a workflow job to run it unattended.
 
 ## 5. Quality bar
 
