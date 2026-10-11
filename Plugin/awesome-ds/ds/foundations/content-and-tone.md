@@ -31,6 +31,19 @@ consistent, in Japanese first and English second, and remove the tells of genera
 | Loading | 読み込み中 (with `aria-busy`) | Please wait... |
 | Form hint | 8 文字以上。数字を 1 つ含めてください。 | パスワードが無効です |
 
+## Generated Japanese
+
+These two lines are composed examples of principle 7, not quotes from a live page.
+The before line stacks an empty `ことができます`, two forbidden words, and an
+unsupported `注目`. The patterns are from no-ai-slop-ja and the forbidden-word row
+above. Sir's 2026-10-11 note names the same failure on the research plugin site
+(odd Japanese, too many words). The private site was not opened in that session.
+
+| | Copy |
+|---|---|
+| Before | 本プラグインは、デザイン思考のあらゆるフェーズにおいて、革新的でシームレスな体験を実現することができます。可視化された表現にご注目ください。 |
+| After | 5 つの段階ごとに、決めたことを 1 枚の HTML で見ます。直したいところは、その場に書きます。 |
+
 ## Alternatives considered
 
 - Playful voice (Slack, Mailchimp early): needs a brand to carry it; the neutral system stays plain
@@ -45,3 +58,4 @@ consistent, in Japanese first and English second, and remove the tells of genera
 - Material 3, Style guide for UX writing: https://m3.material.io/foundations/content-design/style-guide/ux-writing-best-practices
 - NN/g, Confirmation dialogs: https://www.nngroup.com/articles/confirmation-dialog/
 - NN/g, Error message guidelines: https://www.nngroup.com/articles/error-message-guidelines/
+- no-ai-slop-ja, patterns including `ことができます` and unsupported `注目されています`: https://github.com/53able/no-ai-slop-ja (README fetched 2026-10-11)

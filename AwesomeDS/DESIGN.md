@@ -1,5 +1,5 @@
 ---
-version: 0.4.0
+version: 0.5.0
 name: AwesomeDS
 description: >
   A neutral, content-first design system for web products. Near-white canvas,
@@ -393,6 +393,10 @@ Do not
 - Write copy with filler ("seamless", "unlock", "empower", "next generation") or
   metaphors that need explaining.
 - Use em dashes in UI copy. Use a period or a comma.
+- Ship a generated default (purple gradient, three equal cards, `ことができます`,
+  `シームレス`) because it looks finished. Principle 7 in
+  [`foundations/principles.md`](foundations/principles.md). The before/after catalog
+  is `Knowledge/skills/anti-ai-slop.md`.
 
 ## 10. Responsive behaviour
 

@@ -1,4 +1,4 @@
-/* AwesomeDS accent alternates v0.4.0
+/* AwesomeDS accent alternates v0.5.0
    Eight accents derived in OKLCH (see foundations/color.md, "Accent alternates").
    Apply with <html data-accent="violet">. Default (no attribute) is blue, defined in tokens.css.
    Every light accent is at least 4.5:1 on canvas #ffffff; every dark accent at least 4.5:1 on #0a0a0a.
