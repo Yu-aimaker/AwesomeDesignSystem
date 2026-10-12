@@ -47,7 +47,7 @@ Node 22 and pnpm 10.
 
 ## デプロイ (Deploy)
 
-本番は Cloudflare Workers Static Assets です。URL は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントします。workers.dev は https://awesomeds.yumaker.workers.dev です。Vercel プロジェクトは戻し用に残しています。
+本番は Cloudflare Workers Static Assets です。URL は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントします。workers.dev は https://awesomeds.yumaker.workers.dev です。Vercel プロジェクト `awesome-design-systems-claude` は 2026-10-12 に pause しました。戻す手順は `docs/ops/cloudflare-rollback.md` です。
 
 - Cloudflare: `wrangler.jsonc` はアセットだけです（`main` なし）。`routes` は Worker Route `awesomeds.yumaker.studio/*`（zone `yumaker.studio`）で、`custom_domain` は使いません。`public/_headers` が noindex と HSTS を付け、`/assets/*` は長期キャッシュです。`.assetsignore` は `.nojekyll` をアップロードから外します。
 - Vercel（戻し用）: Root Directory は `web`。`vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` を持ちます。

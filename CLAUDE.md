@@ -6,7 +6,7 @@
 
 AI コーディングエージェント向けの **汎用デザインシステム AwesomeDS** と、体験サイト `web/`、Claude Code プラグイン `Plugin/awesome-ds/` の本線（Champion）です。
 
-- 本番サイト: https://awesomeds.yumaker.studio （noindex。Cloudflare Workers Static Assets。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクトは戻し用に残置）
+- 本番サイト: https://awesomeds.yumaker.studio （noindex。Cloudflare Workers Static Assets。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクト `awesome-design-systems-claude` は 2026-10-12 に pause。`vercel.app` は止めてある。Git のビルドは ignore command `exit 0` でスキップする）
 - オーナー判断（Sir）以外で Archive / 可視性変更 / 他リポ削除はしない
 
 ## 必守ロック（毎 run）

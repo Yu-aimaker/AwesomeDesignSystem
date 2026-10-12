@@ -29,7 +29,7 @@ White canvas, black text, a single accent color (`#2f5bea`), Geist + Noto Sans J
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | The source-of-truth design system: DESIGN.md, tokens, 24 foundations, component conventions | [DESIGN.md](AwesomeDS/DESIGN.md) |
 | [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code plugin (7 skills) and Cursor rules | [Plugin README](Plugin/awesome-ds/README.md) (Japanese) |
-| [`web/`](web/) | A demo site where you can try AwesomeDS hands-on. The site itself is built with AwesomeDS. Served by Cloudflare Workers Static Assets, noindex. Production is https://awesomeds.yumaker.studio . Workers Builds comments the preview URL on each PR. workers.dev is https://awesomeds.yumaker.workers.dev . The Vercel project stays in place for rollback | [SITE-DESIGN.md](web/SITE-DESIGN.md) (Japanese) |
+| [`web/`](web/) | A demo site where you can try AwesomeDS hands-on. The site itself is built with AwesomeDS. Served by Cloudflare Workers Static Assets, noindex. Production is https://awesomeds.yumaker.studio . Workers Builds comments the preview URL on each PR. workers.dev is https://awesomeds.yumaker.workers.dev . The Vercel project was paused on 2026-10-12 (rollback: docs/ops/cloudflare-rollback.md) | [SITE-DESIGN.md](web/SITE-DESIGN.md) (Japanese) |
 | [`Knowledge/`](Knowledge/) | Sourced summaries of the skills, OSS, design systems, guidelines and articles we referred to | [Knowledge/README.md](Knowledge/README.md) (Japanese) |
 | [`Reference/`](Reference/) | List of external links cited by Knowledge (auto-generated, do not edit by hand) | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -110,7 +110,7 @@ scripts/              Generation and validation (build-reference, extract-brands
 docs/ops/cloudflare-cutover.md  Cutover of production onto Cloudflare Workers, with the run record (2026-10-11 08:14 JST, 0 seconds of downtime)
 docs/ops/cloudflare-rollback.md  Rollback from Cloudflare Workers to Vercel (DNS values and check commands)
 .claude-plugin/marketplace.json  Plugin marketplace definition
-.github/workflows/    Consistency checks + smoke tests of all routes, manual weekly data update (deploys go through Cloudflare Workers Builds. Production is https://awesomeds.yumaker.studio , previews are PR comments. The Vercel project stays in place for rollback)
+.github/workflows/    Consistency checks + smoke tests of all routes, manual weekly data update (deploys go through Cloudflare Workers Builds. Production is https://awesomeds.yumaker.studio , previews are PR comments. The Vercel project was paused on 2026-10-12)
 ```
 
 ## Update flow

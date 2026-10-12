@@ -1,6 +1,6 @@
 # Cloudflare から Vercel への戻し
 
-本番は Cloudflare Workers Static Assets（Worker `awesomeds`、https://awesomeds.yumaker.studio）です。ここは本番を Vercel に戻す手順の正本です。Vercel プロジェクトは戻し用に残しています。移行計画（2026-10-11 の読み取り棚卸し）の §6 を、DNS のレコード値と確認コマンドまで含めてここに固定します。
+本番は Cloudflare Workers Static Assets（Worker `awesomeds`、https://awesomeds.yumaker.studio）です。ここは本番を Vercel に戻す手順の正本です。Vercel プロジェクトは削除していない。2026-10-12 に pause し、ignore command を `exit 0` にして Git のビルドをスキップしている。移行計画（2026-10-11 の読み取り棚卸し）の §6 を、DNS のレコード値と確認コマンドまで含めてここに固定します。
 
 発動条件: 本番の 5xx、白画面、アセット 404、ルートの不一致、証明書エラー、転送の誤り、または Sir / Jarvis の指示。判断から 10 分以内に R1 から R3 まで終える。DNS の TTL は全レコード Auto（応答 300 秒）のまま。事前に下げる必要はない。どちらの向きでも旧向き先が生きているので、空白時間は出ない。
 
@@ -21,7 +21,7 @@
 
 プロジェクト `awesome-design-systems-claude`（id `prj_DeivC43MpipiBZWuOe5kbIjh9kKw`）、team `yus-projects-9bf1ac09`。
 
-Dashboard → Project → Settings で再開する。本番デプロイが Ready になってから確認する。`vercel.app` は SSO 付きなので確認に使わない。
+Dashboard → Project → Settings で再開する。Ignored Build Step が `exit 0` なら外す。外さないと Git の push はビルドされない。本番デプロイが Ready になってから確認する。`vercel.app` は pause 中 503 で、再開後は SSO 付きなので確認に使わない。
 
 ```bash
 curl -sI --resolve awesomeds.yumaker.studio:443:216.198.79.65 \
