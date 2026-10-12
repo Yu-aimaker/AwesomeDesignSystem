@@ -186,7 +186,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [ant-design/ant-design](https://github.com/ant-design/ant-design)  
   引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
-  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md), [HTMLレポート](../Knowledge/skills/html-report.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md), [HTMLレポート](../Knowledge/skills/html-report.md), [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [assistant-ui apps/registry (the component registry app behind r.assistant-ui.com)](https://github.com/assistant-ui/assistant-ui/tree/main/apps/registry)  
@@ -314,7 +314,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [awesome-design-md-jp: template/DESIGN.md (日本語向けテンプレート)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/template/DESIGN.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 
 ## gitlab.com
 
@@ -452,8 +452,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 - [skills/frontend-design/SKILL.md (anthropics/skills)](https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
-- [anthropics/skills pptx SKILL.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+- [pptx SKILL.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md)  
+  引用: [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [web-artifacts-builder SKILL.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md)  
   引用: [HTMLレポート](../Knowledge/skills/html-report.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [assistant-ui apps/docs/components/pages/design/design-gallery.tsx](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/components/pages/design/design-gallery.tsx)  
@@ -719,7 +719,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI の要点ノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
   引用: [Refactoring UI](../Knowledge/design-thinking/refactoring-ui.md), [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [Frontend Slides README](https://raw.githubusercontent.com/zarazhangrui/frontend-slides/main/README.md)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 
 ## react-spectrum.adobe.com
 

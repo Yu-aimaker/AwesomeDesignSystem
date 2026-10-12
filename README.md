@@ -27,7 +27,7 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 | 置き場所 | 中身 | 最初に読むもの |
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
-| [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 6 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
+| [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 7 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
 | [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Cloudflare Workers Static Assets で配信、noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクトは戻し用に残置 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
@@ -77,6 +77,7 @@ cd web && pnpm install && pnpm dev
 | `design-thinking` | ペルソナ、ユーザーストーリー、ジャーニーマップ、ページフロー、画面ウォークスルーで UX を改善する | `/awesome-ds:design-thinking <機能名>` |
 | `knowledge-curator` | Knowledge にエントリを追加し、Reference を再生成し、AwesomeDS への変更を提案する（毎週のリサーチ用） | `/awesome-ds:knowledge-curator` |
 | `html-report` | 結論3文と、表か図を1つだけ置いた HTML を1ファイルで書く | レポートや計画の HTML を頼むと発動。明示するなら `/awesome-ds:html-report` |
+| `slides` | 16:9 のスライドを HTML 1ファイルで書く。1枚につき主張は1つ。pptx は頼まれたときだけ | スライドを頼むと発動。明示するなら `/awesome-ds:slides` |
 
 ## AwesomeDS の要点
 

@@ -27,7 +27,7 @@ White canvas, black text, a single accent color (`#2f5bea`), Geist + Noto Sans J
 | Location | Contents | Read first |
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | The source-of-truth design system: DESIGN.md, tokens, 24 foundations, component conventions | [DESIGN.md](AwesomeDS/DESIGN.md) |
-| [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code plugin (6 skills) and Cursor rules | [Plugin README](Plugin/awesome-ds/README.md) (Japanese) |
+| [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code plugin (7 skills) and Cursor rules | [Plugin README](Plugin/awesome-ds/README.md) (Japanese) |
 | [`web/`](web/) | A demo site where you can try AwesomeDS hands-on. The site itself is built with AwesomeDS. Served by Cloudflare Workers Static Assets, noindex. Production is https://awesomeds.yumaker.studio . Workers Builds comments the preview URL on each PR. workers.dev is https://awesomeds.yumaker.workers.dev . The Vercel project stays in place for rollback | [SITE-DESIGN.md](web/SITE-DESIGN.md) (Japanese) |
 | [`Knowledge/`](Knowledge/) | Sourced summaries of the skills, OSS, design systems, guidelines and articles we referred to | [Knowledge/README.md](Knowledge/README.md) (Japanese) |
 | [`Reference/`](Reference/) | List of external links cited by Knowledge (auto-generated, do not edit by hand) | [REFERENCE.md](Reference/REFERENCE.md) |
@@ -77,6 +77,7 @@ cd web && pnpm install && pnpm dev
 | `design-thinking` | Improves UX with personas, user stories, journey maps, page flows and screen walkthroughs | `/awesome-ds:design-thinking <feature name>` |
 | `knowledge-curator` | Adds entries to Knowledge, regenerates Reference, and proposes changes to AwesomeDS (for the weekly research) | `/awesome-ds:knowledge-curator` |
 | `html-report` | Writes one HTML file: three-sentence conclusion, one table or figure, white canvas, dark text | Ask for a report or an HTML plan. Or `/awesome-ds:html-report` |
+| `slides` | One 16:9 HTML file, one claim per slide. pptx only when the user asks for PowerPoint | Ask for slides. Or `/awesome-ds:slides` |
 
 ## AwesomeDS at a glance
 
