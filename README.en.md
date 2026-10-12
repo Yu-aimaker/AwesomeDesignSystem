@@ -112,7 +112,7 @@ docs/ops/cloudflare-rollback.md  Rollback from Cloudflare Workers to Vercel (DNS
 
 ## Update flow
 
-1. Every Monday GitHub Actions opens a "Weekly research" issue, and "Update data" re-fetches GitHub stars and brand colors. If you set `ANTHROPIC_API_KEY`, the research itself also runs automatically.
+1. Every Monday GitHub Actions opens a "Weekly research" issue, and "Update data" re-fetches GitHub stars and brand colors. A person runs the research with `knowledge-curator`. The usage-billed automatic research job stays off.
 2. Add new findings to Knowledge with the `knowledge-curator` skill, then regenerate Reference with `node scripts/build-reference.mjs`.
 3. When there is evidence that AwesomeDS should change, update DESIGN.md / tokens / foundations and add the version to the CHANGELOG.
 4. Sync the copy inside the plugin with `Plugin/awesome-ds/scripts/sync-ds.sh` and open a PR. CI checks consistency.
