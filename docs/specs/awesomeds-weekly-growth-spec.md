@@ -226,6 +226,10 @@ GITHUB_TOKEN で作った PR / push では `pull_request` / `push` のワーク�
 | D-7 | main の branch protection（main 直 push 禁止を設定で強制） | 推奨。プランで不可なら CI の禁止パターン検査で代替 |
 | D-8 | STA-17 の扱い | 本 SPEC で置き換え、Duplicate にする |
 
+### 2026-10-12 追記
+
+Sir は 2026-10-12 に、このパイプラインを月曜 09:30 JST に自動実行すると決めた。Check がそのコミットで成功し、差分がデータディレクトリの中だけかつ作者がボットだけのとき、`bot/weekly-growth` の PR を squash マージする。失敗、人のコミット、許可外のパスでは、その PR を閉じ、削除するのは `bot/weekly-growth` だけにする。main への直接 push はしない。上の D-1 の文は残す。3 週待つ条件と「スター数値だけ」は、このパイプラインについては 2026-10-12 の決定が優先する。diff-guard は安全限界として残る。
+
 ## 10. 受け入れ条件
 
 - [ ] main への直接 push 経路がリポ内に 0（CI で検査）

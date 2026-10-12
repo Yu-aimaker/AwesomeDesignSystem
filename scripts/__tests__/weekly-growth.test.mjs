@@ -15,6 +15,7 @@ import {
   isDryRun,
   planDiscoveries,
   readJpegSize,
+  settle,
   topicQuery,
   workflowFindings,
 } from "../lib/growth.mjs";
@@ -452,5 +453,153 @@ test("the next run recreates the bot branch from main after main moves", async (
     assert.throws(() => git(cwd, ["cat-file", "-e", "HEAD:bot-only.txt"]));
   } finally {
     rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+const HEAD_SHA = "0123456789abcdef0123456789abcdef01234567";
+
+function settleInput(overrides = {}) {
+  return {
+    branch: "bot/weekly-growth",
+    headSha: HEAD_SHA,
+    conclusion: "success",
+    pullRequestOpen: true,
+    pullRequestHeadSha: HEAD_SHA,
+    authors: [BOT_EMAIL],
+    paths: ["AwesomeDS/data/repos.json"],
+    ...overrides,
+  };
+}
+
+test("settle merges only a green bot pull request and repeats that action", () => {
+  const input = settleInput();
+  delete input.pullRequestHeadSha;
+  const snapshot = JSON.stringify(input);
+  const merged = { action: "merge", reason: "check-green", headSha: HEAD_SHA };
+  assert.deepEqual(settle(input), merged);
+  assert.deepEqual(settle(input), merged);
+  assert.equal(JSON.stringify(input), snapshot);
+
+  const matched = settleInput();
+  const first = settle(matched);
+  const second = settle(matched);
+  assert.deepEqual(first, merged);
+  assert.deepEqual(second, merged);
+  assert.deepEqual(
+    settle(settleInput({ paths: ["Plugin/awesome-ds/ds/data/repos.json", "AwesomeDS/data/brands.json"] })),
+    merged,
+  );
+});
+
+test("settle skips, fails, or closes instead of merging an unsafe pull request", () => {
+  assert.deepEqual(settle(settleInput({ branch: "main", headSha: "" })), { action: "skip", reason: "branch" });
+  assert.deepEqual(settle(settleInput({ branch: "feature/data" })), { action: "skip", reason: "branch" });
+  assert.deepEqual(settle(settleInput({ pullRequestOpen: false })), { action: "skip", reason: "no-pull-request" });
+  assert.deepEqual(settle(settleInput({ headSha: "" })), { action: "fail", reason: "missing-head-sha" });
+  assert.deepEqual(settle(settleInput({ headSha: "   " })), { action: "fail", reason: "missing-head-sha" });
+  assert.deepEqual(
+    settle(settleInput({ pullRequestHeadSha: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", conclusion: "failure", paths: ["web/src/App.tsx"] })),
+    { action: "skip", reason: "head-moved" },
+  );
+  for (const conclusion of ["failure", "cancelled", "skipped", "timed_out", ""]) {
+    assert.deepEqual(settle(settleInput({ conclusion })), { action: "close", reason: "check" });
+  }
+  assert.deepEqual(settle(settleInput({ authors: [] })), { action: "close", reason: "author" });
+  assert.deepEqual(settle(settleInput({ authors: [BOT_EMAIL, "sir@example.com"] })), { action: "close", reason: "author" });
+  assert.deepEqual(settle(settleInput({ paths: [] })), { action: "close", reason: "empty-diff" });
+  assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/repos.json", "web/src/App.tsx"] })), { action: "close", reason: "path" });
+  assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/../../web/App.tsx"] })), { action: "close", reason: "path" });
+});
+
+test("monday schedule proposes for real and settle merges or closes only the bot pull request", () => {
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const settleYml = readFileSync(join(repoRoot, ".github/workflows/weekly-growth-settle.yml"), "utf8");
+  assert.match(weekly, /cron:\s*"30 0 \* \* 1"/);
+  assert.match(weekly, /workflow_dispatch:/);
+  assert.match(weekly, /default:\s*true/);
+  assert.match(weekly, /if \[ "\$EVENT_NAME" = "schedule" \]; then\n\s+dry_run=false/);
+  assert.match(weekly, /weekly-growth-decide\.mjs --guard \.growth\/guard\.json --dry-run "\$dry_run"/);
+  assert.deepEqual(workflowFindings(weekly), []);
+  assert.match(settleYml, /workflows:\s*\["Check"\]/);
+  assert.match(settleYml, /head_branch != 'bot\/weekly-growth'/);
+  assert.match(settleYml, /run: exit 0/);
+  assert.match(settleYml, /weekly-growth-settle\.mjs/);
+  assert.match(settleYml, /gh pr merge[^\n]*--squash[^\n]*--delete-branch[^\n]*--match-head-commit/);
+  assert.match(settleYml, /gh pr close/);
+  assert.match(settleYml, /git push origin --delete bot\/weekly-growth/);
+  assert.equal(settleYml.includes("HEAD:main"), false);
+  assert.deepEqual(workflowFindings(settleYml), []);
+
+  const dir = mkdtempSync(join(tmpdir(), "ads-settle-"));
+  try {
+    const authors = join(dir, "authors.txt");
+    const paths = join(dir, "paths.txt");
+    const pr = join(dir, "pr.json");
+    const output = join(dir, "github-output.txt");
+    writeFileSync(authors, `${BOT_EMAIL}\n`);
+    writeFileSync(paths, "AwesomeDS/data/repos.json\0Plugin/awesome-ds/ds/data/repos.json\0");
+    writeFileSync(pr, JSON.stringify([{ number: 30, headRefOid: HEAD_SHA }]));
+    const merged = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        HEAD_BRANCH: "bot/weekly-growth",
+        HEAD_SHA,
+        CHECK_CONCLUSION: "success",
+        AUTHORS_FILE: authors,
+        PATHS_FILE: paths,
+        PR_FILE: pr,
+        GITHUB_OUTPUT: output,
+      },
+    });
+    assert.deepEqual(JSON.parse(merged), { action: "merge", reason: "check-green", headSha: HEAD_SHA });
+    const recorded = readFileSync(output, "utf8");
+    assert.match(recorded, /action=merge/);
+    assert.match(recorded, new RegExp(`head_sha=${HEAD_SHA}`));
+    assert.match(recorded, /pr_number=30/);
+
+    writeFileSync(pr, "[]");
+    writeFileSync(output, "");
+    const skipped = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        HEAD_BRANCH: "bot/weekly-growth",
+        HEAD_SHA,
+        CHECK_CONCLUSION: "success",
+        AUTHORS_FILE: authors,
+        PATHS_FILE: paths,
+        PR_FILE: pr,
+        GITHUB_OUTPUT: output,
+      },
+    });
+    assert.deepEqual(JSON.parse(skipped), { action: "skip", reason: "no-pull-request" });
+
+    const openPr = join(dir, "open.json");
+    writeFileSync(openPr, JSON.stringify([{ number: 30, headRefOid: HEAD_SHA }]));
+    let code = 0;
+    let failed = "";
+    try {
+      failed = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          HEAD_BRANCH: "bot/weekly-growth",
+          HEAD_SHA: "",
+          CHECK_CONCLUSION: "success",
+          AUTHORS_FILE: authors,
+          PATHS_FILE: paths,
+          PR_FILE: openPr,
+          GITHUB_OUTPUT: output,
+        },
+      });
+    } catch (error) {
+      code = error.status ?? 1;
+      failed = `${error.stdout ?? ""}`;
+    }
+    assert.equal(code, 1);
+    assert.deepEqual(JSON.parse(failed), { action: "fail", reason: "missing-head-sha" });
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
   }
 });

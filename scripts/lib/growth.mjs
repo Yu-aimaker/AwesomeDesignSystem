@@ -3,6 +3,13 @@
 
 export const BOT_EMAIL = "41898282+github-actions[bot]@users.noreply.github.com";
 export const ALLOW_PREFIXES = ["AwesomeDS/data/", "Plugin/awesome-ds/ds/data/"];
+const BOT_BRANCH = "bot/weekly-growth";
+
+function isAllowedDataPath(path) {
+  const text = String(path).replace(/\\/g, "/");
+  if (text.split("/").includes("..")) return false;
+  return ALLOW_PREFIXES.some((prefix) => text.startsWith(prefix));
+}
 export const MAX_FILE_BYTES = 1_000_000;
 const OGP_W = 1200;
 const OGP_H = 630;
@@ -75,7 +82,7 @@ export function diffGuard({ base, head, changedPaths = [], fileBytes = {}, fetch
   }
 
   for (const p of changedPaths) {
-    if (!ALLOW_PREFIXES.some((prefix) => p.startsWith(prefix))) reasons.push(`path outside data: ${p}`);
+    if (!isAllowedDataPath(p)) reasons.push(`path outside data: ${p}`);
   }
   for (const [p, bytes] of Object.entries(fileBytes)) {
     if (bytes > MAX_FILE_BYTES) reasons.push(`file over 1MB: ${p} (${bytes} bytes)`);
@@ -116,6 +123,28 @@ export function decide({ guard, dryRun, humanAuthors = [] }) {
 
 export function foreignAuthors(emails) {
   return (emails ?? []).filter((email) => email && email !== BOT_EMAIL);
+}
+
+export function settle(input) {
+  const branch = input?.branch ?? "";
+  const headSha = typeof input?.headSha === "string" ? input.headSha.trim() : "";
+  const conclusion = input?.conclusion ?? "";
+  const authors = Array.isArray(input?.authors) ? input.authors : [];
+  const paths = Array.isArray(input?.paths) ? input.paths : [];
+  const pullRequestOpen = input?.pullRequestOpen === true;
+  const pullRequestHeadSha = input?.pullRequestHeadSha;
+
+  if (branch !== BOT_BRANCH) return { action: "skip", reason: "branch" };
+  if (!pullRequestOpen) return { action: "skip", reason: "no-pull-request" };
+  if (!headSha) return { action: "fail", reason: "missing-head-sha" };
+  if (typeof pullRequestHeadSha === "string" && pullRequestHeadSha !== headSha) {
+    return { action: "skip", reason: "head-moved" };
+  }
+  if (conclusion !== "success") return { action: "close", reason: "check" };
+  if (!authors.length || authors.some((email) => email !== BOT_EMAIL)) return { action: "close", reason: "author" };
+  if (!paths.length) return { action: "close", reason: "empty-diff" };
+  if (paths.some((path) => !isAllowedDataPath(path))) return { action: "close", reason: "path" };
+  return { action: "merge", reason: "check-green", headSha };
 }
 
 function candidateId(kind, url) {
