@@ -2,10 +2,10 @@ import type { Localized } from "../locales";
 
 const ja = {
   title: "ランキング",
-  lead: "デザインと AI フロントエンドの OSS を GitHub スターで。毎週月曜に自動更新。",
+  lead: "デザインと AI フロントエンドの OSS を GitHub スターで。自動の週次取得は止めてある。",
   statLabel: "リポジトリ",
   pendingTitle: "スター数は最初の自動取得を待っています",
-  pendingBody: "GitHub Actions の「Update data」が毎週月曜 00:30 UTC に取得します。手動実行もできます。それまでは選定リストとして表示します。",
+  pendingBody: "自動の「Update data」は止めてある。数字が無い間は選定リストとして表示する。更新するときは Weekly growth を手動で実行する（既定は dry-run で、main へは push しない）。",
   all: "すべて",
   searchPlaceholder: "リポジトリ、topic",
   notFoundTitle: "見つかりません",
@@ -24,10 +24,10 @@ export type RankingsMessages = typeof ja;
 
 const en: RankingsMessages = {
   title: "Rankings",
-  lead: "Open source for design and AI front ends, ranked by GitHub stars. Updated every Monday.",
+  lead: "Open source for design and AI front ends, ranked by GitHub stars. The automatic weekly fetch is off.",
   statLabel: "repositories",
   pendingTitle: "Star counts are waiting for the first automatic fetch",
-  pendingBody: "The GitHub Actions workflow \"Update data\" fetches them every Monday at 00:30 UTC, or when run by hand. Until then this is a curated list.",
+  pendingBody: "The automatic \"Update data\" workflow is off. Until star counts exist, this is a curated list. To refresh, run Weekly growth by hand (the default is a dry run and it does not push to main).",
   all: "All",
   searchPlaceholder: "Repository or topic",
   notFoundTitle: "No matches",

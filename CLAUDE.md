@@ -49,7 +49,7 @@ scripts/       validate / build-reference / 週次データ
 .github/workflows/  check, weekly-growth（手動・dry-run 既定。main へは push しない）
 ```
 
-スキル: `awesome-ds` / `ds-creator` / `design-verifier` / `design-thinking` / `knowledge-curator`
+スキル: `awesome-ds` / `ds-creator` / `design-verifier` / `design-thinking` / `knowledge-curator` / `html-report` / `slides`
 
 ## 箱 Claude（Teams）運用
 

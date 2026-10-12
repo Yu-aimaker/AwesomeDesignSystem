@@ -7,7 +7,7 @@ import { useT } from "../i18n/context";
 import { aboutMessages } from "../i18n/messages/about";
 
 const dirs = ["AwesomeDS/", "AwesomeDS/data/", "Knowledge/", "Reference/", "Plugin/awesome-ds/", "web/"] as const;
-const skillNames = ["awesome-ds", "ds-creator", "design-verifier", "design-thinking", "knowledge-curator"] as const;
+const skillNames = ["awesome-ds", "ds-creator", "design-verifier", "design-thinking", "knowledge-curator", "html-report", "slides"] as const;
 
 export function About() {
   const t = useT(aboutMessages);
