@@ -59,14 +59,14 @@ for (const file of walk(knowledgeDir)) {
 }
 entries.sort((a, b) => (a.category + a.title).localeCompare(b.category + b.title, "ja"));
 
-// Knowledge/README.md
-{
+// Knowledge/README.md, and the same index for the plugin's copy of Knowledge.
+function knowledgeIndex(intro) {
   const byCat = new Map();
   for (const e of entries) {
     if (!byCat.has(e.category)) byCat.set(e.category, []);
     byCat.get(e.category).push(e);
   }
-  let md = `# Knowledge\n\nAI コーディングエージェントがデザインシステムを作る・適用する・検証するときに参照する知見の集積です。各エントリは出典リンク付きの要約で、末尾に「AwesomeDS への反映」を必ず持ちます。\n\n追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の \`knowledge-curator\` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は \`node scripts/build-reference.mjs\` で生成されます。手で編集しないでください。\n\n件数: ${entries.length}\n\n`;
+  let md = `# Knowledge\n\n${intro}\n\n件数: ${entries.length}\n\n`;
   for (const [cat, list] of [...byCat.entries()].sort()) {
     md += `## ${cat}\n\n| エントリ | 種別 | タグ | 更新 |\n|---|---|---|---|\n`;
     for (const e of list) {
@@ -75,8 +75,23 @@ entries.sort((a, b) => (a.category + a.title).localeCompare(b.category + b.title
     }
     md += "\n";
   }
-  writeFileSync(join(knowledgeDir, "README.md"), md);
+  return md;
 }
+writeFileSync(
+  join(knowledgeDir, "README.md"),
+  knowledgeIndex(
+    "AI コーディングエージェントがデザインシステムを作る・適用する・検証するときに参照する知見の集積です。各エントリは出典リンク付きの要約で、末尾に「AwesomeDS への反映」を必ず持ちます。\n\n追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。",
+  ),
+);
+// The plugin copy has no repo root next to it, so this index links only inside knowledge/.
+const pluginKnowledgeDir = join(root, "Plugin", "awesome-ds", "knowledge");
+mkdirSync(pluginKnowledgeDir, { recursive: true });
+writeFileSync(
+  join(pluginKnowledgeDir, "README.md"),
+  knowledgeIndex(
+    "AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係するカテゴリのエントリを読んでください。各エントリは出典 URL 付きの要約で、末尾に「AwesomeDS への反映」があります。\n\n正本はリポの `Knowledge/` です。この一覧は `node scripts/build-reference.mjs`、エントリは `Plugin/awesome-ds/scripts/sync-ds.sh` で生成します。手で編集しないでください。",
+  ),
+);
 
 // Reference/REFERENCE.md
 {

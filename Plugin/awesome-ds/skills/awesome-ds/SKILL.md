@@ -18,7 +18,8 @@ Do these in order. Do not skip step 1 because the cheat sheet below "looks like 
 1. Read `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` top to bottom. Open the foundation file for each area you will touch: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/{principles,color,typography,japanese-typography,spacing,layout,radius,elevation,motion,iconography,accessibility,stack,anti-patterns,content-and-tone}.md`, plus `${CLAUDE_PLUGIN_ROOT}/ds/components/README.md` when building components. Principle 7 (no generated tells) is mandatory on every UI task. The before/after catalog lives in the repo at `Knowledge/skills/anti-ai-slop.md`, not in the plugin copy.
 2. Check for a project design system. Search the repo root for `DESIGN.md`, `design-system.md`, `docs/design/`, `tokens.css`, `theme.css`. If a project DESIGN.md exists, it wins. Use AwesomeDS only for the roles, rules and states it does not define, and say which gaps you filled.
 3. Detect the stack (section 2) and decide how tokens get wired.
-4. State assumptions. Write a one-line "design read" and up to three assumptions (see section 1). Do not ask a list of questions. Ask exactly one question only when the answer changes the layout or the token wiring (for example, "Tailwind v3 or v4?" when both configs exist). Otherwise proceed with the stated assumption.
+4. When the task touches a library, motion, a component kit, Japanese typography, or a reference brand, open `${CLAUDE_PLUGIN_ROOT}/knowledge/README.md` and read the matching entries before choosing. They are sourced summaries; you do not need to search the web for what they already cover.
+5. State assumptions. Write a one-line "design read" and up to three assumptions (see section 1). Do not ask a list of questions. Ask exactly one question only when the answer changes the layout or the token wiring (for example, "Tailwind v3 or v4?" when both configs exist). Otherwise proceed with the stated assumption.
 
 ## 1. The design read (one line, always printed)
 

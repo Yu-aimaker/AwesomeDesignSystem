@@ -67,7 +67,7 @@ node scripts/build-reference.mjs          # Knowledge/README.md と Reference/RE
 node scripts/validate-knowledge.mjs       # Knowledge の frontmatter と見出し
 node scripts/validate-data.mjs            # AwesomeDS/data/*.json
 node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs  # ヘッダ検査（ネットワークなし）
-bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピーが AwesomeDS と一致するか
+bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Knowledge のコピーが元と一致するか
 ```
 
 本番またはプレビューの実応答を見るときは `node scripts/hosting-smoke.mjs <url> [url...]`。`/`、`/sources`、`/foundations`、`/en/sources`、存在しない `/missing-page` は `node scripts/preview-headers.mjs <url>`。切替手順は [docs/ops/cloudflare-cutover.md](docs/ops/cloudflare-cutover.md)。戻し手順は [docs/ops/cloudflare-rollback.md](docs/ops/cloudflare-rollback.md)。
