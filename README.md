@@ -72,6 +72,8 @@ Phase のチケットがどの用途に効くか。
 claude --plugin-dir ./Plugin/awesome-ds
 ```
 
+このリポジトリへの導入は上の手順で足りる。Cursor Marketplace などの公開は Sir が明示するまでしない。
+
 ### B. Cursor で使う
 
 `Plugin/awesome-ds/cursor/*.mdc` を自分のプロジェクトの `.cursor/rules/` にコピーします。

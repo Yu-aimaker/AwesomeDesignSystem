@@ -72,6 +72,8 @@ To try it from a local checkout:
 claude --plugin-dir ./Plugin/awesome-ds
 ```
 
+Installing from this repository is enough. Do not publish the plugin to the Cursor Marketplace until Sir says to.
+
 ### B. Use it in Cursor
 
 Copy `Plugin/awesome-ds/cursor/*.mdc` into `.cursor/rules/` in your project.
