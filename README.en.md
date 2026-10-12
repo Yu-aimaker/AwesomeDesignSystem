@@ -130,12 +130,12 @@ scripts/              Generation and validation (build-reference, extract-brands
 docs/ops/cloudflare-cutover.md  Cutover of production onto Cloudflare Workers, with the run record (2026-10-11 08:14 JST, 0 seconds of downtime)
 docs/ops/cloudflare-rollback.md  Rollback from Cloudflare Workers to Vercel (DNS values and check commands)
 .claude-plugin/marketplace.json  Plugin marketplace definition
-.github/workflows/    Consistency checks + smoke tests of all routes, manual weekly data update (deploys go through Cloudflare Workers Builds. Production is https://awesomeds.yumaker.studio , previews are PR comments. The Vercel project was paused on 2026-10-12)
+.github/workflows/    Consistency checks + smoke tests of all routes, weekly data update on Monday 09:30 JST (deploys go through Cloudflare Workers Builds. Production is https://awesomeds.yumaker.studio , previews are PR comments. The Vercel project was paused on 2026-10-12)
 ```
 
 ## Update flow
 
-1. Run `Weekly growth` (`.github/workflows/weekly-growth.yml`) by hand. The default is a dry run and does not open a pull request. With `dry_run=false` it opens one data pull request on `bot/weekly-growth`. It never pushes to main. There is no schedule yet. Candidates accumulate in `AwesomeDS/data/candidates.json` and are not shown on the site. The usage-billed automatic research job stays off.
+1. `Weekly growth` (`.github/workflows/weekly-growth.yml`) runs Monday 09:30 JST (cron `30 0 * * 1`). A scheduled run opens a pull request. `weekly-growth-settle.yml` squash-merges `bot/weekly-growth` only when Check succeeded and every path is under `AwesomeDS/data/` or `Plugin/awesome-ds/ds/data/`. A manual `workflow_dispatch` stays a dry run and does not open a pull request. Candidates accumulate in `AwesomeDS/data/candidates.json` and are not shown on the site. The usage-billed automatic research job stays off. A person runs `knowledge-curator` for the written findings.
 2. Add new findings to Knowledge with the `knowledge-curator` skill, then regenerate Reference with `node scripts/build-reference.mjs`. Actions do not call an AI API.
 3. When there is evidence that AwesomeDS should change, update DESIGN.md / tokens / foundations and add the version to the CHANGELOG.
 4. Sync the copy inside the plugin with `Plugin/awesome-ds/scripts/sync-ds.sh` and open a PR. CI checks consistency.

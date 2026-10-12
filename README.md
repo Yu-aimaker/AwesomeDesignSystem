@@ -130,12 +130,12 @@ scripts/              生成と検証（build-reference, extract-brands, build-p
 docs/ops/cloudflare-cutover.md  本番を Cloudflare Workers へ切り替えた手順と実施記録（2026-10-11 08:14 JST、停止 0 秒）
 docs/ops/cloudflare-rollback.md  Cloudflare Workers から Vercel へ戻す手順（DNS の値と確認コマンド）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、手動の週次データ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、プレビューは PR コメント。Vercel は 2026-10-12 に pause）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、月曜 09:30 JST の週次データ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、プレビューは PR コメント。Vercel は 2026-10-12 に pause）
 ```
 
 ## 更新の流れ
 
-1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）を手動で実行する。既定は dry-run で、PR は作らない。`dry_run=false` のときだけ `bot/weekly-growth` にデータ差分の PR を 1 本出す。main へは push しない。スケジュールはまだ付けていない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。
+1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は PR を出し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで Check が成功したとき `weekly-growth-settle.yml` が `bot/weekly-growth` を squash merge する。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。
 2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。Actions では AI API を使わない。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
