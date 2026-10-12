@@ -29,7 +29,7 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
 | [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 7 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
-| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Cloudflare Workers Static Assets で配信、noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクトは戻し用に残置 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
+| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Cloudflare Workers Static Assets で配信、noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel は 2026-10-12 に pause（戻す手順は docs/ops/cloudflare-rollback.md） | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -110,7 +110,7 @@ scripts/              生成と検証（build-reference, extract-brands, build-p
 docs/ops/cloudflare-cutover.md  本番を Cloudflare Workers へ切り替えた手順と実施記録（2026-10-11 08:14 JST、停止 0 秒）
 docs/ops/cloudflare-rollback.md  Cloudflare Workers から Vercel へ戻す手順（DNS の値と確認コマンド）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、手動の週次データ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、プレビューは PR コメント。Vercel プロジェクトは戻し用に残置）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、手動の週次データ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、プレビューは PR コメント。Vercel は 2026-10-12 に pause）
 ```
 
 ## 更新の流れ

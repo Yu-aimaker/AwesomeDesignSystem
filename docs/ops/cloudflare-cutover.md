@@ -297,7 +297,7 @@ README、`README.en.md`、`web/README.md`、`CLAUDE.md` のホスティング記
 - 本番 URL: https://awesomeds.yumaker.studio
 - workers.dev: https://awesomeds.yumaker.workers.dev
 - プレビュー: Workers Builds が PR に Preview URL をコメントする。
-- Vercel プロジェクト `awesome-design-systems-claude` は戻し用に残置する（削除しない。pause は S9 の確認のあとだけ）。
+- Vercel プロジェクト `awesome-design-systems-claude` は削除していない。2026-10-12 に Sir の判断で pause した。`awesome-design-systems-claude.vercel.app` は 503。本番ホストと 3 つの転送は Cloudflare のまま 200 / 301。Git 連携は Hobby の API では外せないので残し、ignore command を `exit 0` にしてビルドをスキップする。戻すときは [cloudflare-rollback.md](cloudflare-rollback.md) の R0。
 
 ## 関連
 

@@ -1,8 +1,8 @@
 # Plugin: awesome-ds
 
-AwesomeDS を Claude Code（と Cursor）で使うためのプラグインです。デザインシステム本体のコピー、5 つのスキル、Cursor 用ルールを 1 つのフォルダに同梱しています。
+AwesomeDS を Claude Code（と Cursor）で使うためのプラグインです。デザインシステム本体のコピー、7 つのスキル、Cursor 用ルールを 1 つのフォルダに同梱しています。
 
-**English summary:** `awesome-ds` is a Claude Code plugin that bundles the AwesomeDS design system (a synced copy of `../AwesomeDS/`), five skills (apply the DS, create a brand DS by interview, adversarial screenshot review, UX design-thinking, knowledge curation) and Cursor rule files. Install from this repo's marketplace or load it locally with `--plugin-dir`.
+**English summary:** `awesome-ds` is a Claude Code plugin that bundles the AwesomeDS design system (a synced copy of `../AwesomeDS/`), seven skills (apply the DS, create a brand DS by interview, adversarial screenshot review, UX design-thinking, knowledge curation, one-file HTML reports, 16:9 HTML slides) and Cursor rule files. Install from this repo's marketplace or load it locally with `--plugin-dir`.
 
 ## インストール（Claude Code）
 
@@ -42,6 +42,8 @@ mkdir -p design-system/awesome-ds && cp -R Plugin/awesome-ds/ds/. design-system/
 | design-verifier | `/awesome-ds:design-verifier <url>` | 静的監査 + Playwright で 390/768/1280 × light/dark を撮影 + ルーブリック採点。`design-review.md` に file:line 付きの指摘と修正リストを出す |
 | design-thinking | `/awesome-ds:design-thinking <機能>` | ペルソナ、ユーザーストーリー、ジャーニーマップ、Mermaid の画面フロー、スクリーンショットのウォークスルー、影響×工数で並べた提案を `docs/ux/` に出す |
 | knowledge-curator | `/awesome-ds:knowledge-curator <url or weekly>` | Knowledge/ にエントリを追加し、Reference/REFERENCE.md を更新し、AwesomeDS 変更を CHANGELOG 付きで提案。週次リサーチ用（手動呼び出しのみ） |
+| html-report | レポートや計画の HTML を頼むと発動。明示するなら `/awesome-ds:html-report` | 結論3文と、表か図を1つだけ置いた HTML を1ファイルで書く |
+| slides | スライドを頼むと発動。明示するなら `/awesome-ds:slides` | 16:9 のスライドを HTML 1ファイルで書く。1枚につき主張は1つ。pptx は頼まれたときだけ |
 
 すべてのスキルは日本語での指示に対応しています。
 
@@ -70,7 +72,9 @@ Plugin/
       design-verifier/       SKILL.md, reference/rubric.md, reference/capture-playbook.md, scripts/capture.mjs, scripts/static-audit.mjs
       design-thinking/       SKILL.md, templates/, reference/methods.md
       knowledge-curator/     SKILL.md, templates/entry.template.md
-    cursor/                  README.md と .mdc ルール 4 本
+      html-report/           SKILL.md
+      slides/                SKILL.md
+    cursor/                  README.md と .mdc ルール
 ```
 
 ## 必要なもの
