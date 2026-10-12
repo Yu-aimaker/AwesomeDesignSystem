@@ -55,6 +55,10 @@ export const sidebar: NavGroup[] = [
     ],
   },
   {
+    label: { ja: "資料", en: "Documents" },
+    items: [{ label: { ja: "HTMLレポート", en: "HTML report" }, to: "/report", hint: { ja: "報告を HTML 1枚で書く", en: "Write a report as one HTML file" } }],
+  },
+  {
     label: { ja: "根拠", en: "Evidence" },
     items: [
       { label: { ja: "ナレッジ", en: "Knowledge" }, to: "/knowledge" },
