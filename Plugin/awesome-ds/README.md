@@ -14,6 +14,8 @@ Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin 
 | `html-report` | One self-contained HTML report. White canvas, dark text, three-sentence conclusion, one table or figure. |
 | `slides` | One HTML deck, 16:9, white canvas, one claim per slide. pptx only when the user asks for PowerPoint. |
 
+Why each Claude Code surface is used, or left unused: [SURFACES.md](SURFACES.md).
+
 `ds/` is a synced copy of the repo's `AwesomeDS/` (`scripts/sync-ds.sh`; CI runs `scripts/check-sync.sh`). Do not edit `ds/` by hand.
 
 Scripts (Node 18+, no dependencies except Playwright for capture):
