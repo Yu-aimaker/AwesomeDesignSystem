@@ -23,6 +23,26 @@ The source of truth for design, plus a plugin, for building front ends with AI c
 
 White canvas, black text, a single accent color (`#2f5bea`), Geist + Noto Sans JP, a 4px grid, borders over shadows, short motion. Every value has a reason and a source.
 
+## Three uses
+
+AwesomeDS meets these three uses at the same time. The decision is STA-12.
+
+| Use | What it does | Where it lives |
+|---|---|---|
+| 1. Apply the rules while building UI | Installing the plugin applies the AwesomeDS rules to the UI under construction | `awesome-ds` |
+| 2. Make a design system for one product | Ask about the brand, then write that product's DESIGN.md and tokens | `ds-creator` |
+| 3. Keep one general source of truth | Keep updating the shared answer for type, color, spacing, components, and motion | `AwesomeDS/` and `Knowledge/` |
+
+Which phase ticket serves which use.
+
+| Ticket | Use |
+|---|---|
+| STA-7, STA-13, STA-14, STA-16, STA-17 | 3. The source of truth |
+| STA-8, STA-9, STA-15 | 1. Apply the rules. STA-9 and STA-15 also cover 2. A product-specific system |
+| STA-18 | Not one of the three uses. Sir decides what becomes public |
+
+When a choice splits, raise it to Sir.
+
 ## What is inside
 
 | Location | Contents | Read first |
