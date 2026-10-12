@@ -3,6 +3,14 @@
 All notable changes to AwesomeDS are recorded here. The format follows Keep a Changelog
 and the project follows Semantic Versioning 2.0.0.
 
+## [Unreleased]
+
+### Changed
+
+- `foundations/content-and-tone.md`: the generated-Japanese example now uses a
+  neutral product sentence. The note about one specific site was removed; the
+  example stands on the patterns alone. No token changed.
+
 ## [0.5.0] - 2026-10-11
 
 ### Added

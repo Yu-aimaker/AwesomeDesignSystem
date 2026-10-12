@@ -12,7 +12,6 @@
   <a href="#スキル">スキル</a> ·
   <a href="AwesomeDS/DESIGN.md">DESIGN.md</a> ·
   <a href="https://awesomeds.yumaker.studio">体験サイト</a> ·
-  <a href="https://design-thinking.yumaker.studio">研究プラグイン</a> ·
   <a href="Plugin/awesome-ds/">プラグイン</a> ·
   <a href="CONTRIBUTING.md">コントリビュート</a>
 </p>

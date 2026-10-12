@@ -1,27 +1,16 @@
 import type { Localized } from "../locales";
 
 /**
- * Copy for /anti-slop (STA-105). The Japanese example sentences stay Japanese
- * in every locale: they are the specimen, not interface text. Only the labels
- * and the "what is wrong" lines are translated.
- * Source of truth for the content: Knowledge/skills/anti-ai-slop.md and the
- * Vault note on the research site (2026-10-12).
+ * Copy for /anti-slop. The Japanese example sentences stay Japanese in every
+ * locale: they are the specimen, not interface text. Only the labels and the
+ * "what is wrong" lines are translated.
+ * Source of truth for the content: Knowledge/skills/anti-ai-slop.md.
  */
 
 export interface CopyPair {
   before: string;
   after: string;
   why: string;
-}
-
-export interface ResearchCase {
-  /** One of the owner's four causes. */
-  cause: string;
-  before: string;
-  after: string;
-  why: string;
-  /** file:line in Yu-aimaker/design-thinking-plugin, site/ on the v2 branch. */
-  where: string;
 }
 
 export interface Hack {
@@ -33,34 +22,11 @@ export interface Hack {
 
 const copyPairs: Array<{ before: string; after: string }> = [
   {
-    before: "本プラグインは、デザイン思考のあらゆるフェーズにおいて、革新的でシームレスな体験を実現することができます。",
-    after: "5 つの段階ごとに、決めたことを 1 枚の HTML で見ます。",
+    before: "本サービスは、あらゆるシーンにおいて、革新的でシームレスな体験を実現することができます。",
+    after: "請求書を 3 分で作り、そのまま送れます。",
   },
   { before: "体験をはじめる", after: "保存する" },
   { before: "正常に保存が完了しました", after: "保存しました" },
-];
-
-const research: Array<{ before: string; after: string; where: string }> = [
-  {
-    before: "広げて、絞る。を 2 回。絞る前に人間が決める。",
-    after: "広げる、絞る、を 2 回くり返します。絞る前に、人間が決めます。",
-    where: "site/src/i18n/ja.json:56",
-  },
-  {
-    before: "「プラグインは採点しない。」がホームの見出し、フッター、研究ページの 3 か所に出る",
-    after: "研究ページに 1 回だけ置く",
-    where: "site/src/i18n/ja.json:23, 84, 403",
-  },
-  {
-    before: "丸は機能、四角は UI 表現。その凡例がサイトのどこにもない",
-    after: "図の上に凡例を 1 行置く",
-    where: "site/src/site.css:297",
-  },
-  {
-    before: "サイトは「Node.js 20 以上」、手順書は「Node 18 以上」",
-    after: "両方を 20 に揃える（package.json は >=20）",
-    where: "site/src/i18n/ja.json:308, docs/setup-guide.md:3",
-  },
 ];
 
 const hacks: Array<{ name: string; install: string; url: string }> = [
@@ -107,9 +73,6 @@ const ja = {
   components: {
     title: "コンポーネント",
     lead: "見た目だけの部品は、触ると意味が分からない。",
-    navBadLabel: "避ける: アイコンだけのナビ。タッチでは説明が出ない",
-    navGoodLabel: "採用: 見える文字を添える",
-    nav: ["ホーム", "検索", "保存", "設定"],
     formBadLabel: "避ける: プレースホルダーをラベル代わりにする",
     formGoodLabel: "採用: 入力欄の上にラベル",
     formLabel: "会社名",
@@ -127,24 +90,6 @@ const ja = {
         "「正常に」「完了しました」は冗長。結果だけを言う",
       ][i],
     })) as CopyPair[],
-  },
-  research: {
-    title: "研究サイトの実例",
-    lead: "AwesomeDS を使っていても起きた 4 つ。どれも直せる。",
-    cases: research.map((r, i) => ({
-      ...r,
-      cause: ["日本語が変", "文章が多い", "可視化が見にくい", "バグ・ミス"][i],
-      why: [
-        "「。」の直後に「を 2 回」が続き、文が壊れている。常体で素っ気ない",
-        "見出しに使うほど重要ではない主張を、何度も言っている",
-        "形だけで意味を持たせ、読み方をどこにも書いていない",
-        "前提が文書ごとに違い、読者がどちらを信じるか迷う",
-      ][i],
-    })) as ResearchCase[],
-    legendBadLabel: "Before: 凡例なし",
-    legendGoodLabel: "After: 凡例 1 行",
-    legendFeature: "機能",
-    legendUi: "UI 表現",
   },
   hacks: {
     title: "ハック",
@@ -192,9 +137,6 @@ const en: AntiSlopMessages = {
   components: {
     title: "Components",
     lead: "A part that only looks right means nothing once touched.",
-    navBadLabel: "Avoid: icon-only navigation. Touch shows no tooltip",
-    navGoodLabel: "Use: add visible labels",
-    nav: ["Home", "Search", "Saved", "Settings"],
     formBadLabel: "Avoid: placeholder as the label",
     formGoodLabel: "Use: a label above the field",
     formLabel: "Company name",
@@ -212,24 +154,6 @@ const en: AntiSlopMessages = {
         "\"Successfully\" and \"completed\" are padding. State the result",
       ][i],
     })),
-  },
-  research: {
-    title: "Real cases from the research site",
-    lead: "Four that happened even on top of AwesomeDS. Each one is fixable.",
-    cases: research.map((r, i) => ({
-      ...r,
-      cause: ["Unnatural Japanese", "Too much text", "Hard-to-read visuals", "Bugs and mistakes"][i],
-      why: [
-        "A full stop splits the sentence in the middle. The plain form reads curt",
-        "A claim too minor for a heading is repeated three times",
-        "Shape carries meaning but nothing says how to read it",
-        "Documents disagree on a prerequisite, so the reader has to guess",
-      ][i],
-    })),
-    legendBadLabel: "Before: no legend",
-    legendGoodLabel: "After: one-line legend",
-    legendFeature: "Feature",
-    legendUi: "UI expression",
   },
   hacks: {
     title: "Hacks",

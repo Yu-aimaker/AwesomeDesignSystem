@@ -1,4 +1,4 @@
-import { ExternalLink, Home as HomeIcon, Search, Bookmark, Settings, Zap, Shield, Sparkles } from "lucide-react";
+import { ExternalLink, Zap, Shield, Sparkles } from "lucide-react";
 import { DataNote, GalleryHeader } from "../layout/Gallery";
 import { Section } from "../layout/Page";
 import { Compare } from "../layout/Playground";
@@ -7,14 +7,14 @@ import { useT } from "../i18n/context";
 import { antiSlopMessages, type AntiSlopMessages } from "../i18n/messages/antiSlop";
 
 /**
- * /anti-slop (STA-105). Each pair is drawn, not described: the "avoid" side
+ * /anti-slop. Each pair is drawn, not described: the "avoid" side
  * renders the generated default, the "use" side renders the fix with the
- * same content. Copy pairs and real cases from the research site follow.
+ * same content. Copy pairs and the hack list follow.
  * Content source: Knowledge/skills/anti-ai-slop.md.
  */
 export function AntiSlop() {
   const t = useT(antiSlopMessages);
-  const count = 4 + t.copy.pairs.length + t.research.cases.length;
+  const count = 4 + t.copy.pairs.length;
 
   return (
     <div>
@@ -33,7 +33,6 @@ export function AntiSlop() {
 
       <Section id="components" title={t.components.title} lead={t.components.lead}>
         <div className="flex flex-col gap-6">
-          <Compare goodLabel={t.components.navGoodLabel} badLabel={t.components.navBadLabel} good={<Nav t={t} labels />} bad={<Nav t={t} />} />
           <Compare goodLabel={t.components.formGoodLabel} badLabel={t.components.formBadLabel} good={<FormGood t={t} />} bad={<FormBad t={t} />} />
         </div>
       </Section>
@@ -42,16 +41,6 @@ export function AntiSlop() {
         <ol className="overflow-hidden rounded-lg border border-hairline bg-surface">
           {t.copy.pairs.map((p, i) => (
             <PairRow key={p.after} index={i} before={p.before} after={p.after} why={p.why} t={t} />
-          ))}
-        </ol>
-      </Section>
-
-      <Section id="research" title={t.research.title} lead={t.research.lead}>
-        <ol className="overflow-hidden rounded-lg border border-hairline bg-surface">
-          {t.research.cases.map((c, i) => (
-            <PairRow key={c.where} index={i} label={c.cause} before={c.before} after={c.after} why={c.why} where={c.where} t={t}>
-              {i === 2 && <LegendDemo t={t} />}
-            </PairRow>
           ))}
         </ol>
       </Section>
@@ -176,23 +165,6 @@ function CardsGood({ t }: { t: T }) {
   );
 }
 
-function Nav({ t, labels = false }: { t: T; labels?: boolean }) {
-  const icons = [HomeIcon, Search, Bookmark, Settings];
-  return (
-    <nav aria-label={labels ? t.components.navGoodLabel : t.components.navBadLabel} className="flex justify-between rounded-lg border border-hairline bg-surface px-2 py-2">
-      {t.components.nav.map((label, i) => {
-        const Icon = icons[i];
-        return (
-          <span key={label} className="flex min-w-0 flex-1 flex-col items-center gap-1 py-1 text-ink-secondary">
-            <Icon className="size-5" strokeWidth={1.75} aria-hidden={labels} aria-label={labels ? undefined : label} />
-            {labels && <span className="t-caption text-ink">{label}</span>}
-          </span>
-        );
-      })}
-    </nav>
-  );
-}
-
 function FormBad({ t }: { t: T }) {
   return (
     <div className="flex h-10 items-center rounded-md border border-hairline-strong bg-surface px-3 text-sm text-ink-muted" aria-hidden>
@@ -206,40 +178,6 @@ function FormGood({ t }: { t: T }) {
     <div className="flex flex-col gap-1.5" aria-hidden>
       <span className="t-label text-ink">{t.components.formLabel}</span>
       <span className="flex h-10 items-center rounded-md border border-hairline-strong bg-surface px-3 text-sm text-ink-muted">{t.components.formExample}</span>
-    </div>
-  );
-}
-
-/** The research site's dot strip: circles are features, squares are UI ideas. */
-function LegendDemo({ t }: { t: T }) {
-  const dots: Array<["c" | "s", number]> = [["c", 8], ["s", 18], ["c", 30], ["s", 44], ["c", 52], ["s", 67], ["c", 80], ["s", 90]];
-  const strip = (
-    <div className="relative h-8 rounded-md bg-canvas-soft" aria-hidden>
-      {dots.map(([k, x]) => (
-        <span key={x} className={"absolute top-1/2 size-3 -translate-y-1/2 border border-ink bg-surface " + (k === "c" ? "rounded-full" : "rounded-none")} style={{ left: `${x}%` }} />
-      ))}
-    </div>
-  );
-  return (
-    <div className="mt-4 grid gap-3 md:grid-cols-2">
-      <div className="min-w-0">
-        <p className="t-caption mb-1 text-ink-muted">{t.research.legendBadLabel}</p>
-        {strip}
-      </div>
-      <div className="min-w-0">
-        <p className="t-caption mb-1 text-ink-muted">{t.research.legendGoodLabel}</p>
-        <p className="t-caption mb-1 flex items-center gap-3 text-ink-secondary">
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block size-2.5 rounded-full border border-ink" aria-hidden />
-            {t.research.legendFeature}
-          </span>
-          <span className="inline-flex items-center gap-1">
-            <span className="inline-block size-2.5 rounded-none border border-ink" aria-hidden />
-            {t.research.legendUi}
-          </span>
-        </p>
-        {strip}
-      </div>
     </div>
   );
 }

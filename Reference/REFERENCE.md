@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 322  /  ドメイン数: 69
+リンク数: 321  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -121,11 +121,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
 - [Meet Liquid Glass - WWDC25](https://developer.apple.com/videos/play/wwdc2025/219/)  
   引用: [Apple Human Interface Guidelines](../Knowledge/platform-guidelines/apple-hig.md)
-
-## drive.google.com
-
-- [要件: AwesomeDS拡張と研究Pluginの進化（Sir 2026-10-11）](https://drive.google.com/file/d/1k93Z9do9rQrJxyz5S5t6oGy-SDeEO_bh/view)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 
 ## emilkowal.ski
 
