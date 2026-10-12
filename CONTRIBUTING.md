@@ -72,7 +72,7 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピ
 
 本番またはプレビューの実応答を見るときは `node scripts/hosting-smoke.mjs <url> [url...]`。`/`、`/sources`、`/foundations`、`/en/sources`、存在しない `/missing-page` は `node scripts/preview-headers.mjs <url>`。切替手順は [docs/ops/cloudflare-cutover.md](docs/ops/cloudflare-cutover.md)。戻し手順は [docs/ops/cloudflare-rollback.md](docs/ops/cloudflare-rollback.md)。
 
-- リンク確認: `node scripts/check-links.mjs` で `*.md` の相対リンク切れを探せます（CI には未導入）。
+- リンク確認: `node scripts/check-links.mjs`。相対リンクはファイルの有無で落とします。https は `scripts/external-link-allowlist.txt` に載った URL だけを、失敗時は再試行して確認します。それ以外の外部リンクは取得しません。
 
 ## PR
 
@@ -82,5 +82,6 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピ
   - `validate-knowledge.mjs`
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
+  - `check-links.mjs`（相対リンクと、許容リストの外部リンク）
   - `hosting-smoke.test.mjs` と `preview-headers.test.mjs`（URL へのリクエストはしない）
   - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.test.mjs`、`check-cf-assets.mjs`、`wrangler deploy --dry-run`）、`screenshot.mjs --check`
