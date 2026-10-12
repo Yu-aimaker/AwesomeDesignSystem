@@ -11,7 +11,8 @@
   <a href="#quick-start">Quick start</a> ·
   <a href="#skills">Skills</a> ·
   <a href="AwesomeDS/DESIGN.md">DESIGN.md</a> ·
-  <a href="web/">Demo site</a> ·
+  <a href="https://awesomeds.yumaker.studio">Demo site</a> ·
+  <a href="https://design-thinking.yumaker.studio">Research plugin</a> ·
   <a href="Plugin/awesome-ds/">Plugin</a> ·
   <a href="CONTRIBUTING.md">Contributing</a> (Japanese)
 </p>
