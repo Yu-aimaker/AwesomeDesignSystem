@@ -1,6 +1,6 @@
 # awesome-ds (Claude Code plugin)
 
-AwesomeDS design system plus five skills for AI coding agents. Japanese instructions work in every skill.
+AwesomeDS design system plus seven skills for AI coding agents. Japanese instructions work in every skill.
 
 Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin install awesome-ds@awesome-design-systems`. Local: `claude --plugin-dir ./Plugin/awesome-ds`.
 
@@ -11,6 +11,8 @@ Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin 
 | `design-verifier` | Adversarial review: static audit, Playwright screenshots at 390/768/1280 light and dark, rubric scores, `design-review.md`. |
 | `design-thinking` | Personas, user stories, journey map, Mermaid page flow, screenshot walk-through, prioritised recommendations. |
 | `knowledge-curator` | Add Knowledge entries, update Reference/REFERENCE.md, propose AwesomeDS changes with CHANGELOG. Weekly routine. User-invoked only. |
+| `html-report` | One self-contained HTML report. White canvas, dark text, three-sentence conclusion, one table or figure. |
+| `slides` | One HTML deck, 16:9, white canvas, one claim per slide. pptx only when the user asks for PowerPoint. |
 
 Why each Claude Code surface is used, or left unused: [SURFACES.md](SURFACES.md).
 

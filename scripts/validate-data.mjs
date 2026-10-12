@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // Validates AwesomeDS/data/*.json so the site never receives a broken data set.
 // Run: node scripts/validate-data.mjs   (exit 1 with a list of problems)
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { candidateProblems, sourceProblems } from "./lib/growth.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dir = join(root, "AwesomeDS/data");
@@ -35,7 +36,7 @@ function unique(name, items, key = "id") {
   }
 }
 
-const required = ["brands.json", "palettes.json", "fonts.json", "stack.json", "repos.json"];
+const required = ["brands.json", "palettes.json", "fonts.json", "stack.json", "repos.json", "candidates.json"];
 const present = readdirSync(dir).filter((f) => f.endsWith(".json"));
 for (const f of required) if (!present.includes(f)) bad(f, "file missing");
 
@@ -112,6 +113,30 @@ if (repos) {
     if (!r.owner || !r.name || !r.category) bad("repos.json", `${key}: owner/name/category`);
     if (!URL_RE.test(r.url ?? "")) bad("repos.json", `${key}: url`);
     if (r.stars !== null && (typeof r.stars !== "number" || r.stars < 0)) bad("repos.json", `${key}: stars`);
+  }
+}
+
+const candidates = load("candidates.json");
+if (candidates) for (const p of candidateProblems(candidates)) bad("candidates.json", p);
+
+const curatedPath = join(dir, "sources/curated-repos.json");
+const blockPath = join(dir, "sources/blocklist.json");
+if (!existsSync(curatedPath) || !existsSync(blockPath)) bad("sources", "curated-repos.json or blocklist.json missing");
+else {
+  try {
+    const curated = JSON.parse(readFileSync(curatedPath, "utf8"));
+    const blocklist = JSON.parse(readFileSync(blockPath, "utf8"));
+    for (const p of sourceProblems(curated, blocklist)) bad("sources", p);
+    // The weekly diff guard fails when a curated key is absent from the ranking
+    // (for example after a GitHub repo transfer). Catch it here, before a run.
+    if (repos?.repos) {
+      const ranked = new Set(repos.repos.map((r) => `${r.owner}/${r.name}`.toLowerCase()));
+      for (const key of Object.keys(curated)) {
+        if (!ranked.has(key.toLowerCase())) bad("sources", `curated key ${key} is not in repos.json (renamed or transferred repo?)`);
+      }
+    }
+  } catch (e) {
+    bad("sources", e.message);
   }
 }
 
