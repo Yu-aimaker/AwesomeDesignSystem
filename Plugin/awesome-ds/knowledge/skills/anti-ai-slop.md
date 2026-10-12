@@ -25,8 +25,6 @@ sources:
     title: "Frontend Slides README"
   - url: https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md
     title: "anthropics/skills pptx SKILL.md"
-  - url: https://drive.google.com/file/d/1k93Z9do9rQrJxyz5S5t6oGy-SDeEO_bh/view
-    title: "要件: AwesomeDS拡張と研究Pluginの進化（Sir 2026-10-11）"
 tags: [anti-slop, japanese, before-after, mermaid, slides, skill]
 updated: 2026-10-11
 ---
@@ -35,14 +33,13 @@ updated: 2026-10-11
 
 ## 概要
 
-モデルが繰り返す既定（紫のグラデーション、3 枚の同じカード、中身のない日本語）を、デザイン、コンポーネント、文章の 3 分野で Before / After にする一覧。数値と禁止項目の正本は `AwesomeDS/foundations/anti-patterns.md` と `content-and-tone.md`。このエントリは、Sir の要件（STA-100）に合わせてハックの出典を 1 か所にまとめる。サイトのページは作らない。ルート案 `/anti-slop` はフロントの Opus 作業。
+モデルが繰り返す既定（紫のグラデーション、3 枚の同じカード、中身のない日本語）を、デザイン、コンポーネント、文章の 3 分野で Before / After にする一覧。数値と禁止項目の正本は `AwesomeDS/foundations/anti-patterns.md` と `content-and-tone.md`。ハックの出典を 1 か所にまとめる。サイトでは `/anti-slop` で見せる。
 
 ## 要点
 
 - 2026-10-11 に GitHub API で確認した stars: taste-skill 94,574（最終 push 2026-10-09）、ui-skills 9,606（最終 push 2026-10-11）、anthropics/skills 180,427（最終 push 2026-10-09）、frontend-slides 30,450（最終 push 2026-06-23、MIT）、Pretty Mermaid 1,525（最終 push 2026-08-22、MIT）。
 - 日本語専用でパターンが具体的だったのは `53able/no-ai-slop-ja`。検索 API の stars は 2（2026-10-11）。人気のリポジトリではない。21 パターンを README が列挙する。
 - Anthropic の `web-artifacts-builder` は、AI slop として「中央寄せの多用、紫グラデーション、均一な角丸、Inter」を避けると SKILL.md に書く（2026-10-11 に raw を取得）。
-- 研究 Plugin の導入サイトは、このセッションから開けなかった。`Yu-aimaker/design-thinking-plugin` と `Yu-aimaker/morimoto-dt-plugin` は GitHub で解決できず（2026-10-11）。文章の作例は、Sir が要件に書いた 4 点から起こした。画面の実物比較は Opus がサイトを開いて撮る。
 
 ### デザイン
 
@@ -60,13 +57,13 @@ updated: 2026-10-11
 
 ### 文章（変な日本語）
 
-Sir の 4 点（要件 Drive、2026-10-11）: 日本語が変、文章量が多い、可視化が見にくい、ところどころにバグやミス。下は、その診断から作った作例。サイトの原文ではない。
+下は、よくあるパターンを組み合わせた作例。
 
 | | 文 |
 |---|---|
-| Before | 本プラグインは、デザイン思考のあらゆるフェーズにおいて、革新的でシームレスな体験を実現することができます。可視化された表現にご注目ください。 |
+| Before | 本サービスは、あらゆるシーンにおいて、革新的でシームレスな体験を実現することができます。最新の機能にご注目ください。 |
 | どこがダメか | 「ことができます」は空の名詞殻。`革新的` `シームレス` は禁止語（`content-and-tone.md`）。「注目」は根拠がない（no-ai-slop-ja の「注目されています」）。1 文に用事が 3 つある |
-| After | 5 つの段階ごとに、決めたことを 1 枚の HTML で見ます。直したいところは、その場に書きます。 |
+| After | 請求書を 3 分で作り、そのまま送れます。送ったあとの入金も 1 画面で確かめられます。 |
 
 ボタンの対も同じ原則。
 
@@ -91,7 +88,7 @@ Sir の 4 点（要件 Drive、2026-10-11）: 日本語が変、文章量が多�
 
 Pretty Mermaid の 6 種: Flowchart、Sequence、State、Class、ER、XY。テーマは 15（zinc、tokyo-night、catppuccin、github、solarized、nord、dracula、one-dark の明暗）。ブラウザ不要。Node 16 以上。
 
-Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グラデーションを避けると書く。大きな読み面を白基調にするのは Vault の原則で、この Skill の全プリセットがそうとは README からは確認できない。AwesomeDS のスライド Skill 側で白キャンバスを既定にする。
+Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グラデーションを避けると書く。大きな読み面を白基調にするのは AwesomeDS の原則で、この Skill の全プリセットがそうとは README からは確認できない。AwesomeDS のスライド Skill 側で白キャンバスを既定にする。
 
 ## 具体的な値・ルール（あれば）
 
@@ -109,7 +106,7 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 
 - 反映済み (AwesomeDS 0.5.0, foundations/principles.md 原則 7): モデルの既定を設計判断にしない。
 - 反映済み (AwesomeDS 0.5.0, foundations/content-and-tone.md): 日本語の Before / After を 2 行足した。
-- 反映不要: サイトの `/anti-slop` ページ。トークンは変えない。画面は Opus（STA-100）。
+- 反映済み: サイトの `/anti-slop` ページ。トークンは変えない。
 
 ## 出典
 
@@ -121,4 +118,3 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 - https://raw.githubusercontent.com/53able/no-ai-slop-ja/main/README.md : 21 パターンとインストール（2026-10-11）。stars 2 は検索 API。
 - https://raw.githubusercontent.com/imxv/Pretty-mermaid-skills/main/README.md : 6 種、15 テーマ、インストール（2026-10-11）。stars は API。
 - https://raw.githubusercontent.com/zarazhangrui/frontend-slides/main/README.md : HTML 1 枚、16:9、インストール（2026-10-11）。stars は API。
-- https://drive.google.com/file/d/1k93Z9do9rQrJxyz5S5t6oGy-SDeEO_bh/view : Sir の 4 点（2026-10-11 に本文を読んだ）。

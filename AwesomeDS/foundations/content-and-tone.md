@@ -36,13 +36,12 @@ consistent, in Japanese first and English second, and remove the tells of genera
 These two lines are composed examples of principle 7, not quotes from a live page.
 The before line stacks an empty `ことができます`, two forbidden words, and an
 unsupported `注目`. The patterns are from no-ai-slop-ja and the forbidden-word row
-above. Sir's 2026-10-11 note names the same failure on the research plugin site
-(odd Japanese, too many words). The private site was not opened in that session.
+above.
 
 | | Copy |
 |---|---|
-| Before | 本プラグインは、デザイン思考のあらゆるフェーズにおいて、革新的でシームレスな体験を実現することができます。可視化された表現にご注目ください。 |
-| After | 5 つの段階ごとに、決めたことを 1 枚の HTML で見ます。直したいところは、その場に書きます。 |
+| Before | 本サービスは、あらゆるシーンにおいて、革新的でシームレスな体験を実現することができます。最新の機能にご注目ください。 |
+| After | 請求書を 3 分で作り、そのまま送れます。送ったあとの入金も 1 画面で確かめられます。 |
 
 ## Alternatives considered
 

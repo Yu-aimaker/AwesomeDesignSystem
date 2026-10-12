@@ -1,6 +1,6 @@
 # Claude plugin surfaces
 
-One line each for why this plugin uses a Claude Code surface, or why it does not. STA-101. Checked against the files in this folder on 2026-10-12.
+One line each for why this plugin uses a Claude Code surface, or why it does not. Checked against the files in this folder on 2026-10-12.
 
 | Surface | What this plugin does | Why |
 |---|---|---|
@@ -17,4 +17,4 @@ One line each for why this plugin uses a Claude Code surface, or why it does not
 | `ds/` copy | `scripts/sync-ds.sh` copies `AwesomeDS/`. | An installed plugin cannot read the repo root. The copy is the copy, not a second source. |
 | `knowledge/` copy | `scripts/sync-ds.sh` copies the `Knowledge/` entries. `scripts/build-reference.mjs` writes `knowledge/README.md`. | The agent reads sourced notes instead of searching the web for each library or pattern. CI fails when the copy drifts. |
 
-Not in this file: the site pages for anti-slop, reports, and slides. Those are frontend work for Opus (STA-100, STA-102, STA-103).
+Not in this file: the site pages for anti-slop, reports, and slides.

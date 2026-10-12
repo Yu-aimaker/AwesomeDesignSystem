@@ -67,6 +67,7 @@ function pageRoutes() {
       <Route path="rankings" element={page(() => import("./pages/Rankings"), "Rankings")} />
       <Route path="report" element={page(() => import("./pages/Report"), "Report")} />
       <Route path="slides" element={page(() => import("./pages/Slides"), "Slides")} />
+      <Route path="anti-slop" element={page(() => import("./pages/AntiSlop"), "AntiSlop")} />
       <Route path="knowledge" element={page(() => import("./pages/Knowledge"), "Knowledge")} />
       <Route path="knowledge/:category/:slug" element={page(() => import("./pages/KnowledgeEntry"), "KnowledgeEntry")} />
       <Route path="sources" element={page(() => import("./pages/Sources"), "Sources")} />
