@@ -15,6 +15,12 @@ Output folder: `docs/ux/<feature-slug>/`. Create it. Files: `personas.md`, `user
 
 Methods reference: `${CLAUDE_PLUGIN_ROOT}/skills/design-thinking/reference/methods.md` (Laws of UX, Nielsen's 10 heuristics, Norman's principles, with the check each one gives you). Read it before step 3.
 
+## Anti-jobs
+
+- Do not implement the screens. Hand the recommendation list to `awesome-ds`.
+- Do not make the executive call. Score impact and effort, then stop.
+- Do not write a persona that has no device, time, or ability constraint.
+
 ## 1. Clarify goal and users (assumptions first, questions only when blocked)
 
 1. Read what exists: README, product docs, issue text, existing `docs/ux/`, the DESIGN.md (project's own or `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md`), routes (`app/`, `pages/`, `src/routes`), analytics or support notes if present.

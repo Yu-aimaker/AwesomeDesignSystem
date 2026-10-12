@@ -11,6 +11,12 @@ Works in any language. If the user writes Japanese, answer in Japanese and apply
 
 AwesomeDS is a neutral, content-first system: white canvas, near-black ink, one accent used only for links, focus and selection. Geist + Noto Sans JP on a 4px grid. Borders before shadows. Motion only as feedback. The full system is at `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md`. The bundled copy is synced from the repo's `AwesomeDS/` folder.
 
+## Anti-jobs
+
+- Do not choose the product strategy, the public release, or a new brand. If the project has a DESIGN.md, it wins. Otherwise apply AwesomeDS.
+- Do not edit canonical tokens in `AwesomeDS/`. Copy `tokens.css` into the product.
+- Do not publish this plugin or the site.
+
 ## 0. Before writing any code
 
 Do these in order. Do not skip step 1 because the cheat sheet below "looks like enough".

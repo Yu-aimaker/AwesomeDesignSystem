@@ -38,7 +38,7 @@ mkdir -p design-system/awesome-ds && cp -R Plugin/awesome-ds/ds/. design-system/
 | スキル | 呼び出し | 1 行説明 |
 |---|---|---|
 | awesome-ds | 自動（UI を作る・直す時） | AwesomeDS を読み、スタックを検出してトークンを配線し、shadcn/ui をトークンで再スタイルし、禁止パターンを避け、チェックリストで締める |
-| ds-creator | `/awesome-ds:ds-creator <製品名>` | 1 ターン 1 質問のインタビューでブランド用 DS を作る。DESIGN.md、tokens.css、tailwind.css、RATIONALE.md、preview.html を出力し、コントラストを計算で検証 |
+| ds-creator | `/awesome-ds:ds-creator <製品名>` | 1 ターン 1 質問の grill でブランド用 DS を作る。DESIGN.md、tokens.css、tailwind.css、RATIONALE.md、preview.html を出力し、コントラストを計算で検証 |
 | design-verifier | `/awesome-ds:design-verifier <url>` | 静的監査 + Playwright で 390/768/1280 × light/dark を撮影 + ルーブリック採点。`design-review.md` に file:line 付きの指摘と修正リストを出す |
 | design-thinking | `/awesome-ds:design-thinking <機能>` | ペルソナ、ユーザーストーリー、ジャーニーマップ、Mermaid の画面フロー、スクリーンショットのウォークスルー、影響×工数で並べた提案を `docs/ux/` に出す |
 | knowledge-curator | `/awesome-ds:knowledge-curator <url or weekly>` | Knowledge/ にエントリを追加し、Reference/REFERENCE.md を更新し、AwesomeDS 変更を CHANGELOG 付きで提案。週次リサーチ用（手動呼び出しのみ） |
