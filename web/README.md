@@ -37,7 +37,7 @@ Node 22 and pnpm 10.
   `type`, `sources[{url,title}]`, `tags[]`, `updated`).
 - `vite.config.ts` uses `base` `/` (override with `SITE_BASE`). The router reads `import.meta.env.BASE_URL`.
 - `scripts/postbuild.mjs` copies `index.html` to `404.html` so deep links work
-  on Vercel.
+  on the Vercel project kept for rollback. Cloudflare uses `not_found_handling`.
 
 ## Screenshots
 
@@ -47,8 +47,10 @@ Node 22 and pnpm 10.
 
 ## デプロイ (Deploy)
 
-- Vercel で配信します。Root Directory は `web` です。
-- `vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` ヘッダーを持ちます。
+本番は Cloudflare Workers Static Assets です。URL は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントします。workers.dev は https://awesomeds.yumaker.workers.dev です。Vercel プロジェクトは戻し用に残しています。
+
+- Cloudflare: `wrangler.jsonc` はアセットだけです（`main` なし）。`routes` は Worker Route `awesomeds.yumaker.studio/*`（zone `yumaker.studio`）で、`custom_domain` は使いません。`public/_headers` が noindex と HSTS を付け、`/assets/*` は長期キャッシュです。`.assetsignore` は `.nojekyll` をアップロードから外します。
+- Vercel（戻し用）: Root Directory は `web`。`vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` を持ちます。
 - `base` の既定は `/` です。別のパスで配信するときだけ `SITE_BASE=/path/ pnpm build` を使います。
 
-Vercel hosts the site from Root Directory `web`; see `vercel.json` for build, rewrite and noindex settings.
+Production is Cloudflare Workers Static Assets at https://awesomeds.yumaker.studio . Workers Builds comments a preview URL on the PR. workers.dev is https://awesomeds.yumaker.workers.dev . The Vercel project stays for rollback. `wrangler.jsonc` is assets only (no Worker script) and sets the Worker Route `awesomeds.yumaker.studio/*` on zone `yumaker.studio` (not a custom domain). `vercel.json` still configures the Vercel project. `public/_headers` sets noindex and HSTS.

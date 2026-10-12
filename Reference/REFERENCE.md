@@ -300,7 +300,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [xeji01/nothingfont: nothing.tech typeface (Ndot-55, Ndot-57, NType-82)](https://github.com/xeji01/nothingfont)  
   引用: [Nothing Technology](../Knowledge/design-systems/nothing-technology.md)
-- [このリポジトリ本体 (scripts/fetch-repos.mjs と .github/workflows/update-data.yml)](https://github.com/Yu-aimaker/AwesomeDesignSystem)  
+- [このリポジトリ本体 (scripts/fetch-repos.mjs と .github/workflows/weekly-growth.yml)](https://github.com/Yu-aimaker/AwesomeDesignSystem)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md)
 - [awesome-design-md-jp: goodpatch/DESIGN.md (実測 2026-05-21)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/design-md/goodpatch/DESIGN.md)  
   引用: [Goodpatch](../Knowledge/design-systems/goodpatch.md)

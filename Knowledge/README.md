@@ -101,7 +101,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-09-07 |
+| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-11 |
 
 ## skills
 

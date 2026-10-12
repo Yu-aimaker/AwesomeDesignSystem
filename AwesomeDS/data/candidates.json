@@ -1,0 +1,14 @@
+{
+  "meta": {
+    "description": "Machine-collected candidates for design systems, guidelines, OSS, and agent skills. Nothing here is shown on the site until a person accepts it in a pull request.",
+    "updated": "2026-10-11",
+    "sources": [
+      "https://api.github.com/search/repositories",
+      "https://github.com/voltagent/awesome-design-md",
+      "https://github.com/kzhrknt/awesome-design-md-jp"
+    ],
+    "license": "Candidate metadata is public GitHub and website data. Each project keeps its own license.",
+    "generator": "scripts/discover-candidates.mjs"
+  },
+  "candidates": []
+}
