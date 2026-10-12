@@ -66,8 +66,11 @@ CI と同じ確認だけをしたいときは `node scripts/screenshot.mjs --che
 node scripts/build-reference.mjs          # Knowledge/README.md と Reference/REFERENCE.md を再生成
 node scripts/validate-knowledge.mjs       # Knowledge の frontmatter と見出し
 node scripts/validate-data.mjs            # AwesomeDS/data/*.json
+node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs  # ヘッダ検査（ネットワークなし）
 bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピーが AwesomeDS と一致するか
 ```
+
+本番またはプレビューの実応答を見るときは `node scripts/hosting-smoke.mjs <url> [url...]`。`/`、`/sources`、`/foundations`、`/en/sources`、存在しない `/missing-page` は `node scripts/preview-headers.mjs <url>`。切替手順は [docs/ops/cloudflare-cutover.md](docs/ops/cloudflare-cutover.md)。戻し手順は [docs/ops/cloudflare-rollback.md](docs/ops/cloudflare-rollback.md)。
 
 - リンク確認: `node scripts/check-links.mjs` で `*.md` の相対リンク切れを探せます（CI には未導入）。
 
@@ -79,4 +82,5 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピ
   - `validate-knowledge.mjs`
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
-  - web の typecheck、build、`screenshot.mjs --check`
+  - `hosting-smoke.test.mjs` と `preview-headers.test.mjs`（URL へのリクエストはしない）
+  - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.test.mjs`、`check-cf-assets.mjs`、`wrangler deploy --dry-run`）、`screenshot.mjs --check`

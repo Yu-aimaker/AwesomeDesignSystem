@@ -28,7 +28,7 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
 | [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 5 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
-| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Vercel ホスト、noindex。URL はリポジトリの About 欄 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
+| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Cloudflare Workers Static Assets で配信、noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクトは戻し用に残置 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -103,9 +103,11 @@ Knowledge/            出典付きの知見。カテゴリ別フォルダ
 Reference/REFERENCE.md  外部リンク一覧（scripts/build-reference.mjs で生成）
 Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = AwesomeDS の同期コピー）
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
-scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*）
+scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*, hosting-smoke, preview-headers）
+docs/ops/cloudflare-cutover.md  本番を Cloudflare Workers へ切り替えた手順と実施記録（2026-10-11 08:14 JST、停止 0 秒）
+docs/ops/cloudflare-rollback.md  Cloudflare Workers から Vercel へ戻す手順（DNS の値と確認コマンド）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、workers.dev は https://awesomeds.yumaker.workers.dev 、プレビューは PR コメント。Vercel プロジェクトは戻し用に残置）
 ```
 
 ## 更新の流れ

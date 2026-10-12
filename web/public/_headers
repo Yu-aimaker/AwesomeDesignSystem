@@ -1,0 +1,6 @@
+/*
+  X-Robots-Tag: noindex, nofollow
+  Strict-Transport-Security: max-age=63072000
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
