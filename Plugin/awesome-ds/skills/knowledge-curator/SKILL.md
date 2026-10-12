@@ -89,7 +89,7 @@ Run on a schedule or when asked. Do all of it; do not stop after the first inter
 6. Produce one PR proposal (section 3) bundling all DS changes for the week, with one CHANGELOG entry listing each change and its source entry.
 7. Print a digest: `| source | version or date | change | effect on AwesomeDS | entry |`, then the PR proposal path or link. Nothing else.
 
-Note: the old weekly research issue workflow has been removed. Do not add an Actions job that calls a billed model API. Run this skill from a logged-in Claude subscription session. Candidate repos for a later review are collected by `scripts/discover-candidates.mjs` into `AwesomeDS/data/candidates.json` and are not adopted automatically.
+Note: the old weekly research issue workflow has been removed. Run this skill from a logged-in Claude subscription session. Do not add an Actions job, a repository secret, or a workflow that calls a billed model API. Candidate repos for a later review are collected by `scripts/discover-candidates.mjs` into `AwesomeDS/data/candidates.json` and are not adopted automatically.
 
 ## 5. Quality bar
 

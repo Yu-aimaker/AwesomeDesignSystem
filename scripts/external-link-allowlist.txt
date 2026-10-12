@@ -1,0 +1,5 @@
+# One public URL prefix per line. check-links.mjs fetches only matches.
+# Other https links are skipped so third-party timeouts do not fail CI.
+# Each match is retried on network errors, 408, 429, and 5xx.
+# Do not add the private GitHub repository. Unauthenticated requests return 404.
+https://awesomeds.yumaker.studio
