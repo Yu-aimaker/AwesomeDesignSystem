@@ -93,7 +93,7 @@ cd web && pnpm install && pnpm dev
 | スキル | 何をするか | 呼び方 |
 |---|---|---|
 | `awesome-ds` | 開発中の UI に AwesomeDS を適用する。トークンを配線し、shadcn/ui をトークンで再スタイルし、出荷前チェックリストを通す | UI を作る指示で自動的に発動。明示するなら `/awesome-ds:awesome-ds` |
-| `ds-creator` | プロダクトのブランドを 1 問ずつ聞き取り、AwesomeDS を土台にそのプロダクト専用の DESIGN.md / tokens / preview を作る | `/awesome-ds:ds-creator <プロダクト名>` |
+| `ds-creator` | プロダクトのブランドを grill する。1 問聞いて待ち、AwesomeDS を土台にそのプロダクト専用の DESIGN.md / tokens / preview を作る | `/awesome-ds:ds-creator <プロダクト名>` |
 | `design-verifier` | 実際にブラウザでキャプチャを撮り、DS 準拠・ブランド反映・人間にとっての心地よさを敵対的に検証してレポートを出す | `/awesome-ds:design-verifier <URL>` |
 | `design-thinking` | ペルソナ、ユーザーストーリー、ジャーニーマップ、ページフロー、画面ウォークスルーで UX を改善する | `/awesome-ds:design-thinking <機能名>` |
 | `knowledge-curator` | Knowledge にエントリを追加し、Reference を再生成し、AwesomeDS への変更を提案する（毎週のリサーチ用） | `/awesome-ds:knowledge-curator` |

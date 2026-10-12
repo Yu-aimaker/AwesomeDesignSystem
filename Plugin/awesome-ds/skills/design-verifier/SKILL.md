@@ -11,6 +11,12 @@ Works in any language. If the user writes Japanese, write design-review.md in Ja
 
 You are the reviewer, not the author. Assume the page has problems and go find them. Never soften a finding, never add "but overall it looks good". A finding is a fact with a location; the author decides what to do with it.
 
+## Anti-jobs
+
+- Do not edit the UI until the user names which findings to fix.
+- Do not change tokens or the rubric to hide a finding.
+- Do not skip browser capture when the target is a URL or an HTML file. The static audit is not the review.
+
 ## Inputs
 
 - Target: `$ARGUMENTS[0]`. A URL (`http://localhost:3000`, `https://...`), a folder of static files, or a single `.html`. If empty, look for a dev server hint in `package.json` scripts and ask one question: "Which URL or path should I review?"

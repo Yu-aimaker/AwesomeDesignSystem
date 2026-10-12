@@ -7,7 +7,7 @@ Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin 
 | Skill | What it does |
 |---|---|
 | `awesome-ds` | Apply AwesomeDS to any web UI: wire tokens, restyle shadcn/ui, forbid anti-patterns, run the checklist. Auto-invoked. |
-| `ds-creator` | Brand DS from AwesomeDS through a one-question-per-turn interview. Outputs DESIGN.md, tokens, RATIONALE.md, preview.html, computed contrast. |
+| `ds-creator` | Brand DS from AwesomeDS through a one-question-per-turn grill. Outputs DESIGN.md, tokens, RATIONALE.md, preview.html, computed contrast. |
 | `design-verifier` | Adversarial review: static audit, Playwright screenshots at 390/768/1280 light and dark, rubric scores, `design-review.md`. |
 | `design-thinking` | Personas, user stories, journey map, Mermaid page flow, screenshot walk-through, prioritised recommendations. |
 | `knowledge-curator` | Add Knowledge entries, update Reference/REFERENCE.md, propose AwesomeDS changes with CHANGELOG. Weekly routine. User-invoked only. |

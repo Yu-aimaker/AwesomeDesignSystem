@@ -1,6 +1,6 @@
 ---
 name: ds-creator
-description: Create a product-specific design system starting from AwesomeDS. Use when the user asks for "a design system for X", "our brand DS", "make DESIGN.md for this product", "brand tokens", or wants to adapt AwesomeDS to a logo, colour or brand brief. Runs a one-question-per-turn interview, then produces DESIGN.md, tokens.css, tailwind.css, RATIONALE.md and preview.html, and verifies contrast.
+description: Create a product-specific design system starting from AwesomeDS. Use when the user asks for "a design system for X", "our brand DS", "make DESIGN.md for this product", "brand tokens", or wants to adapt AwesomeDS to a logo, colour or brand brief. Runs a one-question-per-turn grill, then produces DESIGN.md, tokens.css, tailwind.css, RATIONALE.md and preview.html, and verifies contrast.
 argument-hint: "[product name or brand brief]"
 allowed-tools: Read, Grep, Glob, Bash(node *)
 ---
@@ -17,6 +17,15 @@ Two hard rules that apply to every phase:
 
 - Never invent brand facts. A colour, a font, a tone, a platform list is either found in an asset, given by the user, or kept as the AwesomeDS default and marked `default, not decided`.
 - The interview asks exactly one question per turn. Never batch questions, never number a list of questions, never "a few quick questions". Ask, stop, wait.
+
+## Anti-jobs
+
+The interview is the grill. Ask one question, then wait.
+
+- Do not skip the grill, and do not ask a second question in the same turn.
+- Do not invent a colour, a font, a tone, or a platform list.
+- Do not build product screens. Stop at `design-system/`, then hand that folder to `awesome-ds`.
+- Do not decide a public release or a marketplace listing.
 
 ## Phase 1: intake (no questions yet)
 

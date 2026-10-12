@@ -93,7 +93,7 @@ cd web && pnpm install && pnpm dev
 | Skill | What it does | How to call it |
 |---|---|---|
 | `awesome-ds` | Applies AwesomeDS to the UI you are building. Wires the tokens, restyles shadcn/ui with them, and runs the pre-release checklist | Activates automatically on UI requests. To call it explicitly: `/awesome-ds:awesome-ds` |
-| `ds-creator` | Interviews you about your product's brand one question at a time, then builds a product-specific DESIGN.md / tokens / preview on top of AwesomeDS | `/awesome-ds:ds-creator <product name>` |
+| `ds-creator` | Grills the brand one question at a time, then builds a product-specific DESIGN.md / tokens / preview on top of AwesomeDS | `/awesome-ds:ds-creator <product name>` |
 | `design-verifier` | Captures real browser screenshots and adversarially checks DS compliance, brand fidelity and how it feels to a human, then writes a report | `/awesome-ds:design-verifier <URL>` |
 | `design-thinking` | Improves UX with personas, user stories, journey maps, page flows and screen walkthroughs | `/awesome-ds:design-thinking <feature name>` |
 | `knowledge-curator` | Adds entries to Knowledge, regenerates Reference, and proposes changes to AwesomeDS (for the weekly research) | `/awesome-ds:knowledge-curator` |
