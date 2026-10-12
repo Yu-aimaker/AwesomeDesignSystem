@@ -1,0 +1,99 @@
+name: Weekly growth settle
+
+on:
+  workflow_run:
+    workflows: ["Check"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  other-branch:
+    if: github.event.workflow_run.head_branch != 'bot/weekly-growth'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Leave main unchanged
+        run: exit 0
+
+  settle:
+    if: github.event.workflow_run.head_branch == 'bot/weekly-growth'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: weekly-growth-settle
+      cancel-in-progress: false
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Load the checked commit
+        env:
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin main
+          git fetch --no-tags origin bot/weekly-growth || true
+          if [ -n "${HEAD_SHA}" ]; then
+            git fetch --no-tags origin "${HEAD_SHA}" || true
+          fi
+          if [ -n "${HEAD_SHA}" ] && git cat-file -e "${HEAD_SHA}^{commit}" 2>/dev/null; then
+            echo present > "$RUNNER_TEMP/sha-state"
+            git log --format='%ae' "origin/main..${HEAD_SHA}" > "$RUNNER_TEMP/authors.txt"
+            git diff --name-only -z "origin/main...${HEAD_SHA}" > "$RUNNER_TEMP/paths.txt"
+          else
+            echo missing > "$RUNNER_TEMP/sha-state"
+            : > "$RUNNER_TEMP/authors.txt"
+            : > "$RUNNER_TEMP/paths.txt"
+          fi
+
+      - name: Find the open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh pr list --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --state open --json number,headRefOid > "$RUNNER_TEMP/pr.json"
+
+      - name: Decide
+        id: settle
+        env:
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          CHECK_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          AUTHORS_FILE: ${{ runner.temp }}/authors.txt
+          PATHS_FILE: ${{ runner.temp }}/paths.txt
+          PR_FILE: ${{ runner.temp }}/pr.json
+        run: |
+          set -euo pipefail
+          sha="${HEAD_SHA}"
+          if [ "$(cat "$RUNNER_TEMP/sha-state")" != "present" ]; then
+            sha=""
+          fi
+          HEAD_SHA="$sha" node scripts/weekly-growth-settle.mjs
+
+      - name: Merge the bot pull request
+        if: steps.settle.outputs.action == 'merge'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh pr merge "${{ steps.settle.outputs.pr_number }}" --repo "$GITHUB_REPOSITORY" --squash --delete-branch --match-head-commit "${{ steps.settle.outputs.head_sha }}"
+
+      - name: Close the bot pull request and delete its branch
+        if: steps.settle.outputs.action == 'close'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh pr close "${{ steps.settle.outputs.pr_number }}" --repo "$GITHUB_REPOSITORY" --comment "Check が成功していないか、作者がボットでないか、差分がデータディレクトリの外を含むため、この PR を閉じます。"
+          if git ls-remote --exit-code --heads origin bot/weekly-growth >/dev/null; then
+            git push origin --delete bot/weekly-growth
+          fi

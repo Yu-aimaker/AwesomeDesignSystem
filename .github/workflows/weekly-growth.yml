@@ -1,8 +1,10 @@
 name: Weekly growth
 
-# Manual only. dry_run defaults to true, so a dispatch does not open a pull request.
-# A schedule is intentionally absent until the dry-run and one real run have been reviewed.
+# Monday 09:30 JST. A schedule run passes dry-run false and may open one bot pull request.
+# workflow_dispatch keeps dry_run default true, so a manual run does not open a pull request.
 on:
+  schedule:
+    - cron: "30 0 * * 1"
   workflow_dispatch:
     inputs:
       dry_run:
@@ -88,7 +90,17 @@ jobs:
 
       - name: Decide
         id: plan
-        run: node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --dry-run "${{ inputs.dry_run }}"
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DRY_RUN_INPUT: ${{ inputs.dry_run }}
+        run: |
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            dry_run=false
+          else
+            dry_run="${DRY_RUN_INPUT:-true}"
+          fi
+          echo "dry_run=$dry_run" >> "$GITHUB_OUTPUT"
+          node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --dry-run "$dry_run"
 
       - name: Step summary
         if: always()
@@ -97,7 +109,7 @@ jobs:
             echo "## 週次更新"
             echo ""
             echo "- action: ${{ steps.plan.outputs.action }}"
-            echo "- dry_run: ${{ inputs.dry_run }}"
+            echo "- dry_run: ${{ steps.plan.outputs.dry_run }}"
             echo ""
             cat .growth/report.md 2>/dev/null || true
           } >> "$GITHUB_STEP_SUMMARY"
