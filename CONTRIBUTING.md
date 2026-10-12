@@ -66,7 +66,7 @@ CI と同じ確認だけをしたいときは `node scripts/screenshot.mjs --che
 node scripts/build-reference.mjs          # Knowledge/README.md と Reference/REFERENCE.md を再生成
 node scripts/validate-knowledge.mjs       # Knowledge の frontmatter と見出し
 node scripts/validate-data.mjs            # AwesomeDS/data/*.json
-bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS コピーが AwesomeDS と一致するか
+bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Knowledge のコピーが元と一致するか
 ```
 
 - リンク確認: `node scripts/check-links.mjs` で `*.md` の相対リンク切れを探せます（CI には未導入）。

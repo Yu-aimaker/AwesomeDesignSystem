@@ -68,7 +68,7 @@ claude -p "..." --model opus --allowedTools "Read,Edit,Bash" </dev/null
 
 - **1 PR 1 テーマ**。CI（`.github/workflows/check.yml`）緑を目標
 - AwesomeDS 値変更時: `DESIGN.md` + tokens 三本 + `foundations/` 理由 + `CHANGELOG` + `Plugin/awesome-ds/scripts/sync-ds.sh`
-- Knowledge 追加後: `node scripts/build-reference.mjs`（`Reference/` と Knowledge README は手編集しない）
+- Knowledge 追加後: `node scripts/build-reference.mjs` と `bash Plugin/awesome-ds/scripts/sync-ds.sh`（`Reference/`、Knowledge README、`Plugin/awesome-ds/knowledge/` は手編集しない）
 - web ローカル:
 
 ```

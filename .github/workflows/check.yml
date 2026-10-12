@@ -16,11 +16,13 @@ jobs:
       - name: Reference and Knowledge index are up to date
         run: |
           node scripts/build-reference.mjs
-          git diff --exit-code -- Reference/REFERENCE.md Knowledge/README.md
+          git diff --exit-code -- Reference/REFERENCE.md Knowledge/README.md Plugin/awesome-ds/knowledge/README.md
       - name: Knowledge entries pass validation
         run: node scripts/validate-knowledge.mjs
-      - name: Plugin DS copy is in sync with AwesomeDS
+      - name: Plugin DS and Knowledge copies are in sync
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
+      - name: Plugin hook reports UI findings and stays silent otherwise
+        run: node --test scripts/plugin-hook.test.mjs
       - name: Data files are valid
         run: node scripts/validate-data.mjs
       - name: Plugin manifests are valid JSON

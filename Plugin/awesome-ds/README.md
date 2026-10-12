@@ -12,9 +12,19 @@ Install: `/plugin marketplace add Yu-aimaker/AwesomeDesignSystem` then `/plugin 
 | `design-thinking` | Personas, user stories, journey map, Mermaid page flow, screenshot walk-through, prioritised recommendations. |
 | `knowledge-curator` | Add Knowledge entries, update Reference/REFERENCE.md, propose AwesomeDS changes with CHANGELOG. Weekly routine. User-invoked only. |
 
+| Agent | What it does |
+|---|---|
+| `design-reviewer` | Runs `design-verifier` in a fresh context that did not write the UI, and returns the S1/S2 findings. Delegate to it before calling UI work done. |
+
+| Hook | What it does |
+|---|---|
+| PostToolUse `Write\|Edit\|MultiEdit` | Runs the static audit on the one UI file just written and gives the S1/S2 findings back to Claude. Advisory, never blocks. `AWESOME_DS_HOOK=off` turns it off. |
+
+`knowledge/` holds the repo's Knowledge entries (index: [knowledge/README.md](knowledge/README.md)), so the agent can read sourced notes on libraries, motion, Japanese typography and reference brands without searching.
+
 Why each Claude Code surface is used, or left unused: [SURFACES.md](SURFACES.md).
 
-`ds/` is a synced copy of the repo's `AwesomeDS/` (`scripts/sync-ds.sh`; CI runs `scripts/check-sync.sh`). Do not edit `ds/` by hand.
+`ds/` and `knowledge/` are synced copies of the repo's `AwesomeDS/` and `Knowledge/` (`scripts/sync-ds.sh`; the index is written by `scripts/build-reference.mjs`; CI runs `scripts/check-sync.sh`). Do not edit them by hand.
 
 Scripts (Node 18+, no dependencies except Playwright for capture):
 
