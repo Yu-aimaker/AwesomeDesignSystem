@@ -62,6 +62,10 @@ export const sidebar: NavGroup[] = [
     ],
   },
   {
+    label: { ja: "AI の出力", en: "AI output" },
+    items: [{ label: { ja: "脱AIスロップ", en: "Beyond AI slop" }, to: "/anti-slop", hint: { ja: "ダメな例と直し方", en: "Bad examples and their fixes" } }],
+  },
+  {
     label: { ja: "根拠", en: "Evidence" },
     items: [
       { label: { ja: "ナレッジ", en: "Knowledge" }, to: "/knowledge" },
