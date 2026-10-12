@@ -47,10 +47,10 @@ How to check a GitHub repo without spending a full clone on every one: `git ls-r
 
 | Source | What to check | Knowledge entry |
 |---|---|---|
-| `scripts/fetch-repos.mjs`, `AwesomeDS/data/repos.json`, `.github/workflows/update-data.yml` (owned by another workstream) | new categories added to `CURATED`, schedule changes, new fetch errors worth noting | research/oss-rankings.md |
+| `scripts/fetch-repos.mjs`, `AwesomeDS/data/sources/curated-repos.json`, `AwesomeDS/data/repos.json`, `.github/workflows/weekly-growth.yml` | new categories in the curated map, guard failures, new fetch errors worth noting | research/oss-rankings.md |
 
 ## Cadence
 
-- Weekly (the `weekly-research` trigger, Monday): walk every row above whose baseline is more than 6 days old. Sources with a Knowledge entry: compare the source's latest release/push date against the entry's `updated` field. No entry yet: check the last 7 days of activity.
+- Weekly (when a person runs the knowledge-curator weekly routine, or reviews the `bot/weekly-growth` pull request): walk every row above whose baseline is more than 6 days old. Sources with a Knowledge entry: compare the source's latest release/push date against the entry's `updated` field. No entry yet: check the last 7 days of activity.
 - On demand (`/awesome-ds:knowledge-curator <url or topic>`): research and write or update the single entry the user asked for, no need to touch the rest of the watchlist that run.
 - Add a new row here whenever a new Knowledge entry is created for a repo, product, or spec that is likely to change again (has releases, a changelog, or an active maintainer). Static, one-off articles (Nielsen's heuristics, a book) do not need a watchlist row.

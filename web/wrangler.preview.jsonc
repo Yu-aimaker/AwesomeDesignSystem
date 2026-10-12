@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "awesomeds",
+  "compatibility_date": "2026-10-01",
+  // Workers Builds の非本番だけが読む。本番の wrangler.jsonc に main は置かない。
+  // wrangler preview は assets-only だと no-op worker を付け、無いパスが 404 になる。
+  // ASSETS.fetch は not_found_handling を通す。同じホストへの fetch は error 1042。
+  // https://developers.cloudflare.com/workers/static-assets/binding/
+  "main": "scripts/preview-spa-fallback.js",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "html_handling": "auto-trailing-slash"
+  },
+  "workers_dev": true,
+  "preview_urls": true,
+  "previews": {}
+}

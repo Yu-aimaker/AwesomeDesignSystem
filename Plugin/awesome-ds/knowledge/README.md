@@ -4,7 +4,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 正本はリポの `Knowledge/` です。この一覧は `node scripts/build-reference.mjs`、エントリは `Plugin/awesome-ds/scripts/sync-ds.sh` で生成します。手で編集しないでください。
 
-件数: 70
+件数: 73
 
 ## accessibility
 
@@ -101,7 +101,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-09-07 |
+| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-11 |
 
 ## skills
 
@@ -112,11 +112,14 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 | [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
 | [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
 | [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](skills/diagram-design.md) | skill | skill, diagram, svg, excalidraw, mermaid-alternative, editorial, design-tokens | 2026-09-07 |
+| [HTMLレポート](skills/html-report.md) | guideline | html-report, skill, anthropic, artifacts, white-canvas | 2026-10-11 |
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
 | [Superpowers (obra)](skills/superpowers.md) | skill | skill, superpowers, sdlc, subagent-driven-development, brainstorming, tdd, multi-harness | 2026-09-07 |
 | [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, dials, gsap, motion, landing-page, pre-flight, em-dash | 2026-09-06 |
 | [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
+| [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
+| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-11 |
 
 ## tech-stack
 

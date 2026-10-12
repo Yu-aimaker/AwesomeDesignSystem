@@ -1,11 +1,11 @@
 # Principles
 
 AwesomeDS is a set of defaults. Each default exists because a documented finding
-about human perception or behaviour says it works. This file lists the six
+about human perception or behaviour says it works. This file lists the seven
 principles, then maps each law or heuristic we lean on to the concrete rule it
 produced in `DESIGN.md`.
 
-## The six principles
+## The seven principles
 
 | # | Principle | Plain statement | Where it shows up |
 |---|---|---|---|
@@ -15,6 +15,7 @@ produced in `DESIGN.md`.
 | 4 | Honesty of materials | A surface looks like what it does. No fake glass, no fake depth. | Elevation, anti-patterns |
 | 5 | Feedback | Every action gets a visible response within 100 ms. | Motion, component states |
 | 6 | Consistency | Same thing, same look, same place, every time. | Radius family, icon family, layout |
+| 7 | No generated tells | A choice models repeat is not a design decision. Replace it. | `anti-patterns.md`, content and tone |
 
 ### 1. Content first
 
@@ -59,6 +60,17 @@ expectations from other products. AwesomeDS enforces one radius family, one icon
 family, left-aligned logo and label-above forms because these are the conventions
 users already know.
 
+### 7. No generated tells
+
+Language models share a high-probability center: purple gradients, three equal cards,
+Inter on a dark mesh, and Japanese that says nothing (`ことができます`, `シームレス`,
+`革新的`). Anthropic's `web-artifacts-builder` names the same visual cluster (centered
+layouts, purple gradients, uniform radii, Inter). taste-skill's pre-flight and
+ui-skills `baseline-ui` ban the same items. AwesomeDS already lists the replacements
+in `anti-patterns.md` and `content-and-tone.md`. Principle 7 says to apply that list
+before shipping, including in copy. The catalog of sources and before/after lines is
+`Knowledge/skills/anti-ai-slop.md`.
+
 ## Laws and how they became rules
 
 | Law or heuristic | Finding | AwesomeDS rule it produced |
@@ -78,7 +90,7 @@ users already know.
 | Nielsen H3 user control | Provide an emergency exit and undo. | Dialogs close on Escape and backdrop click; destructive toasts offer undo. |
 | Nielsen H5 error prevention | Prevent before you message. | Inline validation, disabled states with reason, confirmation for destructive actions. |
 | Nielsen H6 recognition over recall | Make options visible. | Icons always carry visible labels in navigation. No placeholder-as-label. |
-| Nielsen H8 aesthetic and minimalist | Every extra element competes with the relevant ones. | No gradients, glow, or decorative blobs by default. Max one eyebrow per three sections. |
+| Nielsen H8 aesthetic and minimalist | Every extra element competes with the relevant ones. | No gradients, glow, or decorative blobs by default. Max one eyebrow per three sections. Principle 7: drop the generated default even when it looks finished. |
 | Nielsen H9 recover from errors | Plain-language messages with a fix. | Error copy states what happened and what to do, in `danger` with an icon. |
 | Progressive disclosure | Show primary options first; defer the rest. | Advanced settings behind a disclosure, sheets for secondary flows, command menu for power users. |
 
@@ -118,3 +130,7 @@ users already know.
 - https://www.nngroup.com/videos/aesthetic-usability-effect/ : why attractiveness masks problems.
 - https://www.nngroup.com/articles/visual-treatments-accessibility/ : do not rely on color alone.
 - https://vercel.com/geist/colors : blue as the sole interactive accent.
+- https://github.com/Leonxlnx/taste-skill : anti-default list and pre-flight (stars 94,574 on 2026-10-11).
+- https://github.com/ibelick/ui-skills : `baseline-ui` discrete MUST / NEVER rules (stars 9,606 on 2026-10-11).
+- https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md : names centered layouts, purple gradients, uniform radii, and Inter as AI slop (fetched 2026-10-11).
+- https://github.com/53able/no-ai-slop-ja : Japanese patterns such as `ことができます` and unsupported `注目されています` (README fetched 2026-10-11).
