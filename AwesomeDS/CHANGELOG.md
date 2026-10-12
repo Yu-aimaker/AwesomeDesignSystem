@@ -3,6 +3,23 @@
 All notable changes to AwesomeDS are recorded here. The format follows Keep a Changelog
 and the project follows Semantic Versioning 2.0.0.
 
+## [0.5.0] - 2026-10-11
+
+### Added
+
+- Principle 7, "No generated tells", in `foundations/principles.md`. A choice that
+  language models repeat is not a design decision. Replacements stay in
+  `foundations/anti-patterns.md`.
+- `foundations/content-and-tone.md`: one Japanese before/after for empty
+  `ことができます`, forbidden words, and unsupported `注目`.
+- `Knowledge/skills/anti-ai-slop.md`: the three-domain catalog and the hack list
+  (taste-skill, ui-skills, no-ai-slop-ja, Pretty Mermaid, Frontend Slides, Anthropic
+  pptx). Stars and install lines were read on 2026-10-11.
+
+### Changed
+
+- DESIGN.md section 9 points at principle 7. No token values changed.
+
 ## [0.4.0] - 2026-10-08
 
 ### Added

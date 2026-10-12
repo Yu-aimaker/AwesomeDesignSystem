@@ -27,8 +27,8 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 | 置き場所 | 中身 | 最初に読むもの |
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
-| [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 5 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
-| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Vercel ホスト、noindex。URL はリポジトリの About 欄 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
+| [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 6 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
+| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Cloudflare Workers Static Assets で配信、noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクトは戻し用に残置 | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -76,6 +76,7 @@ cd web && pnpm install && pnpm dev
 | `design-verifier` | 実際にブラウザでキャプチャを撮り、DS 準拠・ブランド反映・人間にとっての心地よさを敵対的に検証してレポートを出す | `/awesome-ds:design-verifier <URL>` |
 | `design-thinking` | ペルソナ、ユーザーストーリー、ジャーニーマップ、ページフロー、画面ウォークスルーで UX を改善する | `/awesome-ds:design-thinking <機能名>` |
 | `knowledge-curator` | Knowledge にエントリを追加し、Reference を再生成し、AwesomeDS への変更を提案する（毎週のリサーチ用） | `/awesome-ds:knowledge-curator` |
+| `html-report` | 結論3文と、表か図を1つだけ置いた HTML を1ファイルで書く | レポートや計画の HTML を頼むと発動。明示するなら `/awesome-ds:html-report` |
 
 ## AwesomeDS の要点
 
@@ -103,15 +104,17 @@ Knowledge/            出典付きの知見。カテゴリ別フォルダ
 Reference/REFERENCE.md  外部リンク一覧（scripts/build-reference.mjs で生成）
 Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = AwesomeDS の同期コピー）
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
-scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*）
+scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*, hosting-smoke, preview-headers）
+docs/ops/cloudflare-cutover.md  本番を Cloudflare Workers へ切り替えた手順と実施記録（2026-10-11 08:14 JST、停止 0 秒）
+docs/ops/cloudflare-rollback.md  Cloudflare Workers から Vercel へ戻す手順（DNS の値と確認コマンド）
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、毎週のリサーチ Issue、毎週のデータ更新（デプロイは Vercel の Git 連携）
+.github/workflows/    整合性チェック + 全ルートのスモークテスト、手動の週次データ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、プレビューは PR コメント。Vercel プロジェクトは戻し用に残置）
 ```
 
 ## 更新の流れ
 
-1. 毎週月曜に GitHub Actions が「Weekly research」Issue を開き、「Update data」が GitHub スターとブランド配色を再取得する。`ANTHROPIC_API_KEY` を設定すると調査自体も自動で走る。
-2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。
+1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）を手動で実行する。既定は dry-run で、PR は作らない。`dry_run=false` のときだけ `bot/weekly-growth` にデータ差分の PR を 1 本出す。main へは push しない。スケジュールはまだ付けていない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。
+2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。Actions では AI API を使わない。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
 
