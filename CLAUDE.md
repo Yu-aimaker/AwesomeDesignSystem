@@ -6,7 +6,7 @@
 
 AI コーディングエージェント向けの **汎用デザインシステム AwesomeDS** と、体験サイト `web/`、Claude Code プラグイン `Plugin/awesome-ds/` の本線（Champion）です。
 
-- 本番サイト: https://awesomeds.yumaker.studio （noindex。Vercel の preview は SSO 保護付き）
+- 本番サイト: https://awesomeds.yumaker.studio （noindex。Cloudflare Workers Static Assets。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクトは戻し用に残置）
 - オーナー判断（Sir）以外で Archive / 可視性変更 / 他リポ削除はしない
 
 ## 必守ロック（毎 run）
@@ -46,7 +46,7 @@ Reference/     自動生成リンク一覧（手編集しない）
 Plugin/awesome-ds/  skills ×5 + cursor rules + ds 同期コピー
 web/           Vite + React 19 + Tailwind 4 体験サイト
 scripts/       validate / build-reference / 週次データ
-.github/workflows/  check, update-data, weekly-research
+.github/workflows/  check, weekly-growth（手動・dry-run 既定。main へは push しない）
 ```
 
 スキル: `awesome-ds` / `ds-creator` / `design-verifier` / `design-thinking` / `knowledge-curator`
