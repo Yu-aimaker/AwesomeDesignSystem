@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 323  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -57,6 +57,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Improving frontend design through Skills (Claude blog, proxy blocked, link recorded)](https://claude.com/blog/improving-frontend-design-through-skills)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
+- [Using Claude Code: The unreasonable effectiveness of HTML](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html)  
+  引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 
 ## code.claude.com
 
@@ -180,6 +182,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [GOV.UK Design System](../Knowledge/platform-guidelines/govuk-design-system.md)
 - [ant-design/ant-design](https://github.com/ant-design/ant-design)  
   引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
+- [session-report SKILL.md](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/session-report/skills/session-report/SKILL.md)  
+  引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md), [HTMLレポート](../Knowledge/skills/html-report.md), [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  

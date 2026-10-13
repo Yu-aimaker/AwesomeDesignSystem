@@ -112,7 +112,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
 | [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
 | [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](skills/diagram-design.md) | skill | skill, diagram, svg, excalidraw, mermaid-alternative, editorial, design-tokens | 2026-09-07 |
-| [HTMLレポート](skills/html-report.md) | guideline | html-report, skill, anthropic, artifacts, white-canvas | 2026-10-11 |
+| [HTMLレポート](skills/html-report.md) | guideline | html-report, skill, anthropic, artifacts, white-canvas | 2026-10-14 |
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
 | [Superpowers (obra)](skills/superpowers.md) | skill | skill, superpowers, sdlc, subagent-driven-development, brainstorming, tdd, multi-harness | 2026-09-07 |
 | [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, dials, gsap, motion, landing-page, pre-flight, em-dash | 2026-09-06 |
