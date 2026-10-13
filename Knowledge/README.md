@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 73
+件数: 80
 
 ## accessibility
 
@@ -25,6 +25,18 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Motion Primitives と Animata](animation/motion-primitives-and-animata.md) | library | motion-primitives, animata, motion, framer-motion, tailwindcss, copy-paste, shadcn-style | 2026-09-07 |
 | [Rive state machines](animation/rive.md) | product | rive, state-machine, inputs, data-binding, interactive, wasm, react | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
+
+## anti-slop
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [Humanizer](anti-slop/humanizer.md) | skill | english, skill, prose, mit | 2026-10-13 |
+| [Impeccable](anti-slop/impeccable.md) | skill | skill, detector, apache-2.0, design | 2026-10-13 |
+| [natural-japanese](anti-slop/natural-japanese.md) | skill | japanese, skill, lint, mit | 2026-10-13 |
+| [stop-slop](anti-slop/stop-slop.md) | skill | english, skill, prose, mit | 2026-10-13 |
+| [textlint AI writing](anti-slop/textlint-ai-writing.md) | library | japanese, textlint, lint, mit | 2026-10-13 |
+| [yomiyasu](anti-slop/yomiyasu.md) | skill | japanese, skill, lint, mit | 2026-10-13 |
+| [脱AIスロップ調査（B1）](anti-slop/anti-ai-slop-guide.md) | guideline | anti-slop, japanese, skill, lint, draft | 2026-10-13 |
 
 ## color
 

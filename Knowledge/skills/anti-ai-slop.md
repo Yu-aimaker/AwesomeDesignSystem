@@ -107,6 +107,7 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 - 反映済み (AwesomeDS 0.5.0, foundations/principles.md 原則 7): モデルの既定を設計判断にしない。
 - 反映済み (AwesomeDS 0.5.0, foundations/content-and-tone.md): 日本語の Before / After を 2 行足した。
 - 反映済み: サイトの `/anti-slop` ページ。トークンは変えない。
+- 調査の個票: `Knowledge/anti-slop/`（yomiyasu、Impeccable、natural-japanese、textlint、Humanizer、stop-slop）。画面は変えていない。
 
 ## 出典
 
