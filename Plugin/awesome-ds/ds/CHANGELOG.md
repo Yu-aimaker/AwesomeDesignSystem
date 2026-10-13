@@ -11,6 +11,11 @@ and the project follows Semantic Versioning 2.0.0.
   neutral product sentence. The note about one specific site was removed; the
   example stands on the patterns alone. No token changed.
 
+### Added
+
+- `foundations/anti-patterns.md`: four tables for Japanese copy, volume, charts,
+  and correctness. No token changed. DESIGN.md section 9 points at them.
+
 ## [0.5.0] - 2026-10-11
 
 ### Added

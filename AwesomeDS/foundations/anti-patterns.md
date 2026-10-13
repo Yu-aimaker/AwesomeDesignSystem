@@ -74,6 +74,45 @@ and NN/g research.
 | Middle-dot chains (`a · b · c · d`) | Metadata soup | One separator per line max; prefer line breaks or columns. |
 | Broken external image links (dead Unsplash URLs) | Unverified assets | Real assets, generated images, or seeded placeholders that are known to resolve. |
 
+## Japanese copy
+
+The rows in Typography and copy cover English filler. These cover Japanese that says nothing.
+Word lists and the before/after line live in `content-and-tone.md`.
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| `ことができます` wrapped around a verb that already has a short form | An empty shell. The before line in `content-and-tone.md` is this pattern | `送れます`, or `送ります` |
+| `シームレス`, `革新的`, `次世代`, `〜を実現` | Forbidden words in `content-and-tone.md`. They name no action | The object and the verb: 「請求書を送る」 |
+| `注目されています` with no named source | The same before line. A crowd that does not exist | Name the source, or delete the sentence |
+| One sentence that asks the reader to do three things | Nielsen: one idea per paragraph. Extra ideas are skipped | One sentence, one action |
+
+## Volume
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| The decision sits after a long introduction | Nielsen (1997): 79 percent of test users scanned. Usability was 58 percent higher for the concise version. Start with the conclusion. Use half the words of conventional writing, or less | Conclusion first. Cut a sentence that does not change the next action |
+| A report body that restates the conclusion | `html-report`: three conclusion sentences, then one figure or one table, then a body under 1,500 Japanese characters | Cut until the body changes the decision |
+| A slide that holds a paragraph | `slides`: one claim per slide. At most 40 Japanese characters, or 20 English words | A heading plus one sentence, or a list of at most four items |
+| A UI sentence over 60 Japanese characters | `content-and-tone.md` Length row | Split, or move the extra clause to the next screen |
+
+## Charts
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| Two y-axes for a general audience | Datawrapper (2018, intro updated 2026): most readers misread a dual-axis chart. Few (2008): he could not name a case where a dual-scaled axis was the best solution | Two charts, or one shared unit |
+| A color key when the label fits next to the mark | Datawrapper (2022): remove the key and label the category on the mark. Eye travel between key and line drops the meaning | Direct labels. A key only when the label does not fit |
+| A title that only names the columns | Datawrapper Annotate: the title is the one statement the reader should remember. The description holds the precise definition | 「3月の入金は前年の2倍」 not 「入金の推移」 |
+| A chart with no source line | The same Annotate tab: source name and URL | Source under the chart |
+
+## Correctness
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| A number the source does not contain | Fake-precise numbers are already in Typography and copy. A sentence that quotes a figure the chart does not show is the same failure | The sentence and the chart use the same number, or the copy says the figure is a sample |
+| A date written two ways on one page | `content-and-tone.md` Dates: 2026年9月7日 in prose, `2026-09-07` in tables | One form per context |
+| A control with no empty, error, or loading state | Components and content, above | Ship the states |
+| A link or image that does not resolve | Components and content, above | A URL that was opened, or no link |
+
 ## Process tells
 
 | Tell | Replacement |
@@ -107,3 +146,8 @@ Avoiding them is not about novelty; it is about making decisions the content sup
 - https://web.dev/blog/viewport-units : `dvh`.
 - https://www.nngroup.com/articles/ai-roles-ux/ : guiding AI-generated designs with UX judgment.
 - https://github.com/voltagent/awesome-design-md : what the measured leaders do instead (one CTA, hairlines, surface ladders).
+- https://www.nngroup.com/articles/how-users-read-on-the-web/ : Jakob Nielsen, 1997. 79 percent scanned. Concise writing measured 58 percent higher usability. One idea per paragraph. Inverted pyramid. Half the word count or less. Fetched 2026-10-14.
+- https://www.datawrapper.de/blog/dualaxis : Lisa Charlotte Muth, 2018. Dual-axis charts are easy to misread. The 2026 intro still says a general audience is likely to misread them. Fetched 2026-10-14.
+- https://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf : Stephen Few, March 2008. He could not name a case where a dual-scaled axis was the best solution. Fetched 2026-10-14.
+- https://www.datawrapper.de/blog/text-in-data-visualizations : Lisa Charlotte Muth, 2022. Label categories on the marks. Remove the color key when a direct label fits. Fetched 2026-10-14.
+- https://www.datawrapper.de/academy/annotate-tab : the title is the statement to remember. The description holds the precise definition. Put the source name and URL in the footer. Fetched 2026-10-14.

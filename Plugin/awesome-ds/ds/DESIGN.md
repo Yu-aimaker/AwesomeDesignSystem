@@ -397,6 +397,9 @@ Do not
   `シームレス`) because it looks finished. Principle 7 in
   [`foundations/principles.md`](foundations/principles.md). The before/after catalog
   is `Knowledge/skills/anti-ai-slop.md`.
+- Ship a long introduction before the decision, a chart with two y-axes, a color
+  key where a label fits, or a number the chart does not show. The four tables are
+  in [`foundations/anti-patterns.md`](foundations/anti-patterns.md).
 
 ## 10. Responsive behaviour
 
