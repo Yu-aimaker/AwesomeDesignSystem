@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 323  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -373,6 +373,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Design Critiques: Encourage a Positive Culture to Improve Products - NN/g](https://www.nngroup.com/articles/design-critiques/)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
+- [NN/g Placeholders in Form Fields Are Harmful](https://www.nngroup.com/articles/form-design-placeholders/)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [Journey Mapping 101 - NN/g](https://www.nngroup.com/articles/journey-mapping-101/)  
   引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
 - [Personas Make Users Memorable for Product Team Members - NN/g](https://www.nngroup.com/articles/persona/)  
@@ -523,6 +525,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [oh-my-design: duolingo/DESIGN.md (design.duolingo.com/identity/color と www.duolingo.com を照合した二次資料)](https://raw.githubusercontent.com/kwakseongjae/oh-my-design/HEAD/design-md/duolingo/DESIGN.md)  
   引用: [Duolingo Design](../Knowledge/design-systems/duolingo.md)
+- [taste-skill tells.md](https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/skills/taste-skill/references/tells.md)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [magicui registry.json (item list)](https://raw.githubusercontent.com/magicuidesign/magicui/main/registry.json)  
   引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
 - [diagram-design README](https://raw.githubusercontent.com/mahip-kakan/diagram-design/main/README.md)  
