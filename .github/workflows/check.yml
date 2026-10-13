@@ -20,6 +20,8 @@ jobs:
           git diff --exit-code -- Reference/REFERENCE.md Knowledge/README.md Plugin/awesome-ds/knowledge/README.md
       - name: Knowledge entries pass validation
         run: node scripts/validate-knowledge.mjs
+      - name: Slide skill catalog has sourced rows
+        run: node --test scripts/slide-skills-catalog.test.mjs
       - name: Hosting smoke checks pass without network
         run: node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs
       - name: Plugin DS and Knowledge copies are in sync
