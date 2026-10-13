@@ -43,6 +43,23 @@ above.
 | Before | 本サービスは、あらゆるシーンにおいて、革新的でシームレスな体験を実現することができます。最新の機能にご注目ください。 |
 | After | 請求書を 3 分で作り、そのまま送れます。送ったあとの入金も 1 画面で確かめられます。 |
 
+## Long form
+
+UI sentences stay at 60 Japanese characters (Length row). Reports, Knowledge prose,
+and speaker notes use the ceilings below. The UI catalog is still checked for the
+tells in the Decisions table. Intentional bad examples use a key that contains
+`bad` or `before` (as in `badBody` or `heroBadTitle`), and the checker skips those keys.
+
+| Decision | Value | One-line reason |
+|---|---|---|
+| Sentence length | 100 Japanese characters or fewer | Default of `textlint-rule-preset-ja-technical-writing`. The README says the defaults are strict. UI stays at 60. |
+| Commas | at most 3 `、` in one sentence | Same preset. |
+| Empty ability | 「送れます」, not 「送ることができます」 | `ai-tech-writing-guideline` rewrites `〜することができます` to `〜します`. |
+| List items | no bold label, no emoji, no em dash before the text | `no-ai-list-formatting`. |
+| Hype | Forbidden words still apply. Also drop absolute claims such as 「世界初」「究極」「完全に」 | `no-ai-hype-expressions` names this class. The preset's example sentences are not copied here. |
+
+Not adopted: the same preset's "at most 6 kanji in a row". Its README says that rule always needs exceptions.
+
 ## Alternatives considered
 
 - Playful voice (Slack, Mailchimp early): needs a brand to carry it; the neutral system stays plain
@@ -58,3 +75,5 @@ above.
 - NN/g, Confirmation dialogs: https://www.nngroup.com/articles/confirmation-dialog/
 - NN/g, Error message guidelines: https://www.nngroup.com/articles/error-message-guidelines/
 - no-ai-slop-ja, patterns including `ことができます` and unsupported `注目されています`: https://github.com/53able/no-ai-slop-ja (README fetched 2026-10-11)
+- textlint-ja/textlint-rule-preset-ja-technical-writing, sentence length 100 and at most 3 `、`: https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing (README fetched 2026-10-14)
+- textlint-ja/textlint-rule-preset-ai-writing, `ことができます`, list labels, hype: https://github.com/textlint-ja/textlint-rule-preset-ai-writing (README fetched 2026-10-14)
