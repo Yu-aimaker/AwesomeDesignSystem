@@ -288,6 +288,8 @@ README、`README.en.md`、`web/README.md`、`CLAUDE.md` のホスティング記
 
 確認: その PR の CI が緑。Linear を Done にするのは Sir の指示があるときだけ。Jarvis へは完了を 1 本で報告する。
 
+実施: 配信の記述は README.md、README.en.md、web/README.md、CLAUDE.md に入っている。2026-10-12 の Vercel pause も含む。`vercel.json` は戻し用に残している。週次と STA-94 の索引は [../README.md](../README.md)。
+
 ## 実施記録（2026-10-11）
 
 - 時刻: 2026-10-11 08:14 JST に本番ホストを Worker `awesomeds` へ切替済み。

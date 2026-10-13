@@ -1,11 +1,22 @@
 # [SPEC] 週次自動成長の作り直し（Actions・PR経由・本番無影響）
 
-状態: 下書き v0.2（2026-10-11 05:00 JST、AwesomeDS Lead）。`_scratch/AwesomeDS-Leadノート.md`（Sir の意図ノート）と突き合わせ済み。実装は Sir 承認後。
-対象リポ: **`Yu-aimaker/AwesomeDesignSystem`**（10-11 に `Awesome-Design-Systems-Claude` から改名済み。旧名は GitHub が転送する。README のプラグイン導入行は旧名のままなので、実装時に直す）
-既存の `update-data.yml` は **PR Watch が 10-11 04:28 JST に `gh workflow disable` で停止済み**（`disabled_manually`、コード変更なし）。10-12 09:30 の main 直 push は走らない。本 SPEC の実装 PR でファイルごと削除する。
-関連: STA-17（[SPEC] Knowledge収集と週次更新、9月の古い票。本 SPEC で置き換える案）、STA-42 の Sir FB「参考DS／ガイドライン／クックブックをもっと増やす（Sir 指定以外も調査して入れる）」
+状態: 実装済み（STA-91。PR #17 は main に入っている）。2026-10-14 に冒頭を現行へ合わせた。対象リポは `Yu-aimaker/AwesomeDesignSystem`。
 
-## 0. 根拠にした現状（読み取りのみで確認）
+## 現行（2026-10-14）
+
+配信は Cloudflare Workers Static Assets。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクト `awesome-design-systems-claude` は 2026-10-12 に pause した。手順の正本は [cloudflare-cutover.md](../ops/cloudflare-cutover.md) と [cloudflare-rollback.md](../ops/cloudflare-rollback.md)。
+
+週次は `.github/workflows/weekly-growth.yml`。月曜 09:30 JST（cron `30 0 * * 1`）の schedule は PR を出せる。手動の `workflow_dispatch` は `dry_run` 既定 true で PR を作らない。候補は `AwesomeDS/data/candidates.json` に溜め、サイトには出さない。Actions は AI API を呼ばない。
+
+自動マージは `.github/workflows/weekly-growth-settle.yml`。Check が成功し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで、作者がボットだけのとき、`bot/weekly-growth` を squash merge する。失敗、人のコミット、許可外のパスではその PR を閉じ、消すブランチは `bot/weekly-growth` だけ。main へは push しない。この段落は下の §9「2026-10-12 追記」と同じ。D-1 の「当面なし」よりこちらが優先する。
+
+`update-data.yml` と `weekly-research.yml` はリポジトリに無い。
+
+下の §0 以降は 2026-10-11 05:00 JST の設計記録（v0.2）。当時の「デプロイは Vercel」「実装は承認後」「`update-data.yml` が残っている」は現行ではない。
+
+関連: STA-17（[SPEC] Knowledge収集と週次更新。本 SPEC で置き換える案）、STA-42 の Sir FB「参考DS／ガイドライン／クックブックをもっと増やす（Sir 指定以外も調査して入れる）」、STA-94 の対応表は [sta-94-cause-map.md](../extensions/sta-94-cause-map.md)。
+
+## 0. 根拠にした現状（2026-10-11 の読み取り。現行は冒頭）
 
 | 項目 | 現状 | 出典 |
 |---|---|---|

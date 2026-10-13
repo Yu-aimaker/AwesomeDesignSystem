@@ -1,6 +1,10 @@
 # STA-94 の4つの原因と追加機能の対応
 
-研究 Plugin のサイトで見えた4つの原因を、AwesomeDS の B1、B2、B3、B4 のどれが止めるかを示す。数値と禁止の正本は表のファイル。この表は画面を追加しない。研究 Plugin のサイト実例は入れない。
+4つの原因を、AwesomeDS の B1、B2、B3、B4 のどれが止めるかを示す。数値と禁止の正本は表のファイル。この表は画面を追加しない。他プロダクトのサイト実例は入れない。
+
+## 現状（2026-10-14）
+
+表のファイル、スキル、3つの経路は main にある。サイトは `/anti-slop`、`/report`、`/slides`（英語は `/en` 接頭辞）。配信は Cloudflare Workers Static Assets（[cloudflare-cutover.md](../ops/cloudflare-cutover.md)）。週次のデータの更新は [awesomeds-weekly-growth-spec.md](../specs/awesomeds-weekly-growth-spec.md) の冒頭。画面の見た目は STA-152 で 2026-10-15 以降に確認するまで変えない。子票 B1〜B4 は、この表だけでは Done にしない。
 
 | 原因 | 止める追加 | リポにある実体 |
 | --- | --- | --- |

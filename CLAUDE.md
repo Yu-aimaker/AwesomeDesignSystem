@@ -43,10 +43,10 @@ AI コーディングエージェント向けの **汎用デザインシステ�
 AwesomeDS/     DESIGN.md, tokens/, foundations/, components/, data/, CHANGELOG
 Knowledge/     出典付き知見
 Reference/     自動生成リンク一覧（手編集しない）
-Plugin/awesome-ds/  skills ×5 + cursor rules + ds 同期コピー
+Plugin/awesome-ds/  skills ×7 + cursor rules + ds 同期コピー
 web/           Vite + React 19 + Tailwind 4 体験サイト
 scripts/       validate / build-reference / 週次データ
-.github/workflows/  check, weekly-growth（手動・dry-run 既定。main へは push しない）
+.github/workflows/  check, weekly-growth（月曜 09:30 JST。schedule は PR。手動は dry-run 既定。main へは push しない。条件を満たすと weekly-growth-settle が bot/weekly-growth を squash merge）
 ```
 
 スキル: `awesome-ds` / `ds-creator` / `design-verifier` / `design-thinking` / `knowledge-curator` / `html-report` / `slides`
