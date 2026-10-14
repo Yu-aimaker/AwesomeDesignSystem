@@ -15,7 +15,7 @@ Each item: what it is, why it is banned, how to detect it mechanically. Run the 
 | 9 | Text too small / tight | Legibility | `text-\[?1[01]px`, `font-size:\s*(1[01]|[0-9])px`, `leading-(none|tight)` on body, `line-height:\s*1\.[0-4]` on paragraphs |
 | 10 | Weight 700+ | Hierarchy by size and spacing, not shouting | `font-bold|font-extrabold|font-black`, `font-weight:\s*(7|8|9)00` outside display |
 | 11 | `100vh`, scroll listeners | Mobile viewport bugs, jank | `100vh`, `h-screen`, `addEventListener\(['"]scroll` |
-| 12 | Em dash, filler, placeholders | Copy tells | `—`, `seamless|unlock|empower|elevate|next.generation|revolutioni|supercharge|effortless|cutting.edge|robust`, `lorem ipsum|Acme|John Doe|Jane Doe` |
+| 12 | Em dash, filler, placeholders, unsupported overlook | Copy tells | `—`, `seamless|unlock|empower|elevate|next.generation|revolutioni|supercharge|effortless|cutting.edge|robust`, `lorem ipsum|Acme|John Doe|Jane Doe`, `多くの人[がは]見落とし` unless the same line or the next two name a URL or 出典 |
 | 13 | Color-only status | WCAG 1.4.1 | Status color class without an adjacent `<svg`, icon component or text label in the same element |
 | 14 | Missing or wrong `lang` | Font fallback, line breaking, screen readers | `<html` without `lang=`; `lang="en"` with Japanese characters in the file (`[぀-ヿ一-鿿]`) |
 | 15 | Shadows at rest | Elevation model | `shadow-(sm|md|lg|xl)` or `box-shadow` on `.card`, `Card`, inputs, without being a popover or dialog |

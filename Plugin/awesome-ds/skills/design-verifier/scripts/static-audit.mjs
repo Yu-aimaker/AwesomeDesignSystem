@@ -76,6 +76,10 @@ for (const file of files) {
     if (/—/.test(line) && !/^\s*(\/\/|\/\*|\*|#)/.test(line)) add(3, "em-dash", file, n, line, "Replace with period or comma");
     if (FILLER.test(line) && !/^\s*(import|\/\/|\/\*|\*)/.test(line)) add(3, "filler-word", file, n, line, "Say the concrete thing instead");
     if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
+    // 7b. crowd overlook. no-ai-slop-ja pattern 13: delete the claim, or cite the rate.
+    if (unsupportedOverlook(line) && !sourceNearby(lines, i)) {
+      add(3, "unsupported-overlook", file, n, line, "Delete the crowd claim, or cite the rate on this line or the next two");
+    }
     // 8. eyebrows and sections
     if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
     if (/<section\b|<Section\b/.test(line)) counts.sections++;
@@ -107,6 +111,22 @@ for (const file of files) {
 }
 
 // Eyebrow budget: ceil(sections / 3), minimum 1
+function unsupportedOverlook(line) {
+  if (/^\s*(\/\/|\/\*|\*|import )/.test(line) || /ads-audit-ignore/.test(line)) return false;
+  if (/\b(bad|before)\s*:/.test(line)) return false;
+  const match = line.match(/多くの人[がは]見落とし/);
+  if (!match) return false;
+  const at = match.index;
+  const open = line.lastIndexOf("「", at);
+  const close = line.indexOf("」", at);
+  if (open !== -1 && close > at) return false;
+  return true;
+}
+
+function sourceNearby(lines, index) {
+  return /https?:\/\/|出典/.test(lines.slice(index, index + 3).join("\n"));
+}
+
 if (counts.sections > 0) {
   const budget = Math.max(1, Math.ceil(counts.sections / 3));
   if (counts.eyebrows > budget) add(3, "eyebrow-overuse", target, 0, `${counts.eyebrows} uppercase eyebrow labels for ${counts.sections} sections (budget ${budget})`, "Remove eyebrows; let the heading carry the section");
