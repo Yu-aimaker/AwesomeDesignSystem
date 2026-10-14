@@ -33,6 +33,7 @@ const add = (sev, rule, file, line, text, fix) => findings.push({ sev, rule, fil
 
 const FILLER = /\b(seamless(ly)?|unlock|empower(ing)?|elevate|next[- ]gen(eration)?|revolutioni[sz]e|supercharge|effortless(ly)?|cutting[- ]edge|robust|game[- ]chang(er|ing)|unleash|leverage)\b/i;
 const PLACEHOLDER = /\b(lorem ipsum|acme|john doe|jane doe|sarah chan)\b/i;
+const ATTENTION = /注目されています|ご注目ください|注目を集めて/;
 const JA = /[぀-ヿ一-鿿]/;
 
 for (const file of files) {
@@ -76,6 +77,10 @@ for (const file of files) {
     if (/—/.test(line) && !/^\s*(\/\/|\/\*|\*|#)/.test(line)) add(3, "em-dash", file, n, line, "Replace with period or comma");
     if (FILLER.test(line) && !/^\s*(import|\/\/|\/\*|\*)/.test(line)) add(3, "filler-word", file, n, line, "Say the concrete thing instead");
     if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
+    // 7b. unsupported crowd claims. no-ai-slop-ja pattern 15: name the source or delete.
+    if (unsupportedAttention(line) && !sourceNearby(lines, i)) {
+      add(3, "unsupported-attention", file, n, line, "Name the source on this line or the next two, or delete the sentence");
+    }
     // 8. eyebrows and sections
     if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
     if (/<section\b|<Section\b/.test(line)) counts.sections++;
@@ -110,6 +115,22 @@ for (const file of files) {
 if (counts.sections > 0) {
   const budget = Math.max(1, Math.ceil(counts.sections / 3));
   if (counts.eyebrows > budget) add(3, "eyebrow-overuse", target, 0, `${counts.eyebrows} uppercase eyebrow labels for ${counts.sections} sections (budget ${budget})`, "Remove eyebrows; let the heading carry the section");
+}
+
+function unsupportedAttention(line) {
+  if (/^\s*(\/\/|\/\*|\*|import )/.test(line) || /ads-audit-ignore/.test(line)) return false;
+  if (/\b(bad|before)\s*:/.test(line)) return false;
+  const match = line.match(ATTENTION);
+  if (!match) return false;
+  const at = match.index;
+  const open = line.lastIndexOf("「", at);
+  const close = line.indexOf("」", at);
+  if (open !== -1 && close > at) return false;
+  return true;
+}
+
+function sourceNearby(lines, index) {
+  return /https?:\/\/|出典/.test(lines.slice(index, index + 3).join("\n"));
 }
 
 const tokenShare = counts.colorDecls ? Math.round((counts.tokenColorDecls / counts.colorDecls) * 100) : 100;
