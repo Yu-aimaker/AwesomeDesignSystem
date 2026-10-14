@@ -603,3 +603,17 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("Knowledge describes the Monday schedule, not a manual-only workflow", () => {
+  const workflow = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const settle = readFileSync(join(repoRoot, ".github/workflows/weekly-growth-settle.yml"), "utf8");
+  const entry = readFileSync(join(repoRoot, "Knowledge/research/oss-rankings.md"), "utf8");
+  const skill = readFileSync(join(repoRoot, "Plugin/awesome-ds/skills/knowledge-curator/SKILL.md"), "utf8");
+  assert.match(workflow, /cron: "30 0 \* \* 1"/);
+  assert.match(settle, /bot\/weekly-growth/);
+  assert.match(entry, /月曜 09:30 JST/);
+  assert.match(entry, /weekly-growth-settle\.yml/);
+  assert.doesNotMatch(entry, /定期実行は未設定/);
+  assert.match(skill, /Monday 09:30 JST/);
+  assert.doesNotMatch(skill, /manual, dry-run by default/);
+});

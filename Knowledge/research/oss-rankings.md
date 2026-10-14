@@ -10,18 +10,18 @@ sources:
   - url: https://github.com/obra/superpowers
     title: "obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)"
 tags: [rankings, github-stars, oss, data-pipeline, caveats, github-api]
-updated: 2026-10-11
+updated: 2026-10-14
 ---
 
 # OSS ランキング (/rankings) の設計
 
 ## 概要
 
-本リポジトリの `AwesomeDS/data/repos.json` は、デザイン / AI フロントエンド関連 OSS の GitHub スター数ランキングを保持するデータファイルで、`scripts/fetch-repos.mjs` が GitHub REST API から生成する。選定リストは `AwesomeDS/data/sources/curated-repos.json` にあり、`topic:design-system` の検索結果は `stars:>500`、直近 90 日に push があるもの、`AwesomeDS/data/sources/blocklist.json` に無いものに限る。`web/SITE-DESIGN.md` の `/rankings` はこのデータを表示する画面で、原則 5「壊れない: 外部 API はビルド時に読まず、コミット済み JSON だけを表示する」に従い、サイトのビルドやページ表示は GitHub API を直接叩かない。更新は `.github/workflows/weekly-growth.yml` が `bot/weekly-growth` への PR でのみ行い、main へは push しない。
+本リポジトリの `AwesomeDS/data/repos.json` は、デザイン / AI フロントエンド関連 OSS の GitHub スター数ランキングを保持するデータファイルで、`scripts/fetch-repos.mjs` が GitHub REST API から生成する。選定リストは `AwesomeDS/data/sources/curated-repos.json` にあり、`topic:design-system` の検索結果は `stars:>500`、直近 90 日に push があるもの、`AwesomeDS/data/sources/blocklist.json` に無いものに限る。`web/SITE-DESIGN.md` の `/rankings` はこのデータを表示する画面で、原則 5「壊れない: 外部 API はビルド時に読まず、コミット済み JSON だけを表示する」に従い、サイトのビルドやページ表示は GitHub API を直接叩かない。更新は `.github/workflows/weekly-growth.yml` が `bot/weekly-growth` への PR でのみ行い、main へは push しない。月曜 09:30 JST の schedule は PR を出せる。手動の `workflow_dispatch` は dry-run が既定で PR を作らない。
 
 ## 要点
 
-- 更新の仕組み: `.github/workflows/weekly-growth.yml` は `workflow_dispatch` のみ（スケジュールなし、`dry_run` 既定 true）。`node scripts/fetch-repos.mjs` → `node scripts/extract-brands.mjs` → `node scripts/build-palettes.mjs` → `node scripts/build-fonts.mjs` → `node scripts/discover-candidates.mjs` → `node scripts/validate-data.mjs` → `Plugin/awesome-ds/scripts/sync-ds.sh` → `node scripts/diff-guard.mjs` の順に実行する。意味のある差分があり、かつ dry-run でないときだけ `bot/weekly-growth` に 1 コミットして PR を作る。main への push はしない。
+- 更新の仕組み: `.github/workflows/weekly-growth.yml` は月曜 09:30 JST（cron `30 0 * * 1`）と `workflow_dispatch`（`dry_run` 既定 true）の両方を持つ。schedule は dry-run を外して PR を出せる。手動は dry-run のまま PR を作らない。中身は `node scripts/fetch-repos.mjs` → `node scripts/extract-brands.mjs` → `node scripts/build-palettes.mjs` → `node scripts/build-fonts.mjs` → `node scripts/discover-candidates.mjs` → `node scripts/validate-data.mjs` → `Plugin/awesome-ds/scripts/sync-ds.sh` → `node scripts/diff-guard.mjs`。意味のある差分があり、かつ dry-run でないときだけ `bot/weekly-growth` に 1 コミットして PR を作る。`.github/workflows/weekly-growth-settle.yml` は Check が成功し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで、作者がボットだけのとき、そのブランチを squash merge する。失敗、人のコミット、許可外のパスではその PR を閉じ、消すブランチは `bot/weekly-growth` だけ。main への push はしない。
 - データ取得の 2 系統: (1) `AwesomeDS/data/sources/curated-repos.json` の owner/repo とカテゴリ（`/repos/{owner}/{name}` を個別取得）、(2) `topic:design-system stars:>500 pushed:>{90日前}` の GitHub 検索 API 上位 20 件から blocklist を除いたもの。両方を 1 つの `repos[]` 配列にマージし、`stars` の降順で並べる。
 - カテゴリ一覧（`CURATED` のキーで確認できる区分）: `component-library`、`headless`、`animation`、`animated-components`、`3d`、`icons`、`dataviz`、`styling`、`design-tokens`、`fonts`、`agent-skills`、`ai-ui`、`design-tools`、`framework`、`tooling`、および検索由来の `topic:design-system`。Knowledge のカテゴリ（component-libraries、animation、skills など）とは名前も粒度も一致しない、独立した分類であることに注意。
 - レート制限対策: `GITHUB_TOKEN` があれば 60/時間から 5,000/時間に上がる（スクリプト冒頭のコメント）。403/429 かつ `x-ratelimit-remaining: 0` を検知すると `x-ratelimit-reset` まで最大 15 分（`MAX_WAIT_MS`）待って再試行し、それを超えるとエラーで打ち切る。5xx と 429 は最大 3 回まで指数的に間隔を空けて再試行する。
@@ -43,7 +43,7 @@ node scripts/fetch-repos.mjs --seed <file.json>
 
 | 項目 | 値 |
 |---|---|
-| 更新スケジュール | 手動の `weekly-growth.yml` のみ。定期実行は未設定 |
+| 更新スケジュール | 月曜 09:30 JST（cron `30 0 * * 1`）。手動 dispatch は dry-run 既定で PR を作らない |
 | トークンなしのレート制限 | 60 リクエスト/時間 |
 | トークンありのレート制限 | 5,000 リクエスト/時間 |
 | topic 検索の対象 | `topic:design-system stars:>500`、直近 90 日、blocklist 除外、上位 20 件 |
@@ -71,6 +71,6 @@ node scripts/fetch-repos.mjs --seed <file.json>
 
 ## 出典
 
-- このリポジトリの `scripts/fetch-repos.mjs`、`AwesomeDS/data/sources/curated-repos.json`、`.github/workflows/weekly-growth.yml`。2026-10-11 にファイルを直接読んで確認した。2026-09-07 の計測値は下の表のまま残している。
+- このリポジトリの `scripts/fetch-repos.mjs`、`AwesomeDS/data/sources/curated-repos.json`、`.github/workflows/weekly-growth.yml`、`.github/workflows/weekly-growth-settle.yml`。2026-10-14 にワークフローを直接読んで確認した。2026-09-07 の計測値は下の表のまま残している。
 - https://github.com/tt-a1i/archify : スター数の実例。GitHub 検索 API で 2026-09-07 に確認。
 - https://github.com/obra/superpowers : スター数の実例。GitHub 検索 API で 2026-09-07 に確認。
