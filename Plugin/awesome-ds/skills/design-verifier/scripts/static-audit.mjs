@@ -94,6 +94,40 @@ for (const file of files) {
     if (/<input\b[^>]*placeholder=/.test(line) && !/aria-label|<label|id=/.test(line)) add(1, "placeholder-as-label", file, n, line, "Add a visible <label> above the input");
     if (/<(button|a)\b[^>]*>\s*<(svg|[A-Z][A-Za-z]*Icon)\b[^>]*\/?>\s*<\/(button|a)>/.test(line) && !/aria-label/.test(line)) add(1, "icon-button-no-label", file, n, line, "Add aria-label to icon-only buttons");
   });
+
+  // 14. Chart without a source name and URL in the footer.
+  // Datawrapper Academy, Annotate tab, "Data source & link to data source"
+  // (page last updated 2024-04-08): https://www.datawrapper.de/academy/annotate-tab
+  // Opened 2026-10-14. The footer is the 12 lines after the chart.
+  const chartOpen = /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/g;
+  let opened;
+  while ((opened = chartOpen.exec(src))) {
+    const name = opened[1];
+    const rest = src.slice(opened.index);
+    const selfClose = /^<[^>]*\/>/.exec(rest);
+    const closeTag = `</${name}>`;
+    const closeAt = src.indexOf(closeTag, opened.index);
+    const end = selfClose ? opened.index + selfClose[0].length : closeAt === -1 ? src.length : closeAt + closeTag.length;
+    const footer = src.slice(end).split("\n").slice(0, 13);
+    const footerText = [];
+    for (const ln of footer) {
+      if (footerText.length && /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/.test(ln)) break;
+      footerText.push(ln);
+    }
+    const lineNo = src.slice(0, opened.index).split("\n").length;
+    const openLines = src.split("\n").slice(lineNo - 1, lineNo + 1).join("\n");
+    if (/ads-audit-ignore/.test(openLines)) {
+      chartOpen.lastIndex = end;
+      continue;
+    }
+    const under = footerText.join("\n");
+    const hasName = /出典|\bsource\b/i.test(under);
+    const hasUrl = /https?:\/\//.test(under);
+    if (!(hasName && hasUrl)) {
+      add(2, "chart-source", file, lineNo, "Chart has no source name and URL under it", "Put the source name and a URL in the 12 lines under the chart");
+    }
+    chartOpen.lastIndex = end;
+  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card

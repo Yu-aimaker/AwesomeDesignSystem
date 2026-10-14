@@ -59,6 +59,10 @@ Findings: token share under 95% (S2); component height, radius or border off the
 What to look at: the six questions in SKILL.md step (e). Each "no" is a finding.
 Findings: primary action not findable in 5 seconds (S1); motion without user action (S2, S1 if it loops with no pause control); targets under 24 or 44 (S1); body under 16 (S1).
 
+## 13. Charts
+What to look at: the footer under the chart. Readers need the source name and a URL so they can judge the data.
+Findings: `<BarChart>`, `<LineChart>`, `<AreaChart>`, `<PieChart>`, or `<ComposedChart>` with no `出典` or `source` and no `http` URL in the 12 lines under the chart (S2, static audit `chart-source`). Source: https://www.datawrapper.de/academy/annotate-tab
+
 ## Report discipline
 
 - Every finding: severity, id, one-line problem, location (`file:line` or `shots/<name>.png`), rule reference, one-line fix.
