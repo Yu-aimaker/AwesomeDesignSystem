@@ -98,3 +98,13 @@ After: white page, three short sentences, one table, the sentence 「3 件を直
 ## 5. Done
 
 Print the file path and the three conclusion lines in chat. Do not paste the whole HTML into chat.
+
+## 6. Check the file
+
+From a checkout of this plugin:
+
+`node ${CLAUDE_PLUGIN_ROOT}/skills/html-report/scripts/check-report.mjs path/to/report.html`
+
+The script fails unless all of these hold: `lang` on `<html>`, `--canvas: #ffffff`, `--ink: #0a0a0a`, exactly three `<p>` elements in `section.conclusion`, exactly one `<table>` or one figure (`<figure>`, `<img>`, or `<svg>`), and no gradient. Body text outside the title, the conclusion, and the source line stays under 1,500 characters when the file contains Japanese, otherwise under 700 words.
+
+Another repository uses the same command on its own HTML file. Do not copy that repository into AwesomeDS.
