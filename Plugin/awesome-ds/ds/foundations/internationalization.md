@@ -95,11 +95,16 @@ Outputs from Node 20 (ICU); browsers can differ in small details, so tests compa
 // Bad: month/day order is a US convention; 10/08 reads as 10 August in Europe
 const label = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
 
-// Good
-const label = new Intl.DateTimeFormat(locale, {
-  dateStyle: "medium", timeZone: "Asia/Tokyo",
+// Good: Japanese prose matches content-and-tone.md (2026年10月8日 on Node 20, ja-JP).
+// dateStyle "medium" prints 2026/10/08. That slash form is not prose.
+const label = new Intl.DateTimeFormat("ja-JP", {
+  dateStyle: "long", timeZone: "Asia/Tokyo",
 }).format(d);
 ```
+
+`dateStyle: "medium"` in the table above is what Node 20 actually prints. It is not the
+prose form. Japanese UI copy uses `dateStyle: "long"` (年月日). Tables, logs and code use
+ISO 8601 (`2026-10-08`), which W3C lists as the locale-neutral option and which sorts as text.
 
 When a date must be unambiguous in every locale (logs, exports), W3C suggests a month name
 plus a four-digit year, or ISO 8601 (`2026-10-08`) where the reader is technical.
@@ -182,6 +187,7 @@ so an Arabic or Hebrew name does not reorder the punctuation around it.
 - `<html lang>` matches the route; foreign-language passages carry their own `lang`.
 - Every button, tab and label survives the German test string at 390 px without clipping.
 - No date, number, currency or list is built by string concatenation.
+- Japanese prose uses `dateStyle: "long"` (2026年10月8日). Tables and code use `2026-10-08`.
 - Every `Intl.DateTimeFormat` call passes `timeZone`.
 - Plural strings go through `Intl.PluralRules` or ICU MessageFormat.
 - Name fields: one field unless a split is required; order follows the locale.

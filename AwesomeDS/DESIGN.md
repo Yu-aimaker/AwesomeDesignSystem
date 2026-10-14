@@ -393,6 +393,8 @@ Do not
 - Write copy with filler ("seamless", "unlock", "empower", "next generation") or
   metaphors that need explaining.
 - Use em dashes in UI copy. Use a period or a comma.
+- Build a date with slashes (`10/08`). Japanese prose is 2026年10月8日.
+  Tables and code use `2026-10-08`.
 - Ship a generated default (purple gradient, three equal cards, `ことができます`,
   `シームレス`) because it looks finished. Principle 7 in
   [`foundations/principles.md`](foundations/principles.md). The before/after catalog

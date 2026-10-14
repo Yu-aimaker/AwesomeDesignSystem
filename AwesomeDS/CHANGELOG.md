@@ -7,6 +7,9 @@ and the project follows Semantic Versioning 2.0.0.
 
 ### Changed
 
+- Japanese prose dates are `dateStyle: "long"` (2026年10月8日). The old "good"
+  sample used `dateStyle: "medium"`, which Node 20 prints as 2026/10/08. Tables
+  and code stay ISO 8601. No token changed.
 - `foundations/content-and-tone.md`: the generated-Japanese example now uses a
   neutral product sentence. The note about one specific site was removed; the
   example stands on the patterns alone. No token changed.

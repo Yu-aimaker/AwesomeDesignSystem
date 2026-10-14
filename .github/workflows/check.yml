@@ -22,6 +22,8 @@ jobs:
         run: node scripts/validate-knowledge.mjs
       - name: Hosting smoke checks pass without network
         run: node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs
+      - name: Hand-rolled slash dates fail the static audit
+        run: node --test scripts/hand-rolled-date.test.mjs
       - name: Plugin DS and Knowledge copies are in sync
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
       - name: Plugin hook reports UI findings and stays silent otherwise
