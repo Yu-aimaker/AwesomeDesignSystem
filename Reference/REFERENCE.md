@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 328  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -242,6 +242,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [mattpocock grill-me / grilling](../Knowledge/skills/mattpocock-grill-me.md)
 - [microsoft/fluentui: Fluent UI web (React v9, v8, Web Components)](https://github.com/microsoft/fluentui)  
   引用: [Fluent 2 Design System](../Knowledge/platform-guidelines/fluent-2.md)
+- [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop)  
+  引用: [anti-slop (miqdadbadjuber)](../Knowledge/anti-slop/anti-slop.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [modularscale/modularscale-sass: Modular scale calculator built into your Sass](https://github.com/modularscale/modularscale-sass)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [motiondivision/motion: An open source animation library for JavaScript, React and Vue](https://github.com/motiondivision/motion)  
@@ -252,6 +254,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)](https://github.com/obra/superpowers)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Superpowers (obra)](../Knowledge/skills/superpowers.md)
+- [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop)  
+  引用: [No AI Slop (petergyang)](../Knowledge/anti-slop/no-ai-slop.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [pmndrs/drei: useful helpers for react-three-fiber](https://github.com/pmndrs/drei)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
@@ -575,6 +579,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Playwright visual testing and axe-core](../Knowledge/tech-stack/playwright-visual-testing.md)
 - [Playwright docs: Visual comparisons (source of playwright.dev, which is proxy blocked)](https://raw.githubusercontent.com/microsoft/playwright/main/docs/src/test-snapshots-js.md)  
   引用: [Playwright visual testing and axe-core](../Knowledge/tech-stack/playwright-visual-testing.md)
+- [antislop.md](https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md)  
+  引用: [anti-slop (miqdadbadjuber)](../Knowledge/anti-slop/anti-slop.md)
+- [anti-slop package.json](https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/package.json)  
+  引用: [anti-slop (miqdadbadjuber)](../Knowledge/anti-slop/anti-slop.md)
+- [anti-slop README](https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/README.md)  
+  引用: [anti-slop (miqdadbadjuber)](../Knowledge/anti-slop/anti-slop.md)
 - [motion-dom spring.ts (springDefaults)](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/generators/spring.ts)  
   引用: [Motion (motion/react)](../Knowledge/animation/motion.md)
 - [motion-dom default-transitions.ts](https://raw.githubusercontent.com/motiondivision/motion/main/packages/motion-dom/src/animation/utils/default-transitions.ts)  
@@ -603,6 +613,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Superpowers (obra)](../Knowledge/skills/superpowers.md)
 - [opensesh/DESIGN-OPS: design-critique-facilitator.md](https://raw.githubusercontent.com/opensesh/DESIGN-OPS/HEAD/skills/design-critique-facilitator.md)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
+- [No AI Slop README](https://raw.githubusercontent.com/petergyang/no-ai-slop/main/README.md)  
+  引用: [No AI Slop (petergyang)](../Knowledge/anti-slop/no-ai-slop.md)
+- [no-ai-slop SKILL.md](https://raw.githubusercontent.com/petergyang/no-ai-slop/main/skills/no-ai-slop/SKILL.md)  
+  引用: [No AI Slop (petergyang)](../Knowledge/anti-slop/no-ai-slop.md)
 - [R3F docs: Scaling performance](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/advanced/scaling-performance.mdx)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [R3F docs: Introduction (source of r3f.docs.pmnd.rs, which is proxy blocked)](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/getting-started/introduction.mdx)  
