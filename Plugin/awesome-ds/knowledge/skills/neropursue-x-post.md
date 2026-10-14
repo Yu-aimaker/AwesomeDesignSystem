@@ -4,57 +4,80 @@ category: skills
 type: article
 sources:
   - url: https://x.com/neropursue/status/2089263766428950683
-    title: "Nero (@neropursue) on X, status 2089263766428950683 (unretrievable, link recorded)"
-  - url: https://x.com/neropursue
-    title: "Nero (@neropursue) / Posts / X (profile, seen in search results only)"
-tags: [x-post, unretrievable, frontend-design, skills, reference]
-updated: 2026-09-06
+    title: "Nero (@neropursue) on X, 2026-08-17"
+  - url: https://api.fxtwitter.com/neropursue/status/2089263766428950683
+    title: "fxtwitter JSON for status 2089263766428950683"
+  - url: https://www.originkit.dev/
+    title: "Originkit"
+  - url: https://orbs.jakubantalik.com/
+    title: "Thinking orbs (moved notice)"
+  - url: https://transitions.dev/
+    title: "Transitions.dev"
+  - url: https://www.beautifului.dev/
+    title: "Beautiful UI"
+  - url: https://21st.dev/
+    title: "21st.dev"
+  - url: https://ui.aceternity.com/
+    title: "Aceternity UI"
+  - url: https://component.gallery/
+    title: "The Component Gallery"
+  - url: https://www.agentation.com/
+    title: "Agentation"
+tags: [x-post, component-library, animation, reference]
+updated: 2026-10-14
 ---
 
 # @neropursue X post (2089263766428950683)
 
 ## 概要
 
-要件で参照されている X の投稿。URL は `https://x.com/neropursue/status/2089263766428950683`。本セッションのネットワークでは x.com、publish.twitter.com、api.fxtwitter.com、cdn.syndication.twimg.com、r.jina.ai のいずれも取得できず、Web 検索でも当該ステータス ID に一致する結果は得られなかった。投稿本文は未取得。リンクのみ記録する。
+STA-6 の要件が名指しした X の投稿。2026-10-14 に fxtwitter の JSON で本文を取得した。投稿日は 2026-08-17 08:11 UTC。作者は Nero（`@neropursue`）。中身は UI 部品サイト 8 件のブックマークで、計測値やトークンは書いていない。
 
 ## 要点
 
-- 取得を試みた経路と結果。
-  - `https://x.com/neropursue/status/2089263766428950683` : プロキシでブロック。
-  - `https://publish.twitter.com/oembed?url=...` : プロキシでブロック。
-  - `https://api.fxtwitter.com/neropursue/status/2089263766428950683` : プロキシでブロック。
-  - `https://cdn.syndication.twimg.com/tweet-result?id=2089263766428950683` : プロキシでブロック。
-  - `https://r.jina.ai/https://x.com/...` : プロキシでブロック。
-  - Web 検索 `neropursue x.com status 2089263766428950683` : 該当なし。プロフィール `https://x.com/neropursue` が結果に出たのみで、投稿本文は表示されない。
-  - Web 検索 `@neropursue design skill claude code frontend post` : 投稿は出ず、Anthropic の frontend-design スキル、Composio、Snyk、Medium の「Claude Code 向けデザインスキル」まとめ記事が返った。投稿との関係は確認できない。
-- 投稿者は表示名 "Nero"、ハンドル `@neropursue`。それ以外の属性（投稿日、本文、添付）は未確認。
-- 検索結果の周辺情報から、投稿はフロントエンドデザイン用のスキルやプラグインに関するものと推測されるが、これは要件の文脈からの推測であり、投稿本文で確認したものではない。
-- 同じ検索で返った関連資料（投稿とは無関係の可能性がある）: Anthropic の frontend-design スキル（github.com/anthropics/claude-code の plugins/frontend-design）、Composio「Top 10 Design Skills for Claude Code and Codex」、Snyk「Top 8 Claude Skills for UI/UX Engineers」、Medium の「10 Claude code frontend design skills, plugins, and CLIs」。これらは Knowledge/skills/anthropic-frontend-design-skill.md と Knowledge/skills/taste-skill.md の対象と重なる。
-- 本エントリの位置づけ: 要件が参照する URL を失わないための記録。内容の要約や評価は含めない。
-- ステータス ID `2089263766428950683` は 19 桁で、2026 年の投稿に対応する範囲の Snowflake ID。投稿時期はこの点からのみ推定でき、本文の日付表示は未確認。
+- 本文（英語）: 「The best UI components ready to use, save this」。続けて 8 件の URL と、作者が付けた短い説明。末尾は「What Did I Miss?」。
+- 公開の数（同じ JSON、2026-10-14 取得）: 表示 96,914、いいね 1,406、リポスト 152、返信 32、ブックマーク 2,936。
+- 投稿に書かれた URL と、2026-10-14 に開いた先。
+
+| 投稿の URL | 開いた先 | ページが言っていること |
+|---|---|---|
+| http://originkit.dev | https://www.originkit.dev/ | 無料のアニメーション部品。コードのコピー、Framer、MCP |
+| http://orbs.jakubantalik.com | https://orbs.jakubantalik.com/ | 移転告知。新しい場所は libraries.dev/orbs。npm の `thinking-orbs` は変えない |
+| http://transitions.dev | https://transitions.dev/ | 題は「UI transitions for AI agents」 |
+| http://beautiful-ui-five.vercel.app | https://www.beautifului.dev/ | AI 向けのコピー用部品（会話、思考状態、承認） |
+| https://21st.dev/ | https://21st.dev/ | React と Tailwind の部品・テンプレート集。題は 12,000 件超 |
+| http://ui.aceternity.com | https://ui.aceternity.com/ | React と Tailwind の部品集。題は 200 件超。Motion を使う |
+| http://component.gallery | https://component.gallery/ | デザインシステムの実例を集めた部品の見本帳 |
+| http://agentation.com | https://www.agentation.com/ | エージェント向けの画面フィードバック |
+
+- Aceternity UI は `Knowledge/component-libraries/magic-ui-and-aceternity.md` に既にある。既定の UI には使わない。
+- 残りの 7 件は、この投稿の一覧としてここに置く。それぞれのリポジトリを正本の規則にはしない。
 
 ## 具体的な値・ルール（あれば）
 
 | 項目 | 値 |
 |---|---|
-| URL | `https://x.com/neropursue/status/2089263766428950683` |
-| 投稿者 | Nero（`@neropursue`） |
-| 本文 | 未取得 |
-| 投稿日 | 未取得 |
-| 取得試行日 | 2026-09-06 |
-| 状態 | unretrievable, link recorded |
-| 試行した経路 | x.com 直接、oEmbed、fxtwitter、syndication、r.jina.ai、Web 検索 2 回 |
-| 次の確認者 | プロキシ外の環境を持つ担当者（`knowledge-curator` の運用で扱う） |
+| 投稿 | https://x.com/neropursue/status/2089263766428950683 |
+| 投稿日 | 2026-08-17 08:11 UTC |
+| 取得 | 2026-10-14、https://api.fxtwitter.com/neropursue/status/2089263766428950683 |
+| 件数 | 8 URL |
+| AwesomeDS のトークン | 変えない |
 
 ## AwesomeDS への反映
 
-- 反映なし。本文を確認できていないため、AwesomeDS の値や規則には一切取り込んでいない。
-- 今後の手順: プロキシ外の環境で投稿を開き、本文とリンク先を確認したうえで、本エントリの「要点」を書き換える。投稿がスキルやリポジトリを紹介している場合は、そのリポジトリを一次資料として別エントリを起こす。
-- 判断の原則: 未確認の投稿を根拠に AwesomeDS を変更しない。この原則は `knowledge-curator` スキルの運用ルールとして残す。
-- 想定される確認項目（取得できたとき）: 投稿が紹介するリポジトリやスキルの名前、その install name、対象エージェント、AwesomeDS 第 1 節から第 9 節のどこに関係するか、taste-skill や Anthropic frontend-design と重複するか。
-- 重複時の扱い: 既存エントリと同じ主張なら本エントリに要約を足すだけにし、新しい規則を含むなら別エントリを起こしてから AwesomeDS への反映を検討する。
+- 反映なし。投稿は紹介の一覧で、色・余白・角丸の計測はない。
+- アニメーション部品を既定に足さない。モーションの既定は Motion のまま（`AwesomeDS/foundations/motion.md`）。
+- Aceternity UI の扱いは既存エントリのまま。任意であり、既定ではない。
 
 ## 出典
 
-- https://x.com/neropursue/status/2089263766428950683 : 対象の投稿。取得不可（x.com はプロキシでブロック）。
-- https://x.com/neropursue : 投稿者プロフィール。Web 検索の結果一覧にタイトルとして表示されたのみで、ページ本体は未取得。
+- https://api.fxtwitter.com/neropursue/status/2089263766428950683 : 本文、投稿日、表示といいね（2026-10-14）。
+- https://x.com/neropursue/status/2089263766428950683 : 投稿の URL。
+- https://www.originkit.dev/ : 題と description（2026-10-14）。
+- https://orbs.jakubantalik.com/ : 移転先 libraries.dev/orbs と npm 名（2026-10-14）。
+- https://transitions.dev/ : 題（2026-10-14）。
+- https://www.beautifului.dev/ : 旧 vercel.app の転送先。題と description（2026-10-14）。
+- https://21st.dev/ : 題（2026-10-14）。
+- https://ui.aceternity.com/ : 題と description（2026-10-14）。
+- https://component.gallery/ : 題と description（2026-10-14）。
+- https://www.agentation.com/ : 題と description（2026-10-14）。

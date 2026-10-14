@@ -4,7 +4,17 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 328  /  ドメイン数: 76
+
+## 21st.dev
+
+- [21st.dev](https://21st.dev/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+
+## agentation.com
+
+- [Agentation](https://www.agentation.com/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## animaapp.com
 
@@ -28,6 +38,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Claude can now create and edit files](https://www.anthropic.com/news/create-files)  
   引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 
+## api.fxtwitter.com
+
+- [fxtwitter JSON for status 2089263766428950683](https://api.fxtwitter.com/neropursue/status/2089263766428950683)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+
 ## atlassian.design
 
 - [Atlassian Design](https://atlassian.design/)  
@@ -37,6 +52,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Unstyled UI components for accessible design systems · Base UI](https://base-ui.com/)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
+
+## beautifului.dev
+
+- [Beautiful UI](https://www.beautifului.dev/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## blog.duolingo.com
 
@@ -62,6 +82,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Claude Code docs: Agent Skills (SKILL.md format)](https://code.claude.com/docs/en/skills)  
   引用: [2026 年の DESIGN.md エコシステム](../Knowledge/design-md-collections/claude-design-and-design-md-ecosystem.md), [Claude Design (Anthropic)](../Knowledge/skills/anthropic-claude-design.md)
+
+## component.gallery
+
+- [The Component Gallery](https://component.gallery/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## datacamp.com
 
@@ -396,6 +421,16 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [geist - npm](https://www.npmjs.com/package/geist)  
   引用: [Geist (Geist Sans / Geist Mono)](../Knowledge/typography/geist-font.md)
+
+## orbs.jakubantalik.com
+
+- [Thinking orbs (moved notice)](https://orbs.jakubantalik.com/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+
+## originkit.dev
+
+- [Originkit](https://www.originkit.dev/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## phonearena.com
 
@@ -821,10 +856,15 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Stripe Design Language Study](https://stripe.design/)  
   引用: [Stripe](../Knowledge/design-systems/stripe.md)
 
+## transitions.dev
+
+- [Transitions.dev](https://transitions.dev/)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+
 ## ui.aceternity.com
 
 - [Aceternity UI (site, proxy blocked, link recorded)](https://ui.aceternity.com/)  
-  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md), [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## ui.shadcn.com
 
@@ -847,8 +887,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## x.com
 
-- [Nero (@neropursue) / Posts / X (profile, seen in search results only)](https://x.com/neropursue)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
-- [Nero (@neropursue) on X, status 2089263766428950683 (unretrievable, link recorded)](https://x.com/neropursue/status/2089263766428950683)  
+- [Nero (@neropursue) on X, 2026-08-17](https://x.com/neropursue/status/2089263766428950683)  
   引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 

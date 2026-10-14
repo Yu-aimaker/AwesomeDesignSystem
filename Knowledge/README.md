@@ -107,7 +107,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [@neropursue X post (2089263766428950683)](skills/neropursue-x-post.md) | article | x-post, unretrievable, frontend-design, skills, reference | 2026-09-06 |
+| [@neropursue X post (2089263766428950683)](skills/neropursue-x-post.md) | article | x-post, component-library, animation, reference | 2026-10-14 |
 | [Anthropic frontend-design skill](skills/anthropic-frontend-design-skill.md) | skill | skill, anthropic, frontend-design, typography, ai-tells, canvas-design, theme-factory | 2026-09-06 |
 | [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
 | [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
