@@ -66,6 +66,7 @@ CI と同じ確認だけをしたいときは `node scripts/screenshot.mjs --che
 node scripts/build-reference.mjs          # Knowledge/README.md と Reference/REFERENCE.md を再生成
 node scripts/validate-knowledge.mjs       # Knowledge の frontmatter と見出し
 node scripts/validate-data.mjs            # AwesomeDS/data/*.json
+node --test scripts/check-contrast.test.mjs   # トークンのコントラスト（WCAG の文字 4.5:1）。正本は AwesomeDS/foundations/dark-mode.md
 node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs  # ヘッダ検査（ネットワークなし）
 bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Knowledge のコピーが元と一致するか
 ```
@@ -82,6 +83,7 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Kn
   - `validate-knowledge.mjs`
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
+  - `check-contrast.test.mjs`（トークンの文字コントラスト。基準は WCAG 2.2 の 4.5:1）
   - `check-links.mjs`（相対リンクと、許容リストの外部リンク）
   - `hosting-smoke.test.mjs` と `preview-headers.test.mjs`（URL へのリクエストはしない）
   - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.test.mjs`、`check-cf-assets.mjs`、`wrangler deploy --dry-run`）、`screenshot.mjs --check`
