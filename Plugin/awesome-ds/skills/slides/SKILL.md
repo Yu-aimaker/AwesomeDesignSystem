@@ -110,3 +110,15 @@ Frontend Slides says it avoids purple gradients. It does not promise a white can
 ## 5. Done
 
 Print the file path, the slide count, and the title of each slide. Do not paste the file into chat.
+
+## 6. Structured input
+
+When the claims are already JSON, generate the file. Do not retype the skeleton.
+
+```
+node ${CLAUDE_PLUGIN_ROOT}/skills/slides/scripts/render-slides.mjs deck.json -o deck.html
+```
+
+The script fills section 2 and keeps that CSS. It exits 1 and writes nothing when a slide breaks the rules (one sentence or a list of at most four items, heading and body at most 40 Japanese characters or 20 English words, white slide, dark text). Contract: `docs/specs/sta-103-slides.md`.
+
+Another repository runs the same command on its own JSON. Do not copy that HTML into this repository. Do not add a page to the AwesomeDS site from this script.
