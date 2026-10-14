@@ -94,6 +94,44 @@ for (const file of files) {
     if (/<input\b[^>]*placeholder=/.test(line) && !/aria-label|<label|id=/.test(line)) add(1, "placeholder-as-label", file, n, line, "Add a visible <label> above the input");
     if (/<(button|a)\b[^>]*>\s*<(svg|[A-Z][A-Za-z]*Icon)\b[^>]*\/?>\s*<\/(button|a)>/.test(line) && !/aria-label/.test(line)) add(1, "icon-button-no-label", file, n, line, "Add aria-label to icon-only buttons");
   });
+
+  // 14. More than seven series colors in one chart.
+  // Datawrapper (Lisa Charlotte Muth, 2018-05-29): if a chart needs more than seven colors,
+  // use another chart type or group the tail.
+  // https://blog.datawrapper.de/colors/ (opened 2026-10-14).
+  // Cartesian charts count <Bar>, <Line>, and <Area>. A pie counts <Cell>, or objects in data={[...]}.
+  // ads-audit-ignore on the opening tag skips that chart.
+  const chartOpen = /<(BarChart|LineChart|AreaChart|ComposedChart|PieChart)\b/g;
+  let opened;
+  while ((opened = chartOpen.exec(src))) {
+    const name = opened[1];
+    const closeAt = src.indexOf(`</${name}>`, opened.index);
+    if (closeAt === -1) continue;
+    const openLineNo = src.slice(0, opened.index).split("\n").length;
+    const openLine = lines[openLineNo - 1] || "";
+    if (/ads-audit-ignore/.test(openLine)) {
+      chartOpen.lastIndex = closeAt + name.length + 3;
+      continue;
+    }
+    const body = src.slice(opened.index + opened[0].length, closeAt);
+    let count = 0;
+    if (name === "PieChart") {
+      const cells = body.match(/<Cell\b/g);
+      count = cells ? cells.length : 0;
+      const dataLit = body.match(/data=\{\s*\[([\s\S]*?)\]\s*\}/);
+      if (dataLit) {
+        const objects = (dataLit[1].match(/\{/g) || []).length;
+        if (objects > count) count = objects;
+      }
+    } else {
+      const marks = body.match(/<(?:Bar|Line|Area)(?!Chart)\b/g);
+      count = marks ? marks.length : 0;
+    }
+    if (count > 7) {
+      add(2, "too-many-colors", file, openLineNo, `${name} uses ${count} series colors`, "Keep at most 7 colors. Group the tail as other, or split the chart");
+    }
+    chartOpen.lastIndex = closeAt + name.length + 3;
+  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card

@@ -59,6 +59,10 @@ Findings: token share under 95% (S2); component height, radius or border off the
 What to look at: the six questions in SKILL.md step (e). Each "no" is a finding.
 Findings: primary action not findable in 5 seconds (S1); motion without user action (S2, S1 if it loops with no pause control); targets under 24 or 44 (S1); body under 16 (S1).
 
+## 13. Charts
+What to look at: how many colors one chart uses to tell categories apart. Seven is the last count a reader can match without regrouping.
+Findings: more than 7 `<Bar>`, `<Line>`, or `<Area>` series in one chart, or more than 7 pie slices (S2, static audit `too-many-colors`). One bar color across many rows is fine. Source: https://blog.datawrapper.de/colors/
+
 ## Report discipline
 
 - Every finding: severity, id, one-line problem, location (`file:line` or `shots/<name>.png`), rule reference, one-line fix.
