@@ -98,3 +98,15 @@ After: white page, three short sentences, one table, the sentence 「3 件を直
 ## 5. Done
 
 Print the file path and the three conclusion lines in chat. Do not paste the whole HTML into chat.
+
+## 6. Structured input
+
+When the facts are already JSON, generate the file. Do not retype the skeleton.
+
+```
+node ${CLAUDE_PLUGIN_ROOT}/skills/html-report/scripts/render-report.mjs report.json -o report.html
+```
+
+The script fills section 3 and keeps that CSS. It exits 1 and writes nothing when section 2 is broken (three conclusion sentences, one table or one `img`, white canvas, dark text, Japanese body at most 1,500 characters). Contract: `docs/specs/sta-102-html-report.md`.
+
+Another repository runs the same command on its own JSON. Do not copy that HTML into this repository. Do not add a page to the AwesomeDS site from this script.

@@ -7,4 +7,4 @@ alwaysApply: false
 
 Use when the user asks for a report, a readout, or an HTML plan.
 
-Read `Plugin/awesome-ds/skills/html-report/SKILL.md` and follow it. One HTML file. White canvas, dark text, AwesomeDS tokens. Conclusion in three sentences, then one table or one figure. Do not build a React app and do not add a page to the AwesomeDS site.
+Read `Plugin/awesome-ds/skills/html-report/SKILL.md` and follow it. One HTML file. White canvas, dark text, AwesomeDS tokens. Conclusion in three sentences, then one table or one figure. When the facts are JSON, run `Plugin/awesome-ds/skills/html-report/scripts/render-report.mjs`. Do not build a React app and do not add a page to the AwesomeDS site.
