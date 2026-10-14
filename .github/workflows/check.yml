@@ -6,6 +6,12 @@ on:
   push:
     branches: [main]
 
+# A later push to the same pull request cancels the Check that is still running.
+# Pushes to main stay queued. cancel-in-progress is true only for pull_request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   repo:
     runs-on: ubuntu-latest
@@ -38,6 +44,8 @@ jobs:
         run: node scripts/check-ogp-images.mjs
       - name: Workflows do not push main or call billed agents
         run: node scripts/check-workflows.mjs
+      - name: Check cancels only the same pull request
+        run: node --test scripts/check-concurrency.test.mjs
       - name: Bot data diff guard
         if: github.head_ref == 'bot/weekly-growth' || github.ref == 'refs/heads/bot/weekly-growth'
         env:

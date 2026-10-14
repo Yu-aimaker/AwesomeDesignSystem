@@ -77,7 +77,8 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Kn
 ## PR
 
 - 1 PR 1 テーマ。
-- CI（`.github/workflows/check.yml`）が次を確認します。
+- CI（`.github/workflows/check.yml`）は、同じ pull request への新しい push で、まだ走っている Check を打ち切る。main への push は打ち切らない。
+- CI が次を確認します。
   - Reference と Knowledge 索引が最新か（`build-reference.mjs` 後に差分なし）
   - `validate-knowledge.mjs`
   - プラグインの同期（`check-sync.sh`）
