@@ -83,5 +83,6 @@ bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Kn
   - プラグインの同期（`check-sync.sh`）
   - `validate-data.mjs`
   - `check-links.mjs`（相対リンクと、許容リストの外部リンク）
+  - `check-ogp-images.mjs` と `check-flagship-catalog.mjs`（/sources の共有画像。実画像のパスか、理由付きポスターか）
   - `hosting-smoke.test.mjs` と `preview-headers.test.mjs`（URL へのリクエストはしない）
   - web の typecheck、build、Cloudflare アセット検査（`check-cf-assets.test.mjs`、`check-cf-assets.mjs`、`wrangler deploy --dry-run`）、`screenshot.mjs --check`

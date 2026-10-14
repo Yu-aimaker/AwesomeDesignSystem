@@ -36,6 +36,10 @@ jobs:
           node scripts/check-links.mjs
       - name: Flagship share images
         run: node scripts/check-ogp-images.mjs
+      - name: Flagship catalog contract
+        run: |
+          node --test scripts/__tests__/flagship-catalog.test.mjs
+          node scripts/check-flagship-catalog.mjs
       - name: Workflows do not push main or call billed agents
         run: node scripts/check-workflows.mjs
       - name: Bot data diff guard
