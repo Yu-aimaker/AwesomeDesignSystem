@@ -53,7 +53,7 @@ Findings: missing or wrong lang (S1); negative letter spacing on Japanese text (
 
 ## 11. DS conformance
 What to look at: token usage share from the static audit; component measurements against the DS `components:` block; brand reflection (accent, type and tone visible and matching the DS atmosphere).
-Findings: token share under 95% (S2); component height, radius or border off the spec (S2 each type); declared font not loaded (S2); accent absent everywhere (S3); tone of copy contradicting the DS tone (S3).
+Findings: token share under 95% (S2); component height, radius or border off the spec (S2 each type); declared font not loaded (S2); accent absent everywhere (S3); tone of copy contradicting the DS tone (S3); two Y axes in one chart file (S2, static audit `dual-axis`). A general audience misreads dual-axis charts (https://www.datawrapper.de/blog/dualaxis, opened 2026-10-14).
 
 ## 12. Human comfort
 What to look at: the six questions in SKILL.md step (e). Each "no" is a finding.
