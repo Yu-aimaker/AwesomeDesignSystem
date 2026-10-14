@@ -59,6 +59,10 @@ Findings: token share under 95% (S2); component height, radius or border off the
 What to look at: the six questions in SKILL.md step (e). Each "no" is a finding.
 Findings: primary action not findable in 5 seconds (S1); motion without user action (S2, S1 if it loops with no pause control); targets under 24 or 44 (S1); body under 16 (S1).
 
+## 13. Charts
+What to look at: where the series name sits. On a line, area, or pie chart the name belongs on the mark. A color key apart from the mark makes the reader look back and forth.
+Findings: `<Legend>` inside `<LineChart>`, `<AreaChart>`, or `<PieChart>` (S2, static audit `color-key`). Column and bar charts may keep a legend. Source: https://www.datawrapper.de/blog/text-in-data-visualizations
+
 ## Report discipline
 
 - Every finding: severity, id, one-line problem, location (`file:line` or `shots/<name>.png`), rule reference, one-line fix.

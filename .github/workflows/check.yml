@@ -26,6 +26,8 @@ jobs:
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
       - name: Plugin hook reports UI findings and stays silent otherwise
         run: node --test scripts/plugin-hook.test.mjs
+      - name: Line, area, and pie charts label the series on the mark
+        run: node --test scripts/chart-legend-audit.test.mjs
       - name: Data files are valid
         run: node scripts/validate-data.mjs
       - name: Weekly growth unit tests
