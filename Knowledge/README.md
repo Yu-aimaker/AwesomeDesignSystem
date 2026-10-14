@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 73
+件数: 74
 
 ## accessibility
 
@@ -25,6 +25,12 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Motion Primitives と Animata](animation/motion-primitives-and-animata.md) | library | motion-primitives, animata, motion, framer-motion, tailwindcss, copy-paste, shadcn-style | 2026-09-07 |
 | [Rive state machines](animation/rive.md) | product | rive, state-machine, inputs, data-binding, interactive, wasm, react | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
+
+## anti-slop
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [natural-japanese](anti-slop/natural-japanese.md) | skill | japanese, skill, lint, mit | 2026-10-14 |
 
 ## color
 
@@ -119,7 +125,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
 | [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
-| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-11 |
+| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-14 |
 
 ## tech-stack
 

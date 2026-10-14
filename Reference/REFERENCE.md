@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 323  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -190,6 +190,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [codse/animata: animation and interaction code, copy-paste (animata.design)](https://github.com/codse/animata)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [coji/natural-japanese](https://github.com/coji/natural-japanese)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [coleam00/excalidraw-diagram-skill: Excalidraw diagrams that argue visually](https://github.com/coleam00/excalidraw-diagram-skill)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
@@ -479,6 +481,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [animata README](https://raw.githubusercontent.com/codse/animata/main/README.md)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [natural-japanese README](https://raw.githubusercontent.com/coji/natural-japanese/main/README.md)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [excalidraw-diagram-skill README](https://raw.githubusercontent.com/coleam00/excalidraw-diagram-skill/main/README.md)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [design-tokens README (develop)](https://raw.githubusercontent.com/digital-go-jp/design-tokens/develop/README.md)  

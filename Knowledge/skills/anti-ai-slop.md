@@ -11,6 +11,10 @@ sources:
     title: "anthropics/skills"
   - url: https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md
     title: "web-artifacts-builder SKILL.md"
+  - url: https://github.com/coji/natural-japanese
+    title: "coji/natural-japanese"
+  - url: https://raw.githubusercontent.com/coji/natural-japanese/main/README.md
+    title: "natural-japanese README"
   - url: https://github.com/53able/no-ai-slop-ja
     title: "53able/no-ai-slop-ja"
   - url: https://raw.githubusercontent.com/53able/no-ai-slop-ja/main/README.md
@@ -26,7 +30,7 @@ sources:
   - url: https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md
     title: "anthropics/skills pptx SKILL.md"
 tags: [anti-slop, japanese, before-after, mermaid, slides, skill]
-updated: 2026-10-11
+updated: 2026-10-14
 ---
 
 # 脱AIスロップ
@@ -38,7 +42,8 @@ updated: 2026-10-11
 ## 要点
 
 - 2026-10-11 に GitHub API で確認した stars: taste-skill 94,574（最終 push 2026-10-09）、ui-skills 9,606（最終 push 2026-10-11）、anthropics/skills 180,427（最終 push 2026-10-09）、frontend-slides 30,450（最終 push 2026-06-23、MIT）、Pretty Mermaid 1,525（最終 push 2026-08-22、MIT）。
-- 日本語専用でパターンが具体的だったのは `53able/no-ai-slop-ja`。検索 API の stars は 2（2026-10-11）。人気のリポジトリではない。21 パターンを README が列挙する。
+- 人気の日本語 Skill は `coji/natural-japanese`。GitHub API（2026-10-14）で stars 1,926、MIT、最終 push 2026-10-13。README は書く前に見出しの骨組みを置き、検出は `lint.py`（sudachipy）、採否は人がする、と書く。
+- パターン名の列挙が具体的だったのは `53able/no-ai-slop-ja`。検索 API の stars は 2（2026-10-11）。人気のリポジトリではない。21 パターンを README が列挙する。
 - Anthropic の `web-artifacts-builder` は、AI slop として「中央寄せの多用、紫グラデーション、均一な角丸、Inter」を避けると SKILL.md に書く（2026-10-11 に raw を取得）。
 
 ### デザイン
@@ -74,11 +79,12 @@ updated: 2026-10-11
 
 ### ハック
 
-各 URL は 2026-10-11 に開いた。stars は同日の GitHub API。
+各 URL は 2026-10-11 に開いた。stars は同日の GitHub API。natural-japanese の行だけ 2026-10-14。
 
 | 用途 | 名前 | 入れ方 | URL |
 |---|---|---|---|
-| 日本語 | no-ai-slop-ja | `npx skills add 53able/no-ai-slop-ja --skill no-ai-slop-ja --global --yes` | https://github.com/53able/no-ai-slop-ja |
+| 日本語（人気） | natural-japanese | `npx skills add coji/natural-japanese` | https://github.com/coji/natural-japanese |
+| 日本語（パターン名） | no-ai-slop-ja | `npx skills add 53able/no-ai-slop-ja --skill no-ai-slop-ja --global --yes` | https://github.com/53able/no-ai-slop-ja |
 | taste | taste-skill | `npx skills add https://github.com/Leonxlnx/taste-skill` | https://github.com/Leonxlnx/taste-skill |
 | デザイン監査 | ui-skills `baseline-ui` | `npx ui-skills`（詳細は Knowledge/skills/ui-skills.md） | https://github.com/ibelick/ui-skills |
 | デザインの方向 | Anthropic `frontend-design` | `/plugin marketplace add anthropics/skills` | https://github.com/anthropics/skills |
@@ -106,7 +112,8 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 
 - 反映済み (AwesomeDS 0.5.0, foundations/principles.md 原則 7): モデルの既定を設計判断にしない。
 - 反映済み (AwesomeDS 0.5.0, foundations/content-and-tone.md): 日本語の Before / After を 2 行足した。
-- 反映済み: サイトの `/anti-slop` ページ。トークンは変えない。
+- 反映済み: サイトの `/anti-slop` ページ。トークンは変えない。この追記ではページを変えていない。
+- 反映済み: ハック集の日本語（人気）に natural-japanese。個票は `Knowledge/anti-slop/natural-japanese.md`。検査スクリプトは Node の CI に入れない。
 
 ## 出典
 
@@ -115,6 +122,8 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 - https://github.com/anthropics/skills : README と GitHub API、stars 180,427、push 2026-10-09（2026-10-11）。
 - https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md : AI slop の 4 項目（2026-10-11）。
 - https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md : 既定キャンバスと色の書き方（2026-10-11）。
+- https://github.com/coji/natural-japanese : GitHub API、stars 1,926、MIT、push 2026-10-13（2026-10-14）。
+- https://raw.githubusercontent.com/coji/natural-japanese/main/README.md : インストール、lint.py、uv（2026-10-14）。規則本文は写していない。
 - https://raw.githubusercontent.com/53able/no-ai-slop-ja/main/README.md : 21 パターンとインストール（2026-10-11）。stars 2 は検索 API。
 - https://raw.githubusercontent.com/imxv/Pretty-mermaid-skills/main/README.md : 6 種、15 テーマ、インストール（2026-10-11）。stars は API。
 - https://raw.githubusercontent.com/zarazhangrui/frontend-slides/main/README.md : HTML 1 枚、16:9、インストール（2026-10-11）。stars は API。
