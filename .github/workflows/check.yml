@@ -26,6 +26,8 @@ jobs:
         run: bash Plugin/awesome-ds/scripts/check-sync.sh
       - name: Plugin hook reports UI findings and stays silent otherwise
         run: node --test scripts/plugin-hook.test.mjs
+      - name: Column and line charts omit vertical grid lines
+        run: node --test scripts/chart-grid-audit.test.mjs
       - name: Data files are valid
         run: node scripts/validate-data.mjs
       - name: Weekly growth unit tests

@@ -59,6 +59,10 @@ Findings: token share under 95% (S2); component height, radius or border off the
 What to look at: the six questions in SKILL.md step (e). Each "no" is a finding.
 Findings: primary action not findable in 5 seconds (S1); motion without user action (S2, S1 if it loops with no pause control); targets under 24 or 44 (S1); body under 16 (S1).
 
+## 13. Charts
+What to look at: grid lines that cross the bars or the time axis. On a column, line, or area chart the values run along Y, so only horizontal lines help. A horizontal bar chart (value along X) may keep vertical lines.
+Findings: `<CartesianGrid>` without `vertical={false}` on a column, line, or area chart (S2, static audit `vertical-grid`). Source: https://clauswilke.com/dataviz/balance-data-context.html#background-grids
+
 ## Report discipline
 
 - Every finding: severity, id, one-line problem, location (`file:line` or `shots/<name>.png`), rule reference, one-line fix.
