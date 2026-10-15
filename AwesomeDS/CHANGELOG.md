@@ -24,6 +24,11 @@ and the project follows Semantic Versioning 2.0.0.
 
 - `foundations/anti-patterns.md`: four tables for Japanese copy, volume, charts,
   and correctness. No token changed. DESIGN.md section 9 points at them.
+- `foundations/content-and-tone.md`: long-form ceilings (100 Japanese characters,
+  at most 3 `、`, no empty `ことができます`, no bold or emoji list labels).
+  UI copy stays at 60 characters. No token changed. `scripts/check-copy.mjs`
+  flags those tells in `web/src/i18n/messages`, and skips keys that contain
+  `bad` or `before`.
 
 ## [0.5.0] - 2026-10-11
 
