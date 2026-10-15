@@ -231,6 +231,19 @@ function columnOnlyTitle(title, keys) {
     }
     chartOpen.lastIndex = closeAt + name.length + 3;
   }
+  // 14. two Y axes in one chart file. Datawrapper (2018-05-08, intro revised 2026-07):
+  // a general audience misreads dual-axis charts. https://www.datawrapper.de/blog/dualaxis
+  const yAxis = /<YAxis\b/g;
+  let yHit = 0;
+  let yMatch;
+  while ((yMatch = yAxis.exec(src))) {
+    yHit += 1;
+    if (yHit === 2) {
+      const lineNo = src.slice(0, yMatch.index).split("\n").length;
+      add(2, "dual-axis", file, lineNo, "<YAxis> appears twice in one file", "Keep one Y axis. Draw the second series in its own chart.");
+      break;
+    }
+  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card
