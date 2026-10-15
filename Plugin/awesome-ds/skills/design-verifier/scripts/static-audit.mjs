@@ -33,7 +33,21 @@ const add = (sev, rule, file, line, text, fix) => findings.push({ sev, rule, fil
 
 const TITLE_SUFFIX = /(?:の推移|の変化|の比較|の内訳| over time| trend)$/i;
 const FILLER = /\b(seamless(ly)?|unlock|empower(ing)?|elevate|next[- ]gen(eration)?|revolutioni[sz]e|supercharge|effortless(ly)?|cutting[- ]edge|robust|game[- ]chang(er|ing)|unleash|leverage)\b/i;
+const JA_FILLER = /ことができます|シームレス|革新的|次世代|を実現/;
+const COUNTEREXAMPLE_KEY = /(?:^|(?<=[^A-Za-z])|(?<=[a-z]))(?:bad|Bad|before|Before)[A-Za-z0-9]*\s*:/;
 const PLACEHOLDER = /\b(lorem ipsum|acme|john doe|jane doe|sarah chan)\b/i;
+
+function quotedJaFiller(line) {
+  const hit = JA_FILLER.exec(line);
+  if (!hit) return false;
+  if (COUNTEREXAMPLE_KEY.test(line)) return false;
+  const open = line.lastIndexOf("「", hit.index);
+  const close = line.lastIndexOf("」", hit.index);
+  if (open > close && line.indexOf("」", hit.index + hit[0].length) !== -1) return false;
+  const end = hit.index + hit[0].length;
+  if (line.slice(hit.index - 2, hit.index) === '\\"' && line.slice(end, end + 2) === '\\"') return false;
+  return true;
+}
 const JA = /[぀-ヿ一-鿿]/;
 
 for (const file of files) {
@@ -76,6 +90,7 @@ for (const file of files) {
     // 7. copy
     if (/—/.test(line) && !/^\s*(\/\/|\/\*|\*|#)/.test(line)) add(3, "em-dash", file, n, line, "Replace with period or comma");
     if (FILLER.test(line) && !/^\s*(import|\/\/|\/\*|\*)/.test(line)) add(3, "filler-word", file, n, line, "Say the concrete thing instead");
+    if (quotedJaFiller(line) && !/^\s*(import|\/\/|\/\*|\*|ads-audit-ignore)/.test(line) && !/ads-audit-ignore/.test(line)) add(3, "ja-filler", file, n, line, "Replace ことができます / シームレス / 革新的 / 次世代 / を実現 with a concrete action");
     if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
     // 8. eyebrows and sections
     if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
