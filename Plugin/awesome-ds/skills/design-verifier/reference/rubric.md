@@ -46,6 +46,7 @@ Findings: primary action below the fold at 390 (S1 on a marketing page, S2 other
 What to look at: read every visible string. Sentences are short and specific and say what happens next. No em dashes. No filler (seamless, unlock, empower, elevate, next generation, revolutionize, supercharge, effortless, cutting-edge, robust). No placeholder names or lorem ipsum. Button labels are verbs plus objects. Error messages say how to recover.
 Findings: lorem ipsum or Acme in delivered UI (S2); em dash in UI copy (S3, one finding per occurrence); filler word (S3 each); `させていただく` / `させていただきます` (and `頂く`), or `形となっております` (S3, `hidden-agent`); a button labelled "Submit" or "Click here" (S3); an error message with no recovery step (S2).
 Findings: lorem ipsum or Acme in delivered UI (S2); em dash in UI copy (S3, one finding per occurrence); filler word (S3 each); `注目されています`, `ご注目ください`, or `注目を集めて` with no source on the same line or the next two (S3, `unsupported-attention`); a button labelled "Submit" or "Click here" (S3); an error message with no recovery step (S2).
+Findings: lorem ipsum or Acme in delivered UI (S2); em dash in UI copy (S3, one finding per occurrence); filler word (S3 each); `多くの人が見落とし` or `多くの人は見落とし` with no source on the same line or the next two (S3, `unsupported-overlook`); a button labelled "Submit" or "Click here" (S3); an error message with no recovery step (S2).
 
 ## 10. Japanese typography
 Only when the page has Japanese text. Otherwise `n/a`.
