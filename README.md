@@ -48,7 +48,8 @@ Phase のチケットがどの用途に効くか。
 |---|---|---|
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
 | [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 7 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
-| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。Cloudflare Workers Static Assets で配信、noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel は 2026-10-12 に pause（戻す手順は docs/ops/cloudflare-rollback.md） | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
+| [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。配信は [配信](#配信) | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
+| [`docs/`](docs/) | 配信、週次、STA-94 の索引 | [docs/README.md](docs/README.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -128,18 +129,28 @@ Reference/REFERENCE.md  外部リンク一覧（scripts/build-reference.mjs で�
 Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = AwesomeDS の同期コピー）
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
 scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*, hosting-smoke, preview-headers）
-docs/ops/cloudflare-cutover.md  本番を Cloudflare Workers へ切り替えた手順と実施記録（2026-10-11 08:14 JST、停止 0 秒）
-docs/ops/cloudflare-rollback.md  Cloudflare Workers から Vercel へ戻す手順（DNS の値と確認コマンド）
+docs/                 索引は docs/README.md
+  ops/                Cloudflare への切替と、Vercel へ戻す手順
+  specs/              週次自動成長（冒頭が現行）
+  extensions/         STA-94 の原因と B1〜B4 の対応
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
-.github/workflows/    整合性チェック + 全ルートのスモークテスト、月曜 09:30 JST の週次データ更新（デプロイは Cloudflare Workers Builds。本番 https://awesomeds.yumaker.studio 、プレビューは PR コメント。Vercel は 2026-10-12 に pause）
+.github/workflows/    check、weekly-growth、weekly-growth-settle
 ```
 
 ## 更新の流れ
 
-1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は PR を出し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで Check が成功したとき `weekly-growth-settle.yml` が `bot/weekly-growth` を squash merge する。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。
+1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は PR を出し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで、作者がボットだけで、Check が成功したとき `weekly-growth-settle.yml` が `bot/weekly-growth` を squash merge する。失敗、人のコミット、許可外のパスではその PR を閉じる。消すブランチは `bot/weekly-growth` だけ。main へは push しない。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。設計の記録は [docs/specs/awesomeds-weekly-growth-spec.md](docs/specs/awesomeds-weekly-growth-spec.md)。冒頭の「現行」が今の動き。
 2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。Actions では AI API を使わない。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
+
+## 配信
+
+体験サイトは Cloudflare Workers Static Assets で配信する。noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクト `awesome-design-systems-claude` は 2026-10-12 に pause した。切替の記録は [docs/ops/cloudflare-cutover.md](docs/ops/cloudflare-cutover.md)。戻す手順は [docs/ops/cloudflare-rollback.md](docs/ops/cloudflare-rollback.md)。
+
+## STA-94
+
+脱 AI スロップ、HTML レポート、スライドを足した。4つの原因と、それを止める場所は [docs/extensions/sta-94-cause-map.md](docs/extensions/sta-94-cause-map.md)。サイトの経路は `/anti-slop`、`/report`、`/slides`（英語は `/en` 接頭辞）。スキルは上の表の `awesome-ds`、`design-verifier`、`html-report`、`slides`。
 
 ## 参考にした主なもの
 
