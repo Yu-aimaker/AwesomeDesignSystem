@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 329  /  ドメイン数: 69
 
 ## animaapp.com
 
@@ -127,6 +127,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Emil Kowalski's site and blog (proxy blocked, link recorded)](https://emilkowal.ski/)  
   引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md)
 
+## en.wikipedia.org
+
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+
 ## evilmartians.com
 
 - [OKLCH in CSS: why we moved from RGB and HSL - Evil Martians](https://evilmartians.com/chronicles/oklch-in-css-why-quit-rgb-hsl)  
@@ -180,16 +185,26 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [GOV.UK Design System](../Knowledge/platform-guidelines/govuk-design-system.md)
 - [ant-design/ant-design](https://github.com/ant-design/ant-design)  
   引用: [Ant Design](../Knowledge/component-libraries/ant-design.md)
+- [Anthropic frontend-design SKILL.md](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+- [Claude cookbooks: Prompting for frontend aesthetics](https://github.com/anthropics/claude-cookbooks/blob/main/coding/prompting_for_frontend_aesthetics.ipynb)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [anthropics/skills: Public repository for Agent Skills](https://github.com/anthropics/skills)  
-  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md), [HTMLレポート](../Knowledge/skills/html-report.md), [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md), [HTMLレポート](../Knowledge/skills/html-report.md), [スライド](../Knowledge/skills/slides.md)
+- [Anthropic web-artifacts-builder SKILL.md](https://github.com/anthropics/skills/blob/main/skills/web-artifacts-builder/SKILL.md)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [assistant-ui/assistant-ui: The UX of ChatGPT in your React app](https://github.com/assistant-ui/assistant-ui)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [assistant-ui apps/registry (the component registry app behind r.assistant-ui.com)](https://github.com/assistant-ui/assistant-ui/tree/main/apps/registry)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [atlassian/atlassian-frontend-mirror (Atlassian Design System packages)](https://github.com/atlassian/atlassian-frontend-mirror)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [blader/humanizer](https://github.com/blader/humanizer)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [codse/animata: animation and interaction code, copy-paste (animata.design)](https://github.com/codse/animata)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [coji/natural-japanese](https://github.com/coji/natural-japanese)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [coleam00/excalidraw-diagram-skill: Excalidraw diagrams that argue visually](https://github.com/coleam00/excalidraw-diagram-skill)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
@@ -210,6 +225,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md)
 - [fontsource/fontsource: Self-host Open Source fonts in neatly bundled NPM packages](https://github.com/fontsource/fontsource)  
   引用: [Font loading: Fontsource, next/font, subsetting, size-adjust](../Knowledge/tech-stack/fonts-loading.md)
+- [geonwoo-jeong/japanese-humanizer](https://github.com/geonwoo-jeong/japanese-humanizer)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [google-labs-code/design.md: DESIGN.md format specification](https://github.com/google-labs-code/design.md)  
   引用: [2026 年の DESIGN.md エコシステム](../Knowledge/design-md-collections/claude-design-and-design-md-ecosystem.md), [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md), [VoltAgent awesome-design-md](../Knowledge/design-md-collections/voltagent-awesome-design-md.md)
 - [google-labs-code/stitch-skills: Agent skills and plugins for Google Stitch](https://github.com/google-labs-code/stitch-skills)  
@@ -222,14 +239,14 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
 - [ibelick/ui-skills: Skills for Design Engineers](https://github.com/ibelick/ui-skills)  
   引用: [UI Skills (ibelick)](../Knowledge/skills/ui-skills.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
-- [imxv/Pretty-mermaid-skills](https://github.com/imxv/Pretty-mermaid-skills)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [kufu/smarthr-design-system (smarthr.design のソース)](https://github.com/kufu/smarthr-design-system)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kufu/smarthr-ui: React components for creating SmartHR applications](https://github.com/kufu/smarthr-ui)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [kzhrknt/awesome-design-md-jp](https://github.com/kzhrknt/awesome-design-md-jp)  
   引用: [2026 年の DESIGN.md エコシステム](../Knowledge/design-md-collections/claude-design-and-design-md-ecosystem.md), [awesome-design-md-jp](../Knowledge/design-md-collections/awesome-design-md-jp.md)
+- [ux-skill wiki: How to detect AI slop in your design](https://github.com/Laith0003/ux-skill/wiki/How-to-detect-AI-slop-in-your-design)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [Leonxlnx/taste-skill README (lists Emil Kowalski / animations.dev as a sponsor)](https://github.com/Leonxlnx/taste-skill)  
   引用: [animations.dev and Emil Kowalski](../Knowledge/animation/animations-dev-emil-kowalski.md), [CSS scroll-driven animations](../Knowledge/animation/css-scroll-driven-animations.md), [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md), [React Bits](../Knowledge/component-libraries/react-bits.md), [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [LottieFiles/dotlottie-web: dotLottie Web player (Rust + WASM, ThorVG)](https://github.com/LottieFiles/dotlottie-web)  
@@ -250,8 +267,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Myndex/SAPC-APCA: APCA Accessible Perceptual Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [Nutlope/hallmark](https://github.com/Nutlope/hallmark)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)](https://github.com/obra/superpowers)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Superpowers (obra)](../Knowledge/skills/superpowers.md)
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [pmndrs/drei: useful helpers for react-three-fiber](https://github.com/pmndrs/drei)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
@@ -268,12 +289,14 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)  
   引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
+- [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing)  
+  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [tt-a1i/archify (本タスクで観測した高スター数の実例、51,537 stars)](https://github.com/tt-a1i/archify)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Archify (tt-a1i)](../Knowledge/skills/archify.md)
 - [uswds/uswds: United States Web Design System](https://github.com/uswds/uswds)  
   引用: [U.S. Web Design System (USWDS)](../Knowledge/platform-guidelines/uswds.md)
 - [vercel-labs/agent-skills (the `npx skills add` CLI taste-skill installs through)](https://github.com/vercel-labs/agent-skills)  
-  引用: [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md), [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
+  引用: [taste-skill (Leonxlnx)](../Knowledge/skills/taste-skill.md), [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [vercel-labs/skills: the `npx skills` CLI](https://github.com/vercel-labs/skills)  
   引用: [Vercel agent-skills and the skills CLI](../Knowledge/skills/vercel-agent-skills.md)
 - [vercel/ai-elements: AI-native components built on shadcn/ui](https://github.com/vercel/ai-elements)  
@@ -309,7 +332,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [awesome-design-md-jp: template/DESIGN.md (日本語向けテンプレート)](https://github.com/yuki-takei/awesome-design-md-jp/blob/main/template/DESIGN.md)  
   引用: [日本語 Web タイポグラフィ](../Knowledge/typography/japanese-web-typography.md)
 - [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides)  
-  引用: [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [スライド](../Knowledge/skills/slides.md)
 
 ## gitlab.com
 
@@ -435,8 +458,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
 - [18F Methods: Personas](https://raw.githubusercontent.com/18F/methods/HEAD/_methods/personas.md)  
   引用: [ペルソナ、ジャーニーマップ、ページフロー](../Knowledge/design-thinking/personas-journeys-and-flows.md)
-- [no-ai-slop-ja README](https://raw.githubusercontent.com/53able/no-ai-slop-ja/main/README.md)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [aashishGitHub/UI-UX: 10 Usability Heuristics by Jakob Nielsen (NN/g 各記事を引用したノート)](https://raw.githubusercontent.com/aashishGitHub/UI-UX/HEAD/Principles/6.%2010%20Usability%20Heuristics%20by%20Jakob%20Nielsen.md)  
   引用: [Nielsen の 10 ユーザビリティヒューリスティクス](../Knowledge/design-thinking/nielsen-heuristics.md)
 - [ahastudio/til: ux/laws-of-ux.md (lawsofux.com の要約ノート)](https://raw.githubusercontent.com/ahastudio/til/HEAD/ux/laws-of-ux.md)  
@@ -448,9 +469,9 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [skills/frontend-design/SKILL.md (anthropics/skills)](https://raw.githubusercontent.com/anthropics/skills/main/skills/frontend-design/SKILL.md)  
   引用: [Anthropic frontend-design skill](../Knowledge/skills/anthropic-frontend-design-skill.md)
 - [pptx SKILL.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md)  
-  引用: [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [スライド](../Knowledge/skills/slides.md)
 - [web-artifacts-builder SKILL.md](https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md)  
-  引用: [HTMLレポート](../Knowledge/skills/html-report.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 - [assistant-ui apps/docs/components/pages/design/design-gallery.tsx](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/components/pages/design/design-gallery.tsx)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [assistant-ui apps/docs/components/pages/design/registry-meta.ts (the /design component kit sections)](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/apps/docs/components/pages/design/registry-meta.ts)  
@@ -513,8 +534,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [UI Skills (ibelick)](../Knowledge/skills/ui-skills.md)
 - [ui-skills: src/data/registry.ts (aggregated external skill registry)](https://raw.githubusercontent.com/ibelick/ui-skills/main/src/data/registry.ts)  
   引用: [UI Skills (ibelick)](../Knowledge/skills/ui-skills.md)
-- [Pretty Mermaid README](https://raw.githubusercontent.com/imxv/Pretty-mermaid-skills/main/README.md)  
-  引用: [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [smarthr-ui createColor.ts (色トークン)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createColor.ts)  
   引用: [SmartHR Design System](../Knowledge/design-systems/smarthr-design-system.md)
 - [smarthr-ui createFontSize.ts (フォントサイズ)](https://raw.githubusercontent.com/kufu/smarthr-ui/master/packages/smarthr-ui/src/themes/createFontSize.ts)  
@@ -714,7 +733,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [NEXPLACE docs: 08-refactoring-ui.md (Refactoring UI の要点ノート)](https://raw.githubusercontent.com/xCYBERx01/NEXPLACE/HEAD/docs/research/08-refactoring-ui.md)  
   引用: [Refactoring UI](../Knowledge/design-thinking/refactoring-ui.md), [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [Frontend Slides README](https://raw.githubusercontent.com/zarazhangrui/frontend-slides/main/README.md)  
-  引用: [スライド](../Knowledge/skills/slides.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+  引用: [スライド](../Knowledge/skills/slides.md)
 
 ## react-spectrum.adobe.com
 

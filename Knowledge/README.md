@@ -119,7 +119,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
 | [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
-| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-11 |
+| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, ai-defaults, before-after, japanese, copy, skill | 2026-10-13 |
 
 ## tech-stack
 
