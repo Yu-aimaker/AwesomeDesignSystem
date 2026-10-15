@@ -5,6 +5,10 @@ type: guideline
 sources:
   - url: https://github.com/Leonxlnx/taste-skill
     title: "Leonxlnx/taste-skill"
+  - url: https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/skills/taste-skill/references/tells.md
+    title: "taste-skill tells.md"
+  - url: https://www.nngroup.com/articles/form-design-placeholders/
+    title: "NN/g Placeholders in Form Fields Are Harmful"
   - url: https://github.com/ibelick/ui-skills
     title: "ibelick/ui-skills"
   - url: https://github.com/anthropics/skills
@@ -26,7 +30,7 @@ sources:
   - url: https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md
     title: "anthropics/skills pptx SKILL.md"
 tags: [anti-slop, japanese, before-after, mermaid, slides, skill]
-updated: 2026-10-11
+updated: 2026-10-14
 ---
 
 # 脱AIスロップ
@@ -52,8 +56,8 @@ updated: 2026-10-11
 
 | | 例 | どこがダメか |
 |---|---|---|
-| Before | div で描いた偽のダッシュボード。アイコンだけのナビ | 製品ではなく絵。タッチではホバーの説明が出ない（`anti-patterns.md` の Components） |
-| After | 本物のコンポーネントか、ラベル付きの空スロット `<!-- TODO: hero image 1600x1200 -->`。ナビの項目には見える文字 | 同じファイルの置換 |
+| Before | div で描いた偽のダッシュボード。入力欄はプレースホルダーだけ | 製品ではなく絵（taste-skill の tells: Fake dashboard hero）。プレースホルダーは入力を始めると消える（NN/g "Placeholders in Form Fields Are Harmful"、`anti-patterns.md` の Components） |
+| After | 本物のコンポーネントか、ラベル付きの空スロット `<!-- TODO: hero image 1600x1200 -->`。入力欄の上に常に見えるラベル | 同じファイルの置換 |
 
 ### 文章（変な日本語）
 
@@ -112,6 +116,8 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 ## 出典
 
 - https://github.com/Leonxlnx/taste-skill : GitHub API、stars 94,574、push 2026-10-09（2026-10-11）。
+- https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/skills/taste-skill/references/tells.md : Fake dashboard hero built from grey bars and donut charts（2026-10-14 に raw を取得）。
+- https://www.nngroup.com/articles/form-design-placeholders/ : タイトル "Placeholders in Form Fields Are Harmful"（2026-10-14 に確認）。
 - https://github.com/ibelick/ui-skills : GitHub API、stars 9,606、push 2026-10-11。
 - https://github.com/anthropics/skills : README と GitHub API、stars 180,427、push 2026-10-09（2026-10-11）。
 - https://raw.githubusercontent.com/anthropics/skills/main/skills/web-artifacts-builder/SKILL.md : AI slop の 4 項目（2026-10-11）。
