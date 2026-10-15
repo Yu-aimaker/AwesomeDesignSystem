@@ -109,6 +109,10 @@ for (const file of files) {
     // 13. placeholder as label
     if (/<input\b[^>]*placeholder=/.test(line) && !/aria-label|<label|id=/.test(line)) add(1, "placeholder-as-label", file, n, line, "Add a visible <label> above the input");
     if (/<(button|a)\b[^>]*>\s*<(svg|[A-Z][A-Za-z]*Icon)\b[^>]*\/?>\s*<\/(button|a)>/.test(line) && !/aria-label/.test(line)) add(1, "icon-button-no-label", file, n, line, "Add aria-label to icon-only buttons");
+    // 14. hand-rolled numeric dates. content-and-tone.md: ja prose is 年月日, tables are ISO.
+    if (!/ads-audit-ignore/.test(line) && /get(?:Month|Date|FullYear)\(/.test(line) && /\$\{[^}]*\}\s*\/\s*\$\{/.test(line)) {
+      add(2, "hand-rolled-date", file, n, line, "Do not join month, day and year with slashes", "Japanese prose: Intl dateStyle long. Tables and code: ISO 8601");
+    }
   });
 
   // 14. Bar length must match the amount. Wilke, Fundamentals of Data Visualization, ch. 6

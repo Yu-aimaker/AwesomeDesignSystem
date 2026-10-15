@@ -14,7 +14,7 @@ consistent, in Japanese first and English second, and remove the tells of genera
 | Empty states | one sentence of what belongs here plus one primary action | An empty screen is the first onboarding step. |
 | Titles | noun phrase, sentence case in English, no trailing period | Headings are labels. |
 | Numbers | half-width digits, `tabular-nums` in tables, thousands separator, unit after a thin space | 12,480 件, 184 ms. |
-| Dates | 2026年9月7日 in Japanese prose, `2026-09-07` in tables and code | Unambiguous and sortable. |
+| Dates | 2026年9月7日 in Japanese prose (`Intl` `dateStyle: "long"`), `2026-09-07` in tables and code | The month is a word, so 10/08 cannot be read two ways. W3C date formats. |
 | Punctuation | no exclamation marks, no em dashes, no ellipsis for suspense | Calm; three tells of generated copy. |
 | Forbidden words | 「シームレス」「革新的」「次世代」「〜を実現」, "unleash", "seamless", "elevate", "empower" | Marketing filler that describes nothing. |
 | Mixed script | half-width space between Japanese and Latin or digits (or `text-autospace`) | Legibility; see japanese-typography.md. |
