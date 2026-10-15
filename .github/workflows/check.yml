@@ -56,6 +56,8 @@ jobs:
         run: node --test scripts/unsupported-attention.test.mjs
       - name: Unsupported overlook claims fail the static audit
         run: node --test scripts/unsupported-overlook.test.mjs
+      - name: Charts use at most seven category colors
+        run: node --test scripts/chart-series-audit.test.mjs
       - name: Data files are valid
         run: node scripts/validate-data.mjs
       - name: Weekly growth unit tests

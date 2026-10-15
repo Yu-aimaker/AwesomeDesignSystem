@@ -242,6 +242,13 @@ function columnOnlyTitle(title, keys) {
   // Those chart types label the series on the mark. A separate color key makes the reader
   // look back and forth. Column and bar charts keep a Legend. ads-audit-ignore skips one key.
   const chartOpen = /<(LineChart|AreaChart|PieChart)\b/g;
+  // 14. More than seven series colors in one chart.
+  // Datawrapper (Lisa Charlotte Muth, 2018-05-29): if a chart needs more than seven colors,
+  // use another chart type or group the tail.
+  // https://blog.datawrapper.de/colors/ (opened 2026-10-14).
+  // Cartesian charts count <Bar>, <Line>, and <Area>. A pie counts <Cell>, or objects in data={[...]}.
+  // ads-audit-ignore on the opening tag skips that chart.
+  const chartOpen = /<(BarChart|LineChart|AreaChart|ComposedChart|PieChart)\b/g;
   let opened;
   while ((opened = chartOpen.exec(src))) {
     const name = opened[1];
@@ -272,6 +279,31 @@ function columnOnlyTitle(title, keys) {
       add(2, "dual-axis", file, lineNo, "<YAxis> appears twice in one file", "Keep one Y axis. Draw the second series in its own chart.");
       break;
     }
+  }
+    const openLineNo = src.slice(0, opened.index).split("\n").length;
+    const openLine = lines[openLineNo - 1] || "";
+    if (/ads-audit-ignore/.test(openLine)) {
+      chartOpen.lastIndex = closeAt + name.length + 3;
+      continue;
+    }
+    const body = src.slice(opened.index + opened[0].length, closeAt);
+    let count = 0;
+    if (name === "PieChart") {
+      const cells = body.match(/<Cell\b/g);
+      count = cells ? cells.length : 0;
+      const dataLit = body.match(/data=\{\s*\[([\s\S]*?)\]\s*\}/);
+      if (dataLit) {
+        const objects = (dataLit[1].match(/\{/g) || []).length;
+        if (objects > count) count = objects;
+      }
+    } else {
+      const marks = body.match(/<(?:Bar|Line|Area)(?!Chart)\b/g);
+      count = marks ? marks.length : 0;
+    }
+    if (count > 7) {
+      add(2, "too-many-colors", file, openLineNo, `${name} uses ${count} series colors`, "Keep at most 7 colors. Group the tail as other, or split the chart");
+    }
+    chartOpen.lastIndex = closeAt + name.length + 3;
   }
 }
 

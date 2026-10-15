@@ -70,6 +70,8 @@ What to look at: the footer under the chart. Readers need the source name and a 
 Findings: `<BarChart>`, `<LineChart>`, `<AreaChart>`, `<PieChart>`, or `<ComposedChart>` with no `出典` or `source` and no `http` URL in the 12 lines under the chart (S2, static audit `chart-source`). Source: https://www.datawrapper.de/academy/annotate-tab
 What to look at: where the series name sits. On a line, area, or pie chart the name belongs on the mark. A color key apart from the mark makes the reader look back and forth.
 Findings: `<Legend>` inside `<LineChart>`, `<AreaChart>`, or `<PieChart>` (S2, static audit `color-key`). Column and bar charts may keep a legend. Source: https://www.datawrapper.de/blog/text-in-data-visualizations
+What to look at: how many colors one chart uses to tell categories apart. Seven is the last count a reader can match without regrouping.
+Findings: more than 7 `<Bar>`, `<Line>`, or `<Area>` series in one chart, or more than 7 pie slices (S2, static audit `too-many-colors`). One bar color across many rows is fine. Source: https://blog.datawrapper.de/colors/
 
 ## Report discipline
 
