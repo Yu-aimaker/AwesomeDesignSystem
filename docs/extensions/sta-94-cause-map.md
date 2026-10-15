@@ -8,7 +8,7 @@
 
 | 原因 | 止める追加 | リポにある実体 |
 | --- | --- | --- |
-| 日本語が変 | B1 | `Knowledge/skills/anti-ai-slop.md` の文章節。禁止語と Before / After は `AwesomeDS/foundations/content-and-tone.md`。原則 7 は `AwesomeDS/foundations/principles.md`。サイトは `/anti-slop`。 |
-| 文章が多すぎる | B3、B4 | `Plugin/awesome-ds/skills/html-report/SKILL.md` は結論を3文にし、本文を日本語 1,500 字以内にする。`Plugin/awesome-ds/skills/slides/SKILL.md` は1枚に主張1つ、スライド本文は日本語 40 字まで。サイトは `/report` と `/slides`。 |
-| 可視化が見にくく分かりにくい | B1、B3、B4 | B1 は紫のグラデーション、暗いメッシュ、同じカード3枚を退ける。B3 は結論の直後に図か表を1つ置く。B4 は白地に濃色の文字で、1枚に主張1つ。 |
-| バグやミス、ツッコミどころがある | B2 | `Plugin/awesome-ds/skills/design-verifier/SKILL.md` が `Plugin/awesome-ds/skills/design-verifier/scripts/static-audit.mjs` と `Plugin/awesome-ds/skills/design-verifier/scripts/capture.mjs` で画面を検査する。 |
+| 日本語が変 | B1 | `AwesomeDS/foundations/anti-patterns.md` の Japanese copy。禁止語と Before / After は `AwesomeDS/foundations/content-and-tone.md`。原則 7 は `AwesomeDS/foundations/principles.md`。サイトは `/anti-slop`。 |
+| 文章が多すぎる | B1、B3、B4 | `anti-patterns.md` の Volume。`Plugin/awesome-ds/skills/html-report/SKILL.md` は結論を3文にし、本文を日本語 1,500 字以内にする。`Plugin/awesome-ds/skills/slides/SKILL.md` は1枚に主張1つ、スライド本文は日本語 40 字まで。サイトは `/report` と `/slides`。 |
+| 可視化が見にくく分かりにくい | B1、B3、B4 | `anti-patterns.md` の Charts（2軸、離れた色の説明、題名が列名だけ、出典なし）。B3 は結論の直後に図か表を1つ置く。B4 は白地に濃色の文字で、1枚に主張1つ。 |
+| バグやミス、ツッコミどころがある | B1、B2 | `anti-patterns.md` の Correctness。`Plugin/awesome-ds/skills/design-verifier/SKILL.md` が `static-audit.mjs` と `capture.mjs` で画面を検査する。 |

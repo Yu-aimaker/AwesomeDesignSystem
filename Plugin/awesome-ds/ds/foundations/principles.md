@@ -69,7 +69,8 @@ layouts, purple gradients, uniform radii, Inter). taste-skill's pre-flight and
 ui-skills `baseline-ui` ban the same items. AwesomeDS already lists the replacements
 in `anti-patterns.md` and `content-and-tone.md`. Principle 7 says to apply that list
 before shipping, including in copy. The catalog of sources and before/after lines is
-`Knowledge/skills/anti-ai-slop.md`.
+`Knowledge/skills/anti-ai-slop.md`. Japanese copy, volume, charts, and correctness
+are the four tables at the end of `anti-patterns.md`.
 
 ## Laws and how they became rules
 
