@@ -90,6 +90,7 @@ Motion
 - Enter transforms travel 4 to 8px, scale enters start at 0.98. Nothing loops except a progress indicator.
 - `prefers-reduced-motion: reduce` keeps opacity only. `tokens.css` already handles it globally; do not undo it.
 - Library order: CSS transition, then `motion/react`, then GSAP ScrollTrigger only for pinned or scrubbed sequences.
+- Hybrid C (STA-19): AwesomeDS owns the tokens and this order. Do not write a custom animation runtime or a second component kit. Preview the recommended library.
 
 ## 4. Forbidden (fail the build if present)
 

@@ -36,6 +36,20 @@ each part, and a table of when to deviate.
    390, 768 and 1280 px in light and dark.
 7. Run `components/checklist.md` before the first commit.
 
+## What AwesomeDS authors
+
+Locked 2026-09-06 as hybrid C (Linear STA-19, parent STA-6).
+
+- AwesomeDS authors the core tokens: color, type, spacing, radius, motion durations,
+  and component states.
+- AwesomeDS does not author a second animation runtime or a second component kit.
+  Complex motion and heavy components use a recommended library. The showcase previews
+  that library. It does not replace it with a home-grown player.
+- The preview order is the library decision tree in `motion.md`: CSS transitions, then
+  Motion, then GSAP ScrollTrigger, then Lottie, then three.js via react-three-fiber.
+- Later preview pages follow the same rule. They show a recommended library. They do
+  not add a runtime that AwesomeDS maintains.
+
 ## Rules
 
 - Server Components render layout; anything using Motion, scroll or pointer state is a
@@ -97,5 +111,6 @@ each part, and a table of when to deviate.
 - https://biomejs.dev/ : Biome formatter and linter.
 - https://github.com/digital-go-jp/design-system-example-components-react : Digital Agency React components.
 - https://github.com/Leonxlnx/taste-skill : official-package rule, RSC isolation, dependency verification.
+- https://linear.app/stark--industries/issue/STA-19 : hybrid C lock (2026-09-06). Core tokens are authored here. Complex motion and heavy components stay on a recommended library.
 - https://carbondesignsystem.com/getting-started/developing/overview : Carbon ships its own packages for developers (opened 2026-10-08).
 - https://shopify.dev/docs/api/polaris : Polaris is Shopify's UI framework, now documented on shopify.dev (opened 2026-10-08).

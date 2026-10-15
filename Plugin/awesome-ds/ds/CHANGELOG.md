@@ -5,6 +5,12 @@ and the project follows Semantic Versioning 2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Hybrid C (STA-19, 2026-09-06) in `DESIGN.md`, `foundations/stack.md`, and
+  `foundations/motion.md`. AwesomeDS authors core tokens. Complex motion and heavy
+  components stay on the recommended libraries. No token values changed.
+
 ### Changed
 
 - Japanese prose dates are `dateStyle: "long"` (2026年10月8日). The old "good"
