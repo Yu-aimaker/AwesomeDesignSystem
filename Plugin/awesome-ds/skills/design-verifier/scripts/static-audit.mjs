@@ -94,6 +94,27 @@ for (const file of files) {
     if (/<input\b[^>]*placeholder=/.test(line) && !/aria-label|<label|id=/.test(line)) add(1, "placeholder-as-label", file, n, line, "Add a visible <label> above the input");
     if (/<(button|a)\b[^>]*>\s*<(svg|[A-Z][A-Za-z]*Icon)\b[^>]*\/?>\s*<\/(button|a)>/.test(line) && !/aria-label/.test(line)) add(1, "icon-button-no-label", file, n, line, "Add aria-label to icon-only buttons");
   });
+
+  // 14. Bar length must match the amount. Wilke, Fundamentals of Data Visualization, ch. 6
+  // (https://clauswilke.com/dataviz/visualizing-amounts.html, opened 2026-10-14):
+  // bars need to start at zero. Line charts may use a different baseline.
+  if (/<BarChart\b|<Bar\b/.test(src)) {
+    const tagRe = /<YAxis\b[\s\S]*?\/>/g;
+    let tag;
+    while ((tag = tagRe.exec(src))) {
+      const lineNo = src.slice(0, tag.index).split("\n").length;
+      const throughLine = src.split("\n").slice(lineNo - 1, lineNo - 1 + tag[0].split("\n").length).join("\n");
+      if (/ads-audit-ignore/.test(throughLine)) continue;
+      const domain = tag[0].match(/\bdomain=\{\s*\[\s*([^,\]]+)/);
+      if (!domain) continue;
+      const min = domain[1].trim().replace(/^['"]|['"]$/g, "");
+      const numeric = /^-?\d+(?:\.\d+)?$/.test(min);
+      const truncated = numeric ? Number(min) !== 0 : /^(dataMin|auto)$/.test(min);
+      if (!truncated) continue;
+      add(2, "bar-baseline", file, lineNo, "Bar chart Y axis does not start at 0", "Start the bar axis at 0 so length matches the amount");
+      break;
+    }
+  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card
