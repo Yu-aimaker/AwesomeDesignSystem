@@ -31,6 +31,7 @@ const findings = [];
 const counts = { colorDecls: 0, tokenColorDecls: 0, eyebrows: 0, sections: 0 };
 const add = (sev, rule, file, line, text, fix) => findings.push({ sev, rule, file, line, text: text.trim().slice(0, 140), fix });
 
+const TITLE_SUFFIX = /(?:の推移|の変化|の比較|の内訳| over time| trend)$/i;
 const FILLER = /\b(seamless(ly)?|unlock|empower(ing)?|elevate|next[- ]gen(eration)?|revolutioni[sz]e|supercharge|effortless(ly)?|cutting[- ]edge|robust|game[- ]chang(er|ing)|unleash|leverage)\b/i;
 const PLACEHOLDER = /\b(lorem ipsum|acme|john doe|jane doe|sarah chan)\b/i;
 const JA = /[぀-ヿ一-鿿]/;
@@ -115,6 +116,74 @@ for (const file of files) {
       break;
     }
   }
+  // 14. Chart title that only repeats column names.
+  // Datawrapper Academy, Annotate tab, "Title" (page last updated 2024-04-08):
+  // the title is the one statement to remember, not a description of the columns.
+  // https://www.datawrapper.de/academy/annotate-tab (opened 2026-10-14).
+  // A title in the 8 lines above the chart, or title/aria-label on the chart tag,
+  // that equals a dataKey or name (optional suffix の推移 / の変化 / の比較 / の内訳 / over time / trend).
+  // ads-audit-ignore on the opening tag skips that chart.
+  const chartOpen = /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/g;
+  let opened;
+  while ((opened = chartOpen.exec(src))) {
+    const name = opened[1];
+    const rest = src.slice(opened.index);
+    const selfClose = /^<[^>]*\/>/.exec(rest);
+    const closeTag = `</${name}>`;
+    const closeAt = src.indexOf(closeTag, opened.index);
+    const end = selfClose ? opened.index + selfClose[0].length : closeAt === -1 ? src.length : closeAt + closeTag.length;
+    const openLineNo = src.slice(0, opened.index).split("\n").length;
+    const openLine = lines[openLineNo - 1] || "";
+    if (/ads-audit-ignore/.test(openLine)) {
+      chartOpen.lastIndex = end;
+      continue;
+    }
+    const gt = src.indexOf(">", opened.index);
+    const openTag = gt === -1 ? "" : src.slice(opened.index, Math.min(gt + 1, end));
+    const body = src.slice(opened.index, end);
+    const keys = [
+      ...attrValues(body, "dataKey"),
+      ...attrValues(body, "name"),
+      ...fieldNames(body),
+    ];
+    const preamble = lines.slice(Math.max(0, openLineNo - 9), openLineNo - 1);
+    const title = chartTitle(openTag, preamble);
+    if (title && columnOnlyTitle(title, keys)) {
+      add(2, "column-title", file, openLineNo, `${name} title only names the columns`, "Write the one statement the reader should remember");
+    }
+    chartOpen.lastIndex = end;
+  }
+}
+
+function attrValues(chunk, attr) {
+  const re = new RegExp(`\\b${attr}=\\{?["']([^"']+)["']\\}?`, "g");
+  return [...chunk.matchAll(re)].map((m) => m[1]);
+}
+
+function fieldNames(chunk) {
+  return [...chunk.matchAll(/\bname:\s*["']([^"']+)["']/g)].map((m) => m[1]);
+}
+
+function chartTitle(openTag, preamble) {
+  const onTag = [...attrValues(openTag, "title"), ...attrValues(openTag, "aria-label")];
+  if (onTag.length) return onTag[onTag.length - 1];
+  const text = preamble.join("\n");
+  const found = [];
+  for (const m of text.matchAll(/<h[1-6]\b[^>]*>([^<]{1,120})<\/h[1-6]>/gi)) found.push(m[1]);
+  for (const m of text.matchAll(/\b(?:title|aria-label)=\{?["']([^"']+)["']\}?/g)) found.push(m[1]);
+  return found.length ? found[found.length - 1].trim() : "";
+}
+
+function columnOnlyTitle(title, keys) {
+  const t = title.trim().replace(/\s+/g, " ");
+  const bare = t.replace(TITLE_SUFFIX, "").trim();
+  const norm = (s) => s.trim().toLowerCase();
+  const list = [...new Set(keys.map((k) => k.trim()).filter(Boolean))];
+  if (!list.length || !bare) return false;
+  if (list.some((k) => norm(k) === norm(t) || norm(k) === norm(bare))) return true;
+  if (list.length < 2) return false;
+  const joins = [list.join("と"), list.join("、"), list.join(" and "), list.join(" vs "), list.join("/")];
+  return joins.some((j) => norm(j) === norm(t) || norm(j) === norm(bare));
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card

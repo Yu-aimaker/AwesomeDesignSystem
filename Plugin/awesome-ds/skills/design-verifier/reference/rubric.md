@@ -62,6 +62,8 @@ Findings: primary action not findable in 5 seconds (S1); motion without user act
 ## 13. Charts
 What to look at: a bar's length must match the amount. An axis that starts above zero makes a small gap look large. Line charts may use another baseline when the caption says so.
 Findings: bar chart Y domain not starting at 0 (S2, static audit `bar-baseline`). Source: https://clauswilke.com/dataviz/visualizing-amounts.html
+What to look at: whether the title is the one statement a reader should remember, or only the names of the columns.
+Findings: a title in the 8 lines above a chart, or `title` / `aria-label` on the chart, that equals a `dataKey` or `name` (optional suffix の推移, の変化, の比較, の内訳, over time, trend) (S2, static audit `column-title`). A title with a claim is fine. No title is not this finding. Source: https://www.datawrapper.de/academy/annotate-tab
 
 ## Report discipline
 
