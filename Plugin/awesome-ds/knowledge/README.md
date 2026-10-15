@@ -113,7 +113,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-11 |
+| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-14 |
 
 ## skills
 
