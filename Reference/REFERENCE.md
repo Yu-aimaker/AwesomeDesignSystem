@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 321  /  ドメイン数: 68
+リンク数: 335  /  ドメイン数: 69
 
 ## animaapp.com
 
@@ -188,8 +188,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [atlassian/atlassian-frontend-mirror (Atlassian Design System packages)](https://github.com/atlassian/atlassian-frontend-mirror)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
+- [blader/humanizer](https://github.com/blader/humanizer)  
+  引用: [Humanizer](../Knowledge/anti-slop/humanizer.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md)
 - [codse/animata: animation and interaction code, copy-paste (animata.design)](https://github.com/codse/animata)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [coji/natural-japanese](https://github.com/coji/natural-japanese)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md)
 - [coleam00/excalidraw-diagram-skill: Excalidraw diagrams that argue visually](https://github.com/coleam00/excalidraw-diagram-skill)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
@@ -216,6 +220,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Google Stitch DESIGN.md spec](../Knowledge/design-md-collections/google-stitch-design-md.md)
 - [greensock/GSAP: GSAP (GreenSock Animation Platform)](https://github.com/greensock/GSAP)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+- [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop)  
+  引用: [stop-slop](../Knowledge/anti-slop/stop-slop.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md)
 - [Heydon/Inclusive-Components: Resources for the inclusive components blog](https://github.com/Heydon/Inclusive-Components)  
   引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md)
 - [ibelick/motion-primitives: UI kit for animated interfaces (motion-primitives.com)](https://github.com/ibelick/motion-primitives)  
@@ -250,8 +256,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
 - [Myndex/SAPC-APCA: APCA Accessible Perceptual Contrast Algorithm](https://github.com/Myndex/SAPC-APCA)  
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
+- [nanaism/yomiyasu](https://github.com/nanaism/yomiyasu)  
+  引用: [yomiyasu](../Knowledge/anti-slop/yomiyasu.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md)
 - [obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)](https://github.com/obra/superpowers)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Superpowers (obra)](../Knowledge/skills/superpowers.md)
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable)  
+  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md)
 - [pmndrs/drei: useful helpers for react-three-fiber](https://github.com/pmndrs/drei)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
@@ -268,6 +278,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [shadcn/ui](../Knowledge/component-libraries/shadcn-ui.md)
 - [tailwindlabs/tailwindcss](https://github.com/tailwindlabs/tailwindcss)  
   引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
+- [textlint-ja/textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing)  
+  引用: [textlint AI writing](../Knowledge/anti-slop/textlint-ai-writing.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md)
 - [tt-a1i/archify (本タスクで観測した高スター数の実例、51,537 stars)](https://github.com/tt-a1i/archify)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Archify (tt-a1i)](../Knowledge/skills/archify.md)
 - [uswds/uswds: United States Web Design System](https://github.com/uswds/uswds)  
@@ -331,6 +343,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [GSAP docs: ScrollTrigger (proxy blocked, link recorded)](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+
+## impeccable.style
+
+- [impeccable.style](https://impeccable.style)  
+  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md)
 
 ## inclusive-components.design
 
@@ -471,6 +488,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
 - [assistant-ui README](https://raw.githubusercontent.com/assistant-ui/assistant-ui/main/README.md)  
   引用: [assistant-ui](../Knowledge/component-libraries/assistant-ui.md)
+- [Humanizer README](https://raw.githubusercontent.com/blader/humanizer/main/README.md)  
+  引用: [Humanizer](../Knowledge/anti-slop/humanizer.md)
 - [carbon/packages/type fontFamily.ts (IBM Plex)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/fontFamily.ts)  
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [carbon/packages/type scale.ts (type scale)](https://raw.githubusercontent.com/carbon-design-system/carbon/HEAD/packages/type/src/scale.ts)  
@@ -479,6 +498,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [animata README](https://raw.githubusercontent.com/codse/animata/main/README.md)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [natural-japanese README](https://raw.githubusercontent.com/coji/natural-japanese/main/README.md)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [excalidraw-diagram-skill README](https://raw.githubusercontent.com/coleam00/excalidraw-diagram-skill/main/README.md)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [design-tokens README (develop)](https://raw.githubusercontent.com/digital-go-jp/design-tokens/develop/README.md)  
@@ -493,6 +514,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Noto Sans JP](../Knowledge/typography/noto-sans-jp.md)
 - [GSAP types/scroll-trigger.d.ts (ScrollTrigger config)](https://raw.githubusercontent.com/greensock/GSAP/master/types/scroll-trigger.d.ts)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
+- [stop-slop README](https://raw.githubusercontent.com/hardikpandya/stop-slop/main/README.md)  
+  引用: [stop-slop](../Knowledge/anti-slop/stop-slop.md)
 - [Heydon/inclusive-design-checklist: Inclusive Web Design Checklist](https://raw.githubusercontent.com/Heydon/inclusive-design-checklist/HEAD/README.md)  
   引用: [Inclusive Components (Heydon Pickering)](../Knowledge/accessibility/inclusive-components.md), [Norman『誰のためのデザイン?』(The Design of Everyday Things)](../Knowledge/design-thinking/norman-design-of-everyday-things.md)
 - [motion-primitives README](https://raw.githubusercontent.com/ibelick/motion-primitives/main/README.md)  
@@ -589,6 +612,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
 - [Why APCA (Myndex/SAPC-APCA)](https://raw.githubusercontent.com/Myndex/SAPC-APCA/master/documentation/WhyAPCA.md)  
   引用: [コントラストとアクセシブルな色](../Knowledge/color/contrast-and-accessible-color.md)
+- [yomiyasu README](https://raw.githubusercontent.com/nanaism/yomiyasu/main/README.md)  
+  引用: [yomiyasu](../Knowledge/anti-slop/yomiyasu.md)
+- [yomiyasu_lint.py](https://raw.githubusercontent.com/nanaism/yomiyasu/main/scripts/yomiyasu_lint.py)  
+  引用: [yomiyasu](../Knowledge/anti-slop/yomiyasu.md)
 - [nathanstypographynotes: butterick.md (Practical Typography のノート)](https://raw.githubusercontent.com/nathanlane/nathanstypographynotes/HEAD/butterick.md)  
   引用: [タイプスケールと測度 (行長)](../Knowledge/typography/type-scale-and-measure.md)
 - [open-design: duolingo/DESIGN.md (二次資料)](https://raw.githubusercontent.com/nexu-io/open-design/main/design-systems/duolingo/DESIGN.md)  
@@ -603,6 +630,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Superpowers (obra)](../Knowledge/skills/superpowers.md)
 - [opensesh/DESIGN-OPS: design-critique-facilitator.md](https://raw.githubusercontent.com/opensesh/DESIGN-OPS/HEAD/skills/design-critique-facilitator.md)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
+- [Impeccable README](https://raw.githubusercontent.com/pbakaus/impeccable/main/README.md)  
+  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md)
 - [R3F docs: Scaling performance](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/advanced/scaling-performance.mdx)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [R3F docs: Introduction (source of r3f.docs.pmnd.rs, which is proxy blocked)](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/getting-started/introduction.mdx)  
@@ -653,6 +682,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
 - [tailwindcss v4 theme.css (oklch palette)](https://raw.githubusercontent.com/tailwindlabs/tailwindcss/main/packages/tailwindcss/theme.css)  
   引用: [OKLCH とモダン CSS カラー](../Knowledge/color/oklch-and-modern-css-color.md), [Tailwind CSS v4](../Knowledge/tech-stack/tailwind-v4.md)
+- [preset-ai-writing README](https://raw.githubusercontent.com/textlint-ja/textlint-rule-preset-ai-writing/main/README.md)  
+  引用: [textlint AI writing](../Knowledge/anti-slop/textlint-ai-writing.md)
 - [TrentM6/baseline-core: design-critique.md](https://raw.githubusercontent.com/TrentM6/baseline-core/HEAD/skills/ux-design/references/design-critique.md)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
 - [Archify archify/package.json (version, bin)](https://raw.githubusercontent.com/tt-a1i/archify/main/archify/package.json)  
