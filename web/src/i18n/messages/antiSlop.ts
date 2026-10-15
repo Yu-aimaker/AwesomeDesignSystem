@@ -64,32 +64,32 @@ const components: Array<{ p: L; f: L; s: string }> = [
   { p: both("空・読み込み中・エラー・無効の状態がない", "No empty, loading, error or disabled state"), f: both("全状態を作る。空の状態には次の操作を 1 つ", "Design every state. One next action when empty"), s: "ux-skill, baseline-ui, hallmark" },
 ];
 
-const copyEn: Array<{ p: L; b: string; a: string; s: string }> = [
-  { p: both("誇大な動詞（Unlock、Elevate、Seamless）", "Hype verbs (Unlock, Elevate, Seamless)"), b: "Unlock seamless productivity", a: "Approve invoices from email in one click", s: "taste-skill, hallmark, ux-skill" },
-  { p: both("「X ではなく Y だ」", "\"It's not X, it's Y\""), b: "It's not just a tool, it's a partner.", a: "It drafts replies; you approve them.", s: "humanizer, Wikipedia" },
-  { p: both("無理な 3 つ並べ", "Forced rule of three"), b: "Fast, secure, and scalable.", a: "Deploys in 40 s.", s: "humanizer, Wikipedia" },
-  { p: both("AI 語彙（delve、landscape、pivotal）", "AI vocabulary (delve, landscape, pivotal)"), b: "Delve into the evolving landscape", a: "See what changed in v3", s: "humanizer" },
-  { p: both("大げさな意義づけ", "Inflated significance"), b: "This marks a pivotal shift.", a: "Exports now include tax IDs.", s: "humanizer, Wikipedia" },
-  { p: both("仮の名前（John Doe、Acme）", "Placeholder names (John Doe, Acme)"), b: "John Doe, CEO at Acme", a: "Mika Sato, Ops lead", s: "taste-skill, hallmark, ux-skill" },
-  { p: both("作った数字", "Invented stats"), b: "Trusted by 50,000+ teams", a: "(remove until the number is real)", s: "hallmark, ux-skill, taste-skill" },
-  { p: both("飾りの太字・絵文字の見出し", "Decorative bold and emoji headings"), b: "🚀 **Fast** setup", a: "Setup takes 5 minutes", s: "humanizer, textlint ai-writing" },
-  { p: both("チャットの残り", "Chatbot leftovers"), b: "Great question! Here's a quick overview.", a: "(delete)", s: "humanizer, Wikipedia" },
-  { p: both("前置き", "Filler signposting"), b: "It's important to note that exports are limited.", a: "Exports are limited to 10k rows.", s: "humanizer" },
+const copyEn: Array<{ p: L; before: string; after: string; s: string }> = [
+  { p: both("誇大な動詞（「Unlock」「Elevate」「Seamless」）", "Hype verbs (\"Unlock\", \"Elevate\", \"Seamless\")"), before: "Unlock seamless productivity", after: "Approve invoices from email in one click", s: "taste-skill, hallmark, ux-skill" },
+  { p: both("「X ではなく Y だ」", "\"It's not X, it's Y\""), before: "It's not just a tool, it's a partner.", after: "It drafts replies; you approve them.", s: "humanizer, Wikipedia" },
+  { p: both("無理な 3 つ並べ", "Forced rule of three"), before: "Fast, secure, and scalable.", after: "Deploys in 40 s.", s: "humanizer, Wikipedia" },
+  { p: both("AI 語彙（delve、landscape、pivotal）", "AI vocabulary (delve, landscape, pivotal)"), before: "Delve into the evolving landscape", after: "See what changed in v3", s: "humanizer" },
+  { p: both("大げさな意義づけ", "Inflated significance"), before: "This marks a pivotal shift.", after: "Exports now include tax IDs.", s: "humanizer, Wikipedia" },
+  { p: both("仮の名前（John Doe、Acme）", "Placeholder names (John Doe, Acme)"), before: "John Doe, CEO at Acme", after: "Mika Sato, Ops lead", s: "taste-skill, hallmark, ux-skill" },
+  { p: both("作った数字", "Invented stats"), before: "Trusted by 50,000+ teams", after: "(remove until the number is real)", s: "hallmark, ux-skill, taste-skill" },
+  { p: both("飾りの太字・絵文字の見出し", "Decorative bold and emoji headings"), before: "🚀 **Fast** setup", after: "Setup takes 5 minutes", s: "humanizer, textlint ai-writing" },
+  { p: both("チャットの残り", "Chatbot leftovers"), before: "Great question! Here's a quick overview.", after: "(delete)", s: "humanizer, Wikipedia" },
+  { p: both("前置き", "Filler signposting"), before: "It's important to note that exports are limited.", after: "Exports are limited to 10k rows.", s: "humanizer" },
 ];
 
-const copyJa: Array<{ p: L; b: string; a: string; s: string }> = [
-  { p: both("「〜することができます」", "\"〜することができます\" (can-do shell)"), b: "設定を変更することができます。", a: "設定を変更できます。", s: "no-ai-slop-ja, textlint ai-writing, japanese-humanizer" },
-  { p: both("責任を隠す過剰な敬語", "Over-polite phrasing that hides who acts"), b: "こちらで確認させていただく形となっております。", a: "担当者が確認します。", s: "no-ai-slop-ja, natural-japanese" },
-  { p: both("誇大語", "Hype words"), b: "業務をスーパーチャージします。", a: "月次の照合作業を 2 日短縮します。", s: "textlint ai-writing, no-ai-slop-ja" },
-  { p: both("カタカナ抽象語の重なり", "Stacked katakana abstractions"), b: "アセットを活用し、シナジーのあるソリューションを提供します。", a: "既存の顧客データで請求書を自動で作ります。", s: "no-ai-slop-ja, textlint ai-writing" },
-  { p: both("「単なる〜ではありません」", "\"Not just X\" in Japanese"), b: "これは単なるツールではありません。未来を変えるパートナーです。", a: "返信の下書きを作り、承認後に送ります。", s: "no-ai-slop-ja, humanizer" },
-  { p: both("漢語＋「を行う」", "Nominalized verbs with を行う"), b: "課題の把握および改善の実施を行います。", a: "課題を把握して改善します。", s: "no-ai-slop-ja, japanese-humanizer" },
-  { p: both("「の」の連鎖", "Chains of の"), b: "チームの開発の速度の改善の方法", a: "チームの開発速度を上げる方法", s: "no-ai-slop-ja, japanese-humanizer" },
-  { p: both("根拠のない権威", "Authority without a source"), b: "近年注目されています。", a: "（出典を添えるか、消す）", s: "no-ai-slop-ja, japanese-humanizer" },
-  { p: both("絵文字の箇条書き", "Emoji bullets"), b: "✅ 完了した項目", a: "完了した項目", s: "textlint ai-writing, no-ai-slop-ja" },
-  { p: both("英語式のコロンでつなぐ", "English-style colon before content"), b: "実行します:", a: "実行方法は次のとおりです。", s: "textlint ai-writing" },
-  { p: both("同じ文末の繰り返し", "The same sentence ending repeated"), b: "確認することが重要です。共有することが重要です。", a: "確認と共有が重要です。", s: "no-ai-slop-ja, japanese-humanizer" },
-  { p: both("助走と劇的な断片", "Build-ups and dramatic fragments"), b: "答えは？ シンプルです。自動化。", a: "答えは自動化です。", s: "no-ai-slop-ja, textlint ai-writing, humanizer" },
+const copyJa: Array<{ p: L; before: string; after: string; s: string }> = [
+  { p: both("「〜することができます」", "\"〜することができます\" (can-do shell)"), before: "設定を変更することができます。", after: "設定を変更できます。", s: "no-ai-slop-ja, textlint ai-writing, japanese-humanizer" },
+  { p: both("責任を隠す過剰な敬語", "Over-polite phrasing that hides who acts"), before: "こちらで確認させていただく形となっております。", after: "担当者が確認します。", s: "no-ai-slop-ja, natural-japanese" },
+  { p: both("誇大語", "Hype words"), before: "業務をスーパーチャージします。", after: "月次の照合作業を 2 日短縮します。", s: "textlint ai-writing, no-ai-slop-ja" },
+  { p: both("カタカナ抽象語の重なり", "Stacked katakana abstractions"), before: "アセットを活用し、シナジーのあるソリューションを提供します。", after: "既存の顧客データで請求書を自動で作ります。", s: "no-ai-slop-ja, textlint ai-writing" },
+  { p: both("「単なる〜ではありません」", "\"Not just X\" in Japanese"), before: "これは単なるツールではありません。未来を変えるパートナーです。", after: "返信の下書きを作り、承認後に送ります。", s: "no-ai-slop-ja, humanizer" },
+  { p: both("漢語＋「を行う」", "Nominalized verbs with を行う"), before: "課題の把握および改善の実施を行います。", after: "課題を把握して改善します。", s: "no-ai-slop-ja, japanese-humanizer" },
+  { p: both("「の」の連鎖", "Chains of の"), before: "チームの開発の速度の改善の方法", after: "チームの開発速度を上げる方法", s: "no-ai-slop-ja, japanese-humanizer" },
+  { p: both("根拠のない権威", "Authority without a source"), before: "近年注目されています。", after: "（出典を添えるか、消す）", s: "no-ai-slop-ja, japanese-humanizer" },
+  { p: both("絵文字の箇条書き", "Emoji bullets"), before: "✅ 完了した項目", after: "完了した項目", s: "textlint ai-writing, no-ai-slop-ja" },
+  { p: both("英語式のコロンでつなぐ", "English-style colon before content"), before: "実行します:", after: "実行方法は次のとおりです。", s: "textlint ai-writing" },
+  { p: both("同じ文末の繰り返し", "The same sentence ending repeated"), before: "確認することが重要です。共有することが重要です。", after: "確認と共有が重要です。", s: "no-ai-slop-ja, japanese-humanizer" },
+  { p: both("助走と劇的な断片", "Build-ups and dramatic fragments"), before: "答えは？ シンプルです。自動化。", after: "答えは自動化です。", s: "no-ai-slop-ja, textlint ai-writing, humanizer" },
 ];
 
 const excluded: Array<{ p: L; why: L }> = [
@@ -122,7 +122,7 @@ const hacks: Array<{ name: string; what: L; install: string; url: string }> = [
 function build(l: "ja" | "en") {
   return {
     patterns: (rows: Array<{ p: L; f: L; s: string }>): Pattern[] => rows.map((r) => ({ pattern: r.p[l], fix: r.f[l], sources: r.s })),
-    copy: (rows: Array<{ p: L; b: string; a: string; s: string }>): CopyPair[] => rows.map((r) => ({ pattern: r.p[l], before: r.b, after: r.a, sources: r.s })),
+    copy: (rows: Array<{ p: L; before: string; after: string; s: string }>): CopyPair[] => rows.map((r) => ({ pattern: r.p[l], before: r.before, after: r.after, sources: r.s })),
     excluded: excluded.map((e) => ({ pattern: e.p[l], why: e.why[l] })),
     hacks: hacks.map((h) => ({ name: h.name, what: h.what[l], install: h.install, url: h.url })) as Hack[],
   };
@@ -153,8 +153,8 @@ const ja = {
     heroGoodCta: "請求書を作る",
     heroBadLabel: "紫から青のグラデーション、光るボタン、中身のない見出し",
     heroGoodLabel: "単色の面、結果を言う見出し、動詞のボタン",
-    cardsBadLabel: "角丸アイコンタイル＋見出しのカード 3 枚、片側の色帯、絵文字",
     cardsGoodLabel: "並列の項目は一覧で。数字と条件で言い切る",
+    cardsBadLabel: "角丸アイコンタイル＋見出しのカード 3 枚、片側の色帯、絵文字",
     cardsBad: [
       ["⚡", "高速", "圧倒的なスピードを実現。"],
       ["🔒", "安全", "あらゆる脅威から保護。"],
@@ -209,8 +209,8 @@ const en: AntiSlopMessages = {
     lead: "A screen nobody decided on drifts to the same colors, fonts and decoration.",
     heroBadLabel: "Purple-to-blue gradient, glowing button, empty headline",
     heroGoodLabel: "Solid surface, a headline that names the result, a verb button",
-    cardsBadLabel: "Three icon-tile cards, a side stripe, emoji",
     cardsGoodLabel: "Parallel items as a list. Commit to numbers and conditions",
+    cardsBadLabel: "Three icon-tile cards, a side stripe, emoji",
     rows: E.patterns(design),
   },
   components: {
