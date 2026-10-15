@@ -29,6 +29,10 @@ sources:
     title: "Frontend Slides README"
   - url: https://raw.githubusercontent.com/anthropics/skills/main/skills/pptx/SKILL.md
     title: "anthropics/skills pptx SKILL.md"
+  - url: https://github.com/petergyang/no-ai-slop
+    title: "petergyang/no-ai-slop"
+  - url: https://github.com/miqdadbadjuber/anti-slop
+    title: "miqdadbadjuber/anti-slop"
 tags: [anti-slop, japanese, before-after, mermaid, slides, skill]
 updated: 2026-10-14
 ---
@@ -42,7 +46,8 @@ updated: 2026-10-14
 ## 要点
 
 - 2026-10-11 に GitHub API で確認した stars: taste-skill 94,574（最終 push 2026-10-09）、ui-skills 9,606（最終 push 2026-10-11）、anthropics/skills 180,427（最終 push 2026-10-09）、frontend-slides 30,450（最終 push 2026-06-23、MIT）、Pretty Mermaid 1,525（最終 push 2026-08-22、MIT）。
-- 日本語専用でパターンが具体的だったのは `53able/no-ai-slop-ja`。検索 API の stars は 2（2026-10-11）。人気のリポジトリではない。21 パターンを README が列挙する。
+- 日本語専用でパターンが具体的だったのは `53able/no-ai-slop-ja`。検索 API の stars は 2（2026-10-14）。人気のリポジトリではない。21 パターンを README が列挙する。
+- 英語の文章で stars が多いのは `petergyang/no-ai-slop`（12,303）。画面と文章とコメントをまとめて落とすのは `miqdadbadjuber/anti-slop`（6,011）。どちらも 2026-10-14 の GitHub API、MIT。詳細は `Knowledge/anti-slop/`。
 - Anthropic の `web-artifacts-builder` は、AI slop として「中央寄せの多用、紫グラデーション、均一な角丸、Inter」を避けると SKILL.md に書く（2026-10-11 に raw を取得）。
 
 ### デザイン
@@ -89,6 +94,8 @@ updated: 2026-10-14
 | Mermaid | Pretty Mermaid | `npx skills add imxv/pretty-mermaid-skills@pretty-mermaid -g -y` | https://github.com/imxv/Pretty-mermaid-skills |
 | スライド（HTML） | Frontend Slides | `/plugin marketplace add https://github.com/zarazhangrui/frontend-slides` | https://github.com/zarazhangrui/frontend-slides |
 | スライド（pptx） | Anthropic `pptx` | document-skills。新規は pptxgenjs。既定キャンバスは 10 x 5.625 インチ | https://github.com/anthropics/skills/blob/main/skills/pptx/SKILL.md |
+| 人気のリポジトリ（英語の文章） | No AI Slop | `npx skills add petergyang/no-ai-slop --skill no-ai-slop --global --yes` | https://github.com/petergyang/no-ai-slop |
+| 人気のリポジトリ（画面・文章・コメント） | anti-slop | `npx antislop-ai` | https://github.com/miqdadbadjuber/anti-slop |
 
 Pretty Mermaid の 6 種: Flowchart、Sequence、State、Class、ER、XY。テーマは 15（zinc、tokyo-night、catppuccin、github、solarized、nord、dracula、one-dark の明暗）。ブラウザ不要。Node 16 以上。
 
@@ -125,3 +132,5 @@ Frontend Slides は依存なしの HTML 1 枚、16:9 固定。README は紫グ�
 - https://raw.githubusercontent.com/53able/no-ai-slop-ja/main/README.md : 21 パターンとインストール（2026-10-11）。stars 2 は検索 API。
 - https://raw.githubusercontent.com/imxv/Pretty-mermaid-skills/main/README.md : 6 種、15 テーマ、インストール（2026-10-11）。stars は API。
 - https://raw.githubusercontent.com/zarazhangrui/frontend-slides/main/README.md : HTML 1 枚、16:9、インストール（2026-10-11）。stars は API。
+- https://github.com/petergyang/no-ai-slop : GitHub API、stars 12,303、MIT（2026-10-14）。要点は `Knowledge/anti-slop/no-ai-slop.md`。
+- https://github.com/miqdadbadjuber/anti-slop : GitHub API、stars 6,011、MIT、package 3.2.20（2026-10-14）。要点は `Knowledge/anti-slop/anti-slop.md`。

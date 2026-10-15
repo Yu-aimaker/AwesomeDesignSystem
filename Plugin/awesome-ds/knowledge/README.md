@@ -4,7 +4,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 正本はリポの `Knowledge/` です。この一覧は `node scripts/build-reference.mjs`、エントリは `Plugin/awesome-ds/scripts/sync-ds.sh` で生成します。手で編集しないでください。
 
-件数: 80
+件数: 75
 
 ## accessibility
 
@@ -30,13 +30,8 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [Humanizer](anti-slop/humanizer.md) | skill | english, skill, prose, mit | 2026-10-13 |
-| [Impeccable](anti-slop/impeccable.md) | skill | skill, detector, apache-2.0, design | 2026-10-13 |
-| [natural-japanese](anti-slop/natural-japanese.md) | skill | japanese, skill, lint, mit | 2026-10-13 |
-| [stop-slop](anti-slop/stop-slop.md) | skill | english, skill, prose, mit | 2026-10-13 |
-| [textlint AI writing](anti-slop/textlint-ai-writing.md) | library | japanese, textlint, lint, mit | 2026-10-13 |
-| [yomiyasu](anti-slop/yomiyasu.md) | skill | japanese, skill, lint, mit | 2026-10-13 |
-| [脱AIスロップ調査（B1）](anti-slop/anti-ai-slop-guide.md) | guideline | anti-slop, japanese, skill, lint, draft | 2026-10-13 |
+| [anti-slop (miqdadbadjuber)](anti-slop/anti-slop.md) | skill | skill, filter, mit, ui, copy | 2026-10-14 |
+| [No AI Slop (petergyang)](anti-slop/no-ai-slop.md) | skill | english, skill, prose, mit | 2026-10-14 |
 
 ## color
 
@@ -113,7 +108,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-14 |
+| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-11 |
 
 ## skills
 
