@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 324  /  ドメイン数: 69
+リンク数: 323  /  ドメイン数: 68
 
 ## animaapp.com
 
@@ -190,6 +190,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [codse/animata: animation and interaction code, copy-paste (animata.design)](https://github.com/codse/animata)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [coji/natural-japanese](https://github.com/coji/natural-japanese)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [coleam00/excalidraw-diagram-skill: Excalidraw diagrams that argue visually](https://github.com/coleam00/excalidraw-diagram-skill)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
@@ -252,8 +254,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)](https://github.com/obra/superpowers)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Superpowers (obra)](../Knowledge/skills/superpowers.md)
-- [pbakaus/impeccable](https://github.com/pbakaus/impeccable)  
-  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [pmndrs/drei: useful helpers for react-three-fiber](https://github.com/pmndrs/drei)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
@@ -333,11 +333,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [GSAP docs: ScrollTrigger (proxy blocked, link recorded)](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
-
-## impeccable.style
-
-- [impeccable.style](https://impeccable.style)  
-  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md)
 
 ## inclusive-components.design
 
@@ -486,6 +481,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Atlassian, Carbon, Polaris, Primer (比較)](../Knowledge/design-systems/atlassian-carbon-polaris-primer.md)
 - [animata README](https://raw.githubusercontent.com/codse/animata/main/README.md)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [natural-japanese README](https://raw.githubusercontent.com/coji/natural-japanese/main/README.md)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [excalidraw-diagram-skill README](https://raw.githubusercontent.com/coleam00/excalidraw-diagram-skill/main/README.md)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [design-tokens README (develop)](https://raw.githubusercontent.com/digital-go-jp/design-tokens/develop/README.md)  
@@ -610,8 +607,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Superpowers (obra)](../Knowledge/skills/superpowers.md)
 - [opensesh/DESIGN-OPS: design-critique-facilitator.md](https://raw.githubusercontent.com/opensesh/DESIGN-OPS/HEAD/skills/design-critique-facilitator.md)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
-- [Impeccable README](https://raw.githubusercontent.com/pbakaus/impeccable/main/README.md)  
-  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [R3F docs: Scaling performance](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/advanced/scaling-performance.mdx)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [R3F docs: Introduction (source of r3f.docs.pmnd.rs, which is proxy blocked)](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/getting-started/introduction.mdx)  

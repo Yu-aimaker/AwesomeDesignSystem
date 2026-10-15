@@ -30,7 +30,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [Impeccable](anti-slop/impeccable.md) | skill | skill, detector, apache-2.0, design, anti-slop | 2026-10-14 |
+| [natural-japanese](anti-slop/natural-japanese.md) | skill | japanese, skill, lint, mit | 2026-10-14 |
 
 ## color
 
