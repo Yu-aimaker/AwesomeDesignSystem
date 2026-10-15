@@ -108,7 +108,8 @@ From a checkout of this plugin:
 The script fails unless all of these hold: `lang` on `<html>`, `--canvas: #ffffff`, `--ink: #0a0a0a`, exactly three `<p>` elements in `section.conclusion`, exactly one `<table>` or one figure (`<figure>`, `<img>`, or `<svg>`), and no gradient. Body text outside the title, the conclusion, and the source line stays under 1,500 characters when the file contains Japanese, otherwise under 700 words.
 
 Another repository uses the same command on its own HTML file. Do not copy that repository into AwesomeDS.
-## 6. Structured input
+
+## 7. Structured input
 
 When the facts are already JSON, generate the file. Do not retype the skeleton.
 

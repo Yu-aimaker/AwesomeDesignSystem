@@ -36,6 +36,7 @@ const FILLER = /\b(seamless(ly)?|unlock|empower(ing)?|elevate|next[- ]gen(eratio
 const JA_FILLER = /ことができます|シームレス|革新的|次世代|を実現/;
 const COUNTEREXAMPLE_KEY = /(?:^|(?<=[^A-Za-z])|(?<=[a-z]))(?:bad|Bad|before|Before)[A-Za-z0-9]*\s*:/;
 const PLACEHOLDER = /\b(lorem ipsum|acme|john doe|jane doe|sarah chan)\b/i;
+const ATTENTION = /注目されています|ご注目ください|注目を集めて/;
 
 function quotedJaFiller(line) {
   const hit = JA_FILLER.exec(line);
@@ -48,7 +49,7 @@ function quotedJaFiller(line) {
   if (line.slice(hit.index - 2, hit.index) === '\\"' && line.slice(end, end + 2) === '\\"') return false;
   return true;
 }
-const ATTENTION = /注目されています|ご注目ください|注目を集めて/;
+
 const JA = /[぀-ヿ一-鿿]/;
 
 for (const file of files) {
@@ -93,15 +94,16 @@ for (const file of files) {
     if (FILLER.test(line) && !/^\s*(import|\/\/|\/\*|\*)/.test(line)) add(3, "filler-word", file, n, line, "Say the concrete thing instead");
     if (quotedJaFiller(line) && !/^\s*(import|\/\/|\/\*|\*|ads-audit-ignore)/.test(line) && !/ads-audit-ignore/.test(line)) add(3, "ja-filler", file, n, line, "Replace ことができます / シームレス / 革新的 / 次世代 / を実現 with a concrete action");
     if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
-    // 7c. hidden agent. no-ai-slop-ja pattern 9: name who acts, or delete the shell.
-    if (hiddenAgent(line)) add(3, "hidden-agent", file, n, line, "Name who does the action. Drop させていただく and 形となっております");
     // 7b. unsupported crowd claims. no-ai-slop-ja pattern 15: name the source or delete.
     if (unsupportedAttention(line) && !sourceNearby(lines, i)) {
       add(3, "unsupported-attention", file, n, line, "Name the source on this line or the next two, or delete the sentence");
-    // 7b. crowd overlook. no-ai-slop-ja pattern 13: delete the claim, or cite the rate.
+    }
+    // 7c. crowd overlook. no-ai-slop-ja pattern 13: delete the claim, or cite the rate.
     if (unsupportedOverlook(line) && !sourceNearby(lines, i)) {
       add(3, "unsupported-overlook", file, n, line, "Delete the crowd claim, or cite the rate on this line or the next two");
     }
+    // 7d. hidden agent. no-ai-slop-ja pattern 9: name who acts, or delete the shell.
+    if (hiddenAgent(line)) add(3, "hidden-agent", file, n, line, "Name who does the action. Drop させていただく and 形となっております");
     // 8. eyebrows and sections
     if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
     if (/<section\b|<Section\b/.test(line)) counts.sections++;
@@ -119,7 +121,7 @@ for (const file of files) {
     // 13. placeholder as label
     if (/<input\b[^>]*placeholder=/.test(line) && !/aria-label|<label|id=/.test(line)) add(1, "placeholder-as-label", file, n, line, "Add a visible <label> above the input");
     if (/<(button|a)\b[^>]*>\s*<(svg|[A-Z][A-Za-z]*Icon)\b[^>]*\/?>\s*<\/(button|a)>/.test(line) && !/aria-label/.test(line)) add(1, "icon-button-no-label", file, n, line, "Add aria-label to icon-only buttons");
-    // 14. hand-rolled numeric dates. content-and-tone.md: ja prose is 年月日, tables are ISO.
+    // 13b. hand-rolled numeric dates. content-and-tone.md: ja prose is 年月日, tables are ISO.
     if (!/ads-audit-ignore/.test(line) && /get(?:Month|Date|FullYear)\(/.test(line) && /\$\{[^}]*\}\s*\/\s*\$\{/.test(line)) {
       add(2, "hand-rolled-date", file, n, line, "Do not join month, day and year with slashes", "Japanese prose: Intl dateStyle long. Tables and code: ISO 8601");
     }
@@ -128,65 +130,208 @@ for (const file of files) {
   // 14. Bar length must match the amount. Wilke, Fundamentals of Data Visualization, ch. 6
   // (https://clauswilke.com/dataviz/visualizing-amounts.html, opened 2026-10-14):
   // bars need to start at zero. Line charts may use a different baseline.
-  if (/<BarChart\b|<Bar\b/.test(src)) {
-    const tagRe = /<YAxis\b[\s\S]*?\/>/g;
-    let tag;
-    while ((tag = tagRe.exec(src))) {
-      const lineNo = src.slice(0, tag.index).split("\n").length;
-      const throughLine = src.split("\n").slice(lineNo - 1, lineNo - 1 + tag[0].split("\n").length).join("\n");
-      if (/ads-audit-ignore/.test(throughLine)) continue;
-      const domain = tag[0].match(/\bdomain=\{\s*\[\s*([^,\]]+)/);
-      if (!domain) continue;
-      const min = domain[1].trim().replace(/^['"]|['"]$/g, "");
-      const numeric = /^-?\d+(?:\.\d+)?$/.test(min);
-      const truncated = numeric ? Number(min) !== 0 : /^(dataMin|auto)$/.test(min);
-      if (!truncated) continue;
-      add(2, "bar-baseline", file, lineNo, "Bar chart Y axis does not start at 0", "Start the bar axis at 0 so length matches the amount");
-      break;
+  {
+    if (/<BarChart\b|<Bar\b/.test(src)) {
+      const tagRe = /<YAxis\b[\s\S]*?\/>/g;
+      let tag;
+      while ((tag = tagRe.exec(src))) {
+        const lineNo = src.slice(0, tag.index).split("\n").length;
+        const throughLine = src.split("\n").slice(lineNo - 1, lineNo - 1 + tag[0].split("\n").length).join("\n");
+        if (/ads-audit-ignore/.test(throughLine)) continue;
+        const domain = tag[0].match(/\bdomain=\{\s*\[\s*([^,\]]+)/);
+        if (!domain) continue;
+        const min = domain[1].trim().replace(/^['"]|['"]$/g, "");
+        const numeric = /^-?\d+(?:\.\d+)?$/.test(min);
+        const truncated = numeric ? Number(min) !== 0 : /^(dataMin|auto)$/.test(min);
+        if (!truncated) continue;
+        add(2, "bar-baseline", file, lineNo, "Bar chart Y axis does not start at 0", "Start the bar axis at 0 so length matches the amount");
+        break;
+      }
     }
   }
-  // 14. Chart title that only repeats column names.
+
+  // 15. Chart title that only repeats column names.
   // Datawrapper Academy, Annotate tab, "Title" (page last updated 2024-04-08):
   // the title is the one statement to remember, not a description of the columns.
   // https://www.datawrapper.de/academy/annotate-tab (opened 2026-10-14).
   // A title in the 8 lines above the chart, or title/aria-label on the chart tag,
   // that equals a dataKey or name (optional suffix の推移 / の変化 / の比較 / の内訳 / over time / trend).
   // ads-audit-ignore on the opening tag skips that chart.
-  // 14. Chart without a source name and URL in the footer.
+  {
+    const chartOpen = /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/g;
+    let opened;
+    while ((opened = chartOpen.exec(src))) {
+      const name = opened[1];
+      const rest = src.slice(opened.index);
+      const selfClose = /^<[^>]*\/>/.exec(rest);
+      const closeTag = `</${name}>`;
+      const closeAt = src.indexOf(closeTag, opened.index);
+      const end = selfClose ? opened.index + selfClose[0].length : closeAt === -1 ? src.length : closeAt + closeTag.length;
+      const openLineNo = src.slice(0, opened.index).split("\n").length;
+      const openLine = lines[openLineNo - 1] || "";
+      if (/ads-audit-ignore/.test(openLine)) {
+        chartOpen.lastIndex = end;
+        continue;
+      }
+      const gt = src.indexOf(">", opened.index);
+      const openTag = gt === -1 ? "" : src.slice(opened.index, Math.min(gt + 1, end));
+      const body = src.slice(opened.index, end);
+      const keys = [
+        ...attrValues(body, "dataKey"),
+        ...attrValues(body, "name"),
+        ...fieldNames(body),
+      ];
+      const preamble = lines.slice(Math.max(0, openLineNo - 9), openLineNo - 1);
+      const title = chartTitle(openTag, preamble);
+      if (title && columnOnlyTitle(title, keys)) {
+        add(2, "column-title", file, openLineNo, `${name} title only names the columns`, "Write the one statement the reader should remember");
+      }
+      chartOpen.lastIndex = end;
+    }
+  }
+
+  // 16. Chart without a source name and URL in the footer.
   // Datawrapper Academy, Annotate tab, "Data source & link to data source"
   // (page last updated 2024-04-08): https://www.datawrapper.de/academy/annotate-tab
   // Opened 2026-10-14. The footer is the 12 lines after the chart.
-  const chartOpen = /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/g;
-  let opened;
-  while ((opened = chartOpen.exec(src))) {
-    const name = opened[1];
-    const rest = src.slice(opened.index);
-    const selfClose = /^<[^>]*\/>/.exec(rest);
-    const closeTag = `</${name}>`;
-    const closeAt = src.indexOf(closeTag, opened.index);
-    const end = selfClose ? opened.index + selfClose[0].length : closeAt === -1 ? src.length : closeAt + closeTag.length;
-    const openLineNo = src.slice(0, opened.index).split("\n").length;
-    const openLine = lines[openLineNo - 1] || "";
-    if (/ads-audit-ignore/.test(openLine)) {
+  {
+    const chartOpen = /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/g;
+    let opened;
+    while ((opened = chartOpen.exec(src))) {
+      const name = opened[1];
+      const rest = src.slice(opened.index);
+      const selfClose = /^<[^>]*\/>/.exec(rest);
+      const closeTag = `</${name}>`;
+      const closeAt = src.indexOf(closeTag, opened.index);
+      const end = selfClose ? opened.index + selfClose[0].length : closeAt === -1 ? src.length : closeAt + closeTag.length;
+      const footer = src.slice(end).split("\n").slice(0, 13);
+      const footerText = [];
+      for (const ln of footer) {
+        if (footerText.length && /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/.test(ln)) break;
+        footerText.push(ln);
+      }
+      const lineNo = src.slice(0, opened.index).split("\n").length;
+      const openLines = src.split("\n").slice(lineNo - 1, lineNo + 1).join("\n");
+      if (/ads-audit-ignore/.test(openLines)) {
+        chartOpen.lastIndex = end;
+        continue;
+      }
+      const under = footerText.join("\n");
+      const hasName = /出典|\bsource\b/i.test(under);
+      const hasUrl = /https?:\/\//.test(under);
+      if (!(hasName && hasUrl)) {
+        add(2, "chart-source", file, lineNo, "Chart has no source name and URL under it", "Put the source name and a URL in the 12 lines under the chart");
+      }
       chartOpen.lastIndex = end;
-      continue;
     }
-    const gt = src.indexOf(">", opened.index);
-    const openTag = gt === -1 ? "" : src.slice(opened.index, Math.min(gt + 1, end));
-    const body = src.slice(opened.index, end);
-    const keys = [
-      ...attrValues(body, "dataKey"),
-      ...attrValues(body, "name"),
-      ...fieldNames(body),
-    ];
-    const preamble = lines.slice(Math.max(0, openLineNo - 9), openLineNo - 1);
-    const title = chartTitle(openTag, preamble);
-    if (title && columnOnlyTitle(title, keys)) {
-      add(2, "column-title", file, openLineNo, `${name} title only names the columns`, "Write the one statement the reader should remember");
+  }
+
+  // 17. Color key on a line, area, or pie chart.
+  // Datawrapper (Lisa Charlotte Muth, 2022-09-28), "Label directly":
+  // https://www.datawrapper.de/blog/text-in-data-visualizations (opened 2026-10-14).
+  // Those chart types label the series on the mark. A separate color key makes the reader
+  // look back and forth. Column and bar charts keep a Legend. ads-audit-ignore skips one key.
+  {
+    const chartOpen = /<(LineChart|AreaChart|PieChart)\b/g;
+    let opened;
+    while ((opened = chartOpen.exec(src))) {
+      const name = opened[1];
+      const closeAt = src.indexOf(`</${name}>`, opened.index);
+      if (closeAt === -1) continue;
+      const block = src.slice(opened.index, closeAt);
+      const legendRe = /<Legend\b[\s\S]*?(?:\/>|<\/Legend>)/g;
+      let legend;
+      while ((legend = legendRe.exec(block))) {
+        const abs = opened.index + legend.index;
+        const lineNo = src.slice(0, abs).split("\n").length;
+        const span = legend[0].split("\n").length;
+        const through = src.split("\n").slice(lineNo - 1, lineNo - 1 + span).join("\n");
+        if (/ads-audit-ignore/.test(through)) continue;
+        add(2, "color-key", file, lineNo, "Chart uses a color key instead of a label on the mark", "Label the series on the line, area, or slice. Keep Legend only where the label does not fit, and mark that Legend ads-audit-ignore");
+      }
+      chartOpen.lastIndex = closeAt + name.length + 3;
     }
-    chartOpen.lastIndex = end;
+  }
+
+  // 18. two Y axes in one chart file. Datawrapper (2018-05-08, intro revised 2026-07):
+  // a general audience misreads dual-axis charts. https://www.datawrapper.de/blog/dualaxis
+  {
+    const yAxis = /<YAxis\b/g;
+    let yHit = 0;
+    let yMatch;
+    while ((yMatch = yAxis.exec(src))) {
+      yHit += 1;
+      if (yHit === 2) {
+        const lineNo = src.slice(0, yMatch.index).split("\n").length;
+        add(2, "dual-axis", file, lineNo, "<YAxis> appears twice in one file", "Keep one Y axis. Draw the second series in its own chart.");
+        break;
+      }
+    }
+  }
+
+  // 19. More than seven series colors in one chart.
+  // Datawrapper (Lisa Charlotte Muth, 2018-05-29): if a chart needs more than seven colors,
+  // use another chart type or group the tail.
+  // https://blog.datawrapper.de/colors/ (opened 2026-10-14).
+  // Cartesian charts count <Bar>, <Line>, and <Area>. A pie counts <Cell>, or objects in data={[...]}.
+  // ads-audit-ignore on the opening tag skips that chart.
+  {
+    const chartOpen = /<(BarChart|LineChart|AreaChart|ComposedChart|PieChart)\b/g;
+    let opened;
+    while ((opened = chartOpen.exec(src))) {
+      const name = opened[1];
+      const closeAt = src.indexOf(`</${name}>`, opened.index);
+      if (closeAt === -1) continue;
+      const openLineNo = src.slice(0, opened.index).split("\n").length;
+      const openLine = lines[openLineNo - 1] || "";
+      if (/ads-audit-ignore/.test(openLine)) {
+        chartOpen.lastIndex = closeAt + name.length + 3;
+        continue;
+      }
+      const body = src.slice(opened.index + opened[0].length, closeAt);
+      let count = 0;
+      if (name === "PieChart") {
+        const cells = body.match(/<Cell\b/g);
+        count = cells ? cells.length : 0;
+        const dataLit = body.match(/data=\{\s*\[([\s\S]*?)\]\s*\}/);
+        if (dataLit) {
+          const objects = (dataLit[1].match(/\{/g) || []).length;
+          if (objects > count) count = objects;
+        }
+      } else {
+        const marks = body.match(/<(?:Bar|Line|Area)(?!Chart)\b/g);
+        count = marks ? marks.length : 0;
+      }
+      if (count > 7) {
+        add(2, "too-many-colors", file, openLineNo, `${name} uses ${count} series colors`, "Keep at most 7 colors. Group the tail as other, or split the chart");
+      }
+      chartOpen.lastIndex = closeAt + name.length + 3;
+    }
+  }
+
+  // 20. Vertical grid lines on a chart whose values run along Y.
+  // Wilke, Fundamentals of Data Visualization, ch. 23.2
+  // (https://clauswilke.com/dataviz/balance-data-context.html#background-grids, opened 2026-10-14):
+  // when the reader cares about change in y, vertical grid lines are not needed.
+  // Horizontal bars (Recharts BarChart layout="vertical") keep vertical lines.
+  {
+    const columnBar = /<BarChart\b(?![^>]*\blayout=["']vertical["'])/.test(src);
+    const lineOrArea = /<LineChart\b|<AreaChart\b/.test(src);
+    if (columnBar || lineOrArea) {
+      const gridRe = /<CartesianGrid\b[\s\S]*?(?:\/>|<\/CartesianGrid>)/g;
+      let grid;
+      while ((grid = gridRe.exec(src))) {
+        const lineNo = src.slice(0, grid.index).split("\n").length;
+        const throughLine = src.split("\n").slice(lineNo - 1, lineNo - 1 + grid[0].split("\n").length).join("\n");
+        if (/ads-audit-ignore/.test(throughLine)) continue;
+        if (/\bvertical=\{\s*false\s*\}/.test(grid[0])) continue;
+        add(2, "vertical-grid", file, lineNo, "Chart grid draws vertical lines", "Set CartesianGrid vertical={false}; keep horizontal lines only");
+        break;
+      }
+    }
   }
 }
+
 
 function attrValues(chunk, attr) {
   const re = new RegExp(`\\b${attr}=\\{?["']([^"']+)["']\\}?`, "g");
@@ -217,113 +362,6 @@ function columnOnlyTitle(title, keys) {
   if (list.length < 2) return false;
   const joins = [list.join("と"), list.join("、"), list.join(" and "), list.join(" vs "), list.join("/")];
   return joins.some((j) => norm(j) === norm(t) || norm(j) === norm(bare));
-    const footer = src.slice(end).split("\n").slice(0, 13);
-    const footerText = [];
-    for (const ln of footer) {
-      if (footerText.length && /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/.test(ln)) break;
-      footerText.push(ln);
-    }
-    const lineNo = src.slice(0, opened.index).split("\n").length;
-    const openLines = src.split("\n").slice(lineNo - 1, lineNo + 1).join("\n");
-    if (/ads-audit-ignore/.test(openLines)) {
-      chartOpen.lastIndex = end;
-      continue;
-    }
-    const under = footerText.join("\n");
-    const hasName = /出典|\bsource\b/i.test(under);
-    const hasUrl = /https?:\/\//.test(under);
-    if (!(hasName && hasUrl)) {
-      add(2, "chart-source", file, lineNo, "Chart has no source name and URL under it", "Put the source name and a URL in the 12 lines under the chart");
-    }
-    chartOpen.lastIndex = end;
-  // 14. Color key on a line, area, or pie chart.
-  // Datawrapper (Lisa Charlotte Muth, 2022-09-28), "Label directly":
-  // https://www.datawrapper.de/blog/text-in-data-visualizations (opened 2026-10-14).
-  // Those chart types label the series on the mark. A separate color key makes the reader
-  // look back and forth. Column and bar charts keep a Legend. ads-audit-ignore skips one key.
-  const chartOpen = /<(LineChart|AreaChart|PieChart)\b/g;
-  // 14. More than seven series colors in one chart.
-  // Datawrapper (Lisa Charlotte Muth, 2018-05-29): if a chart needs more than seven colors,
-  // use another chart type or group the tail.
-  // https://blog.datawrapper.de/colors/ (opened 2026-10-14).
-  // Cartesian charts count <Bar>, <Line>, and <Area>. A pie counts <Cell>, or objects in data={[...]}.
-  // ads-audit-ignore on the opening tag skips that chart.
-  const chartOpen = /<(BarChart|LineChart|AreaChart|ComposedChart|PieChart)\b/g;
-  let opened;
-  while ((opened = chartOpen.exec(src))) {
-    const name = opened[1];
-    const closeAt = src.indexOf(`</${name}>`, opened.index);
-    if (closeAt === -1) continue;
-    const block = src.slice(opened.index, closeAt);
-    const legendRe = /<Legend\b[\s\S]*?(?:\/>|<\/Legend>)/g;
-    let legend;
-    while ((legend = legendRe.exec(block))) {
-      const abs = opened.index + legend.index;
-      const lineNo = src.slice(0, abs).split("\n").length;
-      const span = legend[0].split("\n").length;
-      const through = src.split("\n").slice(lineNo - 1, lineNo - 1 + span).join("\n");
-      if (/ads-audit-ignore/.test(through)) continue;
-      add(2, "color-key", file, lineNo, "Chart uses a color key instead of a label on the mark", "Label the series on the line, area, or slice. Keep Legend only where the label does not fit, and mark that Legend ads-audit-ignore");
-    }
-    chartOpen.lastIndex = closeAt + name.length + 3;
-  }
-  // 14. two Y axes in one chart file. Datawrapper (2018-05-08, intro revised 2026-07):
-  // a general audience misreads dual-axis charts. https://www.datawrapper.de/blog/dualaxis
-  const yAxis = /<YAxis\b/g;
-  let yHit = 0;
-  let yMatch;
-  while ((yMatch = yAxis.exec(src))) {
-    yHit += 1;
-    if (yHit === 2) {
-      const lineNo = src.slice(0, yMatch.index).split("\n").length;
-      add(2, "dual-axis", file, lineNo, "<YAxis> appears twice in one file", "Keep one Y axis. Draw the second series in its own chart.");
-      break;
-    }
-  }
-    const openLineNo = src.slice(0, opened.index).split("\n").length;
-    const openLine = lines[openLineNo - 1] || "";
-    if (/ads-audit-ignore/.test(openLine)) {
-      chartOpen.lastIndex = closeAt + name.length + 3;
-      continue;
-    }
-    const body = src.slice(opened.index + opened[0].length, closeAt);
-    let count = 0;
-    if (name === "PieChart") {
-      const cells = body.match(/<Cell\b/g);
-      count = cells ? cells.length : 0;
-      const dataLit = body.match(/data=\{\s*\[([\s\S]*?)\]\s*\}/);
-      if (dataLit) {
-        const objects = (dataLit[1].match(/\{/g) || []).length;
-        if (objects > count) count = objects;
-      }
-    } else {
-      const marks = body.match(/<(?:Bar|Line|Area)(?!Chart)\b/g);
-      count = marks ? marks.length : 0;
-    }
-    if (count > 7) {
-      add(2, "too-many-colors", file, openLineNo, `${name} uses ${count} series colors`, "Keep at most 7 colors. Group the tail as other, or split the chart");
-    }
-    chartOpen.lastIndex = closeAt + name.length + 3;
-  }
-  // 14. Vertical grid lines on a chart whose values run along Y.
-  // Wilke, Fundamentals of Data Visualization, ch. 23.2
-  // (https://clauswilke.com/dataviz/balance-data-context.html#background-grids, opened 2026-10-14):
-  // when the reader cares about change in y, vertical grid lines are not needed.
-  // Horizontal bars (Recharts BarChart layout="vertical") keep vertical lines.
-  const columnBar = /<BarChart\b(?![^>]*\blayout=["']vertical["'])/.test(src);
-  const lineOrArea = /<LineChart\b|<AreaChart\b/.test(src);
-  if (columnBar || lineOrArea) {
-    const gridRe = /<CartesianGrid\b[\s\S]*?(?:\/>|<\/CartesianGrid>)/g;
-    let grid;
-    while ((grid = gridRe.exec(src))) {
-      const lineNo = src.slice(0, grid.index).split("\n").length;
-      const throughLine = src.split("\n").slice(lineNo - 1, lineNo - 1 + grid[0].split("\n").length).join("\n");
-      if (/ads-audit-ignore/.test(throughLine)) continue;
-      if (/\bvertical=\{\s*false\s*\}/.test(grid[0])) continue;
-      add(2, "vertical-grid", file, lineNo, "Chart grid draws vertical lines", "Set CartesianGrid vertical={false}; keep horizontal lines only");
-      break;
-    }
-  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card
@@ -337,22 +375,6 @@ for (const file of files) {
 }
 
 // Eyebrow budget: ceil(sections / 3), minimum 1
-function unsupportedOverlook(line) {
-  if (/^\s*(\/\/|\/\*|\*|import )/.test(line) || /ads-audit-ignore/.test(line)) return false;
-  if (/\b(bad|before)\s*:/.test(line)) return false;
-  const match = line.match(/多くの人[がは]見落とし/);
-  if (!match) return false;
-  const at = match.index;
-  const open = line.lastIndexOf("「", at);
-  const close = line.indexOf("」", at);
-  if (open !== -1 && close > at) return false;
-  return true;
-}
-
-function sourceNearby(lines, index) {
-  return /https?:\/\/|出典/.test(lines.slice(index, index + 3).join("\n"));
-}
-
 if (counts.sections > 0) {
   const budget = Math.max(1, Math.ceil(counts.sections / 3));
   if (counts.eyebrows > budget) add(3, "eyebrow-overuse", target, 0, `${counts.eyebrows} uppercase eyebrow labels for ${counts.sections} sections (budget ${budget})`, "Remove eyebrows; let the heading carry the section");
@@ -371,6 +393,7 @@ function hiddenAgent(line) {
     if (open <= close) return true;
   }
   return false;
+}
 function unsupportedAttention(line) {
   if (/^\s*(\/\/|\/\*|\*|import )/.test(line) || /ads-audit-ignore/.test(line)) return false;
   if (/\b(bad|before)\s*:/.test(line)) return false;
@@ -386,6 +409,18 @@ function unsupportedAttention(line) {
 function sourceNearby(lines, index) {
   return /https?:\/\/|出典/.test(lines.slice(index, index + 3).join("\n"));
 }
+function unsupportedOverlook(line) {
+  if (/^\s*(\/\/|\/\*|\*|import )/.test(line) || /ads-audit-ignore/.test(line)) return false;
+  if (/\b(bad|before)\s*:/.test(line)) return false;
+  const match = line.match(/多くの人[がは]見落とし/);
+  if (!match) return false;
+  const at = match.index;
+  const open = line.lastIndexOf("「", at);
+  const close = line.indexOf("」", at);
+  if (open !== -1 && close > at) return false;
+  return true;
+}
+
 
 const tokenShare = counts.colorDecls ? Math.round((counts.tokenColorDecls / counts.colorDecls) * 100) : 100;
 findings.sort((a, b) => a.sev - b.sev || a.file.localeCompare(b.file) || a.line - b.line);
