@@ -4,17 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 328  /  ドメイン数: 76
-
-## 21st.dev
-
-- [21st.dev](https://21st.dev/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
-
-## agentation.com
-
-- [Agentation](https://www.agentation.com/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+リンク数: 324  /  ドメイン数: 69
 
 ## animaapp.com
 
@@ -38,11 +28,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Claude can now create and edit files](https://www.anthropic.com/news/create-files)  
   引用: [HTMLレポート](../Knowledge/skills/html-report.md)
 
-## api.fxtwitter.com
-
-- [fxtwitter JSON for status 2089263766428950683](https://api.fxtwitter.com/neropursue/status/2089263766428950683)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
-
 ## atlassian.design
 
 - [Atlassian Design](https://atlassian.design/)  
@@ -52,11 +37,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Unstyled UI components for accessible design systems · Base UI](https://base-ui.com/)  
   引用: [Base UI (@base-ui/react)](../Knowledge/component-libraries/base-ui.md)
-
-## beautifului.dev
-
-- [Beautiful UI](https://www.beautifului.dev/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## blog.duolingo.com
 
@@ -82,11 +62,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Claude Code docs: Agent Skills (SKILL.md format)](https://code.claude.com/docs/en/skills)  
   引用: [2026 年の DESIGN.md エコシステム](../Knowledge/design-md-collections/claude-design-and-design-md-ecosystem.md), [Claude Design (Anthropic)](../Knowledge/skills/anthropic-claude-design.md)
-
-## component.gallery
-
-- [The Component Gallery](https://component.gallery/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## datacamp.com
 
@@ -277,6 +252,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [WCAG 2.2 (UI に関わる達成基準)](../Knowledge/platform-guidelines/wcag-2-2.md)
 - [obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)](https://github.com/obra/superpowers)  
   引用: [OSS ランキング (/rankings) の設計](../Knowledge/research/oss-rankings.md), [Superpowers (obra)](../Knowledge/skills/superpowers.md)
+- [pbakaus/impeccable](https://github.com/pbakaus/impeccable)  
+  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [pmndrs/drei: useful helpers for react-three-fiber](https://github.com/pmndrs/drei)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [primer/primitives: Color, spacing, and typography primitives in json](https://github.com/primer/primitives)  
@@ -357,6 +334,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [GSAP docs: ScrollTrigger (proxy blocked, link recorded)](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)  
   引用: [GSAP and ScrollTrigger](../Knowledge/animation/gsap.md)
 
+## impeccable.style
+
+- [impeccable.style](https://impeccable.style)  
+  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md)
+
 ## inclusive-components.design
 
 - [Inclusive Components](https://inclusive-components.design/)  
@@ -421,16 +403,6 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [geist - npm](https://www.npmjs.com/package/geist)  
   引用: [Geist (Geist Sans / Geist Mono)](../Knowledge/typography/geist-font.md)
-
-## orbs.jakubantalik.com
-
-- [Thinking orbs (moved notice)](https://orbs.jakubantalik.com/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
-
-## originkit.dev
-
-- [Originkit](https://www.originkit.dev/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 
 ## phonearena.com
 
@@ -638,6 +610,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [Superpowers (obra)](../Knowledge/skills/superpowers.md)
 - [opensesh/DESIGN-OPS: design-critique-facilitator.md](https://raw.githubusercontent.com/opensesh/DESIGN-OPS/HEAD/skills/design-critique-facilitator.md)  
   引用: [デザインレビューとクリティーク](../Knowledge/design-thinking/design-review-and-critique.md)
+- [Impeccable README](https://raw.githubusercontent.com/pbakaus/impeccable/main/README.md)  
+  引用: [Impeccable](../Knowledge/anti-slop/impeccable.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
 - [R3F docs: Scaling performance](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/advanced/scaling-performance.mdx)  
   引用: [three.js, react-three-fiber and drei](../Knowledge/animation/threejs-and-r3f.md)
 - [R3F docs: Introduction (source of r3f.docs.pmnd.rs, which is proxy blocked)](https://raw.githubusercontent.com/pmndrs/react-three-fiber/master/docs/getting-started/introduction.mdx)  
@@ -856,15 +830,10 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [Stripe Design Language Study](https://stripe.design/)  
   引用: [Stripe](../Knowledge/design-systems/stripe.md)
 
-## transitions.dev
-
-- [Transitions.dev](https://transitions.dev/)  
-  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
-
 ## ui.aceternity.com
 
 - [Aceternity UI (site, proxy blocked, link recorded)](https://ui.aceternity.com/)  
-  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md), [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+  引用: [Magic UI and Aceternity UI](../Knowledge/component-libraries/magic-ui-and-aceternity.md)
 
 ## ui.shadcn.com
 
@@ -887,6 +856,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## x.com
 
-- [Nero (@neropursue) on X, 2026-08-17](https://x.com/neropursue/status/2089263766428950683)  
+- [Nero (@neropursue) / Posts / X (profile, seen in search results only)](https://x.com/neropursue)  
+  引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
+- [Nero (@neropursue) on X, status 2089263766428950683 (unretrievable, link recorded)](https://x.com/neropursue/status/2089263766428950683)  
   引用: [@neropursue X post (2089263766428950683)](../Knowledge/skills/neropursue-x-post.md)
 

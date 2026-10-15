@@ -26,6 +26,12 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Rive state machines](animation/rive.md) | product | rive, state-machine, inputs, data-binding, interactive, wasm, react | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
 
+## anti-slop
+
+| エントリ | 種別 | タグ | 更新 |
+|---|---|---|---|
+| [Impeccable](anti-slop/impeccable.md) | skill | skill, detector, apache-2.0, design, anti-slop | 2026-10-14 |
+
 ## color
 
 | エントリ | 種別 | タグ | 更新 |
@@ -107,7 +113,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [@neropursue X post (2089263766428950683)](skills/neropursue-x-post.md) | article | x-post, component-library, animation, reference | 2026-10-14 |
+| [@neropursue X post (2089263766428950683)](skills/neropursue-x-post.md) | article | x-post, unretrievable, frontend-design, skills, reference | 2026-09-06 |
 | [Anthropic frontend-design skill](skills/anthropic-frontend-design-skill.md) | skill | skill, anthropic, frontend-design, typography, ai-tells, canvas-design, theme-factory | 2026-09-06 |
 | [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
 | [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
@@ -119,8 +125,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
 | [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
-| [人気のスライド作成Skill](skills/slide-skills.md) | guideline | slides, skill, catalog, pptx, html | 2026-10-14 |
-| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-11 |
+| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-14 |
 
 ## tech-stack
 
