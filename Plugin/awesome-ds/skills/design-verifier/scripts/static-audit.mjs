@@ -48,6 +48,7 @@ function quotedJaFiller(line) {
   if (line.slice(hit.index - 2, hit.index) === '\\"' && line.slice(end, end + 2) === '\\"') return false;
   return true;
 }
+const ATTENTION = /注目されています|ご注目ください|注目を集めて/;
 const JA = /[぀-ヿ一-鿿]/;
 
 for (const file of files) {
@@ -94,6 +95,10 @@ for (const file of files) {
     if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
     // 7c. hidden agent. no-ai-slop-ja pattern 9: name who acts, or delete the shell.
     if (hiddenAgent(line)) add(3, "hidden-agent", file, n, line, "Name who does the action. Drop させていただく and 形となっております");
+    // 7b. unsupported crowd claims. no-ai-slop-ja pattern 15: name the source or delete.
+    if (unsupportedAttention(line) && !sourceNearby(lines, i)) {
+      add(3, "unsupported-attention", file, n, line, "Name the source on this line or the next two, or delete the sentence");
+    }
     // 8. eyebrows and sections
     if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
     if (/<section\b|<Section\b/.test(line)) counts.sections++;
@@ -296,6 +301,20 @@ function hiddenAgent(line) {
     if (open <= close) return true;
   }
   return false;
+function unsupportedAttention(line) {
+  if (/^\s*(\/\/|\/\*|\*|import )/.test(line) || /ads-audit-ignore/.test(line)) return false;
+  if (/\b(bad|before)\s*:/.test(line)) return false;
+  const match = line.match(ATTENTION);
+  if (!match) return false;
+  const at = match.index;
+  const open = line.lastIndexOf("「", at);
+  const close = line.indexOf("」", at);
+  if (open !== -1 && close > at) return false;
+  return true;
+}
+
+function sourceNearby(lines, index) {
+  return /https?:\/\/|出典/.test(lines.slice(index, index + 3).join("\n"));
 }
 
 const tokenShare = counts.colorDecls ? Math.round((counts.tokenColorDecls / counts.colorDecls) * 100) : 100;
