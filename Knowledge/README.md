@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 75
+件数: 74
 
 ## accessibility
 
@@ -25,13 +25,6 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Motion Primitives と Animata](animation/motion-primitives-and-animata.md) | library | motion-primitives, animata, motion, framer-motion, tailwindcss, copy-paste, shadcn-style | 2026-09-07 |
 | [Rive state machines](animation/rive.md) | product | rive, state-machine, inputs, data-binding, interactive, wasm, react | 2026-09-06 |
 | [three.js, react-three-fiber and drei](animation/threejs-and-r3f.md) | library | three, r3f, drei, webgl, 3d, performance, reduced-motion, frameloop | 2026-09-06 |
-
-## anti-slop
-
-| エントリ | 種別 | タグ | 更新 |
-|---|---|---|---|
-| [anti-slop (miqdadbadjuber)](anti-slop/anti-slop.md) | skill | skill, filter, mit, ui, copy | 2026-10-14 |
-| [No AI Slop (petergyang)](anti-slop/no-ai-slop.md) | skill | english, skill, prose, mit | 2026-10-14 |
 
 ## color
 
@@ -119,14 +112,15 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
 | [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
 | [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](skills/diagram-design.md) | skill | skill, diagram, svg, excalidraw, mermaid-alternative, editorial, design-tokens | 2026-09-07 |
-| [HTMLレポート](skills/html-report.md) | guideline | html-report, skill, anthropic, artifacts, white-canvas | 2026-10-14 |
+| [HTMLレポート](skills/html-report.md) | guideline | html-report, skill, anthropic, artifacts, white-canvas | 2026-10-11 |
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
 | [Superpowers (obra)](skills/superpowers.md) | skill | skill, superpowers, sdlc, subagent-driven-development, brainstorming, tdd, multi-harness | 2026-09-07 |
 | [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, dials, gsap, motion, landing-page, pre-flight, em-dash | 2026-09-06 |
 | [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
 | [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
-| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-14 |
+| [人気のスライド作成Skill](skills/slide-skills.md) | guideline | slides, skill, catalog, pptx, html | 2026-10-14 |
+| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, japanese, before-after, mermaid, slides, skill | 2026-10-11 |
 
 ## tech-stack
 

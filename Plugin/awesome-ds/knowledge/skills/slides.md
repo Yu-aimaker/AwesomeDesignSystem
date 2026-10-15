@@ -27,6 +27,7 @@ updated: 2026-10-11
 - 導入（README）: `/plugin marketplace add https://github.com/zarazhangrui/frontend-slides` のあと `/plugin install frontend-slides@frontend-slides`。短縮形は SSH を試して失敗することがある、と README が注意する。
 - Anthropic `pptx`（2026-10-11 に SKILL.md を取得）: 新規は pptxgenjs。`LAYOUT_16x9` は 10 x 5.625 インチ。色は `#` なしの 6 桁。`#FF0000` はファイルを壊す。
 - AwesomeDS の Skill は `Plugin/awesome-ds/skills/slides/SKILL.md`。1 枚 1 主張。本文は 18px 以上。矢印キーで送り、`3 / 8` のように枚数を文字で出す。
+- 人気 Skill の一覧（stars、ライセンス、良い例と悪い例）は `Knowledge/skills/slide-skills.md`。確認日は 2026-10-14。
 
 ## 具体的な値・ルール（あれば）
 
