@@ -207,6 +207,29 @@ function columnOnlyTitle(title, keys) {
       add(2, "chart-source", file, lineNo, "Chart has no source name and URL under it", "Put the source name and a URL in the 12 lines under the chart");
     }
     chartOpen.lastIndex = end;
+  // 14. Color key on a line, area, or pie chart.
+  // Datawrapper (Lisa Charlotte Muth, 2022-09-28), "Label directly":
+  // https://www.datawrapper.de/blog/text-in-data-visualizations (opened 2026-10-14).
+  // Those chart types label the series on the mark. A separate color key makes the reader
+  // look back and forth. Column and bar charts keep a Legend. ads-audit-ignore skips one key.
+  const chartOpen = /<(LineChart|AreaChart|PieChart)\b/g;
+  let opened;
+  while ((opened = chartOpen.exec(src))) {
+    const name = opened[1];
+    const closeAt = src.indexOf(`</${name}>`, opened.index);
+    if (closeAt === -1) continue;
+    const block = src.slice(opened.index, closeAt);
+    const legendRe = /<Legend\b[\s\S]*?(?:\/>|<\/Legend>)/g;
+    let legend;
+    while ((legend = legendRe.exec(block))) {
+      const abs = opened.index + legend.index;
+      const lineNo = src.slice(0, abs).split("\n").length;
+      const span = legend[0].split("\n").length;
+      const through = src.split("\n").slice(lineNo - 1, lineNo - 1 + span).join("\n");
+      if (/ads-audit-ignore/.test(through)) continue;
+      add(2, "color-key", file, lineNo, "Chart uses a color key instead of a label on the mark", "Label the series on the line, area, or slice. Keep Legend only where the label does not fit, and mark that Legend ads-audit-ignore");
+    }
+    chartOpen.lastIndex = closeAt + name.length + 3;
   }
 }
 

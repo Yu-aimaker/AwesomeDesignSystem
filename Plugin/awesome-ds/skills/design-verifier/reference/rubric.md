@@ -66,6 +66,8 @@ What to look at: whether the title is the one statement a reader should remember
 Findings: a title in the 8 lines above a chart, or `title` / `aria-label` on the chart, that equals a `dataKey` or `name` (optional suffix の推移, の変化, の比較, の内訳, over time, trend) (S2, static audit `column-title`). A title with a claim is fine. No title is not this finding. Source: https://www.datawrapper.de/academy/annotate-tab
 What to look at: the footer under the chart. Readers need the source name and a URL so they can judge the data.
 Findings: `<BarChart>`, `<LineChart>`, `<AreaChart>`, `<PieChart>`, or `<ComposedChart>` with no `出典` or `source` and no `http` URL in the 12 lines under the chart (S2, static audit `chart-source`). Source: https://www.datawrapper.de/academy/annotate-tab
+What to look at: where the series name sits. On a line, area, or pie chart the name belongs on the mark. A color key apart from the mark makes the reader look back and forth.
+Findings: `<Legend>` inside `<LineChart>`, `<AreaChart>`, or `<PieChart>` (S2, static audit `color-key`). Column and bar charts may keep a legend. Source: https://www.datawrapper.de/blog/text-in-data-visualizations
 
 ## Report discipline
 
