@@ -1,4 +1,4 @@
-// STA-100 Japanese copy: a crowd claim needs a source.
+// A crowd claim needs a source.
 // no-ai-slop-ja pattern 15 (SKILL.md, fetched 2026-10-14):
 // https://github.com/53able/no-ai-slop-ja
 // Bad: 「近年注目されています。」 Fix: name the source, or delete the sentence.

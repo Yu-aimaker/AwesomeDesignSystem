@@ -1,4 +1,4 @@
-// Sir 2026-10-11: charts were hard to read. A color key apart from the mark is one case.
+// Charts were hard to read. A color key apart from the mark is one case.
 // Source: https://www.datawrapper.de/blog/text-in-data-visualizations (opened 2026-10-14).
 import { test } from "node:test";
 import assert from "node:assert/strict";

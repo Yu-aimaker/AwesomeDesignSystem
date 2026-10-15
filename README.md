@@ -24,23 +24,13 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 
 ## 3つの用途
 
-AwesomeDS は次の 3 つを同時に満たす。決めた内容は STA-12。
+AwesomeDS は次の 3 つを同時に満たす。
 
 | 用途 | 何をするか | 主な置き場所 |
 |---|---|---|
 | 1. 開発中の UI にルールを当てる | プラグインを入れると、モダンで AI らしくない UI になる | `awesome-ds` |
 | 2. そのプロダクト専用の DS を作る | ブランドを聞きながら DESIGN.md と tokens を作る | `ds-creator` |
 | 3. 汎用の正本を 1 つ育てる | フォント、色、余白、部品、モーションの共通解を更新し続ける | `AwesomeDS/` と `Knowledge/` |
-
-Phase のチケットがどの用途に効くか。
-
-| チケット | 用途 |
-|---|---|
-| STA-7, STA-13, STA-14, STA-16, STA-17 | 3. 正本を育てる |
-| STA-8, STA-9, STA-15 | 1. ルールを当てる。STA-9 と STA-15 は 2. 専用 DS も含む |
-| STA-18 | 用途ではない。公開は Sir が決める |
-
-方針が割れたときは Sir に上げる。
 
 ## 何が入っているか
 
@@ -49,7 +39,7 @@ Phase のチケットがどの用途に効くか。
 | [`AwesomeDS/`](AwesomeDS/) | 正本のデザインシステム。DESIGN.md、tokens、24 の foundations、コンポーネント規約 | [DESIGN.md](AwesomeDS/DESIGN.md) |
 | [`Plugin/awesome-ds/`](Plugin/awesome-ds/) | Claude Code プラグイン（スキル 7 本）と Cursor 用ルール | [Plugin README](Plugin/awesome-ds/README.md) |
 | [`web/`](web/) | AwesomeDS を触って確かめる体験サイト。サイト自身が AwesomeDS で作られている。配信は [配信](#配信) | [SITE-DESIGN.md](web/SITE-DESIGN.md) |
-| [`docs/`](docs/) | 配信、週次、STA-94 の索引 | [docs/README.md](docs/README.md) |
+| [`docs/`](docs/) | 週次の仕組み、レポートとスライドの生成仕様、i18n | [docs/README.md](docs/README.md) |
 | [`Knowledge/`](Knowledge/) | 参考にしたスキル、OSS、デザインシステム、ガイドライン、記事の出典付き要約 | [Knowledge/README.md](Knowledge/README.md) |
 | [`Reference/`](Reference/) | Knowledge が参照した外部リンク一覧（自動生成。手編集しない） | [REFERENCE.md](Reference/REFERENCE.md) |
 
@@ -72,7 +62,7 @@ Phase のチケットがどの用途に効くか。
 claude --plugin-dir ./Plugin/awesome-ds
 ```
 
-このリポジトリへの導入は上の手順で足りる。Cursor Marketplace などの公開は Sir が明示するまでしない。
+このリポジトリへの導入は上の手順で足りる。
 
 ### B. Cursor で使う
 
@@ -129,28 +119,32 @@ Reference/REFERENCE.md  外部リンク一覧（scripts/build-reference.mjs で�
 Plugin/awesome-ds/    Claude Code プラグイン（skills/, cursor/, ds/ = AwesomeDS の同期コピー）
 web/                  体験サイト（Vite + React + Tailwind v4 + Motion + three.js + Lottie）
 scripts/              生成と検証（build-reference, extract-brands, build-palettes, build-fonts, fetch-repos, validate-*, hosting-smoke, preview-headers）
-docs/                 索引は docs/README.md
-  ops/                Cloudflare への切替と、Vercel へ戻す手順
-  specs/              週次自動成長（冒頭が現行）
-  extensions/         STA-94 の原因と B1〜B4 の対応
+docs/                 週次の仕組み、生成仕様、i18n。索引は docs/README.md
 .claude-plugin/marketplace.json  プラグインマーケットプレイス定義
 .github/workflows/    check、weekly-growth、weekly-growth-settle
 ```
 
 ## 更新の流れ
 
-1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は PR を出し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで、作者がボットだけで、Check が成功したとき `weekly-growth-settle.yml` が `bot/weekly-growth` を squash merge する。失敗、人のコミット、許可外のパスではその PR を閉じる。消すブランチは `bot/weekly-growth` だけ。main へは push しない。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。設計の記録は [docs/specs/awesomeds-weekly-growth-spec.md](docs/specs/awesomeds-weekly-growth-spec.md)。冒頭の「現行」が今の動き。
+1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は PR を出し、差分が `AwesomeDS/data/` と `Plugin/awesome-ds/ds/data/` だけで、作者がボットだけで、Check が成功したとき `weekly-growth-settle.yml` が `bot/weekly-growth` を squash merge する。失敗、人のコミット、許可外のパスではその PR を閉じる。消すブランチは `bot/weekly-growth` だけ。main へは push しない。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は `AwesomeDS/data/candidates.json` に溜まり、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。仕組みと止める事故は [docs/weekly-growth.md](docs/weekly-growth.md)。
 2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。Actions では AI API を使わない。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
 
 ## 配信
 
-体験サイトは Cloudflare Workers Static Assets で配信する。noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。Vercel プロジェクト `awesome-design-systems-claude` は 2026-10-12 に pause した。切替の記録は [docs/ops/cloudflare-cutover.md](docs/ops/cloudflare-cutover.md)。戻す手順は [docs/ops/cloudflare-rollback.md](docs/ops/cloudflare-rollback.md)。
+体験サイトは Cloudflare Workers Static Assets で配信する。noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。ヘッダと応答の確認は `node scripts/hosting-smoke.mjs <url>`。
 
-## STA-94
+## AI っぽさの 4 つの原因と、止める仕組み
 
-脱 AI スロップ、HTML レポート、スライドを足した。4つの原因と、それを止める場所は [docs/extensions/sta-94-cause-map.md](docs/extensions/sta-94-cause-map.md)。サイトの経路は `/anti-slop`、`/report`、`/slides`（英語は `/en` 接頭辞）。スキルは上の表の `awesome-ds`、`design-verifier`、`html-report`、`slides`。
+| 原因 | 止める場所 |
+|---|---|
+| 日本語が不自然 | `AwesomeDS/foundations/anti-patterns.md` の Japanese copy、`content-and-tone.md`、原則 7（`principles.md`）、サイトの `/anti-slop` |
+| 文章が多すぎる | `anti-patterns.md` の Volume。`html-report` は結論 3 文、本文は日本語 1,500 字まで。`slides` は 1 枚 1 主張、40 字まで。サイトの `/report` と `/slides` |
+| 図が読みにくい | `anti-patterns.md` の Charts（2 本の Y 軸、離れた色の説明、列名だけの題名、出典なし）。`design-verifier` の静的検査が拾う |
+| 細かなミス | `anti-patterns.md` の Correctness。`design-verifier` の `static-audit.mjs` と `capture.mjs` |
+
+英語のページは `/en` 接頭辞。
 
 ## 参考にした主なもの
 

@@ -203,7 +203,7 @@ test("dry-run is the default and only an explicit false proposes", () => {
   assert.equal(isDryRun("false"), false);
   assert.equal(decide({ guard, dryRun: undefined, humanAuthors: [] }).action, "dry-run");
   assert.equal(decide({ guard, dryRun: "false", humanAuthors: [] }).action, "propose");
-  assert.equal(decide({ guard, dryRun: "false", humanAuthors: ["sir@example.com"] }).action, "fail");
+  assert.equal(decide({ guard, dryRun: "false", humanAuthors: ["human@example.com"] }).action, "fail");
 });
 
 test("known, rejected, and imageless candidates are not proposed again", () => {
@@ -505,7 +505,7 @@ test("settle skips, fails, or closes instead of merging an unsafe pull request",
     assert.deepEqual(settle(settleInput({ conclusion })), { action: "close", reason: "check" });
   }
   assert.deepEqual(settle(settleInput({ authors: [] })), { action: "close", reason: "author" });
-  assert.deepEqual(settle(settleInput({ authors: [BOT_EMAIL, "sir@example.com"] })), { action: "close", reason: "author" });
+  assert.deepEqual(settle(settleInput({ authors: [BOT_EMAIL, "human@example.com"] })), { action: "close", reason: "author" });
   assert.deepEqual(settle(settleInput({ paths: [] })), { action: "close", reason: "empty-diff" });
   assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/repos.json", "web/src/App.tsx"] })), { action: "close", reason: "path" });
   assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/../../web/App.tsx"] })), { action: "close", reason: "path" });

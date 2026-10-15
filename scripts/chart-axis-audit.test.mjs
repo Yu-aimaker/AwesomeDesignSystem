@@ -1,4 +1,4 @@
-// Sir 2026-10-11: charts were hard to read. Two Y axes are one of those cases.
+// Charts were hard to read. Two Y axes are one of those cases.
 // Source: https://www.datawrapper.de/blog/dualaxis (opened 2026-10-14).
 import { test } from "node:test";
 import assert from "node:assert/strict";

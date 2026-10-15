@@ -1,4 +1,4 @@
-// STA-100 Japanese copy: keigo that hides who acts.
+// Keigo that hides who acts.
 // no-ai-slop-ja pattern 9 (SKILL.md, fetched 2026-10-14):
 // https://github.com/53able/no-ai-slop-ja/blob/main/skills/no-ai-slop-ja/SKILL.md
 // Bad: 「こちらで確認させていただく形となっております。」

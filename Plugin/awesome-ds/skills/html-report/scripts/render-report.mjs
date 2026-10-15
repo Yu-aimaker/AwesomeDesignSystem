@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Write one HTML report from JSON. See docs/specs/sta-102-html-report.md.
+// Write one HTML report from JSON. See docs/specs/html-report.md.
 // node render-report.mjs <report.json> -o <report.html>
 import { readFileSync, writeFileSync } from "node:fs";
 

@@ -1,11 +1,11 @@
-# [SPEC] HTMLレポートの生成（STA-102）
+# [SPEC] HTMLレポートの生成
 
-状態: 下書き（2026-10-14 JST）。画面は変えない。
-対象: `Plugin/awesome-ds/skills/html-report/`。サイトの `/report` は STA-152 で凍結（木曜以降に Claude が確認するまで CSS・SVG・画面を変えない）。
+状態: 実装済み（`render-report.mjs`）。
+対象: `Plugin/awesome-ds/skills/html-report/`。サイトの `/report` は Skill の説明ページで、このスクリプトでは変えない。
 
 ## 1. ゴール
 
-構造化された事実から、Skill の骨格と同じ HTML を1枚書く。研究リポジトリ（STA-85）は同じコマンドを自分の JSON にかける。研究側の HTML は AwesomeDS に写さない。
+構造化された事実から、Skill の骨格と同じ HTML を1枚書く。他のリポジトリも同じコマンドを自分の JSON にかけてよい。そこで作った HTML は AwesomeDS に写さない。
 
 ## 2. 非ゴール
 

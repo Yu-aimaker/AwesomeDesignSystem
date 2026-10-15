@@ -13,7 +13,7 @@ export interface FlagshipOgp {
   note?: string;
 }
 
-/** How much of a source AwesomeDS takes in. See docs/audits/sta-53-core-quality.md. */
+/** How much of a source AwesomeDS takes in. */
 export type AbsorptionLevel = "adopted" | "adapted" | "reference";
 
 export interface FlagshipAbsorption {

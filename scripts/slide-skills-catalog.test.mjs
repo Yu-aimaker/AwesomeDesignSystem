@@ -1,4 +1,4 @@
-// STA-103: the popular slide-skill catalog stays a sourced table.
+// The popular slide-skill catalog stays a sourced table.
 // Run: node --test scripts/slide-skills-catalog.test.mjs
 import { test } from "node:test";
 import assert from "node:assert/strict";

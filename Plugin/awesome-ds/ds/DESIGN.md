@@ -353,7 +353,7 @@ Full reasoning: [`foundations/motion.md`](foundations/motion.md).
 - Library order: CSS transitions → Motion (`motion/react`) → GSAP ScrollTrigger only
   for pinned or scrubbed scroll sequences → Lottie for illustration → three.js (via
   react-three-fiber) only when the product is 3D.
-- Hybrid C (STA-19, 2026-09-06): AwesomeDS owns these tokens and this order. Complex
+- Hybrid C (decided 2026-09-06): AwesomeDS owns these tokens and this order. Complex
   motion and heavy components use the libraries above. Do not ship a second animation
   runtime or a second component kit. Previews play the recommended library.
 

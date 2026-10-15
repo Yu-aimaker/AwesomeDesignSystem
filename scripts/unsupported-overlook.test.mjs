@@ -1,4 +1,4 @@
-// STA-100 Japanese copy: a crowd overlook claim needs a source.
+// A crowd overlook claim needs a source.
 // no-ai-slop-ja pattern 13 (SKILL.md, fetched 2026-10-14):
 // https://github.com/53able/no-ai-slop-ja
 // Bad: 「多くの人が見落としているのが、運用の重要性です。」

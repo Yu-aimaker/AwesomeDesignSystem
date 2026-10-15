@@ -158,10 +158,10 @@ describe("render-report", () => {
   });
 
   it("spec locks the generator and leaves the site page alone", () => {
-    const spec = readFileSync(join(root, "docs/specs/sta-102-html-report.md"), "utf8");
+    const spec = readFileSync(join(root, "docs/specs/html-report.md"), "utf8");
     assert.match(spec, /render-report\.mjs/);
     assert.match(spec, /1,500/);
-    assert.match(spec, /STA-152/);
+    assert.match(spec, /このスクリプトでは変えない/);
     assert.match(spec, /\/report/);
   });
 });

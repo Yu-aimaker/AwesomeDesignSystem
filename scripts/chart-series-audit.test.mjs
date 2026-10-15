@@ -1,4 +1,4 @@
-// Sir 2026-10-11: charts were hard to read. More than seven category colors is one case.
+// Charts were hard to read. More than seven category colors is one case.
 // Source: https://blog.datawrapper.de/colors/ (opened 2026-10-14).
 import { test } from "node:test";
 import assert from "node:assert/strict";

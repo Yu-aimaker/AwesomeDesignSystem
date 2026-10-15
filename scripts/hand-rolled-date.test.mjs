@@ -1,4 +1,4 @@
-// STA-100 correctness: one page must not invent a third date form.
+// One page must not invent a third date form.
 // Japanese prose is 年月日 (content-and-tone.md). Tables and code are ISO 8601.
 // W3C: https://www.w3.org/International/questions/qa-date-format (opened 2026-10-14).
 import { test } from "node:test";

@@ -1,4 +1,4 @@
-// Sir 2026-10-11: charts were hard to read. Vertical grid lines are one case.
+// Charts were hard to read. Vertical grid lines are one case.
 // Source: https://clauswilke.com/dataviz/balance-data-context.html#background-grids (opened 2026-10-14).
 import { test } from "node:test";
 import assert from "node:assert/strict";

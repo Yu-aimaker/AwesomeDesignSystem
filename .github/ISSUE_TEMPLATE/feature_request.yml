@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        注意: Funnel / FunnelOrange / STARK などの製品ブランドを提案に含めない（Funnel-free）。
+        注意: 実在の企業・製品のブランド（ロゴ、名前、ブランド色）を AwesomeDS の既定として提案しない。
   - type: textarea
     id: problem
     attributes:

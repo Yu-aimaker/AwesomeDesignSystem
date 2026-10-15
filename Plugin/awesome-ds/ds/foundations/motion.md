@@ -108,7 +108,7 @@ Is the product itself 3D (configurator, spatial data)?
 
 Never mix GSAP or three.js and Motion on the same element tree; they fight for frames.
 
-AwesomeDS authors the durations, curves, and this tree (hybrid C, Linear STA-19,
+AwesomeDS authors the durations, curves, and this tree (hybrid C,
 2026-09-06). It does not author a replacement for Motion, GSAP, Lottie, or three.js.
 A preview page plays the recommended library. It does not ship a second runtime.
 
@@ -160,4 +160,3 @@ A preview page plays the recommended library. It does not ship a second runtime.
 - https://r3f.docs.pmnd.rs/getting-started/introduction : react-three-fiber.
 - https://github.com/pmndrs/react-three-fiber : repository.
 - https://github.com/Leonxlnx/taste-skill : never `useState` for continuous values; never mix GSAP/three with Motion; isolate motion in client leaves.
-- https://linear.app/stark--industries/issue/STA-19 : hybrid C. AwesomeDS authors the motion tokens. It does not replace Motion, GSAP, Lottie, or three.js.

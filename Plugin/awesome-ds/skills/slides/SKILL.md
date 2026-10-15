@@ -119,6 +119,6 @@ When the claims are already JSON, generate the file. Do not retype the skeleton.
 node ${CLAUDE_PLUGIN_ROOT}/skills/slides/scripts/render-slides.mjs deck.json -o deck.html
 ```
 
-The script fills section 2 and keeps that CSS. It exits 1 and writes nothing when a slide breaks the rules (one sentence or a list of at most four items, heading and body at most 40 Japanese characters or 20 English words, white slide, dark text). Contract: `docs/specs/sta-103-slides.md`.
+The script fills section 2 and keeps that CSS. It exits 1 and writes nothing when a slide breaks the rules (one sentence or a list of at most four items, heading and body at most 40 Japanese characters or 20 English words, white slide, dark text). Contract: `docs/specs/slides.md` in the AwesomeDS repository.
 
-Another repository runs the same command on its own JSON. Do not copy that HTML into this repository. Do not add a page to the AwesomeDS site from this script.
+Do not add a page to the AwesomeDS site from this script.

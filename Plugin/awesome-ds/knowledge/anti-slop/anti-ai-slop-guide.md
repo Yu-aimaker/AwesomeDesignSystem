@@ -23,13 +23,12 @@ updated: 2026-10-13
 
 ## 概要
 
-STA-100 の調査下書き。サイトの `/anti-slop` と `Knowledge/skills/anti-ai-slop.md` は既にある。このフォルダは、2026-10-11 の調査でライセンスを確認し、2026-10-13 に GitHub API と README を開き直したツールの個票である。見た目の Before / After はサイト側の仕事で、この PR では足さない。
+AI スロップを減らすツールの調査メモ。サイトの `/anti-slop` と `Knowledge/skills/anti-ai-slop.md` は既にある。このフォルダは、2026-10-11 の調査でライセンスを確認し、2026-10-13 に GitHub API と README を開き直したツールの個票である。見た目の Before / After はサイト側に置く。
 
 ## 要点
 
 - 正本の禁止項目は `AwesomeDS/foundations/anti-patterns.md` と `content-and-tone.md`。原則 7 は `foundations/principles.md`。
 - ライセンスを GitHub API で再確認したものだけを個票にした（2026-10-13）。ライセンスがない投稿や記事は転記しない。
-- 研究サイトの文面は使わない（2026-10-13 の指示）。
 - 依存としてリポジトリに同梱するのはまだしない。導入コマンドは各個票に書き、CI への接続は別 PR。
 
 | 個票 | ライセンス | stars（2026-10-13 API） | 使い方 |

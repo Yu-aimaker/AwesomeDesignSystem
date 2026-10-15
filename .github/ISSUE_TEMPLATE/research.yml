@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        注意: 結論や推奨に Funnel / FunnelOrange / STARK などの製品ブランドを持ち込まない（図形名の Funnel は一般語として可）。
+        注意: 結論や推奨に、実在の企業・製品のブランドを AwesomeDS の既定として持ち込まない（図形名の Funnel などは一般語として可）。
   - type: textarea
     id: question
     attributes:

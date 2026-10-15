@@ -107,8 +107,6 @@ From a checkout of this plugin:
 
 The script fails unless all of these hold: `lang` on `<html>`, `--canvas: #ffffff`, `--ink: #0a0a0a`, exactly three `<p>` elements in `section.conclusion`, exactly one `<table>` or one figure (`<figure>`, `<img>`, or `<svg>`), and no gradient. Body text outside the title, the conclusion, and the source line stays under 1,500 characters when the file contains Japanese, otherwise under 700 words.
 
-Another repository uses the same command on its own HTML file. Do not copy that repository into AwesomeDS.
-
 ## 7. Structured input
 
 When the facts are already JSON, generate the file. Do not retype the skeleton.
@@ -117,6 +115,6 @@ When the facts are already JSON, generate the file. Do not retype the skeleton.
 node ${CLAUDE_PLUGIN_ROOT}/skills/html-report/scripts/render-report.mjs report.json -o report.html
 ```
 
-The script fills section 3 and keeps that CSS. It exits 1 and writes nothing when section 2 is broken (three conclusion sentences, one table or one `img`, white canvas, dark text, Japanese body at most 1,500 characters). Contract: `docs/specs/sta-102-html-report.md`.
+The script fills section 3 and keeps that CSS. It exits 1 and writes nothing when section 2 is broken (three conclusion sentences, one table or one `img`, white canvas, dark text, Japanese body at most 1,500 characters). Contract: `docs/specs/html-report.md` in the AwesomeDS repository.
 
-Another repository runs the same command on its own JSON. Do not copy that HTML into this repository. Do not add a page to the AwesomeDS site from this script.
+Do not add a page to the AwesomeDS site from this script.

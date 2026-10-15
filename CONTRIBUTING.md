@@ -71,7 +71,7 @@ node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs  # �
 bash Plugin/awesome-ds/scripts/check-sync.sh   # プラグイン内の DS と Knowledge のコピーが元と一致するか
 ```
 
-本番またはプレビューの実応答を見るときは `node scripts/hosting-smoke.mjs <url> [url...]`。`/`、`/sources`、`/foundations`、`/en/sources`、存在しない `/missing-page` は `node scripts/preview-headers.mjs <url>`。切替手順は [docs/ops/cloudflare-cutover.md](docs/ops/cloudflare-cutover.md)。戻し手順は [docs/ops/cloudflare-rollback.md](docs/ops/cloudflare-rollback.md)。
+本番またはプレビューの実応答を見るときは `node scripts/hosting-smoke.mjs <url> [url...]`。`/`、`/sources`、`/foundations`、`/en/sources`、存在しない `/missing-page` は `node scripts/preview-headers.mjs <url>`。
 
 - リンク確認: `node scripts/check-links.mjs`。相対リンクはファイルの有無で落とします。https は `scripts/external-link-allowlist.txt` に載った URL だけを、失敗時は再試行して確認します。それ以外の外部リンクは取得しません。
 

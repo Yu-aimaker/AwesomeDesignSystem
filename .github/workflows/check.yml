@@ -68,7 +68,7 @@ jobs:
         run: node --test scripts/render-html-report.test.mjs
       - name: Slide deck generator
         run: node --test scripts/render-slides.test.mjs
-      - name: STA-6 named X post stays in Knowledge
+      - name: UI component sites post stays recorded in Knowledge
         run: node --test scripts/neropursue-post.test.mjs
       - name: Data files are valid
         run: node scripts/validate-data.mjs

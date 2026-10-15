@@ -157,10 +157,10 @@ describe("render-slides", () => {
   });
 
   it("spec locks the generator and leaves the site page alone", () => {
-    const spec = readFileSync(join(root, "docs/specs/sta-103-slides.md"), "utf8");
+    const spec = readFileSync(join(root, "docs/specs/slides.md"), "utf8");
     assert.match(spec, /render-slides\.mjs/);
     assert.match(spec, /40/);
-    assert.match(spec, /STA-152/);
+    assert.match(spec, /このスクリプトでは変えない/);
     assert.match(spec, /\/slides/);
   });
 });

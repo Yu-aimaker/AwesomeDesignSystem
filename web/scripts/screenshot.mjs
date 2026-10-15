@@ -57,7 +57,7 @@ const routes = [
   "/sources",
   "/about",
   "/missing-page",
-  // English (STA-51). Same pages under the /en prefix.
+  // English. Same pages under the /en prefix.
   "/en",
   "/en/foundations",
   "/en/foundations/typography",

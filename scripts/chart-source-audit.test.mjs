@@ -1,4 +1,4 @@
-// Sir 2026-10-11: charts were hard to read. A figure with no source is one case.
+// Charts were hard to read. A figure with no source is one case.
 // Source: https://www.datawrapper.de/academy/annotate-tab (opened 2026-10-14).
 import { test } from "node:test";
 import assert from "node:assert/strict";

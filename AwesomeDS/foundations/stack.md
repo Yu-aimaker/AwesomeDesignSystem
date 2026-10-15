@@ -38,7 +38,7 @@ each part, and a table of when to deviate.
 
 ## What AwesomeDS authors
 
-Locked 2026-09-06 as hybrid C (Linear STA-19, parent STA-6).
+Locked 2026-09-06 as hybrid C.
 
 - AwesomeDS authors the core tokens: color, type, spacing, radius, motion durations,
   and component states.
@@ -111,6 +111,5 @@ Locked 2026-09-06 as hybrid C (Linear STA-19, parent STA-6).
 - https://biomejs.dev/ : Biome formatter and linter.
 - https://github.com/digital-go-jp/design-system-example-components-react : Digital Agency React components.
 - https://github.com/Leonxlnx/taste-skill : official-package rule, RSC isolation, dependency verification.
-- https://linear.app/stark--industries/issue/STA-19 : hybrid C lock (2026-09-06). Core tokens are authored here. Complex motion and heavy components stay on a recommended library.
 - https://carbondesignsystem.com/getting-started/developing/overview : Carbon ships its own packages for developers (opened 2026-10-08).
 - https://shopify.dev/docs/api/polaris : Polaris is Shopify's UI framework, now documented on shopify.dev (opened 2026-10-08).

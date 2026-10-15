@@ -1,4 +1,4 @@
-// STA-35: /sources flagship cards are committed share images, or a poster with a written reason.
+// /sources flagship cards are committed share images, or a poster with a written reason.
 // This checks the catalog text. It does not fetch pages or change the site.
 
 const CATEGORIES = new Set(["platform", "component-library", "company", "government", "cookbook"]);

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Write one HTML slide deck from JSON. See docs/specs/sta-103-slides.md.
+// Write one HTML slide deck from JSON. See docs/specs/slides.md.
 // node render-slides.mjs <deck.json> -o <deck.html>
 import { readFileSync, writeFileSync } from "node:fs";
 
