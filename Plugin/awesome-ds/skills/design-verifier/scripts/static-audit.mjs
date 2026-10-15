@@ -92,6 +92,8 @@ for (const file of files) {
     if (FILLER.test(line) && !/^\s*(import|\/\/|\/\*|\*)/.test(line)) add(3, "filler-word", file, n, line, "Say the concrete thing instead");
     if (quotedJaFiller(line) && !/^\s*(import|\/\/|\/\*|\*|ads-audit-ignore)/.test(line) && !/ads-audit-ignore/.test(line)) add(3, "ja-filler", file, n, line, "Replace ことができます / シームレス / 革新的 / 次世代 / を実現 with a concrete action");
     if (PLACEHOLDER.test(line)) add(2, "placeholder-content", file, n, line, "Replace with real, locale-appropriate content");
+    // 7c. hidden agent. no-ai-slop-ja pattern 9: name who acts, or delete the shell.
+    if (hiddenAgent(line)) add(3, "hidden-agent", file, n, line, "Name who does the action. Drop させていただく and 形となっております");
     // 8. eyebrows and sections
     if (/uppercase[^"'`]*tracking|text-transform:\s*uppercase|letter-spacing:\s*0\.(0[5-9]|[1-9])em/.test(line)) { counts.eyebrows++; eyebrowsHere++; }
     if (/<section\b|<Section\b/.test(line)) counts.sections++;
@@ -279,6 +281,21 @@ for (const file of files) {
 if (counts.sections > 0) {
   const budget = Math.max(1, Math.ceil(counts.sections / 3));
   if (counts.eyebrows > budget) add(3, "eyebrow-overuse", target, 0, `${counts.eyebrows} uppercase eyebrow labels for ${counts.sections} sections (budget ${budget})`, "Remove eyebrows; let the heading carry the section");
+}
+
+function hiddenAgent(line) {
+  if (/ads-audit-ignore/.test(line)) return false;
+  if (/^\s*(\/\/|\/\*|\*)/.test(line)) return false;
+  if (/(^|[^A-Za-z])(bad|before)\s*:/.test(line)) return false;
+  const re = /させて(?:いただ|頂)(?:く|きます|きました)|形となっております/g;
+  let match;
+  while ((match = re.exec(line))) {
+    const before = line.slice(0, match.index);
+    const open = (before.match(/「/g) || []).length;
+    const close = (before.match(/」/g) || []).length;
+    if (open <= close) return true;
+  }
+  return false;
 }
 
 const tokenShare = counts.colorDecls ? Math.round((counts.tokenColorDecls / counts.colorDecls) * 100) : 100;

@@ -50,6 +50,8 @@ jobs:
         run: node --test scripts/check-html-report.test.mjs
       - name: Static audit flags Japanese filler
         run: node --test scripts/static-audit.test.mjs
+      - name: Hidden-agent keigo is a static-audit finding
+        run: node --test scripts/hidden-agent.test.mjs
       - name: Data files are valid
         run: node scripts/validate-data.mjs
       - name: Weekly growth unit tests
