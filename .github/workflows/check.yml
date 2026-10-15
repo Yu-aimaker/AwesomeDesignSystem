@@ -26,6 +26,8 @@ jobs:
           git diff --exit-code -- Reference/REFERENCE.md Knowledge/README.md Plugin/awesome-ds/knowledge/README.md
       - name: Knowledge entries pass validation
         run: node scripts/validate-knowledge.mjs
+      - name: HTML report knowledge keeps the official HTML source
+        run: node --test scripts/html-report-knowledge.test.mjs
       - name: Hosting smoke checks pass without network
         run: node --test scripts/hosting-smoke.test.mjs scripts/preview-headers.test.mjs
       - name: Token contrast meets WCAG text and non-text minima
