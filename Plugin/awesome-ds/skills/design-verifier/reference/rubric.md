@@ -72,6 +72,8 @@ What to look at: where the series name sits. On a line, area, or pie chart the n
 Findings: `<Legend>` inside `<LineChart>`, `<AreaChart>`, or `<PieChart>` (S2, static audit `color-key`). Column and bar charts may keep a legend. Source: https://www.datawrapper.de/blog/text-in-data-visualizations
 What to look at: how many colors one chart uses to tell categories apart. Seven is the last count a reader can match without regrouping.
 Findings: more than 7 `<Bar>`, `<Line>`, or `<Area>` series in one chart, or more than 7 pie slices (S2, static audit `too-many-colors`). One bar color across many rows is fine. Source: https://blog.datawrapper.de/colors/
+What to look at: grid lines that cross the bars or the time axis. On a column, line, or area chart the values run along Y, so only horizontal lines help. A horizontal bar chart (value along X) may keep vertical lines.
+Findings: `<CartesianGrid>` without `vertical={false}` on a column, line, or area chart (S2, static audit `vertical-grid`). Source: https://clauswilke.com/dataviz/balance-data-context.html#background-grids
 
 ## Report discipline
 

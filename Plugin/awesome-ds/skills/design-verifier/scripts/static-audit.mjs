@@ -305,6 +305,25 @@ function columnOnlyTitle(title, keys) {
     }
     chartOpen.lastIndex = closeAt + name.length + 3;
   }
+  // 14. Vertical grid lines on a chart whose values run along Y.
+  // Wilke, Fundamentals of Data Visualization, ch. 23.2
+  // (https://clauswilke.com/dataviz/balance-data-context.html#background-grids, opened 2026-10-14):
+  // when the reader cares about change in y, vertical grid lines are not needed.
+  // Horizontal bars (Recharts BarChart layout="vertical") keep vertical lines.
+  const columnBar = /<BarChart\b(?![^>]*\blayout=["']vertical["'])/.test(src);
+  const lineOrArea = /<LineChart\b|<AreaChart\b/.test(src);
+  if (columnBar || lineOrArea) {
+    const gridRe = /<CartesianGrid\b[\s\S]*?(?:\/>|<\/CartesianGrid>)/g;
+    let grid;
+    while ((grid = gridRe.exec(src))) {
+      const lineNo = src.slice(0, grid.index).split("\n").length;
+      const throughLine = src.split("\n").slice(lineNo - 1, lineNo - 1 + grid[0].split("\n").length).join("\n");
+      if (/ads-audit-ignore/.test(throughLine)) continue;
+      if (/\bvertical=\{\s*false\s*\}/.test(grid[0])) continue;
+      add(2, "vertical-grid", file, lineNo, "Chart grid draws vertical lines", "Set CartesianGrid vertical={false}; keep horizontal lines only");
+      break;
+    }
+  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card
