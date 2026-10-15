@@ -64,6 +64,8 @@ What to look at: a bar's length must match the amount. An axis that starts above
 Findings: bar chart Y domain not starting at 0 (S2, static audit `bar-baseline`). Source: https://clauswilke.com/dataviz/visualizing-amounts.html
 What to look at: whether the title is the one statement a reader should remember, or only the names of the columns.
 Findings: a title in the 8 lines above a chart, or `title` / `aria-label` on the chart, that equals a `dataKey` or `name` (optional suffix の推移, の変化, の比較, の内訳, over time, trend) (S2, static audit `column-title`). A title with a claim is fine. No title is not this finding. Source: https://www.datawrapper.de/academy/annotate-tab
+What to look at: the footer under the chart. Readers need the source name and a URL so they can judge the data.
+Findings: `<BarChart>`, `<LineChart>`, `<AreaChart>`, `<PieChart>`, or `<ComposedChart>` with no `出典` or `source` and no `http` URL in the 12 lines under the chart (S2, static audit `chart-source`). Source: https://www.datawrapper.de/academy/annotate-tab
 
 ## Report discipline
 

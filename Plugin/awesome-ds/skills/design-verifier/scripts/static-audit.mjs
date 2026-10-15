@@ -123,6 +123,10 @@ for (const file of files) {
   // A title in the 8 lines above the chart, or title/aria-label on the chart tag,
   // that equals a dataKey or name (optional suffix の推移 / の変化 / の比較 / の内訳 / over time / trend).
   // ads-audit-ignore on the opening tag skips that chart.
+  // 14. Chart without a source name and URL in the footer.
+  // Datawrapper Academy, Annotate tab, "Data source & link to data source"
+  // (page last updated 2024-04-08): https://www.datawrapper.de/academy/annotate-tab
+  // Opened 2026-10-14. The footer is the 12 lines after the chart.
   const chartOpen = /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/g;
   let opened;
   while ((opened = chartOpen.exec(src))) {
@@ -184,6 +188,26 @@ function columnOnlyTitle(title, keys) {
   if (list.length < 2) return false;
   const joins = [list.join("と"), list.join("、"), list.join(" and "), list.join(" vs "), list.join("/")];
   return joins.some((j) => norm(j) === norm(t) || norm(j) === norm(bare));
+    const footer = src.slice(end).split("\n").slice(0, 13);
+    const footerText = [];
+    for (const ln of footer) {
+      if (footerText.length && /<(BarChart|LineChart|AreaChart|PieChart|ComposedChart)\b/.test(ln)) break;
+      footerText.push(ln);
+    }
+    const lineNo = src.slice(0, opened.index).split("\n").length;
+    const openLines = src.split("\n").slice(lineNo - 1, lineNo + 1).join("\n");
+    if (/ads-audit-ignore/.test(openLines)) {
+      chartOpen.lastIndex = end;
+      continue;
+    }
+    const under = footerText.join("\n");
+    const hasName = /出典|\bsource\b/i.test(under);
+    const hasUrl = /https?:\/\//.test(under);
+    if (!(hasName && hasUrl)) {
+      add(2, "chart-source", file, lineNo, "Chart has no source name and URL under it", "Put the source name and a URL in the 12 lines under the chart");
+    }
+    chartOpen.lastIndex = end;
+  }
 }
 
 // Share metadata: an .html file with <head> needs og:image and twitter:card
