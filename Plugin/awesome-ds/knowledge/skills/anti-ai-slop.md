@@ -38,7 +38,7 @@ sources:
   - url: https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
     title: "Wikipedia: Signs of AI writing"
 tags: [anti-slop, ai-defaults, before-after, japanese, copy, skill]
-updated: 2026-10-15
+updated: 2026-10-30
 ---
 
 # 脱AIスロップ

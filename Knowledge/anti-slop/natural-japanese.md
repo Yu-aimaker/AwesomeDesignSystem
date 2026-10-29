@@ -38,7 +38,7 @@ AI が書いた仕事の日本語（議事録、調査レポート、技術記�
 - 例: v1.6.3 は、ふだん使う外来語を漢語に言い換えすぎる癖を止めた版。報告文 5 本ずつで、ソフトのバージョンを「版」と書いた箇所が 13 から 0 になった。直しすぎていないかの確認では、同じものでも回によって 1 から 4 か所動くので、その範囲の差はばらつきとして扱う、とリリースに書く。
 - v1.6.4 は、括弧に文を詰め込む書き方を本文に出して直す版。Opus が書いた文書 9 本にあった、文や読点の入った括弧 21 個のうち、残った数が 17・16 から 4・5 になった（2 回ずつ）。
 - 苦手なこと（README）: 英語の言い方を 1 語ずつ訳した熟語や、動作を名詞にまとめた言い回しは半分ほど見逃す。effort を下げると手順を省く。
-- インストール: `npx skills add coji/natural-japanese`。Claude Code では `/plugin marketplace add coji/natural-japanese`。採点だけなら `/natural-japanese score <ファイル>`。
+- インストール: `npx skills add coji/natural-japanese`。Claude Code では `/plugin marketplace add coji/natural-japanese` のあと `/plugin install natural-japanese@natural-japanese`。採点だけなら `/natural-japanese score <ファイル>`。
 - 依存が uv と sudachipy なので、AwesomeDS の Node CI には入れない。
 - 例文と規則の本文は MIT の著作物。ここでは要約にとどめ、AwesomeDS 用の文は作り直す。
 
@@ -56,7 +56,7 @@ AI が書いた仕事の日本語（議事録、調査レポート、技術記�
 ## AwesomeDS への反映
 
 - 反映済み: `/sites` のスキル欄（`AwesomeDS/data/sites.json`）と `/anti-slop` のハック集。
-- 反映済み: `Knowledge/skills/anti-ai-slop.md` のハック集「日本語（人気）」。
+- 反映済み: `Knowledge/skills/anti-ai-slop.md` の「ハック（入れる・読む）」の表。
 - 参考にする: 実測の示し方（条件つきの数、苦手なことも書く）は、AwesomeDS のレポートと Plugin の説明文を書くときの見本になる。
 - 反映しない: CI ジョブ。禁止語の正本は変えない。
 

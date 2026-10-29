@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Recommended sites for building UI: component libraries, animation and loading libraries, design galleries, and agent skills. Every entry passed the intake rules (primary source, live link, updated within 12 months, known license for code, not archived, no duplicates).",
-    "updated": "2026-10-29",
+    "updated": "2026-10-30",
     "sources": [
       "https://api.github.com/repos/{owner}/{name}",
       "AwesomeDS/data/sites.json"
@@ -1557,7 +1557,7 @@
       "stars": 1993,
       "lastUpdated": "2026-10-28",
       "source": "https://github.com/coji/natural-japanese",
-      "addedAt": "2026-10-29"
+      "addedAt": "2026-10-30"
     }
   ]
 }

@@ -143,7 +143,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 | [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
 | [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
 | [人気のスライド作成Skill](skills/slide-skills.md) | guideline | slides, skill, catalog, pptx, html | 2026-10-14 |
-| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, ai-defaults, before-after, japanese, copy, skill | 2026-10-15 |
+| [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, ai-defaults, before-after, japanese, copy, skill | 2026-10-30 |
 
 ## tech-stack
 
