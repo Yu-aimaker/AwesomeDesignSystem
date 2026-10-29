@@ -1,0 +1,100 @@
+/*
+ * Mascot motion. Illustration, not UI feedback, so the 300ms UI limit does not apply; it plays on
+ * /character only (docs/character.md). Transform and opacity only, travel at most 8px. Origins inside
+ * the SVG are in viewBox units; the jump runs on the HTML wrapper so its 8px stays 8 CSS px at any size. Nothing loops forever: idle runs three cycles, every other motion runs once.
+ */
+[data-mascot] { display: inline-block; }
+[data-mascot] .m-jump { display: block; width: 100%; height: 100%; transform-origin: 50% 81.25%; } /* feet at y 78 of 96 */
+[data-mascot] svg { display: block; width: 100%; height: 100%; overflow: visible; }
+[data-mascot] .m-ink { fill: var(--ds-ink); }
+[data-mascot] .m-canvas { fill: var(--ds-canvas); }
+[data-mascot] .m-accent { fill: var(--ds-accent); }
+[data-mascot] g,
+[data-mascot] rect { transform-box: view-box; }
+
+[data-mascot] .m-torso { transform-origin: 48px 72px; }
+[data-mascot] .m-arm-l { transform-origin: 30px 47px; transform: rotate(35deg); }
+[data-mascot] .m-arm-r { transform-origin: 66px 47px; transform: rotate(-35deg); }
+[data-mascot] .m-eyes { transform-origin: 48px 41px; }
+[data-mascot] .m-mouth { transform-origin: 48px 49px; }
+[data-mascot] .m-spark { opacity: 0; }
+
+/* Still poses: the reduced-motion stand-in for each motion, and the pose gallery. */
+[data-mascot][data-pose="wave"] .m-arm-r { transform: rotate(-150deg); }
+[data-mascot][data-pose="happy"] .m-arm-l { transform: rotate(150deg); }
+[data-mascot][data-pose="happy"] .m-arm-r { transform: rotate(-150deg); }
+[data-mascot][data-pose="happy"] .m-spark { opacity: 1; }
+[data-mascot][data-pose="happy"] .m-mouth { transform: scale(1.2, 1.8); }
+[data-mascot][data-pose="blink"] .m-eyes { transform: scaleY(0.1); }
+[data-mascot][data-pose="nod"] .m-torso { transform: translateY(2px); }
+[data-mascot][data-pose="nod"] .m-face { transform: translateY(2px); }
+
+/* idle: breathe three times (2.4s each, 2px down and 2% shorter), sway the arms, blink twice, stop. */
+[data-motion="idle"] .m-torso { animation: mascot-breathe 2.4s var(--ds-ease-out) 3; }
+[data-motion="idle"] .m-arm-l { animation: mascot-sway-l 2.4s var(--ds-ease-out) 3; }
+[data-motion="idle"] .m-arm-r { animation: mascot-sway-r 2.4s var(--ds-ease-out) 3; }
+[data-motion="idle"] .m-eyes { animation: mascot-idle-blink 7.2s var(--ds-ease-out); }
+@keyframes mascot-breathe { 0%, 100% { transform: none; } 50% { transform: translateY(2px) scaleY(0.98); } }
+@keyframes mascot-sway-l { 0%, 100% { transform: rotate(35deg); } 50% { transform: rotate(39deg); } }
+@keyframes mascot-sway-r { 0%, 100% { transform: rotate(-35deg); } 50% { transform: rotate(-39deg); } }
+@keyframes mascot-idle-blink {
+  0%, 33%, 36%, 80%, 83%, 100% { transform: none; }
+  34.5%, 81.5% { transform: scaleY(0.1); }
+}
+
+/* wave: raise the right arm, two swings of about 20 degrees, lower it. Body leans 2 degrees. */
+[data-motion="wave"] .m-arm-r { animation: mascot-wave 800ms var(--ds-ease-out); }
+[data-motion="wave"] .m-torso { animation: mascot-lean 800ms var(--ds-ease-out); }
+@keyframes mascot-wave {
+  0% { transform: rotate(-35deg); }
+  20% { transform: rotate(-150deg); }
+  35% { transform: rotate(-130deg); }
+  50% { transform: rotate(-168deg); }
+  65% { transform: rotate(-130deg); }
+  80% { transform: rotate(-150deg); }
+  100% { transform: rotate(-35deg); }
+}
+@keyframes mascot-lean { 0%, 100% { transform: none; } 20%, 80% { transform: rotate(2deg); } }
+
+/* happy: crouch, jump 8px, land; both arms up; four accent tiles fade in and out (opacity only). */
+[data-motion="happy"] .m-jump { animation: mascot-jump 700ms; }
+[data-motion="happy"] .m-arm-l { animation: mascot-cheer-l 700ms var(--ds-ease-out); }
+[data-motion="happy"] .m-arm-r { animation: mascot-cheer-r 700ms var(--ds-ease-out); }
+[data-motion="happy"] .m-mouth { animation: mascot-smile 700ms var(--ds-ease-out); }
+[data-motion="happy"] .m-spark { animation: mascot-spark 520ms var(--ds-ease-out) both; }
+[data-motion="happy"] .m-spark:nth-child(2) { animation-delay: 60ms; }
+[data-motion="happy"] .m-spark:nth-child(3) { animation-delay: 120ms; }
+[data-motion="happy"] .m-spark:nth-child(4) { animation-delay: 180ms; }
+@keyframes mascot-jump {
+  0% { transform: none; animation-timing-function: var(--ds-ease-out); }
+  15% { transform: scaleY(0.94); animation-timing-function: var(--ds-ease-out); }
+  45% { transform: translateY(-8px); animation-timing-function: var(--ds-ease-in); }
+  70% { transform: scaleY(0.97); animation-timing-function: var(--ds-ease-out); }
+  86%, 100% { transform: none; }
+}
+@keyframes mascot-cheer-l { 0%, 100% { transform: rotate(35deg); } 30%, 72% { transform: rotate(150deg); } }
+@keyframes mascot-cheer-r { 0%, 100% { transform: rotate(-35deg); } 30%, 72% { transform: rotate(-150deg); } }
+@keyframes mascot-smile { 0%, 100% { transform: none; } 25%, 75% { transform: scale(1.2, 1.8); } }
+@keyframes mascot-spark { 0%, 30% { opacity: 0; } 50%, 75% { opacity: 1; } 100% { opacity: 0; } }
+
+/* blink: one quick blink. */
+[data-motion="blink"] .m-eyes { animation: mascot-blink 160ms var(--ds-ease-out); }
+@keyframes mascot-blink { 0%, 100% { transform: none; } 45%, 55% { transform: scaleY(0.1); } }
+
+/* nod: body down 2px, face a further 2px, back up. */
+[data-motion="nod"] .m-torso { animation: mascot-nod 400ms var(--ds-ease-out); }
+[data-motion="nod"] .m-face { animation: mascot-nod-face 400ms var(--ds-ease-out); }
+@keyframes mascot-nod { 0%, 100% { transform: none; } 40% { transform: translateY(2px); } }
+@keyframes mascot-nod-face { 0%, 100% { transform: none; } 40% { transform: translateY(2px); } }
+
+[data-mascot][data-paused] * { animation-play-state: paused !important; }
+
+/*
+ * Reduced motion: no animation at all, the still pose for the motion is shown instead.
+ * Overrides the global 0.01ms rule, which would flash iterating loops to their end frames.
+ */
+[data-mascot][data-reduced] *,
+[data-reduced-motion="true"] [data-mascot] * { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  [data-mascot] * { animation: none !important; }
+}

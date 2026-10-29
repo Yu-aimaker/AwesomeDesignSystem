@@ -1,0 +1,160 @@
+# Anti-patterns
+
+Generated UI has recognisable habits. Each one below is a real default that language
+models fall into, the reason it reads as generated, and the AwesomeDS replacement.
+Most items come from the taste-skill production tests; the rest from measured leaders
+and NN/g research.
+
+## Visual
+
+| Tell | Why it reads as generated | AwesomeDS replacement |
+|---|---|---|
+| Purple or violet gradient accents, "AI glow" | The most repeated default palette of 2023 to 2025 | One accent, saturation under 80 percent, no gradients on backgrounds. Purple only if the brand owns it. |
+| Glass (backdrop blur) on every card | Depends on what is behind it; unreadable on busy content; Apple's material is platform-only | Borders before shadows. Blur only on a sticky nav over imagery with a solid fallback; never over a plain canvas, where there is nothing to blur. |
+| Centered hero over a dark mesh gradient | Composition with no content decision behind it | Left-aligned hero, real visual or none, `canvas` background. |
+| Neon outer glows, colored drop shadows | No physical analogue; noise | Ink-tinted shadows at levels 2 and 3 only. |
+| Pure `#000000` backgrounds or text | Harsh; halation on OLED | `#0a0a0a`. |
+| Warm cream + brass + espresso palette for every "premium" brand | Second most repeated AI palette | True grays plus one brand accent; warm palettes via `ds-creator` only. |
+| Decorative colored status dots on every list item | Dot without state means nothing | Dots only for real status, with a label. |
+| Crosshair or hairline grid lines as decoration | Lines that organise nothing | Grid lines only around real content. |
+| Custom cursors | Accessibility and performance cost | Never. |
+
+## Typography and copy
+
+| Tell | Why | Replacement |
+|---|---|---|
+| Inter + slate + purple | The default stack of generated SaaS pages | Geist + true gray + one accent. Inter is fine when a brief asks for it. |
+| Serif display "because it feels premium" | The tested AI response to any "creative" brief | Sans display in the same family; serif only when the brand names one. |
+| Em dashes in UI copy, headlines, captions, alt text | The single most-violated tell in production tests | Period, comma, or a new sentence. |
+| Filler verbs and adjectives: `seamless`, `unlock`, `elevate`, `empower`, `delightful`, `next-generation`, `revolutionize` | Words that describe nothing the user can do | Concrete verbs and nouns: "Export as CSV", "Invite your team". |
+| Fake-precise numbers: 99.99%, 4.1x, 48k users | Invented specs | Real numbers or none. If a metric is illustrative, say so in the copy. |
+| Fake-round numbers: 50%, 1,000,000 | Read as placeholders | Same as above. |
+| Generic names: John Doe, Sarah Chan, Acme, Nexus | Placeholder content | Locale-appropriate realistic names or clearly marked sample data. |
+| Poetic section labels: "From the field", "Loose plates" | Performed craft | Plain labels: "Testimonials", "Latest writing". |
+| Micro-meta sentences under headings ("The list will stay short on purpose.") | Padding | Heading plus body. |
+| Oversized H1 that screams | Size used instead of hierarchy | 36 to 56 px; weight and space do the rest. |
+| `<br>`-split italic headlines | Design move without a reason | Natural line breaks; italic only for emphasis within the same family. |
+
+## Layout
+
+| Tell | Why | Replacement |
+|---|---|---|
+| Three equal feature cards in a row | The template feature section | Two-column list, asymmetric grid, single column, or a table. Three cards only when exactly three equal items exist and it is the only card grid. |
+| Eyebrow above a section heading, pill badge or "New" chip above a headline | Templated rhythm; taste-skill measured tiny uppercase labels on 57 percent of weak sites and 16 percent of top sites | No eyebrows. The heading carries the topic. |
+| Section-number eyebrows (`01 / Features`), index numbering (01 / 02 / 03), version labels (`v2.0 BETA`) in the hero | Decorative metadata | Plain-language topic or nothing. A real `<ol>` when order matters. |
+| A heading that wraps to three lines at 390 | Size or length chosen on desktop only | Two lines at every width: about 20 Japanese characters for `h1`, 24 for `h2`. Cut words, do not shrink. |
+| Cards in one row that end at different heights, or a lone card on the last row | The grid was chosen before the content | Balance the row or use `align-items: start`; choose the column count from the item count. |
+| Same layout family repeated down the page | The eye learns it in two sections and skips | Each family at most once per page; at least four families on an eight-section page. |
+| Zigzag image/text alternation for six sections | Banal after two | Cap at two consecutive; then a full-width or stacked section. |
+| Bento with empty cells | Planned for a template, not the content | Cells equal items. |
+| Split header (big heading left, small paragraph right) | Decoration for a one-message section | Stack heading and paragraph, 65ch. |
+| Trust logos, pricing teaser, avatar row stuffed into the hero | Hero as a feature list | Move below the hero. Hero has at most four text elements. |
+| `h-screen` / `100vh` heroes | Jumps when mobile toolbars move | `min-height: 100svh` (`100dvh` only for an app shell). |
+| Centered long paragraphs | Slow reading | Left-aligned, 65ch. |
+| Nav wrapping to two lines on desktop | Broken layout | Condense labels, drop items, or use a menu; cap nav at 64 to 80 px. |
+
+## Components and content
+
+| Tell | Why | Replacement |
+|---|---|---|
+| Div-based fake screenshots (fake dashboard, fake terminal, fake task list) | The number one visual tell; it is a drawing of a product, not the product | Real screenshot, generated image, real component preview, or nothing. Leave a labelled `<!-- TODO: hero image 1600x1200 -->` slot. |
+| Fake version footers inside mockups ("v0.6.2-rc.1 · last sync 4s ago") | Adds nothing | Remove. |
+| Infinite micro-animations (pulse, float, shimmer, typewriter) on informational content | Motion without a trigger | Motion is feedback. Loops only for a progress indicator, which stops under reduced motion. Skeletons are flat bars, no shimmer. |
+| Auto-forwarding carousel | NN/g: annoys users, hides content | Static hero, or user-controlled carousel with visible controls. |
+| Icon-only buttons and nav without labels | Universal icons are rare; hover labels fail on touch | Visible label in nav; `aria-label` plus tooltip for toolbar icons. |
+| Placeholder as label | Disappears on focus; fails recall and screen readers | Label above the input, always visible. |
+| Success-state-only components | No loading, empty, error, disabled | Every interactive component ships all states; every data view ships skeleton, empty, error. |
+| Table header in a grey band, numbers left-aligned, `--` for a missing value | Kit defaults; taste-skill's app study found no fill band in 11 of 11 headed tables | No header fill, numbers right-aligned in tabular figures, a grey dash for missing, a real zero printed as `0`. |
+| A narrow table stretched across a 1200 px container | Empty space between a name and its first figure | A table of five columns or fewer stays near 760 px. |
+| Generic avatar egg or user icon for testimonials | Placeholder content | Real photos or a specific initials style. |
+| Two CTAs with the same intent ("Get started" and "Try free") | Duplicate choices slow decisions (Hick) | One label per intent, reused everywhere. |
+| CTA label wrapping to two lines | Broken button | Max three words or a wider button. |
+| Tooltip carrying essential information | Hidden on touch | Essential text on the page; tooltips for extras. |
+| `outline: none` on focus | Removes the keyboard indicator | `:focus-visible` ring, 2 px accent. |
+| Hand-rolled SVG icons | Optical inconsistency | One icon family. |
+| Emoji as icons in product UI | Renders differently per OS | Icon family glyphs. |
+| Mixed radii (pill buttons, sharp cards) | Two systems on one page | One radius family. |
+| Mixed grays (warm in the header, cool in the footer) | Two palettes | One true-gray ramp. |
+| Middle-dot chains (`a · b · c · d`) | Metadata soup | One separator per line max; prefer line breaks or columns. |
+| Broken external image links (dead Unsplash URLs) | Unverified assets | Real assets, generated images, or seeded placeholders that are known to resolve. |
+
+## Japanese copy
+
+The rows in Typography and copy cover English filler. These cover Japanese that says nothing.
+Word lists and the before/after line live in `content-and-tone.md`.
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| `ことができます` wrapped around a verb that already has a short form | An empty shell. The before line in `content-and-tone.md` is this pattern | `送れます`, or `送ります` |
+| `シームレス`, `革新的`, `次世代`, `〜を実現` | Forbidden words in `content-and-tone.md`. They name no action | The object and the verb: 「請求書を送る」 |
+| `注目されています` with no named source | The same before line. A crowd that does not exist | Name the source, or delete the sentence |
+| One sentence that asks the reader to do three things | Nielsen: one idea per paragraph. Extra ideas are skipped | One sentence, one action |
+
+## Volume
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| The decision sits after a long introduction | Nielsen (1997): 79 percent of test users scanned. Usability was 58 percent higher for the concise version. Start with the conclusion. Use half the words of conventional writing, or less | Conclusion first. Cut a sentence that does not change the next action |
+| A report body that restates the conclusion | `html-report`: three conclusion sentences, then one figure or one table, then a body under 1,500 Japanese characters | Cut until the body changes the decision |
+| A slide that holds a paragraph | `slides`: one claim per slide. At most 40 Japanese characters, or 20 English words | A heading plus one sentence, or a list of at most four items |
+| A UI sentence over 60 Japanese characters | `content-and-tone.md` Length row | Split, or move the extra clause to the next screen |
+
+## Charts
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| Two y-axes for a general audience | Datawrapper (2018, intro updated 2026): most readers misread a dual-axis chart. Few (2008): he could not name a case where a dual-scaled axis was the best solution | Two charts, or one shared unit |
+| A color key when the label fits next to the mark | Datawrapper (2022): remove the key and label the category on the mark. Eye travel between key and line drops the meaning | Direct labels. A key only when the label does not fit |
+| A title that only names the columns | Datawrapper Annotate: the title is the one statement the reader should remember. The description holds the precise definition | 「3月の入金は前年の2倍」 not 「入金の推移」 |
+| A chart with no source line | The same Annotate tab: source name and URL | Source under the chart |
+
+## Correctness
+
+| Tell | Why it reads as generated | Replacement |
+|---|---|---|
+| A number the source does not contain | Fake-precise numbers are already in Typography and copy. A sentence that quotes a figure the chart does not show is the same failure | The sentence and the chart use the same number, or the copy says the figure is a sample |
+| A date written two ways on one page | `content-and-tone.md` Dates: 2026年9月7日 in prose, `2026-09-07` in tables | One form per context |
+| A control with no empty, error, or loading state | Components and content, above | Ship the states |
+| A link or image that does not resolve | Components and content, above | A URL that was opened, or no link |
+
+## Process tells
+
+| Tell | Replacement |
+|---|---|
+| Starting from a layout and filling it with copy | Write the copy, then choose the layout (content first). |
+| Choosing an aesthetic before reading the brief | State the page kind and audience in one line first (DESIGN.md section 12). |
+| Importing a library that is not in `package.json` | Check first; print the install command. |
+| Shipping the default shadcn theme | Restyle radii, colors, shadows with tokens. Never ship the default state. |
+| Skipping the checklist because "it looks fine" | Run `components/checklist.md`; report what was skipped. |
+
+## Why these matter
+
+Users judge a page in about 50 ms and then scan rather than read. A page that matches the
+generated template is read as low effort, and NN/g's credibility research ties visual
+quality to trust. The anti-patterns above are the shortcuts that produce that template.
+Avoiding them is not about novelty; it is about making decisions the content supports.
+Removing every tell is not enough either: an empty page with good manners is also a tell
+(taste-skill, `references/tells.md`). Replace each removed device with a content decision.
+
+## Sources
+
+- https://github.com/Leonxlnx/taste-skill/tree/6010f91a9935f1c167dfc500fb1a475681892e6b/skills/taste-skill : the current house rules (`SKILL.md`, House rules), the tell list (`references/tells.md`), the 247-site study (`references/research.md`) and the app-screen tables and states (`references/app-screens.md` sections 7 and 11). Read in a local clone at commit 6010f91 (2026-10-21).
+- https://github.com/Leonxlnx/taste-skill-classics : the older v1 and v2-experimental skills, where the first production-test tells were written (sections 0.D, 4, 9.A to 9.G, 14). taste-skill's CHANGELOG 2.1.3 says they moved there with the same files.
+- https://www.nngroup.com/articles/designing-effective-carousels/ : auto-forwarding carousels.
+- https://www.nngroup.com/articles/icon-usability/ : icons need labels.
+- https://www.nngroup.com/articles/form-design-placeholders/ : placeholders are harmful.
+- https://www.nngroup.com/articles/tooltip-guidelines/ : tooltips must not carry essential information.
+- https://www.nngroup.com/articles/low-contrast/ : low contrast signals indifference.
+- https://www.nngroup.com/articles/trustworthy-design/ : design quality and credibility.
+- https://www.nngroup.com/articles/aesthetic-minimalist-design/ : the 50 ms first impression; signal versus noise.
+- https://www.nngroup.com/articles/centered-logos/ : left alignment.
+- https://www.nngroup.com/articles/keyboard-accessibility/ : do not remove focus indicators.
+- https://www.nngroup.com/videos/hicks-law-long-menus/ : duplicate choices slow decisions.
+- https://web.dev/blog/viewport-units : `dvh`.
+- https://www.nngroup.com/articles/ai-roles-ux/ : guiding AI-generated designs with UX judgment.
+- https://github.com/voltagent/awesome-design-md : what the measured leaders do instead (one CTA, hairlines, surface ladders).
+- https://www.nngroup.com/articles/how-users-read-on-the-web/ : Jakob Nielsen, 1997. 79 percent scanned. Concise writing measured 58 percent higher usability. One idea per paragraph. Inverted pyramid. Half the word count or less. Fetched 2026-10-14.
+- https://www.datawrapper.de/blog/dualaxis : Lisa Charlotte Muth, 2018. Dual-axis charts are easy to misread. The 2026 intro still says a general audience is likely to misread them. Fetched 2026-10-14.
+- https://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf : Stephen Few, March 2008. He could not name a case where a dual-scaled axis was the best solution. Fetched 2026-10-14.
+- https://www.datawrapper.de/blog/text-in-data-visualizations : Lisa Charlotte Muth, 2022. Label categories on the marks. Remove the color key when a direct label fits. Fetched 2026-10-14.
+- https://www.datawrapper.de/academy/annotate-tab : the title is the statement to remember. The description holds the precise definition. Put the source name and URL in the footer. Fetched 2026-10-14.

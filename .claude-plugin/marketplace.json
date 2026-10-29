@@ -1,0 +1,24 @@
+{
+  "name": "awesome-design-systems",
+  "owner": {
+    "name": "Yu-aimaker",
+    "url": "https://github.com/Yu-aimaker"
+  },
+  "metadata": {
+    "description": "AwesomeDS: design system, knowledge base and skills for AI coding agents",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "awesome-ds",
+      "source": "./Plugin/awesome-ds",
+      "description": "Apply AwesomeDS to any web UI, create a brand-specific design system by interview, review designs adversarially with screenshots, run UX design-thinking, and curate the design knowledge base.",
+      "version": "0.1.0",
+      "category": "design",
+      "keywords": ["design-system", "design", "ui", "ux", "tailwind", "shadcn", "tokens", "accessibility", "japanese", "review"],
+      "author": { "name": "Yu-aimaker" },
+      "homepage": "https://github.com/Yu-aimaker/AwesomeDesignSystem",
+      "license": "MIT"
+    }
+  ]
+}

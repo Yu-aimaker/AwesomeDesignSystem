@@ -1,0 +1,44 @@
+/* AwesomeDS font pairings v0.5.0
+   Apply with <html data-font="geist|inter|plex|manrope|source-serif">.
+   Each pairing keeps Noto Sans JP for Japanese and the OS fallbacks. Fonts are self-hosted by the
+   app (next/font or @fontsource-variable/*); this file only sets the family stacks.
+   See foundations/typography.md, "Font pairings". */
+
+:root[data-font="geist"] {
+  --ds-font-sans: "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+  --ds-font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Inter: accepted when a brief asks for it. Enable tabular figures and the open digits. */
+:root[data-font="inter"] {
+  --ds-font-sans: "Inter", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+  --ds-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+:root[data-font="inter"] body { font-feature-settings: "kern" 1, "cv11" 1, "ss03" 1; }
+
+/* IBM Plex: enterprise voice; Plex Mono is the matching code face. */
+:root[data-font="plex"] {
+  --ds-font-sans: "IBM Plex Sans", "IBM Plex Sans JP", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+  --ds-font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Manrope: geometric, friendly; larger x-height so body may stay at 16. */
+:root[data-font="manrope"] {
+  --ds-font-sans: "Manrope", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-display: var(--ds-font-sans);
+  --ds-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Source Serif 4 on headings only. Body stays Geist so UI chrome and forms remain sans.
+   Japanese headings fall to Noto Serif JP when loaded, else to Noto Sans JP. */
+:root[data-font="source-serif"] {
+  --ds-font-sans: "Geist", "Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+  --ds-font-display: "Source Serif 4", "Noto Serif JP", "Noto Sans JP", Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --ds-font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ds-tracking-display: -0.01em;   /* serifs need less negative tracking */
+  --ds-tracking-heading: -0.005em;
+}
+:root[data-font="source-serif"] :is(h1, h2, h3, h4) { font-weight: var(--ds-weight-semibold); }

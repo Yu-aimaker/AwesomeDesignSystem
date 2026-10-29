@@ -1,0 +1,55 @@
+/* {{PRODUCT_NAME}} tokens v0.1.0
+   Built on AwesomeDS 0.1.0. base.tokens.css is an unmodified copy of AwesomeDS/tokens/tokens.css.
+   This file overrides ONLY what the brand changed. Every override is explained in RATIONALE.md.
+   Import this file once at the app root; do not import base.tokens.css separately. */
+
+@import "./base.tokens.css";
+
+:root {
+  /* Accent (Q5: "{{QUOTED_ANSWER}}") */
+  --ds-accent: {{ACCENT}};
+  --ds-accent-hover: {{ACCENT_HOVER}};   /* accent, lightness -10% */
+  --ds-accent-soft: {{ACCENT_SOFT}};     /* accent at ~10% over canvas */
+  --ds-on-accent: {{ON_ACCENT}};         /* #ffffff or var(--ds-ink); whichever passes 4.5:1 */
+  --ds-focus-ring: var(--ds-accent);
+  --ds-selection: {{SELECTION}};         /* accent at ~20% over canvas */
+
+  /* Typography (Q6: "{{QUOTED_ANSWER}}") remove this block if the default was kept */
+  /* --ds-font-sans: "{{FONT_SANS}}", "Noto Sans JP", system-ui, sans-serif; */
+  /* --ds-font-display: "{{FONT_DISPLAY}}", var(--ds-font-sans); */
+
+  /* Shape (Q3 adjectives: "{{QUOTED_ANSWER}}") remove if default */
+  /* --ds-radius-md: {{RADIUS_CONTROL}}; */
+  /* --ds-radius-lg: {{RADIUS_CARD}}; */
+  /* --ds-radius-xl: {{RADIUS_DIALOG}}; */
+
+  /* Density (Q2: "{{QUOTED_ANSWER}}") remove if default */
+  /* --ds-control-md: 32px; */
+  /* --ds-card-padding: 16px; */
+
+  /* Accessibility (Q11) remove if default */
+  /* --ds-focus-width: 3px; */
+}
+
+[data-theme="dark"] {
+  --ds-accent: {{DARK_ACCENT}};          /* accent lightened until 4.5:1 on #0a0a0a */
+  --ds-accent-hover: {{DARK_ACCENT_HOVER}};
+  --ds-accent-soft: {{DARK_ACCENT_SOFT}};
+  --ds-on-accent: {{DARK_ON_ACCENT}};
+  --ds-focus-ring: var(--ds-accent);
+  --ds-selection: {{DARK_SELECTION}};
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ds-accent: {{DARK_ACCENT}};
+    --ds-accent-hover: {{DARK_ACCENT_HOVER}};
+    --ds-accent-soft: {{DARK_ACCENT_SOFT}};
+    --ds-on-accent: {{DARK_ON_ACCENT}};
+    --ds-focus-ring: var(--ds-accent);
+    --ds-selection: {{DARK_SELECTION}};
+  }
+}
+
+/* Optional: display face on display and h1 only. Delete if no serif was chosen. */
+/* h1, .ds-display { font-family: var(--ds-font-display); } */

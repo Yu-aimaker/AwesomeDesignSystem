@@ -1,0 +1,56 @@
+name: Research
+description: 調査依頼・調査メモ（Knowledge / SPEC の前段）
+title: "[research] "
+labels: ["research"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        注意: 結論や推奨に、実在の企業・製品のブランドを AwesomeDS の既定として持ち込まない（図形名の Funnel などは一般語として可）。
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: 何を明らかにしたいか。1〜3 文。
+      placeholder: 例: 主要 DS のフォーカスリング太さと色の傾向
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why
+      description: 調査結果をどこで使うか。
+      placeholder: 例: foundations/focus の理由づけ、Knowledge 追加
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: 対象と範囲（DS 名・期間・件数など）。
+      placeholder: |
+        - 対象:
+        - 範囲外:
+    validations:
+      required: true
+  - type: textarea
+    id: deliverable
+    attributes:
+      label: Deliverable
+      description: 提出物の形。
+      value: |
+        - 要点 3〜5 行
+        - 確認済み出典 URL 付き
+        - 必要なら Knowledge/ への追加案
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources（既知）
+      description: すでに分かっている出典 URL。
+  - type: input
+    id: due
+    attributes:
+      label: Due（任意）
+      placeholder: 例: 2026-10-09

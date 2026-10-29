@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.wrangler/
+.screenshots/
+*.log
+.DS_Store
+.env
+.env.*
+web/src/ds/tokens/
+web/src/ds/data/
+.growth/

@@ -1,0 +1,8 @@
+# Candidates for AwesomeDS/data/sites.json. Rules: Knowledge/research/recommended-sites.md
+# category | url | name | 一行説明 | key=value ...
+# category: component-library, animation, loading, gallery, resource, skill
+# How or by whom an entry was found is not recorded (via, source_post, bookmark, like fail).
+# keys: repo, license, licenseUrl, publisher, source (spaces as _)
+# Check: node scripts/sites.mjs --intake this-file.txt   Add: ... --write
+component-library | https://ui.shadcn.com | shadcn/ui | Tailwind の部品をコピーして自分のコードにする部品集。土台は Base UI が既定で Radix と React Aria も選べる | repo=shadcn-ui/ui
+gallery | https://component.gallery | The Component Gallery | 各社のデザインシステムの部品を名前ごとに比べる見本帳 | publisher=Iain_Bean

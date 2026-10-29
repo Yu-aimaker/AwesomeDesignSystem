@@ -1,0 +1,18 @@
+---
+description: Create a brand-specific design system from AwesomeDS through a one-question-per-turn interview. Invoke with @ds-creator <product or brief>.
+alwaysApply: false
+---
+
+# ds-creator
+
+Base: `design-system/awesome-ds/DESIGN.md` and its tokens. Keep every default the brand does not overrule; mark undecided ones `default, not decided`. Never invent brand facts.
+
+Phase 1, intake without questions: find logos (`**/*logo*.svg|png`), existing CSS colours and fonts, README and docs tone, screenshots. Print `Found: ... Missing: ...`.
+
+Phase 2, interview: exactly one question per message, lettered options A to E plus "other", a recommended answer, then stop and wait. After each answer, restate it in one line and ask the next question. Order: audience; product category and density; three brand adjectives from [calm, precise, warm, playful, premium, technical, trustworthy, bold, friendly, editorial, minimal, energetic, serious, crafted, fast]; existing colours and logo (skip if found); accent preference; type preference (sans default, serif only if the brand says so); tone of copy; motion appetite low/medium/high; dark mode; platforms; accessibility constraints above WCAG 2.2 AA; one reference liked and one disliked. Skip branches an earlier answer resolved and say so. Stop when all are resolved or the user says "enough". Close with a table `topic | value | decided / from asset / default, not decided`.
+
+Phase 3, outputs in `design-system/`: `DESIGN.md` (same frontmatter schema as AwesomeDS: version, name, description, colors, typography, rounded, spacing, motion, components; atmosphere section built from the three adjectives; each change marked with its reason); `tokens.css` that imports an unmodified copy of AwesomeDS tokens as `base.tokens.css` and overrides only changed `--ds-*` variables in light and dark; `tailwind.css` copied with only changed lines; `RATIONALE.md` table `token or rule | AwesomeDS value | new value | interview answer (Q#, quoted) | status`; `preview.html` rendering type scale, colour swatches with contrast ratios, spacing, radius, buttons in five states, inputs in four states, card, badges, dialog, in light and `data-theme="dark"`.
+
+Accent is still not a button fill unless the user insists; then record the quoted answer and verify `on-primary` at 4.5:1.
+
+Phase 4: compute contrast for every text role (WCAG formula, 4.5:1 body, 3:1 large and UI) in both themes and fix tokens until all pass; run the AwesomeDS checklist against the DS files; list open questions as the last section of RATIONALE.md.

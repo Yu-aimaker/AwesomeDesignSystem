@@ -1,0 +1,17 @@
+{
+  "description": "After Claude writes a UI file, run the design-verifier static audit on that one file and hand the S1/S2 findings back to Claude. Advisory only: it never blocks. Turn off with AWESOME_DS_HOOK=off.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/post-edit-audit.mjs\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}

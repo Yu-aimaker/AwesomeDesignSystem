@@ -1,0 +1,1867 @@
+{
+  "meta": {
+    "description": "Typefaces used by well-designed products. Metadata is curated in scripts/build-fonts.mjs; `usedBy` is measured: the brands in brands.json whose DESIGN.md declares the family. `loaded` marks fonts the site ships via fontsource; system and proprietary fonts render with the viewer's local copy or the fallback.",
+    "updated": "2026-10-05",
+    "sources": [
+      "AwesomeDS/data/brands.json",
+      "https://fonts.google.com",
+      "https://fontsource.org"
+    ],
+    "license": "This list: MIT (this repository). Each typeface keeps its own license (see `license`: OFL, system, proprietary).",
+    "generator": "scripts/build-fonts.mjs",
+    "counts": {
+      "fonts": 34,
+      "loaded": 19,
+      "brandsScanned": 261
+    },
+    "categories": [
+      "sans",
+      "serif",
+      "mono",
+      "jp-sans",
+      "jp-serif"
+    ]
+  },
+  "fonts": [
+    {
+      "id": "geist",
+      "name": "Geist",
+      "category": "sans",
+      "designer": "Vercel, basement.studio",
+      "foundry": "Vercel",
+      "year": 2023,
+      "license": "OFL",
+      "url": "https://vercel.com/font",
+      "fontsource": "@fontsource-variable/geist",
+      "cssFamily": "Geist Variable",
+      "pairs": [
+        "noto-sans-jp",
+        "geist-mono"
+      ],
+      "note": "AwesomeDS の既定。幾何学的だが冷たくない",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "mintlify",
+          "name": "Mintlify",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/mintlify/DESIGN.md"
+        },
+        {
+          "id": "replicate",
+          "name": "Replicate",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/replicate/DESIGN.md"
+        },
+        {
+          "id": "resend",
+          "name": "Resend",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/resend/DESIGN.md"
+        },
+        {
+          "id": "vercel",
+          "name": "Vercel",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/vercel/DESIGN.md"
+        },
+        {
+          "id": "x-ai",
+          "name": "xAI",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/x.ai/DESIGN.md"
+        }
+      ],
+      "usedByCount": 5
+    },
+    {
+      "id": "inter",
+      "name": "Inter",
+      "category": "sans",
+      "designer": "Rasmus Andersson",
+      "foundry": "rsms",
+      "year": 2017,
+      "license": "OFL",
+      "url": "https://rsms.me/inter/",
+      "fontsource": "@fontsource-variable/inter",
+      "cssFamily": "Inter Variable",
+      "pairs": [
+        "noto-sans-jp",
+        "jetbrains-mono"
+      ],
+      "note": "最も使われる OSS 書体。UI の安全な選択",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "jp-benesse",
+          "name": "Benesse",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/benesse/DESIGN.md"
+        },
+        {
+          "id": "cal",
+          "name": "Cal.com",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/cal/DESIGN.md"
+        },
+        {
+          "id": "clay",
+          "name": "Clay",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/clay/DESIGN.md"
+        },
+        {
+          "id": "clickhouse",
+          "name": "ClickHouse",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/clickhouse/DESIGN.md"
+        },
+        {
+          "id": "jp-cygames",
+          "name": "Cygames",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/cygames/DESIGN.md"
+        },
+        {
+          "id": "elevenlabs",
+          "name": "ElevenLabs",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/elevenlabs/DESIGN.md"
+        },
+        {
+          "id": "expo",
+          "name": "Expo",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/expo/DESIGN.md"
+        },
+        {
+          "id": "framer",
+          "name": "Framer",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/framer/DESIGN.md"
+        },
+        {
+          "id": "jp-hakuhodo",
+          "name": "Hakuhodo",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hakuhodo/DESIGN.md"
+        },
+        {
+          "id": "mintlify",
+          "name": "Mintlify",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/mintlify/DESIGN.md"
+        },
+        {
+          "id": "mistral-ai",
+          "name": "Mistral AI",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/mistral.ai/DESIGN.md"
+        },
+        {
+          "id": "jp-notion",
+          "name": "Notion 日本語版",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/notion/DESIGN.md"
+        },
+        {
+          "id": "raycast",
+          "name": "Raycast",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/raycast/DESIGN.md"
+        },
+        {
+          "id": "resend",
+          "name": "Resend",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/resend/DESIGN.md"
+        },
+        {
+          "id": "revolut",
+          "name": "Revolut",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/revolut/DESIGN.md"
+        },
+        {
+          "id": "shopify",
+          "name": "Shopify",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/shopify/DESIGN.md"
+        },
+        {
+          "id": "jp-sony",
+          "name": "SONY",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/sony/DESIGN.md"
+        },
+        {
+          "id": "jp-studio",
+          "name": "STUDIO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/studio/DESIGN.md"
+        },
+        {
+          "id": "jp-visvim",
+          "name": "visvim",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/visvim/DESIGN.md"
+        },
+        {
+          "id": "voltagent",
+          "name": "VoltAgent",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/voltagent/DESIGN.md"
+        },
+        {
+          "id": "warp",
+          "name": "Warp",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/warp/DESIGN.md"
+        },
+        {
+          "id": "wise",
+          "name": "Wise",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/wise/DESIGN.md"
+        },
+        {
+          "id": "zapier",
+          "name": "Zapier",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/zapier/DESIGN.md"
+        },
+        {
+          "id": "jp-shiseido",
+          "name": "資生堂",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/shiseido/DESIGN.md"
+        }
+      ],
+      "usedByCount": 24
+    },
+    {
+      "id": "sf-pro",
+      "name": "SF Pro",
+      "category": "sans",
+      "designer": "Apple",
+      "foundry": "Apple",
+      "year": 2015,
+      "license": "system",
+      "url": "https://developer.apple.com/fonts/",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "hiragino-sans",
+        "sf-mono"
+      ],
+      "note": "Apple 端末の標準。system-ui で参照する",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-andpad",
+          "name": "ANDPAD",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/andpad/DESIGN.md"
+        },
+        {
+          "id": "apple",
+          "name": "Apple",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/apple/DESIGN.md"
+        },
+        {
+          "id": "ollama",
+          "name": "Ollama",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/ollama/DESIGN.md"
+        },
+        {
+          "id": "jp-toyota",
+          "name": "Toyota",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/toyota/DESIGN.md"
+        }
+      ],
+      "usedByCount": 4
+    },
+    {
+      "id": "roboto",
+      "name": "Roboto",
+      "category": "sans",
+      "designer": "Christian Robertson",
+      "foundry": "Google",
+      "year": 2011,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Roboto",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "Android の標準。Material の既定",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-g-mark",
+          "name": "グッドデザイン賞 / GOOD DESIGN AWARD",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/g-mark/DESIGN.md"
+        }
+      ],
+      "usedByCount": 1
+    },
+    {
+      "id": "helvetica-neue",
+      "name": "Helvetica Neue",
+      "category": "sans",
+      "designer": "Max Miedinger, Linotype",
+      "foundry": "Monotype",
+      "year": 1983,
+      "license": "proprietary",
+      "url": "https://www.myfonts.com/collections/neue-helvetica-font-linotype",
+      "fontsource": null,
+      "cssFamily": "Helvetica Neue",
+      "pairs": [
+        "hiragino-sans"
+      ],
+      "note": "スポーツ、ファッションの定番。macOS には同梱",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-isseymiyake",
+          "name": "ISSEY MIYAKE",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/isseymiyake/DESIGN.md"
+        },
+        {
+          "id": "jp-montbell",
+          "name": "mont-bell",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/montbell/DESIGN.md"
+        },
+        {
+          "id": "jp-nanamica",
+          "name": "nanamica",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nanamica/DESIGN.md"
+        },
+        {
+          "id": "nike",
+          "name": "Nike",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/nike/DESIGN.md"
+        }
+      ],
+      "usedByCount": 4
+    },
+    {
+      "id": "sohne",
+      "name": "Söhne",
+      "category": "sans",
+      "designer": "Kris Sowersby",
+      "foundry": "Klim Type Foundry",
+      "year": 2019,
+      "license": "proprietary",
+      "url": "https://klim.co.nz/retail-fonts/soehne/",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "OpenAI が採用。Akzidenz 系の現代解釈",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "stripe",
+          "name": "Stripe",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/stripe/DESIGN.md"
+        }
+      ],
+      "usedByCount": 1
+    },
+    {
+      "id": "circular",
+      "name": "Circular",
+      "category": "sans",
+      "designer": "Laurenz Brunner",
+      "foundry": "Lineto",
+      "year": 2013,
+      "license": "proprietary",
+      "url": "https://lineto.com/typefaces/circular",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "幾何学サンズの代表。丸みが親しみを作る",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "mongodb",
+          "name": "MongoDB",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/mongodb/DESIGN.md"
+        },
+        {
+          "id": "supabase",
+          "name": "Supabase",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/supabase/DESIGN.md"
+        }
+      ],
+      "usedByCount": 2
+    },
+    {
+      "id": "manrope",
+      "name": "Manrope",
+      "category": "sans",
+      "designer": "Mikhail Sharanda",
+      "foundry": "Independent",
+      "year": 2018,
+      "license": "OFL",
+      "url": "https://manropefont.com/",
+      "fontsource": "@fontsource-variable/manrope",
+      "cssFamily": "Manrope Variable",
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "見出し向きの幾何学サンズ。数字が読みやすい",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "dm-sans",
+      "name": "DM Sans",
+      "category": "sans",
+      "designer": "Colophon Foundry",
+      "foundry": "Google Fonts",
+      "year": 2019,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/DM+Sans",
+      "fontsource": "@fontsource-variable/dm-sans",
+      "cssFamily": "DM Sans Variable",
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "低コントラストで小さくても読める。SaaS で増加中",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "jp-dena",
+          "name": "DeNA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/dena/DESIGN.md"
+        },
+        {
+          "id": "jp-layerx",
+          "name": "LayerX",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/layerx/DESIGN.md"
+        },
+        {
+          "id": "minimax",
+          "name": "MiniMax",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/minimax/DESIGN.md"
+        }
+      ],
+      "usedByCount": 3
+    },
+    {
+      "id": "space-grotesk",
+      "name": "Space Grotesk",
+      "category": "sans",
+      "designer": "Florian Karsten",
+      "foundry": "Independent",
+      "year": 2018,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Space+Grotesk",
+      "fontsource": "@fontsource-variable/space-grotesk",
+      "cssFamily": "Space Grotesk Variable",
+      "pairs": [
+        "noto-sans-jp",
+        "jetbrains-mono"
+      ],
+      "note": "技術系の見出しに。個性は強いので本文には使わない",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "plus-jakarta-sans",
+      "name": "Plus Jakarta Sans",
+      "category": "sans",
+      "designer": "Gumpita Rahayu",
+      "foundry": "Tokotype",
+      "year": 2020,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Plus+Jakarta+Sans",
+      "fontsource": "@fontsource-variable/plus-jakarta-sans",
+      "cssFamily": "Plus Jakarta Sans Variable",
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "柔らかい幾何学サンズ。スタートアップの LP に多い",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "outfit",
+      "name": "Outfit",
+      "category": "sans",
+      "designer": "Rodrigo Fuenzalida",
+      "foundry": "On Brand Investments",
+      "year": 2021,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Outfit",
+      "fontsource": "@fontsource-variable/outfit",
+      "cssFamily": "Outfit Variable",
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "ブランド寄りの見出し書体。太いウェイトが映える",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "figtree",
+      "name": "Figtree",
+      "category": "sans",
+      "designer": "Erik Kennedy",
+      "foundry": "Independent",
+      "year": 2022,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Figtree",
+      "fontsource": "@fontsource-variable/figtree",
+      "cssFamily": "Figtree Variable",
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "UI デザイナーが UI のために作った。Inter より温かい",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "ibm-plex-sans",
+      "name": "IBM Plex Sans",
+      "category": "sans",
+      "designer": "Mike Abbink, Bold Monday",
+      "foundry": "IBM",
+      "year": 2017,
+      "license": "OFL",
+      "url": "https://www.ibm.com/plex/",
+      "fontsource": "@fontsource-variable/ibm-plex-sans",
+      "cssFamily": "IBM Plex Sans Variable",
+      "pairs": [
+        "ibm-plex-sans-jp"
+      ],
+      "note": "企業書体を OSS に。Mono、Serif、JP まで揃う",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "ibm",
+          "name": "IBM",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/ibm/DESIGN.md"
+        },
+        {
+          "id": "jp-mosh",
+          "name": "MOSH",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mosh/DESIGN.md"
+        },
+        {
+          "id": "posthog",
+          "name": "PostHog",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/posthog/DESIGN.md"
+        },
+        {
+          "id": "jp-tablecheck",
+          "name": "TableCheck",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/tablecheck/DESIGN.md"
+        }
+      ],
+      "usedByCount": 4
+    },
+    {
+      "id": "public-sans",
+      "name": "Public Sans",
+      "category": "sans",
+      "designer": "Dan Williams, USWDS",
+      "foundry": "U.S. General Services Administration",
+      "year": 2019,
+      "license": "OFL",
+      "url": "https://public-sans.digital.gov/",
+      "fontsource": "@fontsource-variable/public-sans",
+      "cssFamily": "Public Sans Variable",
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "米国政府のデザインシステム用。中立で実務的",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "open-sans",
+      "name": "Open Sans",
+      "category": "sans",
+      "designer": "Steve Matteson",
+      "foundry": "Google",
+      "year": 2011,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Open+Sans",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "長く使われるヒューマニスト・サンズ。無難で読みやすい",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-lowya",
+          "name": "LOWYA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/lowya/DESIGN.md"
+        },
+        {
+          "id": "jp-balmuda",
+          "name": "BALMUDA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/balmuda/DESIGN.md"
+        },
+        {
+          "id": "jp-suzuri",
+          "name": "SUZURI",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/suzuri/DESIGN.md"
+        },
+        {
+          "id": "jp-ubie",
+          "name": "Ubie",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/ubie/DESIGN.md"
+        },
+        {
+          "id": "jp-smartbank",
+          "name": "スマートバンク",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/smartbank/DESIGN.md"
+        }
+      ],
+      "usedByCount": 5
+    },
+    {
+      "id": "montserrat",
+      "name": "Montserrat",
+      "category": "sans",
+      "designer": "Julieta Ulanovsky",
+      "foundry": "Independent",
+      "year": 2011,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Montserrat",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "ブエノスアイレスの看板から。見出し向き",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-daiso",
+          "name": "DAISO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/daiso/DESIGN.md"
+        },
+        {
+          "id": "jp-roland",
+          "name": "Roland",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/roland/DESIGN.md"
+        },
+        {
+          "id": "jp-loglass",
+          "name": "ログラス",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/loglass/DESIGN.md"
+        }
+      ],
+      "usedByCount": 3
+    },
+    {
+      "id": "lato",
+      "name": "Lato",
+      "category": "sans",
+      "designer": "Łukasz Dziedzic",
+      "foundry": "tyPoland",
+      "year": 2010,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Lato",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "noto-sans-jp"
+      ],
+      "note": "半丸ゴシック的な温かさ。企業サイトに多い",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-kumon",
+          "name": "KUMON",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kumon/DESIGN.md"
+        },
+        {
+          "id": "jp-snowpeak",
+          "name": "Snow Peak",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/snowpeak/DESIGN.md"
+        },
+        {
+          "id": "jp-kaminashi",
+          "name": "カミナシ",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kaminashi/DESIGN.md"
+        }
+      ],
+      "usedByCount": 3
+    },
+    {
+      "id": "source-serif-4",
+      "name": "Source Serif 4",
+      "category": "serif",
+      "designer": "Frank Grießhammer",
+      "foundry": "Adobe",
+      "year": 2014,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Source+Serif+4",
+      "fontsource": "@fontsource-variable/source-serif-4",
+      "cssFamily": "Source Serif 4 Variable",
+      "pairs": [
+        "noto-serif-jp",
+        "geist"
+      ],
+      "note": "光学サイズ軸を持つ本文セリフ。長文に",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "fraunces",
+      "name": "Fraunces",
+      "category": "serif",
+      "designer": "Undercase Type",
+      "foundry": "Google Fonts",
+      "year": 2020,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Fraunces",
+      "fontsource": "@fontsource-variable/fraunces",
+      "cssFamily": "Fraunces Variable",
+      "pairs": [
+        "dm-sans"
+      ],
+      "note": "SOFT / WONK 軸で表情が変わる見出しセリフ",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "tiempos",
+      "name": "Tiempos",
+      "category": "serif",
+      "designer": "Kris Sowersby",
+      "foundry": "Klim Type Foundry",
+      "year": 2010,
+      "license": "proprietary",
+      "url": "https://klim.co.nz/retail-fonts/tiempos-text/",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "sohne"
+      ],
+      "note": "Anthropic、多くのメディアが本文に。Times の現代版",
+      "loaded": false,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "geist-mono",
+      "name": "Geist Mono",
+      "category": "mono",
+      "designer": "Vercel, basement.studio",
+      "foundry": "Vercel",
+      "year": 2023,
+      "license": "OFL",
+      "url": "https://vercel.com/font",
+      "fontsource": "@fontsource-variable/geist-mono",
+      "cssFamily": "Geist Mono Variable",
+      "pairs": [
+        "geist"
+      ],
+      "note": "AwesomeDS の等幅。コードと数値に",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "mintlify",
+          "name": "Mintlify",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/mintlify/DESIGN.md"
+        },
+        {
+          "id": "resend",
+          "name": "Resend",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/resend/DESIGN.md"
+        },
+        {
+          "id": "vercel",
+          "name": "Vercel",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/vercel/DESIGN.md"
+        }
+      ],
+      "usedByCount": 3
+    },
+    {
+      "id": "jetbrains-mono",
+      "name": "JetBrains Mono",
+      "category": "mono",
+      "designer": "Philipp Nurullin, Konstantin Bulenkov",
+      "foundry": "JetBrains",
+      "year": 2020,
+      "license": "OFL",
+      "url": "https://www.jetbrains.com/lp/mono/",
+      "fontsource": "@fontsource-variable/jetbrains-mono",
+      "cssFamily": "JetBrains Mono Variable",
+      "pairs": [
+        "inter"
+      ],
+      "note": "開発者向けプロダクトの等幅で最多。字高が高く読みやすい",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "cal",
+          "name": "Cal.com",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/cal/DESIGN.md"
+        },
+        {
+          "id": "claude",
+          "name": "Claude",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/claude/DESIGN.md"
+        },
+        {
+          "id": "clickhouse",
+          "name": "ClickHouse",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/clickhouse/DESIGN.md"
+        },
+        {
+          "id": "composio",
+          "name": "Composio",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/composio/DESIGN.md"
+        },
+        {
+          "id": "cursor",
+          "name": "Cursor",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/cursor/DESIGN.md"
+        },
+        {
+          "id": "expo",
+          "name": "Expo",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/expo/DESIGN.md"
+        },
+        {
+          "id": "mistral-ai",
+          "name": "Mistral AI",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/mistral.ai/DESIGN.md"
+        },
+        {
+          "id": "replicate",
+          "name": "Replicate",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/replicate/DESIGN.md"
+        }
+      ],
+      "usedByCount": 8
+    },
+    {
+      "id": "berkeley-mono",
+      "name": "Berkeley Mono",
+      "category": "mono",
+      "designer": "Neil Panchal",
+      "foundry": "U.S. Graphics",
+      "year": 2022,
+      "license": "proprietary",
+      "url": "https://usgraphics.com/products/berkeley-mono",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "inter"
+      ],
+      "note": "ターミナル美学。AI ツールの UI で増えている",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "opencode-ai",
+          "name": "OpenCode",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/opencode.ai/DESIGN.md"
+        }
+      ],
+      "usedByCount": 1
+    },
+    {
+      "id": "sf-mono",
+      "name": "SF Mono",
+      "category": "mono",
+      "designer": "Apple",
+      "foundry": "Apple",
+      "year": 2016,
+      "license": "system",
+      "url": "https://developer.apple.com/fonts/",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "sf-pro"
+      ],
+      "note": "Apple 端末の等幅。ui-monospace で参照する",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-loftwork",
+          "name": "Loftwork",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/loftwork/DESIGN.md"
+        },
+        {
+          "id": "supabase",
+          "name": "Supabase",
+          "region": "global",
+          "source": "https://github.com/voltagent/awesome-design-md/blob/main/design-md/supabase/DESIGN.md"
+        }
+      ],
+      "usedByCount": 2
+    },
+    {
+      "id": "noto-sans-jp",
+      "name": "Noto Sans JP",
+      "category": "jp-sans",
+      "designer": "Adobe, Google (源ノ角ゴシック)",
+      "foundry": "Google",
+      "year": 2014,
+      "license": "OFL",
+      "url": "https://fonts.google.com/noto/specimen/Noto+Sans+JP",
+      "fontsource": "@fontsource-variable/noto-sans-jp",
+      "cssFamily": "Noto Sans JP Variable",
+      "pairs": [
+        "geist",
+        "inter"
+      ],
+      "note": "日本の企業サイトで圧倒的。可変フォントで太さを合わせる",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "jp-lowya",
+          "name": "LOWYA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/lowya/DESIGN.md"
+        },
+        {
+          "id": "jp-nissan",
+          "name": "NISSAN",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nissan/DESIGN.md"
+        },
+        {
+          "id": "jp-2121designsight",
+          "name": "21_21 DESIGN SIGHT",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/2121designsight/DESIGN.md"
+        },
+        {
+          "id": "jp-amadana",
+          "name": "amadana",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/amadana/DESIGN.md"
+        },
+        {
+          "id": "jp-asahibeer",
+          "name": "Asahi Beer",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/asahibeer/DESIGN.md"
+        },
+        {
+          "id": "jp-askul",
+          "name": "ASKUL",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/askul/DESIGN.md"
+        },
+        {
+          "id": "jp-canon",
+          "name": "Canon",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/canon/DESIGN.md"
+        },
+        {
+          "id": "jp-casio",
+          "name": "CASIO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/casio/DESIGN.md"
+        },
+        {
+          "id": "jp-cygames",
+          "name": "Cygames",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/cygames/DESIGN.md"
+        },
+        {
+          "id": "jp-daiso",
+          "name": "DAISO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/daiso/DESIGN.md"
+        },
+        {
+          "id": "jp-dentsu",
+          "name": "dentsu",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/dentsu/DESIGN.md"
+        },
+        {
+          "id": "jp-descente",
+          "name": "DESCENTE",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/descente/DESIGN.md"
+        },
+        {
+          "id": "jp-dnp",
+          "name": "DNP",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/dnp/DESIGN.md"
+        },
+        {
+          "id": "jp-freee",
+          "name": "freee",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/freee/DESIGN.md"
+        },
+        {
+          "id": "jp-hario",
+          "name": "HARIO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hario/DESIGN.md"
+        },
+        {
+          "id": "jp-hitachi",
+          "name": "HITACHI",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hitachi/DESIGN.md"
+        },
+        {
+          "id": "jp-hoshinoresorts",
+          "name": "Hoshino Resorts",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hoshinoresorts/DESIGN.md"
+        },
+        {
+          "id": "jp-jal",
+          "name": "JAL",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/jal/DESIGN.md"
+        },
+        {
+          "id": "jp-jreast",
+          "name": "JR East",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/jreast/DESIGN.md"
+        },
+        {
+          "id": "jp-kirin",
+          "name": "KIRIN",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kirin/DESIGN.md"
+        },
+        {
+          "id": "jp-kose",
+          "name": "KOSÉ / Maison KOSÉ",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kose/DESIGN.md"
+        },
+        {
+          "id": "jp-kumon",
+          "name": "KUMON",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kumon/DESIGN.md"
+        },
+        {
+          "id": "jp-line",
+          "name": "LINE",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/line/DESIGN.md"
+        },
+        {
+          "id": "jp-mazda",
+          "name": "Mazda",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mazda/DESIGN.md"
+        },
+        {
+          "id": "jp-meiji",
+          "name": "Meiji",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/meiji/DESIGN.md"
+        },
+        {
+          "id": "jp-mixi",
+          "name": "MIXI",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mixi/DESIGN.md"
+        },
+        {
+          "id": "jp-nikon",
+          "name": "Nikon",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nikon/DESIGN.md"
+        },
+        {
+          "id": "jp-nosh",
+          "name": "nosh",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nosh/DESIGN.md"
+        },
+        {
+          "id": "jp-ntt",
+          "name": "NTT Group",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/ntt/DESIGN.md"
+        },
+        {
+          "id": "jp-onitsukatiger",
+          "name": "Onitsuka Tiger",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/onitsukatiger/DESIGN.md"
+        },
+        {
+          "id": "jp-panasonic",
+          "name": "Panasonic",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/panasonic/DESIGN.md"
+        },
+        {
+          "id": "jp-paypay",
+          "name": "PayPay",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/paypay/DESIGN.md"
+        },
+        {
+          "id": "jp-plaid",
+          "name": "Plaid",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/plaid/DESIGN.md"
+        },
+        {
+          "id": "jp-preferred-networks",
+          "name": "Preferred Networks",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/preferred-networks/DESIGN.md"
+        },
+        {
+          "id": "jp-readyfor",
+          "name": "READYFOR",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/readyfor/DESIGN.md"
+        },
+        {
+          "id": "jp-sacai",
+          "name": "sacai",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/sacai/DESIGN.md"
+        },
+        {
+          "id": "jp-sanrio",
+          "name": "Sanrio",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/sanrio/DESIGN.md"
+        },
+        {
+          "id": "jp-schoo",
+          "name": "Schoo",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/schoo/DESIGN.md"
+        },
+        {
+          "id": "jp-sega",
+          "name": "SEGA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/sega/DESIGN.md"
+        },
+        {
+          "id": "jp-seiko",
+          "name": "Seiko",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/seiko/DESIGN.md"
+        },
+        {
+          "id": "jp-sharp",
+          "name": "SHARP",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/sharp/DESIGN.md"
+        },
+        {
+          "id": "jp-smartnews",
+          "name": "SmartNews",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/smartnews/DESIGN.md"
+        },
+        {
+          "id": "jp-stores",
+          "name": "STORES",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/stores/DESIGN.md"
+        },
+        {
+          "id": "jp-studio",
+          "name": "STUDIO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/studio/DESIGN.md"
+        },
+        {
+          "id": "jp-suzuki",
+          "name": "SUZUKI",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/suzuki/DESIGN.md"
+        },
+        {
+          "id": "jp-suzuri",
+          "name": "SUZURI",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/suzuri/DESIGN.md"
+        },
+        {
+          "id": "jp-tential",
+          "name": "TENTIAL",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/tential/DESIGN.md"
+        },
+        {
+          "id": "jp-wacom",
+          "name": "Wacom",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/wacom/DESIGN.md"
+        },
+        {
+          "id": "jp-wantedly",
+          "name": "Wantedly",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/wantedly/DESIGN.md"
+        },
+        {
+          "id": "jp-whatever",
+          "name": "Whatever",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/whatever/DESIGN.md"
+        },
+        {
+          "id": "jp-yamaha",
+          "name": "Yamaha",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/yamaha/DESIGN.md"
+        },
+        {
+          "id": "jp-yamap",
+          "name": "YAMAP",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/yamap/DESIGN.md"
+        },
+        {
+          "id": "jp-kaminashi",
+          "name": "カミナシ",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kaminashi/DESIGN.md"
+        },
+        {
+          "id": "jp-g-mark",
+          "name": "グッドデザイン賞 / GOOD DESIGN AWARD",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/g-mark/DESIGN.md"
+        },
+        {
+          "id": "jp-smartbank",
+          "name": "スマートバンク",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/smartbank/DESIGN.md"
+        },
+        {
+          "id": "jp-timee",
+          "name": "タイミー",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/timee/DESIGN.md"
+        },
+        {
+          "id": "jp-nulab",
+          "name": "ヌーラボ",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nulab/DESIGN.md"
+        },
+        {
+          "id": "jp-hobonichi",
+          "name": "ほぼ日刊イトイ新聞",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hobonichi/DESIGN.md"
+        },
+        {
+          "id": "jp-loglass",
+          "name": "ログラス",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/loglass/DESIGN.md"
+        },
+        {
+          "id": "jp-kadokawa-museum",
+          "name": "角川武蔵野ミュージアム",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kadokawa-museum/DESIGN.md"
+        },
+        {
+          "id": "jp-nact",
+          "name": "国立新美術館",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nact/DESIGN.md"
+        },
+        {
+          "id": "jp-shiseido",
+          "name": "資生堂",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/shiseido/DESIGN.md"
+        },
+        {
+          "id": "jp-daikanyama-tsite",
+          "name": "代官山 蔦屋書店",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/daikanyama-tsite/DESIGN.md"
+        },
+        {
+          "id": "jp-muji",
+          "name": "無印良品ネットストア",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/muji/DESIGN.md"
+        }
+      ],
+      "usedByCount": 64
+    },
+    {
+      "id": "hiragino-sans",
+      "name": "ヒラギノ角ゴシック",
+      "category": "jp-sans",
+      "designer": "字游工房",
+      "foundry": "SCREEN グラフィックソリューションズ",
+      "year": 1993,
+      "license": "system",
+      "url": "https://www.screen-hiragino.jp/",
+      "fontsource": null,
+      "cssFamily": "Hiragino Sans",
+      "pairs": [
+        "sf-pro",
+        "helvetica-neue"
+      ],
+      "note": "macOS / iOS の標準日本語書体。端正で現代的",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-kao",
+          "name": "KAO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kao/DESIGN.md"
+        },
+        {
+          "id": "jp-ana",
+          "name": "ANA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/ana/DESIGN.md"
+        },
+        {
+          "id": "jp-campfire",
+          "name": "CAMPFIRE",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/campfire/DESIGN.md"
+        },
+        {
+          "id": "jp-capcom",
+          "name": "CAPCOM",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/capcom/DESIGN.md"
+        },
+        {
+          "id": "jp-chatwork",
+          "name": "Chatwork",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/chatwork/DESIGN.md"
+        },
+        {
+          "id": "jp-connpass",
+          "name": "connpass",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/connpass/DESIGN.md"
+        },
+        {
+          "id": "jp-creema",
+          "name": "Creema",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/creema/DESIGN.md"
+        },
+        {
+          "id": "jp-draft",
+          "name": "DRAFT",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/draft/DESIGN.md"
+        },
+        {
+          "id": "jp-epson",
+          "name": "Epson",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/epson/DESIGN.md"
+        },
+        {
+          "id": "jp-isseymiyake",
+          "name": "ISSEY MIYAKE",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/isseymiyake/DESIGN.md"
+        },
+        {
+          "id": "jp-kinto",
+          "name": "KINTO",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kinto/DESIGN.md"
+        },
+        {
+          "id": "jp-kyash",
+          "name": "Kyash",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kyash/DESIGN.md"
+        },
+        {
+          "id": "jp-mizuno",
+          "name": "Mizuno",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mizuno/DESIGN.md"
+        },
+        {
+          "id": "jp-montbell",
+          "name": "mont-bell",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/montbell/DESIGN.md"
+        },
+        {
+          "id": "jp-nikkei",
+          "name": "Nikkei",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nikkei/DESIGN.md"
+        },
+        {
+          "id": "jp-note",
+          "name": "note",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/note/DESIGN.md"
+        },
+        {
+          "id": "jp-docomo",
+          "name": "NTT docomo",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/docomo/DESIGN.md"
+        },
+        {
+          "id": "jp-pola",
+          "name": "POLA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/pola/DESIGN.md"
+        },
+        {
+          "id": "jp-raksul",
+          "name": "RAKSUL",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/raksul/DESIGN.md"
+        },
+        {
+          "id": "jp-shimano",
+          "name": "Shimano",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/shimano/DESIGN.md"
+        },
+        {
+          "id": "jp-subaru",
+          "name": "SUBARU",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/subaru/DESIGN.md"
+        },
+        {
+          "id": "jp-suntory",
+          "name": "Suntory",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/suntory/DESIGN.md"
+        },
+        {
+          "id": "jp-toyota",
+          "name": "Toyota",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/toyota/DESIGN.md"
+        },
+        {
+          "id": "jp-uniqlo",
+          "name": "UNIQLO Japan",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/uniqlo/DESIGN.md"
+        },
+        {
+          "id": "jp-zenn",
+          "name": "Zenn",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/zenn/DESIGN.md"
+        },
+        {
+          "id": "jp-kurashiru",
+          "name": "クラシル",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kurashiru/DESIGN.md"
+        },
+        {
+          "id": "jp-concent",
+          "name": "コンセント",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/concent/DESIGN.md"
+        },
+        {
+          "id": "jp-nitori",
+          "name": "ニトリ",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nitori/DESIGN.md"
+        },
+        {
+          "id": "jp-moneyforward",
+          "name": "マネーフォワード",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/moneyforward/DESIGN.md"
+        },
+        {
+          "id": "jp-mercari",
+          "name": "メルカリ",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mercari/DESIGN.md"
+        },
+        {
+          "id": "jp-mori-art-museum",
+          "name": "森美術館 / Mori Art Museum",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mori-art-museum/DESIGN.md"
+        }
+      ],
+      "usedByCount": 31
+    },
+    {
+      "id": "yu-gothic",
+      "name": "游ゴシック",
+      "category": "jp-sans",
+      "designer": "字游工房",
+      "foundry": "字游工房",
+      "year": 2008,
+      "license": "system",
+      "url": "https://www.jiyu-kobo.co.jp/",
+      "fontsource": null,
+      "cssFamily": "Yu Gothic",
+      "pairs": [
+        "helvetica-neue"
+      ],
+      "note": "Windows / macOS 両方に同梱。Medium 以上を指定する",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-balmuda",
+          "name": "BALMUDA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/balmuda/DESIGN.md"
+        },
+        {
+          "id": "jp-brother",
+          "name": "Brother",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/brother/DESIGN.md"
+        },
+        {
+          "id": "jp-cado",
+          "name": "cado",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/cado/DESIGN.md"
+        },
+        {
+          "id": "jp-goldwin",
+          "name": "Goldwin",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/goldwin/DESIGN.md"
+        },
+        {
+          "id": "jp-goodpatch",
+          "name": "Goodpatch",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/goodpatch/DESIGN.md"
+        },
+        {
+          "id": "jp-hacomono",
+          "name": "hacomono",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hacomono/DESIGN.md"
+        },
+        {
+          "id": "jp-hands",
+          "name": "Hands",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hands/DESIGN.md"
+        },
+        {
+          "id": "jp-kapital",
+          "name": "KAPITAL",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kapital/DESIGN.md"
+        },
+        {
+          "id": "jp-kyocera",
+          "name": "Kyocera",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kyocera/DESIGN.md"
+        },
+        {
+          "id": "jp-nendo",
+          "name": "nendo",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/nendo/DESIGN.md"
+        },
+        {
+          "id": "jp-orbis",
+          "name": "ORBIS",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/orbis/DESIGN.md"
+        },
+        {
+          "id": "jp-sansan",
+          "name": "Sansan",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/sansan/DESIGN.md"
+        },
+        {
+          "id": "jp-smarthr",
+          "name": "SmartHR",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/smarthr/DESIGN.md"
+        },
+        {
+          "id": "jp-takram",
+          "name": "Takram",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/takram/DESIGN.md"
+        },
+        {
+          "id": "jp-yohjiyamamoto",
+          "name": "Yohji Yamamoto",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/yohjiyamamoto/DESIGN.md"
+        },
+        {
+          "id": "jp-kikkoman",
+          "name": "キッコーマン",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kikkoman/DESIGN.md"
+        },
+        {
+          "id": "jp-kanazawa21",
+          "name": "金沢21世紀美術館",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/kanazawa21/DESIGN.md"
+        }
+      ],
+      "usedByCount": 17
+    },
+    {
+      "id": "biz-udpgothic",
+      "name": "BIZ UDPゴシック",
+      "category": "jp-sans",
+      "designer": "モリサワ",
+      "foundry": "Morisawa",
+      "year": 2018,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/BIZ+UDPGothic",
+      "fontsource": "@fontsource/biz-udpgothic",
+      "cssFamily": "BIZ UDPGothic",
+      "pairs": [
+        "public-sans"
+      ],
+      "note": "ユニバーサルデザイン書体。Windows 同梱、Google Fonts にも",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "jp-abema",
+          "name": "ABEMA",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/abema/DESIGN.md"
+        },
+        {
+          "id": "jp-bridgestone",
+          "name": "Bridgestone",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/bridgestone/DESIGN.md"
+        },
+        {
+          "id": "jp-mybest",
+          "name": "mybest",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mybest/DESIGN.md"
+        },
+        {
+          "id": "jp-yonex",
+          "name": "Yonex",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/yonex/DESIGN.md"
+        }
+      ],
+      "usedByCount": 4
+    },
+    {
+      "id": "zen-kaku-gothic-new",
+      "name": "Zen角ゴシック New",
+      "category": "jp-sans",
+      "designer": "Yoshimichi Ohira",
+      "foundry": "Zen Font Kobo",
+      "year": 2021,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/Zen+Kaku+Gothic+New",
+      "fontsource": "@fontsource/zen-kaku-gothic-new",
+      "cssFamily": "Zen Kaku Gothic New",
+      "pairs": [
+        "dm-sans"
+      ],
+      "note": "Noto より柔らかい。ブランド寄りのサイトに",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "jp-fancl",
+          "name": "FANCL",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/fancl/DESIGN.md"
+        },
+        {
+          "id": "jp-hakuhodo",
+          "name": "Hakuhodo",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/hakuhodo/DESIGN.md"
+        }
+      ],
+      "usedByCount": 2
+    },
+    {
+      "id": "m-plus-1p",
+      "name": "M PLUS 1p",
+      "category": "jp-sans",
+      "designer": "森下浩司",
+      "foundry": "M+ FONTS",
+      "year": 2011,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/M+PLUS+1p",
+      "fontsource": "@fontsource/m-plus-1p",
+      "cssFamily": "M PLUS 1p",
+      "pairs": [
+        "space-grotesk"
+      ],
+      "note": "幾何学的な日本語書体。数字と欧文も揃う",
+      "loaded": true,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "line-seed-jp",
+      "name": "LINE Seed JP",
+      "category": "jp-sans",
+      "designer": "LINE",
+      "foundry": "LINE",
+      "year": 2022,
+      "license": "OFL",
+      "url": "https://seed.line.me/index_jp.html",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "plus-jakarta-sans"
+      ],
+      "note": "コーポレート書体を OFL で公開。丸みが親しみを作る",
+      "loaded": false,
+      "usedBy": [],
+      "usedByCount": 0
+    },
+    {
+      "id": "ibm-plex-sans-jp",
+      "name": "IBM Plex Sans JP",
+      "category": "jp-sans",
+      "designer": "Sandoll, IBM",
+      "foundry": "IBM",
+      "year": 2021,
+      "license": "OFL",
+      "url": "https://fonts.google.com/specimen/IBM+Plex+Sans+JP",
+      "fontsource": null,
+      "cssFamily": null,
+      "pairs": [
+        "ibm-plex-sans"
+      ],
+      "note": "Plex と骨格を揃えた日本語。多言語サイトに",
+      "loaded": false,
+      "usedBy": [
+        {
+          "id": "jp-mosh",
+          "name": "MOSH",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/mosh/DESIGN.md"
+        }
+      ],
+      "usedByCount": 1
+    },
+    {
+      "id": "noto-serif-jp",
+      "name": "Noto Serif JP",
+      "category": "jp-serif",
+      "designer": "Adobe, Google (源ノ明朝)",
+      "foundry": "Google",
+      "year": 2017,
+      "license": "OFL",
+      "url": "https://fonts.google.com/noto/specimen/Noto+Serif+JP",
+      "fontsource": "@fontsource/noto-serif-jp",
+      "cssFamily": "Noto Serif JP",
+      "pairs": [
+        "source-serif-4"
+      ],
+      "note": "文章と写真が主役のサイトに。太さは 2 つまで",
+      "loaded": true,
+      "usedBy": [
+        {
+          "id": "jp-rhizomatiks",
+          "name": "ライゾマティクス",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/rhizomatiks/DESIGN.md"
+        },
+        {
+          "id": "jp-tabechoku",
+          "name": "食べチョク",
+          "region": "jp",
+          "source": "https://github.com/kzhrknt/awesome-design-md-jp/blob/main/design-md/tabechoku/DESIGN.md"
+        }
+      ],
+      "usedByCount": 2
+    }
+  ]
+}

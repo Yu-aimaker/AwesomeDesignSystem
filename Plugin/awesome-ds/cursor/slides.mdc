@@ -1,0 +1,10 @@
+---
+description: Make a 16:9 slide deck. Invoke with @slides. White slides, dark text, one claim per slide.
+alwaysApply: false
+---
+
+# Slides
+
+Use when the user asks for slides, a deck, or a presentation.
+
+Read `Plugin/awesome-ds/skills/slides/SKILL.md` and follow it. Default is one HTML file, 16:9, white canvas, dark text. When the claims are JSON, run `Plugin/awesome-ds/skills/slides/scripts/render-slides.mjs`. Use pptx only when the user asks for PowerPoint. Do not add a page to the AwesomeDS site.

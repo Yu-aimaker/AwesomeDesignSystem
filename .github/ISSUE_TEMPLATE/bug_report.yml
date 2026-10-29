@@ -1,0 +1,51 @@
+name: Bug report
+description: サイト・プラグイン・スクリプトの不具合
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      placeholder: 何が壊れているか 1〜2 文
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Surface
+      options:
+        - web
+        - Plugin / skills
+        - AwesomeDS / tokens
+        - scripts / CI
+        - other
+    validations:
+      required: true
+  - type: input
+    id: viewport
+    attributes:
+      label: Viewport（UI の場合）
+      placeholder: 例: 390 / 1280、ライト or ダーク

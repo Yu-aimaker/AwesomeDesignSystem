@@ -1,0 +1,229 @@
+/* AwesomeDS accent alternates v0.5.0
+   Eight accents derived in OKLCH (see foundations/color.md, "Accent alternates").
+   Apply with <html data-accent="violet">. Default (no attribute) is blue, defined in tokens.css.
+   Every light accent is at least 4.5:1 on canvas #ffffff; every dark accent at least 4.5:1 on #0a0a0a.
+   Verified by tokens/scripts/check-contrast.mjs. Do not edit values by hand; regenerate. */
+
+/* ink: light oklch(0.14 0 0), dark oklch(0.985 0 0) */
+:root[data-accent="ink"] {
+  --ds-accent: #0a0a0a;
+  --ds-accent-hover: #262626;
+  --ds-accent-soft: #f0f0f0;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #0a0a0a;
+  --ds-selection: #e5e5e5;
+}
+:root[data-accent="ink"][data-theme="dark"] {
+  --ds-accent: #fafafa;
+  --ds-accent-hover: #e5e5e5;
+  --ds-accent-soft: #262626;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #fafafa;
+  --ds-selection: #333333;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="ink"]:not([data-theme="light"]) {
+    --ds-accent: #fafafa;
+    --ds-accent-hover: #e5e5e5;
+    --ds-accent-soft: #262626;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #fafafa;
+    --ds-selection: #333333;
+  }
+}
+
+/* blue: light oklch(0.52 0.21 265), dark oklch(0.71 0.15 265) */
+:root[data-accent="blue"] {
+  --ds-accent: #2f5bea;
+  --ds-accent-hover: #264dd0;
+  --ds-accent-soft: #e8eefc;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #2f5bea;
+  --ds-selection: #dbe4fd;
+}
+:root[data-accent="blue"][data-theme="dark"] {
+  --ds-accent: #7a9cff;
+  --ds-accent-hover: #93afff;
+  --ds-accent-soft: #16203d;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #7a9cff;
+  --ds-selection: #1e2a4d;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="blue"]:not([data-theme="light"]) {
+    --ds-accent: #7a9cff;
+    --ds-accent-hover: #93afff;
+    --ds-accent-soft: #16203d;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #7a9cff;
+    --ds-selection: #1e2a4d;
+  }
+}
+
+/* violet: light oklch(0.56 0.2 300), dark oklch(0.78 0.13 300) */
+:root[data-accent="violet"] {
+  --ds-accent: #8a4fd7;
+  --ds-accent-hover: #793bc3;
+  --ds-accent-soft: #f8f5ff;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #8a4fd7;
+  --ds-selection: #ece2ff;
+}
+:root[data-accent="violet"][data-theme="dark"] {
+  --ds-accent: #c4a4fe;
+  --ds-accent-hover: #d4bdff;
+  --ds-accent-soft: #261a3a;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #c4a4fe;
+  --ds-selection: #33244b;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="violet"]:not([data-theme="light"]) {
+    --ds-accent: #c4a4fe;
+    --ds-accent-hover: #d4bdff;
+    --ds-accent-soft: #261a3a;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #c4a4fe;
+    --ds-selection: #33244b;
+  }
+}
+
+/* emerald: light oklch(0.53 0.16 155), dark oklch(0.78 0.13 155) */
+:root[data-accent="emerald"] {
+  --ds-accent: #018149;
+  --ds-accent-hover: #046d3d;
+  --ds-accent-soft: #edfbf1;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #018149;
+  --ds-selection: #d4f0dc;
+}
+:root[data-accent="emerald"][data-theme="dark"] {
+  --ds-accent: #6cd092;
+  --ds-accent-hover: #8ee0ab;
+  --ds-accent-soft: #012a14;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #6cd092;
+  --ds-selection: #05381e;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="emerald"]:not([data-theme="light"]) {
+    --ds-accent: #6cd092;
+    --ds-accent-hover: #8ee0ab;
+    --ds-accent-soft: #012a14;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #6cd092;
+    --ds-selection: #05381e;
+  }
+}
+
+/* rose: light oklch(0.57 0.2 10), dark oklch(0.78 0.13 10) */
+:root[data-accent="rose"] {
+  --ds-accent: #d12c5c;
+  --ds-accent-hover: #bb094b;
+  --ds-accent-soft: #fff3f5;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #d12c5c;
+  --ds-selection: #ffdee2;
+}
+:root[data-accent="rose"][data-theme="dark"] {
+  --ds-accent: #fe93a4;
+  --ds-accent-hover: #ffb2bd;
+  --ds-accent-soft: #39131b;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #fe93a4;
+  --ds-selection: #4a1d26;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="rose"]:not([data-theme="light"]) {
+    --ds-accent: #fe93a4;
+    --ds-accent-hover: #ffb2bd;
+    --ds-accent-soft: #39131b;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #fe93a4;
+    --ds-selection: #4a1d26;
+  }
+}
+
+/* amber: light oklch(0.55 0.16 70), dark oklch(0.78 0.13 70) */
+:root[data-accent="amber"] {
+  --ds-accent: #9c6306;
+  --ds-accent-hover: #855405;
+  --ds-accent-soft: #fff5e9;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #9c6306;
+  --ds-selection: #fae4cc;
+}
+:root[data-accent="amber"][data-theme="dark"] {
+  --ds-accent: #eca851;
+  --ds-accent-hover: #f9be78;
+  --ds-accent-soft: #321c00;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #eca851;
+  --ds-selection: #422700;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="amber"]:not([data-theme="light"]) {
+    --ds-accent: #eca851;
+    --ds-accent-hover: #f9be78;
+    --ds-accent-soft: #321c00;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #eca851;
+    --ds-selection: #422700;
+  }
+}
+
+/* cyan: light oklch(0.54 0.14 215), dark oklch(0.78 0.13 215) */
+:root[data-accent="cyan"] {
+  --ds-accent: #067a8f;
+  --ds-accent-hover: #00687a;
+  --ds-accent-soft: #e9fbff;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #067a8f;
+  --ds-selection: #cbeff9;
+}
+:root[data-accent="cyan"][data-theme="dark"] {
+  --ds-accent: #2ccceb;
+  --ds-accent-hover: #6addf7;
+  --ds-accent-soft: #00272f;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #2ccceb;
+  --ds-selection: #01343e;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="cyan"]:not([data-theme="light"]) {
+    --ds-accent: #2ccceb;
+    --ds-accent-hover: #6addf7;
+    --ds-accent-soft: #00272f;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #2ccceb;
+    --ds-selection: #01343e;
+  }
+}
+
+/* orange: light oklch(0.56 0.19 45), dark oklch(0.78 0.13 45) */
+:root[data-accent="orange"] {
+  --ds-accent: #bc4e04;
+  --ds-accent-hover: #a24101;
+  --ds-accent-soft: #fff4ef;
+  --ds-on-accent: #ffffff;
+  --ds-focus-ring: #bc4e04;
+  --ds-selection: #ffe0d3;
+}
+:root[data-accent="orange"][data-theme="dark"] {
+  --ds-accent: #fc9b6f;
+  --ds-accent-hover: #ffb898;
+  --ds-accent-soft: #381706;
+  --ds-on-accent: #0a0a0a;
+  --ds-focus-ring: #fc9b6f;
+  --ds-selection: #4a200c;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-accent="orange"]:not([data-theme="light"]) {
+    --ds-accent: #fc9b6f;
+    --ds-accent-hover: #ffb898;
+    --ds-accent-soft: #381706;
+    --ds-on-accent: #0a0a0a;
+    --ds-focus-ring: #fc9b6f;
+    --ds-selection: #4a200c;
+  }
+}

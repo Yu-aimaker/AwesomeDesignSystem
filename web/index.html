@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="AwesomeDS: 白いキャンバス、黒いインク、ひとつのアクセント。Claude Code 向けデザインシステムの仕様と実例。" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Share cards (X, LINE, Slack). Absolute URLs on the production domain; image is 1200x630 (web/scripts/render-og-image.mjs). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AwesomeDS" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:title" content="AwesomeDS" />
+    <meta property="og:description" content="白いキャンバス、黒いインク、ひとつのアクセント。AI コーディングエージェント向けデザインシステムの仕様と実例。" />
+    <meta property="og:url" content="https://awesomeds.yumaker.studio/" />
+    <meta property="og:image" content="https://awesomeds.yumaker.studio/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AwesomeDS のロゴと、canvas・ink・hairline・accent の色見本、余白の刻み、ボタンの例" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AwesomeDS" />
+    <meta name="twitter:description" content="白いキャンバス、黒いインク、ひとつのアクセント。AI コーディングエージェント向けデザインシステムの仕様と実例。" />
+    <meta name="twitter:image" content="https://awesomeds.yumaker.studio/og-image.png" />
+    <title>AwesomeDS</title>
+    <script>
+      // Apply the saved theme before first paint so the page does not flash.
+      try {
+        var t = localStorage.getItem("ds-theme");
+        if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+        var k = JSON.parse(localStorage.getItem("ds-knobs") || "{}");
+        var d = { accent: "blue", radius: "soft", font: "geist", density: "comfortable" };
+        for (var key in d) if (k[key] && k[key] !== d[key]) document.documentElement.setAttribute("data-" + key, k[key]);
+        var hex = /^#[0-9a-f]{6}$/i;
+        if (k.accent === "custom" && k.custom && hex.test(k.custom.light) && hex.test(k.custom.dark)) {
+          document.documentElement.style.setProperty("--ds-custom-accent-light", k.custom.light);
+          document.documentElement.style.setProperty("--ds-custom-accent-dark", k.custom.dark);
+        } else if (k.accent === "custom") document.documentElement.removeAttribute("data-accent");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
