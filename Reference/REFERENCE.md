@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 423  /  ドメイン数: 91
+リンク数: 429  /  ドメイン数: 92
 
 ## 21st.dev
 
@@ -307,8 +307,14 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [人気のスライド作成Skill](../Knowledge/skills/slide-skills.md)
 - [codse/animata: animation and interaction code, copy-paste (animata.design)](https://github.com/codse/animata)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [coji (GitHub)](https://github.com/coji)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [coji/natural-japanese](https://github.com/coji/natural-japanese)  
   引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md), [脱AIスロップ調査（B1）](../Knowledge/anti-slop/anti-ai-slop-guide.md), [脱AIスロップ](../Knowledge/skills/anti-ai-slop.md)
+- [natural-japanese v1.6.3](https://github.com/coji/natural-japanese/releases/tag/v1.6.3)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
+- [natural-japanese v1.6.4](https://github.com/coji/natural-japanese/releases/tag/v1.6.4)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [coleam00/excalidraw-diagram-skill: Excalidraw diagrams that argue visually](https://github.com/coleam00/excalidraw-diagram-skill)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
 - [DavidHDev/react-bits: An open source collection of animated, interactive & fully customizable React components](https://github.com/DavidHDev/react-bits)  
@@ -683,7 +689,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
   引用: [人気のスライド作成Skill](../Knowledge/skills/slide-skills.md)
 - [animata README](https://raw.githubusercontent.com/codse/animata/main/README.md)  
   引用: [Motion Primitives と Animata](../Knowledge/animation/motion-primitives-and-animata.md)
+- [natural-japanese PRODUCT.md](https://raw.githubusercontent.com/coji/natural-japanese/main/PRODUCT.md)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [natural-japanese README](https://raw.githubusercontent.com/coji/natural-japanese/main/README.md)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
+- [natural-japanese SKILL.md](https://raw.githubusercontent.com/coji/natural-japanese/main/skills/natural-japanese/SKILL.md)  
   引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [excalidraw-diagram-skill README](https://raw.githubusercontent.com/coleam00/excalidraw-diagram-skill/main/README.md)  
   引用: [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](../Knowledge/skills/diagram-design.md)
@@ -1059,6 +1069,11 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 - [Tailwind CSS docs](https://tailwindcss.com/docs)  
   引用: [参考サイトの余白と幅の実測（2026-10-21）](../Knowledge/layout/reference-sites-measured.md)
+
+## techtalk.jp
+
+- [株式会社TechTalk](https://www.techtalk.jp/)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 
 ## transitions.dev
 

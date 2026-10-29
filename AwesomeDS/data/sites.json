@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Recommended sites for building UI: component libraries, animation and loading libraries, design galleries, and agent skills. Every entry passed the intake rules (primary source, live link, updated within 12 months, known license for code, not archived, no duplicates).",
-    "updated": "2026-10-27",
+    "updated": "2026-10-29",
     "sources": [
       "https://api.github.com/repos/{owner}/{name}",
       "AwesomeDS/data/sites.json"
@@ -23,7 +23,7 @@
       "loading": 6,
       "gallery": 27,
       "resource": 20,
-      "skill": 12
+      "skill": 13
     }
   },
   "sites": [
@@ -1545,6 +1545,19 @@
       "lastUpdated": "2026-10-26",
       "source": "https://github.com/nanaism/yomiyasu",
       "addedAt": "2026-10-21"
+    },
+    {
+      "id": "natural-japanese",
+      "name": "natural-japanese",
+      "url": "https://github.com/coji/natural-japanese",
+      "category": "skill",
+      "description": "AI が書いた仕事の日本語を、元にない内容を足さずに読みやすく直すスキル",
+      "repo": "coji/natural-japanese",
+      "license": "MIT",
+      "stars": 1993,
+      "lastUpdated": "2026-10-28",
+      "source": "https://github.com/coji/natural-japanese",
+      "addedAt": "2026-10-29"
     }
   ]
 }

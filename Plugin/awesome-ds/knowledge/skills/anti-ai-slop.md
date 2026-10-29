@@ -182,6 +182,6 @@ updated: 2026-10-15
 - https://github.com/vercel-labs/agent-skills : web-design-guidelines と writing-guidelines。stars 32.3k（2026-10-13）。
 - https://github.com/53able/no-ai-slop-ja : 日本語の 21 パターン（2026-10-13）。
 - https://github.com/textlint-ja/textlint-rule-preset-ai-writing : 誇大表現、強調、箇条書き、コロンの規則（2026-10-13）。
-- https://github.com/coji/natural-japanese : 日本語のビジネス文の規則（12 条の本文は未確認）。
+- https://github.com/coji/natural-japanese : 日本語のビジネス文の規則。12 条の原則は SKILL.md §2 で確認した（2026-10-30）。詳しくは `Knowledge/anti-slop/natural-japanese.md`。
 - https://github.com/geonwoo-jeong/japanese-humanizer : 翻訳調と冗長表現の例（2026-10-13）。
 - https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing : 記述的な指針で、禁止リストではない（検索の要約のみ）。

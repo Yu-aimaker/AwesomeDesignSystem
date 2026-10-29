@@ -33,7 +33,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [anti-slop (miqdadbadjuber)](anti-slop/anti-slop.md) | skill | skill, filter, mit, ui, copy | 2026-10-14 |
 | [Humanizer](anti-slop/humanizer.md) | skill | english, skill, prose, mit | 2026-10-13 |
 | [Impeccable](anti-slop/impeccable.md) | skill | skill, detector, apache-2.0, design, anti-slop | 2026-10-14 |
-| [natural-japanese](anti-slop/natural-japanese.md) | skill | japanese, skill, lint, mit | 2026-10-14 |
+| [natural-japanese](anti-slop/natural-japanese.md) | skill | japanese, skill, lint, mit, evaluation | 2026-10-30 |
 | [No AI Slop (petergyang)](anti-slop/no-ai-slop.md) | skill | english, skill, prose, mit | 2026-10-14 |
 | [stop-slop](anti-slop/stop-slop.md) | skill | english, skill, prose, mit | 2026-10-13 |
 | [textlint AI writing](anti-slop/textlint-ai-writing.md) | library | japanese, textlint, lint, mit | 2026-10-13 |
