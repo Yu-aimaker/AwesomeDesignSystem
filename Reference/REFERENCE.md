@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 429  /  ドメイン数: 92
+リンク数: 430  /  ドメイン数: 92
 
 ## 21st.dev
 
@@ -692,6 +692,8 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 - [natural-japanese PRODUCT.md](https://raw.githubusercontent.com/coji/natural-japanese/main/PRODUCT.md)  
   引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [natural-japanese README](https://raw.githubusercontent.com/coji/natural-japanese/main/README.md)  
+  引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
+- [natural-japanese manual-checklist.md](https://raw.githubusercontent.com/coji/natural-japanese/main/skills/natural-japanese/references/manual-checklist.md)  
   引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
 - [natural-japanese SKILL.md](https://raw.githubusercontent.com/coji/natural-japanese/main/skills/natural-japanese/SKILL.md)  
   引用: [natural-japanese](../Knowledge/anti-slop/natural-japanese.md)
