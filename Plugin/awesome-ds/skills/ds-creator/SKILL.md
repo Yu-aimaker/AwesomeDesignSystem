@@ -13,6 +13,8 @@ Goal: a design system for `$ARGUMENTS` that keeps every AwesomeDS default the br
 
 Base: `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` and `${CLAUDE_PLUGIN_ROOT}/ds/tokens/`. Read them before Phase 1.
 
+[Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) is a competitor you may link. Do not paste its guides into the product DESIGN.md. Prefer AwesomeDS, and answers from the interview, over prior knowledge. Do not turn experimental browser APIs on to chase a reference. Scope: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/principles.md`.
+
 Two hard rules that apply to every phase:
 
 - Never invent brand facts. A colour, a font, a tone, a platform list is either found in an asset, given by the user, or kept as the AwesomeDS default and marked `default, not decided`.

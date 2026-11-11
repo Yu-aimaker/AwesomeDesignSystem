@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Recommended sites for building UI: component libraries, animation and loading libraries, design galleries, and agent skills. Every entry passed the intake rules (primary source, live link, updated within 12 months, known license for code, not archived, no duplicates).",
-    "updated": "2026-10-30",
+    "updated": "2026-11-11",
     "sources": [
       "https://api.github.com/repos/{owner}/{name}",
       "AwesomeDS/data/sites.json"
@@ -18,12 +18,12 @@
       "skill"
     ],
     "counts": {
-      "component-library": 35,
+      "component-library": 36,
       "animation": 12,
       "loading": 6,
       "gallery": 27,
-      "resource": 20,
-      "skill": 13
+      "resource": 22,
+      "skill": 16
     }
   },
   "sites": [
@@ -145,6 +145,20 @@
       "lastUpdated": "2026-04-13",
       "source": "https://github.com/tailwindlabs/headlessui",
       "addedAt": "2026-10-21"
+    },
+    {
+      "id": "astryx",
+      "name": "Astryx",
+      "url": "https://astryx.atmeta.com",
+      "category": "component-library",
+      "description": "React 19 向けの部品集。CSS を同梱し、className で上書きできる",
+      "repo": "meta/astryx",
+      "license": "MIT",
+      "publisher": "Meta",
+      "stars": 24449,
+      "lastUpdated": "2026-11-11",
+      "source": "https://github.com/meta/astryx",
+      "addedAt": "2026-11-11"
     },
     {
       "id": "magic-ui",
@@ -1109,6 +1123,32 @@
       "addedAt": "2026-10-21"
     },
     {
+      "id": "chrome-devtools-for-agents",
+      "name": "Chrome DevTools for agents",
+      "url": "https://developer.chrome.com/docs/devtools/agents",
+      "category": "resource",
+      "description": "Chrome のコンソール、通信、a11y、トレースをエージェントから読む",
+      "repo": "ChromeDevTools/chrome-devtools-mcp",
+      "license": "Apache-2.0",
+      "stars": 55099,
+      "lastUpdated": "2026-11-11",
+      "source": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "addedAt": "2026-11-11"
+    },
+    {
+      "id": "react-grab",
+      "name": "React Grab",
+      "url": "https://react-grab.com",
+      "category": "resource",
+      "description": "開発中だけ、選んだ要素のソース位置をエージェントに渡す",
+      "repo": "aidenybai/react-grab",
+      "license": "MIT",
+      "stars": 7706,
+      "lastUpdated": "2026-08-22",
+      "source": "https://github.com/aidenybai/react-grab",
+      "addedAt": "2026-11-11"
+    },
+    {
       "id": "amicons",
       "name": "Amicons",
       "url": "https://amicons.design",
@@ -1521,6 +1561,19 @@
       "addedAt": "2026-10-21"
     },
     {
+      "id": "elephant-goldfish-model",
+      "name": "Elephant-Goldfish Model",
+      "url": "https://egm.dev",
+      "category": "skill",
+      "description": "仕様を、前の会話なしで読み直す技能。テストの代わりにはしない",
+      "repo": "google/elephant-goldfish-model",
+      "license": "Apache-2.0",
+      "stars": 17473,
+      "lastUpdated": "2026-11-11",
+      "source": "https://github.com/google/elephant-goldfish-model",
+      "addedAt": "2026-11-11"
+    },
+    {
       "id": "ui-skills",
       "name": "UI Skills",
       "url": "https://www.ui-skills.com",
@@ -1532,6 +1585,34 @@
       "lastUpdated": "2026-10-25",
       "source": "https://github.com/ibelick/ui-skills",
       "addedAt": "2026-10-21"
+    },
+    {
+      "id": "appllama-skills",
+      "name": "Appllama skills",
+      "url": "https://github.com/Appllama/appllama-skills",
+      "category": "skill",
+      "description": "Expo と React Native の画面を、調査からシミュレータ確認まで進める技能",
+      "repo": "Appllama/appllama-skills",
+      "license": "MIT",
+      "stars": 5113,
+      "lastUpdated": "2026-09-06",
+      "source": "https://github.com/Appllama/appllama-skills",
+      "addedAt": "2026-11-11"
+    },
+    {
+      "id": "modern-web-guidance",
+      "name": "Modern Web Guidance",
+      "url": "https://developer.chrome.com/docs/modern-web-guidance",
+      "category": "skill",
+      "description": "エージェント向けの Web 指針。AwesomeDS は参照し、本文は写さない",
+      "repo": "GoogleChrome/modern-web-guidance",
+      "license": "Apache-2.0 and CC-BY-4.0",
+      "licenseUrl": "https://github.com/GoogleChrome/modern-web-guidance/blob/main/README.md",
+      "publisher": "Google Chrome",
+      "stars": 4352,
+      "lastUpdated": "2026-11-10",
+      "source": "https://github.com/GoogleChrome/modern-web-guidance",
+      "addedAt": "2026-11-11"
     },
     {
       "id": "yomiyasu",
