@@ -339,7 +339,16 @@ export function buildSeo(webRoot) {
     .join("\n");
   writeFileSync(join(dist, "_redirects"), `${redirects}\n`);
 
-  const problems = [...routeContentProblems(dist, staticPaths), ...productionIndexProblems(dist, routeFiles)];
+  const problems = [
+    ...routeContentProblems(dist, staticPaths, {
+      repo,
+      webRoot,
+      entries,
+      systems: flagshipSystems,
+      messages: catalogsFor,
+    }),
+    ...productionIndexProblems(dist, routeFiles),
+  ];
   if (problems.length) {
     console.error(problems.map((line) => `seo: ${line}`).join("\n"));
     process.exit(1);

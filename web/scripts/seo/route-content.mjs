@@ -16,18 +16,21 @@ function list(items) {
   return rows.length ? `<ul>${rows.join("")}</ul>` : "";
 }
 
-function invokeCopy(fn, counts, name) {
-  const arity = fn.length;
+/** Same arguments Home.tsx passes. Other functions are left uncalled. */
+const CAPTION_ARGS = {
+  fontsCaption: (counts) => [counts.fonts, counts.brands],
+  palettesCaption: (counts) => [counts.brands],
+  stackCaption: (counts) => [counts.stack],
+  rankingsCaption: (counts) => [counts.repos],
+};
+
+/** Character.tsx calls these with the mascot name. */
+const NAME_FIELDS = new Set(["lead", "mascotCaption", "namesLead"]);
+
+function renderField(fn, key, counts, name) {
   try {
-    if (arity <= 0) {
-      const value = fn();
-      return typeof value === "string" ? value : "";
-    }
-    const src = Function.prototype.toString.call(fn);
-    const wantsName = /\bname\b/.test(src);
-    const nums = [counts.fonts, counts.brands, counts.stack, counts.repos];
-    const args = wantsName ? Array.from({ length: arity }, () => name) : nums.slice(0, arity);
-    const value = fn(...args);
+    const caption = CAPTION_ARGS[key];
+    const value = caption ? fn(...caption(counts)) : NAME_FIELDS.has(key) && name ? fn(name) : undefined;
     return typeof value === "string" ? value : "";
   } catch {
     return "";
@@ -38,7 +41,7 @@ function invokeCopy(fn, counts, name) {
 export function catalogStrings(value, counts = {}, name = "") {
   const out = [];
   const seen = new Set();
-  const visit = (node) => {
+  const visit = (node, key) => {
     if (typeof node === "string") {
       const text = node.trim();
       if (text && !seen.has(text)) {
@@ -48,7 +51,7 @@ export function catalogStrings(value, counts = {}, name = "") {
       return;
     }
     if (typeof node === "function") {
-      visit(invokeCopy(node, counts, name));
+      visit(renderField(node, key, counts, name));
       return;
     }
     if (Array.isArray(node)) {
@@ -56,9 +59,9 @@ export function catalogStrings(value, counts = {}, name = "") {
       return;
     }
     if (node && typeof node === "object") {
-      for (const [key, item] of Object.entries(node)) {
-        if (/[/-]/.test(key)) visit(key);
-        visit(item);
+      for (const [childKey, item] of Object.entries(node)) {
+        if (/[/-]/.test(childKey)) visit(childKey);
+        visit(item, childKey);
       }
     }
   };
@@ -75,14 +78,19 @@ function readJson(repo, name) {
   return JSON.parse(readFileSync(join(repo, "AwesomeDS/data", name), "utf8"));
 }
 
-export function datasetCounts(repo) {
-  const fonts = readJson(repo, "fonts.json");
-  const palettes = readJson(repo, "palettes.json");
-  const stack = readJson(repo, "stack.json");
-  const repos = readJson(repo, "repos.json");
+function readAppJson(webRoot, name) {
+  return JSON.parse(readFileSync(join(webRoot, "src/ds/data", name), "utf8"));
+}
+
+/** Counts Home.tsx passes into the captions. brandCount prefers palettes meta. */
+export function datasetCounts(webRoot) {
+  const fonts = readAppJson(webRoot, "fonts.json");
+  const palettes = readAppJson(webRoot, "palettes.json");
+  const stack = readAppJson(webRoot, "stack.json");
+  const repos = readAppJson(webRoot, "repos.json");
   return {
     fonts: fonts.fonts.length,
-    brands: palettes.brand.length,
+    brands: palettes.meta?.counts?.brand ?? palettes.brand.length,
     stack: stack.layers.length,
     repos: repos.repos.length,
   };
@@ -212,7 +220,7 @@ export function routeExtra({ repo, webRoot, locale, path, entry, entries, messag
   if (entry) {
     return section(`<article lang="${contentLanguage(entry.body)}">${mdToHtml(publishText(entry.body))}</article>`);
   }
-  const counts = datasetCounts(repo);
+  const counts = datasetCounts(webRoot);
   const name = messages.name ?? "";
   if (path === "/") return homeBlock(messages.home, counts, name);
   if (path === "/fonts") return fontsBlock(repo);
@@ -239,29 +247,35 @@ export function htmlPath(locale, path) {
   return `${urlPath.slice(1)}/index.html`;
 }
 
-/** Floors that mark a page as real catalog content rather than the shared nav. */
-export function contentFloor(path) {
-  const floors = {
-    "/": { items: 12, phrase: { ja: "白地、黒文字、アクセント 1 色。AI が書く UI の既定値。", en: "White canvas, black ink, one accent. The defaults for UI that AI writes." } },
-    "/fonts": { items: 30, phrase: { ja: "Geist", en: "Geist" } },
-    "/palettes": { items: 20, phrase: { ja: "Airbnb", en: "Airbnb" } },
-    "/motion": { items: 30, phrase: { ja: "SplitTextReveal", en: "SplitTextReveal" } },
-    "/stack": { items: 20, phrase: { ja: "TypeScript", en: "TypeScript" } },
-    "/rankings": { items: 40, phrase: { ja: "system-design-primer", en: "system-design-primer" } },
-    "/sites": { items: 40, phrase: { ja: "shadcn/ui", en: "shadcn/ui" } },
-    "/components": { items: 40, phrase: { ja: "Button (button)", en: "Button (button)" } },
-    "/report": { items: 8, phrase: { ja: "/awesome-ds:html-report", en: "/awesome-ds:html-report" } },
-    "/slides": { items: 8, phrase: { ja: "1枚に主張は1つ", en: "One claim per slide" } },
-    "/anti-slop": { items: 15, phrase: { ja: "紫から青のグラデーション", en: "Purple-to-blue gradient" } },
-    "/sources": { items: 15, phrase: { ja: "Material Design 3", en: "Material Design 3" } },
-    "/about": { items: 8, phrase: { ja: "AwesomeDS/", en: "AwesomeDS/" } },
-    "/character": { items: 10, phrase: { ja: "エース", en: "Ace" } },
-    "/knowledge": { items: 20 },
-    "/foundations": { items: 10 },
-  };
-  if (floors[path]) return floors[path];
-  if (path.startsWith("/foundations/")) return { chars: 400, phrase: path === "/foundations/color" ? { ja: "Neutrals are true gray", en: "Neutrals are true gray" } : undefined };
-  return { items: 3, chars: 80 };
+export function visibleText(html) {
+  return String(html)
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** The first catalog lines a built page must contain. Taken from the section just generated. */
+export function contentMarkers(sectionHtml, limit = 3) {
+  const stats = contentStats(sectionHtml.includes("<section") ? sectionHtml : `<section data-route-content>${sectionHtml}</section>`);
+  if (!stats) return [];
+  const items = [...stats.body.matchAll(/<li\b[^>]*>([\s\S]*?)<\/li>/g)]
+    .map((match) => visibleText(match[1]))
+    .filter((text) => text.length >= 2);
+  if (items.length) return items.slice(0, limit);
+  const text = visibleText(stats.body);
+  return text ? [text.slice(0, 80)] : [];
+}
+
+export function pageContentProblems(html, expectedSection) {
+  const stats = contentStats(html);
+  if (!stats) return ["boilerplate"];
+  const seen = visibleText(stats.body);
+  return contentMarkers(expectedSection).flatMap((marker) => (seen.includes(marker) ? [] : [`missing ${JSON.stringify(marker)}`]));
 }
 
 export function contentStats(html) {
@@ -275,7 +289,7 @@ export function contentStats(html) {
   };
 }
 
-export function routeContentProblems(dist, routes) {
+export function routeContentProblems(dist, routes, env) {
   const problems = [];
   for (const path of routes) {
     for (const locale of ["ja", "en"]) {
@@ -287,21 +301,22 @@ export function routeContentProblems(dist, routes) {
         problems.push(`${rel} is missing`);
         continue;
       }
-      const stats = contentStats(html);
-      const floor = contentFloor(path);
-      if (!stats) {
-        problems.push(`${rel} is boilerplate`);
+      const expected = routeExtra({
+        repo: env.repo,
+        webRoot: env.webRoot,
+        locale,
+        path,
+        entries: env.entries,
+        messages: env.messages(locale),
+        systems: env.systems,
+      });
+      if (!expected) {
+        problems.push(`${rel} has no catalog`);
         continue;
       }
-      const enoughItems = floor.items == null || stats.items >= floor.items;
-      const enoughText = floor.chars == null || stats.chars >= floor.chars;
-      if (floor.items != null && floor.chars != null) {
-        if (!enoughItems && !enoughText) problems.push(`${rel} has ${stats.items} entries`);
-      } else if (!enoughItems || !enoughText) {
-        problems.push(`${rel} has ${stats.items} entries / ${stats.chars} chars`);
+      for (const item of pageContentProblems(html, expected)) {
+        problems.push(item === "boilerplate" ? `${rel} is boilerplate` : `${rel} ${item}`);
       }
-      const phrase = floor.phrase?.[locale];
-      if (phrase && !stats.body.includes(phrase)) problems.push(`${rel} missing ${JSON.stringify(phrase)}`);
     }
   }
   return problems;

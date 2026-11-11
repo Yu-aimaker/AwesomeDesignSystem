@@ -6,9 +6,10 @@ import { fileURLToPath } from "node:url";
 import { auditHtml, htmlDeclaresNoindex, robotsPolicyProblems } from "./check.mjs";
 import { loadEntries, parseAppRoutes } from "./collect.mjs";
 import { CSP, renderHeaders } from "./headers.mjs";
-import { hygieneProblems, publishText } from "./hygiene.mjs";
+import { hygieneProblems, publishKnowledge, publishText } from "./hygiene.mjs";
 import { mdToHtml } from "./markdown.mjs";
-import { contentStats, routeExtra } from "./route-content.mjs";
+import { contentMarkers, contentStats, datasetCounts, pageContentProblems, routeExtra } from "./route-content.mjs";
+import { sanitizeKnowledgeRaw } from "./sanitize-raw.mjs";
 import { homeMessages } from "../../src/i18n/messages/home.ts";
 import { reportMessages } from "../../src/i18n/messages/report.ts";
 import { slidesMessages } from "../../src/i18n/messages/slides.ts";
@@ -258,4 +259,105 @@ test("home export includes every string field, including fields added later", ()
   });
   assert.match(html, /白地、黒文字、アクセント 1 色。AI が書く UI の既定値。/);
   assert.match(html, /Modern Web Guidance より広く、深く、新しい作法を持つ。/);
+});
+
+function homeHtml(locale) {
+  return routeExtra({
+    repo: repoRoot,
+    webRoot,
+    locale,
+    path: "/",
+    entries: [],
+    messages: catalogs(locale),
+    systems: flagshipSystems,
+  });
+}
+
+test("home captions use each catalog count", () => {
+  const counts = datasetCounts(webRoot);
+  const fonts = JSON.parse(readFileSync(join(webRoot, "src/ds/data/fonts.json"), "utf8"));
+  const palettes = JSON.parse(readFileSync(join(webRoot, "src/ds/data/palettes.json"), "utf8"));
+  const stack = JSON.parse(readFileSync(join(webRoot, "src/ds/data/stack.json"), "utf8"));
+  const repos = JSON.parse(readFileSync(join(webRoot, "src/ds/data/repos.json"), "utf8"));
+  assert.equal(counts.fonts, fonts.fonts.length);
+  assert.equal(counts.brands, palettes.meta.counts.brand);
+  assert.equal(counts.stack, stack.layers.length);
+  assert.equal(counts.repos, repos.repos.length);
+  const ja = homeHtml("ja");
+  const en = homeHtml("en");
+  assert.match(ja, new RegExp(`${counts.fonts} 書体。使用数は ${counts.brands} 社から実測`));
+  assert.match(ja, new RegExp(`${counts.brands} 社の実測配色`));
+  assert.match(ja, new RegExp(`${counts.stack} 層`));
+  assert.match(ja, new RegExp(`${counts.repos} の OSS`));
+  assert.match(en, new RegExp(`${counts.fonts} typefaces\\. Usage measured across ${counts.brands} brands`));
+  assert.match(en, new RegExp(`Measured colors from ${counts.brands} brands`));
+  assert.match(en, new RegExp(`${counts.stack} layers`));
+  assert.match(en, new RegExp(`${counts.repos} open source projects`));
+});
+
+test("character status lines are not filled with the font count", () => {
+  const counts = datasetCounts(webRoot);
+  const html = routeExtra({
+    repo: repoRoot,
+    webRoot,
+    locale: "ja",
+    path: "/character",
+    entries: [],
+    messages: catalogs("ja"),
+    systems: flagshipSystems,
+  });
+  assert.equal(html.includes(`${counts.fonts}を再生中`), false);
+  assert.match(html, /エースは AwesomeDS のアイコンから描いたマスコットです/);
+});
+
+test("removing the route section is boilerplate", () => {
+  const section = routeExtra({
+    repo: repoRoot,
+    webRoot,
+    locale: "ja",
+    path: "/fonts",
+    entries: [],
+    messages: catalogs("ja"),
+    systems: flagshipSystems,
+  });
+  const page = `<html><nav><a>Fonts</a></nav>${section}</html>`;
+  assert.deepEqual(pageContentProblems(page, section), []);
+  const stripped = page.replace(/<section data-route-content>[\s\S]*?<\/section>/, "");
+  assert.deepEqual(pageContentProblems(stripped, section), ["boilerplate"]);
+});
+
+test("guard markers are the current catalog titles", () => {
+  const repos = JSON.parse(readFileSync(join(repoRoot, "AwesomeDS/data/repos.json"), "utf8"));
+  const html = routeExtra({
+    repo: repoRoot,
+    webRoot,
+    locale: "ja",
+    path: "/rankings",
+    entries: [],
+    messages: catalogs("ja"),
+    systems: flagshipSystems,
+  });
+  const names = repos.repos.slice(0, 3).map((repo) => `${repo.owner}/${repo.name}`);
+  const markers = contentMarkers(html);
+  for (const name of names) assert.ok(markers.some((marker) => marker.includes(name)), name);
+  const first = names[0];
+  const stale = html.replaceAll(first, "removed-from-catalog");
+  const problems = pageContentProblems(`<html>${stale}</html>`, html);
+  assert.ok(problems.some((line) => line.includes(first)));
+});
+
+test("knowledge raw modules drop status urls and the repo file keeps them", () => {
+  const file = join(repoRoot, "Knowledge/skills/neropursue-x-post.md");
+  const raw = readFileSync(file, "utf8");
+  assert.match(raw, /https:\/\/x\.com\/neropursue\/status\/2089263766428950683/);
+  const published = publishKnowledge(raw);
+  assert.equal(/https?:\/\/(?:www\.)?(?:(?:x|twitter)\.com|api\.fxtwitter\.com)\/\S*\/status\/\d+/.test(published), false);
+  assert.match(published, /https:\/\/www\.originkit\.dev\//);
+  const loaded = sanitizeKnowledgeRaw().load(`${file}?raw`);
+  assert.equal(loaded.includes("x.com/neropursue/status/"), false);
+  assert.equal(loaded.includes("api.fxtwitter.com/neropursue/status/"), false);
+  assert.equal(sanitizeKnowledgeRaw().load(`${file}?url`), null);
+  const js = 'const src = "https://x.com/neropursue/status/2089263766428950683";';
+  assert.ok(hygieneProblems(js, "assets/index.js").some((line) => /status URL/.test(line)));
+  assert.deepEqual(hygieneProblems(published, "note"), []);
 });

@@ -134,7 +134,7 @@ export function productionIndexProblems(dist, routeFiles = []) {
     const text = readFileSync(file, "utf8");
     if (base === "_headers" && headersDeclareNoindex(text)) problems.push(`${rel} contains noindex`);
     if (ext === ".html" && htmlDeclaresNoindex(text)) problems.push(`${rel} contains noindex`);
-    if (ext === ".html" || base === "llms.txt" || base === "llms-full.txt") {
+    if (ext === ".html" || ext === ".js" || ext === ".css" || base === "llms.txt" || base === "llms-full.txt") {
       problems.push(...hygieneProblems(text, rel));
     }
     if (ext === ".html") {

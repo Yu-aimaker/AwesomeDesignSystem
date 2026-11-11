@@ -28,6 +28,15 @@ export function publishText(text) {
   return String(text).replace(STATUS_URL, "");
 }
 
+/**
+ * Browser copy of a Knowledge or foundation note.
+ * Status URLs are removed, and a source entry whose URL was only that status link is dropped.
+ * The repository file is left unchanged.
+ */
+export function publishKnowledge(raw) {
+  return publishText(raw).replace(/^[ \t]*- url:[ \t]*\r?\n(?:[ \t]+(?!- ).+\r?\n)*/gm, "");
+}
+
 function personalEmail(email) {
   const [local, domain] = email.split("@");
   if (!domain) return false;
@@ -40,7 +49,7 @@ function personalEmail(email) {
 /** Problems in a generated artifact. "Pyramid / Funnel" is a category name. */
 export function hygieneProblems(text, label) {
   const problems = [];
-  const source = String(text);
+  const source = String(text).replace(/\\\//g, "/");
   if (/https?:\/\/(?:www\.)?(?:(?:x|twitter)\.com|api\.fxtwitter\.com)\/[^\s<>"']*\/status\/\d+/i.test(source)) {
     problems.push(`${label} contains an X or Twitter status URL`);
   }
