@@ -146,25 +146,6 @@ jobs:
           test -f .growth/discover.json
           node --input-type=module -e "import { readFileSync } from 'node:fs'; const doc = JSON.parse(readFileSync('.growth/discover.json','utf8')); if (doc.partial || doc.failed) { console.error('discover file is partial'); process.exit(1); }"
 
-      - name: Append Knowledge candidates
-        run: node scripts/append-knowledge.mjs --discover .growth/discover.json
-
-      - name: Rebuild Reference from Knowledge
-        run: |
-          node scripts/restore-unpublished.mjs
-          bash Plugin/awesome-ds/scripts/sync-ds.sh
-          node scripts/build-reference.mjs
-
-      - name: Keep only the Knowledge publish set
-        run: |
-          mkdir -p /tmp/growth-keep
-          cp -a Knowledge /tmp/growth-keep/Knowledge
-          cp -a Reference /tmp/growth-keep/Reference
-          cp -a Plugin/awesome-ds/knowledge /tmp/growth-keep/knowledge
-          git checkout -- .
-          rm -rf growth-artifact
-          git clean -fd -e .growth
-
       - name: Prepare the bot branch
         id: prepare
         env:
@@ -173,21 +154,22 @@ jobs:
         run: |
           git fetch origin main
           git fetch origin bot/weekly-growth || true
+          rm -rf growth-artifact
           node scripts/publish-bot-branch.mjs --prepare-only --branch bot/weekly-growth --from origin/main
 
-      - name: Commit Knowledge onto the bot branch
+      - name: Append to the open ledgers and commit
         id: publish
         if: steps.prepare.outputs.action == 'ready'
         env:
           GROWTH_ACTOR: ${{ github.actor }}
           GROWTH_STATE: weekly-growth
+          GH_TOKEN: ${{ github.token }}
         run: |
           bash scripts/setup-git-identity.sh
-          rm -rf Knowledge Reference Plugin/awesome-ds/knowledge
-          cp -a /tmp/growth-keep/Knowledge Knowledge
-          cp -a /tmp/growth-keep/Reference Reference
-          mkdir -p Plugin/awesome-ds
-          cp -a /tmp/growth-keep/knowledge Plugin/awesome-ds/knowledge
+          node scripts/append-knowledge.mjs --discover .growth/discover.json
+          node scripts/restore-unpublished.mjs
+          bash Plugin/awesome-ds/scripts/sync-ds.sh
+          node scripts/build-reference.mjs
           node scripts/restore-unpublished.mjs
           git add -- Knowledge Reference Plugin/awesome-ds/knowledge
           node scripts/check-publish-paths.mjs --git origin/main

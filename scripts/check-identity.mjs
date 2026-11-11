@@ -4,8 +4,9 @@
 // Prints the SHA and role only. Never prints the address.
 //
 // pull_request: base.sha..head.sha (not the synthetic merge commit). Strict.
-// push to main: the same rule, plus one platform merge commit (two parents,
-// canonical author, GitHub committer). Other refs stay strict.
+// push to main: the same rule, plus a GitHub web-flow merge (two or more
+// parents, committer noreply@github.com, every non-merge parent noreply).
+// The merge author may be the person who pressed the button. Other refs stay strict.
 // workflow_dispatch: origin/main..HEAD. An empty range is success.
 // A shallow repository fails closed until it is unshallowed, even when both
 // ends of the range exist. Missing objects or an unreadable fork head fail closed.
@@ -23,9 +24,9 @@ function arg(name) {
   return index === -1 ? "" : process.argv[index + 1] ?? "";
 }
 
-function git(args, allowFail = false) {
+function git(args, allowFail = false, input) {
   try {
-    return execFileSync("git", args, { encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    return execFileSync("git", args, { encoding: "utf8", input, stdio: ["pipe", "pipe", "pipe"] });
   } catch (error) {
     if (allowFail) return null;
     throw error;
@@ -69,31 +70,58 @@ export function isNoreplyEmail(email) {
   return text === GITHUB_MERGE_EMAIL || text.endsWith("@users.noreply.github.com");
 }
 
-export function isPlatformMerge(commit) {
-  return Number(commit.parents) >= 2
-    && commit.authorName === CANONICAL_NAME
-    && commit.authorEmail === CANONICAL_EMAIL
-    && commit.committerName === GITHUB_MERGE_NAME
-    && commit.committerEmail === GITHUB_MERGE_EMAIL;
+export function unfoldBody(body) {
+  const lines = String(body ?? "").replace(/\r\n/g, "\n").split("\n");
+  const out = [];
+  for (const line of lines) {
+    if (/^[ \t]/.test(line) && out.length) out[out.length - 1] += ` ${line.trim()}`;
+    else out.push(line);
+  }
+  return out.join("\n");
+}
+
+export function trailerLeak(body) {
+  const text = unfoldBody(body);
+  TRAILER_RE.lastIndex = 0;
+  for (const line of text.match(TRAILER_RE) ?? []) {
+    EMAIL_RE.lastIndex = 0;
+    const emails = line.match(EMAIL_RE) ?? [];
+    if (emails.some((email) => !isNoreplyEmail(email))) return true;
+  }
+  return false;
+}
+
+function parentCount(commit) {
+  if (Array.isArray(commit?.parentShas)) return commit.parentShas.length;
+  return Number(commit?.parents) || 0;
+}
+
+export function passesNoreply(commit) {
+  return isNoreplyEmail(commit?.authorEmail) && isNoreplyEmail(commit?.committerEmail) && !trailerLeak(commit?.body);
+}
+
+export function isPlatformMerge(commit, parentCommits = []) {
+  if (parentCount(commit) < 2) return false;
+  if (commit?.committerName !== GITHUB_MERGE_NAME) return false;
+  if (String(commit?.committerEmail ?? "").toLowerCase() !== GITHUB_MERGE_EMAIL) return false;
+  if (!Array.isArray(parentCommits) || parentCommits.length < 2) return false;
+  const nonMerge = parentCommits.filter((parent) => parentCount(parent) < 2);
+  if (!nonMerge.length) return false;
+  return nonMerge.every((parent) => passesNoreply(parent));
 }
 
 export function identityProblems(commits, options = {}) {
   const problems = [];
   for (const commit of commits) {
-    const authorBad = commit.authorName !== CANONICAL_NAME || commit.authorEmail !== CANONICAL_EMAIL;
-    const committerBad = commit.committerName !== CANONICAL_NAME || commit.committerEmail !== CANONICAL_EMAIL;
-    const platform = options.allowPlatformMerge && isPlatformMerge(commit);
-    if (authorBad) problems.push({ sha: commit.sha, role: "author" });
-    if (committerBad && !platform) problems.push({ sha: commit.sha, role: "committer" });
-    const body = String(commit.body ?? "");
-    let trailer = false;
-    TRAILER_RE.lastIndex = 0;
-    for (const line of body.match(TRAILER_RE) ?? []) {
-      EMAIL_RE.lastIndex = 0;
-      const emails = line.match(EMAIL_RE) ?? [];
-      if (emails.some((email) => !isNoreplyEmail(email))) trailer = true;
+    const parents = commit.parentCommits ?? [];
+    const platform = options.allowPlatformMerge === true && isPlatformMerge(commit, parents);
+    if (!platform) {
+      const authorBad = commit.authorName !== CANONICAL_NAME || commit.authorEmail !== CANONICAL_EMAIL;
+      const committerBad = commit.committerName !== CANONICAL_NAME || commit.committerEmail !== CANONICAL_EMAIL;
+      if (authorBad) problems.push({ sha: commit.sha, role: "author" });
+      if (committerBad) problems.push({ sha: commit.sha, role: "committer" });
     }
-    if (trailer) problems.push({ sha: commit.sha, role: "trailer" });
+    if (trailerLeak(commit.body)) problems.push({ sha: commit.sha, role: "trailer" });
   }
   return problems;
 }
@@ -103,16 +131,52 @@ function readCommits(base, head) {
   if (raw === null) return null;
   return raw.split("\0").filter(Boolean).map((record) => {
     const [sha, authorName, authorEmail, committerName, committerEmail, parents, body] = record.split("\x1f");
+    const parentShas = String(parents ?? "").split(" ").filter(Boolean);
     return {
       sha,
       authorName,
       authorEmail,
       committerName,
       committerEmail,
-      parents: String(parents ?? "").split(" ").filter(Boolean).length,
+      parents: parentShas.length,
+      parentShas,
       body: body ?? "",
     };
   });
+}
+
+function readOne(sha) {
+  const raw = git(["log", "-1", "-z", "--format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%P%x1f%B", sha], true);
+  if (!raw) return null;
+  const record = raw.split("\0").find(Boolean);
+  if (!record) return null;
+  const [id, authorName, authorEmail, committerName, committerEmail, parents, body] = record.split("\x1f");
+  const parentShas = String(parents ?? "").split(" ").filter(Boolean);
+  return {
+    sha: id,
+    authorName,
+    authorEmail,
+    committerName,
+    committerEmail,
+    parents: parentShas.length,
+    parentShas,
+    body: body ?? "",
+  };
+}
+
+function attachParents(commits) {
+  const known = new Map(commits.map((commit) => [commit.sha, commit]));
+  for (const commit of commits) {
+    commit.parentCommits = [];
+    for (const sha of commit.parentShas ?? []) {
+      let parent = known.get(sha);
+      if (!parent) {
+        parent = readOne(sha);
+        if (parent) known.set(sha, parent);
+      }
+      if (parent) commit.parentCommits.push(parent);
+    }
+  }
 }
 
 function isShallow() {
@@ -148,6 +212,11 @@ function main() {
     console.error("identity: missing range");
     process.exit(1);
   }
+  for (const commit of commits) {
+    const parsed = git(["interpret-trailers", "--parse"], true, `${commit.body ?? ""}\n`);
+    if (parsed) commit.body = `${commit.body ?? ""}\n${parsed}`;
+  }
+  attachParents(commits);
   const problems = identityProblems(commits, { allowPlatformMerge: range.allowPlatformMerge === true });
   if (!problems.length) {
     console.log(`identity: ${commits.length} commits`);

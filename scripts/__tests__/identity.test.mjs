@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { identityProblems, intendedRange, isPlatformMerge } from "../check-identity.mjs";
+import { identityProblems, intendedRange, isPlatformMerge, unfoldBody } from "../check-identity.mjs";
 import { CANONICAL_EMAIL, CANONICAL_NAME, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -153,20 +153,43 @@ test("event ranges are explicit", () => {
   }]);
   assert.deepEqual(trailer, [{ sha: "def", role: "trailer" }]);
   assert.equal(JSON.stringify(trailer).includes("@"), false);
+  const parent = {
+    sha: "p",
+    parents: 1,
+    authorName: CANONICAL_NAME,
+    authorEmail: CANONICAL_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: CANONICAL_EMAIL,
+    body: "",
+  };
   const merge = {
     sha: "aaa",
     parents: 2,
-    authorName: CANONICAL_NAME,
-    authorEmail: CANONICAL_EMAIL,
+    authorName: "Owner",
+    authorEmail: "owner@example.com",
     committerName: "GitHub",
     committerEmail: "noreply@github.com",
     body: "",
+    parentCommits: [parent, { ...parent, sha: "q" }],
   };
-  assert.equal(isPlatformMerge(merge), true);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits), true);
   assert.deepEqual(identityProblems([merge], { allowPlatformMerge: true }), []);
-  assert.deepEqual(identityProblems([merge]), [{ sha: "aaa", role: "committer" }]);
-  assert.equal(isPlatformMerge({ ...merge, parents: 1 }), false);
-  assert.equal(isPlatformMerge({ ...merge, authorEmail: "person@example.com" }), false);
+  assert.deepEqual(identityProblems([merge]), [{ sha: "aaa", role: "author" }, { sha: "aaa", role: "committer" }]);
+  assert.equal(isPlatformMerge({ ...merge, parents: 1 }, merge.parentCommits), false);
+  assert.equal(isPlatformMerge(merge, []), false);
+  assert.equal(isPlatformMerge(merge, [parent, { ...parent, authorEmail: "person@example.com" }]), false);
+  const folded = unfoldBody("Co-authored-by: Fixture\n <person@example.com>");
+  assert.match(folded, /Co-authored-by: Fixture <person@example.com>/);
+  const foldedProblem = identityProblems([{
+    sha: "fold",
+    authorName: CANONICAL_NAME,
+    authorEmail: CANONICAL_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: CANONICAL_EMAIL,
+    body: "CO-AUTHORED-BY: Fixture\n <person@example.com>\nSigned-off-by: Fixture\n <other@example.com>",
+  }]);
+  assert.deepEqual(foldedProblem, [{ sha: "fold", role: "trailer" }]);
+  assert.equal(JSON.stringify(foldedProblem).includes("@"), false);
 });
 
 test("commit trailers reject a non-noreply address and keep a noreply trailer", () => {
@@ -180,6 +203,14 @@ test("commit trailers reject a non-noreply address and keep a noreply trailer", 
     assert.equal(bad.code, 1);
     assert.match(bad.stderr, new RegExp(`${leaked} trailer`));
     assert.equal(`${bad.stdout}${bad.stderr}`.includes("@"), false);
+
+    git(cwd, ["reset", "--hard", base]);
+    git(cwd, ["commit", "--allow-empty", "-m", "folded", "-m", "Co-authored-by: Fixture\n <person@example.com>"], identityEnv());
+    const foldedSha = git(cwd, ["rev-parse", "HEAD"]).trim();
+    const folded = runCheck(cwd, ["--base", base, "--head", foldedSha]);
+    assert.equal(folded.code, 1);
+    assert.match(folded.stderr, new RegExp(`${foldedSha} trailer`));
+    assert.equal(`${folded.stdout}${folded.stderr}`.includes("@"), false);
 
     git(cwd, ["reset", "--hard", base]);
     git(cwd, ["commit", "--allow-empty", "-m", "note", "-m", `Co-authored-by: ${CANONICAL_NAME} <${CANONICAL_EMAIL}>`], identityEnv());
@@ -266,16 +297,60 @@ test("push to main allows only a platform merge commit", () => {
       forged.GIT_COMMITTER_EMAIL = "noreply@github.com";
       git(other, ["merge", "--no-ff", "side", "-m", "Merge pull request #8 from side"], forged);
       const otherHead = git(other, ["rev-parse", "HEAD"]).trim();
-      const rejected = runCheck(other, [], {
+      const accepted = runCheck(other, [], {
         ...process.env,
         EVENT_NAME: "push",
         BEFORE_SHA: otherBase,
         PUSH_SHA: otherHead,
         PUSH_REF: "refs/heads/main",
       });
-      assert.equal(rejected.code, 1);
-      assert.match(rejected.stderr, new RegExp(`${otherHead} author`));
-      assert.equal(`${rejected.stdout}${rejected.stderr}`.includes("example.com"), false);
+      assert.equal(accepted.code, 0, accepted.stderr);
+      const direct = identityEnv();
+      direct.GIT_AUTHOR_EMAIL = "person@example.com";
+      direct.GIT_COMMITTER_EMAIL = "person@example.com";
+      git(other, ["commit", "--allow-empty", "-m", "direct"], direct);
+      const directHead = git(other, ["rev-parse", "HEAD"]).trim();
+      const directBad = runCheck(other, [], {
+        ...process.env,
+        EVENT_NAME: "push",
+        BEFORE_SHA: otherHead,
+        PUSH_SHA: directHead,
+        PUSH_REF: "refs/heads/main",
+      });
+      assert.equal(directBad.code, 1);
+      assert.match(directBad.stderr, new RegExp(`${directHead} author`));
+      assert.equal(`${directBad.stdout}${directBad.stderr}`.includes("example.com"), false);
+
+      const tainted = emptyRepo();
+      try {
+        const gmail = identityEnv();
+        gmail.GIT_AUTHOR_EMAIL = "person@example.com";
+        gmail.GIT_COMMITTER_EMAIL = "person@example.com";
+        git(tainted, ["commit", "--allow-empty", "-m", "gmail-base"], gmail);
+        const gmailBase = git(tainted, ["rev-parse", "HEAD"]).trim();
+        git(tainted, ["checkout", "-b", "side"]);
+        git(tainted, ["commit", "--allow-empty", "-m", "side"], identityEnv());
+        git(tainted, ["checkout", "main"]);
+        const web = identityEnv();
+        web.GIT_AUTHOR_NAME = "Owner";
+        web.GIT_AUTHOR_EMAIL = "owner@example.com";
+        web.GIT_COMMITTER_NAME = "GitHub";
+        web.GIT_COMMITTER_EMAIL = "noreply@github.com";
+        git(tainted, ["merge", "--no-ff", "side", "-m", "Merge pull request #9 from side"], web);
+        const taintedHead = git(tainted, ["rev-parse", "HEAD"]).trim();
+        const taintedPush = runCheck(tainted, [], {
+          ...process.env,
+          EVENT_NAME: "push",
+          BEFORE_SHA: gmailBase,
+          PUSH_SHA: taintedHead,
+          PUSH_REF: "refs/heads/main",
+        });
+        assert.equal(taintedPush.code, 1);
+        assert.match(taintedPush.stderr, new RegExp(`${taintedHead} committer`));
+        assert.equal(`${taintedPush.stdout}${taintedPush.stderr}`.includes("example.com"), false);
+      } finally {
+        rmSync(tainted, { recursive: true, force: true });
+      }
     } finally {
       rmSync(other, { recursive: true, force: true });
     }

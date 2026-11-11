@@ -1,7 +1,7 @@
 // Pure decisions for the weekly growth pipeline. No network, no filesystem.
 // Scripts in scripts/ call these so tests can use fixtures.
 
-import { CANONICAL_EMAIL, CANONICAL_NAME, GROWTH_STATE } from "./identity.mjs";
+import { BOT_ACTOR, CANONICAL_EMAIL, CANONICAL_NAME, GROWTH_STATE } from "./identity.mjs";
 import { constrainField, leakageFindings } from "./redact.mjs";
 
 export const BOT_EMAIL = CANONICAL_EMAIL;
@@ -144,15 +144,31 @@ export function discoveryStatus({ searches = 0, searchFailures = 0, releaseFailu
   return { failed: false, partial: false, reason: "ok" };
 }
 
+const TRUSTED_ASSOCIATIONS = new Set(["OWNER", "MEMBER"]);
+
+export function trustFromGithub({ login, permission, association, owner } = {}) {
+  const name = String(login ?? "").trim();
+  if (!name || name === "null") return {};
+  if (name === BOT_ACTOR) return { login: name };
+  const relation = String(association ?? "").trim();
+  if (permission === "admin" || relation === "OWNER" || (owner && name === owner)) {
+    return { login: name, association: "OWNER" };
+  }
+  if (permission === "maintain" || relation === "MEMBER") {
+    return { login: name, association: "MEMBER" };
+  }
+  return {};
+}
+
 export function isTrustedAuthor(entry) {
   if (!entry || typeof entry !== "object") return false;
-  const actorOk = typeof entry.actor === "string" && /^[A-Za-z0-9_.[\]-]+$/.test(entry.actor);
-  return entry.email === CANONICAL_EMAIL
+  const identityOk = entry.email === CANONICAL_EMAIL
     && entry.name === CANONICAL_NAME
     && entry.committerEmail === CANONICAL_EMAIL
-    && entry.committerName === CANONICAL_NAME
-    && actorOk
-    && entry.state === GROWTH_STATE;
+    && entry.committerName === CANONICAL_NAME;
+  if (!identityOk) return false;
+  if (entry.login === BOT_ACTOR) return true;
+  return typeof entry.association === "string" && TRUSTED_ASSOCIATIONS.has(entry.association);
 }
 
 export function foreignAuthors(entries) {

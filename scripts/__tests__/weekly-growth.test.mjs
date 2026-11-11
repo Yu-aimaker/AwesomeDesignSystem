@@ -23,6 +23,7 @@ import {
   renderReport,
   settle,
   topicQuery,
+  trustFromGithub,
   workflowFindings,
 } from "../lib/growth.mjs";
 import { BOT_ACTOR, CANONICAL_NAME, GROWTH_STATE, identityEnv } from "../lib/identity.mjs";
@@ -301,11 +302,20 @@ test("workflows must not push main or call billed agents", () => {
     email: BOT_EMAIL,
     committerName: CANONICAL_NAME,
     committerEmail: BOT_EMAIL,
-    actor: BOT_ACTOR,
+    actor: "anyone",
     state: GROWTH_STATE,
+    login: BOT_ACTOR,
   };
   assert.equal(isTrustedAuthor(trusted), true);
-  assert.equal(isTrustedAuthor({ ...trusted, actor: "" }), false);
+  assert.equal(isTrustedAuthor({ ...trusted, login: undefined, association: "OWNER" }), true);
+  assert.equal(isTrustedAuthor({ ...trusted, login: undefined, association: "CONTRIBUTOR" }), false);
+  assert.equal(isTrustedAuthor({ ...trusted, login: undefined }), false);
+  assert.deepEqual(trustFromGithub({ login: BOT_ACTOR }), { login: BOT_ACTOR });
+  assert.deepEqual(trustFromGithub({ login: "Yu-aimaker", permission: "admin" }), { login: "Yu-aimaker", association: "OWNER" });
+  assert.deepEqual(trustFromGithub({ login: "Yu-aimaker", owner: "Yu-aimaker" }), { login: "Yu-aimaker", association: "OWNER" });
+  assert.deepEqual(trustFromGithub({ login: "person", association: "MEMBER" }), { login: "person", association: "MEMBER" });
+  assert.deepEqual(trustFromGithub({ login: "person", permission: "maintain" }), { login: "person", association: "MEMBER" });
+  assert.deepEqual(trustFromGithub({ login: "person", permission: "read", association: "CONTRIBUTOR", owner: "Yu-aimaker" }), {});
   assert.deepEqual(foreignAuthors([trusted, "human@example.com"]), ["human@example.com"]);
   assert.ok(workflowFindings("runs-on: ubuntu-latest\nrun: git push --force origin HEAD\n").includes("force-push"));
   assert.ok(workflowFindings("runs-on: ubuntu-latest\n").includes("larger-runner"));
@@ -504,8 +514,7 @@ function trustedAuthor() {
     email: BOT_EMAIL,
     committerName: CANONICAL_NAME,
     committerEmail: BOT_EMAIL,
-    actor: BOT_ACTOR,
-    state: GROWTH_STATE,
+    login: BOT_ACTOR,
   };
 }
 
@@ -732,7 +741,10 @@ test("every workflow job has a short timeout and Check reads contents", () => {
   }
   const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
   assert.match(checkYml, /^permissions:\n {2}contents: read\n/m);
-  assert.match(checkYml, /actions: write/);
+  assert.doesNotMatch(checkYml, /actions: write/);
+  assert.match(checkYml, /pnpm\/action-setup@[0-9a-f]{40}/);
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  assert.match(weekly, /actions: write/);
 });
 
 test("a Knowledge proposal passes bot Check and still fails the collection data guard", () => {
@@ -775,6 +787,47 @@ test("a Knowledge proposal passes bot Check and still fails the collection data 
       assert.equal(error.status, 1);
       assert.match(String(error.stderr), /web\/leak\.txt/);
     }
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test("a second weekly run keeps candidate rows the new discovery omitted", () => {
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  assert.ok(weekly.indexOf("--prepare-only") < weekly.indexOf("append-knowledge.mjs"));
+  assert.equal(weekly.includes("rm -rf Knowledge"), false);
+  const cwd = mkdtempSync(join(tmpdir(), "ads-ledger-"));
+  const ledger = [
+    "---",
+    "title: candidates",
+    "---",
+    "",
+    "| 見た日 | 名前 | URL | 補足 |",
+    "|---|---|---|---|",
+    "",
+  ].join("\n");
+  try {
+    execFileSync("git", ["init", "-b", "main"], { cwd, stdio: "pipe" });
+    const env = identityEnv();
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), ledger);
+    writeFileSync(join(cwd, "Knowledge/research/site-candidates.md"), ledger);
+    execFileSync("git", ["add", "Knowledge"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["commit", "-m", "base"], { cwd, env, stdio: "pipe" });
+    execFileSync("git", ["checkout", "-b", "bot/weekly-growth"], { cwd, stdio: "pipe" });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), `${ledger}| 2026-11-04 | acme/a | https://github.com/acme/a | MIT |\n`);
+    execFileSync("git", ["add", "Knowledge"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["commit", "-m", "week A"], { cwd, env, stdio: "pipe" });
+    execFileSync("git", ["checkout", "main"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["checkout", "bot/weekly-growth"], { cwd, stdio: "pipe" });
+    mkdirSync(join(cwd, ".growth"), { recursive: true });
+    writeFileSync(join(cwd, ".growth/discover.json"), JSON.stringify({
+      fresh: [{ kind: "oss", title: "acme/b", url: "https://github.com/acme/b", stars: 12, license: "MIT" }],
+    }));
+    execFileSync(process.execPath, [join(repoRoot, "scripts/append-knowledge.mjs"), "--discover", ".growth/discover.json"], { cwd, stdio: "pipe" });
+    const text = readFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), "utf8");
+    assert.match(text, /https:\/\/github.com\/acme\/a/);
+    assert.match(text, /https:\/\/github.com\/acme\/b/);
   } finally {
     rmSync(cwd, { recursive: true, force: true });
   }

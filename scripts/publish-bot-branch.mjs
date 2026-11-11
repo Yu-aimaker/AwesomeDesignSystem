@@ -5,6 +5,7 @@ import { appendFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { prepareBotBranch, commitAsCanonical, pushFastForward } from "./lib/bot-branch.mjs";
 import { authorFromLog, publishPlan } from "./lib/growth.mjs";
+import { lookupCommitTrust } from "./lib/github-trust.mjs";
 import { GROWTH_STATE } from "./lib/identity.mjs";
 
 function arg(name, fallback = "") {
@@ -35,11 +36,6 @@ if (process.argv.includes("--prepare-only")) {
   process.exit(0);
 }
 
-const log = git(["log", "--format=%an%x1f%ae%x1f%cn%x1f%ce%x1f%B%x1e", `${mainRef}..HEAD`]);
-const commits = log.split("\x1e").map((chunk) => chunk.trim()).filter(Boolean).map((chunk) => {
-  const [authorName, authorEmail, committerName, committerEmail, body] = chunk.split("\x1f");
-  return authorFromLog({ authorName, authorEmail, committerName, committerEmail, body });
-});
 let remoteOk = false;
 try {
   execFileSync("git", ["rev-parse", "--verify", "--quiet", remoteRef], { stdio: "pipe" });
@@ -47,6 +43,17 @@ try {
 } catch {
   remoteOk = false;
 }
+// Only commits already on the remote have a GitHub author. The merge and the
+// new Knowledge commit are created in this job and are not a prior edit.
+const log = remoteOk
+  ? git(["log", "--format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%B%x1e", `${mainRef}..${remoteRef}`])
+  : "";
+const commits = log.split("\x1e").map((chunk) => chunk.trim()).filter(Boolean).map((chunk) => {
+  const [sha, authorName, authorEmail, committerName, committerEmail, body] = chunk.split("\x1f");
+  const record = authorFromLog({ authorName, authorEmail, committerName, committerEmail, body });
+  const trust = lookupCommitTrust(sha);
+  return { ...record, login: trust.login, association: trust.association };
+});
 const plan = publishPlan({
   actor,
   remoteExists: remoteOk,

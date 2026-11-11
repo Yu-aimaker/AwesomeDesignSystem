@@ -44,6 +44,7 @@ jobs:
       - name: Load the checked commit
         env:
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main
