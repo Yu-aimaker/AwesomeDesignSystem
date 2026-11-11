@@ -28,6 +28,7 @@ import {
   weeklyChainProblems,
   workflowFindings,
 } from "../lib/growth.mjs";
+import { ledgerDropSummary, pruneOssLedger } from "../lib/knowledge-append.mjs";
 import { commitRequest, checkRunRequest } from "../lib/provenance.mjs";
 import { BOT_ACTOR, CANONICAL_NAME, GROWTH_STATE, identityEnv } from "../lib/identity.mjs";
 
@@ -357,6 +358,52 @@ test("weekly discovery keeps permissive licenses and drops the six restricted re
   assert.match(source, /Knowledge/);
   assert.match(source, /cataloguedRepoKeys/);
   assert.match(source, /\/repos\/\$\{full\}\/license/);
+});
+
+test("an existing bot ledger drops non-permissive and catalogued rows", () => {
+  const ledger = [
+    "---",
+    "title: candidates",
+    "updated: 2026-11-01",
+    "---",
+    "",
+    "| 見た日 | 名前 | URL | 補足 |",
+    "|---|---|---|---|",
+    "| 2026-11-11 | Devin-AXIS/iPolloWork | https://github.com/Devin-AXIS/iPolloWork | stars 7451, NOASSERTION |",
+    "| 2026-11-11 | acme/listed | https://github.com/acme/listed | stars 900, MIT |",
+    "| 2026-11-11 | acme/fresh | https://github.com/acme/fresh | stars 400, MIT |",
+    "| 2026-11-11 | acme/mit-file | https://github.com/acme/mit-file | stars 500, NOASSERTION |",
+    "",
+  ].join("\n");
+  const plugin = ledger.replace("title: candidates", "title: plugin copy");
+  const licenseTextFor = (row) => {
+    if (row.url.endsWith("iPolloWork")) return "non-commercial work and non-commercial evaluation";
+    if (row.url.endsWith("acme/mit-file")) return MIT_TEXT;
+    return "";
+  };
+  const options = { cataloguedKeys: ["acme/listed"], licenseTextFor, today: "2026-11-11" };
+  const knowledge = pruneOssLedger(ledger, options);
+  const copy = pruneOssLedger(plugin, options);
+  assert.equal(knowledge.markdown.includes("iPolloWork"), false);
+  assert.equal(knowledge.markdown.includes("acme/listed"), false);
+  assert.match(knowledge.markdown, /https:\/\/github.com\/acme\/fresh/);
+  assert.match(knowledge.markdown, /https:\/\/github.com\/acme\/mit-file/);
+  assert.match(knowledge.markdown, /^updated: 2026-11-11$/m);
+  assert.equal(copy.markdown.includes("iPolloWork"), false);
+  assert.equal(copy.markdown.includes("acme/listed"), false);
+  assert.match(copy.markdown, /https:\/\/github.com\/acme\/fresh/);
+  assert.deepEqual(knowledge.dropped.map((row) => row.reason).sort(), ["catalogued", "license"]);
+  const again = pruneOssLedger(knowledge.markdown, options);
+  assert.equal(again.dropped.length, 0);
+  assert.equal(again.markdown, knowledge.markdown);
+  const summary = ledgerDropSummary(knowledge.dropped);
+  assert.match(summary, /Devin-AXIS\/iPolloWork \(ライセンス\)/);
+  assert.match(summary, /acme\/listed \(既掲載\)/);
+  const source = readFileSync(join(repoRoot, "scripts/prune-oss-ledgers.mjs"), "utf8");
+  assert.match(source, /Knowledge\/research\/oss-candidates\.md/);
+  assert.match(source, /Plugin\/awesome-ds\/knowledge\/research\/oss-candidates\.md/);
+  assert.match(source, /research\/oss-candidates\.md/);
+  assert.match(source, /\/repos\/\$\{repo\}\/license/);
 });
 
 test("jpeg size and ogp file rules", () => {
@@ -816,6 +863,7 @@ test("dry-run and a partial discovery do not mutate the remote", () => {
   const ahead = remoteWrites({ action: "noop", dryRun: false, branchAhead: true });
   assert.equal(ahead.closeStalePr, false);
   assert.equal(remoteWrites({ action: "propose", dryRun: "false" }).propose, true);
+  assert.equal(remoteWrites({ action: "noop", dryRun: "false" }).propose, true);
   assert.equal(decide({
     guard: { ok: true, meaningful: true, reasons: [] },
     dryRun: false,
@@ -943,6 +991,8 @@ test("a Knowledge proposal passes bot Check and still fails the collection data 
 test("a second weekly run keeps candidate rows the new discovery omitted", () => {
   const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
   assert.ok(weekly.indexOf("--prepare-only") < weekly.indexOf("append-knowledge.mjs"));
+  assert.ok(weekly.indexOf("append-knowledge.mjs") < weekly.indexOf("prune-oss-ledgers.mjs"));
+  assert.ok(weekly.indexOf("prune-oss-ledgers.mjs") < weekly.indexOf("sync-ds.sh"));
   assert.equal(weekly.includes("rm -rf Knowledge"), false);
   const cwd = mkdtempSync(join(tmpdir(), "ads-ledger-"));
   const ledger = [
@@ -1005,6 +1055,8 @@ test("check and settle pass a read token into every API lookup", () => {
   const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
   const propose = jobBlocks(weekly).find((block) => block.startsWith("  propose:\n"));
   assert.match(propose, /checks: write/);
+  assert.match(propose, /actions: read/);
+  assert.doesNotMatch(propose, /actions: write/);
   assert.match(propose, /GH_TOKEN: \$\{\{ github\.token \}\}/);
   assert.match(propose, /GITHUB_RUN_ID: \$\{\{ github\.run_id \}\}/);
 });

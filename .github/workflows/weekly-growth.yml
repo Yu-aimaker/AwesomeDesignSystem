@@ -122,7 +122,7 @@ jobs:
 
   propose:
     needs: collect
-    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'propose' && needs.collect.outputs.dry_run == 'false' && github.ref == 'refs/heads/main'
+    if: needs.collect.result == 'success' && (needs.collect.outputs.action == 'propose' || needs.collect.outputs.action == 'noop') && needs.collect.outputs.dry_run == 'false' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     permissions:
@@ -130,6 +130,7 @@ jobs:
       pull-requests: write
       issues: write
       checks: write
+      actions: read
     outputs:
       committed: ${{ steps.publish.outputs.committed }}
       head_sha: ${{ steps.publish.outputs.head_sha }}
@@ -174,6 +175,7 @@ jobs:
         run: |
           bash scripts/setup-git-identity.sh
           node scripts/append-knowledge.mjs --discover .growth/discover.json
+          node scripts/prune-oss-ledgers.mjs
           node scripts/restore-unpublished.mjs
           bash Plugin/awesome-ds/scripts/sync-ds.sh
           node scripts/build-reference.mjs

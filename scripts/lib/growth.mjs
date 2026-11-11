@@ -173,7 +173,7 @@ export function decide({ guard, dryRun, humanAuthors = [], discovery = null }) {
 export function remoteWrites({ action, dryRun, branchAhead = false }) {
   const live = !isDryRun(dryRun);
   return {
-    propose: live && action === "propose",
+    propose: live && (action === "propose" || action === "noop"),
     closeStalePr: live && action === "noop" && !branchAhead,
     closeFailureIssue: live && (action === "propose" || action === "noop"),
     notify: live && action === "fail",
@@ -366,6 +366,18 @@ export function ossLicenseDecision(api) {
   const matched = matchPermissiveText(text);
   if (!matched.length) return { admit: false, license: "" };
   return { admit: true, license: matched.join(" OR ") };
+}
+
+export function githubRepoKey(value) {
+  const raw = String(value ?? "").trim();
+  const match = raw.match(/github\.com\/([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)/);
+  if (!match) {
+    const plain = raw.replace(/\.git$/i, "").replace(/\.+$/, "");
+    return /^[^/\s]+\/[^/\s]+$/.test(plain) ? plain : "";
+  }
+  if (RESERVED_GITHUB_OWNERS.has(match[1].toLowerCase())) return "";
+  const repo = match[2].replace(/\.git$/i, "").replace(/\.+$/, "");
+  return `${match[1]}/${repo}`;
 }
 
 export function cataloguedRepoKeys({ curatedKeys = [], siteRepos = [], rankedRepos = [], texts = [] } = {}) {

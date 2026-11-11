@@ -17,7 +17,8 @@
       discover-candidates.mjs
       validate-data.mjs と diff-guard.mjs
     propose（新しい候補があり、dry_run が false のときだけ）
-      Knowledge に追記し、bot/weekly-growth を fast-forward して PR を 1 本出す
+      Knowledge に追記し、既存の OSS 候補行を同じ許可規則で再検査してから bot/weekly-growth を fast-forward して PR を 1 本出す
+      新しい候補が無くても、落とせない行があればその差分だけを出す
     checkbot（propose がコミットしたとき）
       check.yml を workflow_call で、そのコミットに対して同じ run の中で実行する
     settle（Check が成功したときだけ）
@@ -34,7 +35,7 @@
 - 公開してよいパスは `Knowledge/`、`Reference/`、`Plugin/awesome-ds/knowledge/` だけです。それ以外が差分に入ると失敗します。収集中の diff-guard はデータ検査のままです。bot ブランチの Check は `check-publish-paths` を使います。
 - OSS 候補のライセンスは MIT、Apache-2.0、BSD-2-Clause、BSD-3-Clause、ISC、0BSD、Unlicense、CC0-1.0 だけです。MPL-2.0 は弱いコピーレフトなので入れません。`NOASSERTION` やライセンス無しは、LICENSE ファイルがその許可リストの本文と一致するときだけ入れます。サイトの一覧、ランキング、Knowledge に既にあるリポジトリは候補にしません。
 - `GITHUB_TOKEN` が開いた PR の `pull_request` Check は `action_required` のままジョブが 0 件になることがあります。settle はその Check を待ちません。同じ Weekly growth の run が Check を実行します。
-- 開いている bot ブランチへ足すときは、すでにある候補行を消さず、新しい発見だけを追記してから Reference を再生成します。
+- 開いている bot ブランチへ足すときは、許可ライセンスで未掲載の候補行は残します。非許可ライセンスと、サイトまたは Knowledge に既にある行は台帳とプラグイン写しから落とします。落とした名前は実行の summary に出します。同じ入力でもう一度走ると、落とす行は増えません。
 
 ## データの出どころ
 
