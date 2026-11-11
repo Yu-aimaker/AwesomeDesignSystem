@@ -1,5 +1,6 @@
 {
   "shadcn-ui/ui": "component-library",
+  "meta/astryx": "component-library",
   "radix-ui/themes": "component-library",
   "mantinedev/mantine": "component-library",
   "chakra-ui/chakra-ui": "component-library",
@@ -85,6 +86,9 @@
   "mattpocock/skills": "agent-skills",
   "obra/superpowers": "agent-skills",
   "vercel-labs/agent-skills": "agent-skills",
+  "GoogleChrome/modern-web-guidance": "agent-skills",
+  "Appllama/appllama-skills": "agent-skills",
+  "google/elephant-goldfish-model": "agent-skills",
   "vercel-labs/design-systems-to-agent-skills": "agent-skills",
   "tt-a1i/archify": "agent-skills",
   "GLips/Figma-Context-MCP": "agent-skills",
@@ -107,5 +111,7 @@
   "oxc-project/oxc": "tooling",
   "microsoft/playwright": "tooling",
   "vitest-dev/vitest": "tooling",
-  "aidenybai/react-scan": "tooling"
+  "aidenybai/react-scan": "tooling",
+  "aidenybai/react-grab": "tooling",
+  "ChromeDevTools/chrome-devtools-mcp": "tooling"
 }

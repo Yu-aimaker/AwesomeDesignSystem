@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 89
+件数: 96
 
 ## accessibility
 
@@ -17,6 +17,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
+| [Animate UI](animation/animate-ui.md) | library | animate-ui, motion, radix, base-ui, commons-clause | 2026-11-11 |
 | [animations.dev and Emil Kowalski](animation/animations-dev-emil-kowalski.md) | article | animations-dev, emil-kowalski, easing, duration, sonner, vaul, principles | 2026-09-06 |
 | [CSS scroll-driven animations](animation/css-scroll-driven-animations.md) | guideline | css, scroll-driven, animation-timeline, view, scroll, browser-support, reduced-motion | 2026-09-06 |
 | [GSAP and ScrollTrigger](animation/gsap.md) | library | gsap, scrolltrigger, pin, scrub, webflow, free, scrolltelling | 2026-09-06 |
@@ -55,6 +56,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 | [AI Elements (Vercel)](component-libraries/vercel-ai-elements.md) | library | ai-elements, vercel, shadcn, ai-sdk, chat, registry, agent-skill | 2026-09-07 |
 | [Ant Design](component-libraries/ant-design.md) | library | antd, ant-design, react, enterprise, typescript, theming, i18n | 2026-10-07 |
 | [assistant-ui](component-libraries/assistant-ui.md) | library | assistant-ui, chat, primitives, shadcn, registry, thread, composer, gallery | 2026-09-07 |
+| [Astryx](component-libraries/meta-astryx.md) | library | astryx, meta, react, component-library, mit, cli | 2026-11-11 |
 | [Base UI (@base-ui/react)](component-libraries/base-ui.md) | library | base-ui, mui, unstyled, render-prop, shadcn, accessibility, headless | 2026-10-07 |
 | [Magic UI and Aceternity UI](component-libraries/magic-ui-and-aceternity.md) | library | magic-ui, aceternity, animation, marketing, shadcn-registry, motion, optional | 2026-09-06 |
 | [Radix Primitives and Radix Colors](component-libraries/radix-primitives-and-colors.md) | library | radix, primitives, accessibility, wai-aria, colors, 12-step-scale, aschild | 2026-10-07 |
@@ -134,15 +136,18 @@ AI コーディングエージェントがデザインシステムを作る・�
 |---|---|---|---|
 | [@neropursue X post (2089263766428950683)](skills/neropursue-x-post.md) | article | x-post, component-library, animation, reference | 2026-10-14 |
 | [Anthropic frontend-design skill](skills/anthropic-frontend-design-skill.md) | skill | skill, anthropic, frontend-design, typography, ai-tells, canvas-design, theme-factory | 2026-09-06 |
+| [Appllama skills](skills/appllama-app-design.md) | skill | skill, appllama, react-native, expo, mit | 2026-11-11 |
 | [Archify (tt-a1i)](skills/archify.md) | skill | skill, archify, diagram, architecture-diagram, mermaid-alternative, json-ir, svg, agent-skill | 2026-09-07 |
 | [Claude Design (Anthropic)](skills/anthropic-claude-design.md) | product | claude-design, anthropic, canvas, artboards, design-tool, research-preview, closed-source | 2026-09-07 |
 | [diagram-design (Mahip Kakan) and excalidraw-diagram-skill (coleam00)](skills/diagram-design.md) | skill | skill, diagram, svg, excalidraw, mermaid-alternative, editorial, design-tokens | 2026-09-07 |
+| [Elephant-Goldfish Model](skills/elephant-goldfish-model.md) | skill | skill, review, specification, apache-2.0 | 2026-11-11 |
 | [HTMLレポート](skills/html-report.md) | guideline | html-report, skill, anthropic, artifacts, white-canvas | 2026-10-14 |
 | [mattpocock grill-me / grilling](skills/mattpocock-grill-me.md) | skill | skill, interview, planning, design-tree, ds-creator, questions | 2026-09-06 |
+| [Modern Web Guidance](skills/modern-web-guidance.md) | skill | skill, modern-web-guidance, reference, apache-2.0, google-chrome | 2026-11-11 |
 | [Superpowers (obra)](skills/superpowers.md) | skill | skill, superpowers, sdlc, subagent-driven-development, brainstorming, tdd, multi-harness | 2026-09-07 |
-| [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, inspector, landing-page, app-screens, house-rules, responsive | 2026-10-21 |
-| [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-09-07 |
-| [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-09-06 |
+| [taste-skill (Leonxlnx)](skills/taste-skill.md) | skill | skill, anti-slop, inspector, landing-page, browser-check, mit | 2026-11-11 |
+| [UI Skills (ibelick)](skills/ui-skills.md) | skill | skill, ibelick, baseline-ui, deslop, registry, design-engineering, mcp | 2026-11-11 |
+| [Vercel agent-skills and the skills CLI](skills/vercel-agent-skills.md) | repo | skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions | 2026-11-11 |
 | [スライド](skills/slides.md) | guideline | slides, skill, pptx, html, white-canvas | 2026-10-11 |
 | [人気のスライド作成Skill](skills/slide-skills.md) | guideline | slides, skill, catalog, pptx, html | 2026-10-14 |
 | [脱AIスロップ](skills/anti-ai-slop.md) | guideline | anti-slop, ai-defaults, before-after, japanese, copy, skill | 2026-10-30 |
@@ -151,9 +156,11 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
+| [Chrome DevTools for agents](tech-stack/chrome-devtools-for-agents.md) | library | chrome-devtools, mcp, verification, apache-2.0, accessibility, performance | 2026-11-11 |
 | [Font loading: Fontsource, next/font, subsetting, size-adjust](tech-stack/fonts-loading.md) | guideline | fonts, fontsource, next-font, geist, noto-sans-jp, subsetting, size-adjust, font-display, japanese | 2026-09-06 |
 | [Next.js App Router and Vite](tech-stack/nextjs-and-vite.md) | library | nextjs, app-router, rsc, next-font, vite, spa, rolldown, framework-choice | 2026-09-06 |
 | [Playwright visual testing and axe-core](tech-stack/playwright-visual-testing.md) | library | playwright, screenshot, tohavescreenshot, axe-core, accessibility, visual-regression, design-verifier | 2026-09-06 |
+| [React Grab](tech-stack/react-grab.md) | library | react-grab, devtools, mit, local-development | 2026-11-11 |
 | [Tailwind CSS v4](tech-stack/tailwind-v4.md) | library | tailwind, v4, theme, css-first, oklch, vite, tokens | 2026-09-06 |
 
 ## typography

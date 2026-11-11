@@ -256,6 +256,16 @@ export function Home() {
             AwesomeDS
           </h1>
           <p className="t-body-lg mt-4 max-w-[48ch] text-ink-secondary">{t.lead}</p>
+          <p className="t-body mt-3 max-w-[48ch] text-ink-secondary">{t.purpose}</p>
+          <a
+            href="https://github.com/GoogleChrome/modern-web-guidance"
+            target="_blank"
+            rel="noreferrer"
+            className="t-label mt-4 inline-flex min-h-6 items-center gap-1 text-ink-secondary no-underline hover:text-ink"
+          >
+            {t.purposeLink}
+            <ExternalLink className="size-4" strokeWidth={1.75} aria-hidden />
+          </a>
         </div>
         <div className="rounded-lg border border-hairline bg-canvas-soft p-5 sm:p-6">
           <p className="t-label mb-4 text-ink">{t.knobsHint}</p>

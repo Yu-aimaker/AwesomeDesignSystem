@@ -4,22 +4,38 @@ category: skills
 type: skill
 sources:
   - url: https://github.com/Leonxlnx/taste-skill
-    title: "Leonxlnx/taste-skill (commit 6010f91, v2.1.4)"
+    title: "Leonxlnx/taste-skill README (2.5.1, read 2026-11-11)"
+  - url: https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/README.md
+    title: "taste-skill README"
+  - url: https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/LICENSE
+    title: "MIT LICENSE"
   - url: https://github.com/Leonxlnx/taste-skill-classics
-    title: "Leonxlnx/taste-skill-classics (v1 and v2-experimental skills)"
-  - url: https://github.com/vercel-labs/agent-skills
-    title: "vercel-labs/agent-skills (the `npx skills add` CLI taste-skill installs through)"
-tags: [skill, anti-slop, inspector, landing-page, app-screens, house-rules, responsive]
-updated: 2026-10-21
+    title: "Leonxlnx/taste-skill-classics (older skills)"
+tags: [skill, anti-slop, inspector, landing-page, browser-check, mit]
+updated: 2026-11-11
 ---
 
 # taste-skill (Leonxlnx)
 
 ## 概要
 
-Web ページのアートディレクションを行う Agent Skill。2026-10-21 にコミット `6010f91`（2026-10-20、プラグイン版 2.1.4）をローカルクローンで読んだ。リポジトリにはスキルが 1 つだけある（`skills/taste-skill/`、install name は `design-taste-frontend`）。CHANGELOG 2.1.3 は「One repo, one skill.」と書く。2.0.0（2026-10-13）で中身を作り直し、旧 v1 と旧 v2（experimental）は `Leonxlnx/taste-skill-classics` に移った。対象はランディングページ、マーケティングサイト、ポートフォリオなどの公開ページと、ダッシュボード、設定、受信箱などのアプリ画面。アプリ画面は旧版では対象外だったが、今は専用の章と手順がある。
+taste-skill は公開ページのアートディレクションを行う Agent Skill である。2026-11-11 に README を読んだ。README は版を `tasteskill 2.5.1` と書く。ライセンスは MIT。GitHub API（2026-11-11）は 113,338 stars、最終 push 2026-11-08、archived ではない。サイト一覧の既存行は更新していない。会社サイトを、実物の写真とブラウザの終了検査で作る技能であり、AwesomeDS の docs の既定にはしない。
 
 ## 要点
+
+2026-11-11 の README。
+
+- 対象は会社サイト。業種を `software`、`gaming`、`tech`、`product`、`service`、`place` に分け、`scripts/start.mjs` が配色と Google Fonts を配り、`assets/layout/deal.mjs` がヒーローを配る。
+- ブラウザ検査は headless Chrome。README の手順 5 は幅 1440、1024、768、390。ツール表の `consistency.mjs` は 1440、1024、820、768、390 と書く。プレースホルダ、実在しない番地、空の見た目、コントラストを落とす。
+- `scripts/gate.mjs` は直せる FAIL が無くなるまで終了を止める。最大 3 ラウンド。
+- 写真はクライアントの部屋、スタッフ、製品のふりをさせない。出典はフッターに書く。
+- シェーダは software、tech、gaming に限る。どのページにもヒーローの入場がある、と README は書く。
+
+2026-10-21 にコミット `6010f91`（2.1.4）を読んだ記録は以下に残す。現行の手順は上の README である。
+
+Web ページのアートディレクションを行う Agent Skill。リポジトリにはスキルが 1 つだけある（`skills/taste-skill/`、install name は `design-taste-frontend`）。CHANGELOG 2.1.3 は「One repo, one skill.」と書く。2.0.0（2026-10-13）で中身を作り直し、旧 v1 と旧 v2（experimental）は `Leonxlnx/taste-skill-classics` に移った。対象はランディングページ、マーケティングサイト、ポートフォリオなどの公開ページと、ダッシュボード、設定、受信箱などのアプリ画面。アプリ画面は旧版では対象外だったが、当時は専用の章と手順があった。
+
+## 記録（2.1.4、2026-10-21）
 
 - 構成: `SKILL.md`（529 行）は Page or app screen、The run（手順 1 から 10）、House rules、Laws of the craft、Special cases、Files の 6 節。詳細は `references/` の 11 ファイル（`layout.md`、`type.md`、`colour.md`、`copy.md`、`critique.md`、`imagery.md`、`motion.md`、`scenes.md`、`tells.md`、`research.md`、`app-screens.md`）に分かれる。
 - 方向の配布: 旧版の 3 つのダイヤル（DESIGN_VARIANCE など）は廃止。`scripts/draw.mjs` が 20 の方向から 3 つを配り、選んだ方向に合わせて書体、配色、ヒーロー、セクション構成をライブラリから配る。ライブラリは 247 の掲載サイトの調査から作った。
@@ -32,6 +48,8 @@ Web ページのアートディレクションを行う Agent Skill。2026-10-21
 - インストール: `npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"`。旧スキルは `taste-skill-classics` から同じ install name で入る。
 
 ## 具体的な値・ルール（あれば）
+
+次の表は 2026-10-21 に読んだ 2.1.4 の値である。2.5.1 の README では取り直していない。
 
 | 項目 | taste-skill の値 | 場所 |
 |---|---|---|
@@ -46,6 +64,11 @@ Web ページのアートディレクションを行う Agent Skill。2026-10-21
 
 ## AwesomeDS への反映
 
+採用したもの（2026-11-11）。
+
+- ブラウザで終了を止める検査。プレースホルダと、実在しない番地を落とす。`awesome-ds` と `design-verifier` に書いた。配色とヒーローの配り方は採らない。
+- 写真や例を、クライアントの実物であるかのように出さない。
+
 採用したもの（2026-10-21）。
 
 - eyebrow の全面禁止。AwesomeDS は旧版由来の「3 セクションに 1 つまで」から禁止に変えた。根拠は調査の 16% 対 57%。`layout.md`、`anti-patterns.md`、`checklist.md` 5.4。
@@ -56,7 +79,13 @@ Web ページのアートディレクションを行う Agent Skill。2026-10-21
 - 平らな背景の上でぼかしを使わない。左右の余白を揃える。文字と画面端の距離は taste-skill の 16 px より厳しい 20 px を保つ。
 - 旧版の出典（§0.D、§9、§14）を、現行ファイルか `taste-skill-classics` に付け替えた。
 
-採用しなかったもの。
+2026-11-11 に README 2.5.1 を読み、追加で採用しなかったもの。
+
+- 配られた配色と Google Fonts。AwesomeDS のトークンと Geist、Noto Sans JP を置き換えない。
+- 会社サイトの LP、全ページのヒーロー入場、1440x900 で 1 画面 1 セクション。docs とギャラリーには合わない。
+- software、tech、gaming 向けのシェーダとスクロール演出。
+
+採用しなかったもの（2026-10-21）。
 
 - セクション間 120 から 240 px、コンテナなしの全幅、バーのないナビ、名前を大きく置くフッター。受賞サイト型の LP の習慣で、docs とギャラリーの AwesomeDS には合わない（非 LP のロック）。taste-skill 自身のアプリ画面調査でもセクション間は 24 から 64 px。
 - 動きの下限（8 要素）と写真の下限（4 枚）。マーケティングページ向けの基準。AwesomeDS の動きはフィードバックだけ。taste-skill もアプリ画面には入場アニメーションを付けない。
@@ -69,6 +98,9 @@ Web ページのアートディレクションを行う Agent Skill。2026-10-21
 
 ## 出典
 
+- https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/README.md : 2.5.1、業種、検査幅、gate、写真の扱い（2026-11-11）。
+- https://raw.githubusercontent.com/Leonxlnx/taste-skill/main/LICENSE : MIT（2026-11-11）。
+- https://github.com/Leonxlnx/taste-skill : API の stars と push（2026-11-11）。下の行は 2026-10-21 のクローン。
 - https://github.com/Leonxlnx/taste-skill : `SKILL.md`、`references/*.md`、`scripts/inspect.mjs`、`CHANGELOG.md`（2.0.0、2.1.3、2.1.4）、`README.md` をコミット `6010f91a9935f1c167dfc500fb1a475681892e6b` のローカルクローンで読んだ（2026-10-21）。
 - https://github.com/Leonxlnx/taste-skill-classics : 旧 v1 と旧 v2（experimental）の移転先。`git ls-remote` で存在を確認した（2026-10-21）。
 - https://github.com/vercel-labs/agent-skills : README がインストール手段として参照する `npx skills add` CLI。

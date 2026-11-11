@@ -27,7 +27,15 @@ How to check a GitHub repo without spending a full clone on every one: `git ls-r
 
 | Source | Why it matters | Knowledge entry |
 |---|---|---|
+| https://github.com/GoogleChrome/modern-web-guidance | what it added, so AwesomeDS stays ahead. Link, do not copy guides | skills/modern-web-guidance.md |
+| https://github.com/meta/astryx | README and CLI README. Do not record an MCP unless those pages add one | component-libraries/meta-astryx.md |
+| https://github.com/ChromeDevTools/chrome-devtools-mcp | privacy flags and tool list | tech-stack/chrome-devtools-for-agents.md |
+| https://github.com/vercel-labs/agent-skills | skill list and whether a root license file appears | skills/vercel-agent-skills.md |
 | https://github.com/ibelick/ui-skills | registry size (`src/data/registry.ts` slug count), new skills under `skills/` | skills/ui-skills.md |
+| https://github.com/Appllama/appllama-skills | skill list, whether the design skill still runs without the paid MCP | skills/appllama-app-design.md |
+| https://github.com/aidenybai/react-grab | install still development-only | tech-stack/react-grab.md |
+| https://github.com/google/elephant-goldfish-model | skill names, the not-a-supported-product line | skills/elephant-goldfish-model.md |
+| https://github.com/imskyleen/animate-ui | LICENSE.md still Commons Clause. Do not vendor source | animation/animate-ui.md |
 | https://github.com/Leonxlnx/taste-skill | version bumps in `CHANGELOG.md`, new sub-skills | skills/taste-skill.md |
 | https://github.com/tt-a1i/archify | `CHANGELOG.md`, schema changes under `schemas/` | skills/archify.md |
 | https://github.com/mahip-kakan/diagram-design | new diagram types, style-guide default token changes | skills/diagram-design.md |
