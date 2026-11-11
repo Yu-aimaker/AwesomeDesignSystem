@@ -15,8 +15,12 @@ concurrency:
 jobs:
   repo:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v5
         with:
           node-version: 22
@@ -82,6 +86,19 @@ jobs:
           node scripts/validate-data.mjs
       - name: Weekly growth unit tests
         run: node --test scripts/__tests__/weekly-growth.test.mjs
+      - name: Collector retry and redaction
+        run: node --test scripts/__tests__/http-retry.test.mjs scripts/__tests__/redact.test.mjs scripts/__tests__/identity.test.mjs
+      # The green result covers commits in this pull request or push range only.
+      # A squash or merge commit that GitHub creates later is outside the range.
+      - name: Commits use the canonical identity
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BEFORE_SHA: ${{ github.event.before }}
+          PUSH_SHA: ${{ github.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: node scripts/check-identity.mjs
       - name: Weekly growth failure issue
         run: node --test scripts/__tests__/failure-issue.test.mjs
       - name: Markdown links resolve

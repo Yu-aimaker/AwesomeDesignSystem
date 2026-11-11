@@ -1,7 +1,10 @@
 name: Weekly growth
 
-# Monday 09:30 JST. A schedule run passes dry-run false and may open one bot pull request.
-# workflow_dispatch keeps dry_run default true, so a manual run does not open a pull request.
+# Monday 09:30 JST. A schedule run may open one pull request that appends
+# Knowledge, Reference, and the plugin Knowledge mirror. It does not change
+# AwesomeDS, plugin skills, or web. workflow_dispatch keeps dry_run default true.
+# Dry-run does not create or close a pull request, label, or issue.
+# The bot branch is fast-forwarded. This file has no force push.
 on:
   schedule:
     - cron: "30 0 * * 1"
@@ -25,25 +28,38 @@ jobs:
     timeout-minutes: 30
     outputs:
       action: ${{ steps.plan.outputs.action }}
+      dry_run: ${{ steps.mode.outputs.dry_run }}
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+
+      - name: Record dry-run
+        id: mode
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          DRY_RUN_INPUT: ${{ inputs.dry_run }}
+        run: |
+          if [ "$EVENT_NAME" = "schedule" ]; then
+            dry_run=false
+          else
+            dry_run="${DRY_RUN_INPUT:-true}"
+          fi
+          echo "dry_run=$dry_run" >> "$GITHUB_OUTPUT"
+
       - name: Fetch origin/main for the guard
         run: git fetch origin main
 
       - name: Fetch GitHub star ranking
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          for i in 1 2; do node scripts/fetch-repos.mjs && exit 0; [ $i = 2 ] || sleep 30; done; exit 1
+        run: node scripts/fetch-repos.mjs
 
       - name: Extract brand tokens
         env:
           DESIGN_MD_CACHE: ${{ runner.temp }}/design-md
-        run: |
-          for i in 1 2; do node scripts/extract-brands.mjs && exit 0; [ $i = 2 ] || sleep 30; done; exit 1
+        run: node scripts/extract-brands.mjs
 
       - name: Build palettes and fonts
         run: |
@@ -55,18 +71,15 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           mkdir -p .growth
-          for i in 1 2; do node scripts/discover-candidates.mjs --report .growth/discover.json && exit 0; [ $i = 2 ] || sleep 30; done; exit 1
+          node scripts/discover-candidates.mjs --report .growth/discover.json
 
       - name: Probe flagship share images
         run: |
           mkdir -p .growth
-          for i in 1 2; do node scripts/probe-ogp.mjs --out .growth/ogp-probe.json && exit 0; [ $i = 2 ] || sleep 30; done; exit 1
+          node scripts/probe-ogp.mjs --out .growth/ogp-probe.json
 
       - name: Validate data
         run: node scripts/validate-data.mjs
-
-      - name: Sync the plugin copy
-        run: bash Plugin/awesome-ds/scripts/sync-ds.sh
 
       - name: Diff guard
         run: |
@@ -74,69 +87,39 @@ jobs:
           node scripts/diff-guard.mjs --git origin/main --out .growth/guard.json || true
 
       - name: Write the report
-        run: |
-          node --input-type=module << 'EOF'
-          import { readFileSync, writeFileSync } from "node:fs";
-          import { renderReport } from "./scripts/lib/growth.mjs";
-          const guard = JSON.parse(readFileSync(".growth/guard.json", "utf8"));
-          let excluded = {};
-          let fresh = [];
-          try {
-            const discovered = JSON.parse(readFileSync(".growth/discover.json", "utf8"));
-            excluded = discovered.excluded ?? {};
-            fresh = discovered.fresh ?? [];
-          } catch { /* discover may have been skipped */ }
-          const date = new Date().toISOString().slice(0, 10);
-          writeFileSync(".growth/report.md", renderReport({ date, guard, excluded, newCandidates: fresh }));
-          EOF
+        run: node scripts/write-growth-report.mjs .growth/report.md
 
       - name: Decide
         id: plan
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          DRY_RUN_INPUT: ${{ inputs.dry_run }}
-        run: |
-          if [ "$EVENT_NAME" = "schedule" ]; then
-            dry_run=false
-          else
-            dry_run="${DRY_RUN_INPUT:-true}"
-          fi
-          echo "dry_run=$dry_run" >> "$GITHUB_OUTPUT"
-          node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --dry-run "$dry_run"
+          dry_run: ${{ steps.mode.outputs.dry_run }}
+        run: node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --discover .growth/discover.json --dry-run "$dry_run"
 
       - name: Step summary
         if: always()
-        run: |
-          {
-            echo "## 週次更新"
-            echo ""
-            echo "- action: ${{ steps.plan.outputs.action }}"
-            echo "- dry_run: ${{ steps.plan.outputs.dry_run }}"
-            echo ""
-            cat .growth/report.md 2>/dev/null || true
-          } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          ACTION: ${{ steps.plan.outputs.action }}
+          DRY_RUN: ${{ steps.mode.outputs.dry_run }}
+        run: node scripts/print-growth-summary.mjs
 
       - name: Pack the run
         if: always()
-        run: |
-          tar -czf growth-payload.tgz \
-            AwesomeDS/data \
-            Plugin/awesome-ds/ds/data \
-            .growth/guard.json \
-            .growth/discover.json \
-            .growth/ogp-probe.json \
-            .growth/report.md
+        run: node scripts/pack-growth-run.mjs
+
       - name: Upload the run
-        if: always()
+        if: always() && hashFiles('growth-payload.tgz') != ''
         uses: actions/upload-artifact@v4
         with:
           name: weekly-growth
-          path: growth-payload.tgz
+          path: |
+            growth-payload.tgz
+            .growth/pack-summary.json
+          retention-days: 7
+          if-no-files-found: ignore
 
   propose:
     needs: collect
-    # Only a run dispatched from main may publish; other refs stay dry-run in effect.
-    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'propose' && github.ref == 'refs/heads/main'
+    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'propose' && needs.collect.outputs.dry_run == 'false' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -157,85 +140,111 @@ jobs:
           node-version: 22
 
       - name: Unpack the run
-        run: tar -xzf growth-artifact/growth-payload.tgz
+        run: |
+          tar -xzf growth-artifact/growth-payload.tgz
+          test -f .growth/discover.json
+          node --input-type=module -e "import { readFileSync } from 'node:fs'; const doc = JSON.parse(readFileSync('.growth/discover.json','utf8')); if (doc.partial || doc.failed) { console.error('discover file is partial'); process.exit(1); }"
 
-      - name: Refuse a branch that a person has edited
+      - name: Append Knowledge candidates
+        run: node scripts/append-knowledge.mjs --discover .growth/discover.json
+
+      - name: Rebuild Reference from Knowledge
+        run: |
+          node scripts/restore-unpublished.mjs
+          bash Plugin/awesome-ds/scripts/sync-ds.sh
+          node scripts/build-reference.mjs
+
+      - name: Keep only the Knowledge publish set
+        run: |
+          mkdir -p /tmp/growth-keep
+          cp -a Knowledge /tmp/growth-keep/Knowledge
+          cp -a Reference /tmp/growth-keep/Reference
+          cp -a Plugin/awesome-ds/knowledge /tmp/growth-keep/knowledge
+          git checkout -- .
+          rm -rf growth-artifact
+          git clean -fd -e .growth
+
+      - name: Prepare the bot branch
+        id: prepare
+        env:
+          GROWTH_ACTOR: ${{ github.actor }}
+          GROWTH_STATE: weekly-growth
+        run: |
+          git fetch origin main
+          git fetch origin bot/weekly-growth || true
+          node scripts/publish-bot-branch.mjs --prepare-only --branch bot/weekly-growth --from origin/main
+
+      - name: Commit Knowledge onto the bot branch
+        id: publish
+        if: steps.prepare.outputs.action == 'ready'
+        env:
+          GROWTH_ACTOR: ${{ github.actor }}
+          GROWTH_STATE: weekly-growth
+        run: |
+          bash scripts/setup-git-identity.sh
+          rm -rf Knowledge Reference Plugin/awesome-ds/knowledge
+          cp -a /tmp/growth-keep/Knowledge Knowledge
+          cp -a /tmp/growth-keep/Reference Reference
+          mkdir -p Plugin/awesome-ds
+          cp -a /tmp/growth-keep/knowledge Plugin/awesome-ds/knowledge
+          node scripts/restore-unpublished.mjs
+          git add -- Knowledge Reference Plugin/awesome-ds/knowledge
+          node scripts/check-publish-paths.mjs --git origin/main
+          date=$(date -u +%F)
+          node scripts/publish-bot-branch.mjs --commit --push --branch bot/weekly-growth --from origin/main --message "knowledge: 週次候補 ${date}"
+
+      - name: Open or update the single pull request
+        if: steps.publish.outputs.committed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ACTION: propose
+          DRY_RUN: "false"
+        run: |
+          date=$(date -u +%F)
+          title="knowledge: 週次候補 ${date}"
+          node scripts/print-growth-summary.mjs --out /tmp/growth-pr.md
+          if ! gh label list --repo "$GITHUB_REPOSITORY" --limit 100 --json name --jq '.[].name' | grep -qx 'bot:weekly-growth'; then
+            gh label create bot:weekly-growth --repo "$GITHUB_REPOSITORY" --color 2f5bea --description "週次の候補"
+          fi
+          number=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --state open --json number --jq '.[0].number')
+          if [ -n "$number" ]; then
+            gh pr edit "$number" --repo "$GITHUB_REPOSITORY" --title "$title" --body-file /tmp/growth-pr.md
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --title "$title" --body-file /tmp/growth-pr.md --label bot:weekly-growth
+          fi
+          gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref bot/weekly-growth
+
+  close-stale-pr:
+    needs: collect
+    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'noop' && needs.collect.outputs.dry_run == 'false'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Close an open bot pull request when the branch has nothing ahead
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           git fetch origin main
           git fetch origin bot/weekly-growth || true
           if git rev-parse --verify origin/bot/weekly-growth >/dev/null 2>&1; then
-            authors=$(git log --format='%ae' origin/main..origin/bot/weekly-growth | paste -sd, -)
-            node scripts/weekly-growth-decide.mjs --guard .growth/guard.json --dry-run false --authors "$authors"
+            if ! git merge-base --is-ancestor origin/bot/weekly-growth origin/main; then
+              echo "branch is ahead; leaving the pull request open"
+              exit 0
+            fi
           fi
-
-      - name: Commit data onto bot/weekly-growth
-        run: |
-          branch=bot/weekly-growth
-          case "$branch" in
-            bot/*) ;;
-            *) echo "refusing to publish $branch"; exit 1 ;;
-          esac
-          mkdir -p /tmp/growth-data
-          cp -a AwesomeDS/data /tmp/growth-data/data
-          cp -a Plugin/awesome-ds/ds/data /tmp/growth-data/plugin-data
-          cp .growth/report.md /tmp/growth-data/report.md
-          node scripts/reset-bot-branch.mjs --branch "$branch" --from origin/main
-          rm -rf AwesomeDS/data Plugin/awesome-ds/ds/data
-          cp -a /tmp/growth-data/data AwesomeDS/data
-          mkdir -p Plugin/awesome-ds/ds
-          cp -a /tmp/growth-data/plugin-data Plugin/awesome-ds/ds/data
-          git add AwesomeDS/data Plugin/awesome-ds/ds/data
-          if git diff --cached --quiet; then
-            echo "Nothing to commit."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          date=$(date -u +%F)
-          git commit -m "data: 週次更新 ${date}"
-          if git rev-parse --verify origin/bot/weekly-growth >/dev/null 2>&1; then
-            expected=$(git rev-parse origin/bot/weekly-growth)
-            git push --force-with-lease="refs/heads/${branch}:${expected}" origin "HEAD:${branch}"
-          else
-            git push origin "HEAD:${branch}"
-          fi
-
-      - name: Open or update the single pull request
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          date=$(date -u +%F)
-          title="data: 週次更新 ${date}"
-          gh label create bot:weekly-growth --repo "$GITHUB_REPOSITORY" --color 2f5bea --description "週次データ更新" --force
           number=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --state open --json number --jq '.[0].number')
           if [ -n "$number" ]; then
-            gh pr edit "$number" --repo "$GITHUB_REPOSITORY" --title "$title" --body-file /tmp/growth-data/report.md
-          else
-            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --title "$title" --body-file /tmp/growth-data/report.md --label bot:weekly-growth
-          fi
-          gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref bot/weekly-growth
-
-  close-stale-pr:
-    needs: collect
-    if: needs.collect.result == 'success' && needs.collect.outputs.action == 'noop'
-    runs-on: ubuntu-24.04
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Close an open bot pull request when nothing meaningful changed
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          number=$(gh pr list --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --state open --json number --jq '.[0].number')
-          if [ -n "$number" ]; then
-            gh pr close "$number" --repo "$GITHUB_REPOSITORY" --comment "日付と集計以外の差分がないため閉じます。"
+            gh pr close "$number" --repo "$GITHUB_REPOSITORY" --comment "新しい候補がないため閉じます。"
           fi
 
   close-failure-issue:
     needs: [collect, propose]
-    if: always() && needs.collect.result == 'success' && (needs.propose.result == 'success' || needs.propose.result == 'skipped')
+    if: always() && needs.collect.outputs.dry_run == 'false' && needs.collect.result == 'success' && (needs.propose.result == 'success' || needs.propose.result == 'skipped')
     runs-on: ubuntu-24.04
     permissions:
       issues: write
@@ -253,7 +262,7 @@ jobs:
 
   notify:
     needs: [collect, propose]
-    if: always() && (needs.collect.result == 'failure' || needs.propose.result == 'failure')
+    if: always() && needs.collect.outputs.dry_run == 'false' && (needs.collect.result == 'failure' || needs.propose.result == 'failure')
     runs-on: ubuntu-24.04
     permissions:
       issues: write
