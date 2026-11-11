@@ -20,14 +20,20 @@ AI コーディングエージェント向けの汎用デザインシステム *
 
 ## ブランチとマージ（エージェントの仕事）
 
-作業はマージして main を最新にするところまでがエージェントの仕事です。
+作業は PR を出すところまでです。main へ直接 push しません。`AGENTS.md` と同じルールです。
 
 - 作業ブランチは最新の main から切る。1 ブランチ 1 テーマ。
-- 終わったら CI（`.github/workflows/check.yml`）を緑にし、main に入れる。Actions が使えないときは、check.yml の各ステップを手元で全部実行して通ったことを PR か コミットに書く。
-- main に入ったら作業ブランチを消す。リモートに残すブランチは `main` と、動いている自動化のブランチ（`bot/weekly-growth`）だけ。
+- 終わったら CI（`.github/workflows/check.yml`）を緑にする。Actions が使えないときは、check.yml の各ステップを手元で全部実行して通ったことを PR に書く。
+- main への反映は、承認済みのマージ経路を確認してから行う。それまで自動マージしない。pull_request の identity 検査は、その PR が作った範囲だけを厳密に見る。main への push では、GitHub の merge ボタンが作る merge コミット（親が 2 つ、author は上記の一組、committer は GitHub）だけを追加で許す。別の作者や noreply 以外の trailer は失敗させる。
+- author と committer は `Yu-aimaker <200000358+Yu-aimaker@users.noreply.github.com>`。作業前に `bash scripts/setup-git-identity.sh` を実行し、範囲内の全コミットを `node scripts/check-identity.mjs` で確認する。
+- force push と、main の履歴を書き換える rebase はしない。`bot/weekly-growth` も fast-forward だけにする。
 - 衝突は main 側の最新の内容を正として解く。両方の追加を残せるなら両方残す。生成物（`Reference/`、`Knowledge/README.md`、`Plugin/awesome-ds/ds/`、`Plugin/awesome-ds/knowledge/`）は手で直さず再生成する。
-- 他のエージェントの開いているブランチと同じファイルを触るときは、そのブランチを先に main に入れてから重ねる。
-- main の履歴を書き換える操作（force push、rebase で main を上書き）はしない。
+- 他のエージェントの開いているブランチと同じファイルを触るときは、その PR が main に入ってから重ねる。
+
+## 週次の二段
+
+1. Actions の週次は、新しい候補を Knowledge（エントリ、サイト候補、OSS 候補）と Reference に追記する PR だけを出す。プラグイン側は Knowledge の写しだけを更新する。
+2. AwesomeDS、Plugin の skills、web は週次では変えない。DS とサイトへの反映は別の AI 手順が行う。
 
 ## 非目標（メンテナーの承認が要る）
 

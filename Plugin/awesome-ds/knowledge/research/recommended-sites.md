@@ -17,7 +17,7 @@ updated: 2026-10-21
 
 ## 概要
 
-UI を作るときに見に行くサイトの一覧を `AwesomeDS/data/sites.json` に置く。分類はコンポーネントライブラリ、アニメーション、ローディング、見本帳、道具と資料、スキルの 6 つ。どの項目も下の基準を `scripts/sites.mjs` で検査してから入れる。足すときも更新するときも同じ検査を通す。更新は今は手で `--network --refresh` を回す（週次の自動更新にはまだ入れていない）。
+UI を作るときに見に行くサイトの一覧を `AwesomeDS/data/sites.json` に置く。分類はコンポーネントライブラリ、アニメーション、ローディング、見本帳、道具と資料、スキルの 6 つ。どの項目も下の基準を `scripts/sites.mjs` で検査してから入れる。足すときも更新するときも同じ検査を通す。スターと更新日の更新は手で `--network --refresh` を回す。週次の Actions は `Knowledge/research/site-candidates.md` に未採用の候補を足すだけで、この JSON は変えない。
 
 ## 要点
 

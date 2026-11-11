@@ -5,7 +5,9 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { planDiscoveries, readImageSize, renderReport, topicQuery } from "./lib/growth.mjs";
+import { discoveryStatus, planDiscoveries, readImageSize, renderReport, topicQuery } from "./lib/growth.mjs";
+import { githubRequest } from "./lib/http-retry.mjs";
+import { constrainField } from "./lib/redact.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(root, "AwesomeDS/data/candidates.json");
@@ -33,11 +35,7 @@ function githubReposFromWatchlist() {
 }
 
 async function gh(path) {
-  const headers = { Accept: "application/vnd.github+json", "User-Agent": UA, "X-GitHub-Api-Version": "2022-11-28" };
-  if (TOKEN) headers.Authorization = `Bearer ${TOKEN}`;
-  const res = await fetch(`https://api.github.com${path}`, { headers, signal: AbortSignal.timeout(20000) });
-  if (!res.ok) throw new Error(`${res.status} ${path}`);
-  return res.json();
+  return githubRequest(path, { token: TOKEN, log: (line) => console.log(`discover-candidates: ${line}`) });
 }
 
 function attr(html, name) {
@@ -98,12 +96,15 @@ const queries = [
   `agent-skills design stars:>300 pushed:>${since}`,
 ];
 const ossItems = [];
-for (const q of queries) {
+let searchFailures = 0;
+for (const [index, q] of queries.entries()) {
   try {
     const res = await gh(`/search/repositories?q=${encodeURIComponent(q)}&sort=stars&order=desc&per_page=20`);
     ossItems.push(...(res.items ?? []));
   } catch (e) {
-    console.log(`discover-candidates: search skipped (${e.message})`);
+    searchFailures += 1;
+    const status = e.status ? `status ${e.status}` : "request failed";
+    console.error(`discover-candidates: search ${index + 1}/${queries.length} failed (${status})`);
   }
 }
 
@@ -111,15 +112,34 @@ const guidelines = [];
 for (const row of newBrandUrls()) guidelines.push(await probe(row.url));
 
 const releases = [];
+let releaseFailures = 0;
 for (const repo of githubReposFromWatchlist()) {
   try {
     const rels = await gh(`/repos/${repo}/releases?per_page=1`);
     const tag = rels?.[0]?.tag_name;
     if (!tag) continue;
-    releases.push({ repo, tag, url: rels[0].html_url, title: `${repo} ${tag}` });
-  } catch {
-    /* a repo with no releases is not a failure */
+    const url = constrainField(rels[0].html_url, 200);
+    const title = constrainField(`${repo} ${tag}`, 120);
+    if (!url || !title) continue;
+    releases.push({ repo, tag, url, title });
+  } catch (e) {
+    if (e.status === 404) continue;
+    releaseFailures += 1;
+    const status = e.status ? `status ${e.status}` : "request failed";
+    console.error(`discover-candidates: release lookup failed (${status})`);
   }
+}
+
+const status = discoveryStatus({ searches: queries.length, searchFailures, releaseFailures });
+const reportPath = arg("--report");
+function writeReport(extra) {
+  if (!reportPath) return;
+  writeFileSync(reportPath, JSON.stringify({ excluded: extra.excluded ?? {}, fresh: extra.fresh ?? [], partial: status.partial, failed: status.failed, reason: status.reason }, null, 2) + "\n");
+}
+if (status.failed) {
+  writeReport({ excluded: {}, fresh: [] });
+  console.error(`discover-candidates: ${status.reason}. previous candidates.json kept`);
+  process.exit(1);
 }
 
 const curated = readJson(join(root, "AwesomeDS/data/sources/curated-repos.json"));
@@ -140,11 +160,17 @@ const next = {
   candidates: planned.candidates,
 };
 writeFileSync(OUT, JSON.stringify(next, null, 2) + "\n");
-const reportPath = arg("--report");
-const fresh = planned.candidates.filter((c) => c.firstSeen === today && c.status === "new");
-if (reportPath) {
-  writeFileSync(reportPath, JSON.stringify({ excluded: planned.excluded, fresh }, null, 2) + "\n");
-}
+const fresh = planned.candidates
+  .filter((c) => c.firstSeen === today && c.status === "new")
+  .map((c) => ({
+    kind: c.kind,
+    title: constrainField(c.title, 80),
+    url: constrainField(c.url, 200),
+    stars: typeof c.stars === "number" ? c.stars : null,
+    license: constrainField(c.signals?.license, 40),
+  }))
+  .filter((c) => c.title && c.url);
+writeReport({ excluded: planned.excluded, fresh });
 console.log(renderReport({
   date: today,
   guard: { meaningful: fresh.length > 0, ok: true, reasons: [], stats: { reposBase: 0, reposHead: 0, brandsBase: 0, brandsHead: 0, fetchErrors: 0 } },

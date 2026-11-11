@@ -4,7 +4,7 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 `node scripts/build-reference.mjs` で Knowledge/**/*.md の frontmatter から生成されます。手で編集しないでください。
 
-リンク数: 430  /  ドメイン数: 92
+リンク数: 432  /  ドメイン数: 92
 
 ## 21st.dev
 
@@ -205,8 +205,12 @@ Knowledge と AwesomeDS が参照した外部リンクの一覧です。ドメ�
 
 ## docs.github.com
 
+- [GitHub REST: Releases](https://docs.github.com/en/rest/releases/releases)  
+  引用: [週次の OSS 候補](../Knowledge/research/oss-candidates.md)
 - [GitHub REST: Get a repository（stargazers_count、pushed_at、license、archived）](https://docs.github.com/en/rest/repos/repos#get-a-repository)  
   引用: [おすすめサイト一覧 (/sites) の取り込み基準](../Knowledge/research/recommended-sites.md)
+- [GitHub REST: Search](https://docs.github.com/en/rest/search/search)  
+  引用: [週次の OSS 候補](../Knowledge/research/oss-candidates.md), [週次のサイト候補](../Knowledge/research/site-candidates.md)
 
 ## duolingo.com
 

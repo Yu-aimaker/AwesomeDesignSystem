@@ -10,15 +10,22 @@ import {
   checkOgpFile,
   decide,
   diffGuard,
+  discoveryStatus,
   filterTopicRepos,
   foreignAuthors,
   isDryRun,
+  isPublishPath,
+  isTrustedAuthor,
   planDiscoveries,
+  publishPlan,
   readJpegSize,
+  remoteWrites,
+  renderReport,
   settle,
   topicQuery,
   workflowFindings,
 } from "../lib/growth.mjs";
+import { BOT_ACTOR, CANONICAL_NAME, GROWTH_STATE, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
@@ -288,7 +295,22 @@ test("workflows must not push main or call billed agents", () => {
   assert.ok(bad.includes("push-main"));
   assert.ok(bad.includes("ANTHROPIC_API_KEY"));
   assert.ok(bad.includes("claude-code-action"));
-  assert.deepEqual(foreignAuthors([BOT_EMAIL, "human@example.com"]), ["human@example.com"]);
+  assert.deepEqual(foreignAuthors([BOT_EMAIL, "human@example.com"]), [BOT_EMAIL, "human@example.com"]);
+  const trusted = {
+    name: CANONICAL_NAME,
+    email: BOT_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: BOT_EMAIL,
+    actor: BOT_ACTOR,
+    state: GROWTH_STATE,
+  };
+  assert.equal(isTrustedAuthor(trusted), true);
+  assert.equal(isTrustedAuthor({ ...trusted, actor: "" }), false);
+  assert.deepEqual(foreignAuthors([trusted, "human@example.com"]), ["human@example.com"]);
+  assert.ok(workflowFindings("runs-on: ubuntu-latest\nrun: git push --force origin HEAD\n").includes("force-push"));
+  assert.ok(workflowFindings("runs-on: ubuntu-latest\n").includes("larger-runner"));
+  assert.ok(workflowFindings("TOKEN: ${{ secrets.TOKEN }}\n").includes("secrets"));
+  assert.deepEqual(workflowFindings("# git push --force\nname: Note\non: pull_request\n"), []);
 });
 
 test("collect report files under .growth/ do not fail the diff guard", () => {
@@ -421,8 +443,8 @@ jobs:
   assert.deepEqual(bot, []);
 });
 
-test("the next run recreates the bot branch from main after main moves", async () => {
-  const { recreateBotBranch } = await import("../lib/bot-branch.mjs");
+test("an existing bot branch is merged forward and a diverged branch is left in place", async () => {
+  const { prepareBotBranch } = await import("../lib/bot-branch.mjs");
   const cwd = mkdtempSync(join(tmpdir(), "ads-bot-"));
   try {
     git(cwd, ["init", "-b", "main"]);
@@ -439,18 +461,36 @@ test("the next run recreates the bot branch from main after main moves", async (
     writeFileSync(join(cwd, "human.txt"), "advanced");
     git(cwd, ["add", "."]);
     git(cwd, ["commit", "-m", "human"]);
-    const mainTip = git(cwd, ["rev-parse", "HEAD"]).trim();
 
-    recreateBotBranch({ cwd, branch: "bot/weekly-growth", mainRef: "main" });
-    writeFileSync(join(cwd, "data.txt"), "fresh");
-    git(cwd, ["add", "data.txt"]);
-    git(cwd, ["commit", "-m", "data: weekly"]);
-
-    const parents = git(cwd, ["rev-parse", "HEAD^@"]).trim().split(/\s+/).filter(Boolean);
-    assert.deepEqual(parents, [mainTip]);
+    const prepared = prepareBotBranch({
+      cwd,
+      branch: "bot/weekly-growth",
+      mainRef: "main",
+      remoteRef: "bot/weekly-growth",
+      actor: BOT_ACTOR,
+      state: GROWTH_STATE,
+    });
+    assert.equal(prepared.action, "ready");
+    assert.equal(prepared.reason, "merged-main");
+    assert.equal(git(cwd, ["merge-base", "--is-ancestor", oldBot, "HEAD"]).trim(), "");
     assert.equal(git(cwd, ["show", "HEAD:human.txt"]).trim(), "advanced");
-    assert.throws(() => git(cwd, ["merge-base", "--is-ancestor", oldBot, "HEAD"]));
-    assert.throws(() => git(cwd, ["cat-file", "-e", "HEAD:bot-only.txt"]));
+    assert.equal(git(cwd, ["show", "HEAD:bot-only.txt"]).trim(), "old data");
+
+    git(cwd, ["checkout", "--orphan", "stray"]);
+    git(cwd, ["rm", "-rf", "."]);
+    writeFileSync(join(cwd, "stray.txt"), "unrelated");
+    git(cwd, ["add", "stray.txt"]);
+    git(cwd, ["commit", "-m", "stray"]);
+    const stray = git(cwd, ["rev-parse", "HEAD"]).trim();
+    git(cwd, ["checkout", "main"]);
+    const diverged = prepareBotBranch({
+      cwd,
+      branch: "bot/other",
+      mainRef: "main",
+      remoteRef: "stray",
+    });
+    assert.deepEqual(diverged, { action: "skip", reason: "diverged" });
+    assert.equal(git(cwd, ["rev-parse", "stray"]).trim(), stray);
   } finally {
     rmSync(cwd, { recursive: true, force: true });
   }
@@ -458,40 +498,56 @@ test("the next run recreates the bot branch from main after main moves", async (
 
 const HEAD_SHA = "0123456789abcdef0123456789abcdef01234567";
 
+function trustedAuthor() {
+  return {
+    name: CANONICAL_NAME,
+    email: BOT_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: BOT_EMAIL,
+    actor: BOT_ACTOR,
+    state: GROWTH_STATE,
+  };
+}
+
 function settleInput(overrides = {}) {
   return {
+    event: "workflow_run",
+    workflow: "Check",
+    repository: "acme/ads",
+    expectedRepository: "acme/ads",
     branch: "bot/weekly-growth",
     headSha: HEAD_SHA,
     conclusion: "success",
     pullRequestOpen: true,
     pullRequestHeadSha: HEAD_SHA,
-    authors: [BOT_EMAIL],
-    paths: ["AwesomeDS/data/repos.json"],
+    authors: [trustedAuthor()],
+    paths: ["Knowledge/research/oss-candidates.md"],
     ...overrides,
   };
 }
 
-test("settle merges only a green bot pull request and repeats that action", () => {
+test("settle reports an eligible bot pull request and does not merge it", () => {
   const input = settleInput();
   delete input.pullRequestHeadSha;
   const snapshot = JSON.stringify(input);
-  const merged = { action: "merge", reason: "check-green", headSha: HEAD_SHA };
-  assert.deepEqual(settle(input), merged);
-  assert.deepEqual(settle(input), merged);
+  const reported = { action: "report", reason: "eligible", headSha: HEAD_SHA };
+  assert.deepEqual(settle(input), reported);
+  assert.deepEqual(settle(input), reported);
   assert.equal(JSON.stringify(input), snapshot);
 
   const matched = settleInput();
-  const first = settle(matched);
-  const second = settle(matched);
-  assert.deepEqual(first, merged);
-  assert.deepEqual(second, merged);
+  assert.deepEqual(settle(matched), reported);
+  assert.deepEqual(settle(matched), reported);
   assert.deepEqual(
-    settle(settleInput({ paths: ["Plugin/awesome-ds/ds/data/repos.json", "AwesomeDS/data/brands.json"] })),
-    merged,
+    settle(settleInput({ paths: ["Reference/REFERENCE.md", "Plugin/awesome-ds/knowledge/research/oss-candidates.md"] })),
+    reported,
   );
 });
 
 test("settle skips, fails, or closes instead of merging an unsafe pull request", () => {
+  assert.deepEqual(settle(settleInput({ event: "push" })), { action: "skip", reason: "event" });
+  assert.deepEqual(settle(settleInput({ workflow: "Weekly growth" })), { action: "skip", reason: "workflow" });
+  assert.deepEqual(settle(settleInput({ repository: "other/ads" })), { action: "skip", reason: "repository" });
   assert.deepEqual(settle(settleInput({ branch: "main", headSha: "" })), { action: "skip", reason: "branch" });
   assert.deepEqual(settle(settleInput({ branch: "feature/data" })), { action: "skip", reason: "branch" });
   assert.deepEqual(settle(settleInput({ pullRequestOpen: false })), { action: "skip", reason: "no-pull-request" });
@@ -501,33 +557,55 @@ test("settle skips, fails, or closes instead of merging an unsafe pull request",
     settle(settleInput({ pullRequestHeadSha: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", conclusion: "failure", paths: ["web/src/App.tsx"] })),
     { action: "skip", reason: "head-moved" },
   );
+  assert.deepEqual(
+    settle(settleInput({ branchTip: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" })),
+    { action: "skip", reason: "head-moved" },
+  );
   for (const conclusion of ["failure", "cancelled", "skipped", "timed_out", ""]) {
-    assert.deepEqual(settle(settleInput({ conclusion })), { action: "close", reason: "check" });
+    assert.deepEqual(settle(settleInput({ conclusion })), { action: "skip", reason: "check-retryable" });
   }
   assert.deepEqual(settle(settleInput({ authors: [] })), { action: "close", reason: "author" });
-  assert.deepEqual(settle(settleInput({ authors: [BOT_EMAIL, "human@example.com"] })), { action: "close", reason: "author" });
+  const leaked = settle(settleInput({ authors: [BOT_EMAIL, "human@example.com"] }));
+  assert.equal(leaked.action, "close");
+  assert.equal(leaked.reason, "author");
+  assert.equal(JSON.stringify(leaked).includes("example.com"), false);
   assert.deepEqual(settle(settleInput({ paths: [] })), { action: "close", reason: "empty-diff" });
   assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/repos.json", "web/src/App.tsx"] })), { action: "close", reason: "path" });
   assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/../../web/App.tsx"] })), { action: "close", reason: "path" });
+  assert.equal(isPublishPath("Knowledge/research/oss-candidates.md"), true);
+  assert.equal(isPublishPath("AwesomeDS/data/repos.json"), false);
+  assert.equal(isPublishPath("web/src/App.tsx"), false);
+  assert.equal(isPublishPath("Plugin/awesome-ds/skills/awesome-ds/SKILL.md"), false);
 });
 
-test("monday schedule proposes for real and settle merges or closes only the bot pull request", () => {
+test("monday schedule proposes for real and settle only reports the bot pull request", () => {
   const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
   const settleYml = readFileSync(join(repoRoot, ".github/workflows/weekly-growth-settle.yml"), "utf8");
   assert.match(weekly, /cron:\s*"30 0 \* \* 1"/);
   assert.match(weekly, /workflow_dispatch:/);
   assert.match(weekly, /default:\s*true/);
   assert.match(weekly, /if \[ "\$EVENT_NAME" = "schedule" \]; then\n\s+dry_run=false/);
-  assert.match(weekly, /weekly-growth-decide\.mjs --guard \.growth\/guard\.json --dry-run "\$dry_run"/);
+  assert.match(weekly, /weekly-growth-decide\.mjs --guard \.growth\/guard\.json --discover \.growth\/discover\.json --dry-run "\$dry_run"/);
+  assert.match(weekly, /dry_run == 'false'/);
+  assert.match(weekly, /check-publish-paths\.mjs/);
+  assert.ok(weekly.includes("rm -rf growth-artifact"));
+  assert.ok(weekly.indexOf("rm -rf growth-artifact") < weekly.indexOf("check-publish-paths.mjs"));
+  assert.match(weekly, /setup-git-identity\.sh/);
+  assert.doesNotMatch(weekly, /--force/);
+  assert.doesNotMatch(weekly, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.deepEqual(workflowFindings(weekly), []);
   assert.match(settleYml, /workflows:\s*\["Check"\]/);
   assert.match(settleYml, /head_branch != 'bot\/weekly-growth'/);
   assert.match(settleYml, /run: exit 0/);
   assert.match(settleYml, /weekly-growth-settle\.mjs/);
-  assert.match(settleYml, /gh pr merge[^\n]*--squash[^\n]*--delete-branch[^\n]*--match-head-commit/);
-  assert.match(settleYml, /gh pr close/);
-  assert.match(settleYml, /git push origin --delete bot\/weekly-growth/);
+  assert.match(settleYml, /action == 'report'/);
+  assert.match(settleYml, /close: not run/);
+  assert.doesNotMatch(settleYml, /gh pr close/);
+  assert.doesNotMatch(weekly, /gh pr close/);
+  assert.doesNotMatch(settleYml, /gh pr merge/);
+  assert.doesNotMatch(settleYml, /--delete/);
   assert.equal(settleYml.includes("HEAD:main"), false);
+  assert.doesNotMatch(settleYml, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.deepEqual(workflowFindings(settleYml), []);
 
   const dir = mkdtempSync(join(tmpdir(), "ads-settle-"));
@@ -536,25 +614,31 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     const paths = join(dir, "paths.txt");
     const pr = join(dir, "pr.json");
     const output = join(dir, "github-output.txt");
-    writeFileSync(authors, `${BOT_EMAIL}\n`);
-    writeFileSync(paths, "AwesomeDS/data/repos.json\0Plugin/awesome-ds/ds/data/repos.json\0");
+    writeFileSync(authors, JSON.stringify([trustedAuthor()]));
+    writeFileSync(paths, "Knowledge/research/oss-candidates.md\0Reference/REFERENCE.md\0");
     writeFileSync(pr, JSON.stringify([{ number: 30, headRefOid: HEAD_SHA }]));
+    const settleEnv = {
+      ...process.env,
+      EVENT_NAME: "workflow_run",
+      WORKFLOW_NAME: "Check",
+      SOURCE_REPOSITORY: "acme/ads",
+      EXPECTED_REPOSITORY: "acme/ads",
+      HEAD_BRANCH: "bot/weekly-growth",
+      HEAD_SHA,
+      CHECK_CONCLUSION: "success",
+      AUTHORS_FILE: authors,
+      PATHS_FILE: paths,
+      PR_FILE: pr,
+      GITHUB_OUTPUT: output,
+    };
     const merged = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
       encoding: "utf8",
-      env: {
-        ...process.env,
-        HEAD_BRANCH: "bot/weekly-growth",
-        HEAD_SHA,
-        CHECK_CONCLUSION: "success",
-        AUTHORS_FILE: authors,
-        PATHS_FILE: paths,
-        PR_FILE: pr,
-        GITHUB_OUTPUT: output,
-      },
+      env: settleEnv,
     });
-    assert.deepEqual(JSON.parse(merged), { action: "merge", reason: "check-green", headSha: HEAD_SHA });
+    assert.equal(merged.includes("@"), false);
+    assert.deepEqual(JSON.parse(merged), { action: "report", reason: "eligible", headSha: HEAD_SHA });
     const recorded = readFileSync(output, "utf8");
-    assert.match(recorded, /action=merge/);
+    assert.match(recorded, /action=report/);
     assert.match(recorded, new RegExp(`head_sha=${HEAD_SHA}`));
     assert.match(recorded, /pr_number=30/);
 
@@ -562,16 +646,7 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     writeFileSync(output, "");
     const skipped = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
       encoding: "utf8",
-      env: {
-        ...process.env,
-        HEAD_BRANCH: "bot/weekly-growth",
-        HEAD_SHA,
-        CHECK_CONCLUSION: "success",
-        AUTHORS_FILE: authors,
-        PATHS_FILE: paths,
-        PR_FILE: pr,
-        GITHUB_OUTPUT: output,
-      },
+      env: { ...settleEnv, PR_FILE: pr, GITHUB_OUTPUT: output },
     });
     assert.deepEqual(JSON.parse(skipped), { action: "skip", reason: "no-pull-request" });
 
@@ -582,16 +657,7 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     try {
       failed = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
         encoding: "utf8",
-        env: {
-          ...process.env,
-          HEAD_BRANCH: "bot/weekly-growth",
-          HEAD_SHA: "",
-          CHECK_CONCLUSION: "success",
-          AUTHORS_FILE: authors,
-          PATHS_FILE: paths,
-          PR_FILE: openPr,
-          GITHUB_OUTPUT: output,
-        },
+        env: { ...settleEnv, HEAD_SHA: "", PR_FILE: openPr, GITHUB_OUTPUT: output },
       });
     } catch (error) {
       code = error.status ?? 1;
@@ -616,4 +682,100 @@ test("Knowledge describes the Monday schedule, not a manual-only workflow", () =
   assert.doesNotMatch(entry, /定期実行は未設定/);
   assert.match(skill, /Monday 09:30 JST/);
   assert.doesNotMatch(skill, /manual, dry-run by default/);
+});
+
+test("dry-run and a partial discovery do not mutate the remote", () => {
+  const none = remoteWrites({ action: "noop", dryRun: true, branchAhead: false });
+  assert.deepEqual(none, { propose: false, closeStalePr: false, closeFailureIssue: false, notify: false });
+  const ahead = remoteWrites({ action: "noop", dryRun: false, branchAhead: true });
+  assert.equal(ahead.closeStalePr, false);
+  assert.equal(remoteWrites({ action: "propose", dryRun: "false" }).propose, true);
+  assert.equal(decide({
+    guard: { ok: true, meaningful: true, reasons: [] },
+    dryRun: false,
+    discovery: { partial: true, fresh: 3 },
+  }).action, "fail");
+  assert.deepEqual(discoveryStatus({ searches: 5, searchFailures: 5, releaseFailures: 0 }), {
+    failed: true,
+    partial: true,
+    reason: "discovery-unavailable",
+  });
+  assert.equal(discoveryStatus({ searches: 5, searchFailures: 1, releaseFailures: 0 }).reason, "discovery-partial");
+  assert.equal(discoveryStatus({ searches: 5, searchFailures: 0, releaseFailures: 0 }).failed, false);
+  assert.equal(publishPlan({ actor: "", remoteExists: false, fastForward: true }).reason, "actor");
+  assert.equal(publishPlan({
+    actor: BOT_ACTOR,
+    remoteExists: true,
+    fastForward: false,
+    commits: [trustedAuthor()],
+  }).reason, "diverged");
+  const report = renderReport({
+    date: "2026-11-11",
+    guard: { meaningful: true, ok: true, reasons: [], stats: { reposBase: 1, reposHead: 1, brandsBase: 1, brandsHead: 1, fetchErrors: 0 } },
+    excluded: {},
+    newCandidates: [{ kind: "oss", title: "leak@example.com", url: "https://github.com/acme/demo" }],
+  });
+  assert.equal(report.includes("example.com"), false);
+});
+
+function jobBlocks(yml) {
+  const start = yml.search(/^jobs:\s*$/m);
+  return yml.slice(start).split(/\n(?= {2}[a-z0-9-]+:\n)/).slice(1);
+}
+
+test("every workflow job has a short timeout and Check reads contents", () => {
+  for (const file of ["check.yml", "weekly-growth.yml", "weekly-growth-settle.yml"]) {
+    const yml = readFileSync(join(repoRoot, ".github/workflows", file), "utf8");
+    const blocks = jobBlocks(yml);
+    assert.ok(blocks.length >= 2, file);
+    for (const block of blocks) assert.match(block, /\n {4}timeout-minutes:\s*(?:[1-9]|[12][0-9]|30)\n/);
+  }
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  assert.match(checkYml, /^permissions:\n {2}contents: read\n/m);
+  assert.match(checkYml, /actions: write/);
+});
+
+test("a Knowledge proposal passes bot Check and still fails the collection data guard", () => {
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const step = checkYml.slice(checkYml.indexOf("Bot publish paths"));
+  assert.ok(step.startsWith("Bot publish paths"));
+  assert.match(step, /check-publish-paths\.mjs/);
+  assert.equal(step.includes("diff-guard.mjs"), false);
+  assert.match(weekly, /diff-guard\.mjs --git origin\/main/);
+
+  const cwd = mkdtempSync(join(tmpdir(), "ads-publish-"));
+  try {
+    execFileSync("git", ["init", "-b", "main"], { cwd, stdio: "pipe" });
+    const env = identityEnv();
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), "| url |\n| --- |\n");
+    execFileSync("git", ["add", "Knowledge"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["commit", "-m", "base"], { cwd, env, stdio: "pipe" });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), "| url |\n| --- |\n| https://github.com/acme/demo |\n");
+    const publish = execFileSync(process.execPath, [join(repoRoot, "scripts/check-publish-paths.mjs"), "--git", "HEAD"], {
+      cwd,
+      encoding: "utf8",
+    });
+    assert.match(publish, /check-publish-paths: 1 paths/);
+    let guard = "";
+    try {
+      execFileSync(process.execPath, [join(repoRoot, "scripts/diff-guard.mjs"), "--git", "HEAD"], { cwd, encoding: "utf8" });
+    } catch (error) {
+      guard = `${error.stdout ?? ""}${error.stderr ?? ""}`;
+      assert.equal(error.status, 1);
+    }
+    assert.match(guard, /path outside data: Knowledge\/research\/oss-candidates\.md/);
+    mkdirSync(join(cwd, "web"), { recursive: true });
+    writeFileSync(join(cwd, "web/leak.txt"), "nope");
+    try {
+      execFileSync(process.execPath, [join(repoRoot, "scripts/check-publish-paths.mjs"), "--git", "HEAD"], { cwd, encoding: "utf8", stdio: "pipe" });
+      assert.fail("web path should fail");
+    } catch (error) {
+      assert.equal(error.status, 1);
+      assert.match(String(error.stderr), /web\/leak\.txt/);
+    }
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
 });

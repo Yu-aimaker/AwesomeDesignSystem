@@ -1,14 +1,71 @@
-// Reset the bot branch to a main ref. The weekly workflow calls this so a
-// later main commit is the parent of the next data commit, not a merge.
+// Move onto bot/<name> without resetting history and without force-push.
+// A missing branch is created from main. An existing branch is checked out
+// and main is merged when the histories still share a base. Divergence is reported.
 import { execFileSync } from "node:child_process";
+import { identityEnv } from "./identity.mjs";
+import { leakageFindings } from "./redact.mjs";
 
-export function recreateBotBranch({ cwd, branch, mainRef }) {
-  if (!branch || !branch.startsWith("bot/")) {
-    throw new Error(`refusing to publish ${branch}`);
+function git(cwd, args, env = process.env) {
+  try {
+    return execFileSync("git", args, {
+      cwd,
+      env,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+  } catch (error) {
+    const stderr = String(error.stderr ?? "");
+    const safe = leakageFindings(stderr).length ? "git command failed" : stderr.trim() || "git command failed";
+    const wrapped = new Error(safe);
+    wrapped.status = error.status ?? 1;
+    throw wrapped;
   }
-  execFileSync("git", ["checkout", "-f", "-B", branch, mainRef], { cwd, stdio: "pipe" });
-  const head = execFileSync("git", ["rev-parse", "HEAD"], { cwd, encoding: "utf8" }).trim();
-  const main = execFileSync("git", ["rev-parse", mainRef], { cwd, encoding: "utf8" }).trim();
-  if (head !== main) throw new Error(`refusing to publish ${branch} from ${head}`);
-  return { branch, head };
+}
+
+function gitOk(cwd, args, env = process.env) {
+  try {
+    execFileSync("git", args, { cwd, env, stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function prepareBotBranch({ cwd, branch, mainRef, remoteRef, actor, state }) {
+  if (!branch || !branch.startsWith("bot/")) throw new Error(`refusing to publish ${branch}`);
+  if (!gitOk(cwd, ["rev-parse", "--verify", "--quiet", mainRef])) throw new Error("missing main ref");
+  const remote = remoteRef || `origin/${branch}`;
+  if (!gitOk(cwd, ["rev-parse", "--verify", "--quiet", remote])) {
+    git(cwd, ["checkout", "-B", branch, mainRef]);
+    return { action: "ready", reason: "created" };
+  }
+  git(cwd, ["checkout", "-B", branch, remote]);
+  if (gitOk(cwd, ["merge-base", "--is-ancestor", mainRef, "HEAD"])) {
+    return { action: "ready", reason: "fast-forward" };
+  }
+  if (!gitOk(cwd, ["merge-base", mainRef, "HEAD"])) return { action: "skip", reason: "diverged" };
+  const env = identityEnv();
+  if (!gitOk(cwd, ["merge", "--no-edit", mainRef], env)) {
+    gitOk(cwd, ["merge", "--abort"]);
+    return { action: "skip", reason: "diverged" };
+  }
+  if (actor && state && /^[A-Za-z0-9_.[\]-]+$/.test(actor) && /^[a-z0-9-]+$/.test(state)) {
+    const message = git(cwd, ["log", "-1", "--format=%B"], env).trim();
+    if (!message.includes("Growth-State:")) {
+      git(cwd, ["commit", "--amend", "-m", `${message}\n\nGrowth-Actor: ${actor}\nGrowth-State: ${state}\n`], env);
+    }
+  }
+  return { action: "ready", reason: "merged-main" };
+}
+
+export function commitAsCanonical({ cwd, message, actor, state }) {
+  if (!/^[A-Za-z0-9_.[\]-]+$/.test(actor || "")) throw new Error("refusing actor");
+  if (!/^[a-z0-9-]+$/.test(state || "")) throw new Error("refusing state");
+  const full = `${message}\n\nGrowth-Actor: ${actor}\nGrowth-State: ${state}\n`;
+  git(cwd, ["commit", "-m", full], identityEnv());
+}
+
+export function pushFastForward({ cwd, branch }) {
+  if (!branch || !branch.startsWith("bot/")) throw new Error(`refusing to publish ${branch}`);
+  git(cwd, ["push", "origin", `HEAD:${branch}`], identityEnv());
 }

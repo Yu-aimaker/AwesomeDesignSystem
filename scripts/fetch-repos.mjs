@@ -14,6 +14,7 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { filterTopicRepos, topicQuery } from "./lib/growth.mjs";
+import { githubRequest } from "./lib/http-retry.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const OUT = join(root, "AwesomeDS/data/repos.json");
@@ -59,30 +60,20 @@ function toEntry(api, category) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function gh(path) {
-  const headers = { Accept: "application/vnd.github+json", "User-Agent": "awesomeds-data", "X-GitHub-Api-Version": "2022-11-28" };
-  if (TOKEN) headers.Authorization = `Bearer ${TOKEN}`;
-  for (let attempt = 0; attempt < 3; attempt++) {
-    const res = await fetch(`https://api.github.com${path}`, { headers });
-    if (res.ok) return res.json();
-    const body = await res.text();
-    const remaining = res.headers.get("x-ratelimit-remaining");
-    const reset = Number(res.headers.get("x-ratelimit-reset")) * 1000;
-    if ((res.status === 403 || res.status === 429) && remaining === "0" && reset) {
-      const wait = reset - Date.now() + 2000;
-      if (wait > MAX_WAIT_MS) throw new Error(`rate limit exhausted; resets in ${Math.round(wait / 60000)} min`);
-      console.log(`fetch-repos: rate limited, sleeping ${Math.round(wait / 1000)}s`);
-      await sleep(wait);
-      continue;
-    }
-    if (res.status === 403 && /not enabled for this session/i.test(body)) {
+  try {
+    return await githubRequest(path, {
+      token: TOKEN,
+      budgetMs: MAX_WAIT_MS,
+      log: (line) => console.log(`fetch-repos: ${line}`),
+    });
+  } catch (error) {
+    if (error.status === 403 && error.kind === "permanent") {
       stopAll = true;
       throw new Error("GitHub API blocked in this environment");
     }
-    if (res.status === 404) throw new Error("404 not found");
-    if (res.status >= 500 || res.status === 429) { await sleep(1500 * (attempt + 1)); continue; }
-    throw new Error(`${res.status} ${body.slice(0, 120)}`);
+    if (error.status === 404) throw new Error("status 404");
+    throw new Error(error.status ? `status ${error.status}` : "request failed");
   }
-  throw new Error("gave up after 3 attempts");
 }
 
 const seeded = new Map();
@@ -132,7 +123,8 @@ if (!NO_FETCH && !stopAll) {
     }
     fetched += topicItems.length;
   } catch (e) {
-    fetchErrors.push(`search ${TOPIC_QUERY}: ${e.message}`);
+    fetchErrors.push(`search failed: ${e.message}`);
+    console.error(`fetch-repos: topic search failed (${e.message}). previous topic rows kept when present`);
   }
 }
 const blocked = new Set(BLOCKLIST.map((name) => name.toLowerCase()));

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { closeFailureIssues, reportFailure } from "../lib/failure-issue.mjs";
+import { closeFailureIssues, reportFailure, safeIssueLines } from "../lib/failure-issue.mjs";
 
 function fakeGithub({ createLabelError, openIssues = [] } = {}) {
   const calls = [];
@@ -90,6 +90,20 @@ test("reportFailure rethrows other createLabel errors", async () => {
     () => reportFailure({ github, owner: "acme", repo: "ads", lines: ["x"] }),
     (error) => error.status === 500,
   );
+});
+
+test("reportFailure withholds addresses and credential text", async () => {
+  const lines = safeIssueLines(["see person@example.com", "token=abcd"]);
+  assert.equal(lines.join("\n").includes("@"), false);
+  assert.equal(lines.join("\n").includes("abcd"), false);
+  const { github, calls } = fakeGithub();
+  await reportFailure({
+    github,
+    owner: "acme",
+    repo: "ads",
+    lines: ["person@example.com"],
+  });
+  assert.equal(calls.at(-1)[1].body.includes("@"), false);
 });
 
 test("closeFailureIssues comments and closes each open issue", async () => {
