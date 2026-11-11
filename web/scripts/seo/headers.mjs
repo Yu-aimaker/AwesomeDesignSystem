@@ -17,7 +17,9 @@ export function bootstrapScriptHashes(html) {
   return hashes;
 }
 
-const scriptSrc = ["'self'", ...bootstrapScriptHashes(), "'wasm-unsafe-eval'"].join(" ");
+// 'self' covers same-origin /cdn-cgi/ scripts. The insights beacon is a separate host.
+// The challenge-platform inline script changes per request, so it is not hashed here.
+const scriptSrc = ["'self'", "https://static.cloudflareinsights.com", ...bootstrapScriptHashes(), "'wasm-unsafe-eval'"].join(" ");
 
 export const CSP = [
   "default-src 'self'",
@@ -29,7 +31,7 @@ export const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self'",
+  "connect-src 'self' https://cloudflareinsights.com",
   "media-src 'self' blob:",
   "worker-src 'self' blob:",
   "manifest-src 'self'",
