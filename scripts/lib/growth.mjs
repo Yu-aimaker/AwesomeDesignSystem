@@ -1,14 +1,35 @@
 // Pure decisions for the weekly growth pipeline. No network, no filesystem.
 // Scripts in scripts/ call these so tests can use fixtures.
 
-export const BOT_EMAIL = "41898282+github-actions[bot]@users.noreply.github.com";
+import { CANONICAL_EMAIL, GROWTH_STATE } from "./identity.mjs";
+import { constrainField, leakageFindings } from "./redact.mjs";
+
+export const BOT_EMAIL = CANONICAL_EMAIL;
 export const ALLOW_PREFIXES = ["AwesomeDS/data/", "Plugin/awesome-ds/ds/data/"];
+// The weekly pull request may only append Knowledge, its generated index, and
+// the plugin mirror of that Knowledge. DS, skills, and the site stay untouched.
+export const PUBLISH_PREFIXES = ["Knowledge/", "Reference/", "Plugin/awesome-ds/knowledge/"];
 const BOT_BRANCH = "bot/weekly-growth";
+const RETRYABLE_CONCLUSIONS = new Set(["failure", "cancelled", "skipped", "timed_out", "neutral", "stale", "action_required", ""]);
+
+function normalizedPath(path) {
+  return String(path ?? "").replace(/\\/g, "/").replace(/^\.\//, "");
+}
 
 function isAllowedDataPath(path) {
-  const text = String(path).replace(/\\/g, "/");
-  if (text.split("/").includes("..")) return false;
+  const text = normalizedPath(path);
+  if (!text || text.startsWith("/") || text.split("/").includes("..")) return false;
   return ALLOW_PREFIXES.some((prefix) => text.startsWith(prefix));
+}
+
+export function isPublishPath(path) {
+  const text = normalizedPath(path);
+  if (!text || text.startsWith("/") || /^[A-Za-z]:/.test(text) || text.split("/").includes("..")) return false;
+  return PUBLISH_PREFIXES.some((prefix) => text === prefix.slice(0, -1) || text.startsWith(prefix));
+}
+
+export function publishPathProblems(paths) {
+  return (paths ?? []).filter((path) => !isPublishPath(path));
 }
 export const MAX_FILE_BYTES = 1_000_000;
 const OGP_W = 1200;
@@ -113,16 +134,84 @@ export function isDryRun(input) {
   return String(input).toLowerCase() !== "false";
 }
 
-export function decide({ guard, dryRun, humanAuthors = [] }) {
+export function discoveryStatus({ searches = 0, searchFailures = 0, releaseFailures = 0 }) {
+  if (searches > 0 && searchFailures === searches) {
+    return { failed: true, partial: true, reason: "discovery-unavailable" };
+  }
+  if (searchFailures > 0 || releaseFailures > 0) {
+    return { failed: true, partial: true, reason: "discovery-partial" };
+  }
+  return { failed: false, partial: false, reason: "ok" };
+}
+
+export function isTrustedAuthor(entry) {
+  const proof = entry?.provenance;
+  if (!proof || typeof proof !== "object" || proof.error === true) return false;
+  return proof.verified === true && proof.webFlow === true && proof.noreplyAuthor === true && proof.receipt === true;
+}
+
+export function foreignAuthors(entries) {
+  return (entries ?? []).filter((entry) => {
+    if (typeof entry === "string") return entry.length > 0;
+    return !isTrustedAuthor(entry);
+  });
+}
+
+export function decide({ guard, dryRun, humanAuthors = [], discovery = null }) {
   if (humanAuthors.length) return { action: "fail", reason: "human-edited-bot-branch" };
-  if (!guard.ok) return { action: "fail", reason: guard.reasons[0] ?? "guard" };
-  if (!guard.meaningful) return { action: "noop", reason: "no-meaningful-change" };
+  if (discovery?.partial || discovery?.failed) return { action: "fail", reason: "discovery-unavailable" };
+  if (!guard?.ok) return { action: "fail", reason: guard?.reasons?.[0] ?? "guard" };
+  if (discovery && typeof discovery.fresh === "number") {
+    if (discovery.fresh <= 0) return { action: "noop", reason: "no-new-knowledge" };
+  } else if (!guard.meaningful) {
+    return { action: "noop", reason: "no-meaningful-change" };
+  }
   if (isDryRun(dryRun)) return { action: "dry-run", reason: "dry-run" };
   return { action: "propose", reason: "changes" };
 }
 
-export function foreignAuthors(emails) {
-  return (emails ?? []).filter((email) => email && email !== BOT_EMAIL);
+export function remoteWrites({ action, dryRun, branchAhead = false }) {
+  const live = !isDryRun(dryRun);
+  return {
+    propose: live && action === "propose",
+    closeStalePr: live && action === "noop" && !branchAhead,
+    closeFailureIssue: live && (action === "propose" || action === "noop"),
+    notify: live && action === "fail",
+  };
+}
+
+export function publishPlan({ actor, remoteExists, fastForward, commits = [] }) {
+  if (!/^[A-Za-z0-9_.[\]-]+$/.test(actor || "")) return { action: "skip", reason: "actor" };
+  if (commits.some((commit) => commit?.provenance?.error === true)) {
+    return { action: "skip", reason: "provenance-unavailable" };
+  }
+  if (commits.some((commit) => !isTrustedAuthor(commit))) {
+    return { action: "skip", reason: "unverified" };
+  }
+  if (!remoteExists) return { action: "ready", reason: "created" };
+  if (!fastForward) return { action: "skip", reason: "diverged" };
+  return { action: "ready", reason: "fast-forward" };
+}
+
+function trailers(body) {
+  const out = {};
+  for (const line of String(body ?? "").split(/\r?\n/)) {
+    const match = line.match(/^([A-Za-z][A-Za-z0-9-]*):\s*(.*)$/);
+    if (match) out[match[1]] = match[2].trim();
+  }
+  return out;
+}
+
+export function authorFromLog({ authorName, authorEmail, committerName, committerEmail, body }) {
+  const parsed = trailers(body);
+  return {
+    name: authorName ?? "",
+    email: authorEmail ?? "",
+    committerName: committerName ?? "",
+    committerEmail: committerEmail ?? "",
+    actor: parsed["Growth-Actor"] ?? "",
+    state: parsed["Growth-State"] ?? "",
+  };
 }
 
 export function settle(input) {
@@ -133,18 +222,31 @@ export function settle(input) {
   const paths = Array.isArray(input?.paths) ? input.paths : [];
   const pullRequestOpen = input?.pullRequestOpen === true;
   const pullRequestHeadSha = input?.pullRequestHeadSha;
+  const branchTip = input?.branchTip;
 
+  if (input?.event !== "workflow_run") return { action: "skip", reason: "event" };
+  if (input?.workflow !== "Check") return { action: "skip", reason: "workflow" };
+  if (!input?.expectedRepository || input.repository !== input.expectedRepository) {
+    return { action: "skip", reason: "repository" };
+  }
   if (branch !== BOT_BRANCH) return { action: "skip", reason: "branch" };
   if (!pullRequestOpen) return { action: "skip", reason: "no-pull-request" };
   if (!headSha) return { action: "fail", reason: "missing-head-sha" };
   if (typeof pullRequestHeadSha === "string" && pullRequestHeadSha !== headSha) {
     return { action: "skip", reason: "head-moved" };
   }
-  if (conclusion !== "success") return { action: "close", reason: "check" };
-  if (!authors.length || authors.some((email) => email !== BOT_EMAIL)) return { action: "close", reason: "author" };
+  if (typeof branchTip === "string" && branchTip !== headSha) {
+    return { action: "skip", reason: "head-moved" };
+  }
+  if (conclusion !== "success" || RETRYABLE_CONCLUSIONS.has(conclusion)) {
+    return { action: "skip", reason: "check-retryable" };
+  }
+  if (!authors.length || authors.some((entry) => !isTrustedAuthor(entry))) {
+    return { action: "close", reason: "author" };
+  }
   if (!paths.length) return { action: "close", reason: "empty-diff" };
-  if (paths.some((path) => !isAllowedDataPath(path))) return { action: "close", reason: "path" };
-  return { action: "merge", reason: "check-green", headSha };
+  if (publishPathProblems(paths).length) return { action: "close", reason: "path" };
+  return { action: "report", reason: "eligible", headSha };
 }
 
 function candidateId(kind, url) {
@@ -598,6 +700,10 @@ function scriptPushesMain(script, allowImplicit) {
   return false;
 }
 
+function activeText(text) {
+  return yamlLines(text).filter((line) => line.trim() && !/^\s*#/.test(line)).join("\n");
+}
+
 export function workflowFindings(text) {
   const findings = [];
   const lines = yamlLines(text);
@@ -609,36 +715,53 @@ export function workflowFindings(text) {
       break;
     }
   }
-  if (text.includes("ANTHROPIC_API_KEY")) findings.push("ANTHROPIC_API_KEY");
-  if (text.includes("claude-code-action")) findings.push("claude-code-action");
+  const active = activeText(text);
+  if (/--force\b|--force-with-lease|\bgit push\b[^\n]*\s\+/.test(active)) findings.push("force-push");
+  if (/\bsecrets\./.test(active)) findings.push("secrets");
+  if (/runs-on:[^\n]*(larger|gpu|macos-|windows-|ubuntu-latest|[0-9]+-cores?)/i.test(active)) findings.push("larger-runner");
+  if (active.includes("ANTHROPIC_API_KEY")) findings.push("ANTHROPIC_API_KEY");
+  if (active.includes("claude-code-action")) findings.push("claude-code-action");
   return findings;
 }
 
 export function renderReport({ date, guard, excluded, newCandidates }) {
+  const safeCandidates = [];
+  for (const candidate of newCandidates ?? []) {
+    const title = constrainField(candidate.title, 80);
+    const url = constrainField(candidate.url, 200);
+    const kind = constrainField(candidate.kind, 20);
+    if (!title || !url || !kind || !/^https:\/\/[^\s]+$/.test(url)) continue;
+    safeCandidates.push({ kind, title, url });
+  }
+  const reasons = (guard.reasons ?? []).map((reason) => constrainField(reason, 160)).filter(Boolean);
   const lines = [
-    `# 週次更新 ${date}`,
+    `# 週次更新 ${constrainField(date, 10) || "unknown"}`,
     "",
-    guard.meaningful ? "データに意味のある差分があります。" : "日付と集計以外の差分はありません。",
+    guard.meaningful ? "Knowledge に追記できる候補があります。" : "追記できる新しい候補はありません。",
     "",
     "## diff-guard",
     "",
     `- repos: ${guard.stats.reposBase} -> ${guard.stats.reposHead}`,
     `- brands: ${guard.stats.brandsBase} -> ${guard.stats.brandsHead}`,
     `- fetch errors: ${guard.stats.fetchErrors}`,
-    guard.ok ? "- 判定: 通過" : `- 判定: 失敗 (${guard.reasons.join("; ")})`,
+    guard.ok ? "- 判定: 通過" : `- 判定: 失敗 (${reasons.join("; ") || "guard"})`,
     "",
     "## 新しい候補",
     "",
   ];
-  if (!newCandidates?.length) lines.push("なし");
-  else for (const c of newCandidates) lines.push(`- [ ] ${c.kind} ${c.title} ${c.url}`);
+  if (!safeCandidates.length) lines.push("なし");
+  else for (const candidate of safeCandidates) lines.push(`- [ ] ${candidate.kind} ${candidate.title} ${candidate.url}`);
   lines.push("", "## 候補から外した件数", "");
   lines.push(`- og:image なし: ${excluded?.noOg ?? 0}`);
   lines.push(`- 画像が小さい、または比率が合わない: ${excluded?.small ?? 0}`);
   lines.push(`- HTTP エラー: ${excluded?.http ?? 0}`);
   lines.push(`- 既知または却下済み: ${(excluded?.known ?? 0) + (excluded?.rejected ?? 0)}`);
   lines.push("");
-  return lines.join("\n");
+  const text = lines.join("\n");
+  if (leakageFindings(text).length) {
+    return `# 週次更新\n\n候補の本文は公開できません。\n`;
+  }
+  return text;
 }
 
 const CANDIDATE_STATUSES = new Set(["new", "accepted", "rejected", "watching"]);

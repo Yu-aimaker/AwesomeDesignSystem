@@ -1,5 +1,8 @@
 name: Weekly growth settle
 
+# Check on bot/weekly-growth can mark a proposal eligible. It does not merge,
+# and it does not close or delete the branch after a cancelled or failed Check.
+# A moved head is left alone.
 on:
   workflow_run:
     workflows: ["Check"]
@@ -12,6 +15,7 @@ jobs:
   other-branch:
     if: github.event.workflow_run.head_branch != 'bot/weekly-growth'
     runs-on: ubuntu-24.04
+    timeout-minutes: 5
     steps:
       - name: Leave main unchanged
         run: exit 0
@@ -24,22 +28,25 @@ jobs:
       group: weekly-growth-settle
       cancel-in-progress: false
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
+      pull-requests: read
+      checks: read
+      actions: read
     outputs:
       action: ${{ steps.settle.outputs.action }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: main
           fetch-depth: 0
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
 
       - name: Load the checked commit
         env:
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main
@@ -49,12 +56,17 @@ jobs:
           fi
           if [ -n "${HEAD_SHA}" ] && git cat-file -e "${HEAD_SHA}^{commit}" 2>/dev/null; then
             echo present > "$RUNNER_TEMP/sha-state"
-            git log --format='%ae' "origin/main..${HEAD_SHA}" > "$RUNNER_TEMP/authors.txt"
+            node scripts/collect-commit-authors.mjs --base origin/main --head "${HEAD_SHA}" --out "$RUNNER_TEMP/authors.json"
             git diff --name-only -z "origin/main...${HEAD_SHA}" > "$RUNNER_TEMP/paths.txt"
           else
             echo missing > "$RUNNER_TEMP/sha-state"
-            : > "$RUNNER_TEMP/authors.txt"
+            echo "[]" > "$RUNNER_TEMP/authors.json"
             : > "$RUNNER_TEMP/paths.txt"
+          fi
+          if git rev-parse --verify origin/bot/weekly-growth >/dev/null 2>&1; then
+            git rev-parse origin/bot/weekly-growth > "$RUNNER_TEMP/tip.txt"
+          else
+            : > "$RUNNER_TEMP/tip.txt"
           fi
 
       - name: Find the open pull request
@@ -67,10 +79,14 @@ jobs:
       - name: Decide
         id: settle
         env:
+          EVENT_NAME: ${{ github.event_name }}
+          WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
+          SOURCE_REPOSITORY: ${{ github.event.workflow_run.head_repository.full_name }}
+          EXPECTED_REPOSITORY: ${{ github.repository }}
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           CHECK_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          AUTHORS_FILE: ${{ runner.temp }}/authors.txt
+          AUTHORS_FILE: ${{ runner.temp }}/authors.json
           PATHS_FILE: ${{ runner.temp }}/paths.txt
           PR_FILE: ${{ runner.temp }}/pr.json
         run: |
@@ -79,36 +95,39 @@ jobs:
           if [ "$(cat "$RUNNER_TEMP/sha-state")" != "present" ]; then
             sha=""
           fi
-          HEAD_SHA="$sha" node scripts/weekly-growth-settle.mjs
+          tip="$(tr -d '[:space:]' < "$RUNNER_TEMP/tip.txt" || true)"
+          HEAD_SHA="$sha" BRANCH_TIP="$tip" node scripts/weekly-growth-settle.mjs
 
-      - name: Merge the bot pull request
-        if: steps.settle.outputs.action == 'merge'
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Report an eligible proposal
+        if: steps.settle.outputs.action == 'report'
         run: |
-          set -euo pipefail
-          gh pr merge "${{ steps.settle.outputs.pr_number }}" --repo "$GITHUB_REPOSITORY" --squash --delete-branch --match-head-commit "${{ steps.settle.outputs.head_sha }}"
+          {
+            echo "eligible proposal"
+            echo "pr: ${{ steps.settle.outputs.pr_number }}"
+            echo "head: ${{ steps.settle.outputs.head_sha }}"
+            echo "merge: not run"
+          } >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Close the bot pull request and delete its branch
+      - name: Report a pull request that stays open
         if: steps.settle.outputs.action == 'close'
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          gh pr close "${{ steps.settle.outputs.pr_number }}" --repo "$GITHUB_REPOSITORY" --comment "Check が成功していないか、作者がボットでないか、差分がデータディレクトリの外を含むため、この PR を閉じます。"
-          if git ls-remote --exit-code --heads origin bot/weekly-growth >/dev/null; then
-            git push origin --delete bot/weekly-growth
-          fi
+          {
+            echo "close: not run"
+            echo "pr: ${{ steps.settle.outputs.pr_number }}"
+            echo "reason: ${{ steps.settle.outputs.reason }}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
   notify:
     needs: settle
     if: always() && (needs.settle.result == 'failure' || (needs.settle.result == 'success' && needs.settle.outputs.action == 'close'))
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     permissions:
+      contents: read
       issues: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/github-script@v7
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const { reportFailure } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/lib/failure-issue.mjs`);
@@ -117,7 +136,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               lines: [
-                "週次更新の PR を閉じたか、settle が失敗しました。main は変更していません。",
+                "週次の settle が失敗したか、閉じる条件でした。PR は閉じていません。main は変更していません。",
                 "",
                 `- settle: ${{ needs.settle.result }}`,
                 `- action: ${{ needs.settle.outputs.action }}`,

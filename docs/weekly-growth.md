@@ -1,6 +1,11 @@
 # 週次のデータ更新
 
-ランキング（GitHub のスター数）、ブランド配色、新しい参考資料の候補を週 1 回集め、ボットの PR で main に入れる仕組みです。AI は使いません。失敗しても main と本番は変わりません。
+ランキング、ブランド配色、新しい参考資料の候補を週 1 回集めます。AI は使いません。失敗しても main と本番は変わりません。
+
+週次は二段です。
+
+1. Actions は新しい候補を集め、Knowledge の OSS 候補とサイト候補、生成した Reference、Knowledge のプラグイン写しだけを PR にします。
+2. AwesomeDS、Plugin の skills、web への反映は、別の AI 手順が行います。週次のジョブでは変えません。
 
 ## 流れ
 
@@ -8,64 +13,69 @@
 月曜 09:30 JST（cron 30 0 * * 1）または手動の workflow_dispatch
   weekly-growth.yml
     collect（contents: read）
-      fetch-repos.mjs          → AwesomeDS/data/repos.json
-      extract-brands.mjs       → brands.json
-      build-palettes / fonts   → palettes.json / fonts.json
-      discover-candidates.mjs  → AwesomeDS/data/candidates.json
+      fetch-repos.mjs / extract-brands.mjs / build-palettes / build-fonts
+      discover-candidates.mjs
       validate-data.mjs と diff-guard.mjs
-    propose（変化があり、dry_run が false のときだけ）
-      main から bot/weekly-growth を作り直して commit、PR を 1 本だけ出す
+    propose（新しい候補があり、dry_run が false のときだけ）
+      Knowledge に追記し、bot/weekly-growth を fast-forward して PR を 1 本出す
   weekly-growth-settle.yml
-    Check が成功し、差分がデータだけで、作者がボットだけなら squash merge
-    失敗・人のコミット・許可外のパスなら PR を閉じる
+    Check が成功し、作者の記録とパスが許可内なら、PR を eligible と報告する
+    マージしない。PR も閉じない。ブランチも消さない
+    候補が無いときも、開いている PR は残す
+    Check が失敗、キャンセル、時間切れのときは PR もブランチも残す
 ```
 
-- 手動実行の `dry_run` は既定 true で、PR を作りません。Step Summary と artifact だけを残します。
-- ボットが push できるのは `bot/` で始まるブランチだけです。main へ push する行はリポジトリにありません（`scripts/check-workflows.mjs` が CI で検査）。
-- 自動マージで消すブランチは `bot/weekly-growth` だけです。
+- 手動実行の `dry_run` は既定 true です。PR、ラベル、issue、ブランチを変えません。Step Summary と artifact だけを残します。
+- 検索が全部失敗したとき、またはリリース確認が途中で落ちたときは、成功した収集として扱いません。`candidates.json` は書き換えず、ジョブを失敗させます。
+- ボットが push できるのは `bot/` で始まるブランチだけです。force push はありません。分岐していたブランチは残して報告します。
+- main へ push する行はリポジトリにありません（`scripts/check-workflows.mjs` が CI で検査します）。
+- 公開してよいパスは `Knowledge/`、`Reference/`、`Plugin/awesome-ds/knowledge/` だけです。それ以外が差分に入ると失敗します。収集中の diff-guard はデータ検査のままです。bot ブランチの Check は `check-publish-paths` を使います。
+- 開いている bot ブランチへ足すときは、すでにある候補行を消さず、新しい発見だけを追記してから Reference を再生成します。
 
 ## データの出どころ
 
 | データ | 取り方 |
 |---|---|
-| ランキング | GitHub REST。対象は `scripts/fetch-repos.mjs` の一覧と `topic:design-system` の上位。失敗した項目は前回値を保持し、途中のファイルは書かない |
-| ブランド配色 | voltagent/awesome-design-md と kzhrknt/awesome-design-md-jp の DESIGN.md から抽出 |
-| 候補 | GitHub Search（design-system、design-tokens、ui-components、shadcn、agent-skills など、stars と更新日で足切り）と、`knowledge-curator/reference/watchlist.md` のリポジトリの新しいリリース。既に載っているもの、除外リスト、却下済みは出さない |
-| おすすめサイト | 週次の job にはまだ入れていない。手で `node scripts/sites.mjs --network --refresh` を回し、スターと更新日を更新し、基準を外れた項目を外す。新しい候補は `--intake <file> --write` で検査を通ったものだけ足す。基準は `Knowledge/research/recommended-sites.md` |
+| ランキング | GitHub REST。取得結果は検査に使い、PR には入れない。失敗した項目は前回値を保持する |
+| ブランド配色 | 収集して diff-guard の検査に使う。PR には入れない |
+| 候補 | GitHub Search と watchlist のリリース。新しいものだけを Knowledge の候補表へ追記する。既に載っているもの、除外リスト、却下済みは出さない |
+| おすすめサイト | 週次は `Knowledge/research/site-candidates.md` に候補を足すだけ。`sites.json` は変えない |
 
-候補は `candidates.json` に貯めるだけで、サイトには出しません。採否は人が PR で決めます。/sources の候補は、og:image が実在して取得できるものだけです。
+候補はサイトには出しません。採否は人が、その後の DS 反映の手順で決めます。
 
 ## 止める事故（diff-guard と CI）
 
 | 検査 | 止める事故 |
 |---|---|
-| diff-guard | 上流の形式変更や API 障害で、データが空や激減のまま main に入る（repos が 5% 以上か 50 件未満に減る、ブランドが 5 社以上減る、1 リポのスターが半分以下になる、許可外のパスの変更、1 ファイル 1MB 超） |
-| validate-data | 型、必須項目、重複、URL の形式。sites.json は取り込み基準のオフライン部分（`scripts/lib/sites.mjs`） |
-| check-workflows | main への push、`ANTHROPIC_API_KEY`、`claude-code-action` の混入 |
-| check-ogp-images と flagship-catalog | /sources の共有画像の欠落や壊れた画像 |
-| check-links | サイト内リンクの 404 |
+| diff-guard | 上流の形式変更や API 障害で、データが空や激減のまま候補を足す（repos が 5% 以上か 50 件未満に減る、ブランドが 5 社以上減る、1 リポのスターが半分以下になる、1 ファイル 1MB 超） |
+| check-publish-paths | bot の PR と dispatch の差分が Knowledge、Reference、Knowledge の写し以外を含む。収集中の diff-guard はデータ用のまま |
+| discover-candidates | 検索の全失敗、またはリリース確認の一時的な失敗を「リリースなし」と扱う |
+| validate-data | 型、必須項目、重複、URL の形式 |
+| check-workflows | main への push、force push、`secrets.`、大きいランナー、`ANTHROPIC_API_KEY`、`claude-code-action` |
+| check-identity | PR 範囲の author、committer、または折り畳みを含む noreply 以外の Co-authored-by / Signed-off-by。main への push の例外は、API で verified、committer が web-flow、親が 2 つ以上、main へ merge された PR の merge_commit_sha と一致するコミットだけ。週次コミットは verified、web-flow、noreply の author、`weekly-growth-receipt` の全部が必要。失敗した API は拒否する |
 
 ## 失敗したとき
 
 | 失敗 | 挙動 |
 |---|---|
-| GitHub API のレート制限や障害 | 前回値を保持。取得失敗が 10% を超えたら PR を作らない |
-| ネットワークの一時的な失敗 | 取得の手順を30秒あけて1回だけやり直す |
-| 上流の形式変更でブランドが激減 | diff-guard で失敗。PR は作らない |
-| 候補の URL が死んでいる | 候補から外し、PR 本文に件数だけ書く |
-| CI が失敗 | PR を閉じる。main は変わらない |
-| settle が PR を閉じた・失敗した | 「週次更新の失敗」issue に書く |
-| 人がボットのブランチにコミットした | 自動マージしない。settle が PR を閉じる |
-| 同じ週に 2 回走った | PR は 1 本のまま、中身が最新に置き換わる |
-| ジョブが始まらない（Actions の枠切れ・課金） | Actions は何も書けない。GitHub の通知と Check の赤で分かる。公開リポの標準ランナーは無料 |
+| GitHub API のレート制限や障害 | Retry-After と reset を見て、予算内だけ待つ。予算を超えたら理由を出して止める。前回値は残す |
+| 発見が全部、または一部失敗 | ジョブを失敗させる。候補ファイルの更新日は進めない |
+| ネットワークの一時的な失敗 | 共有の再試行で、永続的な 401 や 404 はやり直さない |
+| dry-run | リモートを変えない。開いている PR も閉じない |
+| CI が失敗、キャンセル、時間切れ | PR は開いたまま。ブランチは消さない |
+| ボットブランチの前のコミットが、verified の web-flow 署名、noreply の author、このリポジトリの weekly-growth 実行を指す `weekly-growth-receipt` を全部持たない | push しない。履歴は消さない。API の失敗はジョブを失敗させる |
+| ブランチが main と分岐している | fast-forward できないので止めて報告する |
+| 同じ週に 2 回走った | 開いている PR は 1 本のまま追記する |
+| ジョブが始まらない | Actions が無効なら実行自体がない。公開リポジトリの `ubuntu-24.04` だけを使う |
 
 ## 手元で試す
 
 ```
+bash scripts/setup-git-identity.sh
 node scripts/fetch-repos.mjs
 node scripts/discover-candidates.mjs
 node scripts/validate-data.mjs
 node --test scripts/__tests__/weekly-growth.test.mjs
 ```
 
-`GITHUB_TOKEN` を環境変数に置くとレート制限が緩くなります。トークンはコミットしません。
+`GITHUB_TOKEN` を環境変数に置くとレート制限が緩くなります。トークンはコミットしません。ログや PR 本文にも出しません。

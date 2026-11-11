@@ -1,8 +1,18 @@
 // Open or update the weekly-growth failure issue; close it after a good run.
 
+import { leakageFindings } from "./redact.mjs";
+
 const LABEL = "bot:weekly-growth-failure";
 
+export function safeIssueLines(lines) {
+  const text = (lines ?? []).join("\n");
+  const kinds = leakageFindings(text);
+  if (!kinds.length) return lines ?? [];
+  return ["週次更新が失敗しました。詳細は出せません。", "", `- withheld: ${kinds.join(",")}`];
+}
+
 export async function reportFailure({ github, owner, repo, lines }) {
+  lines = safeIssueLines(lines);
   try {
     await github.rest.issues.createLabel({
       owner,

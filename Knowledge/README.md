@@ -4,7 +4,7 @@ AI コーディングエージェントがデザインシステムを作る・�
 
 追加方法は [CONTRIBUTING.md](../CONTRIBUTING.md) と Plugin の `knowledge-curator` スキルを参照してください。この一覧と [Reference/REFERENCE.md](../Reference/REFERENCE.md) は `node scripts/build-reference.mjs` で生成されます。手で編集しないでください。
 
-件数: 87
+件数: 89
 
 ## accessibility
 
@@ -125,6 +125,8 @@ AI コーディングエージェントがデザインシステムを作る・�
 |---|---|---|---|
 | [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-14 |
 | [おすすめサイト一覧 (/sites) の取り込み基準](research/recommended-sites.md) | guideline | sites, component-library, animation, loading, gallery, intake, criteria | 2026-10-21 |
+| [週次の OSS 候補](research/oss-candidates.md) | guideline | weekly, oss, candidates | 2026-11-11 |
+| [週次のサイト候補](research/site-candidates.md) | guideline | weekly, sites, candidates | 2026-11-11 |
 
 ## skills
 

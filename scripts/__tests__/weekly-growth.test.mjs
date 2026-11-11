@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
@@ -10,15 +10,23 @@ import {
   checkOgpFile,
   decide,
   diffGuard,
+  discoveryStatus,
   filterTopicRepos,
   foreignAuthors,
   isDryRun,
+  isPublishPath,
+  isTrustedAuthor,
   planDiscoveries,
+  publishPlan,
   readJpegSize,
+  remoteWrites,
+  renderReport,
   settle,
   topicQuery,
   workflowFindings,
 } from "../lib/growth.mjs";
+import { commitRequest, checkRunRequest } from "../lib/provenance.mjs";
+import { BOT_ACTOR, CANONICAL_NAME, GROWTH_STATE, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 
@@ -288,7 +296,54 @@ test("workflows must not push main or call billed agents", () => {
   assert.ok(bad.includes("push-main"));
   assert.ok(bad.includes("ANTHROPIC_API_KEY"));
   assert.ok(bad.includes("claude-code-action"));
-  assert.deepEqual(foreignAuthors([BOT_EMAIL, "human@example.com"]), ["human@example.com"]);
+  assert.deepEqual(foreignAuthors([BOT_EMAIL, "human@example.com"]), [BOT_EMAIL, "human@example.com"]);
+  const trusted = {
+    name: CANONICAL_NAME,
+    email: BOT_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: BOT_EMAIL,
+    actor: "anyone",
+    state: GROWTH_STATE,
+    provenance: { verified: true, webFlow: true, noreplyAuthor: true, receipt: true },
+  };
+  assert.equal(isTrustedAuthor(trusted), true);
+  const unsignedOwner = {
+    name: CANONICAL_NAME,
+    email: BOT_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: BOT_EMAIL,
+  };
+  assert.equal(isTrustedAuthor(unsignedOwner), false);
+  assert.equal(isTrustedAuthor({ provenance: { verified: true, webFlow: true, noreplyAuthor: true, receipt: false } }), false);
+  assert.equal(isTrustedAuthor({ provenance: { error: true, verified: true, webFlow: true, noreplyAuthor: true, receipt: true } }), false);
+  assert.equal(publishPlan({
+    actor: BOT_ACTOR,
+    remoteExists: true,
+    fastForward: true,
+    commits: [unsignedOwner],
+  }).reason, "unverified");
+  assert.equal(publishPlan({
+    actor: BOT_ACTOR,
+    remoteExists: true,
+    fastForward: true,
+    commits: [{ provenance: { error: true } }],
+  }).reason, "provenance-unavailable");
+  const signed = commitRequest({
+    message: "knowledge",
+    tree: "a".repeat(40),
+    parents: ["b".repeat(40)],
+  });
+  assert.deepEqual(Object.keys(signed).sort(), ["message", "parents", "tree"]);
+  assert.equal(signed.message, "knowledge\n");
+  const receipt = checkRunRequest({ sha: "c".repeat(40), runId: "42" });
+  assert.equal(receipt.external_id, "42");
+  assert.equal(receipt.name, "weekly-growth-receipt");
+  assert.equal(isTrustedAuthor(trusted), true);
+  assert.deepEqual(foreignAuthors([trusted, "human@example.com"]), ["human@example.com"]);
+  assert.ok(workflowFindings("runs-on: ubuntu-latest\nrun: git push --force origin HEAD\n").includes("force-push"));
+  assert.ok(workflowFindings("runs-on: ubuntu-latest\n").includes("larger-runner"));
+  assert.ok(workflowFindings("TOKEN: ${{ secrets.TOKEN }}\n").includes("secrets"));
+  assert.deepEqual(workflowFindings("# git push --force\nname: Note\non: pull_request\n"), []);
 });
 
 test("collect report files under .growth/ do not fail the diff guard", () => {
@@ -421,8 +476,8 @@ jobs:
   assert.deepEqual(bot, []);
 });
 
-test("the next run recreates the bot branch from main after main moves", async () => {
-  const { recreateBotBranch } = await import("../lib/bot-branch.mjs");
+test("an existing bot branch is merged forward and a diverged branch is left in place", async () => {
+  const { prepareBotBranch } = await import("../lib/bot-branch.mjs");
   const cwd = mkdtempSync(join(tmpdir(), "ads-bot-"));
   try {
     git(cwd, ["init", "-b", "main"]);
@@ -439,18 +494,36 @@ test("the next run recreates the bot branch from main after main moves", async (
     writeFileSync(join(cwd, "human.txt"), "advanced");
     git(cwd, ["add", "."]);
     git(cwd, ["commit", "-m", "human"]);
-    const mainTip = git(cwd, ["rev-parse", "HEAD"]).trim();
 
-    recreateBotBranch({ cwd, branch: "bot/weekly-growth", mainRef: "main" });
-    writeFileSync(join(cwd, "data.txt"), "fresh");
-    git(cwd, ["add", "data.txt"]);
-    git(cwd, ["commit", "-m", "data: weekly"]);
-
-    const parents = git(cwd, ["rev-parse", "HEAD^@"]).trim().split(/\s+/).filter(Boolean);
-    assert.deepEqual(parents, [mainTip]);
+    const prepared = prepareBotBranch({
+      cwd,
+      branch: "bot/weekly-growth",
+      mainRef: "main",
+      remoteRef: "bot/weekly-growth",
+      actor: BOT_ACTOR,
+      state: GROWTH_STATE,
+    });
+    assert.equal(prepared.action, "ready");
+    assert.equal(prepared.reason, "merged-main");
+    assert.equal(git(cwd, ["merge-base", "--is-ancestor", oldBot, "HEAD"]).trim(), "");
     assert.equal(git(cwd, ["show", "HEAD:human.txt"]).trim(), "advanced");
-    assert.throws(() => git(cwd, ["merge-base", "--is-ancestor", oldBot, "HEAD"]));
-    assert.throws(() => git(cwd, ["cat-file", "-e", "HEAD:bot-only.txt"]));
+    assert.equal(git(cwd, ["show", "HEAD:bot-only.txt"]).trim(), "old data");
+
+    git(cwd, ["checkout", "--orphan", "stray"]);
+    git(cwd, ["rm", "-rf", "."]);
+    writeFileSync(join(cwd, "stray.txt"), "unrelated");
+    git(cwd, ["add", "stray.txt"]);
+    git(cwd, ["commit", "-m", "stray"]);
+    const stray = git(cwd, ["rev-parse", "HEAD"]).trim();
+    git(cwd, ["checkout", "main"]);
+    const diverged = prepareBotBranch({
+      cwd,
+      branch: "bot/other",
+      mainRef: "main",
+      remoteRef: "stray",
+    });
+    assert.deepEqual(diverged, { action: "skip", reason: "diverged" });
+    assert.equal(git(cwd, ["rev-parse", "stray"]).trim(), stray);
   } finally {
     rmSync(cwd, { recursive: true, force: true });
   }
@@ -458,40 +531,55 @@ test("the next run recreates the bot branch from main after main moves", async (
 
 const HEAD_SHA = "0123456789abcdef0123456789abcdef01234567";
 
+function trustedAuthor() {
+  return {
+    name: CANONICAL_NAME,
+    email: BOT_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: BOT_EMAIL,
+    provenance: { verified: true, webFlow: true, noreplyAuthor: true, receipt: true },
+  };
+}
+
 function settleInput(overrides = {}) {
   return {
+    event: "workflow_run",
+    workflow: "Check",
+    repository: "acme/ads",
+    expectedRepository: "acme/ads",
     branch: "bot/weekly-growth",
     headSha: HEAD_SHA,
     conclusion: "success",
     pullRequestOpen: true,
     pullRequestHeadSha: HEAD_SHA,
-    authors: [BOT_EMAIL],
-    paths: ["AwesomeDS/data/repos.json"],
+    authors: [trustedAuthor()],
+    paths: ["Knowledge/research/oss-candidates.md"],
     ...overrides,
   };
 }
 
-test("settle merges only a green bot pull request and repeats that action", () => {
+test("settle reports an eligible bot pull request and does not merge it", () => {
   const input = settleInput();
   delete input.pullRequestHeadSha;
   const snapshot = JSON.stringify(input);
-  const merged = { action: "merge", reason: "check-green", headSha: HEAD_SHA };
-  assert.deepEqual(settle(input), merged);
-  assert.deepEqual(settle(input), merged);
+  const reported = { action: "report", reason: "eligible", headSha: HEAD_SHA };
+  assert.deepEqual(settle(input), reported);
+  assert.deepEqual(settle(input), reported);
   assert.equal(JSON.stringify(input), snapshot);
 
   const matched = settleInput();
-  const first = settle(matched);
-  const second = settle(matched);
-  assert.deepEqual(first, merged);
-  assert.deepEqual(second, merged);
+  assert.deepEqual(settle(matched), reported);
+  assert.deepEqual(settle(matched), reported);
   assert.deepEqual(
-    settle(settleInput({ paths: ["Plugin/awesome-ds/ds/data/repos.json", "AwesomeDS/data/brands.json"] })),
-    merged,
+    settle(settleInput({ paths: ["Reference/REFERENCE.md", "Plugin/awesome-ds/knowledge/research/oss-candidates.md"] })),
+    reported,
   );
 });
 
 test("settle skips, fails, or closes instead of merging an unsafe pull request", () => {
+  assert.deepEqual(settle(settleInput({ event: "push" })), { action: "skip", reason: "event" });
+  assert.deepEqual(settle(settleInput({ workflow: "Weekly growth" })), { action: "skip", reason: "workflow" });
+  assert.deepEqual(settle(settleInput({ repository: "other/ads" })), { action: "skip", reason: "repository" });
   assert.deepEqual(settle(settleInput({ branch: "main", headSha: "" })), { action: "skip", reason: "branch" });
   assert.deepEqual(settle(settleInput({ branch: "feature/data" })), { action: "skip", reason: "branch" });
   assert.deepEqual(settle(settleInput({ pullRequestOpen: false })), { action: "skip", reason: "no-pull-request" });
@@ -501,33 +589,58 @@ test("settle skips, fails, or closes instead of merging an unsafe pull request",
     settle(settleInput({ pullRequestHeadSha: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", conclusion: "failure", paths: ["web/src/App.tsx"] })),
     { action: "skip", reason: "head-moved" },
   );
+  assert.deepEqual(
+    settle(settleInput({ branchTip: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" })),
+    { action: "skip", reason: "head-moved" },
+  );
   for (const conclusion of ["failure", "cancelled", "skipped", "timed_out", ""]) {
-    assert.deepEqual(settle(settleInput({ conclusion })), { action: "close", reason: "check" });
+    assert.deepEqual(settle(settleInput({ conclusion })), { action: "skip", reason: "check-retryable" });
   }
   assert.deepEqual(settle(settleInput({ authors: [] })), { action: "close", reason: "author" });
-  assert.deepEqual(settle(settleInput({ authors: [BOT_EMAIL, "human@example.com"] })), { action: "close", reason: "author" });
+  assert.deepEqual(settle(settleInput({
+    authors: [{ name: CANONICAL_NAME, email: BOT_EMAIL, committerName: CANONICAL_NAME, committerEmail: BOT_EMAIL }],
+  })), { action: "close", reason: "author" });
+  const leaked = settle(settleInput({ authors: [BOT_EMAIL, "human@example.com"] }));
+  assert.equal(leaked.action, "close");
+  assert.equal(leaked.reason, "author");
+  assert.equal(JSON.stringify(leaked).includes("example.com"), false);
   assert.deepEqual(settle(settleInput({ paths: [] })), { action: "close", reason: "empty-diff" });
   assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/repos.json", "web/src/App.tsx"] })), { action: "close", reason: "path" });
   assert.deepEqual(settle(settleInput({ paths: ["AwesomeDS/data/../../web/App.tsx"] })), { action: "close", reason: "path" });
+  assert.equal(isPublishPath("Knowledge/research/oss-candidates.md"), true);
+  assert.equal(isPublishPath("AwesomeDS/data/repos.json"), false);
+  assert.equal(isPublishPath("web/src/App.tsx"), false);
+  assert.equal(isPublishPath("Plugin/awesome-ds/skills/awesome-ds/SKILL.md"), false);
 });
 
-test("monday schedule proposes for real and settle merges or closes only the bot pull request", () => {
+test("monday schedule proposes for real and settle only reports the bot pull request", () => {
   const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
   const settleYml = readFileSync(join(repoRoot, ".github/workflows/weekly-growth-settle.yml"), "utf8");
   assert.match(weekly, /cron:\s*"30 0 \* \* 1"/);
   assert.match(weekly, /workflow_dispatch:/);
   assert.match(weekly, /default:\s*true/);
   assert.match(weekly, /if \[ "\$EVENT_NAME" = "schedule" \]; then\n\s+dry_run=false/);
-  assert.match(weekly, /weekly-growth-decide\.mjs --guard \.growth\/guard\.json --dry-run "\$dry_run"/);
+  assert.match(weekly, /weekly-growth-decide\.mjs --guard \.growth\/guard\.json --discover \.growth\/discover\.json --dry-run "\$dry_run"/);
+  assert.match(weekly, /dry_run == 'false'/);
+  assert.match(weekly, /check-publish-paths\.mjs/);
+  assert.ok(weekly.includes("rm -rf growth-artifact"));
+  assert.ok(weekly.indexOf("rm -rf growth-artifact") < weekly.indexOf("check-publish-paths.mjs"));
+  assert.match(weekly, /setup-git-identity\.sh/);
+  assert.doesNotMatch(weekly, /--force/);
+  assert.doesNotMatch(weekly, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.deepEqual(workflowFindings(weekly), []);
   assert.match(settleYml, /workflows:\s*\["Check"\]/);
   assert.match(settleYml, /head_branch != 'bot\/weekly-growth'/);
   assert.match(settleYml, /run: exit 0/);
   assert.match(settleYml, /weekly-growth-settle\.mjs/);
-  assert.match(settleYml, /gh pr merge[^\n]*--squash[^\n]*--delete-branch[^\n]*--match-head-commit/);
-  assert.match(settleYml, /gh pr close/);
-  assert.match(settleYml, /git push origin --delete bot\/weekly-growth/);
+  assert.match(settleYml, /action == 'report'/);
+  assert.match(settleYml, /close: not run/);
+  assert.doesNotMatch(settleYml, /gh pr close/);
+  assert.doesNotMatch(weekly, /gh pr close/);
+  assert.doesNotMatch(settleYml, /gh pr merge/);
+  assert.doesNotMatch(settleYml, /--delete/);
   assert.equal(settleYml.includes("HEAD:main"), false);
+  assert.doesNotMatch(settleYml, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.deepEqual(workflowFindings(settleYml), []);
 
   const dir = mkdtempSync(join(tmpdir(), "ads-settle-"));
@@ -536,25 +649,31 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     const paths = join(dir, "paths.txt");
     const pr = join(dir, "pr.json");
     const output = join(dir, "github-output.txt");
-    writeFileSync(authors, `${BOT_EMAIL}\n`);
-    writeFileSync(paths, "AwesomeDS/data/repos.json\0Plugin/awesome-ds/ds/data/repos.json\0");
+    writeFileSync(authors, JSON.stringify([trustedAuthor()]));
+    writeFileSync(paths, "Knowledge/research/oss-candidates.md\0Reference/REFERENCE.md\0");
     writeFileSync(pr, JSON.stringify([{ number: 30, headRefOid: HEAD_SHA }]));
+    const settleEnv = {
+      ...process.env,
+      EVENT_NAME: "workflow_run",
+      WORKFLOW_NAME: "Check",
+      SOURCE_REPOSITORY: "acme/ads",
+      EXPECTED_REPOSITORY: "acme/ads",
+      HEAD_BRANCH: "bot/weekly-growth",
+      HEAD_SHA,
+      CHECK_CONCLUSION: "success",
+      AUTHORS_FILE: authors,
+      PATHS_FILE: paths,
+      PR_FILE: pr,
+      GITHUB_OUTPUT: output,
+    };
     const merged = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
       encoding: "utf8",
-      env: {
-        ...process.env,
-        HEAD_BRANCH: "bot/weekly-growth",
-        HEAD_SHA,
-        CHECK_CONCLUSION: "success",
-        AUTHORS_FILE: authors,
-        PATHS_FILE: paths,
-        PR_FILE: pr,
-        GITHUB_OUTPUT: output,
-      },
+      env: settleEnv,
     });
-    assert.deepEqual(JSON.parse(merged), { action: "merge", reason: "check-green", headSha: HEAD_SHA });
+    assert.equal(merged.includes("@"), false);
+    assert.deepEqual(JSON.parse(merged), { action: "report", reason: "eligible", headSha: HEAD_SHA });
     const recorded = readFileSync(output, "utf8");
-    assert.match(recorded, /action=merge/);
+    assert.match(recorded, /action=report/);
     assert.match(recorded, new RegExp(`head_sha=${HEAD_SHA}`));
     assert.match(recorded, /pr_number=30/);
 
@@ -562,16 +681,7 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     writeFileSync(output, "");
     const skipped = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
       encoding: "utf8",
-      env: {
-        ...process.env,
-        HEAD_BRANCH: "bot/weekly-growth",
-        HEAD_SHA,
-        CHECK_CONCLUSION: "success",
-        AUTHORS_FILE: authors,
-        PATHS_FILE: paths,
-        PR_FILE: pr,
-        GITHUB_OUTPUT: output,
-      },
+      env: { ...settleEnv, PR_FILE: pr, GITHUB_OUTPUT: output },
     });
     assert.deepEqual(JSON.parse(skipped), { action: "skip", reason: "no-pull-request" });
 
@@ -582,16 +692,7 @@ test("monday schedule proposes for real and settle merges or closes only the bot
     try {
       failed = execFileSync(process.execPath, [join(repoRoot, "scripts/weekly-growth-settle.mjs")], {
         encoding: "utf8",
-        env: {
-          ...process.env,
-          HEAD_BRANCH: "bot/weekly-growth",
-          HEAD_SHA: "",
-          CHECK_CONCLUSION: "success",
-          AUTHORS_FILE: authors,
-          PATHS_FILE: paths,
-          PR_FILE: openPr,
-          GITHUB_OUTPUT: output,
-        },
+        env: { ...settleEnv, HEAD_SHA: "", PR_FILE: openPr, GITHUB_OUTPUT: output },
       });
     } catch (error) {
       code = error.status ?? 1;
@@ -616,4 +717,349 @@ test("Knowledge describes the Monday schedule, not a manual-only workflow", () =
   assert.doesNotMatch(entry, /定期実行は未設定/);
   assert.match(skill, /Monday 09:30 JST/);
   assert.doesNotMatch(skill, /manual, dry-run by default/);
+});
+
+test("dry-run and a partial discovery do not mutate the remote", () => {
+  const none = remoteWrites({ action: "noop", dryRun: true, branchAhead: false });
+  assert.deepEqual(none, { propose: false, closeStalePr: false, closeFailureIssue: false, notify: false });
+  const ahead = remoteWrites({ action: "noop", dryRun: false, branchAhead: true });
+  assert.equal(ahead.closeStalePr, false);
+  assert.equal(remoteWrites({ action: "propose", dryRun: "false" }).propose, true);
+  assert.equal(decide({
+    guard: { ok: true, meaningful: true, reasons: [] },
+    dryRun: false,
+    discovery: { partial: true, fresh: 3 },
+  }).action, "fail");
+  assert.deepEqual(discoveryStatus({ searches: 5, searchFailures: 5, releaseFailures: 0 }), {
+    failed: true,
+    partial: true,
+    reason: "discovery-unavailable",
+  });
+  assert.equal(discoveryStatus({ searches: 5, searchFailures: 1, releaseFailures: 0 }).reason, "discovery-partial");
+  assert.equal(discoveryStatus({ searches: 5, searchFailures: 0, releaseFailures: 0 }).failed, false);
+  assert.equal(publishPlan({ actor: "", remoteExists: false, fastForward: true }).reason, "actor");
+  assert.equal(publishPlan({
+    actor: BOT_ACTOR,
+    remoteExists: true,
+    fastForward: false,
+    commits: [trustedAuthor()],
+  }).reason, "diverged");
+  const report = renderReport({
+    date: "2026-11-11",
+    guard: { meaningful: true, ok: true, reasons: [], stats: { reposBase: 1, reposHead: 1, brandsBase: 1, brandsHead: 1, fetchErrors: 0 } },
+    excluded: {},
+    newCandidates: [{ kind: "oss", title: "leak@example.com", url: "https://github.com/acme/demo" }],
+  });
+  assert.equal(report.includes("example.com"), false);
+});
+
+function jobBlocks(yml) {
+  const start = yml.search(/^jobs:\s*$/m);
+  return yml.slice(start).split(/\n(?= {2}[a-z0-9-]+:\n)/).slice(1);
+}
+
+test("every workflow job has a short timeout and Check reads contents", () => {
+  for (const file of ["check.yml", "weekly-growth.yml", "weekly-growth-settle.yml"]) {
+    const yml = readFileSync(join(repoRoot, ".github/workflows", file), "utf8");
+    const blocks = jobBlocks(yml);
+    assert.ok(blocks.length >= 2, file);
+    for (const block of blocks) assert.match(block, /\n {4}timeout-minutes:\s*(?:[1-9]|[12][0-9]|30)\n/);
+  }
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  assert.match(checkYml, /^permissions:\n {2}contents: read\n/m);
+  assert.doesNotMatch(checkYml, /actions: write/);
+  assert.match(checkYml, /pnpm\/action-setup@[0-9a-f]{40}/);
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  assert.match(weekly, /actions: write/);
+  const publish = readFileSync(join(repoRoot, "scripts/publish-bot-branch.mjs"), "utf8");
+  assert.match(publish, /publishSignedCommit/);
+  assert.doesNotMatch(publish, /git push/);
+});
+
+test("every action reference is pinned to a commit SHA", () => {
+  const dir = join(repoRoot, ".github/workflows");
+  const files = readdirSync(dir).filter((name) => name.endsWith(".yml"));
+  assert.ok(files.length >= 3);
+  const refs = [];
+  for (const name of files) {
+    for (const line of readFileSync(join(dir, name), "utf8").split("\n")) {
+      if (line.trim().startsWith("#")) continue;
+      const match = line.match(/\buses:\s*(\S+)/);
+      if (!match) continue;
+      refs.push(match[1]);
+      assert.match(match[1], /^[^@\s]+@[0-9a-f]{40}$/, `${name} ${match[1]}`);
+    }
+  }
+  assert.ok(refs.length >= 20);
+});
+
+test("a Knowledge proposal passes bot Check and still fails the collection data guard", () => {
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const step = checkYml.slice(checkYml.indexOf("Bot publish paths"));
+  assert.ok(step.startsWith("Bot publish paths"));
+  assert.match(step, /check-publish-paths\.mjs/);
+  assert.equal(step.includes("diff-guard.mjs"), false);
+  assert.match(weekly, /diff-guard\.mjs --git origin\/main/);
+
+  const cwd = mkdtempSync(join(tmpdir(), "ads-publish-"));
+  try {
+    execFileSync("git", ["init", "-b", "main"], { cwd, stdio: "pipe" });
+    const env = identityEnv();
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), "| url |\n| --- |\n");
+    execFileSync("git", ["add", "Knowledge"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["commit", "-m", "base"], { cwd, env, stdio: "pipe" });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), "| url |\n| --- |\n| https://github.com/acme/demo |\n");
+    const publish = execFileSync(process.execPath, [join(repoRoot, "scripts/check-publish-paths.mjs"), "--git", "HEAD"], {
+      cwd,
+      encoding: "utf8",
+    });
+    assert.match(publish, /check-publish-paths: 1 paths/);
+    let guard = "";
+    try {
+      execFileSync(process.execPath, [join(repoRoot, "scripts/diff-guard.mjs"), "--git", "HEAD"], { cwd, encoding: "utf8" });
+    } catch (error) {
+      guard = `${error.stdout ?? ""}${error.stderr ?? ""}`;
+      assert.equal(error.status, 1);
+    }
+    assert.match(guard, /path outside data: Knowledge\/research\/oss-candidates\.md/);
+    mkdirSync(join(cwd, "web"), { recursive: true });
+    writeFileSync(join(cwd, "web/leak.txt"), "nope");
+    try {
+      execFileSync(process.execPath, [join(repoRoot, "scripts/check-publish-paths.mjs"), "--git", "HEAD"], { cwd, encoding: "utf8", stdio: "pipe" });
+      assert.fail("web path should fail");
+    } catch (error) {
+      assert.equal(error.status, 1);
+      assert.match(String(error.stderr), /web\/leak\.txt/);
+    }
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test("a second weekly run keeps candidate rows the new discovery omitted", () => {
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  assert.ok(weekly.indexOf("--prepare-only") < weekly.indexOf("append-knowledge.mjs"));
+  assert.equal(weekly.includes("rm -rf Knowledge"), false);
+  const cwd = mkdtempSync(join(tmpdir(), "ads-ledger-"));
+  const ledger = [
+    "---",
+    "title: candidates",
+    "---",
+    "",
+    "| 見た日 | 名前 | URL | 補足 |",
+    "|---|---|---|---|",
+    "",
+  ].join("\n");
+  try {
+    execFileSync("git", ["init", "-b", "main"], { cwd, stdio: "pipe" });
+    const env = identityEnv();
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), ledger);
+    writeFileSync(join(cwd, "Knowledge/research/site-candidates.md"), ledger);
+    execFileSync("git", ["add", "Knowledge"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["commit", "-m", "base"], { cwd, env, stdio: "pipe" });
+    execFileSync("git", ["checkout", "-b", "bot/weekly-growth"], { cwd, stdio: "pipe" });
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), `${ledger}| 2026-11-04 | acme/a | https://github.com/acme/a | MIT |\n`);
+    execFileSync("git", ["add", "Knowledge"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["commit", "-m", "week A"], { cwd, env, stdio: "pipe" });
+    execFileSync("git", ["checkout", "main"], { cwd, stdio: "pipe" });
+    execFileSync("git", ["checkout", "bot/weekly-growth"], { cwd, stdio: "pipe" });
+    mkdirSync(join(cwd, ".growth"), { recursive: true });
+    writeFileSync(join(cwd, ".growth/discover.json"), JSON.stringify({
+      fresh: [{ kind: "oss", title: "acme/b", url: "https://github.com/acme/b", stars: 12, license: "MIT" }],
+    }));
+    execFileSync(process.execPath, [join(repoRoot, "scripts/append-knowledge.mjs"), "--discover", ".growth/discover.json"], { cwd, stdio: "pipe" });
+    const text = readFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), "utf8");
+    assert.match(text, /https:\/\/github.com\/acme\/a/);
+    assert.match(text, /https:\/\/github.com\/acme\/b/);
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test("check and settle pass a read token into every API lookup", () => {
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  const repo = jobBlocks(checkYml).find((block) => block.startsWith("  repo:\n"));
+  const web = jobBlocks(checkYml).find((block) => block.startsWith("  web:\n"));
+  for (const line of ["contents: read", "pull-requests: read", "checks: read", "actions: read"]) {
+    assert.match(repo, new RegExp(line.replace("-", "\\-")));
+  }
+  assert.match(repo, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.match(web, /\n {6}contents: read\n/);
+  assert.doesNotMatch(web, /pull-requests:|checks:|actions:/);
+  assert.doesNotMatch(checkYml, /actions: write/);
+  assert.doesNotMatch(checkYml, /checks: write/);
+
+  const settleYml = readFileSync(join(repoRoot, ".github/workflows/weekly-growth-settle.yml"), "utf8");
+  const settle = jobBlocks(settleYml).find((block) => block.startsWith("  settle:\n"));
+  for (const line of ["contents: read", "pull-requests: read", "checks: read", "actions: read"]) {
+    assert.match(settle, new RegExp(line.replace("-", "\\-")));
+  }
+  assert.match(settle, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.doesNotMatch(settle, /checks: write|actions: write|contents: write/);
+
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const propose = jobBlocks(weekly).find((block) => block.startsWith("  propose:\n"));
+  assert.match(propose, /checks: write/);
+  assert.match(propose, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.match(propose, /GITHUB_RUN_ID: \$\{\{ github\.run_id \}\}/);
+});
+
+function ghCalls(logPath) {
+  return readFileSync(logPath, "utf8").trim().split("\n").filter(Boolean).map((line) => JSON.parse(line));
+}
+
+function callMethod(entry) {
+  return entry.args[entry.args.indexOf("--method") + 1];
+}
+
+function callPath(entry) {
+  return entry.args.find((arg) => arg.startsWith("repos/")) || "";
+}
+
+test("the first manual weekly run sends each git body and the receipt", () => {
+  const root = mkdtempSync(join(tmpdir(), "ads-gh-"));
+  const cwd = join(root, "repo");
+  const bin = join(root, "bin");
+  const logPath = join(root, "gh.log");
+  const outputPath = join(root, "output.txt");
+  mkdirSync(cwd, { recursive: true });
+  mkdirSync(bin, { recursive: true });
+  writeFileSync(join(bin, "gh"), `#!/usr/bin/env node
+import { appendFileSync, readFileSync } from "node:fs";
+const args = process.argv.slice(2);
+const inputAt = args.indexOf("--input");
+let stdin = "";
+if (inputAt !== -1 && args[inputAt + 1] === "-") stdin = readFileSync(0, "utf8");
+appendFileSync(process.env.GH_SHIM_LOG, JSON.stringify({ args, stdin }) + "\\n");
+const method = args[args.indexOf("--method") + 1];
+const path = args.find((arg) => arg.startsWith("repos/")) || "";
+if (process.env.GH_SHIM_FAIL === "1" && method === "POST" && path.endsWith("/git/blobs")) process.exit(1);
+const commit = "${"3".repeat(40)}";
+const send = (value) => process.stdout.write(JSON.stringify(value));
+if (method === "POST" && path.endsWith("/git/blobs")) send({ sha: "${"1".repeat(40)}" });
+else if (method === "POST" && path.endsWith("/git/trees")) send({ sha: "${"2".repeat(40)}" });
+else if (method === "POST" && path.endsWith("/git/commits")) send({ sha: commit });
+else if (method === "GET" && path.includes("/check-runs")) send({ total_count: 1, check_runs: [{ name: "weekly-growth-receipt", head_sha: commit, external_id: "42", app: { slug: "github-actions" } }] });
+else if (method === "GET" && /\\/commits\\/[0-9a-f]{40}$/.test(path)) send({ sha: commit, commit: { verification: { verified: true }, author: { email: "41898282+github-actions[bot]@users.noreply.github.com" }, message: "knowledge: week\\n" }, committer: { login: "web-flow" }, parents: [{ sha: "${"0".repeat(40)}" }] });
+else if (method === "GET" && path.includes("/actions/runs/")) send({ id: 42, path: ".github/workflows/weekly-growth.yml", event: "workflow_dispatch", head_repository: { full_name: "acme/ads" } });
+else if (method === "POST" && path.endsWith("/check-runs")) send({ id: 1, name: "weekly-growth-receipt" });
+else if (method === "POST" && path.endsWith("/git/refs")) send({ ref: "refs/heads/bot/weekly-growth", object: { sha: commit } });
+else process.exit(1);
+`, { mode: 0o755 });
+  try {
+    git(cwd, ["init", "-b", "main"]);
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "Knowledge/research/note.md"), "one\n");
+    git(cwd, ["add", "Knowledge"]);
+    git(cwd, ["commit", "-m", "base"]);
+    writeFileSync(join(cwd, "Knowledge/research/note.md"), "two\n");
+    git(cwd, ["add", "Knowledge"]);
+    const mainSha = git(cwd, ["rev-parse", "HEAD"]).trim();
+    const baseTree = git(cwd, ["rev-parse", "HEAD^{tree}"]).trim();
+    const env = {
+      ...process.env,
+      PATH: `${bin}:${process.env.PATH}`,
+      GH_TOKEN: "shim-token",
+      GITHUB_TOKEN: "",
+      GITHUB_REPOSITORY: "acme/ads",
+      GITHUB_RUN_ID: "42",
+      GROWTH_ACTOR: "github-actions[bot]",
+      GH_SHIM_LOG: logPath,
+      GITHUB_OUTPUT: outputPath,
+    };
+    const published = execFileSync(process.execPath, [
+      join(repoRoot, "scripts/publish-bot-branch.mjs"),
+      "--commit",
+      "--push",
+      "--from",
+      "main",
+      "--remote",
+      "refs/does-not-exist",
+      "--branch",
+      "bot/weekly-growth",
+      "--message",
+      "knowledge: week",
+    ], { cwd, env, encoding: "utf8" });
+    assert.match(published, /ready created/);
+    assert.match(readFileSync(outputPath, "utf8"), /committed=true/);
+    const calls = ghCalls(logPath);
+    const find = (method, suffix) => calls.find((entry) => callMethod(entry) === method && callPath(entry).endsWith(suffix));
+    const blob = find("POST", "/git/blobs");
+    const tree = find("POST", "/git/trees");
+    const commit = find("POST", "/git/commits");
+    const receipt = find("POST", "/check-runs");
+    const ref = find("POST", "/git/refs");
+    for (const entry of [blob, tree, commit, receipt, ref]) {
+      assert.equal(entry.args[entry.args.indexOf("--input") + 1], "-");
+      assert.ok(entry.stdin.length > 0);
+    }
+    for (const entry of calls.filter((entry) => callMethod(entry) === "GET")) {
+      assert.equal(entry.args.includes("--input"), false);
+      assert.equal(entry.stdin, "");
+    }
+    const blobBody = JSON.parse(blob.stdin);
+    assert.equal(blobBody.encoding, "base64");
+    assert.equal(Buffer.from(blobBody.content, "base64").toString("utf8"), "two\n");
+    const treeBody = JSON.parse(tree.stdin);
+    assert.equal(treeBody.base_tree, baseTree);
+    assert.equal(treeBody.tree.length, 1);
+    assert.equal(treeBody.tree[0].path, "Knowledge/research/note.md");
+    assert.equal(treeBody.tree[0].sha, "1".repeat(40));
+    const commitBody = JSON.parse(commit.stdin);
+    assert.deepEqual(Object.keys(commitBody).sort(), ["message", "parents", "tree"]);
+    assert.equal(commitBody.message, "knowledge: week\n");
+    assert.deepEqual(commitBody.parents, [mainSha]);
+    assert.equal(commitBody.tree, "2".repeat(40));
+    const receiptBody = JSON.parse(receipt.stdin);
+    assert.equal(receiptBody.name, "weekly-growth-receipt");
+    assert.equal(receiptBody.head_sha, "3".repeat(40));
+    assert.equal(receiptBody.external_id, "42");
+    const refBody = JSON.parse(ref.stdin);
+    assert.equal(refBody.ref, "refs/heads/bot/weekly-growth");
+    assert.equal(refBody.sha, "3".repeat(40));
+    const order = ["/git/blobs", "/git/trees", "/git/commits", "/check-runs", "/git/refs"];
+    let cursor = -1;
+    for (const suffix of order) {
+      const index = calls.findIndex((entry, at) => at > cursor && callMethod(entry) === "POST" && callPath(entry).endsWith(suffix));
+      assert.ok(index > cursor, suffix);
+      cursor = index;
+    }
+    const getCommit = calls.findIndex((entry) => callMethod(entry) === "GET" && /\/commits\/[0-9a-f]{40}$/.test(callPath(entry)));
+    const postCheck = calls.findIndex((entry) => callMethod(entry) === "POST" && callPath(entry).endsWith("/check-runs"));
+    const postRef = calls.findIndex((entry) => callMethod(entry) === "POST" && callPath(entry).endsWith("/git/refs"));
+    assert.ok(getCommit > calls.findIndex((entry) => callMethod(entry) === "POST" && callPath(entry).endsWith("/git/commits")));
+    assert.ok(getCommit < postCheck);
+    assert.ok(postCheck < postRef);
+
+    writeFileSync(logPath, "");
+    env.GH_SHIM_FAIL = "1";
+    let failed = null;
+    try {
+      execFileSync(process.execPath, [
+        join(repoRoot, "scripts/publish-bot-branch.mjs"),
+        "--commit",
+        "--push",
+        "--from",
+        "main",
+        "--remote",
+        "refs/does-not-exist",
+        "--branch",
+        "bot/weekly-growth",
+        "--message",
+        "knowledge: week",
+      ], { cwd, env, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    } catch (error) {
+      failed = error;
+    }
+    assert.ok(failed);
+    assert.notEqual(failed.status, 0);
+    assert.match(String(failed.stderr), /github api failed/);
+    assert.equal(String(failed.stderr).includes("shim-token"), false);
+    assert.equal(String(failed.stdout || "").includes("ready"), false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
