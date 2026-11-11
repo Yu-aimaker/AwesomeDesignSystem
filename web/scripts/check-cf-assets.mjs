@@ -127,6 +127,9 @@ if (config.previews?.routes != null) {
 if (config.assets?.binding != null) {
   problems.push("wrangler.jsonc must not set assets.binding (that would make production a user Worker)");
 }
+if (config.assets?.run_worker_first != null) {
+  problems.push("wrangler.jsonc must not set assets.run_worker_first (production stays assets-only)");
+}
 
 let previewConfig = {};
 try {
@@ -148,6 +151,9 @@ if (previewConfig.assets?.not_found_handling !== "single-page-application") {
 }
 if (previewConfig.assets?.html_handling !== "drop-trailing-slash") {
   problems.push("wrangler.preview.jsonc must keep html_handling drop-trailing-slash");
+}
+if (previewConfig.assets?.run_worker_first !== true) {
+  problems.push("wrangler.preview.jsonc must set assets.run_worker_first so existing files get noindex");
 }
 if (previewConfig.routes != null) {
   problems.push("wrangler.preview.jsonc must not set routes");

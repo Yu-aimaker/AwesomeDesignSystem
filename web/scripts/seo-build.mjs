@@ -3,17 +3,22 @@
 // (meta, JSON-LD, and readable text). Cloudflare html_handling
 // auto-trailing-slash serves folder/index.html at the slash URL.
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { homeMessages } from "../src/i18n/messages/home.ts";
 import { OG_IMAGE, ORIGIN, ogAlt, pages } from "../src/seo/pages.ts";
 import { excerpt } from "../src/seo/excerpt.ts";
 import { absoluteUrl, buildJsonLd } from "../src/seo/structured.ts";
+import { contentLanguage, documentTitle, publishedLocales } from "../src/seo/titles.mjs";
 import { productionIndexProblems } from "./seo/check.mjs";
 import { loadEntries, parseAppRoutes } from "./seo/collect.mjs";
-import { renderHeaders } from "./seo/headers.mjs";
+import { publishText } from "./seo/hygiene.mjs";
+import { bootstrapScriptHashes, renderHeaders } from "./seo/headers.mjs";
 import { mdToHtml } from "./seo/markdown.mjs";
 import { renderRobots } from "./seo/robots.mjs";
+import { componentsBlock, foundationBlock, homeBlock, routeContentProblems, sitesBlock } from "./seo/route-content.mjs";
 
 const LOCALES = ["ja", "en"];
 const PLUGIN = "https://github.com/Yu-aimaker/AwesomeDesignSystem/tree/main/Plugin/awesome-ds";
@@ -48,10 +53,6 @@ function fileFor(locale, path) {
   return `${urlPath.slice(1)}/index.html`;
 }
 
-function documentTitle(path, title) {
-  return path === "/" ? title : `${title} | AwesomeDS`;
-}
-
 function stripSeo(html) {
   return html
     .replace(/\s*<title>[\s\S]*?<\/title>/gi, "")
@@ -73,25 +74,24 @@ function themeColors(repo) {
 
 function renderPage(template, page) {
   const alternates = [
-    `<link rel="alternate" hreflang="ja" href="${escAttr(page.jaUrl)}" />`,
-    `<link rel="alternate" hreflang="en" href="${escAttr(page.enUrl)}" />`,
-    `<link rel="alternate" hreflang="x-default" href="${escAttr(page.jaUrl)}" />`,
+    ...page.alternates.map((item) => `<link rel="alternate" hreflang="${item.hreflang}" href="${escAttr(item.href)}" data-prerender="true" />`),
+    `<link rel="alternate" hreflang="x-default" href="${escAttr(page.xDefault)}" data-prerender="true" />`,
   ].join("\n    ");
-  const localeTag = page.locale === "en" ? "en_US" : "ja_JP";
-  const altLocale = page.locale === "en" ? "ja_JP" : "en_US";
+  const localeTag = page.htmlLang === "en" ? "en_US" : "ja_JP";
+  const altLocale = page.alternates.find((item) => item.hreflang !== page.htmlLang);
   const json = JSON.stringify(page.jsonLd).replace(/</g, "\\u003c");
   const block = [
     `<title>${esc(page.docTitle)}</title>`,
     `<meta name="description" content="${escAttr(page.description)}" />`,
-    `<link rel="canonical" href="${escAttr(page.url)}" />`,
+    `<link rel="canonical" href="${escAttr(page.canonical)}" />`,
     alternates,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="AwesomeDS" />`,
     `<meta property="og:locale" content="${localeTag}" />`,
-    `<meta property="og:locale:alternate" content="${altLocale}" />`,
+    ...(altLocale ? [`<meta property="og:locale:alternate" content="${altLocale.hreflang === "en" ? "en_US" : "ja_JP"}" />`] : []),
     `<meta property="og:title" content="${escAttr(page.docTitle)}" />`,
     `<meta property="og:description" content="${escAttr(page.description)}" />`,
-    `<meta property="og:url" content="${escAttr(page.url)}" />`,
+    `<meta property="og:url" content="${escAttr(page.canonical)}" />`,
     `<meta property="og:image" content="${escAttr(OG_IMAGE)}" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
@@ -112,12 +112,16 @@ function renderPage(template, page) {
   return html;
 }
 
-function pageBody(locale, path, copy, entry, entries) {
+function pageBody(repo, webRoot, locale, path, copy, entry, entries) {
   const nav = Object.keys(pages)
     .map((key) => `<li><a href="${relHref(locale, key)}">${esc(pages[key][locale].title)}</a></li>`)
     .join("");
   let extra = "";
-  if (entry) extra = mdToHtml(entry.body);
+  if (entry) extra = `<article lang="${contentLanguage(entry.body)}">${mdToHtml(publishText(entry.body))}</article>`;
+  else if (path === "/") extra = homeBlock(homeMessages[locale]);
+  else if (path === "/sites") extra = sitesBlock(repo);
+  else if (path === "/components") extra = componentsBlock(webRoot);
+  else if (path === "/foundations" || path.startsWith("/foundations/")) extra = foundationBlock(repo, path);
   else if (path === "/knowledge") {
     const items = entries
       .slice()
@@ -182,9 +186,9 @@ function llmsFull(records, entries) {
   }
   lines.push("# Knowledge", "");
   for (const entry of entries) {
-    const ja = absoluteUrl("ja", `/knowledge/${entry.category}/${entry.slug}`);
-    const en = absoluteUrl("en", `/knowledge/${entry.category}/${entry.slug}`);
-    lines.push(`## ${entry.title}`, "", ja, "", en, "", entry.body, "");
+    const path = `/knowledge/${entry.category}/${entry.slug}`;
+    const lang = contentLanguage(entry.body);
+    lines.push(`## ${entry.title}`, "", absoluteUrl(lang, path), "", publishText(entry.body), "");
   }
   return lines.join("\n");
 }
@@ -192,23 +196,23 @@ function llmsFull(records, entries) {
 function sitemap(records) {
   const byPath = new Map();
   for (const record of records) {
-    const group = byPath.get(record.path) ?? {};
-    group[record.locale] = record;
+    if (record.canonical !== record.url) continue;
+    const group = byPath.get(record.path) ?? [];
+    group.push(record);
     byPath.set(record.path, group);
   }
   const urls = [];
   for (const group of byPath.values()) {
-    for (const locale of LOCALES) {
-      const record = group[locale];
-      if (!record) continue;
-      const links = LOCALES.map(
-        (item) => `    <xhtml:link rel="alternate" hreflang="${item}" href="${xml(group[item].url)}"/>`,
-      ).join("\n");
+    const xDefault = group.find((record) => record.htmlLang === "ja") ?? group[0];
+    const links = group
+      .map((record) => `    <xhtml:link rel="alternate" hreflang="${record.htmlLang}" href="${xml(record.url)}"/>`)
+      .join("\n");
+    for (const record of group) {
       urls.push(`  <url>
     <loc>${xml(record.url)}</loc>
     <lastmod>${record.lastmod}</lastmod>
 ${links}
-    <xhtml:link rel="alternate" hreflang="x-default" href="${xml(group.ja.url)}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="${xml(xDefault.url)}"/>
   </url>`);
     }
   }
@@ -227,6 +231,13 @@ export function buildSeo(webRoot) {
   const repo = resolve(webRoot, "..");
   const dist = join(webRoot, "dist");
   const template = readFileSync(join(dist, "index.html"), "utf8");
+  const builtHashes = [...template.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(
+    (match) => `'sha256-${createHash("sha256").update(match[1]).digest("base64")}'`,
+  );
+  const sourceHashes = bootstrapScriptHashes();
+  if (builtHashes.join(" ") !== sourceHashes.join(" ")) {
+    throw new Error("built bootstrap script does not match the CSP hash from web/index.html");
+  }
   const theme = themeColors(repo);
   const headDate = gitDate(repo) || "2026-11-11";
   const app = parseAppRoutes(readFileSync(join(webRoot, "src", "App.tsx"), "utf8"));
@@ -244,7 +255,7 @@ export function buildSeo(webRoot) {
   for (const item of paths) {
     for (const locale of LOCALES) {
       const base = item.entry
-        ? { title: item.entry.title, description: excerpt(item.entry.body) || item.entry.title }
+        ? { title: item.entry.title, description: excerpt(publishText(item.entry.body)) || item.entry.title }
         : (pages[item.path]?.[locale] ?? {
             title: item.path,
             description: locale === "ja" ? `${item.path}。AwesomeDS のページ。` : `${item.path}. A page on AwesomeDS.`,
@@ -256,26 +267,43 @@ export function buildSeo(webRoot) {
       const lastmod = item.entry
         ? /^(\d{4}-\d{2}-\d{2})/.exec(item.entry.updated)?.[1] || gitDate(repo, item.entry.file) || headDate
         : headDate;
+      const kind = item.entry ? "knowledge" : "page";
+      const langs = publishedLocales(kind, item.entry?.body ?? "");
+      const htmlLang = item.entry ? langs[0] : locale;
+      const canonical = absoluteUrl(item.entry ? langs[0] : locale, item.path);
+      const url = absoluteUrl(locale, item.path);
       records.push({
         locale,
+        htmlLang,
         path: item.path,
         entry: item.entry,
         copy: base,
         description,
-        docTitle: documentTitle(item.path, base.title),
-        url: absoluteUrl(locale, item.path),
-        jaUrl: absoluteUrl("ja", item.path),
-        enUrl: absoluteUrl("en", item.path),
-        alt: ogAlt[locale],
+        docTitle: documentTitle(htmlLang, item.path, base.title, kind),
+        url,
+        canonical,
+        alternates: langs.map((itemLocale) => ({ hreflang: itemLocale, href: absoluteUrl(itemLocale, item.path) })),
+        xDefault: absoluteUrl(langs.includes("ja") ? "ja" : langs[0], item.path),
+        alt: ogAlt[htmlLang] ?? ogAlt[locale],
         theme,
         lastmod,
-        jsonLd: buildJsonLd(locale, item.path, base.title, description),
-        body: pageBody(locale, item.path, { ...base, description }, item.entry, entries),
+        jsonLd: buildJsonLd(htmlLang, item.path, base.title, description),
+        body: pageBody(repo, webRoot, locale, item.path, { ...base, description }, item.entry, entries),
       });
     }
   }
 
   const routeFiles = [];
+  const titleOwners = new Map();
+  for (const record of records) {
+    if (record.canonical !== record.url) continue;
+    const key = `${record.htmlLang}\0${record.docTitle}`;
+    if (titleOwners.has(key)) {
+      throw new Error(`duplicate ${record.htmlLang} title ${JSON.stringify(record.docTitle)} on ${record.url} and ${titleOwners.get(key)}`);
+    }
+    titleOwners.set(key, record.url);
+  }
+
   for (const record of records) {
     const rel = fileFor(record.locale, record.path);
     const html = renderPage(template, record);
@@ -297,7 +325,7 @@ export function buildSeo(webRoot) {
     .join("\n");
   writeFileSync(join(dist, "_redirects"), `${redirects}\n`);
 
-  const problems = productionIndexProblems(dist, routeFiles);
+  const problems = [...routeContentProblems(dist), ...productionIndexProblems(dist, routeFiles)];
   if (problems.length) {
     console.error(problems.map((line) => `seo: ${line}`).join("\n"));
     process.exit(1);

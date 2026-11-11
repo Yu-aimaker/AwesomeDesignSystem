@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
+import { hygieneProblems } from "./hygiene.mjs";
 import { agentRule, parseGroups, starDisallowsAll, TRAINING, SEARCH } from "./robots.mjs";
 
 const TEXT_EXT = new Set([".html", ".txt", ".xml"]);
@@ -14,9 +15,19 @@ function walk(dir, acc = []) {
   return acc;
 }
 
+/** A robots meta tag. Prose that mentions noindex is not a directive. */
+export function htmlDeclaresNoindex(html) {
+  const tags = String(html).match(/<meta\b[^>]*>/gi) ?? [];
+  return tags.some((tag) => /\b(?:name|http-equiv)\s*=\s*["']robots["']/i.test(tag) && /noindex/i.test(tag));
+}
+
+export function headersDeclareNoindex(text) {
+  return /(?:^|\n)[^\n]*x-robots-tag:[^\n]*noindex/i.test(text);
+}
+
 export function auditHtml(html) {
   const problems = [];
-  if (/noindex/i.test(html)) problems.push("contains noindex");
+  if (htmlDeclaresNoindex(html)) problems.push("contains noindex");
   const lang = /<html\s+lang="([^"]+)"/i.exec(html)?.[1];
   if (lang !== "ja" && lang !== "en") problems.push(`html lang is ${JSON.stringify(lang ?? null)}`);
   const title = /<title>([^<]*)<\/title>/i.exec(html)?.[1]?.trim();
@@ -92,7 +103,7 @@ export function productionIndexProblems(dist, routeFiles = []) {
   } catch {
     problems.push("dist/_headers is missing");
   }
-  if (/noindex/i.test(headers)) problems.push("dist/_headers contains noindex");
+  if (headersDeclareNoindex(headers)) problems.push("dist/_headers contains noindex");
   try {
     robots = readFileSync(join(dist, "robots.txt"), "utf8");
   } catch {
@@ -102,7 +113,6 @@ export function productionIndexProblems(dist, routeFiles = []) {
   for (const name of ["sitemap.xml", "llms.txt", "llms-full.txt"]) {
     try {
       const text = readFileSync(join(dist, name), "utf8");
-      if (/noindex/i.test(text)) problems.push(`dist/${name} contains noindex`);
       if (!text.trim()) problems.push(`dist/${name} is empty`);
     } catch {
       problems.push(`dist/${name} is missing`);
@@ -122,7 +132,11 @@ export function productionIndexProblems(dist, routeFiles = []) {
     const interesting = TEXT_EXT.has(ext) || base === "_headers" || base === "_redirects";
     if (!interesting) continue;
     const text = readFileSync(file, "utf8");
-    if (/noindex/i.test(text)) problems.push(`${rel} contains noindex`);
+    if (base === "_headers" && headersDeclareNoindex(text)) problems.push(`${rel} contains noindex`);
+    if (ext === ".html" && htmlDeclaresNoindex(text)) problems.push(`${rel} contains noindex`);
+    if (ext === ".html" || base === "llms.txt" || base === "llms-full.txt") {
+      problems.push(...hygieneProblems(text, rel));
+    }
     if (ext === ".html") {
       seen.add(rel.split(/[/\\]/).join("/"));
       for (const item of auditHtml(text)) problems.push(`${rel}: ${item}`);

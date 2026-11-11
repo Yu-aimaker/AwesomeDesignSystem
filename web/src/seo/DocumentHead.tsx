@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useLocale } from "../i18n/context";
 import { findEntry } from "../lib/knowledge";
+import { publishText } from "../../scripts/seo/hygiene.mjs";
 import { excerpt } from "./excerpt";
 import { OG_IMAGE, ogAlt, pages, type PageCopy } from "./pages";
 import { absoluteUrl, buildJsonLd } from "./structured";
+import { contentLanguage, documentTitle } from "./titles.mjs";
 
 function normalize(path: string): string {
   if (path.length > 1 && path.endsWith("/")) return path.slice(0, -1);
@@ -45,23 +47,27 @@ export function DocumentHead() {
     const match = /^\/knowledge\/([^/]+)\/([^/]+)$/.exec(bare);
     const entry = match ? findEntry(match[1], match[2]) : undefined;
     const copy: PageCopy | undefined = entry
-      ? { title: entry.title, description: excerpt(entry.body) || entry.title }
+      ? { title: entry.title, description: excerpt(publishText(entry.body)) || entry.title }
       : pages[bare]?.[locale];
     const resolved = copy ?? missing[locale];
-    const title = copy && bare === "/" ? resolved.title : `${resolved.title} | AwesomeDS`;
+    const content = entry ? contentLanguage(entry.body) : locale;
+    const title = documentTitle(entry ? content : locale, bare, resolved.title, entry ? "knowledge" : "page");
     document.title = title;
     upsertMeta("name", "description", resolved.description);
-    const url = copy ? absoluteUrl(locale, bare) : absoluteUrl(locale, "/");
+    const url = copy ? absoluteUrl(entry ? content : locale, bare) : absoluteUrl(locale, "/");
     upsertLink("canonical", url);
-    const localeTag = locale === "en" ? "en_US" : "ja_JP";
-    const altLocale = locale === "en" ? "ja_JP" : "en_US";
+    document.querySelectorAll('link[rel="alternate"][data-prerender]').forEach((el) => el.remove());
+    const localeTag = content === "en" ? "en_US" : "ja_JP";
+    const altLocale = content === "en" ? "ja_JP" : "en_US";
+    const alternate = document.head.querySelector('meta[property="og:locale:alternate"]');
+    if (entry) alternate?.remove();
     upsertMeta("property", "og:title", title);
     upsertMeta("property", "og:description", resolved.description);
     upsertMeta("property", "og:url", url);
     upsertMeta("property", "og:image", OG_IMAGE);
-    upsertMeta("property", "og:image:alt", ogAlt[locale]);
+    upsertMeta("property", "og:image:alt", ogAlt[content === "en" ? "en" : "ja"]);
     upsertMeta("property", "og:locale", localeTag);
-    upsertMeta("property", "og:locale:alternate", altLocale);
+    if (!entry) upsertMeta("property", "og:locale:alternate", altLocale);
     upsertMeta("property", "og:type", "website");
     upsertMeta("property", "og:site_name", "AwesomeDS");
     upsertMeta("name", "twitter:card", "summary_large_image");
@@ -76,7 +82,8 @@ export function DocumentHead() {
     const script = existing ?? document.createElement("script");
     script.id = "seo-jsonld";
     script.setAttribute("type", "application/ld+json");
-    script.textContent = JSON.stringify(buildJsonLd(locale, bare, resolved.title, resolved.description)).replace(/</g, "\\u003c");
+    const ldLocale = entry ? (content === "en" ? "en" : "ja") : locale;
+    script.textContent = JSON.stringify(buildJsonLd(ldLocale, bare, resolved.title, resolved.description)).replace(/</g, "\\u003c");
     if (!existing) document.head.appendChild(script);
   }, [locale, path]);
 

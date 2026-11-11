@@ -1,7 +1,7 @@
-// Preview Worker only (wrangler.preview.jsonc). Missing paths reach this
-// script; env.ASSETS.fetch applies not_found_handling and returns index.html.
-// Non-production hosts stay out of the index. Production wrangler.jsonc has
-// no main script, so it does not send this header.
+// Preview Worker only (wrangler.preview.jsonc). assets.run_worker_first sends
+// every preview request here, including files that exist. env.ASSETS.fetch
+// applies not_found_handling and returns index.html for missing paths.
+// Production wrangler.jsonc has no main script and no run_worker_first.
 export default {
   async fetch(request, env) {
     const response = await env.ASSETS.fetch(request);
