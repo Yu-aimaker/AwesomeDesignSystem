@@ -257,8 +257,6 @@ export function Home() {
           </h1>
           <p className="t-body-lg mt-4 max-w-[48ch] text-ink-secondary">{t.lead}</p>
           <p className="t-body mt-3 max-w-[48ch] text-ink-secondary">{t.purpose}</p>
-          <p className="t-body mt-3 max-w-[48ch] text-ink-secondary">{t.purposeNote}</p>
-          <p className="t-body mt-3 max-w-[48ch] text-ink-secondary">{t.purposeScope}</p>
           <a
             href="https://github.com/GoogleChrome/modern-web-guidance"
             target="_blank"

@@ -21,7 +21,7 @@ AwesomeDS is a neutral, content-first system: white canvas, near-black ink, one 
 
 Do these in order. Do not skip step 1 because the cheat sheet below "looks like enough".
 
-1. Read `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` top to bottom. Open the foundation file for each area you will touch: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/{principles,color,typography,japanese-typography,spacing,layout,radius,elevation,motion,iconography,accessibility,stack,anti-patterns,content-and-tone}.md`, plus `${CLAUDE_PLUGIN_ROOT}/ds/components/README.md` when building components. Principle 7 (no generated tells) is mandatory on every UI task. The before/after catalog lives in the repo at `Knowledge/skills/anti-ai-slop.md`, not in the plugin copy.
+1. Read `${CLAUDE_PLUGIN_ROOT}/ds/DESIGN.md` top to bottom. Open the foundation file for each area you will touch: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/{principles,color,typography,japanese-typography,spacing,layout,radius,elevation,motion,iconography,accessibility,stack,anti-patterns,content-and-tone}.md`, plus `${CLAUDE_PLUGIN_ROOT}/ds/components/README.md` when building components. Principle 7 (no generated tells) is mandatory on every UI task. The before/after catalog is `${CLAUDE_PLUGIN_ROOT}/knowledge/skills/anti-ai-slop.md`.
 2. Check for a project design system. Search the repo root for `DESIGN.md`, `design-system.md`, `docs/design/`, `tokens.css`, `theme.css`. If a project DESIGN.md exists, it wins. Use AwesomeDS only for the roles, rules and states it does not define, and say which gaps you filled.
 3. Detect the stack (section 2) and decide how tokens get wired.
 4. When the task touches a library, motion, a component kit, Japanese typography, or a reference brand, open `${CLAUDE_PLUGIN_ROOT}/knowledge/README.md` and read the matching entries before choosing. They are sourced summaries; you do not need to search the web for what they already cover.
@@ -208,10 +208,10 @@ badge caption text, pill, padding 2 8, bg surface-sunken, text ink-secondary
 
 ## References that do not replace these rules
 
-- taste-skill 2.5.1 is a company-site skill. Do not take its dealt palettes, mandatory hero entrance, or one-section-per-screen layout. Do fail placeholder copy and invented addresses, and do not present a stand-in photo as the client's own. Details: `Knowledge/skills/taste-skill.md`.
-- UI Skills `baseline-ui` is a second checklist, not a new token set. Do not install its registry. Its current text says not to add animation unless asked. AwesomeDS still animates feedback. Do not replace that. Details: `Knowledge/skills/ui-skills.md`.
-- Vercel agent-skills can inform React composition and rendering on a Vite app. Do not assume Next.js, and do not add a deploy skill. The root license file was not in the repo on 2026-11-11. Details: `Knowledge/skills/vercel-agent-skills.md`.
-- Appllama skills target Expo and React Native, including a simulator pass. Do not treat them as this web kit, and do not enable the paid MCP. Details: `Knowledge/skills/appllama-app-design.md`.
+- taste-skill 2.5.1 is a company-site skill. Do not take its dealt palettes, mandatory hero entrance, or one-section-per-screen layout. Do fail placeholder copy and invented addresses, and do not present a stand-in photo as the client's own. Details: `${CLAUDE_PLUGIN_ROOT}/knowledge/skills/taste-skill.md`.
+- UI Skills `baseline-ui` is a second checklist, not a new token set. Do not install its registry. Its current text says not to add animation unless asked. AwesomeDS still animates feedback. Do not replace that. Details: `${CLAUDE_PLUGIN_ROOT}/knowledge/skills/ui-skills.md`.
+- Vercel agent-skills can inform React composition and rendering on a Vite app. Do not assume Next.js, and do not add a deploy skill. The root license file was not in the repo on 2026-11-11. Details: `${CLAUDE_PLUGIN_ROOT}/knowledge/skills/vercel-agent-skills.md`.
+- Appllama skills target Expo and React Native, including a simulator pass. Do not treat them as this web kit, and do not enable the paid MCP. Details: `${CLAUDE_PLUGIN_ROOT}/knowledge/skills/appllama-app-design.md`.
 
 ## 8. Finish: run the checklist and report
 
