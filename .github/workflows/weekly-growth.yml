@@ -5,6 +5,9 @@ name: Weekly growth
 # AwesomeDS, plugin skills, or web. workflow_dispatch keeps dry_run default true.
 # Dry-run does not create or close a pull request, label, or issue.
 # The bot branch is fast-forwarded. This file has no force push.
+# After the bot commit, Check runs here via workflow_call and settle follows
+# in this run. A token-opened pull request leaves its pull_request Check at
+# action_required with no jobs. This run does not wait for that check.
 on:
   schedule:
     - cron: "30 0 * * 1"
@@ -126,8 +129,10 @@ jobs:
       contents: write
       pull-requests: write
       issues: write
-      actions: write
       checks: write
+    outputs:
+      committed: ${{ steps.publish.outputs.committed }}
+      head_sha: ${{ steps.publish.outputs.head_sha }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -197,7 +202,33 @@ jobs:
           else
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head bot/weekly-growth --title "$title" --body-file /tmp/growth-pr.md --label bot:weekly-growth
           fi
-          gh workflow run check.yml --repo "$GITHUB_REPOSITORY" --ref bot/weekly-growth
+
+  checkbot:
+    needs: propose
+    if: needs.propose.result == 'success' && needs.propose.outputs.committed == 'true'
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: read
+      actions: read
+    uses: ./.github/workflows/check.yml
+    with:
+      ref: ${{ needs.propose.outputs.head_sha }}
+      publish_paths: true
+      identity_event: workflow_call
+
+  settle:
+    needs: [propose, checkbot]
+    if: needs.checkbot.result == 'success' && needs.propose.outputs.committed == 'true'
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: read
+      actions: read
+    uses: ./.github/workflows/weekly-growth-settle.yml
+    with:
+      head_sha: ${{ needs.propose.outputs.head_sha }}
+      conclusion: success
 
   close-stale-pr:
     needs: collect
@@ -223,8 +254,8 @@ jobs:
           echo "no new candidates; leaving any open pull request in place"
 
   close-failure-issue:
-    needs: [collect, propose]
-    if: always() && needs.collect.outputs.dry_run == 'false' && needs.collect.result == 'success' && (needs.propose.result == 'success' || needs.propose.result == 'skipped')
+    needs: [collect, propose, checkbot, settle]
+    if: always() && needs.collect.outputs.dry_run == 'false' && needs.collect.result == 'success' && (needs.propose.result == 'success' || needs.propose.result == 'skipped') && (needs.checkbot.result == 'success' || needs.checkbot.result == 'skipped') && (needs.settle.result == 'success' || needs.settle.result == 'skipped') && needs.settle.outputs.action != 'close'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -243,8 +274,8 @@ jobs:
             });
 
   notify:
-    needs: [collect, propose]
-    if: always() && needs.collect.outputs.dry_run == 'false' && (needs.collect.result == 'failure' || needs.propose.result == 'failure')
+    needs: [collect, propose, checkbot, settle]
+    if: always() && needs.collect.outputs.dry_run == 'false' && (needs.collect.result == 'failure' || needs.propose.result == 'failure' || needs.checkbot.result == 'failure' || needs.settle.result == 'failure' || (needs.settle.result == 'success' && needs.settle.outputs.action == 'close'))
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -261,10 +292,13 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               lines: [
-                "週次更新が失敗しました。main は変更していません。",
+                "週次更新が失敗したか、settle が閉じる条件でした。PR は閉じていません。main は変更していません。",
                 "",
                 `- collect: ${{ needs.collect.result }}`,
                 `- propose: ${{ needs.propose.result }}`,
+                `- check: ${{ needs.checkbot.result }}`,
+                `- settle: ${{ needs.settle.result }}`,
+                `- action: ${{ needs.settle.outputs.action }}`,
                 `- run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
               ],
             });

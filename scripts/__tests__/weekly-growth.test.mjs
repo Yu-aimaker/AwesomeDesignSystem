@@ -16,6 +16,8 @@ import {
   isDryRun,
   isPublishPath,
   isTrustedAuthor,
+  cataloguedRepoKeys,
+  ossLicenseDecision,
   planDiscoveries,
   publishPlan,
   readJpegSize,
@@ -23,6 +25,7 @@ import {
   renderReport,
   settle,
   topicQuery,
+  weeklyChainProblems,
   workflowFindings,
 } from "../lib/growth.mjs";
 import { commitRequest, checkRunRequest } from "../lib/provenance.mjs";
@@ -274,6 +277,86 @@ test("known, rejected, and imageless candidates are not proposed again", () => {
   } });
   assert.equal(again.candidates.filter((c) => c.url === "https://github.com/acme/fresh").length, 1);
   assert.equal(again.candidates.filter((c) => c.status === "new" && c.url === "https://good.example/ds").length, 1);
+});
+
+const MIT_TEXT = [
+  "MIT License",
+  "Permission is hereby granted, free of charge, to any person obtaining a copy",
+  "of this software and associated documentation files (the \"Software\"), to deal",
+  "in the Software without restriction, including without limitation the rights",
+  "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell",
+  "copies of the Software.",
+].join("\n");
+
+function ossItem(fullName, extra = {}) {
+  return {
+    full_name: fullName,
+    html_url: `https://github.com/${fullName}`,
+    description: fullName,
+    stargazers_count: 800,
+    archived: false,
+    pushed_at: "2026-11-01T00:00:00Z",
+    ...extra,
+  };
+}
+
+test("weekly discovery keeps permissive licenses and drops the six restricted repos", () => {
+  assert.deepEqual(ossLicenseDecision({ license: { spdx_id: "MIT" } }), { admit: true, license: "MIT" });
+  assert.equal(ossLicenseDecision({ license: { spdx_id: "MPL-2.0" } }).admit, false);
+  assert.equal(ossLicenseDecision({ license: { spdx_id: "MIT OR Apache-2.0" } }).license, "MIT OR Apache-2.0");
+  assert.equal(ossLicenseDecision({ license: { spdx_id: "Apache-2.0 WITH LLVM-exception" } }).admit, false);
+  assert.equal(ossLicenseDecision({ license: { spdx_id: "NOASSERTION" }, licenseText: MIT_TEXT }).license, "MIT");
+  assert.equal(ossLicenseDecision({ license: { spdx_id: "NOASSERTION" }, licenseText: `${MIT_TEXT}\nnon-commercial` }).admit, false);
+  assert.equal(ossLicenseDecision({ license: null, licenseText: "" }).admit, false);
+
+  const blocked = [
+    ossItem("Devin-AXIS/iPolloWork", { license: { spdx_id: "NOASSERTION" }, licenseText: "non-commercial work and non-commercial evaluation" }),
+    ossItem("elastic/eui", { license: { spdx_id: "NOASSERTION" }, licenseText: "dual license under the Server Side Public License, v 1 and the Elastic License 2.0 or an Apache License 2.0 compatible license" }),
+    ossItem("isjiamu/gzh-design-skill", { license: { spdx_id: "NOASSERTION" }, licenseText: "GNU Affero General Public License" }),
+    ossItem("jihe520/MathModelAgent", { license: null, licenseText: "" }),
+    ossItem("Vincentwei1021/video-talkcraft", { license: { spdx_id: "NOASSERTION" }, licenseText: "PolyForm Noncommercial License 1.0.0. noncommercial use is free" }),
+    ossItem("zerostaticthemes/square-ui", { license: { spdx_id: "NOASSERTION" }, licenseText: "Permission is granted to use them.\n\nYou are NOT allowed to:\n\n* Redistribute, share, or publish the Components" }),
+  ];
+  const planned = planDiscoveries({
+    today: "2026-11-11",
+    previous: [],
+    curatedKeys: [],
+    cataloguedKeys: ["shadcn-ui/ui"],
+    blocklist: [],
+    flagshipUrls: [],
+    ossItems: [
+      ...blocked,
+      ossItem("shadcn-ui/ui", { license: { spdx_id: "MIT" } }),
+      ossItem("acme/fresh", { license: { spdx_id: "NOASSERTION" }, licenseText: MIT_TEXT }),
+    ],
+    guidelines: [],
+    releases: [],
+  });
+  const urls = planned.candidates.map((item) => item.url);
+  for (const item of blocked) assert.equal(urls.includes(item.html_url), false, item.full_name);
+  assert.equal(urls.includes("https://github.com/shadcn-ui/ui"), false);
+  assert.equal(urls.includes("https://github.com/acme/fresh"), true);
+  assert.equal(planned.candidates.find((item) => item.url.endsWith("acme/fresh")).signals.license, "MIT");
+  assert.equal(planned.excluded.license, blocked.length);
+  assert.ok(planned.excluded.known >= 1);
+
+  const sites = JSON.parse(readFileSync(join(repoRoot, "AwesomeDS/data/sites.json"), "utf8"));
+  const siteKeys = cataloguedRepoKeys({ siteRepos: (sites.sites ?? []).map((site) => site.repo) });
+  assert.ok(siteKeys.some((key) => key.toLowerCase() === "shadcn-ui/ui"));
+  const knowledge = readFileSync(join(repoRoot, "Knowledge/design-systems/vercel-geist.md"), "utf8");
+  const fromKnowledge = cataloguedRepoKeys({ texts: [knowledge] });
+  assert.ok(fromKnowledge.some((key) => key.toLowerCase() === "voltagent/awesome-design-md"));
+  const ranked = JSON.parse(readFileSync(join(repoRoot, "AwesomeDS/data/repos.json"), "utf8"));
+  const rankedKeys = cataloguedRepoKeys({
+    rankedRepos: (ranked.repos ?? []).map((repo) => `${repo.owner}/${repo.name}`),
+  });
+  assert.ok(rankedKeys.length > 50);
+  const source = readFileSync(join(repoRoot, "scripts/discover-candidates.mjs"), "utf8");
+  assert.match(source, /AwesomeDS\/data\/sites\.json/);
+  assert.match(source, /AwesomeDS\/data\/repos\.json/);
+  assert.match(source, /Knowledge/);
+  assert.match(source, /cataloguedRepoKeys/);
+  assert.match(source, /\/repos\/\$\{full\}\/license/);
 });
 
 test("jpeg size and ogp file rules", () => {
@@ -543,8 +626,9 @@ function trustedAuthor() {
 
 function settleInput(overrides = {}) {
   return {
-    event: "workflow_run",
-    workflow: "Check",
+    event: "schedule",
+    chained: true,
+    workflow: "Weekly growth",
     repository: "acme/ads",
     expectedRepository: "acme/ads",
     branch: "bot/weekly-growth",
@@ -578,7 +662,10 @@ test("settle reports an eligible bot pull request and does not merge it", () => 
 
 test("settle skips, fails, or closes instead of merging an unsafe pull request", () => {
   assert.deepEqual(settle(settleInput({ event: "push" })), { action: "skip", reason: "event" });
-  assert.deepEqual(settle(settleInput({ workflow: "Weekly growth" })), { action: "skip", reason: "workflow" });
+  assert.deepEqual(settle(settleInput({ event: "workflow_run" })), { action: "skip", reason: "event" });
+  assert.equal(settle(settleInput({ event: "workflow_call" })).action, "report");
+  assert.deepEqual(settle(settleInput({ chained: false })), { action: "skip", reason: "event" });
+  assert.deepEqual(settle(settleInput({ workflow: "Check" })), { action: "skip", reason: "workflow" });
   assert.deepEqual(settle(settleInput({ repository: "other/ads" })), { action: "skip", reason: "repository" });
   assert.deepEqual(settle(settleInput({ branch: "main", headSha: "" })), { action: "skip", reason: "branch" });
   assert.deepEqual(settle(settleInput({ branch: "feature/data" })), { action: "skip", reason: "branch" });
@@ -627,11 +714,11 @@ test("monday schedule proposes for real and settle only reports the bot pull req
   assert.ok(weekly.indexOf("rm -rf growth-artifact") < weekly.indexOf("check-publish-paths.mjs"));
   assert.match(weekly, /setup-git-identity\.sh/);
   assert.doesNotMatch(weekly, /--force/);
+  assert.doesNotMatch(weekly, /gh workflow run/);
   assert.doesNotMatch(weekly, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.deepEqual(workflowFindings(weekly), []);
-  assert.match(settleYml, /workflows:\s*\["Check"\]/);
-  assert.match(settleYml, /head_branch != 'bot\/weekly-growth'/);
-  assert.match(settleYml, /run: exit 0/);
+  assert.match(settleYml, /^on:\n {2}workflow_call:/m);
+  assert.match(settleYml, /CHAINED: "true"/);
   assert.match(settleYml, /weekly-growth-settle\.mjs/);
   assert.match(settleYml, /action == 'report'/);
   assert.match(settleYml, /close: not run/);
@@ -642,6 +729,9 @@ test("monday schedule proposes for real and settle only reports the bot pull req
   assert.equal(settleYml.includes("HEAD:main"), false);
   assert.doesNotMatch(settleYml, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
   assert.deepEqual(workflowFindings(settleYml), []);
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  assert.deepEqual(weeklyChainProblems({ weekly, settle: settleYml, check: checkYml }), []);
+  assert.doesNotMatch(settleYml, /workflow_run/);
 
   const dir = mkdtempSync(join(tmpdir(), "ads-settle-"));
   try {
@@ -654,8 +744,9 @@ test("monday schedule proposes for real and settle only reports the bot pull req
     writeFileSync(pr, JSON.stringify([{ number: 30, headRefOid: HEAD_SHA }]));
     const settleEnv = {
       ...process.env,
-      EVENT_NAME: "workflow_run",
-      WORKFLOW_NAME: "Check",
+      EVENT_NAME: "schedule",
+      CHAINED: "true",
+      WORKFLOW_NAME: "Weekly growth",
       SOURCE_REPOSITORY: "acme/ads",
       EXPECTED_REPOSITORY: "acme/ads",
       HEAD_BRANCH: "bot/weekly-growth",
@@ -736,6 +827,7 @@ test("dry-run and a partial discovery do not mutate the remote", () => {
     reason: "discovery-unavailable",
   });
   assert.equal(discoveryStatus({ searches: 5, searchFailures: 1, releaseFailures: 0 }).reason, "discovery-partial");
+  assert.equal(discoveryStatus({ searches: 5, searchFailures: 0, releaseFailures: 0, licenseFailures: 1 }).reason, "discovery-partial");
   assert.equal(discoveryStatus({ searches: 5, searchFailures: 0, releaseFailures: 0 }).failed, false);
   assert.equal(publishPlan({ actor: "", remoteExists: false, fastForward: true }).reason, "actor");
   assert.equal(publishPlan({
@@ -762,15 +854,21 @@ test("every workflow job has a short timeout and Check reads contents", () => {
   for (const file of ["check.yml", "weekly-growth.yml", "weekly-growth-settle.yml"]) {
     const yml = readFileSync(join(repoRoot, ".github/workflows", file), "utf8");
     const blocks = jobBlocks(yml);
-    assert.ok(blocks.length >= 2, file);
-    for (const block of blocks) assert.match(block, /\n {4}timeout-minutes:\s*(?:[1-9]|[12][0-9]|30)\n/);
+    assert.ok(blocks.length >= (file === "weekly-growth-settle.yml" ? 1 : 2), file);
+    for (const block of blocks) {
+      if (/\n {4}uses: \.\/\.github\/workflows\//.test(block)) {
+        assert.doesNotMatch(block, /timeout-minutes:/);
+        continue;
+      }
+      assert.match(block, /\n {4}timeout-minutes:\s*(?:[1-9]|[12][0-9]|30)\n/);
+    }
   }
   const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
   assert.match(checkYml, /^permissions:\n {2}contents: read\n/m);
   assert.doesNotMatch(checkYml, /actions: write/);
   assert.match(checkYml, /pnpm\/action-setup@[0-9a-f]{40}/);
   const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
-  assert.match(weekly, /actions: write/);
+  assert.doesNotMatch(weekly, /actions: write/);
   const publish = readFileSync(join(repoRoot, "scripts/publish-bot-branch.mjs"), "utf8");
   assert.match(publish, /publishSignedCommit/);
   assert.doesNotMatch(publish, /git push/);
@@ -787,6 +885,10 @@ test("every action reference is pinned to a commit SHA", () => {
       const match = line.match(/\buses:\s*(\S+)/);
       if (!match) continue;
       refs.push(match[1]);
+      if (match[1].startsWith("./.github/workflows/")) {
+        assert.match(match[1], /^\.\/\.github\/workflows\/[a-z0-9.-]+\.yml$/, `${name} ${match[1]}`);
+        continue;
+      }
       assert.match(match[1], /^[^@\s]+@[0-9a-f]{40}$/, `${name} ${match[1]}`);
     }
   }
@@ -984,7 +1086,9 @@ else process.exit(1);
       "knowledge: week",
     ], { cwd, env, encoding: "utf8" });
     assert.match(published, /ready created/);
-    assert.match(readFileSync(outputPath, "utf8"), /committed=true/);
+    const recordedOutput = readFileSync(outputPath, "utf8");
+    assert.match(recordedOutput, /committed=true/);
+    assert.match(recordedOutput, new RegExp(`head_sha=${"3".repeat(40)}`));
     const calls = ghCalls(logPath);
     const find = (method, suffix) => calls.find((entry) => callMethod(entry) === method && callPath(entry).endsWith(suffix));
     const blob = find("POST", "/git/blobs");

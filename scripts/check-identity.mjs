@@ -13,7 +13,7 @@
 // weekly-growth-receipt, that run's external_id is a run of this
 // repository's weekly-growth.yml, and the author email ends with
 // @users.noreply.github.com.
-// workflow_dispatch: origin/main..HEAD. An empty range is success.
+// workflow_dispatch and workflow_call: origin/main..HEAD. An empty range is success.
 // A shallow repository fails closed until it is unshallowed, even when both
 // ends of the range exist. Missing objects or an unreadable fork head fail closed.
 import { execFileSync } from "node:child_process";
@@ -55,7 +55,7 @@ export function intendedRange(env) {
       allowPlatformMerge: env.PUSH_REF === "refs/heads/main",
     };
   }
-  if (event === "workflow_dispatch") return { base: "origin/main", head: "HEAD" };
+  if (event === "workflow_dispatch" || event === "workflow_call") return { base: "origin/main", head: "HEAD" };
   return { error: "missing base" };
 }
 
