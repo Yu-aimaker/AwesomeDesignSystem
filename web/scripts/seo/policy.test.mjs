@@ -8,7 +8,15 @@ import { loadEntries, parseAppRoutes } from "./collect.mjs";
 import { CSP, renderHeaders } from "./headers.mjs";
 import { hygieneProblems, publishText } from "./hygiene.mjs";
 import { mdToHtml } from "./markdown.mjs";
-import { componentsBlock, foundationBlock, sitesBlock } from "./route-content.mjs";
+import { contentStats, routeExtra } from "./route-content.mjs";
+import { homeMessages } from "../../src/i18n/messages/home.ts";
+import { reportMessages } from "../../src/i18n/messages/report.ts";
+import { slidesMessages } from "../../src/i18n/messages/slides.ts";
+import { antiSlopMessages } from "../../src/i18n/messages/antiSlop.ts";
+import { aboutMessages } from "../../src/i18n/messages/about.ts";
+import { characterMessages } from "../../src/i18n/messages/character.ts";
+import { flagshipSystems } from "../../src/lib/design-systems.ts";
+import { mascotName } from "../../src/mascot/name.ts";
 import { SEARCH, TRAINING, parseGroups, renderRobots, rootRules, starDisallowsAll } from "./robots.mjs";
 import { contentLanguage, documentTitle, publishedLocales } from "../../src/seo/titles.mjs";
 
@@ -201,8 +209,53 @@ test("export drops status urls and the artifact check catches leaks", () => {
   assert.deepEqual(hygieneProblems("name@example.com", "note"), []);
 });
 
-test("no-js fragments include sites, components, and color guidance", () => {
-  assert.match(sitesBlock(repoRoot), /shadcn\/ui/);
-  assert.match(componentsBlock(webRoot), /Button \(button\)/);
-  assert.match(foundationBlock(repoRoot, "/foundations/color"), /Neutrals are true gray/);
+function catalogs(locale) {
+  return {
+    home: homeMessages[locale],
+    report: reportMessages[locale],
+    slides: slidesMessages[locale],
+    antiSlop: antiSlopMessages[locale],
+    about: aboutMessages[locale],
+    character: characterMessages[locale],
+    name: mascotName[locale],
+  };
+}
+
+test("every public route renders its own catalog, not the shared boilerplate", () => {
+  const source = readFileSync(join(webRoot, "src", "App.tsx"), "utf8");
+  const { pages } = parseAppRoutes(source);
+  const entries = loadEntries(repoRoot);
+  for (const locale of ["ja", "en"]) {
+    for (const path of pages) {
+      const html = routeExtra({
+        repo: repoRoot,
+        webRoot,
+        locale,
+        path,
+        entries,
+        messages: catalogs(locale),
+        systems: flagshipSystems,
+      });
+      const stats = contentStats(`<html>${html}</html>`);
+      assert.ok(stats, `${locale} ${path} is boilerplate`);
+      assert.ok(stats.items >= 3 || stats.chars >= 80, `${locale} ${path} has ${stats.items} entries`);
+    }
+  }
+});
+
+test("home export includes every string field, including fields added later", () => {
+  const html = routeExtra({
+    repo: repoRoot,
+    webRoot,
+    locale: "ja",
+    path: "/",
+    entries: [],
+    messages: {
+      ...catalogs("ja"),
+      home: { ...homeMessages.ja, purpose: "Modern Web Guidance より広く、深く、新しい作法を持つ。" },
+    },
+    systems: flagshipSystems,
+  });
+  assert.match(html, /白地、黒文字、アクセント 1 色。AI が書く UI の既定値。/);
+  assert.match(html, /Modern Web Guidance より広く、深く、新しい作法を持つ。/);
 });

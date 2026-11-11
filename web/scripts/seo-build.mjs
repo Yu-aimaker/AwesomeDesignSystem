@@ -7,7 +7,14 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { aboutMessages } from "../src/i18n/messages/about.ts";
+import { antiSlopMessages } from "../src/i18n/messages/antiSlop.ts";
+import { characterMessages } from "../src/i18n/messages/character.ts";
 import { homeMessages } from "../src/i18n/messages/home.ts";
+import { reportMessages } from "../src/i18n/messages/report.ts";
+import { slidesMessages } from "../src/i18n/messages/slides.ts";
+import { flagshipSystems } from "../src/lib/design-systems.ts";
+import { mascotName } from "../src/mascot/name.ts";
 import { OG_IMAGE, ORIGIN, ogAlt, pages } from "../src/seo/pages.ts";
 import { excerpt } from "../src/seo/excerpt.ts";
 import { absoluteUrl, buildJsonLd } from "../src/seo/structured.ts";
@@ -16,9 +23,8 @@ import { productionIndexProblems } from "./seo/check.mjs";
 import { loadEntries, parseAppRoutes } from "./seo/collect.mjs";
 import { publishText } from "./seo/hygiene.mjs";
 import { bootstrapScriptHashes, renderHeaders } from "./seo/headers.mjs";
-import { mdToHtml } from "./seo/markdown.mjs";
 import { renderRobots } from "./seo/robots.mjs";
-import { componentsBlock, foundationBlock, homeBlock, routeContentProblems, sitesBlock } from "./seo/route-content.mjs";
+import { routeContentProblems, routeExtra } from "./seo/route-content.mjs";
 
 const LOCALES = ["ja", "en"];
 const PLUGIN = "https://github.com/Yu-aimaker/AwesomeDesignSystem/tree/main/Plugin/awesome-ds";
@@ -112,24 +118,32 @@ function renderPage(template, page) {
   return html;
 }
 
+function catalogsFor(locale) {
+  return {
+    home: homeMessages[locale],
+    report: reportMessages[locale],
+    slides: slidesMessages[locale],
+    antiSlop: antiSlopMessages[locale],
+    about: aboutMessages[locale],
+    character: characterMessages[locale],
+    name: mascotName[locale],
+  };
+}
+
 function pageBody(repo, webRoot, locale, path, copy, entry, entries) {
   const nav = Object.keys(pages)
     .map((key) => `<li><a href="${relHref(locale, key)}">${esc(pages[key][locale].title)}</a></li>`)
     .join("");
-  let extra = "";
-  if (entry) extra = `<article lang="${contentLanguage(entry.body)}">${mdToHtml(publishText(entry.body))}</article>`;
-  else if (path === "/") extra = homeBlock(homeMessages[locale]);
-  else if (path === "/sites") extra = sitesBlock(repo);
-  else if (path === "/components") extra = componentsBlock(webRoot);
-  else if (path === "/foundations" || path.startsWith("/foundations/")) extra = foundationBlock(repo, path);
-  else if (path === "/knowledge") {
-    const items = entries
-      .slice()
-      .sort((a, b) => a.title.localeCompare(b.title, "ja"))
-      .map((item) => `<li><a href="${relHref(locale, `/knowledge/${item.category}/${item.slug}`)}">${esc(item.title)}</a></li>`)
-      .join("");
-    extra = `<ul>${items}</ul>`;
-  }
+  const extra = routeExtra({
+    repo,
+    webRoot,
+    locale,
+    path,
+    entry,
+    entries,
+    messages: catalogsFor(locale),
+    systems: flagshipSystems,
+  });
   const plugin =
     locale === "ja"
       ? `<p><a href="${PLUGIN}">awesome-ds プラグイン</a></p>`
@@ -325,7 +339,7 @@ export function buildSeo(webRoot) {
     .join("\n");
   writeFileSync(join(dist, "_redirects"), `${redirects}\n`);
 
-  const problems = [...routeContentProblems(dist), ...productionIndexProblems(dist, routeFiles)];
+  const problems = [...routeContentProblems(dist, staticPaths), ...productionIndexProblems(dist, routeFiles)];
   if (problems.length) {
     console.error(problems.map((line) => `seo: ${line}`).join("\n"));
     process.exit(1);
