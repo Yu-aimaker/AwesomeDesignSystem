@@ -112,8 +112,8 @@ export function isPlatformMerge(commit, parentCommits = [], proof) {
   if (proof.commit.sha !== commit?.sha) return false;
   if (parentCount(commit) < 2 || proof.commit.parents.length !== parentCount(commit)) return false;
   if (!Array.isArray(parentCommits) || parentCommits.length < 2) return false;
+  // Parents may themselves be merges. Only an immediate non-merge parent needs noreply.
   const nonMerge = parentCommits.filter((parent) => parentCount(parent) < 2);
-  if (!nonMerge.length) return false;
   return nonMerge.every((parent) => passesNoreply(parent));
 }
 

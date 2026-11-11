@@ -523,3 +523,86 @@ test("push to main allows only a platform merge commit", () => {
     rmSync(cwd, { recursive: true, force: true });
   }
 });
+
+test("a verified merge is allowed when both parents are merges", () => {
+  const cwd = emptyRepo();
+  try {
+    git(cwd, ["commit", "--allow-empty", "-m", "root"], identityEnv());
+    git(cwd, ["checkout", "-b", "left-side"]);
+    git(cwd, ["commit", "--allow-empty", "-m", "left side"], identityEnv());
+    git(cwd, ["checkout", "-b", "left-tip"]);
+    git(cwd, ["commit", "--allow-empty", "-m", "left tip"], identityEnv());
+    git(cwd, ["checkout", "left-side"]);
+    git(cwd, ["merge", "--no-ff", "left-tip", "-m", "merge left"], identityEnv());
+    git(cwd, ["checkout", "main"]);
+    git(cwd, ["checkout", "-b", "right-side"]);
+    git(cwd, ["commit", "--allow-empty", "-m", "right side"], identityEnv());
+    git(cwd, ["checkout", "-b", "right-tip"]);
+    git(cwd, ["commit", "--allow-empty", "-m", "right tip"], identityEnv());
+    git(cwd, ["checkout", "right-side"]);
+    git(cwd, ["merge", "--no-ff", "right-tip", "-m", "merge right"], identityEnv());
+    git(cwd, ["checkout", "main"]);
+    git(cwd, ["merge", "--no-ff", "left-side", "-m", "merge left into main"], identityEnv());
+    const before = git(cwd, ["rev-parse", "HEAD"]).trim();
+    const web = identityEnv();
+    web.GIT_COMMITTER_NAME = "GitHub";
+    web.GIT_COMMITTER_EMAIL = "noreply@github.com";
+    git(cwd, ["merge", "--no-ff", "right-side", "-m", "Merge pull request #12 from weekly"], web);
+    const head = git(cwd, ["rev-parse", "HEAD"]).trim();
+    const parents = git(cwd, ["rev-parse", "HEAD^1", "HEAD^2"]).trim().split("\n");
+    assert.equal(parents.length, 2);
+    for (const parent of parents) {
+      const fields = git(cwd, ["rev-list", "--parents", "-1", parent]).trim().split(" ");
+      assert.equal(fields.length, 3);
+    }
+    const offline = { ...process.env };
+    delete offline.GH_TOKEN;
+    delete offline.GITHUB_TOKEN;
+    delete offline.PROVENANCE_FIXTURE;
+    const missing = runCheck(cwd, [], {
+      ...offline,
+      EVENT_NAME: "push",
+      BEFORE_SHA: before,
+      PUSH_SHA: head,
+      PUSH_REF: "refs/heads/main",
+    });
+    assert.equal(missing.code, 1);
+    assert.match(missing.stderr, new RegExp(`${head} committer`));
+    const fixture = join(cwd, "provenance.json");
+    writeFileSync(fixture, JSON.stringify({
+      repo: "acme/ads",
+      commits: {
+        [head]: {
+          sha: head,
+          commit: { verification: { verified: true }, message: "Merge pull request #12" },
+          committer: { login: "web-flow" },
+          parents: parents.map((sha) => ({ sha })),
+        },
+      },
+      pulls: {
+        [head]: [{ merge_commit_sha: head, base: { ref: "main" }, merged_at: "2026-11-11T00:00:00Z" }],
+      },
+    }));
+    const allowed = runCheck(cwd, [], {
+      ...offline,
+      PROVENANCE_FIXTURE: fixture,
+      GITHUB_REPOSITORY: "acme/ads",
+      EVENT_NAME: "push",
+      BEFORE_SHA: before,
+      PUSH_SHA: head,
+      PUSH_REF: "refs/heads/main",
+    });
+    assert.equal(allowed.code, 0, allowed.stderr);
+    const asPr = runCheck(cwd, [], {
+      ...offline,
+      PROVENANCE_FIXTURE: fixture,
+      GITHUB_REPOSITORY: "acme/ads",
+      EVENT_NAME: "pull_request",
+      BASE_SHA: before,
+      HEAD_SHA: head,
+    });
+    assert.equal(asPr.code, 1);
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
+});
