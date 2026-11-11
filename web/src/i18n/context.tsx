@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, type ReactNode } from "react";
 import { useLocation } from "react-router";
+import { findEntry } from "../lib/knowledge";
+import { publishedLocales } from "../seo/titles.mjs";
 import { localeFromPath, localeMeta, localizePath, locales, stripLocale, type Locale, type Localized } from "./locales";
 
 interface LocaleValue {
@@ -32,17 +34,21 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   );
 }
 
-/** `<link rel="alternate" hreflang>` for every locale. React 19 hoists these into <head>. */
+/** `<link rel="alternate" hreflang>` for languages that exist. React 19 hoists these into <head>. */
 function LocaleAlternates({ path }: { path: string }) {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   const origin = typeof window === "undefined" ? "" : window.location.origin;
+  const match = /^\/knowledge\/([^/]+)\/([^/]+)$/.exec(path);
+  const entry = match ? findEntry(match[1], match[2]) : undefined;
+  const langs = entry ? publishedLocales("knowledge", entry.body) : locales;
   const href = (l: Locale) => `${origin}${base}${localizePath(path, l)}`;
+  const xDefault = langs.includes("ja") ? "ja" : langs[0];
   return (
     <>
-      {locales.map((l) => (
+      {langs.map((l) => (
         <link key={l} rel="alternate" hrefLang={localeMeta[l].tag} href={href(l)} />
       ))}
-      <link rel="alternate" hrefLang="x-default" href={href("ja")} />
+      <link rel="alternate" hrefLang="x-default" href={href(xDefault)} />
     </>
   );
 }

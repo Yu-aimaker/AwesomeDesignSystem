@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "node:url";
+import { sanitizeKnowledgeRaw } from "./scripts/seo/sanitize-raw.mjs";
 
 const repoRoot = fileURLToPath(new URL("..", import.meta.url));
 
@@ -12,7 +13,7 @@ const productionBase = process.env.SITE_BASE ?? "/";
 
 export default defineConfig(({ command, isPreview }) => ({
   base: command === "build" || isPreview ? productionBase : "/",
-  plugins: [react(), tailwindcss()],
+  plugins: [sanitizeKnowledgeRaw(), react(), tailwindcss()],
   server: {
     fs: { allow: [repoRoot] },
   },

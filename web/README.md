@@ -49,8 +49,8 @@ Node 22 and pnpm 10.
 
 本番は Cloudflare Workers Static Assets です。URL は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントします。workers.dev は https://awesomeds.yumaker.workers.dev です。
 
-- Cloudflare: `wrangler.jsonc` はアセットだけです（`main` なし）。`routes` は Worker Route `awesomeds.yumaker.studio/*`（zone `yumaker.studio`）で、`custom_domain` は使いません。`public/_headers` が noindex と HSTS を付け、`/assets/*` は長期キャッシュです。`.assetsignore` は `.nojekyll` をアップロードから外します。
-- Vercel（戻し用）: Root Directory は `web`。`vercel.json` がビルド設定、SPA の書き換え、`X-Robots-Tag: noindex` を持ちます。
+- Cloudflare: `wrangler.jsonc` はアセットだけです（`main` なし）。`routes` は Worker Route `awesomeds.yumaker.studio/*`（zone `yumaker.studio`）で、`custom_domain` は使いません。`public/_headers` が HSTS とセキュリティヘッダを付け、`/assets/*` は長期キャッシュです。本番 HTML は検索対象です。`.assetsignore` は `.nojekyll` をアップロードから外します。
+- Vercel（戻し用）: Root Directory は `web`。`vercel.json` がビルド設定、SPA の書き換え、非本番向けの `X-Robots-Tag: noindex` を持ちます。
 - `base` の既定は `/` です。別のパスで配信するときだけ `SITE_BASE=/path/ pnpm build` を使います。
 
-Production is Cloudflare Workers Static Assets at https://awesomeds.yumaker.studio . Workers Builds comments a preview URL on the PR. workers.dev is https://awesomeds.yumaker.workers.dev . The Vercel project stays for rollback. `wrangler.jsonc` is assets only (no Worker script) and sets the Worker Route `awesomeds.yumaker.studio/*` on zone `yumaker.studio` (not a custom domain). `vercel.json` still configures the Vercel project. `public/_headers` sets noindex and HSTS.
+Production is Cloudflare Workers Static Assets at https://awesomeds.yumaker.studio and is indexable. Workers Builds comments a preview URL on the PR. The preview Worker adds `X-Robots-Tag: noindex`. workers.dev is https://awesomeds.yumaker.workers.dev . The Vercel project stays for rollback and stays noindex. `wrangler.jsonc` is assets only (no Worker script) and sets the Worker Route `awesomeds.yumaker.studio/*` on zone `yumaker.studio` (not a custom domain). `vercel.json` still configures the Vercel project. `public/_headers` sets HSTS and the security headers.

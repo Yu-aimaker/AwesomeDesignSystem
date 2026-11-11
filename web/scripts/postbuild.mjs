@@ -5,9 +5,11 @@
 import { copyFileSync, existsSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildSeo } from "./seo-build.mjs";
 
 const webRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = resolve(webRoot, "dist");
+buildSeo(webRoot);
 copyFileSync(resolve(dist, "index.html"), resolve(dist, "404.html"));
 writeFileSync(resolve(dist, ".nojekyll"), "");
 // Wrangler reads .assetsignore from the assets directory (dist), not the project root.

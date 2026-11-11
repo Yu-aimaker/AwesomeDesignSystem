@@ -5,8 +5,10 @@ import { checkSamples, parseOrigins } from "./hosting-smoke.mjs";
 function headers(extra = {}) {
   return {
     "content-type": "text/html; charset=utf-8",
-    "x-robots-tag": "noindex, nofollow",
     "strict-transport-security": "max-age=63072000",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "content-security-policy": "default-src 'self'",
     server: "Vercel",
     ...extra,
   };
@@ -37,17 +39,18 @@ test("header names and directive order do not matter", () => {
     "/": {
       headers: {
         "Content-Type": "text/html; charset=utf-8",
-        "X-Robots-Tag": "nofollow, noindex",
         "Strict-Transport-Security": "max-age=63072000",
+        "X-Content-Type-Options": "nosniff",
+        "Referrer-Policy": "strict-origin-when-cross-origin",
       },
     },
   });
   assert.deepEqual(checkSamples([host]), []);
 });
 
-test("missing noindex fails", () => {
+test("noindex fails", () => {
   const host = sample("https://prod.example", {
-    "/": { headers: { "x-robots-tag": "nofollow" } },
+    "/": { headers: { "x-robots-tag": "noindex, nofollow" } },
   });
   const problems = checkSamples([host]);
   assert.equal(problems.length, 1);
