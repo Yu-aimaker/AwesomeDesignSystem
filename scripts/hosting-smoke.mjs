@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 // Compare hosting responses for the AwesomeDS static site.
 // One or more origin URLs. Each must serve:
-//   GET /                 200, text/html, X-Robots-Tag noindex+nofollow, HSTS max-age=63072000
-//   GET /foo/bar?x=1      200, text/html (SPA fallback; same robots and HSTS)
-//   GET /og-image.png     200, image/png (same robots and HSTS)
+//   GET /                 200, text/html, no X-Robots-Tag noindex, HSTS max-age=63072000,
+//                         nosniff, Referrer-Policy, Content-Security-Policy
+//   GET /foo/bar?x=1      200, text/html (SPA fallback; same headers)
+//   GET /og-image.png     200, image/png (same headers)
+// Preview hosts are a different contract: scripts/preview-headers.mjs still requires noindex.
 // With two or more URLs, status and those headers are also compared to the first URL.
 // `server` and cache headers may differ between Vercel and Cloudflare and are not failures.
 //
@@ -40,9 +42,10 @@ export function normalizeHeaders(headers) {
   return out;
 }
 
-function robotsOk(value) {
+function robotsIndexable(value) {
+  if (value == null || String(value).trim() === "") return true;
   const tokens = new Set(directives(value, ","));
-  return tokens.has("noindex") && tokens.has("nofollow");
+  return !tokens.has("noindex") && !tokens.has("nofollow");
 }
 
 function hstsOk(value) {
@@ -69,10 +72,23 @@ function probeProblems(label, path, probe) {
     const why = path === "/og-image.png" ? "og-image" : path === "/" ? "document" : "SPA fallback";
     problems.push(`${label} ${path}: ${why} content-type ${type || "(missing)"}, want ${wantType}`);
   }
-  if (!robotsOk(headers["x-robots-tag"])) {
+  if (!robotsIndexable(headers["x-robots-tag"])) {
     problems.push(
-      `${label} ${path}: x-robots-tag ${JSON.stringify(headers["x-robots-tag"] ?? null)}, want noindex, nofollow`,
+      `${label} ${path}: x-robots-tag ${JSON.stringify(headers["x-robots-tag"] ?? null)} blocks indexing`,
     );
+  }
+  if ((headers["x-content-type-options"] || "").toLowerCase() !== "nosniff") {
+    problems.push(
+      `${label} ${path}: x-content-type-options ${JSON.stringify(headers["x-content-type-options"] ?? null)}, want nosniff`,
+    );
+  }
+  if ((headers["referrer-policy"] || "").toLowerCase() !== "strict-origin-when-cross-origin") {
+    problems.push(
+      `${label} ${path}: referrer-policy ${JSON.stringify(headers["referrer-policy"] ?? null)}, want strict-origin-when-cross-origin`,
+    );
+  }
+  if (!headers["content-security-policy"]) {
+    problems.push(`${label} ${path}: content-security-policy missing`);
   }
   if (!hstsOk(headers["strict-transport-security"])) {
     problems.push(

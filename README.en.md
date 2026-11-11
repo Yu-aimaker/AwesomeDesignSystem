@@ -133,7 +133,7 @@ docs/                 Weekly data updates, generator specs, i18n. Index: docs/RE
 
 ## Hosting
 
-The demo site is served by Cloudflare Workers Static Assets, with noindex. Production is https://awesomeds.yumaker.studio . Workers Builds comments a preview URL on each pull request. workers.dev is https://awesomeds.yumaker.workers.dev . To check headers and responses, run `node scripts/hosting-smoke.mjs <url>`.
+The demo site is served by Cloudflare Workers Static Assets and is indexable. Production is https://awesomeds.yumaker.studio . Workers Builds comments a preview URL on each pull request, and the preview Worker sends noindex. workers.dev is https://awesomeds.yumaker.workers.dev . To check headers and responses, run `node scripts/hosting-smoke.mjs <url>`.
 
 ## Four causes of AI-looking output, and what stops each
 
