@@ -30,8 +30,8 @@ jobs:
       action: ${{ steps.plan.outputs.action }}
       dry_run: ${{ steps.mode.outputs.dry_run }}
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
 
@@ -108,7 +108,7 @@ jobs:
 
       - name: Upload the run
         if: always() && hashFiles('growth-payload.tgz') != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: weekly-growth
           path: |
@@ -128,15 +128,15 @@ jobs:
       issues: write
       actions: write
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           ref: main
           fetch-depth: 0
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: weekly-growth
           path: growth-artifact
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
 
@@ -164,6 +164,7 @@ jobs:
           GROWTH_ACTOR: ${{ github.actor }}
           GROWTH_STATE: weekly-growth
           GH_TOKEN: ${{ github.token }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
         run: |
           bash scripts/setup-git-identity.sh
           node scripts/append-knowledge.mjs --discover .growth/discover.json
@@ -205,7 +206,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
       - name: Leave an open bot pull request in place
@@ -229,8 +230,8 @@ jobs:
       contents: read
       issues: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/github-script@v7
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const { closeFailureIssues } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/lib/failure-issue.mjs`);
@@ -249,8 +250,8 @@ jobs:
       contents: read
       issues: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/github-script@v7
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
         with:
           script: |
             const { reportFailure } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/lib/failure-issue.mjs`);

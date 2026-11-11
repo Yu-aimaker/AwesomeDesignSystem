@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
@@ -23,9 +23,9 @@ import {
   renderReport,
   settle,
   topicQuery,
-  trustFromGithub,
   workflowFindings,
 } from "../lib/growth.mjs";
+import { commitRequest } from "../lib/provenance.mjs";
 import { BOT_ACTOR, CANONICAL_NAME, GROWTH_STATE, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -304,18 +304,38 @@ test("workflows must not push main or call billed agents", () => {
     committerEmail: BOT_EMAIL,
     actor: "anyone",
     state: GROWTH_STATE,
-    login: BOT_ACTOR,
+    provenance: { verified: true, webFlow: true, runMatches: true },
   };
   assert.equal(isTrustedAuthor(trusted), true);
-  assert.equal(isTrustedAuthor({ ...trusted, login: undefined, association: "OWNER" }), true);
-  assert.equal(isTrustedAuthor({ ...trusted, login: undefined, association: "CONTRIBUTOR" }), false);
-  assert.equal(isTrustedAuthor({ ...trusted, login: undefined }), false);
-  assert.deepEqual(trustFromGithub({ login: BOT_ACTOR }), { login: BOT_ACTOR });
-  assert.deepEqual(trustFromGithub({ login: "Yu-aimaker", permission: "admin" }), { login: "Yu-aimaker", association: "OWNER" });
-  assert.deepEqual(trustFromGithub({ login: "Yu-aimaker", owner: "Yu-aimaker" }), { login: "Yu-aimaker", association: "OWNER" });
-  assert.deepEqual(trustFromGithub({ login: "person", association: "MEMBER" }), { login: "person", association: "MEMBER" });
-  assert.deepEqual(trustFromGithub({ login: "person", permission: "maintain" }), { login: "person", association: "MEMBER" });
-  assert.deepEqual(trustFromGithub({ login: "person", permission: "read", association: "CONTRIBUTOR", owner: "Yu-aimaker" }), {});
+  const unsignedOwner = {
+    name: CANONICAL_NAME,
+    email: BOT_EMAIL,
+    committerName: CANONICAL_NAME,
+    committerEmail: BOT_EMAIL,
+  };
+  assert.equal(isTrustedAuthor(unsignedOwner), false);
+  assert.equal(isTrustedAuthor({ provenance: { verified: true, webFlow: true, runMatches: false } }), false);
+  assert.equal(isTrustedAuthor({ provenance: { error: true, verified: true, webFlow: true, runMatches: true } }), false);
+  assert.equal(publishPlan({
+    actor: BOT_ACTOR,
+    remoteExists: true,
+    fastForward: true,
+    commits: [unsignedOwner],
+  }).reason, "unverified");
+  assert.equal(publishPlan({
+    actor: BOT_ACTOR,
+    remoteExists: true,
+    fastForward: true,
+    commits: [{ provenance: { error: true } }],
+  }).reason, "provenance-unavailable");
+  const signed = commitRequest({
+    message: "knowledge",
+    tree: "a".repeat(40),
+    parents: ["b".repeat(40)],
+    runId: "42",
+  });
+  assert.deepEqual(Object.keys(signed).sort(), ["message", "parents", "tree"]);
+  assert.equal(isTrustedAuthor(trusted), true);
   assert.deepEqual(foreignAuthors([trusted, "human@example.com"]), ["human@example.com"]);
   assert.ok(workflowFindings("runs-on: ubuntu-latest\nrun: git push --force origin HEAD\n").includes("force-push"));
   assert.ok(workflowFindings("runs-on: ubuntu-latest\n").includes("larger-runner"));
@@ -514,7 +534,7 @@ function trustedAuthor() {
     email: BOT_EMAIL,
     committerName: CANONICAL_NAME,
     committerEmail: BOT_EMAIL,
-    login: BOT_ACTOR,
+    provenance: { verified: true, webFlow: true, runMatches: true },
   };
 }
 
@@ -574,6 +594,9 @@ test("settle skips, fails, or closes instead of merging an unsafe pull request",
     assert.deepEqual(settle(settleInput({ conclusion })), { action: "skip", reason: "check-retryable" });
   }
   assert.deepEqual(settle(settleInput({ authors: [] })), { action: "close", reason: "author" });
+  assert.deepEqual(settle(settleInput({
+    authors: [{ name: CANONICAL_NAME, email: BOT_EMAIL, committerName: CANONICAL_NAME, committerEmail: BOT_EMAIL }],
+  })), { action: "close", reason: "author" });
   const leaked = settle(settleInput({ authors: [BOT_EMAIL, "human@example.com"] }));
   assert.equal(leaked.action, "close");
   assert.equal(leaked.reason, "author");
@@ -745,6 +768,26 @@ test("every workflow job has a short timeout and Check reads contents", () => {
   assert.match(checkYml, /pnpm\/action-setup@[0-9a-f]{40}/);
   const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
   assert.match(weekly, /actions: write/);
+  const publish = readFileSync(join(repoRoot, "scripts/publish-bot-branch.mjs"), "utf8");
+  assert.match(publish, /publishSignedCommit/);
+  assert.doesNotMatch(publish, /git push/);
+});
+
+test("every action reference is pinned to a commit SHA", () => {
+  const dir = join(repoRoot, ".github/workflows");
+  const files = readdirSync(dir).filter((name) => name.endsWith(".yml"));
+  assert.ok(files.length >= 3);
+  const refs = [];
+  for (const name of files) {
+    for (const line of readFileSync(join(dir, name), "utf8").split("\n")) {
+      if (line.trim().startsWith("#")) continue;
+      const match = line.match(/\buses:\s*(\S+)/);
+      if (!match) continue;
+      refs.push(match[1]);
+      assert.match(match[1], /^[^@\s]+@[0-9a-f]{40}$/, `${name} ${match[1]}`);
+    }
+  }
+  assert.ok(refs.length >= 20);
 });
 
 test("a Knowledge proposal passes bot Check and still fails the collection data guard", () => {

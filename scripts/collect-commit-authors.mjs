@@ -30,8 +30,7 @@ try {
 const authors = raw.split("\x1e").map((chunk) => chunk.trim()).filter(Boolean).map((chunk) => {
   const [sha, authorName, authorEmail, committerName, committerEmail, body] = chunk.split("\x1f");
   const record = authorFromLog({ authorName, authorEmail, committerName, committerEmail, body });
-  const trust = lookupCommitTrust(sha);
-  return { ...record, login: trust.login, association: trust.association };
+  return { ...record, provenance: lookupCommitTrust(sha) };
 });
 writeFileSync(out, JSON.stringify(authors));
 console.log(`collect-commit-authors: ${authors.length}`);

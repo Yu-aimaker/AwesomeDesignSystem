@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-// Fast-forward bot/weekly-growth, or skip when the branch diverged or a person edited it.
-// Never force-pushes. Author and committer are the canonical noreply identity.
+// Fast-forward bot/weekly-growth through the Git data API.
+// GitHub signs that commit. A local git commit is never pushed.
 import { appendFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-import { prepareBotBranch, commitAsCanonical, pushFastForward } from "./lib/bot-branch.mjs";
+import { prepareBotBranch } from "./lib/bot-branch.mjs";
+import { publishSignedCommit } from "./lib/github-commit.mjs";
 import { authorFromLog, publishPlan } from "./lib/growth.mjs";
 import { lookupCommitTrust } from "./lib/github-trust.mjs";
 import { GROWTH_STATE } from "./lib/identity.mjs";
@@ -43,16 +44,14 @@ try {
 } catch {
   remoteOk = false;
 }
-// Only commits already on the remote have a GitHub author. The merge and the
-// new Knowledge commit are created in this job and are not a prior edit.
+// Only commits already on the remote can have a GitHub signature.
 const log = remoteOk
   ? git(["log", "--format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%B%x1e", `${mainRef}..${remoteRef}`])
   : "";
 const commits = log.split("\x1e").map((chunk) => chunk.trim()).filter(Boolean).map((chunk) => {
   const [sha, authorName, authorEmail, committerName, committerEmail, body] = chunk.split("\x1f");
-  const record = authorFromLog({ authorName, authorEmail, committerName, committerEmail, body });
-  const trust = lookupCommitTrust(sha);
-  return { ...record, login: trust.login, association: trust.association };
+  const parsed = authorFromLog({ authorName, authorEmail, committerName, committerEmail, body });
+  return { ...parsed, provenance: lookupCommitTrust(sha) };
 });
 const plan = publishPlan({
   actor,
@@ -69,6 +68,21 @@ if (!staged) {
   record("skip", "empty", "committed=false\n");
   process.exit(0);
 }
-commitAsCanonical({ cwd: process.cwd(), message, actor, state });
-if (process.argv.includes("--push")) pushFastForward({ cwd: process.cwd(), branch });
-record("ready", plan.reason, "committed=true\n");
+if (!process.argv.includes("--push")) {
+  record("skip", "provenance-unavailable", "committed=false\n");
+  process.exit(0);
+}
+const published = publishSignedCommit({
+  cwd: process.cwd(),
+  repo: process.env.GITHUB_REPOSITORY || "",
+  branch,
+  message,
+  runId: process.env.GITHUB_RUN_ID || "",
+  mainRef,
+  remoteRef,
+});
+if (published.action !== "ready") {
+  record(published.action, published.reason, "committed=false\n");
+  process.exit(0);
+}
+record("ready", published.reason, "committed=true\n");

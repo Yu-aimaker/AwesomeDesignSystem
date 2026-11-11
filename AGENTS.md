@@ -13,7 +13,7 @@ author と committer は、名前とメールの両方を次の一組にしま�
 - コミットする前に、PR の base から head までの全コミットを `node scripts/check-identity.mjs --base <base> --head <head>` で確認する。最後の 1 件だけを見ない。
 - メールアドレスをログ、コミットメッセージ、PR 本文に出さない。`Co-authored-by` と `Signed-off-by` に noreply 以外のメールを書かない。検査は trailer として失敗させる。
 - pull_request の検査は、その PR が作った範囲の author と committer をこの一組に限る。
-- main への push では、親が 2 つ以上、committer が GitHub の web-flow（`noreply@github.com`）、merge でない親がすべて noreply、のコミットだけを追加で許す。その author は merge ボタンを押した人のメールでもよい。直接のコミットや、それ以外は許さない。
+- main への push では、GitHub の API が署名を確認した merge だけを追加で許す。条件は `verification.verified` が true、committer が web-flow、親が 2 つ以上、その SHA が main へ merge された PR の `merge_commit_sha` と一致すること。API が失敗したか項目が欠けたら拒否する。merge でない親には noreply と trailer の検査を掛ける。
 
 ## ブランチ
 
@@ -29,4 +29,4 @@ author と committer は、名前とメールの両方を次の一組にしま�
 
 候補は未採用のまま Knowledge に残す。ウェブで見つけた項目を、その実行の中で DS やサイトへ採用しない。開いている週次 PR を次の週が更新するときは、前回の候補行を残して新しい行を足す。
 
-週次の作者の信頼は、コミットメッセージに書いた actor では決めない。GitHub API の `author.login` が `github-actions[bot]` であるか、`author_association` が OWNER か MEMBER であるか、その login がリポジトリの owner であるときだけ信頼する。collaborators の権限 API は workflow の token では読めないことがある。
+週次の作者の信頼は、コミットメッセージの actor や、メールとアカウントの対応では決めない。週次は Git Data API でコミットを作り、GitHub に署名させる。前のコミットを信頼するのは、API で verified が true、committer が web-flow、`Workflow-Run` がこのリポジトリの weekly-growth の実行と一致するときだけ。API が失敗したら拒否する。

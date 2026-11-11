@@ -1,7 +1,7 @@
 // Pure decisions for the weekly growth pipeline. No network, no filesystem.
 // Scripts in scripts/ call these so tests can use fixtures.
 
-import { BOT_ACTOR, CANONICAL_EMAIL, CANONICAL_NAME, GROWTH_STATE } from "./identity.mjs";
+import { CANONICAL_EMAIL, GROWTH_STATE } from "./identity.mjs";
 import { constrainField, leakageFindings } from "./redact.mjs";
 
 export const BOT_EMAIL = CANONICAL_EMAIL;
@@ -144,31 +144,10 @@ export function discoveryStatus({ searches = 0, searchFailures = 0, releaseFailu
   return { failed: false, partial: false, reason: "ok" };
 }
 
-const TRUSTED_ASSOCIATIONS = new Set(["OWNER", "MEMBER"]);
-
-export function trustFromGithub({ login, permission, association, owner } = {}) {
-  const name = String(login ?? "").trim();
-  if (!name || name === "null") return {};
-  if (name === BOT_ACTOR) return { login: name };
-  const relation = String(association ?? "").trim();
-  if (permission === "admin" || relation === "OWNER" || (owner && name === owner)) {
-    return { login: name, association: "OWNER" };
-  }
-  if (permission === "maintain" || relation === "MEMBER") {
-    return { login: name, association: "MEMBER" };
-  }
-  return {};
-}
-
 export function isTrustedAuthor(entry) {
-  if (!entry || typeof entry !== "object") return false;
-  const identityOk = entry.email === CANONICAL_EMAIL
-    && entry.name === CANONICAL_NAME
-    && entry.committerEmail === CANONICAL_EMAIL
-    && entry.committerName === CANONICAL_NAME;
-  if (!identityOk) return false;
-  if (entry.login === BOT_ACTOR) return true;
-  return typeof entry.association === "string" && TRUSTED_ASSOCIATIONS.has(entry.association);
+  const proof = entry?.provenance;
+  if (!proof || typeof proof !== "object" || proof.error === true) return false;
+  return proof.verified === true && proof.webFlow === true && proof.runMatches === true;
 }
 
 export function foreignAuthors(entries) {
@@ -203,8 +182,11 @@ export function remoteWrites({ action, dryRun, branchAhead = false }) {
 
 export function publishPlan({ actor, remoteExists, fastForward, commits = [] }) {
   if (!/^[A-Za-z0-9_.[\]-]+$/.test(actor || "")) return { action: "skip", reason: "actor" };
+  if (commits.some((commit) => commit?.provenance?.error === true)) {
+    return { action: "skip", reason: "provenance-unavailable" };
+  }
   if (commits.some((commit) => !isTrustedAuthor(commit))) {
-    return { action: "skip", reason: "human-edited-bot-branch" };
+    return { action: "skip", reason: "unverified" };
   }
   if (!remoteExists) return { action: "ready", reason: "created" };
   if (!fastForward) return { action: "skip", reason: "diverged" };

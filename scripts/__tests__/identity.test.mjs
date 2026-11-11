@@ -1,11 +1,12 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, rmSync } from "node:fs";
+import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { identityProblems, intendedRange, isPlatformMerge, unfoldBody } from "../check-identity.mjs";
+import { botCommitOk, commitRequest, platformMergeOk } from "../lib/provenance.mjs";
 import { CANONICAL_EMAIL, CANONICAL_NAME, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -162,8 +163,9 @@ test("event ranges are explicit", () => {
     committerEmail: CANONICAL_EMAIL,
     body: "",
   };
+  const mergeSha = "a".repeat(40);
   const merge = {
-    sha: "aaa",
+    sha: mergeSha,
     parents: 2,
     authorName: "Owner",
     authorEmail: "owner@example.com",
@@ -172,12 +174,72 @@ test("event ranges are explicit", () => {
     body: "",
     parentCommits: [parent, { ...parent, sha: "q" }],
   };
-  assert.equal(isPlatformMerge(merge, merge.parentCommits), true);
-  assert.deepEqual(identityProblems([merge], { allowPlatformMerge: true }), []);
-  assert.deepEqual(identityProblems([merge]), [{ sha: "aaa", role: "author" }, { sha: "aaa", role: "committer" }]);
-  assert.equal(isPlatformMerge({ ...merge, parents: 1 }, merge.parentCommits), false);
-  assert.equal(isPlatformMerge(merge, []), false);
-  assert.equal(isPlatformMerge(merge, [parent, { ...parent, authorEmail: "person@example.com" }]), false);
+  const verifiedMerge = {
+    sha: mergeSha,
+    commit: { verification: { verified: true }, message: "Merge pull request #7" },
+    committer: { login: "web-flow" },
+    parents: [{ sha: "p" }, { sha: "q" }],
+  };
+  const mergedPull = [{ merge_commit_sha: mergeSha, base: { ref: "main" }, merged_at: "2026-11-11T00:00:00Z" }];
+  const proof = { commit: verifiedMerge, pulls: mergedPull };
+  assert.equal(platformMergeOk(verifiedMerge, mergedPull), true);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits), false);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits, { error: true }), false);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits, { commit: verifiedMerge, pulls: [] }), false);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits, {
+    commit: verifiedMerge,
+    pulls: [{ merge_commit_sha: "other", base: { ref: "main" }, merged_at: "2026-11-11T00:00:00Z" }],
+  }), false);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits, {
+    commit: { ...verifiedMerge, commit: { verification: { verified: false }, message: "Merge" } },
+    pulls: mergedPull,
+  }), false);
+  assert.equal(isPlatformMerge(merge, merge.parentCommits, proof), true);
+  assert.deepEqual(identityProblems([{ ...merge, provenance: proof }], { allowPlatformMerge: true }), []);
+  assert.deepEqual(identityProblems([merge], { allowPlatformMerge: true }), [
+    { sha: mergeSha, role: "author" },
+    { sha: mergeSha, role: "committer" },
+  ]);
+  assert.deepEqual(identityProblems([merge]), [{ sha: mergeSha, role: "author" }, { sha: mergeSha, role: "committer" }]);
+  assert.equal(isPlatformMerge({ ...merge, parents: 1 }, merge.parentCommits, proof), false);
+  assert.equal(isPlatformMerge(merge, [], proof), false);
+  assert.equal(isPlatformMerge(merge, [parent, { ...parent, authorEmail: "person@example.com" }], proof), false);
+  const botProof = {
+    repo: "acme/ads",
+    commit: {
+      sha: "b".repeat(40),
+      commit: { verification: { verified: true }, message: "knowledge\n\nWorkflow-Run: 99\n" },
+      committer: { login: "web-flow" },
+      parents: [{ sha: "p" }],
+    },
+    run: {
+      id: 99,
+      path: ".github/workflows/weekly-growth.yml",
+      event: "schedule",
+      head_repository: { full_name: "acme/ads" },
+    },
+  };
+  assert.equal(botCommitOk(botProof.commit, botProof.run, "acme/ads"), true);
+  assert.equal(botCommitOk(botProof.commit, botProof.run, "other/ads"), false);
+  assert.deepEqual(identityProblems([{
+    sha: "b".repeat(40),
+    parents: 1,
+    authorName: "github-actions[bot]",
+    authorEmail: "41898282+github-actions[bot]@users.noreply.github.com",
+    committerName: "GitHub",
+    committerEmail: "noreply@github.com",
+    body: "",
+    provenance: botProof,
+  }]), []);
+  const request = commitRequest({
+    message: "knowledge",
+    tree: "a".repeat(40),
+    parents: ["b".repeat(40)],
+    runId: "99",
+  });
+  assert.deepEqual(Object.keys(request).sort(), ["message", "parents", "tree"]);
+  assert.match(request.message, /^knowledge\n\nWorkflow-Run: 99\n$/);
+  assert.equal(commitRequest({ message: "knowledge", tree: "a".repeat(40), parents: ["b".repeat(40)], runId: "" }), null);
   const folded = unfoldBody("Co-authored-by: Fixture\n <person@example.com>");
   assert.match(folded, /Co-authored-by: Fixture <person@example.com>/);
   const foldedProblem = identityProblems([{
@@ -264,14 +326,80 @@ test("push to main allows only a platform merge commit", () => {
     mergeEnv.GIT_COMMITTER_EMAIL = "noreply@github.com";
     git(cwd, ["merge", "--no-ff", "side", "-m", "Merge pull request #7 from side"], mergeEnv);
     const head = git(cwd, ["rev-parse", "HEAD"]).trim();
+    const offline = { ...process.env };
+    delete offline.GH_TOKEN;
+    delete offline.GITHUB_TOKEN;
+    delete offline.PROVENANCE_FIXTURE;
     const pushed = runCheck(cwd, [], {
-      ...process.env,
+      ...offline,
       EVENT_NAME: "push",
       BEFORE_SHA: base,
       PUSH_SHA: head,
       PUSH_REF: "refs/heads/main",
     });
-    assert.equal(pushed.code, 0, pushed.stderr);
+    assert.equal(pushed.code, 1);
+    assert.match(pushed.stderr, new RegExp(`${head} committer`));
+
+    const fixture = join(cwd, "provenance.json");
+    const verified = {
+      repo: "acme/ads",
+      commits: {
+        [head]: {
+          sha: head,
+          commit: { verification: { verified: true }, message: "Merge pull request #7" },
+          committer: { login: "web-flow" },
+          parents: [{ sha: base }, { sha: "c".repeat(40) }],
+        },
+      },
+      pulls: {
+        [head]: [{ merge_commit_sha: head, base: { ref: "main" }, merged_at: "2026-11-11T00:00:00Z" }],
+      },
+    };
+    writeFileSync(fixture, JSON.stringify(verified));
+    const allowed = runCheck(cwd, [], {
+      ...offline,
+      PROVENANCE_FIXTURE: fixture,
+      GITHUB_REPOSITORY: "acme/ads",
+      EVENT_NAME: "push",
+      BEFORE_SHA: base,
+      PUSH_SHA: head,
+      PUSH_REF: "refs/heads/main",
+    });
+    assert.equal(allowed.code, 0, allowed.stderr);
+    const stillPr = runCheck(cwd, [], {
+      ...offline,
+      PROVENANCE_FIXTURE: fixture,
+      GITHUB_REPOSITORY: "acme/ads",
+      EVENT_NAME: "pull_request",
+      BASE_SHA: base,
+      HEAD_SHA: head,
+    });
+    assert.equal(stillPr.code, 1);
+
+    verified.pulls[head] = [];
+    writeFileSync(fixture, JSON.stringify(verified));
+    const notMerged = runCheck(cwd, [], {
+      ...offline,
+      PROVENANCE_FIXTURE: fixture,
+      EVENT_NAME: "push",
+      BEFORE_SHA: base,
+      PUSH_SHA: head,
+      PUSH_REF: "refs/heads/main",
+    });
+    assert.equal(notMerged.code, 1);
+
+    verified.commits[head] = { error: true };
+    verified.pulls[head] = [{ merge_commit_sha: head, base: { ref: "main" }, merged_at: "2026-11-11T00:00:00Z" }];
+    writeFileSync(fixture, JSON.stringify(verified));
+    const apiError = runCheck(cwd, [], {
+      ...offline,
+      PROVENANCE_FIXTURE: fixture,
+      EVENT_NAME: "push",
+      BEFORE_SHA: base,
+      PUSH_SHA: head,
+      PUSH_REF: "refs/heads/main",
+    });
+    assert.equal(apiError.code, 1);
 
     const asPr = runCheck(cwd, [], {
       ...process.env,
@@ -297,14 +425,19 @@ test("push to main allows only a platform merge commit", () => {
       forged.GIT_COMMITTER_EMAIL = "noreply@github.com";
       git(other, ["merge", "--no-ff", "side", "-m", "Merge pull request #8 from side"], forged);
       const otherHead = git(other, ["rev-parse", "HEAD"]).trim();
+      const offline = { ...process.env };
+      delete offline.GH_TOKEN;
+      delete offline.GITHUB_TOKEN;
+      delete offline.PROVENANCE_FIXTURE;
       const accepted = runCheck(other, [], {
-        ...process.env,
+        ...offline,
         EVENT_NAME: "push",
         BEFORE_SHA: otherBase,
         PUSH_SHA: otherHead,
         PUSH_REF: "refs/heads/main",
       });
-      assert.equal(accepted.code, 0, accepted.stderr);
+      assert.equal(accepted.code, 1);
+      assert.match(accepted.stderr, new RegExp(`${otherHead} committer`));
       const direct = identityEnv();
       direct.GIT_AUTHOR_EMAIL = "person@example.com";
       direct.GIT_COMMITTER_EMAIL = "person@example.com";

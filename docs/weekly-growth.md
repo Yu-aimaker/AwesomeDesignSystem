@@ -52,7 +52,7 @@
 | discover-candidates | 検索の全失敗、またはリリース確認の一時的な失敗を「リリースなし」と扱う |
 | validate-data | 型、必須項目、重複、URL の形式 |
 | check-workflows | main への push、force push、`secrets.`、大きいランナー、`ANTHROPIC_API_KEY`、`claude-code-action` |
-| check-identity | PR 範囲の author、committer、または折り畳みを含む noreply 以外の Co-authored-by / Signed-off-by。main への push では、親が 2 つ以上、committer が GitHub web-flow、merge でない親が noreply のコミットだけを例外にする |
+| check-identity | PR 範囲の author、committer、または折り畳みを含む noreply 以外の Co-authored-by / Signed-off-by。main への push の例外は、API で verified、committer が web-flow、親が 2 つ以上、main へ merge された PR の merge_commit_sha と一致するコミットだけ。失敗した API は拒否する |
 
 ## 失敗したとき
 
@@ -63,7 +63,7 @@
 | ネットワークの一時的な失敗 | 共有の再試行で、永続的な 401 や 404 はやり直さない |
 | dry-run | リモートを変えない。開いている PR も閉じない |
 | CI が失敗、キャンセル、時間切れ | PR は開いたまま。ブランチは消さない |
-| 人がボットのブランチに、GitHub 上で信頼できない作者としてコミットした | push しない。履歴は消さない |
+| ボットブランチの前のコミットが、verified の web-flow 署名とこのリポジトリの weekly-growth 実行の両方を持たない | push しない。履歴は消さない |
 | ブランチが main と分岐している | fast-forward できないので止めて報告する |
 | 同じ週に 2 回走った | 開いている PR は 1 本のまま追記する |
 | ジョブが始まらない | Actions が無効なら実行自体がない。公開リポジトリの `ubuntu-24.04` だけを使う |

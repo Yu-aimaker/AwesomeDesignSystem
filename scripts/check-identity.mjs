@@ -4,17 +4,22 @@
 // Prints the SHA and role only. Never prints the address.
 //
 // pull_request: base.sha..head.sha (not the synthetic merge commit). Strict.
-// push to main: the same rule, plus a GitHub web-flow merge (two or more
-// parents, committer noreply@github.com, every non-merge parent noreply).
-// The merge author may be the person who pressed the button. Other refs stay strict.
+// push to main: the same rule, plus a merge GitHub's API reports as verified,
+// committed by web-flow, with two or more parents, whose SHA is the
+// merge_commit_sha of a pull request merged into main. Non-merge parents
+// still need noreply authors, committers, and trailers. A failed or incomplete
+// API response rejects the exception. A weekly commit GitHub signed as
+// web-flow is accepted when its Workflow-Run trailer matches a run of this
+// repository's weekly workflow.
 // workflow_dispatch: origin/main..HEAD. An empty range is success.
 // A shallow repository fails closed until it is unshallowed, even when both
 // ends of the range exist. Missing objects or an unreadable fork head fail closed.
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { CANONICAL_EMAIL, CANONICAL_NAME } from "./lib/identity.mjs";
+import { readProvenance } from "./lib/github-trust.mjs";
+import { botCommitOk, platformMergeOk } from "./lib/provenance.mjs";
 
-const GITHUB_MERGE_NAME = "GitHub";
 const GITHUB_MERGE_EMAIL = "noreply@github.com";
 const TRAILER_RE = /^(?:co-authored-by|signed-off-by):[^\n]*$/gim;
 const EMAIL_RE = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
@@ -100,22 +105,35 @@ export function passesNoreply(commit) {
   return isNoreplyEmail(commit?.authorEmail) && isNoreplyEmail(commit?.committerEmail) && !trailerLeak(commit?.body);
 }
 
-export function isPlatformMerge(commit, parentCommits = []) {
-  if (parentCount(commit) < 2) return false;
-  if (commit?.committerName !== GITHUB_MERGE_NAME) return false;
-  if (String(commit?.committerEmail ?? "").toLowerCase() !== GITHUB_MERGE_EMAIL) return false;
+export function isPlatformMerge(commit, parentCommits = [], proof) {
+  if (!proof || proof.error || !platformMergeOk(proof.commit, proof.pulls)) return false;
+  if (proof.commit.sha !== commit?.sha) return false;
+  if (parentCount(commit) < 2 || proof.commit.parents.length !== parentCount(commit)) return false;
   if (!Array.isArray(parentCommits) || parentCommits.length < 2) return false;
   const nonMerge = parentCommits.filter((parent) => parentCount(parent) < 2);
   if (!nonMerge.length) return false;
   return nonMerge.every((parent) => passesNoreply(parent));
 }
 
+function isSignedBotCommit(commit, proof) {
+  if (!proof || proof.error) return false;
+  if (proof.commit?.sha !== commit?.sha) return false;
+  return botCommitOk(proof.commit, proof.run, proof.repo || process.env.GITHUB_REPOSITORY || "");
+}
+
 export function identityProblems(commits, options = {}) {
   const problems = [];
   for (const commit of commits) {
     const parents = commit.parentCommits ?? [];
-    const platform = options.allowPlatformMerge === true && isPlatformMerge(commit, parents);
-    if (!platform) {
+    const canonical = commit.authorName === CANONICAL_NAME
+      && commit.authorEmail === CANONICAL_EMAIL
+      && commit.committerName === CANONICAL_NAME
+      && commit.committerEmail === CANONICAL_EMAIL;
+    const needsProof = !canonical || (options.allowPlatformMerge === true && parentCount(commit) >= 2);
+    const proof = commit.provenance ?? (needsProof && options.lookup ? options.lookup(commit.sha) : null);
+    const platform = options.allowPlatformMerge === true && isPlatformMerge(commit, parents, proof);
+    const signedBot = isSignedBotCommit(commit, proof);
+    if (!platform && !signedBot) {
       const authorBad = commit.authorName !== CANONICAL_NAME || commit.authorEmail !== CANONICAL_EMAIL;
       const committerBad = commit.committerName !== CANONICAL_NAME || commit.committerEmail !== CANONICAL_EMAIL;
       if (authorBad) problems.push({ sha: commit.sha, role: "author" });
@@ -217,7 +235,10 @@ function main() {
     if (parsed) commit.body = `${commit.body ?? ""}\n${parsed}`;
   }
   attachParents(commits);
-  const problems = identityProblems(commits, { allowPlatformMerge: range.allowPlatformMerge === true });
+  const problems = identityProblems(commits, {
+    allowPlatformMerge: range.allowPlatformMerge === true,
+    lookup: readProvenance,
+  });
   if (!problems.length) {
     console.log(`identity: ${commits.length} commits`);
     process.exit(0);
