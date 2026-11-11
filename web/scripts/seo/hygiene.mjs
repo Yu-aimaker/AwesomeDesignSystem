@@ -28,13 +28,53 @@ export function publishText(text) {
   return String(text).replace(STATUS_URL, "");
 }
 
+function isStatusUrl(url) {
+  return /https?:\/\/(?:www\.)?(?:(?:x|twitter)\.com|api\.fxtwitter\.com)\/[^\s<>"'`)\]]*\/status\/\d+/i.test(url);
+}
+
+function unquote(value) {
+  const text = String(value ?? "").trim();
+  if ((text.startsWith('"') && text.endsWith('"')) || (text.startsWith("'") && text.endsWith("'"))) return text.slice(1, -1);
+  return text;
+}
+
+/** Drop a `- url:` record only when that URL is a status link. Sibling records stay. */
+function dropStatusSourceRecords(yaml) {
+  const lines = yaml.split("\n");
+  const out = [];
+  let i = 0;
+  while (i < lines.length) {
+    const item = /^(\s*)- url:\s*(.*?)\s*$/.exec(lines[i]);
+    if (!item) {
+      out.push(lines[i]);
+      i++;
+      continue;
+    }
+    const indent = item[1].length;
+    const block = [lines[i]];
+    i++;
+    while (i < lines.length && lines[i].trim()) {
+      const nextIndent = lines[i].length - lines[i].trimStart().length;
+      if (nextIndent <= indent) break;
+      block.push(lines[i]);
+      i++;
+    }
+    if (!isStatusUrl(unquote(item[2]))) out.push(...block);
+  }
+  return out.join("\n");
+}
+
 /**
  * Browser copy of a Knowledge or foundation note.
- * Status URLs are removed, and a source entry whose URL was only that status link is dropped.
- * The repository file is left unchanged.
+ * Status URLs are removed. A source record is removed only when its URL is a status link.
+ * Every other source record stays. The repository file is left unchanged.
  */
 export function publishKnowledge(raw) {
-  return publishText(raw).replace(/^[ \t]*- url:[ \t]*\r?\n(?:[ \t]+(?!- ).+\r?\n)*/gm, "");
+  const text = String(raw).replace(/^\uFEFF/, "");
+  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (!match) return publishText(text);
+  const front = dropStatusSourceRecords(match[1].replace(/\r\n/g, "\n").replace(/\r/g, "\n"));
+  return publishText(`---\n${front}\n---${text.slice(match[0].length)}`);
 }
 
 function personalEmail(email) {

@@ -346,16 +346,70 @@ test("guard markers are the current catalog titles", () => {
   assert.ok(problems.some((line) => line.includes(first)));
 });
 
+function sourceUrls(markdown) {
+  const front = /^---\r?\n([\s\S]*?)\r?\n---/.exec(markdown)?.[1] ?? "";
+  return [...front.matchAll(/^\s*- url:\s*(.+?)\s*$/gm)].map((match) => match[1].replace(/^["']|["']$/g, ""));
+}
+
+test("publishKnowledge keeps the eight non-status sources", () => {
+  const file = join(repoRoot, "Knowledge/skills/neropursue-x-post.md");
+  const raw = readFileSync(file, "utf8");
+  const before = sourceUrls(raw);
+  assert.equal(before.length, 10);
+  assert.equal(before.filter((url) => /\/status\/\d+/.test(url)).length, 2);
+  const published = publishKnowledge(raw);
+  const kept = sourceUrls(published);
+  assert.equal(kept.length, 8);
+  assert.deepEqual(kept, before.filter((url) => !/\/status\/\d+/.test(url)));
+  assert.equal(/https?:\/\/(?:www\.)?(?:(?:x|twitter)\.com|api\.fxtwitter\.com)\/\S*\/status\/\d+/.test(published), false);
+  for (const heading of ["## 概要", "## 要点", "## 具体的な値・ルール（あれば）", "## AwesomeDS への反映", "## 出典"]) {
+    assert.match(published, new RegExp(heading.replace(/[()]/g, "\\$&")));
+  }
+  assert.match(published, /https:\/\/www\.originkit\.dev\//);
+
+  const between = `---
+title: mixed
+sources:
+  - url: https://example.com/a
+    title: A
+  - url: https://x.com/foo/status/1
+    title: Status between
+  - url: https://example.com/b
+    title: B
+  - url: https://twitter.com/bar/status/2
+    title: Second status
+  - url: https://example.com/c
+    title: C
+---
+
+See https://x.com/foo/status/99 and https://example.com/a.
+`;
+  const mixed = publishKnowledge(between);
+  assert.deepEqual(sourceUrls(mixed), ["https://example.com/a", "https://example.com/b", "https://example.com/c"]);
+  assert.match(mixed, /title: A/);
+  assert.match(mixed, /title: B/);
+  assert.match(mixed, /title: C/);
+  assert.equal(mixed.includes("Status between"), false);
+  assert.match(mixed, /See  and https:\/\/example.com\/a\./);
+  assert.equal(/status\/\d+/.test(mixed), false);
+
+  for (const name of ["component-libraries/magic-ui-and-aceternity.md", "skills/diagram-design.md"]) {
+    const note = readFileSync(join(repoRoot, "Knowledge", name), "utf8");
+    assert.deepEqual(sourceUrls(publishKnowledge(note)), sourceUrls(note));
+  }
+});
+
 test("knowledge raw modules drop status urls and the repo file keeps them", () => {
   const file = join(repoRoot, "Knowledge/skills/neropursue-x-post.md");
   const raw = readFileSync(file, "utf8");
   assert.match(raw, /https:\/\/x\.com\/neropursue\/status\/2089263766428950683/);
   const published = publishKnowledge(raw);
+  assert.equal(sourceUrls(published).length, 8);
   assert.equal(/https?:\/\/(?:www\.)?(?:(?:x|twitter)\.com|api\.fxtwitter\.com)\/\S*\/status\/\d+/.test(published), false);
-  assert.match(published, /https:\/\/www\.originkit\.dev\//);
   const loaded = sanitizeKnowledgeRaw().load(`${file}?raw`);
   assert.equal(loaded.includes("x.com/neropursue/status/"), false);
   assert.equal(loaded.includes("api.fxtwitter.com/neropursue/status/"), false);
+  assert.equal(loaded.includes("https://www.originkit.dev/"), true);
   assert.equal(sanitizeKnowledgeRaw().load(`${file}?url`), null);
   const js = 'const src = "https://x.com/neropursue/status/2089263766428950683";';
   assert.ok(hygieneProblems(js, "assets/index.js").some((line) => /status URL/.test(line)));
