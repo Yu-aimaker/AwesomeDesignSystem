@@ -5,7 +5,7 @@ alwaysApply: false
 
 # ds-creator
 
-Base: `design-system/awesome-ds/DESIGN.md` and its tokens. Keep every default the brand does not overrule; mark undecided ones `default, not decided`. Never invent brand facts.
+Base: `design-system/awesome-ds/DESIGN.md` and its tokens. Keep every default the brand does not overrule; mark undecided ones `default, not decided`. Never invent brand facts. Modern Web Guidance is a cited competitor. Link it, do not paste its guides. Do not turn experimental browser APIs on to chase a reference.
 
 Phase 1, intake without questions: find logos (`**/*logo*.svg|png`), existing CSS colours and fonts, README and docs tone, screenshots. Print `Found: ... Missing: ...`.
 

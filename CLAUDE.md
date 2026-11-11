@@ -63,6 +63,7 @@ docs/          週次の仕組み、i18n、キャラクター、レポートと�
 ## 作業ルール
 
 - **1 PR 1 テーマ**。CI 緑を目標
+- 反映の基準と、サイト変更の道具は `AGENTS.md`。Modern Web Guidance は参照する競合。本文は写さず、リンクだけを置く
 - AwesomeDS 値変更時: `DESIGN.md` + tokens 三本 + `foundations/` 理由 + `CHANGELOG` + `Plugin/awesome-ds/scripts/sync-ds.sh`
 - Knowledge 追加後: `node scripts/build-reference.mjs` と `bash Plugin/awesome-ds/scripts/sync-ds.sh`（`Reference/`、Knowledge README、`Plugin/awesome-ds/knowledge/` は手編集しない）
 - web ローカル:

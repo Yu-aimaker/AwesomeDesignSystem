@@ -22,6 +22,12 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 
 白地に黒文字、アクセント 1 色（`#2f5bea`）、Geist + Noto Sans JP、4px グリッド、境界線優先、短いモーション。すべての値に理由と出典があります。
 
+## Modern Web Guidance との関係
+
+[Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) は、AwesomeDS がよく参照する競合である。AwesomeDS はそれより広く、深く、新しい作法を持つ。ガイドの本文は写さず、リンクだけを置く。
+
+AwesomeDS が定めるのは、トークンと部品、エージェントの作業手順、見た目の品質、日本語の文字と文章、そして参照先より新しい作法である。モデルの記憶より、このリポジトリの規則と、開いて確認した一次情報を優先する。入れる基準は [AGENTS.md](AGENTS.md)。
+
 ## 3つの用途
 
 AwesomeDS は次の 3 つを同時に満たす。

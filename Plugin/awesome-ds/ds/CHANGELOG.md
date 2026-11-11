@@ -7,6 +7,9 @@ and the project follows Semantic Versioning 2.0.0.
 
 ### Added
 
+- Scope in `foundations/principles.md`, with a pointer in `DESIGN.md`. AwesomeDS
+  aims to be broader, deeper and newer than Modern Web Guidance, a cited
+  competitor. Its guides are not copied. No token changed.
 - Page layout tokens: `--ds-container-doc` (760px, document pages),
   `--ds-measure-ja` (40em, 40 full-width characters), `--ds-gutter-sm` / `-md` /
   `-lg` (20 / 24 / 32px side margins). Tailwind: `max-w-ds-doc`. Values come from

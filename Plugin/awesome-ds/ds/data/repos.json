@@ -1,19 +1,19 @@
 {
   "meta": {
     "description": "GitHub star ranking of design and AI-frontend open source: a curated list (component libraries, headless, animation, icons, tokens, fonts, agent skills, AI UI, tools) plus the top 20 GitHub search results for topic:design-system. Stars, forks, language, topics and pushedAt come from the GitHub REST API. Entries with stars: null could not be fetched yet.",
-    "updated": "2026-10-05",
+    "updated": "2026-11-11",
     "sources": [
       "https://api.github.com/repos/{owner}/{name}",
-      "https://api.github.com/search/repositories?q=topic:design-system&sort=stars"
+      "https://api.github.com/search/repositories?q=topic:design-system stars:>500 pushed:>2026-08-13&sort=stars"
     ],
     "license": "Repository metadata is public GitHub data; each repository keeps its own license (see `license`).",
     "generator": "scripts/fetch-repos.mjs",
     "counts": {
-      "total": 120,
-      "curated": 109,
-      "topicTop": 20,
-      "fetched": 129,
-      "keptFromPrevious": 0,
+      "total": 124,
+      "curated": 115,
+      "topicTop": 9,
+      "fetched": 0,
+      "keptFromPrevious": 118,
       "missing": 0
     },
     "categories": [
@@ -37,36 +37,6 @@
     "fetchErrors": []
   },
   "repos": [
-    {
-      "owner": "donnemartin",
-      "name": "system-design-primer",
-      "url": "https://github.com/donnemartin/system-design-primer",
-      "description": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
-      "stars": 373197,
-      "forks": 58745,
-      "language": "Python",
-      "topics": [
-        "design",
-        "design-patterns",
-        "design-system",
-        "development",
-        "interview",
-        "interview-practice",
-        "interview-questions",
-        "programming",
-        "python",
-        "system",
-        "web",
-        "web-application",
-        "webapp"
-      ],
-      "pushedAt": "2026-09-15T01:10:09Z",
-      "license": "NOASSERTION",
-      "archived": false,
-      "category": "topic:design-system",
-      "fetchedAt": "2026-10-05",
-      "inTopicTop": true
-    },
     {
       "owner": "obra",
       "name": "superpowers",
@@ -647,6 +617,30 @@
       "archived": false,
       "category": "framework",
       "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "ChromeDevTools",
+      "name": "chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "description": "Chrome DevTools for coding agents",
+      "stars": 55099,
+      "forks": 4585,
+      "language": "TypeScript",
+      "topics": [
+        "browser",
+        "chrome",
+        "chrome-devtools",
+        "debugging",
+        "devtools",
+        "mcp",
+        "mcp-server",
+        "puppeteer"
+      ],
+      "pushedAt": "2026-11-11T15:20:47Z",
+      "license": "Apache-2.0",
+      "archived": false,
+      "category": "tooling",
+      "fetchedAt": "2026-11-11"
     },
     {
       "owner": "tldraw",
@@ -1255,6 +1249,21 @@
       "fetchedAt": "2026-10-05"
     },
     {
+      "owner": "meta",
+      "name": "astryx",
+      "url": "https://github.com/meta/astryx",
+      "description": "An open source design system that's fully customizable and agent ready",
+      "stars": 24449,
+      "forks": 1912,
+      "language": "TypeScript",
+      "topics": [],
+      "pushedAt": "2026-11-11T15:44:23Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "component-library",
+      "fetchedAt": "2026-11-11"
+    },
+    {
       "owner": "tailwindlabs",
       "name": "heroicons",
       "url": "https://github.com/tailwindlabs/heroicons",
@@ -1478,35 +1487,36 @@
       "fetchedAt": "2026-10-05"
     },
     {
-      "owner": "gztchan",
-      "name": "awesome-design",
-      "url": "https://github.com/gztchan/awesome-design",
-      "description": "🌟 Curated design resources from all over the world.",
-      "stars": 17600,
-      "forks": 1237,
-      "language": null,
+      "owner": "google",
+      "name": "elephant-goldfish-model",
+      "url": "https://github.com/google/elephant-goldfish-model",
+      "description": "Open-source plugin for designing and reviewing software with agents",
+      "stars": 17473,
+      "forks": 1304,
+      "language": "Python",
       "topics": [
-        "adobe",
-        "awesome",
-        "creative",
-        "curated",
-        "design",
-        "design-system",
-        "designer-news",
-        "font",
-        "graphics",
-        "podcast",
-        "sketch",
-        "ui",
-        "ux",
-        "vector"
+        "agent-skills",
+        "ai-agents",
+        "antigravity",
+        "claude-code",
+        "claude-code-plugin",
+        "claude-skills",
+        "codex",
+        "codex-plugin",
+        "coding-agents",
+        "context-engineering",
+        "developer-tools",
+        "gemini",
+        "llm",
+        "multi-agent",
+        "prompt-engineering",
+        "spec-driven-development"
       ],
-      "pushedAt": "2024-07-04T18:17:39Z",
-      "license": null,
+      "pushedAt": "2026-11-11T15:23:19Z",
+      "license": "Apache-2.0",
       "archived": false,
-      "category": "topic:design-system",
-      "fetchedAt": "2026-10-05",
-      "inTopicTop": true
+      "category": "agent-skills",
+      "fetchedAt": "2026-11-11"
     },
     {
       "owner": "vitest-dev",
@@ -2222,6 +2232,26 @@
       "inTopicTop": true
     },
     {
+      "owner": "aidenybai",
+      "name": "react-grab",
+      "url": "https://github.com/aidenybai/react-grab",
+      "description": "Copy any UI element for your agent",
+      "stars": 7706,
+      "forks": 342,
+      "language": "TypeScript",
+      "topics": [
+        "ai",
+        "coding",
+        "react",
+        "react-grab"
+      ],
+      "pushedAt": "2026-08-22T11:34:22Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "tooling",
+      "fetchedAt": "2026-11-11"
+    },
+    {
       "owner": "phosphor-icons",
       "name": "homepage",
       "url": "https://github.com/phosphor-icons/homepage",
@@ -2470,6 +2500,41 @@
       "fetchedAt": "2026-10-05"
     },
     {
+      "owner": "Appllama",
+      "name": "appllama-skills",
+      "url": "https://github.com/Appllama/appllama-skills",
+      "description": "A builder, not just a researcher. Agent skills that turn top-grossing app patterns into native-quality mobile screens.",
+      "stars": 5113,
+      "forks": 258,
+      "language": null,
+      "topics": [
+        "agent-skills",
+        "ai-agents",
+        "claude",
+        "claude-code",
+        "claude-code-skill",
+        "claude-skills",
+        "codex",
+        "codex-skill",
+        "cursor",
+        "design-system",
+        "expo",
+        "mcp",
+        "mobile-app-development",
+        "mobile-design",
+        "mobile-ui",
+        "model-context-protocol",
+        "react-native",
+        "skills",
+        "ui-design"
+      ],
+      "pushedAt": "2026-09-06T09:01:39Z",
+      "license": "MIT",
+      "archived": false,
+      "category": "agent-skills",
+      "fetchedAt": "2026-11-11"
+    },
+    {
       "owner": "style-dictionary",
       "name": "style-dictionary",
       "url": "https://github.com/style-dictionary/style-dictionary",
@@ -2517,6 +2582,21 @@
       "archived": false,
       "category": "icons",
       "fetchedAt": "2026-10-05"
+    },
+    {
+      "owner": "GoogleChrome",
+      "name": "modern-web-guidance",
+      "url": "https://github.com/GoogleChrome/modern-web-guidance",
+      "description": "Keep your coding agent up to date with the latest web best practices",
+      "stars": 4352,
+      "forks": 142,
+      "language": null,
+      "topics": [],
+      "pushedAt": "2026-11-10T03:22:38Z",
+      "license": "Apache-2.0",
+      "archived": false,
+      "category": "agent-skills",
+      "fetchedAt": "2026-11-11"
     },
     {
       "owner": "notofonts",

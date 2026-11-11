@@ -25,6 +25,14 @@ You are the reviewer, not the author. Assume the page has problems and go find t
 
 Read the DESIGN.md you selected fully before step (a). Read `${CLAUDE_PLUGIN_ROOT}/skills/design-verifier/reference/rubric.md` before step (b).
 
+## Cited reference
+
+[Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) is a competitor you may open. Do not copy its guides into the report. Prefer AwesomeDS rules, and sources you have opened, over prior knowledge. Scope: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/principles.md`.
+
+If Chrome DevTools MCP is already connected, also read the console, the network log, the accessibility tree and one performance trace. Use an isolated profile and disable usage statistics. Disable CrUX submission when the page is private. Do not use a profile that holds personal data. The Playwright capture in this skill still runs. Details: `Knowledge/tech-stack/chrome-devtools-for-agents.md`.
+
+Placeholder copy and invented contact details are findings.
+
 ## Procedure
 
 Run all five steps. Do not stop after the static audit because "it already found a lot".

@@ -26,6 +26,7 @@ Do these in order. Do not skip step 1 because the cheat sheet below "looks like 
 3. Detect the stack (section 2) and decide how tokens get wired.
 4. When the task touches a library, motion, a component kit, Japanese typography, or a reference brand, open `${CLAUDE_PLUGIN_ROOT}/knowledge/README.md` and read the matching entries before choosing. They are sourced summaries; you do not need to search the web for what they already cover.
 5. State assumptions. Write a one-line "design read" and up to three assumptions (see section 1). Do not ask a list of questions. Ask exactly one question only when the answer changes the layout or the token wiring (for example, "Tailwind v3 or v4?" when both configs exist). Otherwise proceed with the stated assumption.
+6. [Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) is a competitor this system cites. You may open the link. Do not copy its guides into the page or into AwesomeDS. Prefer AwesomeDS rules, and sources you have opened, over prior knowledge. Scope and deliberate differences: `${CLAUDE_PLUGIN_ROOT}/ds/foundations/principles.md` under "Scope".
 
 ## 1. The design read (one line, always printed)
 
@@ -59,6 +60,7 @@ Rules for wiring:
 Components
 
 - Use shadcn/ui on Radix (Base UI accepted). Install components into the project (`npx shadcn@latest add button input card dialog ...`); never import a pre-styled kit.
+- [Astryx](https://github.com/meta/astryx) is a reference for an agent-readable component contract. Do not switch the kit to it. Its README and CLI README, read 2026-11-11, do not document an MCP. The CLI package is `@astryxdesign/cli`. Do not run the unscoped name `npx astryx`.
 - Restyle every installed component with tokens: control height 40px, radius 8px, border `1px solid var(--ds-hairline-strong)` on inputs, `var(--ds-hairline)` on cards, focus ring `2px solid var(--ds-focus-ring)` offset 2px.
 - Primary button: `background: var(--ds-primary); color: var(--ds-on-primary)`. Ink on canvas. The accent is never a button fill.
 - Every interactive component ships hover, focus-visible, active, disabled, loading. Every data view ships loading (skeleton), empty, error. Write them in the first pass, not "later".
@@ -203,6 +205,13 @@ badge caption text, pill, padding 2 8, bg surface-sunken, text ink-secondary
 - Mixed text: keep Latin words and numbers in Geist; `text-autospace` handles the gap. Do not insert manual half-width spaces.
 - Punctuation: use full-width 。、「」 in Japanese sentences. No em dashes; use 、 or 。 Line breaks must not start with 。、」 (`line-break: strict` enforces this).
 - Dates and numbers: tabular-nums in tables; `2026年9月6日` in prose, `2026-09-06` in data views.
+
+## References that do not replace these rules
+
+- taste-skill 2.5.1 is a company-site skill. Do not take its dealt palettes, mandatory hero entrance, or one-section-per-screen layout. Do fail placeholder copy and invented addresses, and do not present a stand-in photo as the client's own. Details: `Knowledge/skills/taste-skill.md`.
+- UI Skills `baseline-ui` is a second checklist, not a new token set. Do not install its registry. Its current text says not to add animation unless asked. AwesomeDS still animates feedback. Do not replace that. Details: `Knowledge/skills/ui-skills.md`.
+- Vercel agent-skills can inform React composition and rendering on a Vite app. Do not assume Next.js, and do not add a deploy skill. The root license file was not in the repo on 2026-11-11. Details: `Knowledge/skills/vercel-agent-skills.md`.
+- Appllama skills target Expo and React Native, including a simulator pass. Do not treat them as this web kit, and do not enable the paid MCP. Details: `Knowledge/skills/appllama-app-design.md`.
 
 ## 8. Finish: run the checklist and report
 
