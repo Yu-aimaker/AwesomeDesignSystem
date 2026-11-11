@@ -23,7 +23,7 @@ function sample(overrides = {}) {
   return { label: "https://preview.example", probes };
 }
 
-test("the five preview routes pass when they are 200 HTML with noindex and HSTS", () => {
+test("preview routes pass when they are 200 HTML with noindex and HSTS", () => {
   assert.deepEqual(checkPreviewHeaders([sample()]), []);
 });
 

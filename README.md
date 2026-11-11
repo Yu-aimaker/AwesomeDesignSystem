@@ -133,7 +133,7 @@ docs/                 週次の仕組み、生成仕様、i18n。索引は docs/
 
 ## 配信
 
-体験サイトは Cloudflare Workers Static Assets で配信する。noindex。本番は https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントする。workers.dev は https://awesomeds.yumaker.workers.dev 。ヘッダと応答の確認は `node scripts/hosting-smoke.mjs <url>`。
+体験サイトは Cloudflare Workers Static Assets で配信する。本番は検索対象で、https://awesomeds.yumaker.studio 。プレビューは Workers Builds が PR にコメントし、プレビュー用 Worker が noindex を付ける。workers.dev は https://awesomeds.yumaker.workers.dev 。ヘッダと応答の確認は `node scripts/hosting-smoke.mjs <url>`。
 
 ## AI っぽさの 4 つの原因と、止める仕組み
 

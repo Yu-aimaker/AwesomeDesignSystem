@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 // Hosting contract for the assets-only Worker. Exit 1 when any of these drift:
 // no Worker script (no `main`), the production Worker Route (pattern + zone_name,
-// not custom_domain), SPA fallback, noindex and HSTS in dist/_headers,
+// not custom_domain), SPA fallback, indexable HTML (no noindex, no Disallow for *),
+// HSTS and the other security headers in dist/_headers,
 // dist under the Workers Free file count and per-file size, og-image 1200x630.
 // Removing not_found_handling or the route must fail this script.
 export const PRODUCTION_ROUTE = {
@@ -41,6 +42,7 @@ export function checkProductionRoutes(config) {
   return problems;
 }
 import { readdirSync, readFileSync, statSync } from "node:fs";
+import { productionIndexProblems } from "./seo/check.mjs";
 import { dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -110,6 +112,11 @@ if (config.assets?.not_found_handling !== "single-page-application") {
 if (config.assets?.directory !== "./dist") {
   problems.push(`assets.directory must be "./dist" (got ${JSON.stringify(config.assets?.directory ?? null)})`);
 }
+if (config.assets?.html_handling !== "drop-trailing-slash") {
+  problems.push(
+    `assets.html_handling must be "drop-trailing-slash" (got ${JSON.stringify(config.assets?.html_handling ?? null)})`,
+  );
+}
 if (config.previews == null || typeof config.previews !== "object" || Array.isArray(config.previews)) {
   problems.push("wrangler.jsonc must set previews to an object (wrangler preview requires it; empty is fine)");
 }
@@ -119,6 +126,9 @@ if (config.previews?.routes != null) {
 }
 if (config.assets?.binding != null) {
   problems.push("wrangler.jsonc must not set assets.binding (that would make production a user Worker)");
+}
+if (config.assets?.run_worker_first != null) {
+  problems.push("wrangler.jsonc must not set assets.run_worker_first (production stays assets-only)");
 }
 
 let previewConfig = {};
@@ -139,6 +149,12 @@ if (previewConfig.assets?.binding !== "ASSETS") {
 if (previewConfig.assets?.not_found_handling !== "single-page-application") {
   problems.push("wrangler.preview.jsonc must keep not_found_handling single-page-application");
 }
+if (previewConfig.assets?.html_handling !== "drop-trailing-slash") {
+  problems.push("wrangler.preview.jsonc must keep html_handling drop-trailing-slash");
+}
+if (previewConfig.assets?.run_worker_first !== true) {
+  problems.push("wrangler.preview.jsonc must set assets.run_worker_first so existing files get noindex");
+}
 if (previewConfig.routes != null) {
   problems.push("wrangler.preview.jsonc must not set routes");
 }
@@ -153,8 +169,17 @@ try {
 if (headers && !/^\/\*\s*$/m.test(headers)) {
   problems.push("dist/_headers must include a /* rule");
 }
-if (headers && !/X-Robots-Tag:\s*noindex,\s*nofollow/i.test(headers)) {
-  problems.push('dist/_headers must set "X-Robots-Tag: noindex, nofollow"');
+if (headers && /noindex/i.test(headers)) {
+  problems.push("dist/_headers must not set noindex");
+}
+if (headers && !/X-Content-Type-Options:\s*nosniff/i.test(headers)) {
+  problems.push('dist/_headers must set "X-Content-Type-Options: nosniff"');
+}
+if (headers && !/Referrer-Policy:\s*strict-origin-when-cross-origin/i.test(headers)) {
+  problems.push('dist/_headers must set "Referrer-Policy: strict-origin-when-cross-origin"');
+}
+if (headers && !/Content-Security-Policy:/i.test(headers)) {
+  problems.push("dist/_headers must set Content-Security-Policy");
 }
 // Vercel sends this HSTS today; keep it identical so the cutover changes no header.
 if (headers && !/Strict-Transport-Security:\s*max-age=63072000\s*$/im.test(headers)) {
@@ -209,12 +234,14 @@ try {
   problems.push("dist/og-image.png is missing");
 }
 
+problems.push(...productionIndexProblems(dist));
+
 if (problems.length) {
   console.error(problems.map((line) => `cf-assets: ${line}`).join("\n"));
   process.exit(1);
 }
 console.log(
-  `cf-assets ok: ${files.length} files, no main, route ${PRODUCTION_ROUTE.pattern} zone ${PRODUCTION_ROUTE.zone_name}, previews={}, not_found_handling=single-page-application, noindex, HSTS, og-image 1200x630`,
+  `cf-assets ok: ${files.length} files, no main, route ${PRODUCTION_ROUTE.pattern} zone ${PRODUCTION_ROUTE.zone_name}, previews={}, not_found_handling=single-page-application, indexable, HSTS, og-image 1200x630`,
 );
 }
 

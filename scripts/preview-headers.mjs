@@ -10,7 +10,7 @@
 import { pathToFileURL } from "node:url";
 import { normalizeHeaders, parseOrigins } from "./hosting-smoke.mjs";
 
-export const PATHS = ["/", "/sources", "/foundations", "/en/sources", "/missing-page"];
+export const PATHS = ["/", "/sites", "/knowledge", "/sources", "/foundations", "/en/sources", "/missing-page"];
 
 const HSTS_DIRECTIVE = "max-age=63072000";
 

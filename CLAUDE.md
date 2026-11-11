@@ -6,7 +6,7 @@ AI コーディングエージェント（Claude Code、Cursor など）がこ�
 
 AI コーディングエージェント向けの汎用デザインシステム **AwesomeDS** と、体験サイト `web/`、Claude Code プラグイン `Plugin/awesome-ds/` を置いています。
 
-- 本番サイト: https://awesomeds.yumaker.studio （noindex。Cloudflare Workers Static Assets）。PR のプレビューは Workers Builds が PR にコメントします。workers.dev は https://awesomeds.yumaker.workers.dev 。
+- 本番サイト: https://awesomeds.yumaker.studio （検索対象。Cloudflare Workers Static Assets）。PR のプレビューは Workers Builds が PR にコメントします。プレビュー用 Worker だけ `X-Robots-Tag: noindex` を付けます。workers.dev は https://awesomeds.yumaker.workers.dev 。
 - PR に Vercel のステータスが出ても、配信は Cloudflare です。Vercel 側はビルドしない設定なので、その赤は無視してよい。
 
 ## 必守ロック（毎回）
