@@ -86,6 +86,31 @@ test("Perplexity bots are allowed as search fetchers", () => {
   for (const bot of bots) assert.match(bot.doc, /^https:\/\/docs\.perplexity\.ai\//);
 });
 
+test("CSP allows the Cloudflare analytics beacon and keeps other directives", () => {
+  const expected = [
+    "default-src 'self'",
+    "base-uri 'self'",
+    "object-src 'none'",
+    "frame-ancestors 'none'",
+    "form-action 'self'",
+    "script-src 'self' https://static.cloudflareinsights.com 'sha256-sLkTbdHhXxcgjum4ZATIzcts3pD60GAsku9lzyHhMbA=' 'wasm-unsafe-eval'",
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data: blob: https:",
+    "font-src 'self' data:",
+    "connect-src 'self' https://cloudflareinsights.com",
+    "media-src 'self' blob:",
+    "worker-src 'self' blob:",
+    "manifest-src 'self'",
+    "upgrade-insecure-requests",
+  ].join("; ");
+  assert.equal(CSP, expected);
+  const script = /(?:^|; )script-src ([^;]+)/.exec(CSP)[1];
+  assert.equal(script.includes("'unsafe-inline'"), false);
+  assert.match(script, /(?:^| )'self'(?: |$)/);
+  const connect = /(?:^|; )connect-src ([^;]+)/.exec(CSP)[1];
+  assert.match(connect, /(?:^| )'self'(?: |$)/);
+});
+
 test("public robots.txt and _headers match the generators", () => {
   assert.equal(readFileSync(join(webRoot, "public", "robots.txt"), "utf8"), renderRobots());
   assert.equal(readFileSync(join(webRoot, "public", "_headers"), "utf8"), renderHeaders());
