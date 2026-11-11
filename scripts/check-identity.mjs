@@ -9,8 +9,10 @@
 // merge_commit_sha of a pull request merged into main. Non-merge parents
 // still need noreply authors, committers, and trailers. A failed or incomplete
 // API response rejects the exception. A weekly commit GitHub signed as
-// web-flow is accepted when its Workflow-Run trailer matches a run of this
-// repository's weekly workflow.
+// web-flow is accepted when it has a github-actions check run named
+// weekly-growth-receipt, that run's external_id is a run of this
+// repository's weekly-growth.yml, and the author email ends with
+// @users.noreply.github.com.
 // workflow_dispatch: origin/main..HEAD. An empty range is success.
 // A shallow repository fails closed until it is unshallowed, even when both
 // ends of the range exist. Missing objects or an unreadable fork head fail closed.
@@ -18,7 +20,7 @@ import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { CANONICAL_EMAIL, CANONICAL_NAME } from "./lib/identity.mjs";
 import { readProvenance } from "./lib/github-trust.mjs";
-import { botCommitOk, platformMergeOk } from "./lib/provenance.mjs";
+import { botCommitOk, isBotAuthorEmail, platformMergeOk } from "./lib/provenance.mjs";
 
 const GITHUB_MERGE_EMAIL = "noreply@github.com";
 const TRAILER_RE = /^(?:co-authored-by|signed-off-by):[^\n]*$/gim;
@@ -118,7 +120,9 @@ export function isPlatformMerge(commit, parentCommits = [], proof) {
 function isSignedBotCommit(commit, proof) {
   if (!proof || proof.error) return false;
   if (proof.commit?.sha !== commit?.sha) return false;
-  return botCommitOk(proof.commit, proof.run, proof.repo || process.env.GITHUB_REPOSITORY || "");
+  if (!isBotAuthorEmail(commit?.authorEmail)) return false;
+  if (!isBotAuthorEmail(proof.commit?.commit?.author?.email)) return false;
+  return botCommitOk(proof.commit, proof, proof.repo || process.env.GITHUB_REPOSITORY || "");
 }
 
 export function identityProblems(commits, options = {}) {

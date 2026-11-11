@@ -6,7 +6,7 @@ import { dirname, join } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { identityProblems, intendedRange, isPlatformMerge, unfoldBody } from "../check-identity.mjs";
-import { botCommitOk, commitRequest, platformMergeOk } from "../lib/provenance.mjs";
+import { botCommitOk, checkRunRequest, commitRequest, platformMergeOk } from "../lib/provenance.mjs";
 import { CANONICAL_EMAIL, CANONICAL_NAME, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -204,42 +204,74 @@ test("event ranges are explicit", () => {
   assert.equal(isPlatformMerge({ ...merge, parents: 1 }, merge.parentCommits, proof), false);
   assert.equal(isPlatformMerge(merge, [], proof), false);
   assert.equal(isPlatformMerge(merge, [parent, { ...parent, authorEmail: "person@example.com" }], proof), false);
-  const botProof = {
-    repo: "acme/ads",
-    commit: {
-      sha: "b".repeat(40),
-      commit: { verification: { verified: true }, message: "knowledge\n\nWorkflow-Run: 99\n" },
-      committer: { login: "web-flow" },
-      parents: [{ sha: "p" }],
-    },
-    run: {
-      id: 99,
-      path: ".github/workflows/weekly-growth.yml",
-      event: "schedule",
-      head_repository: { full_name: "acme/ads" },
-    },
+  const botSha = "b".repeat(40);
+  const botEmail = "41898282+github-actions[bot]@users.noreply.github.com";
+  const weeklyRun = {
+    id: 99,
+    path: ".github/workflows/weekly-growth.yml",
+    event: "schedule",
+    head_repository: { full_name: "acme/ads" },
   };
-  assert.equal(botCommitOk(botProof.commit, botProof.run, "acme/ads"), true);
-  assert.equal(botCommitOk(botProof.commit, botProof.run, "other/ads"), false);
-  assert.deepEqual(identityProblems([{
-    sha: "b".repeat(40),
+  const receipt = {
+    name: "weekly-growth-receipt",
+    head_sha: botSha,
+    external_id: "99",
+    app: { slug: "github-actions" },
+  };
+  const botCommit = {
+    sha: botSha,
+    commit: {
+      verification: { verified: true },
+      message: "knowledge\n",
+      author: { email: botEmail },
+    },
+    committer: { login: "web-flow" },
+    parents: [{ sha: "p" }],
+  };
+  const botProof = { repo: "acme/ads", commit: botCommit, checks: [receipt], run: weeklyRun };
+  assert.equal(botCommitOk(botCommit, botProof, "acme/ads"), true);
+  assert.equal(botCommitOk(botCommit, botProof, "other/ads"), false);
+  assert.equal(botCommitOk(botCommit, { ...botProof, checks: [] }, "acme/ads"), false);
+  assert.equal(botCommitOk(botCommit, { ...botProof, checks: [{ ...receipt, app: { slug: "other-app" } }] }, "acme/ads"), false);
+  assert.equal(botCommitOk(botCommit, { ...botProof, run: { ...weeklyRun, path: ".github/workflows/check.yml" } }, "acme/ads"), false);
+  assert.equal(botCommitOk({
+    ...botCommit,
+    commit: { ...botCommit.commit, author: { email: "person@example.com" } },
+  }, botProof, "acme/ads"), false);
+  const botLocal = {
+    sha: botSha,
     parents: 1,
     authorName: "github-actions[bot]",
-    authorEmail: "41898282+github-actions[bot]@users.noreply.github.com",
+    authorEmail: botEmail,
     committerName: "GitHub",
     committerEmail: "noreply@github.com",
     body: "",
     provenance: botProof,
-  }]), []);
+  };
+  assert.deepEqual(identityProblems([botLocal]), []);
+  assert.ok(identityProblems([{ ...botLocal, authorEmail: "person@example.com" }]).some((problem) => problem.role === "author"));
+  assert.ok(identityProblems([{ ...botLocal, provenance: { ...botProof, checks: [] } }]).some((problem) => problem.role === "author"));
+  assert.ok(identityProblems([{
+    ...botLocal,
+    provenance: { ...botProof, checks: [{ ...receipt, app: { slug: "other-app" } }] },
+  }]).some((problem) => problem.role === "author"));
+  assert.ok(identityProblems([{
+    ...botLocal,
+    provenance: { ...botProof, run: { ...weeklyRun, path: ".github/workflows/check.yml" } },
+  }]).some((problem) => problem.role === "author"));
   const request = commitRequest({
     message: "knowledge",
     tree: "a".repeat(40),
     parents: ["b".repeat(40)],
-    runId: "99",
   });
   assert.deepEqual(Object.keys(request).sort(), ["message", "parents", "tree"]);
-  assert.match(request.message, /^knowledge\n\nWorkflow-Run: 99\n$/);
-  assert.equal(commitRequest({ message: "knowledge", tree: "a".repeat(40), parents: ["b".repeat(40)], runId: "" }), null);
+  assert.equal(request.message, "knowledge\n");
+  assert.equal(commitRequest({ message: "  ", tree: "a".repeat(40), parents: ["b".repeat(40)] }), null);
+  const runRequest = checkRunRequest({ sha: botSha, runId: "99" });
+  assert.equal(runRequest.name, "weekly-growth-receipt");
+  assert.equal(runRequest.head_sha, botSha);
+  assert.equal(runRequest.external_id, "99");
+  assert.equal(checkRunRequest({ sha: botSha, runId: "" }), null);
   const folded = unfoldBody("Co-authored-by: Fixture\n <person@example.com>");
   assert.match(folded, /Co-authored-by: Fixture <person@example.com>/);
   const foldedProblem = identityProblems([{

@@ -2,10 +2,15 @@
 // A commit counts only when GitHub's API reports a verified web-flow signature.
 const WEB_FLOW = "web-flow";
 export const WEEKLY_WORKFLOW_PATH = ".github/workflows/weekly-growth.yml";
+export const RECEIPT_NAME = "weekly-growth-receipt";
 
-export function workflowRunId(message) {
-  const match = String(message ?? "").match(/^Workflow-Run:[ \t]+([0-9]+)[ \t]*$/m);
-  return match ? match[1] : "";
+export function isBotAuthorEmail(email) {
+  return String(email ?? "").trim().toLowerCase().endsWith("@users.noreply.github.com");
+}
+
+export function receiptFor(checks) {
+  if (!Array.isArray(checks)) return null;
+  return checks.find((check) => check?.name === RECEIPT_NAME) ?? null;
 }
 
 export function isVerifiedWebFlow(commit) {
@@ -42,21 +47,39 @@ export function workflowRunOk(run, repo, runId) {
   return true;
 }
 
-export function botCommitOk(commit, run, repo) {
+export function botCommitOk(commit, proof, repo) {
   if (!isVerifiedWebFlow(commit)) return false;
-  const runId = workflowRunId(commit.commit?.message);
-  if (!runId) return false;
-  return workflowRunOk(run, repo, runId);
+  if (!isBotAuthorEmail(commit.commit?.author?.email)) return false;
+  const checks = proof?.checks;
+  const receipt = receiptFor(checks);
+  if (!receipt) return false;
+  if (receipt.app?.slug !== "github-actions") return false;
+  if (receipt.head_sha !== commit.sha) return false;
+  const runId = String(receipt.external_id ?? "");
+  if (!/^[0-9]+$/.test(runId)) return false;
+  return workflowRunOk(proof?.run, repo, runId);
 }
 
-export function commitRequest({ message, tree, parents, runId }) {
-  if (!/^[0-9]+$/.test(String(runId ?? ""))) return null;
+export function commitRequest({ message, tree, parents }) {
+  if (!String(message ?? "").trim()) return null;
   if (!/^[0-9a-f]{40}$/i.test(String(tree ?? ""))) return null;
   if (!Array.isArray(parents) || parents.length < 1) return null;
   if (parents.some((sha) => !/^[0-9a-f]{40}$/i.test(String(sha)))) return null;
   return {
-    message: `${String(message ?? "").trim()}\n\nWorkflow-Run: ${runId}\n`,
+    message: `${String(message).trim()}\n`,
     tree,
     parents,
+  };
+}
+
+export function checkRunRequest({ sha, runId }) {
+  if (!/^[0-9a-f]{40}$/i.test(String(sha ?? ""))) return null;
+  if (!/^[0-9]+$/.test(String(runId ?? ""))) return null;
+  return {
+    name: RECEIPT_NAME,
+    head_sha: sha,
+    external_id: String(runId),
+    status: "completed",
+    conclusion: "success",
   };
 }

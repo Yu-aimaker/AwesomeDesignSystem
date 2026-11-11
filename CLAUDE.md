@@ -24,7 +24,7 @@ AI コーディングエージェント向けの汎用デザインシステム *
 
 - 作業ブランチは最新の main から切る。1 ブランチ 1 テーマ。
 - 終わったら CI（`.github/workflows/check.yml`）を緑にする。Actions が使えないときは、check.yml の各ステップを手元で全部実行して通ったことを PR に書く。
-- main への反映は、承認済みのマージ経路を確認してから行う。それまで自動マージしない。pull_request の identity 検査は、その PR が作った範囲だけを厳密に見る。main への push で追加で許す merge は、GitHub API の `verification.verified` が true、committer が web-flow、親が 2 つ以上、その SHA が main へ merge された PR の `merge_commit_sha` と一致するものだけ。API の失敗や欠けた項目は拒否する。merge でない親は noreply と trailer を検査する。週次ブランチの前のコミットは、同じ API で verified かつ web-flow で、`Workflow-Run` がこのリポジトリの weekly-growth の実行と一致するときだけ信頼する。
+- main への反映は、承認済みのマージ経路を確認してから行う。それまで自動マージしない。pull_request の identity 検査は、その PR が作った範囲だけを厳密に見る。main への push で追加で許す merge は、GitHub API の `verification.verified` が true、committer が web-flow、親が 2 つ以上、その SHA が main へ merge された PR の `merge_commit_sha` と一致するものだけ。API の失敗や欠けた項目は拒否する。merge でない親は noreply と trailer を検査する。週次ブランチの前のコミットは、同じ API で verified かつ web-flow、author が `@users.noreply.github.com`、check run `weekly-growth-receipt` の `app.slug` が `github-actions`、`external_id` がこのリポジトリの weekly-growth.yml の実行、`head_sha` がその SHA、の全部がそろうときだけ信頼する。API が失敗したらジョブを失敗させる。
 - author と committer は `Yu-aimaker <200000358+Yu-aimaker@users.noreply.github.com>`。作業前に `bash scripts/setup-git-identity.sh` を実行し、範囲内の全コミットを `node scripts/check-identity.mjs` で確認する。
 - force push と、main の履歴を書き換える rebase はしない。`bot/weekly-growth` も fast-forward だけにする。
 - 衝突は main 側の最新の内容を正として解く。両方の追加を残せるなら両方残す。生成物（`Reference/`、`Knowledge/README.md`、`Plugin/awesome-ds/ds/`、`Plugin/awesome-ds/knowledge/`）は手で直さず再生成する。

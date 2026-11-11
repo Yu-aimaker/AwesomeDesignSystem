@@ -61,7 +61,7 @@ const plan = publishPlan({
 });
 if (plan.action !== "ready") {
   record(plan.action, plan.reason, "committed=false\n");
-  process.exit(0);
+  process.exit(plan.reason === "provenance-unavailable" ? 1 : 0);
 }
 const staged = git(["diff", "--cached", "--name-only"]).trim();
 if (!staged) {

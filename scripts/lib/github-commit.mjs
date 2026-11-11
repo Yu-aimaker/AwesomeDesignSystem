@@ -1,7 +1,7 @@
 // Create the weekly commit through the Git data API so GitHub signs it.
 // No custom author, committer, or signature: those block bot verification.
 import { execFileSync } from "node:child_process";
-import { botCommitOk, commitRequest } from "./provenance.mjs";
+import { botCommitOk, checkRunRequest, commitRequest, isBotAuthorEmail, isVerifiedWebFlow } from "./provenance.mjs";
 
 const MAX_BLOB = 1_000_000;
 
@@ -24,19 +24,25 @@ function gitOk(cwd, args) {
 
 function gh(method, path, body) {
   const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || "";
-  if (!token) return { error: true };
+  if (!token) throw new Error("github api: missing token");
+  const args = ["api", "--method", method, path, "-H", "Accept: application/vnd.github+json"];
+  if (body !== undefined) args.push("--input", "-");
+  let out = "";
   try {
-    const args = ["api", "--method", method, path, "-H", "Accept: application/vnd.github+json"];
-    const out = execFileSync("gh", args, {
+    out = execFileSync("gh", args, {
       encoding: "utf8",
       input: body === undefined ? undefined : JSON.stringify(body),
       env: { ...process.env, GH_TOKEN: token },
       stdio: ["pipe", "pipe", "pipe"],
     });
-    if (!String(out).trim()) return { error: true };
+  } catch {
+    throw new Error(`github api failed: ${method} ${path}`);
+  }
+  if (!String(out).trim()) throw new Error(`github api failed: ${method} ${path}`);
+  try {
     return JSON.parse(out);
   } catch {
-    return { error: true };
+    throw new Error(`github api failed: ${method} ${path}`);
   }
 }
 
@@ -61,7 +67,7 @@ function treeEntries(cwd, repo, baseTree, indexTree) {
       content: bytes.toString("base64"),
       encoding: "base64",
     });
-    if (!blob?.sha) return null;
+    if (!blob?.sha) throw new Error("github api failed: POST git/blobs");
     entries.push({ path, mode, type: "blob", sha: blob.sha });
   }
   return entries;
@@ -81,31 +87,39 @@ export function parentShas({ cwd, mainRef, remoteRef }) {
 }
 
 export function publishSignedCommit({ cwd, repo, branch, message, runId, mainRef, remoteRef }) {
-  if (!repo || !branch?.startsWith("bot/")) return { action: "skip", reason: "provenance-unavailable" };
+  if (!repo || !branch?.startsWith("bot/")) throw new Error("github api: missing repository");
   const planned = parentShas({ cwd, mainRef, remoteRef });
   if (planned.action === "skip") return planned;
   const indexTree = git(cwd, ["write-tree"]).trim();
   const baseTree = git(cwd, ["rev-parse", `${planned.parents[0]}^{tree}`]).trim();
   const entries = treeEntries(cwd, repo, baseTree, indexTree);
-  if (!entries) return { action: "skip", reason: "provenance-unavailable" };
+  if (!entries) throw new Error("github api failed: tree");
   if (!entries.length) return { action: "skip", reason: "empty" };
   const tree = gh("POST", `repos/${repo}/git/trees`, { base_tree: baseTree, tree: entries });
-  if (!tree?.sha) return { action: "skip", reason: "provenance-unavailable" };
-  const body = commitRequest({ message, tree: tree.sha, parents: planned.parents, runId });
+  if (!tree?.sha) throw new Error("github api failed: POST git/trees");
+  const body = commitRequest({ message, tree: tree.sha, parents: planned.parents });
   if (!body || Object.keys(body).some((key) => !["message", "tree", "parents"].includes(key))) {
-    return { action: "skip", reason: "provenance-unavailable" };
+    throw new Error("github api failed: POST git/commits");
   }
   const created = gh("POST", `repos/${repo}/git/commits`, body);
-  if (!created?.sha) return { action: "skip", reason: "provenance-unavailable" };
+  if (!created?.sha) throw new Error("github api failed: POST git/commits");
   const commit = gh("GET", `repos/${repo}/commits/${created.sha}`);
+  if (!isVerifiedWebFlow(commit) || !isBotAuthorEmail(commit.commit?.author?.email)) {
+    throw new Error("github api failed: commit attribution");
+  }
+  const receipt = checkRunRequest({ sha: created.sha, runId });
+  if (!receipt) throw new Error("github api failed: POST check-runs");
+  gh("POST", `repos/${repo}/check-runs`, receipt);
+  const listed = gh("GET", `repos/${repo}/commits/${created.sha}/check-runs?per_page=100`);
+  if (!listed || !Array.isArray(listed.check_runs)) throw new Error("github api failed: GET check-runs");
   const run = gh("GET", `repos/${repo}/actions/runs/${runId}`);
-  if (!botCommitOk(commit, run, repo)) return { action: "skip", reason: "unverified" };
+  if (!botCommitOk(commit, { checks: listed.check_runs, run }, repo)) {
+    throw new Error("github api failed: receipt");
+  }
   const hasRemote = Boolean(planned.remoteSha);
   const updated = hasRemote
     ? gh("PATCH", `repos/${repo}/git/refs/heads/${branch}`, { sha: created.sha, force: false })
     : gh("POST", `repos/${repo}/git/refs`, { ref: `refs/heads/${branch}`, sha: created.sha });
-  if (!updated || updated.error || !(updated.ref || updated.object?.sha)) {
-    return { action: "skip", reason: "provenance-unavailable" };
-  }
+  if (!updated?.ref && !updated?.object?.sha) throw new Error("github api failed: refs");
   return { action: "ready", reason: hasRemote ? "fast-forward" : "created", sha: created.sha };
 }

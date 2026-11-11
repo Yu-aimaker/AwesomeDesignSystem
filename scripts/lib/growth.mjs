@@ -147,7 +147,7 @@ export function discoveryStatus({ searches = 0, searchFailures = 0, releaseFailu
 export function isTrustedAuthor(entry) {
   const proof = entry?.provenance;
   if (!proof || typeof proof !== "object" || proof.error === true) return false;
-  return proof.verified === true && proof.webFlow === true && proof.runMatches === true;
+  return proof.verified === true && proof.webFlow === true && proof.noreplyAuthor === true && proof.receipt === true;
 }
 
 export function foreignAuthors(entries) {

@@ -29,4 +29,4 @@ author と committer は、名前とメールの両方を次の一組にしま�
 
 候補は未採用のまま Knowledge に残す。ウェブで見つけた項目を、その実行の中で DS やサイトへ採用しない。開いている週次 PR を次の週が更新するときは、前回の候補行を残して新しい行を足す。
 
-週次の作者の信頼は、コミットメッセージの actor や、メールとアカウントの対応では決めない。週次は Git Data API でコミットを作り、GitHub に署名させる。前のコミットを信頼するのは、API で verified が true、committer が web-flow、`Workflow-Run` がこのリポジトリの weekly-growth の実行と一致するときだけ。API が失敗したら拒否する。
+週次の作者の信頼は、コミットメッセージの actor や、メールとアカウントの対応では決めない。週次は Git Data API でコミットを作り、GitHub に署名させ、そのコミットへ `weekly-growth-receipt` という check run を付ける。`external_id` は workflow run id。前のコミットを信頼するのは、次が全部そろうときだけ。API の `verification.verified` が true。committer が web-flow。author のメールが `@users.noreply.github.com` で終わる。check run の名前が `weekly-growth-receipt` で、`app.slug` が `github-actions`。その `external_id` がこのリポジトリの `weekly-growth.yml` の実行。`head_sha` がそのコミット SHA。どれか欠けたら拒否する。API が失敗したらジョブを失敗させる。

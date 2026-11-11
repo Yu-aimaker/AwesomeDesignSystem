@@ -21,6 +21,9 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+      pull-requests: read
+      checks: read
+      actions: read
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
@@ -105,6 +108,7 @@ jobs:
           PUSH_SHA: ${{ github.sha }}
           PUSH_REF: ${{ github.ref }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
+          GH_TOKEN: ${{ github.token }}
         run: node scripts/check-identity.mjs
       - name: Weekly growth failure issue
         run: node --test scripts/__tests__/failure-issue.test.mjs

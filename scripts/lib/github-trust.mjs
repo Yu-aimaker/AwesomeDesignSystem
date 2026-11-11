@@ -1,7 +1,7 @@
 // Read GitHub's signature verdict. A missing field or a failed call is a rejection.
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import { botCommitOk, isVerifiedWebFlow } from "./provenance.mjs";
+import { botCommitOk, isBotAuthorEmail, receiptFor } from "./provenance.mjs";
 
 function gh(path) {
   const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN || "";
@@ -25,15 +25,20 @@ export function provenanceFromFixture(fixture, sha) {
   if (!commit || commit.error) return { error: true };
   if (!Array.isArray(fixture.pulls?.[sha]) && fixture.pulls?.[sha]?.error) return { error: true };
   const pulls = fixture.pulls?.[sha];
-  const runId = commit.commit?.message?.match(/^Workflow-Run:[ \t]+([0-9]+)[ \t]*$/m)?.[1] ?? "";
+  if (fixture.checks?.[sha]?.error) return { error: true };
+  const checks = Array.isArray(fixture.checks?.[sha]) ? fixture.checks[sha] : [];
+  const receipt = receiptFor(checks);
   let run = null;
-  if (runId) {
+  if (receipt) {
+    const runId = String(receipt.external_id ?? "");
+    if (!/^[0-9]+$/.test(runId)) return { error: true };
     run = fixture.runs?.[runId];
     if (!run || run.error) return { error: true };
   }
   return {
     commit,
     pulls: Array.isArray(pulls) ? pulls : null,
+    checks,
     run,
     repo: fixture.repo ?? process.env.GITHUB_REPOSITORY ?? "",
   };
@@ -45,13 +50,19 @@ export function fetchProvenance(sha, repo) {
   if (!commit || commit.error || !commit.sha) return { error: true };
   const pulls = gh(`repos/${repo}/commits/${sha}/pulls`);
   if (!Array.isArray(pulls)) return { error: true };
-  const runId = commit.commit?.message?.match(/^Workflow-Run:[ \t]+([0-9]+)[ \t]*$/m)?.[1] ?? "";
+  const listed = gh(`repos/${repo}/commits/${sha}/check-runs?per_page=100`);
+  if (!listed || listed.error || !Array.isArray(listed.check_runs)) return { error: true };
+  if (listed.total_count > listed.check_runs.length) return { error: true };
+  const checks = listed.check_runs;
+  const receipt = receiptFor(checks);
   let run = null;
-  if (runId) {
+  if (receipt) {
+    const runId = String(receipt.external_id ?? "");
+    if (!/^[0-9]+$/.test(runId)) return { error: true };
     run = gh(`repos/${repo}/actions/runs/${runId}`);
     if (!run || run.error || run.id === undefined) return { error: true };
   }
-  return { commit, pulls, run, repo };
+  return { commit, pulls, checks, run, repo };
 }
 
 export function readProvenance(sha) {
@@ -72,8 +83,9 @@ export function lookupCommitTrust(sha) {
   const repo = proof.repo || process.env.GITHUB_REPOSITORY || "";
   return {
     verified: proof.commit.commit?.verification?.verified === true,
-    webFlow: proof.commit.committer?.login === "web-flow" && isVerifiedWebFlow(proof.commit),
-    runMatches: botCommitOk(proof.commit, proof.run, repo),
+    webFlow: proof.commit.committer?.login === "web-flow",
+    noreplyAuthor: isBotAuthorEmail(proof.commit.commit?.author?.email),
+    receipt: botCommitOk(proof.commit, proof, repo),
     error: false,
   };
 }

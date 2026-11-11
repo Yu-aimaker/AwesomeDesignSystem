@@ -25,7 +25,7 @@ import {
   topicQuery,
   workflowFindings,
 } from "../lib/growth.mjs";
-import { commitRequest } from "../lib/provenance.mjs";
+import { commitRequest, checkRunRequest } from "../lib/provenance.mjs";
 import { BOT_ACTOR, CANONICAL_NAME, GROWTH_STATE, identityEnv } from "../lib/identity.mjs";
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
@@ -304,7 +304,7 @@ test("workflows must not push main or call billed agents", () => {
     committerEmail: BOT_EMAIL,
     actor: "anyone",
     state: GROWTH_STATE,
-    provenance: { verified: true, webFlow: true, runMatches: true },
+    provenance: { verified: true, webFlow: true, noreplyAuthor: true, receipt: true },
   };
   assert.equal(isTrustedAuthor(trusted), true);
   const unsignedOwner = {
@@ -314,8 +314,8 @@ test("workflows must not push main or call billed agents", () => {
     committerEmail: BOT_EMAIL,
   };
   assert.equal(isTrustedAuthor(unsignedOwner), false);
-  assert.equal(isTrustedAuthor({ provenance: { verified: true, webFlow: true, runMatches: false } }), false);
-  assert.equal(isTrustedAuthor({ provenance: { error: true, verified: true, webFlow: true, runMatches: true } }), false);
+  assert.equal(isTrustedAuthor({ provenance: { verified: true, webFlow: true, noreplyAuthor: true, receipt: false } }), false);
+  assert.equal(isTrustedAuthor({ provenance: { error: true, verified: true, webFlow: true, noreplyAuthor: true, receipt: true } }), false);
   assert.equal(publishPlan({
     actor: BOT_ACTOR,
     remoteExists: true,
@@ -332,9 +332,12 @@ test("workflows must not push main or call billed agents", () => {
     message: "knowledge",
     tree: "a".repeat(40),
     parents: ["b".repeat(40)],
-    runId: "42",
   });
   assert.deepEqual(Object.keys(signed).sort(), ["message", "parents", "tree"]);
+  assert.equal(signed.message, "knowledge\n");
+  const receipt = checkRunRequest({ sha: "c".repeat(40), runId: "42" });
+  assert.equal(receipt.external_id, "42");
+  assert.equal(receipt.name, "weekly-growth-receipt");
   assert.equal(isTrustedAuthor(trusted), true);
   assert.deepEqual(foreignAuthors([trusted, "human@example.com"]), ["human@example.com"]);
   assert.ok(workflowFindings("runs-on: ubuntu-latest\nrun: git push --force origin HEAD\n").includes("force-push"));
@@ -534,7 +537,7 @@ function trustedAuthor() {
     email: BOT_EMAIL,
     committerName: CANONICAL_NAME,
     committerEmail: BOT_EMAIL,
-    provenance: { verified: true, webFlow: true, runMatches: true },
+    provenance: { verified: true, webFlow: true, noreplyAuthor: true, receipt: true },
   };
 }
 
@@ -873,5 +876,190 @@ test("a second weekly run keeps candidate rows the new discovery omitted", () =>
     assert.match(text, /https:\/\/github.com\/acme\/b/);
   } finally {
     rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test("check and settle pass a read token into every API lookup", () => {
+  const checkYml = readFileSync(join(repoRoot, ".github/workflows/check.yml"), "utf8");
+  const repo = jobBlocks(checkYml).find((block) => block.startsWith("  repo:\n"));
+  const web = jobBlocks(checkYml).find((block) => block.startsWith("  web:\n"));
+  for (const line of ["contents: read", "pull-requests: read", "checks: read", "actions: read"]) {
+    assert.match(repo, new RegExp(line.replace("-", "\\-")));
+  }
+  assert.match(repo, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.match(web, /\n {6}contents: read\n/);
+  assert.doesNotMatch(web, /pull-requests:|checks:|actions:/);
+  assert.doesNotMatch(checkYml, /actions: write/);
+  assert.doesNotMatch(checkYml, /checks: write/);
+
+  const settleYml = readFileSync(join(repoRoot, ".github/workflows/weekly-growth-settle.yml"), "utf8");
+  const settle = jobBlocks(settleYml).find((block) => block.startsWith("  settle:\n"));
+  for (const line of ["contents: read", "pull-requests: read", "checks: read", "actions: read"]) {
+    assert.match(settle, new RegExp(line.replace("-", "\\-")));
+  }
+  assert.match(settle, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.doesNotMatch(settle, /checks: write|actions: write|contents: write/);
+
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const propose = jobBlocks(weekly).find((block) => block.startsWith("  propose:\n"));
+  assert.match(propose, /checks: write/);
+  assert.match(propose, /GH_TOKEN: \$\{\{ github\.token \}\}/);
+  assert.match(propose, /GITHUB_RUN_ID: \$\{\{ github\.run_id \}\}/);
+});
+
+function ghCalls(logPath) {
+  return readFileSync(logPath, "utf8").trim().split("\n").filter(Boolean).map((line) => JSON.parse(line));
+}
+
+function callMethod(entry) {
+  return entry.args[entry.args.indexOf("--method") + 1];
+}
+
+function callPath(entry) {
+  return entry.args.find((arg) => arg.startsWith("repos/")) || "";
+}
+
+test("the first manual weekly run sends each git body and the receipt", () => {
+  const root = mkdtempSync(join(tmpdir(), "ads-gh-"));
+  const cwd = join(root, "repo");
+  const bin = join(root, "bin");
+  const logPath = join(root, "gh.log");
+  const outputPath = join(root, "output.txt");
+  mkdirSync(cwd, { recursive: true });
+  mkdirSync(bin, { recursive: true });
+  writeFileSync(join(bin, "gh"), `#!/usr/bin/env node
+import { appendFileSync, readFileSync } from "node:fs";
+const args = process.argv.slice(2);
+const inputAt = args.indexOf("--input");
+let stdin = "";
+if (inputAt !== -1 && args[inputAt + 1] === "-") stdin = readFileSync(0, "utf8");
+appendFileSync(process.env.GH_SHIM_LOG, JSON.stringify({ args, stdin }) + "\\n");
+const method = args[args.indexOf("--method") + 1];
+const path = args.find((arg) => arg.startsWith("repos/")) || "";
+if (process.env.GH_SHIM_FAIL === "1" && method === "POST" && path.endsWith("/git/blobs")) process.exit(1);
+const commit = "${"3".repeat(40)}";
+const send = (value) => process.stdout.write(JSON.stringify(value));
+if (method === "POST" && path.endsWith("/git/blobs")) send({ sha: "${"1".repeat(40)}" });
+else if (method === "POST" && path.endsWith("/git/trees")) send({ sha: "${"2".repeat(40)}" });
+else if (method === "POST" && path.endsWith("/git/commits")) send({ sha: commit });
+else if (method === "GET" && path.includes("/check-runs")) send({ total_count: 1, check_runs: [{ name: "weekly-growth-receipt", head_sha: commit, external_id: "42", app: { slug: "github-actions" } }] });
+else if (method === "GET" && /\\/commits\\/[0-9a-f]{40}$/.test(path)) send({ sha: commit, commit: { verification: { verified: true }, author: { email: "41898282+github-actions[bot]@users.noreply.github.com" }, message: "knowledge: week\\n" }, committer: { login: "web-flow" }, parents: [{ sha: "${"0".repeat(40)}" }] });
+else if (method === "GET" && path.includes("/actions/runs/")) send({ id: 42, path: ".github/workflows/weekly-growth.yml", event: "workflow_dispatch", head_repository: { full_name: "acme/ads" } });
+else if (method === "POST" && path.endsWith("/check-runs")) send({ id: 1, name: "weekly-growth-receipt" });
+else if (method === "POST" && path.endsWith("/git/refs")) send({ ref: "refs/heads/bot/weekly-growth", object: { sha: commit } });
+else process.exit(1);
+`, { mode: 0o755 });
+  try {
+    git(cwd, ["init", "-b", "main"]);
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "Knowledge/research/note.md"), "one\n");
+    git(cwd, ["add", "Knowledge"]);
+    git(cwd, ["commit", "-m", "base"]);
+    writeFileSync(join(cwd, "Knowledge/research/note.md"), "two\n");
+    git(cwd, ["add", "Knowledge"]);
+    const mainSha = git(cwd, ["rev-parse", "HEAD"]).trim();
+    const baseTree = git(cwd, ["rev-parse", "HEAD^{tree}"]).trim();
+    const env = {
+      ...process.env,
+      PATH: `${bin}:${process.env.PATH}`,
+      GH_TOKEN: "shim-token",
+      GITHUB_TOKEN: "",
+      GITHUB_REPOSITORY: "acme/ads",
+      GITHUB_RUN_ID: "42",
+      GROWTH_ACTOR: "github-actions[bot]",
+      GH_SHIM_LOG: logPath,
+      GITHUB_OUTPUT: outputPath,
+    };
+    const published = execFileSync(process.execPath, [
+      join(repoRoot, "scripts/publish-bot-branch.mjs"),
+      "--commit",
+      "--push",
+      "--from",
+      "main",
+      "--remote",
+      "refs/does-not-exist",
+      "--branch",
+      "bot/weekly-growth",
+      "--message",
+      "knowledge: week",
+    ], { cwd, env, encoding: "utf8" });
+    assert.match(published, /ready created/);
+    assert.match(readFileSync(outputPath, "utf8"), /committed=true/);
+    const calls = ghCalls(logPath);
+    const find = (method, suffix) => calls.find((entry) => callMethod(entry) === method && callPath(entry).endsWith(suffix));
+    const blob = find("POST", "/git/blobs");
+    const tree = find("POST", "/git/trees");
+    const commit = find("POST", "/git/commits");
+    const receipt = find("POST", "/check-runs");
+    const ref = find("POST", "/git/refs");
+    for (const entry of [blob, tree, commit, receipt, ref]) {
+      assert.equal(entry.args[entry.args.indexOf("--input") + 1], "-");
+      assert.ok(entry.stdin.length > 0);
+    }
+    for (const entry of calls.filter((entry) => callMethod(entry) === "GET")) {
+      assert.equal(entry.args.includes("--input"), false);
+      assert.equal(entry.stdin, "");
+    }
+    const blobBody = JSON.parse(blob.stdin);
+    assert.equal(blobBody.encoding, "base64");
+    assert.equal(Buffer.from(blobBody.content, "base64").toString("utf8"), "two\n");
+    const treeBody = JSON.parse(tree.stdin);
+    assert.equal(treeBody.base_tree, baseTree);
+    assert.equal(treeBody.tree.length, 1);
+    assert.equal(treeBody.tree[0].path, "Knowledge/research/note.md");
+    assert.equal(treeBody.tree[0].sha, "1".repeat(40));
+    const commitBody = JSON.parse(commit.stdin);
+    assert.deepEqual(Object.keys(commitBody).sort(), ["message", "parents", "tree"]);
+    assert.equal(commitBody.message, "knowledge: week\n");
+    assert.deepEqual(commitBody.parents, [mainSha]);
+    assert.equal(commitBody.tree, "2".repeat(40));
+    const receiptBody = JSON.parse(receipt.stdin);
+    assert.equal(receiptBody.name, "weekly-growth-receipt");
+    assert.equal(receiptBody.head_sha, "3".repeat(40));
+    assert.equal(receiptBody.external_id, "42");
+    const refBody = JSON.parse(ref.stdin);
+    assert.equal(refBody.ref, "refs/heads/bot/weekly-growth");
+    assert.equal(refBody.sha, "3".repeat(40));
+    const order = ["/git/blobs", "/git/trees", "/git/commits", "/check-runs", "/git/refs"];
+    let cursor = -1;
+    for (const suffix of order) {
+      const index = calls.findIndex((entry, at) => at > cursor && callMethod(entry) === "POST" && callPath(entry).endsWith(suffix));
+      assert.ok(index > cursor, suffix);
+      cursor = index;
+    }
+    const getCommit = calls.findIndex((entry) => callMethod(entry) === "GET" && /\/commits\/[0-9a-f]{40}$/.test(callPath(entry)));
+    const postCheck = calls.findIndex((entry) => callMethod(entry) === "POST" && callPath(entry).endsWith("/check-runs"));
+    const postRef = calls.findIndex((entry) => callMethod(entry) === "POST" && callPath(entry).endsWith("/git/refs"));
+    assert.ok(getCommit > calls.findIndex((entry) => callMethod(entry) === "POST" && callPath(entry).endsWith("/git/commits")));
+    assert.ok(getCommit < postCheck);
+    assert.ok(postCheck < postRef);
+
+    writeFileSync(logPath, "");
+    env.GH_SHIM_FAIL = "1";
+    let failed = null;
+    try {
+      execFileSync(process.execPath, [
+        join(repoRoot, "scripts/publish-bot-branch.mjs"),
+        "--commit",
+        "--push",
+        "--from",
+        "main",
+        "--remote",
+        "refs/does-not-exist",
+        "--branch",
+        "bot/weekly-growth",
+        "--message",
+        "knowledge: week",
+      ], { cwd, env, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] });
+    } catch (error) {
+      failed = error;
+    }
+    assert.ok(failed);
+    assert.notEqual(failed.status, 0);
+    assert.match(String(failed.stderr), /github api failed/);
+    assert.equal(String(failed.stderr).includes("shim-token"), false);
+    assert.equal(String(failed.stdout || "").includes("ready"), false);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
