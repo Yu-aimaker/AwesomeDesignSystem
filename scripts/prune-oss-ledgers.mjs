@@ -2,13 +2,18 @@
 // Drop OSS ledger rows that fail the same rules as a new discovery.
 // The candidate ledger itself is not treated as a catalogue.
 import { appendFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { githubRequest } from "./lib/http-retry.mjs";
 import { cataloguedRepoKeys, githubRepoKey, unresolvedSpdx } from "./lib/growth.mjs";
 import { ledgerDropSummary, licenseFromNote, ossLedgerRows, pruneOssLedger } from "./lib/knowledge-append.mjs";
 
-const root = join(dirname(fileURLToPath(import.meta.url)), "..");
+function arg(name, fallback = "") {
+  const index = process.argv.indexOf(name);
+  return index === -1 ? fallback : process.argv[index + 1] ?? fallback;
+}
+
+const root = resolve(arg("--root", join(dirname(fileURLToPath(import.meta.url)), "..")));
 const LEDGERS = [
   "Knowledge/research/oss-candidates.md",
   "Plugin/awesome-ds/knowledge/research/oss-candidates.md",

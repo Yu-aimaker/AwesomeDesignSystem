@@ -3,7 +3,7 @@
 // GitHub signs that commit. A local git commit is never pushed.
 import { appendFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
-import { prepareBotBranch } from "./lib/bot-branch.mjs";
+import { stageWeeklyBranch } from "./lib/bot-branch.mjs";
 import { publishSignedCommit } from "./lib/github-commit.mjs";
 import { authorFromLog, publishPlan } from "./lib/growth.mjs";
 import { lookupCommitTrust } from "./lib/github-trust.mjs";
@@ -28,12 +28,27 @@ const branch = arg("--branch", "bot/weekly-growth");
 const mainRef = arg("--from", "origin/main");
 const remoteRef = arg("--remote", `origin/${branch}`);
 const message = arg("--message", "knowledge: 週次候補");
+const payloadDir = arg("--payload", "");
 const actor = process.env.GROWTH_ACTOR || "";
 const state = process.env.GROWTH_STATE || GROWTH_STATE;
 
 if (process.argv.includes("--prepare-only")) {
-  const prepared = prepareBotBranch({ cwd: process.cwd(), branch, mainRef, remoteRef, actor, state });
-  record(prepared.action, prepared.reason);
+  // Checkout and merge while the worktree is still clean, then copy the payload.
+  try {
+    const prepared = stageWeeklyBranch({
+      cwd: process.cwd(),
+      branch,
+      mainRef,
+      remoteRef,
+      actor,
+      state,
+      payloadDir,
+    });
+    record(prepared.action, prepared.reason);
+  } catch (error) {
+    console.error(error instanceof Error ? error.message : "prepare failed");
+    process.exit(1);
+  }
   process.exit(0);
 }
 

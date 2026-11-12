@@ -147,11 +147,15 @@ jobs:
         with:
           node-version: 22
 
-      - name: Unpack the run
+      - name: Stage the collect payload outside the worktree
         run: |
-          tar -xzf growth-artifact/growth-payload.tgz
-          test -f .growth/discover.json
-          node --input-type=module -e "import { readFileSync } from 'node:fs'; const doc = JSON.parse(readFileSync('.growth/discover.json','utf8')); if (doc.partial || doc.failed) { console.error('discover file is partial'); process.exit(1); }"
+          staging="${RUNNER_TEMP}/growth-payload"
+          rm -rf "$staging"
+          mkdir -p "$staging"
+          tar -xzf growth-artifact/growth-payload.tgz -C "$staging"
+          test -f "$staging/.growth/discover.json"
+          node --input-type=module -e "import { readFileSync } from 'node:fs'; const doc = JSON.parse(readFileSync(process.argv[1], 'utf8')); if (doc.partial || doc.failed) { console.error('discover file is partial'); process.exit(1); }" "$staging/.growth/discover.json"
+          rm -rf growth-artifact
 
       - name: Prepare the bot branch
         id: prepare
@@ -161,8 +165,7 @@ jobs:
         run: |
           git fetch origin main
           git fetch origin bot/weekly-growth || true
-          rm -rf growth-artifact
-          node scripts/publish-bot-branch.mjs --prepare-only --branch bot/weekly-growth --from origin/main
+          node scripts/publish-bot-branch.mjs --prepare-only --branch bot/weekly-growth --from origin/main --payload "${RUNNER_TEMP}/growth-payload"
 
       - name: Append to the open ledgers and commit
         id: publish

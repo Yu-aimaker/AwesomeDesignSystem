@@ -31,6 +31,7 @@
 - 手動実行の `dry_run` は既定 true です。PR、ラベル、issue、ブランチを変えません。Step Summary と artifact だけを残します。
 - 検索が全部失敗したとき、またはリリース確認が途中で落ちたときは、成功した収集として扱いません。`candidates.json` は書き換えず、ジョブを失敗させます。
 - ボットが push できるのは `bot/` で始まるブランチだけです。force push はありません。分岐していたブランチは残して報告します。
+- 収集の tar は作業ツリーの外で開き、bot ブランチを checkout して main を取り込んだあとで中身を置きます。先に `AwesomeDS/data/repos.json` を上書きすると、その差分で checkout が止まります。
 - main へ push する行はリポジトリにありません（`scripts/check-workflows.mjs` が CI で検査します）。
 - 公開してよいパスは `Knowledge/`、`Reference/`、`Plugin/awesome-ds/knowledge/` だけです。それ以外が差分に入ると失敗します。収集中の diff-guard はデータ検査のままです。bot ブランチの Check は `check-publish-paths` を使います。
 - OSS 候補のライセンスは MIT、Apache-2.0、BSD-2-Clause、BSD-3-Clause、ISC、0BSD、Unlicense、CC0-1.0 だけです。MPL-2.0 は弱いコピーレフトなので入れません。`NOASSERTION` やライセンス無しは、LICENSE ファイルがその許可リストの本文と一致するときだけ入れます。サイトの一覧、ランキング、Knowledge に既にあるリポジトリは候補にしません。
