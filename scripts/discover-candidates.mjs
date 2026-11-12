@@ -2,10 +2,10 @@
 // Append new OSS / guideline / release candidates. Does not display them on the site.
 //   node scripts/discover-candidates.mjs [--no-fetch] [--report report.json]
 import { execFileSync } from "node:child_process";
-import { readFileSync, writeFileSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { discoveryStatus, planDiscoveries, readImageSize, renderReport, topicQuery } from "./lib/growth.mjs";
+import { cataloguedRepoKeys, discoveryStatus, planDiscoveries, readImageSize, renderReport, topicQuery, unresolvedSpdx } from "./lib/growth.mjs";
 import { githubRequest } from "./lib/http-retry.mjs";
 import { constrainField } from "./lib/redact.mjs";
 
@@ -63,6 +63,50 @@ async function probe(url) {
   } catch {
     return { url, title: url, http: 0, ogWidth: null, ogHeight: null };
   }
+}
+
+function markdownTexts(dir) {
+  const texts = [];
+  for (const name of readdirSync(dir, { recursive: true })) {
+    const rel = String(name);
+    if (!rel.endsWith(".md")) continue;
+    texts.push(readFileSync(join(dir, rel), "utf8"));
+  }
+  return texts;
+}
+
+async function attachLicenseTexts(items) {
+  const cache = new Map();
+  let licenseFailures = 0;
+  for (const item of items) {
+    const full = String(item.full_name ?? "");
+    if (!/^[^/\s]+\/[^/\s]+$/.test(full) || !unresolvedSpdx(item.license?.spdx_id)) continue;
+    const key = full.toLowerCase();
+    if (!cache.has(key)) {
+      try {
+        const doc = await gh(`/repos/${full}/license`);
+        const text = doc?.encoding === "base64" && typeof doc.content === "string"
+          ? Buffer.from(doc.content, "base64").toString("utf8").slice(0, 200_000)
+          : "";
+        cache.set(key, { text, detected: doc?.license?.spdx_id ?? "" });
+      } catch (error) {
+        if (error.status === 404) cache.set(key, { text: "", detected: "" });
+        else {
+          licenseFailures += 1;
+          cache.set(key, { failed: true });
+          const status = error.status ? `status ${error.status}` : "request failed";
+          console.error(`discover-candidates: license lookup failed (${status})`);
+        }
+      }
+    }
+    const cached = cache.get(key);
+    if (!cached || cached.failed) continue;
+    item.licenseText = cached.text;
+    if (cached.detected && !unresolvedSpdx(cached.detected)) {
+      item.license = { ...(item.license ?? {}), spdx_id: cached.detected };
+    }
+  }
+  return licenseFailures;
 }
 
 function newBrandUrls() {
@@ -130,7 +174,8 @@ for (const repo of githubReposFromWatchlist()) {
   }
 }
 
-const status = discoveryStatus({ searches: queries.length, searchFailures, releaseFailures });
+const licenseFailures = await attachLicenseTexts(ossItems);
+const status = discoveryStatus({ searches: queries.length, searchFailures, releaseFailures, licenseFailures });
 const reportPath = arg("--report");
 function writeReport(extra) {
   if (!reportPath) return;
@@ -143,11 +188,20 @@ if (status.failed) {
 }
 
 const curated = readJson(join(root, "AwesomeDS/data/sources/curated-repos.json"));
+const sites = readJson(join(root, "AwesomeDS/data/sites.json"));
+const ranked = readJson(join(root, "AwesomeDS/data/repos.json"));
 const blocklist = readJson(join(root, "AwesomeDS/data/sources/blocklist.json")).repos ?? [];
+const cataloguedKeys = cataloguedRepoKeys({
+  curatedKeys: Object.keys(curated),
+  siteRepos: (sites.sites ?? []).map((site) => site.repo),
+  rankedRepos: (ranked.repos ?? []).map((repo) => `${repo.owner}/${repo.name}`),
+  texts: markdownTexts(join(root, "Knowledge")),
+});
 const planned = planDiscoveries({
   today,
   previous: previousDoc.candidates ?? [],
   curatedKeys: Object.keys(curated),
+  cataloguedKeys,
   blocklist,
   flagshipUrls: flagshipUrls(),
   ossItems,

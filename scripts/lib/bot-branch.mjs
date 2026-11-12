@@ -1,7 +1,11 @@
 // Move onto bot/<name> without resetting history and without force-push.
 // A missing branch is created from main. An existing branch is checked out
 // and main is merged when the histories still share a base. Divergence is reported.
+// The collect payload is copied only after that checkout. It contains tracked
+// data files, and a dirty repos.json makes checkout abort.
 import { execFileSync } from "node:child_process";
+import { cpSync, realpathSync, statSync } from "node:fs";
+import { isAbsolute, relative, sep } from "node:path";
 import { identityEnv } from "./identity.mjs";
 import { leakageFindings } from "./redact.mjs";
 
@@ -56,6 +60,37 @@ export function prepareBotBranch({ cwd, branch, mainRef, remoteRef, actor, state
     }
   }
   return { action: "ready", reason: "merged-main" };
+}
+
+function outsideWorktree(cwd, payloadDir) {
+  const root = realpathSync(cwd);
+  const source = realpathSync(payloadDir);
+  const rel = relative(root, source);
+  const inside = rel === "" || (!rel.startsWith(`..${sep}`) && rel !== ".." && !isAbsolute(rel));
+  if (inside) throw new Error("payload must stay outside the worktree");
+  return { root, source };
+}
+
+export function applyPayloadTree({ cwd, payloadDir }) {
+  if (!payloadDir) throw new Error("missing payload");
+  let placed;
+  try {
+    placed = outsideWorktree(cwd, payloadDir);
+  } catch (error) {
+    if (error?.code === "ENOENT") throw new Error("missing payload");
+    throw error;
+  }
+  if (!statSync(placed.source).isDirectory()) throw new Error("missing payload");
+  cpSync(placed.source, placed.root, { recursive: true, dereference: true });
+}
+
+// Checkout and merge first. Copying AwesomeDS/data into the worktree before
+// the branch switch makes git refuse when the bot branch already differs.
+export function stageWeeklyBranch({ cwd, payloadDir = "", ...rest }) {
+  const prepared = prepareBotBranch({ cwd, ...rest });
+  if (prepared.action !== "ready" || !payloadDir) return prepared;
+  applyPayloadTree({ cwd, payloadDir });
+  return prepared;
 }
 
 export function commitAsCanonical({ cwd, message, actor, state }) {

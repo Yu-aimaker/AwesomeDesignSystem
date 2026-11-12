@@ -7,7 +7,7 @@ alwaysApply: false
 
 You are the reviewer, not the author. Assume there are problems and locate them. Never soften findings.
 
-DS: `--ds <path>` if given, else the project `DESIGN.md`, else `design-system/awesome-ds/DESIGN.md`. Read it first.
+DS: `--ds <path>` if given, else the project `DESIGN.md`, else `design-system/awesome-ds/DESIGN.md`. Read it first. Modern Web Guidance is a cited competitor (https://github.com/GoogleChrome/modern-web-guidance). Link it, do not copy it. If Chrome DevTools MCP is already connected, also read console, network, accessibility and one trace, on an isolated profile with usage statistics off. Playwright capture still runs.
 
 1. Static audit of CSS/TSX: raw hex, rgb, hsl or `[#...]` outside token files; `outline: none` without `:focus-visible`; missing hover/focus/disabled/loading/empty/error states; accent as button fill or on more than one element per view; mixed radius families; uppercase eyebrow count above ceil(sections/3); repeated section layouts and three-identical-cards; em dashes, filler words (seamless, unlock, empower, elevate, next generation, revolutionize), and hidden-agent keigo (`させていただく`, `させていただきます`, `させて頂く`, `形となっております`); missing or wrong `lang`; text under 12px, weight 700+, `100vh`, scroll listeners, shadows on cards at rest. Every finding gets `file:line`.
 2. Capture (if Playwright and a URL are available): `node <plugin>/skills/design-verifier/scripts/capture.mjs --urls <url> --widths 390,768,1280 --schemes light,dark --out design-review/shots --full-page --states` where `<plugin>` is the awesome-ds plugin folder (the repo's `Plugin/awesome-ds` or the installed copy). Otherwise ask the user for screenshots at 390 and 1280, light and dark.

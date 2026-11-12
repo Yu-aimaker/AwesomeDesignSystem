@@ -4,6 +4,7 @@
 
 | パス | 内容 |
 |---|---|
+| [../AGENTS.md](../AGENTS.md) | 作者、ブランチ、週次の二段。月 2 回の反映と、サイト変更の道具 |
 | [weekly-growth.md](weekly-growth.md) | 週次のデータ更新（ランキング、ブランド配色、参考資料の候補） |
 | [specs/html-report.md](specs/html-report.md) | JSON から HTML レポートを 1 枚作るスクリプトの仕様 |
 | [specs/slides.md](specs/slides.md) | JSON から 16:9 のスライドを 1 枚の HTML で作るスクリプトの仕様 |

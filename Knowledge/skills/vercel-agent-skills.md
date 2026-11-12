@@ -16,28 +16,42 @@ sources:
   - url: https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-view-transitions/SKILL.md
     title: "react-view-transitions SKILL.md"
 tags: [skill, vercel, cli, react, performance, web-interface-guidelines, view-transitions]
-updated: 2026-09-06
+updated: 2026-11-11
 ---
 
 # Vercel agent-skills and the skills CLI
 
 ## 概要
 
-Vercel が公開する 2 つのリポジトリ。`vercel-labs/skills` は `npx skills add <owner/repo>` でスキルを任意のエージェントにインストールする CLI で、taste-skill や mattpocock/skills もこれを配布手段にしている。`vercel-labs/agent-skills` は Vercel 公式のスキル集で、React / Next.js のパフォーマンス規則 `react-best-practices`、UI コードの監査 `web-design-guidelines`、`react-view-transitions` などを含む。
+Vercel が公開する 2 つのリポジトリ。`vercel-labs/skills` は `npx skills add <owner/repo>` でスキルを任意のエージェントにインストールする CLI で、taste-skill もこれを配布手段にしている。`vercel-labs/agent-skills` は Vercel のスキル集で、React のパフォーマンス規則と UI 監査を含む。2026-11-11 の GitHub API は 33,887 stars、最終 push 2026-10-28、archived ではない。サイト一覧には足していない。API の license は null。ルートの LICENSE、LICENSE.md、license、LICENSE.txt はいずれも 404。package.json に license フィールドは無かった。README 末尾は MIT と書く。スキルファイルの frontmatter が MIT と書くものがある。ルートのライセンスファイルが無いので、サイト一覧には足さない。
 
 ## 要点
+
+2026-11-11 にディレクトリを確認したスキル。
+
+- `react-best-practices`（name `vercel-react-best-practices`）。SKILL.md は 70 規則、8 カテゴリと書き、frontmatter は license MIT。README は 40 以上と書く。数字は版でずれる。
+- `react-native-skills`（name `vercel-react-native-skills`）。frontmatter は license MIT。README はまだ `react-native-guidelines`、16 規則と書く。
+- `composition-patterns`（name `vercel-composition-patterns`）。
+- ほかに `deploy-to-vercel`、`react-view-transitions`、`vercel-optimize`、`web-design-guidelines`、`writing-guidelines`、`vercel-cli-with-tokens`。デプロイとトークン付き CLI は AwesomeDS に入れない。
+- このサイトは Vite で Cloudflare に載る。React の構成と描画の監査は Vite へ読み替え、Next.js を前提にしない。
+
+2026-09-06 の記録。
+
+
 
 - CLI: `npx skills add vercel-labs/agent-skills`。75 以上のエージェント（Claude Code、Cursor、Codex、OpenCode、Cline、Windsurf、Zed、GitHub Copilot など）に対応。
 - 主なフラグ: `-s, --skill <name>`（特定スキル、`'*'` で全部）、`-a, --agent <name>`、`-g, --global`（ホームに入れる）、`-y, --yes`、`--all`、`--copy`（symlink ではなくコピー）、`-l, --list`。
 - インストール先: プロジェクトなら `./<agent>/skills/`（Claude Code は `.claude/skills/`）、`-g` なら `~/<agent>/skills/`。
 - 他コマンド: `npx skills use`（インストールせずプロンプト生成）、`find`（検索）、`list`、`update`、`remove`、`init`（SKILL.md テンプレート作成）。ディレクトリは skills.sh。
 - 探索ルール: リポジトリの `SKILL.md`、`skills/`、`skills/.curated/`、`skills/.experimental/`、`.claude/skills/`、`.agents/skills/` を 3 階層まで探す。SKILL.md は YAML frontmatter に `name` と `description` が必須。
-- agent-skills の 8 スキル: `vercel-optimize`（デプロイ済みプロジェクトの費用・性能・キャッシュ監査）、`react-best-practices`、`web-design-guidelines`、`writing-guidelines`（80 以上の文章規則）、`react-native-guidelines`（16 規則）、`react-view-transitions`、`composition-patterns`（boolean prop の増殖への対処）、`vercel-deploy-claimable`。ライセンス MIT。
+- agent-skills の 8 スキル（2026-09-06 の README）: `vercel-optimize`（デプロイ済みプロジェクトの費用・性能・キャッシュ監査）、`react-best-practices`、`web-design-guidelines`、`writing-guidelines`（80 以上の文章規則）、`react-native-guidelines`（16 規則）、`react-view-transitions`、`composition-patterns`（boolean prop の増殖への対処）、`vercel-deploy-claimable`。当時の README は MIT と書く。2026-11-11 にルートのライセンスファイルは見つからなかった。
 - `react-best-practices`（name: `vercel-react-best-practices`）: SKILL.md 本文は 8 カテゴリ 70 規則。README は 40 以上と書くので数字は版でずれる。優先順位: 1 Eliminating Waterfalls（CRITICAL、6）、2 Bundle Size（CRITICAL、6）、3 Server-Side Performance（HIGH、10）、4 Client-Side Data Fetching（MEDIUM-HIGH、4）、5 Re-render Optimization（MEDIUM、13）、6 Rendering Performance（MEDIUM、11）、7 JavaScript Performance（LOW-MEDIUM、14）、8 Advanced Patterns（LOW、4）。各規則は `rules/*.md` に分かれ、`AGENTS.md` が全文を結合。
 - `web-design-guidelines`: 実行時に `https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md` を取得し、指定ファイルを規則に照らして `file:line` 形式で報告する薄いラッパー。トリガー語は "review my UI"、"check accessibility"、"audit design"。
 - `react-view-transitions`（name: `vercel-react-view-transitions`）: React の `<ViewTransition>`、`addTransitionType`、`::view-transition-old/new` 疑似要素で状態間アニメーションを作る。トリガーは `startTransition` / `useDeferredValue` / `Suspense`。対応ブラウザは Chromium 125+、Firefox 144+、Safari 18.2+。
 
 ## 具体的な値・ルール（あれば）
+
+次の表は 2026-09-06 に読んだ command.md である。2026-11-11 には取り直していない。
 
 Web Interface Guidelines（command.md）の 11 カテゴリ: Accessibility、Focus States、Forms、Animation、Typography、Content Handling、Images、Performance、Navigation & State、Touch & Interaction、その他（Dark Mode、i18n、Hydration、Hover、Copy）。
 
@@ -59,6 +73,7 @@ Web Interface Guidelines（command.md）の 11 カテゴリ: Accessibility、Foc
 
 ## AwesomeDS への反映
 
+- 反映済み（2026-11-11）: `awesome-ds` は React の構成と描画の監査を Vite へ読み替え、Next.js を前提にしない。`deploy-to-vercel` と `vercel-cli-with-tokens` は入れない。ルートのライセンスファイルが無いのでサイト一覧には足さない。
 - 採用: 配布手段。本リポジトリの `Plugin/awesome-ds` は Claude Code プラグイン形式だが、`skills/` 配下に SKILL.md を置く配置は `npx skills add` の探索ルールに合致するようにし、他エージェントからも取り込めるようにする。
 - 採用: Web Interface Guidelines の規則群を AwesomeDS 第 11 節 Accessibility に反映。`aria-label` on icon-only buttons、`:focus-visible` の代替なし `outline: none` 禁止、`prefers-reduced-motion`、`transform` / `opacity` のみの原則は同一。
 - 採用: `…`（U+2026）と `aria-live="polite"` を `components/checklist.md` の項目にする。
@@ -68,7 +83,10 @@ Web Interface Guidelines（command.md）の 11 カテゴリ: Accessibility、Foc
 
 ## 出典
 
-- https://github.com/vercel-labs/agent-skills : README（8 スキル、インストール、ライセンス）。取得済み。
+- https://github.com/vercel-labs/agent-skills : API は 33,887 stars、push 2026-10-28、license null（2026-11-11）。ルートの LICENSE、LICENSE.md、license、LICENSE.txt は 404。package.json に license は無かった。README 末尾は MIT。
+- https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md : frontmatter license MIT、70 規則（2026-11-11 に先頭を確認）。
+- https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-native-skills/SKILL.md : name `vercel-react-native-skills`、frontmatter license MIT（2026-11-11）。
+- https://github.com/vercel-labs/agent-skills : README（8 スキル、インストール、ライセンス）。2026-09-06 に取得。
 - https://github.com/vercel-labs/skills : CLI のコマンド、フラグ、インストール先、探索ルール。取得済み。
 - https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/react-best-practices/SKILL.md : 8 カテゴリ 70 規則と優先度。取得済み。
 - https://raw.githubusercontent.com/vercel-labs/agent-skills/main/skills/web-design-guidelines/SKILL.md : 取得先 URL と手順。取得済み。

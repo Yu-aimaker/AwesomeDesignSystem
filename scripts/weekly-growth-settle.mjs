@@ -17,6 +17,7 @@ const paths = process.env.PATHS_FILE
   : [];
 const result = settle({
   event: process.env.EVENT_NAME ?? "",
+  chained: process.env.CHAINED === "true",
   workflow: process.env.WORKFLOW_NAME ?? "",
   repository: process.env.SOURCE_REPOSITORY ?? "",
   expectedRepository: process.env.EXPECTED_REPOSITORY ?? "",

@@ -1,27 +1,29 @@
 name: Weekly growth settle
 
-# Check on bot/weekly-growth can mark a proposal eligible. It does not merge,
-# and it does not close or delete the branch after a cancelled or failed Check.
+# Called from Weekly growth after Check succeeds in the same run.
+# It does not merge, and it does not close or delete the branch.
 # A moved head is left alone.
 on:
-  workflow_run:
-    workflows: ["Check"]
-    types: [completed]
+  workflow_call:
+    inputs:
+      head_sha:
+        description: "Commit Check ran against."
+        type: string
+        required: true
+      conclusion:
+        description: "Check result. The caller passes success only after Check."
+        type: string
+        required: true
+    outputs:
+      action:
+        description: "skip, fail, close, or report"
+        value: ${{ jobs.settle.outputs.action }}
 
 permissions:
   contents: read
 
 jobs:
-  other-branch:
-    if: github.event.workflow_run.head_branch != 'bot/weekly-growth'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    steps:
-      - name: Leave main unchanged
-        run: exit 0
-
   settle:
-    if: github.event.workflow_run.head_branch == 'bot/weekly-growth'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     concurrency:
@@ -45,12 +47,15 @@ jobs:
 
       - name: Load the checked commit
         env:
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_SHA: ${{ inputs.head_sha }}
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           git fetch --no-tags origin main
           git fetch --no-tags origin bot/weekly-growth || true
+          if ! printf '%s' "${HEAD_SHA}" | grep -Eq '^[0-9a-f]{40}$'; then
+            HEAD_SHA=""
+          fi
           if [ -n "${HEAD_SHA}" ]; then
             git fetch --no-tags origin "${HEAD_SHA}" || true
           fi
@@ -80,12 +85,13 @@ jobs:
         id: settle
         env:
           EVENT_NAME: ${{ github.event_name }}
-          WORKFLOW_NAME: ${{ github.event.workflow_run.name }}
-          SOURCE_REPOSITORY: ${{ github.event.workflow_run.head_repository.full_name }}
+          CHAINED: "true"
+          WORKFLOW_NAME: ${{ github.workflow }}
+          SOURCE_REPOSITORY: ${{ github.repository }}
           EXPECTED_REPOSITORY: ${{ github.repository }}
-          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
-          CHECK_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          HEAD_BRANCH: bot/weekly-growth
+          HEAD_SHA: ${{ inputs.head_sha }}
+          CHECK_CONCLUSION: ${{ inputs.conclusion }}
           AUTHORS_FILE: ${{ runner.temp }}/authors.json
           PATHS_FILE: ${{ runner.temp }}/paths.txt
           PR_FILE: ${{ runner.temp }}/pr.json
@@ -116,30 +122,3 @@ jobs:
             echo "pr: ${{ steps.settle.outputs.pr_number }}"
             echo "reason: ${{ steps.settle.outputs.reason }}"
           } >> "$GITHUB_STEP_SUMMARY"
-
-  notify:
-    needs: settle
-    if: always() && (needs.settle.result == 'failure' || (needs.settle.result == 'success' && needs.settle.outputs.action == 'close'))
-    runs-on: ubuntu-24.04
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      issues: write
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-      - uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
-        with:
-          script: |
-            const { reportFailure } = await import(`${process.env.GITHUB_WORKSPACE}/scripts/lib/failure-issue.mjs`);
-            await reportFailure({
-              github,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              lines: [
-                "週次の settle が失敗したか、閉じる条件でした。PR は閉じていません。main は変更していません。",
-                "",
-                `- settle: ${{ needs.settle.result }}`,
-                `- action: ${{ needs.settle.outputs.action }}`,
-                `- run: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-              ],
-            });

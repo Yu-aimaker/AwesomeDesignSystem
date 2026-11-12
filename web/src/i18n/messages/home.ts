@@ -2,6 +2,8 @@ import type { Localized } from "../locales";
 
 const ja = {
   lead: "白地、黒文字、アクセント 1 色。AI が書く UI の既定値。",
+  purpose: "Modern Web Guidance より広く、深く、新しい作法を持つ。",
+  purposeLink: "Modern Web Guidance",
   knobsHint: "触って変える。サイト全体が追従します。",
   specimens: "実物",
   galleries: "ギャラリー",
@@ -57,6 +59,8 @@ export type HomeMessages = typeof ja;
 
 const en: HomeMessages = {
   lead: "White canvas, black ink, one accent. The defaults for UI that AI writes.",
+  purpose: "Broader, deeper and newer practice than Modern Web Guidance.",
+  purposeLink: "Modern Web Guidance",
   knobsHint: "Change these. The whole site follows.",
   specimens: "Specimens",
   galleries: "Galleries",

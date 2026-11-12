@@ -10,7 +10,7 @@ sources:
   - url: https://github.com/obra/superpowers
     title: "obra/superpowers (本タスクで観測した高スター数の実例、282,566 stars)"
 tags: [rankings, github-stars, oss, data-pipeline, caveats, github-api]
-updated: 2026-10-14
+updated: 2026-11-11
 ---
 
 # OSS ランキング (/rankings) の設計
@@ -21,7 +21,7 @@ updated: 2026-10-14
 
 ## 要点
 
-- 更新の仕組み: `.github/workflows/weekly-growth.yml` は月曜 09:30 JST（cron `30 0 * * 1`）と `workflow_dispatch`（`dry_run` 既定 true）の両方を持つ。schedule は dry-run を外して PR を出せる。手動は dry-run のまま PR を作らない。収集は `node scripts/fetch-repos.mjs` → `node scripts/extract-brands.mjs` → `node scripts/build-palettes.mjs` → `node scripts/build-fonts.mjs` → `node scripts/discover-candidates.mjs` → `node scripts/validate-data.mjs` → `node scripts/diff-guard.mjs`。新しい候補があり、かつ dry-run でないときだけ `Knowledge/research/oss-candidates.md` と `Knowledge/research/site-candidates.md`、生成した Reference、Knowledge のプラグイン写しを `bot/weekly-growth` に fast-forward して PR を 1 本出す。AwesomeDS、Plugin の skills、web は含めない。`.github/workflows/weekly-growth-settle.yml` は Check が成功し、作者の記録とパスが許可内のとき、その PR を eligible と報告する。マージはしない。Check の失敗やキャンセルでは PR もブランチも残す。main への push はしない。
+- 更新の仕組み: `.github/workflows/weekly-growth.yml` は月曜 09:30 JST（cron `30 0 * * 1`）と `workflow_dispatch`（`dry_run` 既定 true）の両方を持つ。schedule は dry-run を外して PR を出せる。手動は dry-run のまま PR を作らない。収集は `node scripts/fetch-repos.mjs` → `node scripts/extract-brands.mjs` → `node scripts/build-palettes.mjs` → `node scripts/build-fonts.mjs` → `node scripts/discover-candidates.mjs` → `node scripts/validate-data.mjs` → `node scripts/diff-guard.mjs`。dry-run でないとき、新しい候補の追記か、既存の OSS 候補行の再検査で差分があるときだけ `Knowledge/research/oss-candidates.md` と `Knowledge/research/site-candidates.md`、生成した Reference、Knowledge のプラグイン写しを `bot/weekly-growth` に fast-forward して PR を 1 本出す。既存行も新しい発見と同じ許可ライセンスと既掲載の規則で見て、落ちた行は台帳とプラグイン写しから除く。AwesomeDS、Plugin の skills、web は含めない。同じ Weekly growth の run が Check を `workflow_call` でそのコミットに対して実行し、成功したときだけ `.github/workflows/weekly-growth-settle.yml` がその PR を eligible と報告する。`workflow_run` は使わない。マージはしない。Check の失敗やキャンセルでは PR もブランチも残す。main への push はしない。OSS 候補は MIT、Apache-2.0、BSD-2-Clause、BSD-3-Clause、ISC、0BSD、Unlicense、CC0-1.0 だけを入れる。MPL-2.0 は入れない。サイトの一覧、ランキング、Knowledge に既にあるリポジトリは入れない。
 
 - データ取得の 2 系統: (1) `AwesomeDS/data/sources/curated-repos.json` の owner/repo とカテゴリ（`/repos/{owner}/{name}` を個別取得）、(2) `topic:design-system stars:>500 pushed:>{90日前}` の GitHub 検索 API 上位 20 件から blocklist を除いたもの。両方を 1 つの `repos[]` 配列にマージし、`stars` の降順で並べる。
 - カテゴリ一覧（`CURATED` のキーで確認できる区分）: `component-library`、`headless`、`animation`、`animated-components`、`3d`、`icons`、`dataviz`、`styling`、`design-tokens`、`fonts`、`agent-skills`、`ai-ui`、`design-tools`、`framework`、`tooling`、および検索由来の `topic:design-system`。Knowledge のカテゴリ（component-libraries、animation、skills など）とは名前も粒度も一致しない、独立した分類であることに注意。

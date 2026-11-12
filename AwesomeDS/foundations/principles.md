@@ -5,6 +5,34 @@ about human perception or behaviour says it works. This file lists the seven
 principles, then maps each law or heuristic we lean on to the concrete rule it
 produced in `DESIGN.md`.
 
+## Scope
+
+AwesomeDS carries broader, deeper and newer practice than
+[Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance). That
+project is a competitor we cite. It is not copied into this file. Agents may open
+the link. They prefer the rules below, and any source they have opened, over prior
+knowledge. `AGENTS.md` says what a twice-monthly reflection may add: a primary
+source, and a point that is broader, deeper or newer than that reference. A point
+it already covers well is a link, not a paragraph here.
+
+AwesomeDS covers:
+
+| Scope | Where it lives |
+|---|---|
+| Tokens and components | `DESIGN.md`, `tokens/`, `components/` |
+| Agent workflows and review tools | `Plugin/awesome-ds/skills/` |
+| Anti-slop and visual quality | Principle 7, `anti-patterns.md` |
+| Japanese typography and writing | `japanese-typography.md`, `content-and-tone.md` |
+| Newer practice than the cited reference | `Knowledge/`, after the check in `AGENTS.md` |
+
+Deliberate differences, decided here:
+
+- Product UI uses shadcn/ui on Base UI or Radix, restyled with these tokens. A cited library does not replace that kit.
+- Motion stays the feedback scale in `motion.md`.
+- Experimental browser APIs and Origin Trials stay off unless a later change in this repository says otherwise.
+- Japanese type, measure and copy rules are the ones in this repository.
+- Review uses this repository's checks. Chrome DevTools MCP, when it is already connected, may also read the console, network, accessibility tree and a trace, on an isolated profile with usage statistics off (`Knowledge/tech-stack/chrome-devtools-for-agents.md`).
+
 ## The seven principles
 
 | # | Principle | Plain statement | Where it shows up |

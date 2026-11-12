@@ -30,3 +30,33 @@ author と committer は、名前とメールの両方を次の一組にしま�
 候補は未採用のまま Knowledge に残す。ウェブで見つけた項目を、その実行の中で DS やサイトへ採用しない。開いている週次 PR を次の週が更新するときは、前回の候補行を残して新しい行を足す。
 
 週次の作者の信頼は、コミットメッセージの actor や、メールとアカウントの対応では決めない。週次は Git Data API でコミットを作り、GitHub に署名させ、そのコミットへ `weekly-growth-receipt` という check run を付ける。`external_id` は workflow run id。前のコミットを信頼するのは、次が全部そろうときだけ。API の `verification.verified` が true。committer が web-flow。author のメールが `@users.noreply.github.com` で終わる。check run の名前が `weekly-growth-receipt` で、`app.slug` が `github-actions`。その `external_id` がこのリポジトリの `weekly-growth.yml` の実行。`head_sha` がそのコミット SHA。どれか欠けたら拒否する。API が失敗したらジョブを失敗させる。
+
+## 反映の基準
+
+月 2 回、AwesomeDS と体験サイトに足すものを決める。一般の作業ルールは [CLAUDE.md](CLAUDE.md)。
+
+[Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) は、よく参照する競合である。AwesomeDS はそれより広く、深く、新しい作法を持つ。
+
+### 入れるもの
+
+その回に一次情報を開いて確認し、かつ次のどれかであるものだけを入れる。
+
+- Modern Web Guidance より範囲が広い
+- Modern Web Guidance より深い
+- Modern Web Guidance の現行より新しい
+
+Modern Web Guidance がすでに十分扱っているものは、リンクだけを置く。本文は写さない。
+
+モデルの記憶より、このリポジトリの規則と、開いて確認した一次情報を優先する。
+
+### 毎回の確認
+
+Modern Web Guidance に何が足されたかを読み、AwesomeDS が先を行く状態を保つ。参照リンクとライセンスの記述が古くなっていれば直す。ガイドの本文は写さない。
+
+見つけた経路、X の投稿 URL、個人情報は残さない。
+
+## サイト変更の道具
+
+見た目の小さい変更は Cursor Cloud Agent が行う。文案、余白、既存の部品への項目追加、小さなスタイル修正がこれにあたる。
+
+ページ構成を新しくする、見た目の方向を変える、作り直すなど、デザインの判断が大きい作業だけを、ローカルの Claude Code で行う。モデルのトークンを節約するためである。

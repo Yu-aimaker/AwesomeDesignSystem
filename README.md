@@ -22,6 +22,12 @@ AI コーディングエージェント（Claude Code, Cursor）でフロント�
 
 白地に黒文字、アクセント 1 色（`#2f5bea`）、Geist + Noto Sans JP、4px グリッド、境界線優先、短いモーション。すべての値に理由と出典があります。
 
+## Modern Web Guidance との関係
+
+[Modern Web Guidance](https://github.com/GoogleChrome/modern-web-guidance) は、AwesomeDS がよく参照する競合である。AwesomeDS はそれより広く、深く、新しい作法を持つ。ガイドの本文は写さず、リンクだけを置く。
+
+AwesomeDS が定めるのは、トークンと部品、エージェントの作業手順、見た目の品質、日本語の文字と文章、そして参照先より新しい作法である。モデルの記憶より、このリポジトリの規則と、開いて確認した一次情報を優先する。入れる基準は [AGENTS.md](AGENTS.md)。
+
 ## 3つの用途
 
 AwesomeDS は次の 3 つを同時に満たす。
@@ -126,7 +132,7 @@ docs/                 週次の仕組み、生成仕様、i18n。索引は docs/
 
 ## 更新の流れ
 
-1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は Knowledge、Reference、Knowledge のプラグイン写しだけを `bot/weekly-growth` に fast-forward して PR を 1 本出す。AwesomeDS、Plugin の skills、web は含めない。`weekly-growth-settle.yml` は Check の結果を報告するだけで、マージも PR を閉じることもブランチ削除もしない。main へは push しない。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は Knowledge の候補表に未採用のまま残り、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。仕組みと止める事故は [docs/weekly-growth.md](docs/weekly-growth.md)。
+1. `Weekly growth`（`.github/workflows/weekly-growth.yml`）は月曜 09:30 JST（cron `30 0 * * 1`）に動く。スケジュール実行は Knowledge、Reference、Knowledge のプラグイン写しだけを `bot/weekly-growth` に fast-forward して PR を 1 本出す。AwesomeDS、Plugin の skills、web は含めない。propose のあと、同じ run が Check を `workflow_call` で実行し、成功したときだけ settle が eligible と報告する。マージも PR を閉じることもブランチ削除もしない。main へは push しない。手動の `workflow_dispatch` は既定 dry-run で PR を作らない。候補は Knowledge の候補表に未採用のまま残り、サイトには出さない。従量課金の自動調査は動かさない。知見の本文は人間が `knowledge-curator` を実行する。仕組みと止める事故は [docs/weekly-growth.md](docs/weekly-growth.md)。
 2. `knowledge-curator` スキルで新しい知見を Knowledge に追加し、`node scripts/build-reference.mjs` で Reference を再生成する。Actions では AI API を使わない。
 3. AwesomeDS を変えるべき根拠が出たら DESIGN.md / tokens / foundations を更新し、CHANGELOG にバージョンを追記する。
 4. `Plugin/awesome-ds/scripts/sync-ds.sh` でプラグイン内のコピーを同期し、PR を出す。CI が整合性を確認する。
