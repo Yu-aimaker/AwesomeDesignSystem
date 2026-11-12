@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import {
@@ -656,6 +656,131 @@ test("an existing bot branch is merged forward and a diverged branch is left in 
     assert.equal(git(cwd, ["rev-parse", "stray"]).trim(), stray);
   } finally {
     rmSync(cwd, { recursive: true, force: true });
+  }
+});
+
+test("a payload that changes repos.json is applied after the bot branch checkout", () => {
+  const weekly = readFileSync(join(repoRoot, ".github/workflows/weekly-growth.yml"), "utf8");
+  const propose = jobBlocks(weekly).find((block) => block.startsWith("  propose:\n"));
+  assert.ok(propose);
+  assert.match(propose, /tar -xzf growth-artifact\/growth-payload\.tgz -C "\$staging"/);
+  assert.ok(propose.indexOf("tar -xzf") < propose.indexOf("--prepare-only"));
+  assert.ok(propose.indexOf("--prepare-only") < propose.indexOf("--payload"));
+  assert.ok(propose.indexOf("--payload") < propose.indexOf("append-knowledge.mjs"));
+  assert.ok(propose.indexOf("append-knowledge.mjs") < propose.indexOf("prune-oss-ledgers.mjs"));
+  assert.doesNotMatch(propose, /tar -xzf growth-artifact\/growth-payload\.tgz\n/);
+
+  const root = mkdtempSync(join(tmpdir(), "ads-payload-"));
+  const cwd = join(root, "repo");
+  const payloadDir = join(root, "payload");
+  const ledger = [
+    "---",
+    "title: candidates",
+    "updated: 2026-11-01",
+    "---",
+    "",
+    "| 見た日 | 名前 | URL | 補足 |",
+    "|---|---|---|---|",
+    "| 2026-11-11 | acme/listed | https://github.com/acme/listed | stars 900, MIT |",
+    "| 2026-11-11 | acme/copyleft | https://github.com/acme/copyleft | stars 10, MPL-2.0 |",
+    "| 2026-11-11 | acme/fresh | https://github.com/acme/fresh | stars 400, MIT |",
+    "",
+  ].join("\n");
+  const reposDoc = (name) => `${JSON.stringify({ repos: [{ owner: "acme", name }] }, null, 2)}\n`;
+  const payloadRepos = reposDoc("listed");
+  try {
+    mkdirSync(cwd, { recursive: true });
+    git(cwd, ["init", "-b", "main"]);
+    git(cwd, ["config", "commit.gpgsign", "false"]);
+    mkdirSync(join(cwd, "AwesomeDS/data/sources"), { recursive: true });
+    mkdirSync(join(cwd, "Knowledge/research"), { recursive: true });
+    mkdirSync(join(cwd, "Plugin/awesome-ds/knowledge/research"), { recursive: true });
+    writeFileSync(join(cwd, "AwesomeDS/data/repos.json"), reposDoc("base"));
+    writeFileSync(join(cwd, "AwesomeDS/data/sites.json"), "{\"sites\":[]}\n");
+    writeFileSync(join(cwd, "AwesomeDS/data/sources/curated-repos.json"), "{}\n");
+    writeFileSync(join(cwd, "Knowledge/research/oss-candidates.md"), ledger);
+    writeFileSync(join(cwd, "Plugin/awesome-ds/knowledge/research/oss-candidates.md"), ledger);
+    writeFileSync(join(cwd, "human.txt"), "base\n");
+    git(cwd, ["add", "."]);
+    git(cwd, ["commit", "-m", "base"]);
+    git(cwd, ["checkout", "-b", "bot/weekly-growth"]);
+    writeFileSync(join(cwd, "AwesomeDS/data/repos.json"), reposDoc("bot-only"));
+    git(cwd, ["add", "AwesomeDS/data/repos.json"]);
+    git(cwd, ["commit", "-m", "bot data"]);
+    git(cwd, ["checkout", "main"]);
+    writeFileSync(join(cwd, "human.txt"), "advanced\n");
+    git(cwd, ["add", "human.txt"]);
+    git(cwd, ["commit", "-m", "human"]);
+
+    mkdirSync(join(payloadDir, "AwesomeDS/data"), { recursive: true });
+    mkdirSync(join(payloadDir, ".growth"), { recursive: true });
+    writeFileSync(join(payloadDir, "AwesomeDS/data/repos.json"), payloadRepos);
+    writeFileSync(join(payloadDir, ".growth/discover.json"), "{\"fresh\":[]}\n");
+    writeFileSync(join(cwd, "AwesomeDS/data/repos.json"), payloadRepos);
+
+    const env = { ...process.env, GROWTH_ACTOR: BOT_ACTOR, GROWTH_STATE: GROWTH_STATE };
+    const prepareArgs = [
+      join(repoRoot, "scripts/publish-bot-branch.mjs"),
+      "--prepare-only",
+      "--branch", "bot/weekly-growth",
+      "--from", "main",
+      "--remote", "bot/weekly-growth",
+      "--payload", payloadDir,
+    ];
+    let dirty = "";
+    try {
+      execFileSync(process.execPath, prepareArgs, {
+        cwd,
+        env,
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "pipe"],
+      });
+      assert.fail("dirty repos.json should abort checkout");
+    } catch (error) {
+      dirty = `${error.stdout ?? ""}${error.stderr ?? ""}`;
+      assert.equal(error.status, 1);
+    }
+    assert.match(dirty, /would be overwritten/);
+    assert.equal(git(cwd, ["branch", "--show-current"]).trim(), "main");
+
+    git(cwd, ["reset", "--hard"]);
+    const prepared = execFileSync(process.execPath, prepareArgs, {
+      cwd,
+      env,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    assert.match(prepared, /publish-bot-branch: ready merged-main/);
+    assert.equal(git(cwd, ["branch", "--show-current"]).trim(), "bot/weekly-growth");
+    assert.equal(git(cwd, ["show", "HEAD:human.txt"]).trim(), "advanced");
+    assert.equal(readFileSync(join(cwd, "AwesomeDS/data/repos.json"), "utf8"), payloadRepos);
+    assert.equal(readFileSync(join(cwd, ".growth/discover.json"), "utf8"), "{\"fresh\":[]}\n");
+    assert.notEqual(git(cwd, ["show", "HEAD:AwesomeDS/data/repos.json"]), payloadRepos);
+
+    assert.notEqual(resolve(cwd), resolve(repoRoot));
+    execFileSync(process.execPath, [join(repoRoot, "scripts/prune-oss-ledgers.mjs"), "--root", cwd], {
+      cwd,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+
+    // The publish step does not stage AwesomeDS/data. This tree is the worktree
+    // after checkout, the payload copy, and the ledger prune.
+    git(cwd, ["add", "--", "AwesomeDS/data/repos.json", "Knowledge", "Plugin/awesome-ds/knowledge"]);
+    const tree = git(cwd, ["write-tree"]).trim();
+    assert.equal(git(cwd, ["show", `${tree}:AwesomeDS/data/repos.json`]), payloadRepos);
+    assert.equal(git(cwd, ["show", `${tree}:human.txt`]).trim(), "advanced");
+    for (const path of [
+      "Knowledge/research/oss-candidates.md",
+      "Plugin/awesome-ds/knowledge/research/oss-candidates.md",
+    ]) {
+      const text = git(cwd, ["show", `${tree}:${path}`]);
+      assert.equal(text.includes("acme/listed"), false, path);
+      assert.equal(text.includes("acme/copyleft"), false, path);
+      assert.match(text, /https:\/\/github.com\/acme\/fresh/);
+    }
+  } finally {
+    rmSync(root, { recursive: true, force: true });
   }
 });
 
