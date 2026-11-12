@@ -2,6 +2,20 @@ name: Check
 
 on:
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: "Commit to check out. Empty uses the event SHA."
+        type: string
+        default: ""
+      publish_paths:
+        description: "Run the Knowledge path allowlist against main."
+        type: boolean
+        default: false
+      identity_event:
+        description: "Identity range. Empty uses the triggering event."
+        type: string
+        default: ""
   pull_request:
   push:
     branches: [main]
@@ -28,6 +42,7 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
+          ref: ${{ inputs.ref != '' && inputs.ref || github.sha }}
       - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
@@ -99,9 +114,10 @@ jobs:
       # push to main allows a merge only when the API reports verification.verified,
       # committer login web-flow, two or more parents, and merge_commit_sha on a
       # pull request merged into main. A failed API call rejects the exception.
+      # workflow_call checks origin/main..HEAD of the commit this run checked out.
       - name: Commits use the canonical identity
         env:
-          EVENT_NAME: ${{ github.event_name }}
+          EVENT_NAME: ${{ inputs.identity_event != '' && inputs.identity_event || github.event_name }}
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           BEFORE_SHA: ${{ github.event.before }}
@@ -131,7 +147,7 @@ jobs:
       - name: Check cancels only the same pull request
         run: node --test scripts/check-concurrency.test.mjs
       - name: Bot publish paths
-        if: github.head_ref == 'bot/weekly-growth' || github.ref == 'refs/heads/bot/weekly-growth'
+        if: github.head_ref == 'bot/weekly-growth' || github.ref == 'refs/heads/bot/weekly-growth' || inputs.publish_paths == true
         env:
           # workflow_dispatch (the bot re-runs Check on its branch) has no base_ref.
           BASE_REF: ${{ github.base_ref || 'main' }}
@@ -157,6 +173,8 @@ jobs:
       PLAYWRIGHT_BROWSERS_PATH: ${{ github.workspace }}/.cache/ms-playwright
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: ${{ inputs.ref != '' && inputs.ref || github.sha }}
       # pnpm/action-setup v4
       - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
         with:

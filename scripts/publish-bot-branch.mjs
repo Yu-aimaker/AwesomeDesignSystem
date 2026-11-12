@@ -85,4 +85,4 @@ if (published.action !== "ready") {
   record(published.action, published.reason, "committed=false\n");
   process.exit(0);
 }
-record("ready", published.reason, "committed=true\n");
+record("ready", published.reason, `committed=true\nhead_sha=${published.sha}\n`);

@@ -134,11 +134,11 @@ export function isDryRun(input) {
   return String(input).toLowerCase() !== "false";
 }
 
-export function discoveryStatus({ searches = 0, searchFailures = 0, releaseFailures = 0 }) {
+export function discoveryStatus({ searches = 0, searchFailures = 0, releaseFailures = 0, licenseFailures = 0 }) {
   if (searches > 0 && searchFailures === searches) {
     return { failed: true, partial: true, reason: "discovery-unavailable" };
   }
-  if (searchFailures > 0 || releaseFailures > 0) {
+  if (searchFailures > 0 || releaseFailures > 0 || licenseFailures > 0) {
     return { failed: true, partial: true, reason: "discovery-partial" };
   }
   return { failed: false, partial: false, reason: "ok" };
@@ -173,7 +173,7 @@ export function decide({ guard, dryRun, humanAuthors = [], discovery = null }) {
 export function remoteWrites({ action, dryRun, branchAhead = false }) {
   const live = !isDryRun(dryRun);
   return {
-    propose: live && action === "propose",
+    propose: live && (action === "propose" || action === "noop"),
     closeStalePr: live && action === "noop" && !branchAhead,
     closeFailureIssue: live && (action === "propose" || action === "noop"),
     notify: live && action === "fail",
@@ -214,6 +214,8 @@ export function authorFromLog({ authorName, authorEmail, committerName, committe
   };
 }
 
+const CHAIN_EVENTS = new Set(["schedule", "workflow_dispatch", "workflow_call"]);
+
 export function settle(input) {
   const branch = input?.branch ?? "";
   const headSha = typeof input?.headSha === "string" ? input.headSha.trim() : "";
@@ -224,8 +226,11 @@ export function settle(input) {
   const pullRequestHeadSha = input?.pullRequestHeadSha;
   const branchTip = input?.branchTip;
 
-  if (input?.event !== "workflow_run") return { action: "skip", reason: "event" };
-  if (input?.workflow !== "Check") return { action: "skip", reason: "workflow" };
+  // Settle runs in the Weekly growth run after Check. A workflow_run from a
+  // GITHUB_TOKEN dispatch does not start, so that event is not a path.
+  if (input?.event === "workflow_run" || input?.chained !== true) return { action: "skip", reason: "event" };
+  if (!CHAIN_EVENTS.has(input?.event)) return { action: "skip", reason: "event" };
+  if (input?.workflow !== "Weekly growth") return { action: "skip", reason: "workflow" };
   if (!input?.expectedRepository || input.repository !== input.expectedRepository) {
     return { action: "skip", reason: "repository" };
   }
@@ -253,10 +258,152 @@ function candidateId(kind, url) {
   return `${kind}:${url}`;
 }
 
+// Permissive SPDX ids only. MPL-2.0 is weak copyleft and is not admitted.
+export const PERMISSIVE_SPDX = Object.freeze([
+  "MIT",
+  "Apache-2.0",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "ISC",
+  "0BSD",
+  "Unlicense",
+  "CC0-1.0",
+]);
+
+const PERMISSIVE = new Set(PERMISSIVE_SPDX.map((id) => id.toLowerCase()));
+const UNRESOLVED_SPDX = new Set(["", "noassertion", "none", "other"]);
+const RESERVED_GITHUB_OWNERS = new Set([
+  "about", "account", "actions", "apps", "codespaces", "collections", "customer-stories",
+  "enterprise", "explore", "features", "issues", "login", "marketplace", "new",
+  "notifications", "organizations", "orgs", "pricing", "pull", "search", "security",
+  "settings", "signup", "sponsors", "topics",
+]);
+
+const LICENSE_DISQUALIFIERS = [
+  /non-?commercial/i,
+  /商用/,
+  /server side public license/i,
+  /\bsspl\b/i,
+  /elastic license/i,
+  /\baffero\b/i,
+  /\bagpl\b/i,
+  /commons clause/i,
+  /polyform/i,
+  /business source license/i,
+  /not allowed to[\s\S]{0,800}redistribut/i,
+  /no redistribution/i,
+  /may not redistribute/i,
+  /must not redistribute/i,
+  /redistribution is (?:not |prohibited)/i,
+  /再配布を禁/,
+  /再配布禁止/,
+  /再配布できません/,
+];
+
+export function unresolvedSpdx(value) {
+  return UNRESOLVED_SPDX.has(String(value ?? "").trim().toLowerCase());
+}
+
+function canonicalSpdx(value) {
+  const text = String(value ?? "").trim().replace(/^\(+|\)+$/g, "");
+  return PERMISSIVE_SPDX.find((id) => id.toLowerCase() === text.toLowerCase()) ?? "";
+}
+
+export function spdxExpressionAllowed(value) {
+  const text = String(value ?? "").trim();
+  if (!text || unresolvedSpdx(text)) return false;
+  if (/\bWITH\b/i.test(text)) return false;
+  const parts = text.split(/\s+(?:OR|AND)\s+/i).map((part) => canonicalSpdx(part)).filter(Boolean);
+  const raw = text.split(/\s+(?:OR|AND)\s+/i).map((part) => part.trim()).filter(Boolean);
+  return raw.length > 0 && parts.length === raw.length;
+}
+
+export function canonicalSpdxExpression(value) {
+  return String(value ?? "")
+    .split(/\s+(?:OR|AND)\s+/i)
+    .map((part) => canonicalSpdx(part))
+    .filter(Boolean)
+    .join(" OR ");
+}
+
+function flatLicense(text) {
+  return String(text).replace(/\s+/g, " ");
+}
+
+function matchPermissiveText(text) {
+  const found = [];
+  const flat = flatLicense(text);
+  if (/permission is hereby granted, free of charge/i.test(flat)
+    && /without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and\/or sell/i.test(flat)) {
+    found.push("MIT");
+  }
+  if (/apache license/i.test(flat) && /version 2\.0/i.test(flat) && /www\.apache\.org\/licenses\/license-2\.0/i.test(flat)) {
+    found.push("Apache-2.0");
+  }
+  const bsdGrant = /redistribution and use in source and binary forms, with or without modification, are permitted/i.test(flat);
+  const bsd3 = /neither the name/i.test(flat) && /names of its contributors/i.test(flat);
+  const bsd4 = /all advertising materials/i.test(flat);
+  if (bsdGrant && !bsd4 && bsd3) found.push("BSD-3-Clause");
+  else if (bsdGrant && !bsd4 && !bsd3) found.push("BSD-2-Clause");
+  if (/zero-clause bsd/i.test(flat) || /\b0bsd\b/i.test(flat)) found.push("0BSD");
+  else if (/permission to use, copy, modify, and\/or distribute this software for any purpose with or without fee is hereby granted/i.test(flat)
+    && /appear in all copies/i.test(flat)) {
+    found.push("ISC");
+  }
+  if (/this is free and unencumbered software released into the public domain/i.test(flat)) found.push("Unlicense");
+  if (/cc0 1\.0 universal/i.test(flat)) found.push("CC0-1.0");
+  return [...new Set(found)];
+}
+
+export function ossLicenseDecision(api) {
+  const spdx = api?.license?.spdx_id ?? "";
+  if (spdxExpressionAllowed(spdx)) return { admit: true, license: canonicalSpdxExpression(spdx) };
+  if (!unresolvedSpdx(spdx)) return { admit: false, license: "" };
+  const text = String(api?.licenseText ?? "");
+  if (!text.trim() || LICENSE_DISQUALIFIERS.some((pattern) => pattern.test(text))) {
+    return { admit: false, license: "" };
+  }
+  const matched = matchPermissiveText(text);
+  if (!matched.length) return { admit: false, license: "" };
+  return { admit: true, license: matched.join(" OR ") };
+}
+
+export function githubRepoKey(value) {
+  const raw = String(value ?? "").trim();
+  const match = raw.match(/github\.com\/([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)/);
+  if (!match) {
+    const plain = raw.replace(/\.git$/i, "").replace(/\.+$/, "");
+    return /^[^/\s]+\/[^/\s]+$/.test(plain) ? plain : "";
+  }
+  if (RESERVED_GITHUB_OWNERS.has(match[1].toLowerCase())) return "";
+  const repo = match[2].replace(/\.git$/i, "").replace(/\.+$/, "");
+  return `${match[1]}/${repo}`;
+}
+
+export function cataloguedRepoKeys({ curatedKeys = [], siteRepos = [], rankedRepos = [], texts = [] } = {}) {
+  const keys = new Set();
+  const add = (value) => {
+    const text = String(value ?? "").trim().replace(/\.git$/i, "").replace(/\.+$/, "");
+    if (!/^[^/\s]+\/[^/\s]+$/.test(text)) return;
+    keys.add(text);
+  };
+  for (const key of curatedKeys) add(key);
+  for (const repo of siteRepos) add(repo);
+  for (const repo of rankedRepos) add(repo);
+  for (const text of texts) {
+    for (const match of String(text).matchAll(/github\.com\/([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)/g)) {
+      if (RESERVED_GITHUB_OWNERS.has(match[1].toLowerCase())) continue;
+      add(`${match[1]}/${match[2]}`);
+    }
+  }
+  return [...keys];
+}
+
 export function planDiscoveries({
   today,
   previous = [],
   curatedKeys = [],
+  cataloguedKeys = [],
   blocklist = [],
   flagshipUrls = [],
   ossItems = [],
@@ -265,11 +412,12 @@ export function planDiscoveries({
   minStars = 300,
 }) {
   const curated = new Set(curatedKeys.map((k) => k.toLowerCase()));
+  const known = new Set([...curated, ...cataloguedKeys.map((k) => String(k).toLowerCase())]);
   const blocked = new Set(blocklist.map((k) => k.toLowerCase()));
   const flagship = new Set(flagshipUrls);
   const prevById = new Map(previous.map((c) => [c.id, c]));
   const prevByUrl = new Map(previous.map((c) => [c.url, c]));
-  const excluded = { known: 0, rejected: 0, noOg: 0, small: 0, http: 0, stars: 0 };
+  const excluded = { known: 0, rejected: 0, noOg: 0, small: 0, http: 0, stars: 0, license: 0 };
   const incoming = [];
 
   const skipExisting = (url) => {
@@ -284,13 +432,18 @@ export function planDiscoveries({
   for (const api of ossItems) {
     const full = String(api.full_name ?? "").toLowerCase();
     const url = api.html_url;
-    if (!url || blocked.has(full) || curated.has(full)) {
+    if (!url || blocked.has(full) || known.has(full)) {
       excluded.known++;
       continue;
     }
     if (skipExisting(url)) continue;
     if (api.archived || (api.stargazers_count ?? 0) <= minStars) {
       excluded.stars++;
+      continue;
+    }
+    const decision = ossLicenseDecision(api);
+    if (!decision.admit) {
+      excluded.license++;
       continue;
     }
     const prev = prevByUrl.get(url);
@@ -305,7 +458,7 @@ export function planDiscoveries({
       firstSeen: prev?.firstSeen ?? today,
       lastSeen: today,
       signals: {
-        license: api.license?.spdx_id ?? null,
+        license: decision.license,
         archived: false,
         starsDelta: prev && typeof prev.stars === "number" && typeof stars === "number" ? stars - prev.stars : null,
       },
@@ -724,6 +877,41 @@ export function workflowFindings(text) {
   return findings;
 }
 
+function jobSlice(yml, id) {
+  const text = String(yml);
+  const header = `  ${id}:\n`;
+  const start = text.search(new RegExp(`^  ${id}:\\n`, "m"));
+  if (start === -1) return "";
+  const rest = text.slice(start + header.length);
+  const next = rest.search(/\n  [a-z0-9-]+:\n/);
+  return header + (next === -1 ? rest : rest.slice(0, next));
+}
+
+export function weeklyChainProblems({ weekly = "", settle = "", check = "" } = {}) {
+  const problems = [];
+  const weeklyActive = activeText(weekly);
+  const settleActive = activeText(settle);
+  const checkActive = activeText(check);
+  if (/\bworkflow_run\b/.test(weeklyActive) || /\bworkflow_run\b/.test(settleActive)) problems.push("workflow_run");
+  if (/\bgh workflow run\b/.test(weeklyActive)) problems.push("token-dispatch");
+  const checkJob = jobSlice(weekly, "checkbot");
+  const settleJob = jobSlice(weekly, "settle");
+  if (!checkJob.includes("uses: ./.github/workflows/check.yml")) problems.push("missing-check-call");
+  if (!/needs\.propose\.outputs\.committed == 'true'/.test(checkJob)) problems.push("check-without-commit");
+  if (!/needs\.propose\.outputs\.head_sha/.test(checkJob)) problems.push("check-ref");
+  if (!/publish_paths:\s*true/.test(checkJob)) problems.push("check-paths");
+  if (!/identity_event:\s*workflow_call/.test(checkJob)) problems.push("check-identity-event");
+  if (!settleJob.includes("uses: ./.github/workflows/weekly-growth-settle.yml")) problems.push("missing-settle-call");
+  if (!/needs:\s*\[propose,\s*checkbot\]/.test(settleJob)) problems.push("settle-needs");
+  if (!/needs\.checkbot\.result == 'success'/.test(settleJob)) problems.push("settle-before-check");
+  if (!/head_sha:\s*\$\{\{\s*needs\.propose\.outputs\.head_sha\s*\}\}/.test(settleJob)) problems.push("settle-sha");
+  if (!/conclusion:\s*success/.test(settleJob)) problems.push("settle-conclusion");
+  if (!/^on:\n {2}workflow_call:/m.test(settle)) problems.push("settle-trigger");
+  if (!/workflow_call:/.test(checkActive)) problems.push("check-not-reusable");
+  if (/\bgh pr merge\b/.test(settleActive) || /\bmerge_method\b/.test(settleActive)) problems.push("merge");
+  return problems;
+}
+
 export function renderReport({ date, guard, excluded, newCandidates }) {
   const safeCandidates = [];
   for (const candidate of newCandidates ?? []) {
@@ -756,6 +944,7 @@ export function renderReport({ date, guard, excluded, newCandidates }) {
   lines.push(`- 画像が小さい、または比率が合わない: ${excluded?.small ?? 0}`);
   lines.push(`- HTTP エラー: ${excluded?.http ?? 0}`);
   lines.push(`- 既知または却下済み: ${(excluded?.known ?? 0) + (excluded?.rejected ?? 0)}`);
+  lines.push(`- 許可していないライセンス: ${excluded?.license ?? 0}`);
   lines.push("");
   const text = lines.join("\n");
   if (leakageFindings(text).length) {

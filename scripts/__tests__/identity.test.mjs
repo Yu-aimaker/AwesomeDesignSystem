@@ -139,6 +139,8 @@ test("event ranges are explicit", () => {
   );
   assert.equal(intendedRange({ EVENT_NAME: "push", BEFORE_SHA: "0".repeat(40), PUSH_SHA: "def" }).error, "missing base");
   assert.deepEqual(intendedRange({ EVENT_NAME: "workflow_dispatch" }), { base: "origin/main", head: "HEAD" });
+  assert.deepEqual(intendedRange({ EVENT_NAME: "workflow_call" }), { base: "origin/main", head: "HEAD" });
+  assert.equal(intendedRange({ EVENT_NAME: "workflow_call" }).allowPlatformMerge, undefined);
   const problems = identityProblems([
     { sha: "abc", authorName: CANONICAL_NAME, authorEmail: CANONICAL_EMAIL, committerName: CANONICAL_NAME, committerEmail: "hidden@example.com" },
   ]);

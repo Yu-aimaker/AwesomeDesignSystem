@@ -125,7 +125,7 @@ AwesomeDS リポの `Knowledge/` の写しです。UI を作る前に、関係�
 
 | エントリ | 種別 | タグ | 更新 |
 |---|---|---|---|
-| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-10-14 |
+| [OSS ランキング (/rankings) の設計](research/oss-rankings.md) | guideline | rankings, github-stars, oss, data-pipeline, caveats, github-api | 2026-11-11 |
 | [おすすめサイト一覧 (/sites) の取り込み基準](research/recommended-sites.md) | guideline | sites, component-library, animation, loading, gallery, intake, criteria | 2026-10-21 |
 | [週次の OSS 候補](research/oss-candidates.md) | guideline | weekly, oss, candidates | 2026-11-11 |
 | [週次のサイト候補](research/site-candidates.md) | guideline | weekly, sites, candidates | 2026-11-11 |
